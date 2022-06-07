@@ -7,9 +7,21 @@
     "start": "tsc -b tsconfig.build.json --watch",
     "prebuild": "rimraf dist .tsBuildInfo",
     "build": "tsc -b tsconfig.build.json",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "test": "jest"
   },
   "keywords": [],
   "author": "ivan-lee",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "babel-jest": "^28.1.1",
+    "jest": "^28.1.1",
+    "babel-preset-wakeadmin-for-test": "*",
+    "vue": "^3.2.37"
+  },
+  "dependencies": {
+    "@wakeapp/framework-core": "0.1.0-daily20220607139",
+    "vue-demi": "*"
+  }
 }
