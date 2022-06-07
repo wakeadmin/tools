@@ -11,7 +11,7 @@
   "milestoneAutoUpdate": false,
 
   // 执行 Typescript 类型检查, 这个功能在 wkstd 1.12.0 开始支持
-  "typescriptEnable": false,
+  "typescriptEnable": true,
 
   // 执行 stylelint 样式检查，默认关闭
   // "stylelintEnable": false,
@@ -23,7 +23,7 @@
   // 指定哪些文件将被 eslint 检查, 默认会检查所有 .ts, .tsx, .js, .jsx, .mjs, .vue
   "scriptPatterns": [],
   // 指定哪些文件将被 stylelint 检查, 默认会检查 stylelint 支持的所有文件类型 .css, .scss, .sass, .less, .stylus, .vue, .html、.js、.jsx、.ts、.tsx
-  "stylePatterns": []
+  "stylePatterns": [],
   // 是否启用 eslint fix，修复可以被修复的文件, 默认 eslint 的修复是开启的
   // "eslintFixable": true,
   // 是否启用 stylelint fix，修复可以被修复的文件, 默认 stylelint 的修复是关闭的
@@ -35,5 +35,5 @@
   // 扩展 prettier 参数
   // "prettierArgs": {},
   // typescript 检查命令
-  // "typescriptCmd": "tsc --noEmit"
+  "typescriptCmd": "npm run type-check"
 }

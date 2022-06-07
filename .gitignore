@@ -12,3 +12,5 @@ env.*.local.json
 .umi/**
 wk-docs-out
 wk-docs
+.tsBuildInfo
+*.log

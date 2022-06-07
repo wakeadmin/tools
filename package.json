@@ -9,7 +9,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "local-check": "wkstd local-check",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "pnpm run -r build",
+    "type-check": "pnpm run -r type-check"
   },
   "author": "ivan-lee",
   "license": "MIT",
@@ -19,6 +21,7 @@
     "husky": "^8.0.1",
     "prettier": "^2.6.2",
     "prettier-config-wk": "^0.2.0",
+    "rimraf": "^3.0.2",
     "typescript": "^4.7.3",
     "wkstd": "^0.2.0"
   },
