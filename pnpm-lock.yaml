@@ -41,17 +41,21 @@ importers:
 
   packages/framework:
     specifiers:
+      '@testing-library/jest-dom': ^5.16.4
+      '@testing-library/vue': ^6.6.0
       '@types/jest': ^28.1.1
-      '@wakeapp/framework-core': 0.1.0-daily20220607139
+      '@wakeapp/framework-core': latest
       babel-jest: ^28.1.1
       babel-preset-wakeadmin-for-test: '*'
       jest: ^28.1.1
       vue: ^3.2.37
-      vue-demi: '*'
+      vue-demi: latest
     dependencies:
       '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220607139
       vue-demi: 172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37
     devDependencies:
+      '@testing-library/jest-dom': 172.26.59.72+4873/@testing-library/jest-dom/5.16.4
+      '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
       '@types/jest': 172.26.59.72+4873/@types/jest/28.1.1
       babel-jest: 172.26.59.72+4873/babel-jest/28.1.1
       babel-preset-wakeadmin-for-test: link:../babel-preset-wakeadmin-for-test
@@ -2346,7 +2350,6 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.13.9
-    dev: false
 
   172.26.59.72+4873/@babel/template/7.16.7:
     resolution:
@@ -2960,6 +2963,81 @@ packages:
       '@sinonjs/commons': 172.26.59.72+4873/@sinonjs/commons/1.8.3
     dev: true
 
+  172.26.59.72+4873/@testing-library/dom/8.13.0:
+    resolution:
+      {
+        integrity: sha512-9VHgfIatKNXQNaZTtLnalIy0jNZzY35a4S3oi08YAt9Hv1VsfZ/DfA45lM8D/UhtHBGJ4/lGwp0PZkVndRkoOQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@testing-library%2fdom/-/dom-8.13.0.tgz,
+      }
+    name: '@testing-library/dom'
+    version: 8.13.0
+    engines: { node: '>=12' }
+    dependencies:
+      '@babel/code-frame': 172.26.59.72+4873/@babel/code-frame/7.16.7
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
+      '@types/aria-query': 172.26.59.72+4873/@types/aria-query/4.2.2
+      aria-query: 172.26.59.72+4873/aria-query/5.0.0
+      chalk: 172.26.59.72+4873/chalk/4.1.2
+      dom-accessibility-api: 172.26.59.72+4873/dom-accessibility-api/0.5.14
+      lz-string: 172.26.59.72+4873/lz-string/1.4.4
+      pretty-format: 172.26.59.72+4873/pretty-format/27.5.1
+    dev: true
+
+  172.26.59.72+4873/@testing-library/jest-dom/5.16.4:
+    resolution:
+      {
+        integrity: sha512-Gy+IoFutbMQcky0k+bqqumXZ1cTGswLsFqmNLzNdSKkU9KGV2u9oXhukCbbJ9/LRPKiqwxEE8VpV/+YZlfkPUA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@testing-library%2fjest-dom/-/jest-dom-5.16.4.tgz,
+      }
+    name: '@testing-library/jest-dom'
+    version: 5.16.4
+    engines: { node: '>=8', npm: '>=6', yarn: '>=1' }
+    dependencies:
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
+      '@types/testing-library__jest-dom': 172.26.59.72+4873/@types/testing-library__jest-dom/5.14.3
+      aria-query: 172.26.59.72+4873/aria-query/5.0.0
+      chalk: 172.26.59.72+4873/chalk/3.0.0
+      css: 172.26.59.72+4873/css/3.0.0
+      css.escape: 172.26.59.72+4873/css.escape/1.5.1
+      dom-accessibility-api: 172.26.59.72+4873/dom-accessibility-api/0.5.14
+      lodash: 172.26.59.72+4873/lodash/4.17.21
+      redent: 172.26.59.72+4873/redent/3.0.0
+    dev: true
+
+  172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha512-pVCYlXSc19TDe8h9KgZGRY9CrdrsN2wLOegWbyI53FDUEJOuk/3w/BeXPLTQPMYxIv4N3/ZKK2ZJcBsNCouajA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@testing-library%2fvue/-/vue-6.6.0.tgz,
+      }
+    id: 172.26.59.72+4873/@testing-library/vue/6.6.0
+    name: '@testing-library/vue'
+    version: 6.6.0
+    engines: { node: '>=12' }
+    peerDependencies:
+      '@vue/compiler-sfc': '>= 3'
+      vue: '>= 3'
+    dependencies:
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
+      '@testing-library/dom': 172.26.59.72+4873/@testing-library/dom/8.13.0
+      '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0_vue@3.2.37
+      vue: 172.26.59.72+4873/vue/3.2.37
+    dev: true
+
+  172.26.59.72+4873/@types/aria-query/4.2.2:
+    resolution:
+      {
+        integrity: sha1-7U4K2SMGpwT5+xMqDPz3dIbb4rw=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@types%2faria-query/-/aria-query-4.2.2.tgz,
+      }
+    name: '@types/aria-query'
+    version: 4.2.2
+    dev: true
+
   172.26.59.72+4873/@types/babel__core/7.1.19:
     resolution:
       {
@@ -3156,6 +3234,19 @@ packages:
       }
     name: '@types/stack-utils'
     version: 2.0.1
+    dev: true
+
+  172.26.59.72+4873/@types/testing-library__jest-dom/5.14.3:
+    resolution:
+      {
+        integrity: sha512-oKZe+Mf4ioWlMuzVBaXQ9WDnEm1+umLx0InILg+yvZVBBDmzV5KfZyLrCvadtWcx8+916jLmHafcmqqffl+iIw==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@types%2ftesting-library__jest-dom/-/testing-library__jest-dom-5.14.3.tgz,
+      }
+    name: '@types/testing-library__jest-dom'
+    version: 5.14.3
+    dependencies:
+      '@types/jest': 172.26.59.72+4873/@types/jest/28.1.1
     dev: true
 
   172.26.59.72+4873/@types/yargs-parser/21.0.0:
@@ -3513,6 +3604,22 @@ packages:
     name: '@vue/shared'
     version: 3.2.37
 
+  172.26.59.72+4873/@vue/test-utils/2.0.0_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha512-zL5kygNq7hONrO1CzaUGprEAklAX+pH8J1MPMCU3Rd2xtSYkZ+PmKU3oEDRg8VAGdL5lNJHzDgrud5amFPtirw==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2ftest-utils/-/test-utils-2.0.0.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/test-utils/2.0.0
+    name: '@vue/test-utils'
+    version: 2.0.0
+    peerDependencies:
+      vue: ^3.0.1
+    dependencies:
+      vue: 172.26.59.72+4873/vue/3.2.37
+    dev: true
+
   172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220607139:
     resolution:
       {
@@ -3744,6 +3851,18 @@ packages:
     version: 2.0.1
     dev: true
 
+  172.26.59.72+4873/aria-query/5.0.0:
+    resolution:
+      {
+        integrity: sha1-IQwhqvRpYT7oyaYsf4ZSXgWNtSw=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/aria-query/-/aria-query-5.0.0.tgz,
+      }
+    name: aria-query
+    version: 5.0.0
+    engines: { node: '>=6.0' }
+    dev: true
+
   172.26.59.72+4873/array-differ/3.0.0:
     resolution:
       {
@@ -3825,6 +3944,19 @@ packages:
     name: astral-regex
     version: 2.0.0
     engines: { node: '>=8' }
+    dev: true
+
+  172.26.59.72+4873/atob/2.1.2:
+    resolution:
+      {
+        integrity: sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/atob/-/atob-2.1.2.tgz,
+      }
+    name: atob
+    version: 2.1.2
+    engines: { node: '>= 4.5.0' }
+    hasBin: true
     dev: true
 
   172.26.59.72+4873/babel-jest/28.1.1:
@@ -4269,6 +4401,21 @@ packages:
       escape-string-regexp: 172.26.59.72+4873/escape-string-regexp/1.0.5
       supports-color: 172.26.59.72+4873/supports-color/5.5.0
 
+  172.26.59.72+4873/chalk/3.0.0:
+    resolution:
+      {
+        integrity: sha1-P3PCv1JlkfV0zEksUeJFY0n4ROQ=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/chalk/-/chalk-3.0.0.tgz,
+      }
+    name: chalk
+    version: 3.0.0
+    engines: { node: '>=8' }
+    dependencies:
+      ansi-styles: 172.26.59.72+4873/ansi-styles/4.3.0
+      supports-color: 172.26.59.72+4873/supports-color/7.2.0
+    dev: true
+
   172.26.59.72+4873/chalk/4.1.2:
     resolution:
       {
@@ -4517,6 +4664,32 @@ packages:
       which: 172.26.59.72+4873/which/2.0.2
     dev: true
 
+  172.26.59.72+4873/css.escape/1.5.1:
+    resolution:
+      {
+        integrity: sha1-QuJ9T6BK4y+TGktNQZH6nN3ul8s=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/css.escape/-/css.escape-1.5.1.tgz,
+      }
+    name: css.escape
+    version: 1.5.1
+    dev: true
+
+  172.26.59.72+4873/css/3.0.0:
+    resolution:
+      {
+        integrity: sha1-REek1Y/dAzZ8UWyp9krjZc7kql0=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/css/-/css-3.0.0.tgz,
+      }
+    name: css
+    version: 3.0.0
+    dependencies:
+      inherits: 172.26.59.72+4873/inherits/2.0.4
+      source-map: 172.26.59.72+4873/source-map/0.6.1
+      source-map-resolve: 172.26.59.72+4873/source-map-resolve/0.6.0
+    dev: true
+
   172.26.59.72+4873/csstype/2.6.20:
     resolution:
       {
@@ -4602,7 +4775,6 @@ packages:
     name: decode-uri-component
     version: 0.2.0
     engines: { node: '>=0.10' }
-    dev: false
 
   172.26.59.72+4873/dedent/0.7.0:
     resolution:
@@ -4728,6 +4900,17 @@ packages:
     engines: { node: '>=6.0.0' }
     dependencies:
       esutils: 172.26.59.72+4873/esutils/2.0.3
+    dev: true
+
+  172.26.59.72+4873/dom-accessibility-api/0.5.14:
+    resolution:
+      {
+        integrity: sha512-NMt+m9zFMPZe0JcY9gN224Qvk6qLIdqex29clBvc/y75ZBX9YA9wNK3frsYvu2DI1xcCIwxwnX+TlsJ2DSOADg==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/dom-accessibility-api/-/dom-accessibility-api-0.5.14.tgz,
+      }
+    name: dom-accessibility-api
+    version: 0.5.14
     dev: true
 
   172.26.59.72+4873/electron-to-chromium/1.4.147:
@@ -6211,6 +6394,18 @@ packages:
     engines: { node: '>=0.8.19' }
     dev: true
 
+  172.26.59.72+4873/indent-string/4.0.0:
+    resolution:
+      {
+        integrity: sha1-Yk+PRJfWGbLZdoUx1Y9BIoVNclE=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/indent-string/-/indent-string-4.0.0.tgz,
+      }
+    name: indent-string
+    version: 4.0.0
+    engines: { node: '>=8' }
+    dev: true
+
   172.26.59.72+4873/inflight/1.0.6:
     resolution:
       {
@@ -7567,6 +7762,18 @@ packages:
       yallist: 172.26.59.72+4873/yallist/4.0.0
     dev: true
 
+  172.26.59.72+4873/lz-string/1.4.4:
+    resolution:
+      {
+        integrity: sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/lz-string/-/lz-string-1.4.4.tgz,
+      }
+    name: lz-string
+    version: 1.4.4
+    hasBin: true
+    dev: true
+
   172.26.59.72+4873/magic-string/0.25.9:
     resolution:
       {
@@ -7654,6 +7861,18 @@ packages:
     name: mimic-fn
     version: 2.1.0
     engines: { node: '>=6' }
+    dev: true
+
+  172.26.59.72+4873/min-indent/1.0.1:
+    resolution:
+      {
+        integrity: sha1-pj9oFnOzBXH76LwlaGrnRu76mGk=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/min-indent/-/min-indent-1.0.1.tgz,
+      }
+    name: min-indent
+    version: 1.0.1
+    engines: { node: '>=4' }
     dev: true
 
   172.26.59.72+4873/minimatch/3.1.2:
@@ -8342,6 +8561,21 @@ packages:
     version: 18.1.0
     dev: true
 
+  172.26.59.72+4873/redent/3.0.0:
+    resolution:
+      {
+        integrity: sha1-5Ve3mYMWu1PJ8fVvpiY1LGljBZ8=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/redent/-/redent-3.0.0.tgz,
+      }
+    name: redent
+    version: 3.0.0
+    engines: { node: '>=8' }
+    dependencies:
+      indent-string: 172.26.59.72+4873/indent-string/4.0.0
+      strip-indent: 172.26.59.72+4873/strip-indent/3.0.0
+    dev: true
+
   172.26.59.72+4873/reflect-metadata/0.1.13:
     resolution:
       {
@@ -8387,7 +8621,6 @@ packages:
       }
     name: regenerator-runtime
     version: 0.13.9
-    dev: false
 
   172.26.59.72+4873/regenerator-transform/0.15.0:
     resolution:
@@ -8804,6 +9037,20 @@ packages:
     version: 1.0.2
     engines: { node: '>=0.10.0' }
 
+  172.26.59.72+4873/source-map-resolve/0.6.0:
+    resolution:
+      {
+        integrity: sha1-PZ34fiNrU/FtAeWBUPx3EROOXtI=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/source-map-resolve/-/source-map-resolve-0.6.0.tgz,
+      }
+    name: source-map-resolve
+    version: 0.6.0
+    dependencies:
+      atob: 172.26.59.72+4873/atob/2.1.2
+      decode-uri-component: 172.26.59.72+4873/decode-uri-component/0.2.0
+    dev: true
+
   172.26.59.72+4873/source-map-support/0.5.13:
     resolution:
       {
@@ -8997,6 +9244,20 @@ packages:
     name: strip-final-newline
     version: 2.0.0
     engines: { node: '>=6' }
+    dev: true
+
+  172.26.59.72+4873/strip-indent/3.0.0:
+    resolution:
+      {
+        integrity: sha1-wy4c7pQLazQyx3G8LFS8znPNMAE=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/strip-indent/-/strip-indent-3.0.0.tgz,
+      }
+    name: strip-indent
+    version: 3.0.0
+    engines: { node: '>=8' }
+    dependencies:
+      min-indent: 172.26.59.72+4873/min-indent/1.0.1
     dev: true
 
   172.26.59.72+4873/strip-json-comments/3.1.1:
