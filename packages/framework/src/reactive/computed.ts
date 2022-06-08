@@ -52,7 +52,10 @@ export const computed: IComputedFactory = ((targetOrOptions?: Object, maybePrope
 
   if (isPlainObject(targetOrOptions) || targetOrOptions == null) {
     // @computed(options) 形式
-    return createAnnotationDecorator(createComputedAnnotation(targetOrOptions as IComputedFactory | undefined));
+    return createAnnotationDecorator(
+      'computed',
+      createComputedAnnotation(targetOrOptions as IComputedFactory | undefined)
+    );
   }
 
   throw new Error(`computed 只能作为装饰器使用`);

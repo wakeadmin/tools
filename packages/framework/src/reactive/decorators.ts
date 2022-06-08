@@ -1,4 +1,4 @@
-import { addHiddenProp, hasProp } from '../utils';
+import { addHiddenProp, assertPropertyDecorator, hasProp } from '../utils';
 import { Annotation, AnnotationMap, AnnotationType } from './types';
 
 /**
@@ -84,8 +84,12 @@ export function collectAnnotations(target: any): AnnotationMap {
  * @param annotation
  * @returns
  */
-export function createAnnotationDecorator(annotation: Annotation): PropertyDecorator {
-  return (target, key) => {
+export function createAnnotationDecorator(name: string, annotation: Annotation): PropertyDecorator {
+  return function (target, key) {
+    if (process.env.NODE_ENV !== 'production') {
+      assertPropertyDecorator(name, Array.from(arguments));
+    }
+
     storeAnnotation(target, key, annotation);
   };
 }

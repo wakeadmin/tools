@@ -1,6 +1,6 @@
-import { isPropertyKey, NOOP } from '../utils';
+import { NOOP } from '../utils';
 
-import { storeAnnotation } from './decorators';
+import { createAnnotationDecorator } from './decorators';
 import { Annotation, AnnotationType, IOverrideFactory } from './types';
 
 const overrideAnnotation: Annotation = {
@@ -13,10 +13,4 @@ const overrideAnnotation: Annotation = {
  * @param target
  * @param key
  */
-export const override: IOverrideFactory = (target, key) => {
-  if (process.env.NODE_ENV !== 'production' && (typeof target !== 'object' || !isPropertyKey(key))) {
-    throw new Error('@override 只能用于属性装饰器');
-  }
-
-  storeAnnotation(target, key, overrideAnnotation);
-};
+export const override: IOverrideFactory = createAnnotationDecorator('override', overrideAnnotation);

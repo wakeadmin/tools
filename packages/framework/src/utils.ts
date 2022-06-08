@@ -77,3 +77,15 @@ export const getDescriptor = (target: any, key: PropertyKey): PropertyDescriptor
 
   return undefined;
 };
+
+/**
+ * 检查是否为属性装饰器
+ * @param name
+ * @param args
+ */
+export const assertPropertyDecorator = (name: string, args: any[]) => {
+  // eslint-disable-next-line no-magic-numbers
+  if (args.length < 2 || typeof args[0] !== 'object' || !isPropertyKey(args[1])) {
+    throw new TypeError(`@${name} 只能用于装饰属性`);
+  }
+};
