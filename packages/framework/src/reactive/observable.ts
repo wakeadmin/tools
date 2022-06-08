@@ -2,6 +2,7 @@ import { shallowRef, reactive, shallowReactive } from 'vue-demi';
 
 import { Annotation, AnnotationMaker, AnnotationType, IObservableFactory } from './types';
 import { createAnnotationDecorator } from './decorators';
+import { isObject } from '../utils';
 
 enum ObservableType {
   Deep = 'deep',
@@ -10,6 +11,11 @@ enum ObservableType {
 }
 
 const createReactiveValue = (type: ObservableType, value: any) => {
+  // 非原始值不转换
+  if (!isObject(value)) {
+    return value;
+  }
+
   switch (type) {
     case ObservableType.Ref:
       return value;
@@ -21,7 +27,7 @@ const createReactiveValue = (type: ObservableType, value: any) => {
 };
 
 const makeObservable: AnnotationMaker = (target, key, annotation, descriptor) => {
-  if (process.env.NODE_ENV !== 'production' && !('value' in descriptor)) {
+  if (process.env.NODE_ENV !== 'production' && (!('value' in descriptor) || typeof descriptor.value === 'function')) {
     throw new Error(`@observable 只能用于属性字段`);
   }
 
