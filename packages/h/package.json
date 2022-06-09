@@ -1,0 +1,25 @@
+{
+  "name": "@wakeadmin/h",
+  "version": "0.1.0",
+  "description": "支持跨 Vue 2/3, 兼容 React JSX 协议的渲染方法",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vue-demi": "^0.13.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/vue": "^6.6.0",
+    "@types/jest": "^28.1.1",
+    "babel-jest": "^28.1.1",
+    "babel-preset-wakeadmin-for-test": "workspace:*",
+    "jest": "^28.1.1",
+    "vue": "^3.2.37",
+    "vue-tsc": "^0.37.3"
+  }
+}
