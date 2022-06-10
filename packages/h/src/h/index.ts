@@ -1,10 +1,7 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/array-type */
 /* eslint-disable @typescript-eslint/prefer-function-type */
-import kebabCase from 'lodash/kebabCase';
 import {
-  isVue2,
   h as vueh,
   Text,
   Comment,
@@ -23,6 +20,8 @@ import {
   VNodeArrayChildren,
   Component,
 } from 'vue-demi';
+
+import { processProps, processChildren, wrap } from './process';
 
 type RawChildren = string | number | boolean | VNode | VNodeArrayChildren | (() => any) | RawSlots;
 
@@ -87,69 +86,9 @@ export function h<P>(
 ): VNode;
 
 export function h(type: any, props: any, ...children: any[]): VNode {
-  return vueh(type, props, children);
-}
+  const finalProps = processProps(type, props);
+  const _children = children.length ? children : finalProps.children;
+  const finalChildren = processChildren(type, finalProps, _children);
 
-const EVENT_KEY = /^on[A-Z][a-zA-Z0-9:]*/;
-const ALLOWED_EVENT_MODIFIER = new Set(['capture', 'once', 'passive', 'native']);
-const EVENT_MODIFIER_PREFIX: Record<string, string> = {
-  capture: '!',
-  once: '~',
-  passive: '&',
-  native: '',
-};
-
-export function vue2EventDeclaration(
-  key: string,
-  value: any
-): { isNative: boolean; name: string; value: Function } | null {
-  if (EVENT_KEY.test(key) && typeof value === 'function') {
-    const splitted = kebabCase(key)
-      .split('-')
-      .map(i => i.toLowerCase());
-    // 描述符只能出现在末尾
-    const detectedModifier: string[] = [];
-    let isNative = false;
-    let i = splitted.length - 1;
-
-    for (; i > 1; i--) {
-      const section = splitted[i];
-      if (ALLOWED_EVENT_MODIFIER.has(section)) {
-        detectedModifier.push(section);
-        if (section === 'native') {
-          isNative = true;
-        }
-      } else {
-        // 不能中断
-        break;
-      }
-    }
-
-    let eventName =
-      detectedModifier.map(m => EVENT_MODIFIER_PREFIX[m]).join('') +
-      splitted
-        .slice(0, i + 1)
-        .join('')
-        .toLowerCase();
-
-    return { name: eventName, value, isNative };
-  }
-
-  return null;
-}
-
-export function normalizeProps(props: any) {
-  if (props == null || typeof props !== 'object') {
-    return props;
-  }
-
-  if (!isVue2) {
-    return props;
-  }
-
-  const keys = Object.keys(props);
-  const events = [];
-  for (const key of keys) {
-    const value = props[key];
-  }
+  return wrap(vueh(type, finalProps, finalChildren));
 }

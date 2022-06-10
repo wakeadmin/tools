@@ -8,8 +8,8 @@ import { UnionToTuple } from './typeUtils';
 declare global {
   namespace JSX {
     interface ElementChildrenAttribute {
-      // JSX 从 $slots 推断子元素
-      $slots: {};
+      // JSX 从 children 推断子元素
+      children: {};
     }
   }
 }
@@ -73,7 +73,7 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
 
 export type DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
   new (...args: any[]): {
-    $props: Props & EmitsToProps<Emit> & { $slots?: Partial<Slots> } & { ref?: Ref<Expose | null> | string }; // string 用于兼容 template 引用
+    $props: Props & EmitsToProps<Emit> & { children?: Partial<Slots> } & { ref?: Ref<Expose | null> | string }; // string 用于兼容 template 引用
     $slots: Slots;
     $emit: EmitFn<Emit>;
   };
