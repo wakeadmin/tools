@@ -1,11 +1,15 @@
 {
-  "extends": ["wkts"],
+  "extends": ["wkts", "wkvue/vue3"],
   "plugins": [],
   "globals": {},
   "rules": {},
+  "parser": "vue-eslint-parser",
   "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "project": "tsconfig.json",
+    "sourceType": "module",
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "extraFileExtensions": [".vue"]
   },
   "env": {
     "browser": true,

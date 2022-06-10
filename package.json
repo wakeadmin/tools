@@ -16,8 +16,10 @@
   "author": "ivan-lee",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "~7.18.2",
     "eslint": "~8.0.0",
     "eslint-config-wkts": "^0.2.0",
+    "eslint-config-wkvue": "^0.1.20",
     "husky": "^8.0.1",
     "prettier": "^2.6.2",
     "prettier-config-wk": "^0.2.0",
