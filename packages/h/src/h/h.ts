@@ -86,7 +86,7 @@ export function h<P>(
 ): VNode;
 
 export function h(type: any, props: any, ...children: any[]): VNode {
-  const finalProps = processProps(type, props);
+  const finalProps = processProps(type, props) ?? {};
   const _children = children.length ? children : finalProps.children;
   const finalChildren = processChildren(type, finalProps, _children);
 
