@@ -10,11 +10,11 @@ import {
   defineComponent as vueDefineComponent,
   isVue2,
   getCurrentInstance,
+  isReactive,
 } from 'vue-demi';
-import type { UnionToIntersection } from '@vue/shared';
 
-import { UnionToTuple } from './typeUtils';
-import { isObject } from '../utils';
+import { UnionToTuple, UnionToIntersection, NotUndefined } from './typeUtils';
+import { isObject, isPlainObject } from '../utils';
 
 declare global {
   namespace JSX {
@@ -137,7 +137,44 @@ export type ExtraRef<T extends DefineComponent<any, any, any, any>> = T['__ref']
 /**
  * 给 props 添加默认值，只能在 setup 中使用
  */
-export function withDefaults() {}
+export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
+  props: T,
+  defaultValue: D
+): T & { [K in keyof D]: K extends keyof T ? NotUndefined<T[K]> : never } {
+  if (process.env.NODE_ENV !== 'production' && (!isReactive(props) || !isPlainObject(props))) {
+    throw new Error(`withDefaults() expects a reactive object but received a plain one.`);
+  }
+
+  const DEFAULT_VALUE_KEYS = Object.keys(defaultValue);
+
+  return new Proxy(props, {
+    get(target, p) {
+      const value = Reflect.get(target, p);
+      if (value === undefined && Reflect.has(defaultValue, p)) {
+        return Reflect.get(defaultValue, p);
+      }
+      return value;
+    },
+    // 让 default value 可被枚举
+    getOwnPropertyDescriptor(target, p) {
+      if (Reflect.has(target, p)) {
+        return Reflect.getOwnPropertyDescriptor(target, p);
+      }
+
+      return Reflect.getOwnPropertyDescriptor(defaultValue, p);
+    },
+    ownKeys(target) {
+      const keys = Reflect.ownKeys(target);
+      for (const key of DEFAULT_VALUE_KEYS) {
+        if (!keys.includes(key)) {
+          keys.push(key);
+        }
+      }
+
+      return keys;
+    },
+  }) as any;
+}
 
 /**
  * 创建 Vue 组件

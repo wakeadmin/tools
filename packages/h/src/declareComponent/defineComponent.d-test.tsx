@@ -1,11 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
 import { VNodeChild, ref, StyleValue } from 'vue-demi';
-import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './defineComponent';
+import {
+  withDefaults,
+  declareComponent,
+  declareProps,
+  declareExpose,
+  declareSlots,
+  declareEmits,
+} from './defineComponent';
 
 export declare function expectType<T>(value: T): void;
 
 declare let t: any;
+
+test('withDefaults', () => {
+  const props: { foo: string; bar?: string } = { foo: '1' };
+  const withDefaultValues1 = withDefaults(props, { bar: '1' });
+  expectType<{ foo: string; bar: string }>(withDefaultValues1);
+
+  // @ts-expect-error baz 未定义
+  withDefaults(props, { baz: '1' });
+
+  // @ts-expect-error 类型不兼容
+  withDefaults(props, { bar: 1 });
+});
 
 test('测试 defineComponent 类型推断', () => {
   test('未定义任何声明', () => {
