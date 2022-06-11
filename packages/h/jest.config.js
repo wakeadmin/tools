@@ -3,6 +3,15 @@
  * https://jestjs.io/docs/configuration
  */
 
+const VUE2_MODE = !!process.env.VUE2;
+const VUE3_MODE = !!process.env.VUE3;
+
+if (VUE2_MODE) {
+  console.log('vue2 mode');
+} else if (VUE3_MODE) {
+  console.log('vue3 mode');
+}
+
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -153,10 +162,12 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
-  // ],
+  testMatch: VUE2_MODE
+    ? // .vue2.* 为特定的文件名，用于匹配vue2的文件
+      ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)', '**/?(*.)+(spec|test).vue2.[tj]s?(x)']
+    : VUE3_MODE
+    ? ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)', '**/?(*.)+(spec|test).vue3.[tj]s?(x)']
+    : ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [

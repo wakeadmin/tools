@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import kebabCase from 'lodash/kebabCase';
-import { Vue2, isVue2 } from 'vue-demi';
+import { Vue2, isVue2, isVNode } from 'vue-demi';
+import lowerFirst from 'lodash/lowerFirst';
 
 import { shallowMerge, isPlainObject, ownKeys } from '../utils';
 
@@ -45,10 +46,10 @@ export interface IAttr {
 
 export function isWrapped(vnode: any): boolean {
   if (!isVue2) {
-    return true;
+    return isVNode(vnode);
   }
 
-  return vnode && typeof vnode === 'object' && vnode[WRAP_SYMBOL];
+  return !!(vnode && typeof vnode === 'object' && vnode[WRAP_SYMBOL]);
 }
 
 export function wrap<T = any>(vnode: T): T {
@@ -90,12 +91,10 @@ export function processVue2Event(key: string, value: any): IEventHandler | null 
       }
     }
 
+    const modifiersLength = detectedModifier.join('').length;
     let eventName =
       detectedModifier.map(m => EVENT_MODIFIER_PREFIX[m]).join('') +
-      splitted
-        .slice(0, i + 1)
-        .join('')
-        .toLowerCase();
+      lowerFirst(key.slice(2, -modifiersLength || key.length));
 
     return { name: eventName, value, isNative };
   }
@@ -103,7 +102,7 @@ export function processVue2Event(key: string, value: any): IEventHandler | null 
   return null;
 }
 
-export function processVue2Attr(el: { tag: string; type?: string }, key: string, value: string): IAttr {
+export function processVue2Attr(el: { tag: string; type?: string }, key: string, value: any): IAttr {
   // Vue3 .prop
   if (key.startsWith('.')) {
     return {
@@ -185,10 +184,15 @@ export function processProps(tag: any, props: any) {
  * @returns
  */
 export function isSlots(children: any) {
-  return (
-    isPlainObject(children) &&
-    !isWrapped(children) &&
-    ownKeys(children).every(k => {
+  if (!isPlainObject(children) || isWrapped(children)) {
+    return false;
+  }
+
+  const keys = ownKeys(children);
+
+  return !!(
+    keys.length &&
+    keys.every(k => {
       return typeof children[k] === 'function';
     })
   );

@@ -7,7 +7,9 @@
     "prebuild": "rimraf dist .tsBuildInfo",
     "build": "tsc -b tsconfig.build.json",
     "type-check": "tsc",
-    "test": "jest"
+    "test:vue2": "vue-demi-switch 2 vue2 && cross-env VUE2=true jest",
+    "test:vue3": "vue-demi-switch 3 && cross-env VUE3=true jest",
+    "test": "npm run test:vue2 && npm run test:vue3"
   },
   "keywords": [],
   "author": "",
@@ -21,9 +23,11 @@
     "@testing-library/vue": "^6.6.0",
     "@types/jest": "^28.1.1",
     "@types/lodash": "^4.14.182",
+    "@vue/composition-api": "^1.6.2",
     "babel-jest": "^28.1.1",
     "babel-preset-wakeadmin-for-test": "workspace:*",
     "jest": "^28.1.1",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue2": "npm:vue@2"
   }
 }
