@@ -1,4 +1,4 @@
-import { resolveComponent, resolveDirective, isVNode } from './helper';
+import { withDirectives, directiveArgumentsToBinding, resolveComponent, resolveDirective, isVNode } from './helper';
 import { wrap } from './process';
 
 test('resolveComponent', () => {
@@ -12,4 +12,46 @@ test('resolveDirective', () => {
 test('isVNode', () => {
   expect(isVNode({})).toBeFalsy();
   expect(isVNode(wrap({}))).toBeTruthy();
+});
+
+test('directiveArgumentsToBinding', () => {
+  expect(directiveArgumentsToBinding([['one'], ['two', 1, 'foo', {}]])).toEqual({
+    directives: [
+      {
+        arg: undefined,
+        dir: 'one',
+        modifiers: undefined,
+        name: 'one',
+        value: undefined,
+      },
+      {
+        dir: 'two',
+        arg: 'foo',
+        modifiers: {},
+        name: 'two',
+        value: 1,
+      },
+    ],
+  });
+});
+
+test('withDirectives', () => {
+  // 注入模式
+  const vnode: any = wrap({
+    data: {},
+  });
+
+  withDirectives(vnode, [['one']]);
+
+  expect(vnode.data).toEqual({
+    directives: [
+      {
+        arg: undefined,
+        dir: 'one',
+        modifiers: undefined,
+        name: 'one',
+        value: undefined,
+      },
+    ],
+  });
 });
