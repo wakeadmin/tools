@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
-import { VNodeChild, ref } from 'vue-demi';
+import { VNodeChild, ref, StyleValue } from 'vue-demi';
 import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './defineComponent';
 
 export declare function expectType<T>(value: T): void;
@@ -34,6 +34,10 @@ test('测试 defineComponent 类型推断', () => {
 
         // emit 也会放入 attrs 中
         expectType<((a: number) => void) | undefined>(attrs.onChange);
+
+        // class/style 也会放入 attrs 中，但是在 vue2 中是始终为空的
+        expectType<any | undefined>(attrs.class);
+        expectType<StyleValue | undefined>(attrs.style);
       },
     });
 

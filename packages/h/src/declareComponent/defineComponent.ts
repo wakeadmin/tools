@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction } from '@vue/runtime-core';
-import { UnionToIntersection } from '@vue/shared';
+import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue } from 'vue-demi';
+import type { UnionToIntersection } from '@vue/shared';
+
 import { UnionToTuple } from './typeUtils';
 
 declare global {
@@ -41,6 +42,11 @@ type EmitFn<Options = ObjectEmitsOptions, Event extends keyof Options = keyof Op
       }[Event]
     >;
 
+export type ReservedAttrs = {
+  class?: any;
+  style?: StyleValue;
+};
+
 export interface SetupContext<Emit, Slot, Expose, Attrs> {
   attrs: Attrs;
   slots: Partial<Slot>;
@@ -62,7 +68,7 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
   setup: (
     this: void,
     props: Props,
-    ctx: SetupContext<Emit, Slots, Expose, Data & EmitsToProps<Emit>>
+    ctx: SetupContext<Emit, Slots, Expose, Data & EmitsToProps<Emit> & ReservedAttrs>
   ) => Promise<RenderFunction | void> | RenderFunction | void;
   // 内置禁用
   // inheritAttrs?: boolean;
