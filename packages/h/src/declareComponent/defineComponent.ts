@@ -16,6 +16,9 @@ import {
 
 import { UnionToTuple, UnionToIntersection, NotUndefined } from './typeUtils';
 import { isObject, isPlainObject } from '../utils';
+import omit from 'lodash/omit';
+import lowerFirst from 'lodash/lowerFirst';
+import upperFirst from 'lodash/upperFirst';
 
 declare global {
   namespace JSX {
@@ -113,7 +116,7 @@ export function declareProps<T extends {}>(list: UnionToTuple<keyof T>): T {
  * @returns
  */
 export function declareExpose<T extends {}>(): T {
-  return null as any as T;
+  return undefined as any as T;
 }
 
 /**
@@ -121,7 +124,7 @@ export function declareExpose<T extends {}>(): T {
  * @returns
  */
 export function declareSlots<T extends { [key: string]: Function }>(): T {
-  return null as any as T;
+  return undefined as any as T;
 }
 
 /**
@@ -186,6 +189,8 @@ export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
   }) as any;
 }
 
+const OMIT_OPTIONS = ['emits', 'slots', 'expose'];
+
 /**
  * 创建 Vue 组件
  * @param options
@@ -198,7 +203,7 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
 
   return vueDefineComponent({
     inheritAttrs: false,
-    ...other,
+    ...omit(other, OMIT_OPTIONS),
     setup: isVue2
       ? function (props: any, context: any) {
           // vue2 不支持 expose
@@ -216,24 +221,47 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
               }
             });
 
-          // vue2 下，将 $listeners 合并 $attrs
-          const attrsProxy = new Proxy(
-            {},
-            {
-              get(_, p) {
-                return Reflect.get(Reflect.has(context.attrs, p) ? context.attrs : context.listeners, p);
-              },
-              set(_, p) {
-                if (process.env.NODE_ENV !== 'production') {
-                  throw new Error(`attrs 是只读对象，不能修改 ${String(p)}`);
-                }
-                return true;
-              },
-              ownKeys() {
-                return Reflect.ownKeys(context.attrs).concat(context.listeners);
-              },
+          const getHandlerName = (p: PropertyKey) => {
+            if (typeof p === 'string' && p.startsWith('on')) {
+              return lowerFirst(p.slice(2));
             }
-          );
+
+            return '';
+          };
+
+          // vue2 下，将 $listeners 合并 $attrs
+          const attrsProxy = new Proxy(context.attrs, {
+            get(_, p) {
+              if (Reflect.has(context.attrs, p)) {
+                return Reflect.get(context.attrs, p);
+              }
+
+              return Reflect.get(context.listeners, getHandlerName(p));
+            },
+            set(_, p) {
+              if (process.env.NODE_ENV !== 'production') {
+                throw new Error(`attrs 是只读对象，不能修改 ${String(p)}`);
+              }
+              return true;
+            },
+            getOwnPropertyDescriptor(_, p) {
+              if (Reflect.has(context.attrs, p)) {
+                return Reflect.getOwnPropertyDescriptor(context.attrs, p);
+              }
+
+              return Reflect.getOwnPropertyDescriptor(context.listeners, getHandlerName(p));
+            },
+            has(_, p) {
+              return Reflect.has(context.attrs, p) || Reflect.has(context.listeners, getHandlerName(p));
+            },
+            ownKeys() {
+              return Reflect.ownKeys(context.attrs).concat(
+                Reflect.ownKeys(context.listeners)
+                  .filter((i): i is string => typeof i === 'string')
+                  .map(i => `on${upperFirst(i)}`)
+              );
+            },
+          });
 
           const contextProxy = new Proxy(context, {
             get(target, p) {

@@ -24,10 +24,15 @@
     "@types/jest": "^28.1.1",
     "@types/lodash": "^4.14.182",
     "@vue/composition-api": "^1.6.2",
+    "@vue/test-utils": "next",
     "babel-jest": "^28.1.1",
     "babel-preset-wakeadmin-for-test": "workspace:*",
     "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
+    "testing-library-vue-2": "npm:@testing-library/vue@5",
     "vue": "^3.2.37",
+    "vue-template-compiler": "^2.6.14",
+    "vue-test-utils-2": "npm:@vue/test-utils@1",
     "vue2": "npm:vue@2"
   }
 }

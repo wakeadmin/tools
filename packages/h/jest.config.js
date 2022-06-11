@@ -97,7 +97,13 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: VUE2_MODE
+    ? {
+        '^vue$': 'vue2',
+        '^@vue/test-utils$': 'vue-test-utils-2',
+        '^@testing-library/vue$': 'testing-library-vue-2',
+      }
+    : {},
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -153,7 +159,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  // testEnvironment: "jest-environment-node",
+  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

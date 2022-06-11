@@ -1,6 +1,22 @@
-import { toRefs, reactive, isReactive, watchEffect, set } from 'vue-demi';
+import { toRefs, reactive, isReactive, watchEffect } from 'vue-demi';
 
-import { withDefaults } from './defineComponent';
+import { withDefaults, declareProps, declareEmits, declareExpose, declareSlots } from './defineComponent';
+
+test('declareProps', () => {
+  expect(declareProps<{ foo: string; bar: string }>(['foo', 'bar'])).toEqual(['foo', 'bar']);
+});
+
+test('declareEmits', () => {
+  expect(declareEmits<{ click: () => void }>(['click'])).toEqual(['click']);
+});
+
+test('declareExpose', () => {
+  expect(declareExpose<{ a: string }>()).toEqual(undefined);
+});
+
+test('declareSlots', () => {
+  expect(declareSlots<{ a: () => any }>()).toEqual(undefined);
+});
 
 describe('withDefaults', () => {
   test('如果是非 reactive 对象则抛出异常', () => {
