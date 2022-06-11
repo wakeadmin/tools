@@ -74,7 +74,11 @@ export function withDirectives<T extends VNode>(
       return vueWithDirectives(arg1, arg2!);
     } else {
       // @ts-expect-error
-      arg1.data?.directives = { ...arg1.data?.directives, ...directiveArgumentsToBinding(arg2).directives };
+      if (arg1.data) {
+        // @ts-expect-error
+        arg1.data.directives = { ...arg1.data?.directives, ...directiveArgumentsToBinding(arg2).directives };
+      }
+
       return arg1;
     }
   } else {

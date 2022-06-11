@@ -8,6 +8,7 @@ import {
   RenderFunction,
   StyleValue,
   defineComponent as vueDefineComponent,
+  set,
   isVue2,
   getCurrentInstance,
   isReactive,
@@ -146,6 +147,15 @@ export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
   }
 
   const DEFAULT_VALUE_KEYS = Object.keys(defaultValue);
+
+  // vue2 如果 props 属性为空，可能不会响应，这里最好设置默认值
+  if (isVue2) {
+    for (const key in defaultValue) {
+      if (!Object.prototype.hasOwnProperty.call(props, key)) {
+        set(props, key, defaultValue[key]);
+      }
+    }
+  }
 
   return new Proxy(props, {
     get(target, p) {

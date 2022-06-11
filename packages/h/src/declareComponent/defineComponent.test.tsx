@@ -1,4 +1,4 @@
-import { toRefs, reactive, isReactive, effect } from 'vue-demi';
+import { toRefs, reactive, isReactive, watchEffect, set } from 'vue-demi';
 
 import { withDefaults } from './defineComponent';
 
@@ -25,9 +25,14 @@ describe('withDefaults', () => {
 
     // 保持响应性
     let bar: any;
-    effect(() => {
-      bar = withDefaultValue.bar;
-    });
+    watchEffect(
+      () => {
+        bar = withDefaultValue.bar;
+      },
+      {
+        flush: 'sync',
+      }
+    );
 
     // toRefs 兼容, 依赖于 ownKeys
     const refs = toRefs(withDefaultValue);
@@ -36,7 +41,9 @@ describe('withDefaults', () => {
     expect(bar).toBe('baz');
     expect(refs.bar.value).toBe('baz');
 
+    // vue2 在这里不会响应, 需要 set
     value.bar = 'new bar';
+
     expect(withDefaultValue.bar).toBe('new bar');
     expect(bar).toBe('new bar');
     expect(refs.bar.value).toBe('new bar');
