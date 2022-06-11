@@ -1,10 +1,20 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue } from 'vue-demi';
+import {
+  Ref,
+  EmitsOptions,
+  ObjectEmitsOptions,
+  RenderFunction,
+  StyleValue,
+  defineComponent as vueDefineComponent,
+  isVue2,
+  getCurrentInstance,
+} from 'vue-demi';
 import type { UnionToIntersection } from '@vue/shared';
 
 import { UnionToTuple } from './typeUtils';
+import { isObject } from '../utils';
 
 declare global {
   namespace JSX {
@@ -125,6 +135,11 @@ export function declareEmits<T extends { [key: string]: Function }>(list: UnionT
 export type ExtraRef<T extends DefineComponent<any, any, any, any>> = T['__ref'] | null;
 
 /**
+ * 给 props 添加默认值，只能在 setup 中使用
+ */
+export function withDefaults() {}
+
+/**
  * 创建 Vue 组件
  * @param options
  * @returns
@@ -132,5 +147,61 @@ export type ExtraRef<T extends DefineComponent<any, any, any, any>> = T['__ref']
 export function declareComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}>(
   options: SimpleComponentOptions<Props, Emit, Expose, Slots>
 ): DefineComponent<Props, Emit, Expose, Slots> {
-  return { options } as any;
+  const { setup, ...other } = options;
+
+  return vueDefineComponent({
+    inheritAttrs: false,
+    ...other,
+    setup: isVue2
+      ? function (props: any, context: any) {
+          // vue2 不支持 expose
+          const expose =
+            context.expose ??
+            ((values: any) => {
+              if (!isObject(values) && process.env.NODE_ENV !== 'production') {
+                throw new Error(`expose 必须为对象`);
+              }
+              const instance = getCurrentInstance();
+
+              if (instance) {
+                // 追加到 vm 实例上
+                Object.assign(instance, values);
+              }
+            });
+
+          // vue2 下，将 $listeners 合并 $attrs
+          const attrsProxy = new Proxy(
+            {},
+            {
+              get(_, p) {
+                return Reflect.get(Reflect.has(context.attrs, p) ? context.attrs : context.listeners, p);
+              },
+              set(_, p) {
+                if (process.env.NODE_ENV !== 'production') {
+                  throw new Error(`attrs 是只读对象，不能修改 ${String(p)}`);
+                }
+                return true;
+              },
+              ownKeys() {
+                return Reflect.ownKeys(context.attrs).concat(context.listeners);
+              },
+            }
+          );
+
+          const contextProxy = new Proxy(context, {
+            get(target, p) {
+              if (p === 'attrs') {
+                return attrsProxy;
+              } else if (p === 'expose') {
+                return expose;
+              }
+              return Reflect.get(target, p);
+            },
+          });
+
+          // @ts-expect-error
+          return setup.call(this, props, contextProxy);
+        }
+      : setup,
+  } as any) as any;
 }
