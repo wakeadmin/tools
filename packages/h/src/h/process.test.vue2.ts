@@ -101,10 +101,10 @@ test('isSlots', () => {
 
 test('processProps', () => {
   expect(processProps('tag', {})).toEqual({
-    attrs: {},
-    domProps: {},
-    nativeOn: {},
-    on: {},
+    // attrs: {},
+    // domProps: {},
+    // nativeOn: {},
+    // on: {},
   });
 
   const p = {};

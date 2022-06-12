@@ -122,7 +122,7 @@ describe('defineComponent', () => {
             'onClickMe',
             'onClick-you',
             'onClick:Hello:World',
-            'children',
+            '__children',
           ]
     );
 

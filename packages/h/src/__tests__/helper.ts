@@ -6,16 +6,17 @@ import { h } from '../h';
 
 export function render(component: any, props: Record<string, any>, ...children: any[]) {
   const App = {
+    name: 'AppWrapper',
     render(this: any) {
-      const p = this.$attrs;
-      return h(component, p, ...(p.children ?? []));
+      const { __children, ...p } = this.$attrs;
+      return h(component, p, ...__children);
     },
   };
 
-  const result = _render(App, { props: { ...props, children } });
+  const result = _render(App, { props: { ...props, __children: children } });
 
   const rerender = (props: Record<string, any>, ...children: any[]) => {
-    const p = Object.assign(props, { children });
+    const p = Object.assign(props, { __children: children });
     if (isVue2) {
       // @ts-expect-error
       result.updateProps(p);

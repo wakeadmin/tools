@@ -3,5 +3,5 @@
   "compilerOptions": {
     "noEmit": false
   },
-  "exclude": ["dist", "**/*.test.*", "**/*.d-test.*", "**/*.vue", "**/*.d.ts"]
+  "exclude": ["dist", "**/__tests__/*", "**/*.test.*", "**/*.d-test.*", "**/*.vue", "**/*.d.ts"]
 }

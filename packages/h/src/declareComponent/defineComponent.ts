@@ -21,6 +21,12 @@ import omit from 'lodash/omit';
 import { UnionToIntersection, NotUndefined } from './typeUtils';
 import { isObject, isPlainObject } from '../utils';
 
+declare module 'vue' {
+  interface HTMLAttributes {
+    children?: any;
+  }
+}
+
 declare global {
   namespace JSX {
     interface ElementChildrenAttribute {
