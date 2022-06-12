@@ -1,7 +1,7 @@
 import { render } from 'testing-library-vue-2';
 import { getCurrentInstance } from 'vue-demi';
 
-import { declareComponent, declareExpose } from './defineComponent';
+import { declareComponent, declareExpose } from './declareComponent';
 
 describe('defineComponent', () => {
   test('expose', () => {

@@ -8,7 +8,7 @@ import {
   declareExpose,
   declareSlots,
   declareEmits,
-} from './defineComponent';
+} from './declareComponent';
 
 export declare function expectType<T>(value: T): void;
 

@@ -8,7 +8,7 @@ import {
   declareEmits,
   declareExpose,
   declareSlots,
-} from './defineComponent';
+} from './declareComponent';
 
 test('declareProps', () => {
   expect(declareProps<{ foo: string; bar: string }>(['foo', 'bar'])).toEqual(['foo', 'bar']);

@@ -5,4 +5,4 @@ export {
   declareProps,
   declareSlots,
   withDefaults,
-} from './defineComponent';
+} from './declareComponent';
