@@ -6,7 +6,6 @@ test('h', () => {
 
   const vnode = h('div', { foo: value, onFoo: handler }, 'hello', 'world');
 
-  // @ts-expect-error
   expect(vnode.props).toEqual({
     foo: value,
     onFoo: handler,

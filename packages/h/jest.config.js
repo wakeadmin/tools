@@ -103,7 +103,9 @@ module.exports = {
         '^@vue/test-utils$': 'vue-test-utils-2',
         '^@testing-library/vue$': 'testing-library-vue-2',
       }
-    : {},
+    : {
+        '^@vue/test-utils$': '<rootDir>/node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js',
+      },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -159,7 +161,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -176,9 +178,7 @@ module.exports = {
     : ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  // testPathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  testPathIgnorePatterns: ['/node_modules/', '__tests__/helper'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],

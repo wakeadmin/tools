@@ -4,7 +4,7 @@ test('h', () => {
   const value = {};
   const handler = () => {};
 
-  const vnode = h(
+  const vnode: any = h(
     'div',
     { foo: value, '.bar': value, onFoo: handler, onBarNative: handler, onFooCapture: handler },
     h('hello'),

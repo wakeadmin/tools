@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/array-type */
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
@@ -13,12 +14,12 @@ import {
   getCurrentInstance,
   isReactive,
 } from 'vue-demi';
-
-import { UnionToTuple, UnionToIntersection, NotUndefined } from './typeUtils';
-import { isObject, isPlainObject } from '../utils';
-import omit from 'lodash/omit';
-import lowerFirst from 'lodash/lowerFirst';
+import kebabCase from 'lodash/kebabCase';
 import upperFirst from 'lodash/upperFirst';
+import omit from 'lodash/omit';
+
+import { UnionToIntersection, NotUndefined } from './typeUtils';
+import { isObject, isPlainObject } from '../utils';
 
 declare global {
   namespace JSX {
@@ -82,14 +83,11 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
   setup: (
     this: void,
     props: Props,
-    ctx: SetupContext<Emit, Slots, Expose, Data & EmitsToProps<Emit> & ReservedAttrs>
+    ctx: SetupContext<Emit, Slots, Expose, Data>
   ) => Promise<RenderFunction | void> | RenderFunction | void;
-  // 内置禁用
-  // inheritAttrs?: boolean;
+  inheritAttrs?: boolean;
   serverPrefetch?(): Promise<any>;
 } & ThisType<void>;
-
-// export type ComponentInstance<>
 
 export type DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
   new (...args: any[]): {
@@ -107,7 +105,7 @@ export type DefineComponent<Props extends {}, Emit extends {}, Expose extends {}
  * @param list
  * @returns
  */
-export function declareProps<T extends {}>(list: UnionToTuple<keyof T>): T {
+export function declareProps<T extends {}>(list: Array<keyof T>): T {
   return list as any as T;
 }
 
@@ -132,8 +130,8 @@ export function declareSlots<T extends { [key: string]: Function }>(): T {
  * @param list
  * @returns
  */
-export function declareEmits<T extends { [key: string]: Function }>(list: UnionToTuple<keyof T>): T {
-  return list as any as T;
+export function declareEmits<T extends { [key: string]: Function }>(): T {
+  return undefined as any as T;
 }
 
 export type ExtraRef<T extends DefineComponent<any, any, any, any>> = T['__ref'] | null;
@@ -189,8 +187,6 @@ export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
   }) as any;
 }
 
-const OMIT_OPTIONS = ['emits', 'slots', 'expose'];
-
 /**
  * 创建 Vue 组件
  * @param options
@@ -203,7 +199,7 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
 
   return vueDefineComponent({
     inheritAttrs: false,
-    ...omit(other, OMIT_OPTIONS),
+    ...omit(other, ['emits']),
     setup: isVue2
       ? function (props: any, context: any) {
           // vue2 不支持 expose
@@ -221,54 +217,49 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
               }
             });
 
-          const getHandlerName = (p: PropertyKey) => {
-            if (typeof p === 'string' && p.startsWith('on')) {
-              return lowerFirst(p.slice(2));
+          const findEventHandler = (name: string) => {
+            if (name in context.listeners) {
+              return name;
             }
 
-            return '';
+            let normalized = name.toLowerCase();
+            if (normalized in context.listeners) {
+              return normalized;
+            }
+
+            // 转换为kebab-case
+            normalized = name
+              .split(':')
+              .map(i => kebabCase(i))
+              .join(':');
+
+            if (normalized in context.listeners) {
+              return normalized;
+            }
+
+            return undefined;
           };
 
-          // vue2 下，将 $listeners 合并 $attrs
-          const attrsProxy = new Proxy(context.attrs, {
-            get(_, p) {
-              if (Reflect.has(context.attrs, p)) {
-                return Reflect.get(context.attrs, p);
+          // vue2 emit 规范化，支持多种命名规范
+          const emit = (name: string, ...args: any[]) => {
+            if (process.env.NODE_ENV !== 'production') {
+              if (name.includes('-')) {
+                throw new Error(`emit(${name}) 统一使用驼峰式命名`);
               }
+            }
 
-              return Reflect.get(context.listeners, getHandlerName(p));
-            },
-            set(_, p) {
-              if (process.env.NODE_ENV !== 'production') {
-                throw new Error(`attrs 是只读对象，不能修改 ${String(p)}`);
-              }
-              return true;
-            },
-            getOwnPropertyDescriptor(_, p) {
-              if (Reflect.has(context.attrs, p)) {
-                return Reflect.getOwnPropertyDescriptor(context.attrs, p);
-              }
-
-              return Reflect.getOwnPropertyDescriptor(context.listeners, getHandlerName(p));
-            },
-            has(_, p) {
-              return Reflect.has(context.attrs, p) || Reflect.has(context.listeners, getHandlerName(p));
-            },
-            ownKeys() {
-              return Reflect.ownKeys(context.attrs).concat(
-                Reflect.ownKeys(context.listeners)
-                  .filter((i): i is string => typeof i === 'string')
-                  .map(i => `on${upperFirst(i)}`)
-              );
-            },
-          });
+            const eventName = findEventHandler(name);
+            if (eventName) {
+              context.emit(eventName, ...args);
+            }
+          };
 
           const contextProxy = new Proxy(context, {
             get(target, p) {
-              if (p === 'attrs') {
-                return attrsProxy;
-              } else if (p === 'expose') {
+              if (p === 'expose') {
                 return expose;
+              } else if (p === 'emit') {
+                return emit;
               }
               return Reflect.get(target, p);
             },
@@ -277,6 +268,43 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
           // @ts-expect-error
           return setup.call(this, props, contextProxy);
         }
-      : setup,
+      : function (props: any, context: any) {
+          const findEventHandler = (name: string) => {
+            let normalized = `on${upperFirst(name)}`;
+            if (normalized in context.attrs) {
+              return normalized;
+            }
+
+            // 转换成 kebab-case
+            normalized = `on${upperFirst(
+              name
+                .split(':')
+                .map(i => kebabCase(i))
+                .join(':')
+            )}`;
+
+            if (normalized in context.attrs) {
+              return normalized;
+            }
+          };
+
+          // @ts-expect-error
+          return setup.call(this, props, {
+            ...context,
+            emit(name, ...args: any[]) {
+              if (process.env.NODE_ENV !== 'production' && name.includes('-')) {
+                throw new Error(`emit(${name}) 统一使用驼峰式命名`);
+              }
+
+              // 先尝试从 attrs 中调用
+              const eventName = findEventHandler(name);
+              if (eventName) {
+                context.attrs[eventName](...args);
+              } else {
+                context.emit(name, ...args);
+              }
+            },
+          });
+        },
   } as any) as any;
 }

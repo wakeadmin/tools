@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
-import { VNodeChild, ref, StyleValue } from 'vue-demi';
+import { VNodeChild, ref } from 'vue-demi';
 import {
   withDefaults,
   declareComponent,
@@ -46,17 +46,11 @@ test('测试 defineComponent 类型推断', () => {
 
   test('emit 定义', () => {
     const Test = declareComponent({
-      emits: declareEmits<{ change: (a: number) => void }>(['change']),
+      // 统一使用驼峰式
+      emits: declareEmits<{ change: (a: number) => void; clickMe: () => void }>(),
       setup(props, { emit, attrs }) {
         // @ts-expect-error
         emit('change', 'a');
-
-        // emit 也会放入 attrs 中
-        expectType<((a: number) => void) | undefined>(attrs.onChange);
-
-        // class/style 也会放入 attrs 中，但是在 vue2 中是始终为空的
-        expectType<any | undefined>(attrs.class);
-        expectType<StyleValue | undefined>(attrs.style);
       },
     });
 
@@ -137,7 +131,7 @@ test('测试 defineComponent 类型推断', () => {
       props: declareProps<{ a?: string; b: number }>(['a', 'b']),
       expose: declareExpose<{ hello: string }>(),
       slots: declareSlots<{ default: () => VNodeChild }>(),
-      emits: declareEmits<{ change: (data: number) => void }>(['change']),
+      emits: declareEmits<{ change: (data: number) => void }>(),
       setup: (props, { emit, expose, slots }) => {
         expectType<string | undefined>(props.a);
         expectType<number>(props.b);
