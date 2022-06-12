@@ -8,6 +8,7 @@ import {
   isVNode as vueIsVNode,
   VNode,
   isVue2,
+  vShow,
 } from 'vue-demi';
 import { isWrapped } from './process';
 
@@ -63,18 +64,43 @@ export function isVNode(node: any): node is VNode {
 
 declare type DirectiveModifiers = Record<string, boolean>;
 
-export function directiveArgumentsToBinding(directives: DirectiveArguments): DirectiveBinding {
+const DIRECTIVE_BINDING = Symbol('directive-binding');
+
+export function isDirectiveArgumentsBinding(arg: any) {
+  // @ts-expect-error
+  return !!(Array.isArray(arg) && arg[DIRECTIVE_BINDING]);
+}
+
+export function directiveArgumentsToBinding(args: DirectiveArguments): DirectiveBinding {
+  const directives = args.map(([name, value, arg, modifiers]) => ({
+    // 兼容 vue3
+    dir: name,
+    name,
+    value,
+    arg,
+    modifiers,
+  }));
+
+  Object.defineProperty(directives, DIRECTIVE_BINDING, {
+    enumerable: false,
+    configurable: false,
+    value: true,
+  });
+
   return {
-    directives: directives.map(([name, value, arg, modifiers]) => ({
-      // 兼容 vue3
-      dir: name,
-      name,
-      value,
-      arg,
-      modifiers,
-    })),
+    directives,
   };
 }
+
+export function directiveBindingToArguments(binding: DirectiveBinding): DirectiveArguments {
+  return binding.directives.map(directive => {
+    return [directive.name, directive.value, directive.arg, directive.modifiers];
+  });
+}
+
+const VUE3_DIRECTIVES_MAP = {
+  show: vShow,
+};
 
 export function withDirectives<T extends VNode>(vnode: T, directives: DirectiveArguments): T;
 export function withDirectives(directives: DirectiveArguments): DirectiveBinding;
@@ -86,7 +112,20 @@ export function withDirectives<T extends VNode>(
     // 注入模式
     if (!isVue2) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return vueWithDirectives(arg1, arg2! as Vue3DirectiveArguments);
+      return vueWithDirectives(
+        arg1,
+        (arg2! as Vue3DirectiveArguments).map(i => {
+          const dir = i[0];
+          // 需要转换
+          if (typeof dir === 'string') {
+            const directive = VUE3_DIRECTIVES_MAP[dir] ?? resolveDirective(dir);
+            if (directive) {
+              i[0] = directive;
+            }
+          }
+          return i;
+        })
+      );
     } else {
       // @ts-expect-error
       if (arg1.data) {

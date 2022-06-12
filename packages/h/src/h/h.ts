@@ -19,7 +19,9 @@ import {
   VNode,
   VNodeArrayChildren,
   Component,
+  isVue2,
 } from 'vue-demi';
+import { directiveBindingToArguments, isDirectiveArgumentsBinding, withDirectives, DirectiveProperty } from './helper';
 
 import { processProps, processChildren, wrap } from './process';
 
@@ -90,5 +92,19 @@ export function h(type: any, props: any, ...children: any[]): VNode {
   const _children = children.length ? children : finalProps.children;
   const finalChildren = processChildren(type, finalProps, _children);
 
-  return wrap(vueh(type, finalProps, finalChildren));
+  if (!isVue2) {
+    let directives: DirectiveProperty[] | undefined;
+    if (finalProps.directives && isDirectiveArgumentsBinding(finalProps.directives)) {
+      directives = finalProps.directives;
+      delete finalProps.directives;
+    }
+    // 需要使用 withDirectives 来包装
+    const vnode = vueh(type, finalProps, finalChildren);
+    if (directives) {
+      return withDirectives(vnode, directiveBindingToArguments({ directives }));
+    }
+    return vnode;
+  } else {
+    return wrap(vueh(type, finalProps, finalChildren));
+  }
 }

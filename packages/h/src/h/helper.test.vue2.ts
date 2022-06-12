@@ -1,4 +1,11 @@
-import { withDirectives, directiveArgumentsToBinding, resolveComponent, resolveDirective, isVNode } from './helper';
+import {
+  isDirectiveArgumentsBinding,
+  withDirectives,
+  directiveArgumentsToBinding,
+  resolveComponent,
+  resolveDirective,
+  isVNode,
+} from './helper';
 import { wrap } from './process';
 
 test('resolveComponent', () => {
@@ -15,7 +22,10 @@ test('isVNode', () => {
 });
 
 test('directiveArgumentsToBinding', () => {
-  expect(directiveArgumentsToBinding([['one'], ['two', 1, 'foo', {}]])).toEqual({
+  const binding = directiveArgumentsToBinding([['one'], ['two', 1, 'foo', {}]]);
+  expect(isDirectiveArgumentsBinding(binding.directives)).toBe(true);
+
+  expect(binding).toEqual({
     directives: [
       {
         arg: undefined,
