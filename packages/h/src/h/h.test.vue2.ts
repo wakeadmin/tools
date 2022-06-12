@@ -1,6 +1,6 @@
 import { h } from './h';
 
-test('h', () => {
+test('h props 转换', () => {
   const value = {};
   const handler = () => {};
 
@@ -29,4 +29,17 @@ test('h', () => {
       foo: handler,
     },
   });
+});
+
+test('h slots 转换', () => {
+  const vnode1: any = h('div', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world');
+
+  expect(Object.keys(vnode1.data.scopedSlots)).toEqual(['foo', 'default']);
+
+  // v-slots 不会出现在 attrs 中
+  expect(Object.keys(vnode1.data.attrs)).toEqual(['foo']);
+
+  // slots 放在 children
+  const vnode2: any = h('div', { foo: 'bar' }, { foo: () => 'hello' });
+  expect(Object.keys(vnode2.data.scopedSlots)).toEqual(['foo']);
 });

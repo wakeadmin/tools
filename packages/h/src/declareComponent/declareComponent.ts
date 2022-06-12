@@ -23,15 +23,17 @@ import { isObject, isPlainObject } from '../utils';
 
 declare module 'vue' {
   interface HTMLAttributes {
-    children?: any;
+    // 避免原生组件报错
+    'v-slots'?: any;
   }
 }
 
 declare global {
   namespace JSX {
     interface ElementChildrenAttribute {
-      // JSX 从 children 推断子元素
-      children: {};
+      // JSX 从 v-slots 推断子元素
+      // 和 vue 的 jsx 插件语法保持一致
+      'v-slots': {};
     }
   }
 }
@@ -97,7 +99,7 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
 
 export type DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
   new (...args: any[]): {
-    $props: Props & EmitsToProps<Emit> & { children?: Partial<Slots> } & { ref?: Ref<Expose | null> | string }; // string 用于兼容 template 引用
+    $props: Props & EmitsToProps<Emit> & { 'v-slots'?: Partial<Slots> } & { ref?: Ref<Expose | null> | string }; // string 用于兼容 template 引用
     $slots: Slots;
     $emit: EmitFn<Emit>;
   };

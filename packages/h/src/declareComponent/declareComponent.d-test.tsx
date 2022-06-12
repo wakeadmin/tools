@@ -91,6 +91,7 @@ test('测试 defineComponent 类型推断', () => {
       },
     });
 
+    // object 语法
     t = (
       <Test>
         {{
@@ -104,6 +105,21 @@ test('测试 defineComponent 类型推断', () => {
           },
         }}
       </Test>
+    );
+
+    // v-slots 语法
+    t = (
+      <Test
+        v-slots={{
+          default: () => {
+            return '';
+          },
+          named: scope => {
+            expectType<string>(scope);
+            return '';
+          },
+        }}
+      />
     );
   });
 

@@ -88,17 +88,18 @@ export function h<P>(
 ): VNode;
 
 export function h(type: any, props: any, ...children: any[]): VNode {
+  props = props ?? {};
+  const finalChildren = processChildren(type, props, children);
   const finalProps = processProps(type, props) ?? {};
-  const _children = children.length ? children : finalProps.children;
-  const finalChildren = processChildren(type, finalProps, _children);
 
   if (!isVue2) {
+    // 需要使用 withDirectives 来包装
     let directives: DirectiveProperty[] | undefined;
     if (finalProps.directives && isDirectiveArgumentsBinding(finalProps.directives)) {
       directives = finalProps.directives;
       delete finalProps.directives;
     }
-    // 需要使用 withDirectives 来包装
+
     const vnode = vueh(type, finalProps, finalChildren);
     if (directives) {
       return withDirectives(vnode, directiveBindingToArguments({ directives }));

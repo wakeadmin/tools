@@ -154,24 +154,49 @@ test('processProps', () => {
 
 describe('processChildren', () => {
   test('无法识别 slots', () => {
-    const props = {};
-    expect(processChildren('', props, null)).toEqual(null);
-    expect(processChildren('', props, [])).toEqual([]);
-    expect(processChildren('', props, 'hello')).toEqual('hello');
-    expect(processChildren('', props, ['hello'])).toEqual(['hello']);
-    expect(processChildren('', props, {})).toEqual({});
+    {
+      const props = {};
+      expect(processChildren('', props, [])).toEqual([]);
+      expect(processChildren('', props, ['hello'])).toEqual(['hello']);
+      expect(processChildren('', props, [{}])).toEqual([{}]);
+    }
+
+    {
+      const props: any = {
+        'v-slots': {},
+      };
+
+      expect(() => processChildren('', props, ['hello', 'world'])).toThrowError('v-slots 必须为对象, 值为函数');
+    }
   });
 
   test('识别 slots', () => {
     {
       const props: any = {};
-      expect(processChildren('', props, { default: () => {} })).toEqual(null);
-      expect(props.scopedSlots).toBeDefined();
-    }
-    {
-      const props: any = {};
       expect(processChildren('', props, [{ default: () => {} }])).toEqual(null);
       expect(props.scopedSlots).toBeDefined();
+    }
+    // 合并 slots
+    {
+      const props: any = {
+        'v-slots': {
+          foo: () => null,
+        },
+      };
+      expect(processChildren('', props, ['hello', 'world'])).toEqual(null);
+      expect(Object.keys(props.scopedSlots)).toEqual(['foo', 'default']);
+      expect(props['v-slots']).toBeUndefined();
+    }
+    // slots 冲突
+    {
+      const props: any = {
+        'v-slots': {
+          default: () => null,
+        },
+      };
+      expect(() => processChildren('', props, ['hello', 'world'])).toThrowError(
+        '在 v-slots 已经定义了 default slot, 不能同时设置 children'
+      );
     }
   });
 });
