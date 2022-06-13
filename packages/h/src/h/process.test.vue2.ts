@@ -89,6 +89,15 @@ test('processVue2Attr', () => {
     name: 'attr',
     value,
   });
+
+  // innerHTML 和 textContent, 必须为 props
+  ['innerHTML', 'textContent'].forEach(k => {
+    expect(processVue2Attr({ tag: 'div', type: undefined }, k, value)).toEqual({
+      domProps: true,
+      name: k,
+      value,
+    });
+  });
 });
 
 test('isSlots', () => {

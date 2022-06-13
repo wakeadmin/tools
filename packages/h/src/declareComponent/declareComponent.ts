@@ -23,6 +23,9 @@ import { isObject, isPlainObject } from '../utils';
 
 declare module 'vue' {
   interface HTMLAttributes {
+    // FIXME: vue 没有设置这个属性
+    textContent?: string;
+
     // 避免原生组件报错
     'v-slots'?: any;
   }

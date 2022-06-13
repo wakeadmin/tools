@@ -31,6 +31,8 @@ const EVENT_MODIFIER_PREFIX: Record<string, string> = {
   passive: '&',
   native: '',
 };
+// Vue2 下必须以 domProps 传入的属性
+const MUST_BE_DOM_PROPS = new Set(['innerHTML', 'textContent']);
 
 export interface IEventHandler {
   isNative: boolean;
@@ -102,6 +104,24 @@ export function processVue2Event(key: string, value: any): IEventHandler | null 
   return null;
 }
 
+export function vue2MustUseProps(tag: any, type: string | undefined, key: string): boolean {
+  if (typeof tag !== 'string') {
+    return false;
+  }
+
+  if (Vue2?.config?.mustUseProp(tag, type, key)) {
+    return true;
+  }
+
+  // 内置组件, 或 自定义组件
+  // FIXME: 目前仅建议在内置组件上使用 innerHTML, 因此这里忽略了 Web Component
+  if (Vue2?.config?.isReservedTag(tag)) {
+    return MUST_BE_DOM_PROPS.has(key);
+  }
+
+  return false;
+}
+
 export function processVue2Attr(el: { tag: string; type?: string }, key: string, value: any): IAttr {
   // Vue3 .prop
   if (key.startsWith('.')) {
@@ -117,7 +137,7 @@ export function processVue2Attr(el: { tag: string; type?: string }, key: string,
     return { domProps: false, name: key.slice(1), value };
   }
 
-  if (typeof el.tag === 'string' && Vue2?.config?.mustUseProp(el.tag, el.type, key)) {
+  if (vue2MustUseProps(el.tag, el.type, key)) {
     return { domProps: true, name: key, value };
   }
 

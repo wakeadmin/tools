@@ -1,7 +1,9 @@
 {
   "extends": ["wkts", "wkvue/vue3"],
   "plugins": [],
-  "globals": {},
+  "globals": {
+    "h": "readonly"
+  },
   "rules": {},
   "parser": "vue-eslint-parser",
   "parserOptions": {
