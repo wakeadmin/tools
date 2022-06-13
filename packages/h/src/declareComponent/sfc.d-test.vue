@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref } from 'vue-demi';
   import {
     declareComponent,
     declareEmits,
@@ -25,7 +25,7 @@
     declareProps,
     declareSlots,
     ExtraRef,
-  } from './defineComponent';
+  } from './declareComponent';
   import { exactType } from './shared.d-test';
 
   const stringType = '';
@@ -33,7 +33,7 @@
 
   const Foo = declareComponent({
     props: declareProps<{ a: number; b?: string }>(['a', 'b']),
-    emits: declareEmits<{ change: (data: string) => void }>(['change']),
+    emits: declareEmits<{ change: (data: string) => void }>(),
     slots: declareSlots<{ foo: (scope: { a: number }) => void }>(),
     expose: declareExpose<{ open: () => void }>(),
     setup() {

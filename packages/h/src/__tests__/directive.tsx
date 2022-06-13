@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /** @jsx h */
 import { ref, nextTick } from 'vue-demi';
 import { screen, fireEvent } from '@testing-library/vue';

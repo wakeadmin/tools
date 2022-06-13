@@ -7,6 +7,7 @@ import { h } from '../h';
 export function render(component: any, props: Record<string, any>, ...children: any[]) {
   const App = {
     name: 'AppWrapper',
+    inheritAttrs: false,
     render(this: any) {
       const { __children, ...p } = this.$attrs;
       return h(component, p, ...__children);
@@ -29,4 +30,11 @@ export function render(component: any, props: Record<string, any>, ...children: 
     ...result,
     rerender,
   };
+}
+
+export function ignoreNewlineJoin(str: string) {
+  return str
+    .split('\n')
+    .map(i => i.trim())
+    .join('');
 }
