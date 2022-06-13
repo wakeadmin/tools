@@ -3,7 +3,7 @@ import kebabCase from 'lodash/kebabCase';
 import { Vue2, isVue2, isVNode } from 'vue-demi';
 import lowerFirst from 'lodash/lowerFirst';
 
-import { shallowMerge, isPlainObject, ownKeys } from '../utils';
+import { isBrowser, shallowMerge, isPlainObject, ownKeys } from '../utils';
 
 const WRAP_SYMBOL = Symbol('__vnode__');
 const EVENT_KEY = /^on[A-Z][a-zA-Z0-9:]*/;
@@ -32,7 +32,6 @@ const EVENT_MODIFIER_PREFIX: Record<string, string> = {
   native: '',
 };
 // Vue2 下必须以 domProps 传入的属性
-const MUST_BE_DOM_PROPS = new Set(['innerHTML', 'textContent']);
 
 export interface IEventHandler {
   isNative: boolean;
@@ -104,6 +103,29 @@ export function processVue2Event(key: string, value: any): IEventHandler | null 
   return null;
 }
 
+const vue2ElementInstanceCache: Record<string, any> = {};
+
+export function vue2GetElementInstance(tag: string) {
+  const normalizedTag = tag.toLowerCase();
+
+  if (normalizedTag in vue2ElementInstanceCache) {
+    return vue2ElementInstanceCache[normalizedTag];
+  }
+
+  // 内置组件, 或 自定义组件
+  const el = document.createElement(normalizedTag);
+  let isUnknown = normalizedTag.includes('-')
+    ? el.constructor === window.HTMLUnknownElement || el.constructor === window.HTMLElement
+    : el.constructor === window.HTMLUnknownElement;
+
+  // 未知元素
+  if (isUnknown) {
+    return (vue2ElementInstanceCache[normalizedTag] = null);
+  } else {
+    return (vue2ElementInstanceCache[normalizedTag] = el);
+  }
+}
+
 export function vue2MustUseProps(tag: any, type: string | undefined, key: string): boolean {
   if (typeof tag !== 'string') {
     return false;
@@ -113,10 +135,14 @@ export function vue2MustUseProps(tag: any, type: string | undefined, key: string
     return true;
   }
 
-  // 内置组件, 或 自定义组件
-  // FIXME: 目前仅建议在内置组件上使用 innerHTML, 因此这里忽略了 Web Component
-  if (Vue2?.config?.isReservedTag(tag)) {
-    return MUST_BE_DOM_PROPS.has(key);
+  if (!isBrowser) {
+    return false;
+  }
+
+  // 浏览器下，通过 in 来检查是否为 dom props, 和 vue3 的行为保持一致
+  const elementInstance = vue2GetElementInstance(tag);
+  if (elementInstance) {
+    return key in elementInstance;
   }
 
   return false;

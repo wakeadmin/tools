@@ -1,6 +1,8 @@
 const plainObjectString = Object.toString();
 const hasGetOwnPropertySymbols = typeof Object.getOwnPropertySymbols !== 'undefined';
 
+export const isBrowser = typeof window !== 'undefined';
+
 export function isObject(obj: any): obj is object {
   return obj != null && typeof obj === 'object';
 }

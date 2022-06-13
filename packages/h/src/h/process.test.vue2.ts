@@ -1,6 +1,16 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { processChildren, isSlots, wrap, isWrapped, processVue2Event, processVue2Attr, processProps } from './process';
+import {
+  processChildren,
+  isSlots,
+  wrap,
+  isWrapped,
+  processVue2Event,
+  processVue2Attr,
+  processProps,
+  vue2GetElementInstance,
+  vue2MustUseProps,
+} from './process';
 
 test('wrap', () => {
   const a = {};
@@ -57,6 +67,23 @@ test('processVue2Event', () => {
     value: handler,
     isNative: true,
   });
+});
+
+test('vue2GetElementInstance', () => {
+  expect(vue2GetElementInstance('foo')).toBe(null);
+  expect(vue2GetElementInstance('foo-bar')).toBe(null);
+
+  const divInstance = vue2GetElementInstance('div');
+  // 缓存
+  expect(vue2GetElementInstance('div')).toBe(divInstance);
+  expect(divInstance.constructor).toBe(HTMLDivElement);
+});
+
+test('vue2MustUseProps', () => {
+  expect(vue2MustUseProps({}, undefined, 'foo')).toBe(false);
+  expect(vue2MustUseProps('input', 'text', 'value')).toBe(true);
+  expect(vue2MustUseProps('img', undefined, 'width')).toBe(true);
+  expect(vue2MustUseProps('img', undefined, 'class')).toBe(false);
 });
 
 test('processVue2Attr', () => {
