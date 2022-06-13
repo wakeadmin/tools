@@ -94,7 +94,8 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
   setup: (
     this: void,
     props: Props,
-    ctx: SetupContext<Emit, Slots, Expose, Data>
+    // 因为关闭了 inheritAttrs，所以可以通过 attrs 访问 class、style
+    ctx: SetupContext<Emit, Slots, Expose, Data & ReservedAttrs>
   ) => Promise<RenderFunction | void> | RenderFunction | void;
   inheritAttrs?: boolean;
   serverPrefetch?(): Promise<any>;
@@ -198,6 +199,8 @@ export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
   }) as any;
 }
 
+const FORCE_OMIT_PROPS = ['emits'];
+
 /**
  * 创建 Vue 组件
  * @param options
@@ -208,9 +211,23 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
 ): DefineComponent<Props, Emit, Expose, Slots> {
   const { setup, ...other } = options;
 
-  return vueDefineComponent({
+  const vueOptions = {
+    // 关闭隐式继承
     inheritAttrs: false,
-    ...omit(other, ['emits']),
+  };
+
+  if (isVue2) {
+    // @ts-expect-error 统一使用 modelValue 形式
+    vueOptions.model = {
+      prop: 'modelValue',
+      event: 'update:modelValue',
+    };
+  }
+
+  Object.assign(vueOptions, omit(other, FORCE_OMIT_PROPS));
+
+  return vueDefineComponent({
+    ...vueOptions,
     setup: isVue2
       ? function (props: any, context: any) {
           // vue2 不支持 expose

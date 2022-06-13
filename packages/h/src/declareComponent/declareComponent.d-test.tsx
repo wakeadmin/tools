@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
-import { VNodeChild, ref } from 'vue-demi';
+import { VNodeChild, ref, StyleValue } from 'vue-demi';
 import {
   withDefaults,
   declareComponent,
@@ -47,7 +47,11 @@ test('测试 defineComponent 类型推断', () => {
   test('emit 定义', () => {
     const Test = declareComponent({
       // 统一使用驼峰式
-      emits: declareEmits<{ change: (a: number) => void; clickMe: () => void }>(),
+      emits: declareEmits<{
+        change: (a: number) => void;
+        clickMe: () => void;
+        'update:modelValue': (value: number) => void;
+      }>(),
       setup(props, { emit, attrs }) {
         // @ts-expect-error
         emit('change', 'a');
@@ -58,6 +62,9 @@ test('测试 defineComponent 类型推断', () => {
       <Test
         // 对 JSX 暴露 onChange 属性
         onChange={a => {
+          expectType<number>(a);
+        }}
+        onUpdate:modelValue={a => {
           expectType<number>(a);
         }}
       ></Test>
@@ -148,7 +155,11 @@ test('测试 defineComponent 类型推断', () => {
       expose: declareExpose<{ hello: string }>(),
       slots: declareSlots<{ default: () => VNodeChild }>(),
       emits: declareEmits<{ change: (data: number) => void }>(),
-      setup: (props, { emit, expose, slots }) => {
+      setup: (props, { emit, expose, slots, attrs }) => {
+        // vue3 可以访问 class、style
+        expectType<any | undefined>(attrs.class);
+        expectType<StyleValue | undefined>(attrs.style);
+
         expectType<string | undefined>(props.a);
         expectType<number>(props.b);
 
