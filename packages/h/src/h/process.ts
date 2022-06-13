@@ -252,6 +252,7 @@ export function isSlots(children: any) {
  */
 export function processChildren(tag: any, props: any, children: any[]) {
   const slots: Record<string, Function> | undefined = props?.['v-slots'];
+  const slotsFromChildren = children.length === 1 && isSlots(children[0]) ? children[0] : undefined;
 
   if (slots != null) {
     if (process.env.NODE_ENV !== 'production') {
@@ -261,6 +262,10 @@ export function processChildren(tag: any, props: any, children: any[]) {
 
       if (slots.default != null && children.length) {
         throw new Error(`在 v-slots 已经定义了 default slot, 不能同时设置 children`);
+      }
+
+      if (slotsFromChildren != null) {
+        throw new Error(`已经使用 v-slots 定义了命名 slot, 禁止使用 children 设置 slots`);
       }
     }
 
@@ -275,14 +280,12 @@ export function processChildren(tag: any, props: any, children: any[]) {
   if (!isVue2) {
     // Vue3
 
-    // 显式定义了 v-slots
     if (slots) {
+      // 显式定义了 v-slots
       return slots;
-    }
-
-    // slots 必须以对象的形式传入
-    if (children.length === 1 && isSlots(children[0])) {
-      return children[0];
+    } else if (slotsFromChildren) {
+      // slots 必须以对象的形式传入
+      return slotsFromChildren;
     }
 
     return children;
@@ -292,17 +295,15 @@ export function processChildren(tag: any, props: any, children: any[]) {
     Object.assign((props.scopedSlots = props.scopedSlots ?? {}), _slots);
   };
 
-  // 显式定义了 slots
   if (slots) {
+    // 显式定义了 slots
     set(slots);
-    return null;
+  } else if (slotsFromChildren) {
+    // 数组的话，只能是第一个
+    set(slotsFromChildren);
+  } else {
+    return children;
   }
 
-  // 数组的话，只能是第一个
-  if (children.length === 1 && isSlots(children[0])) {
-    set(children[0]);
-    return null;
-  }
-
-  return children;
+  return null;
 }

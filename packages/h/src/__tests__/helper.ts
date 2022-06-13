@@ -1,8 +1,16 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { render as _render } from '@testing-library/vue';
-import { isVue2 } from 'vue-demi';
+import { isVue2, VNodeChild } from 'vue-demi';
 
 import { h } from '../h';
+import { declareComponent } from '../declareComponent';
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export function expectType<T>(value: T): void {}
+
+export function createComponent(render: () => VNodeChild) {
+  return declareComponent({ setup: () => render });
+}
 
 export function render(component: any, props: Record<string, any>, ...children: any[]) {
   const App = {
@@ -20,9 +28,9 @@ export function render(component: any, props: Record<string, any>, ...children: 
     const p = Object.assign(props, { __children: children });
     if (isVue2) {
       // @ts-expect-error
-      result.updateProps(p);
+      return result.updateProps(p);
     } else {
-      result.rerender(p);
+      return result.rerender(p);
     }
   };
 
@@ -37,4 +45,8 @@ export function ignoreNewlineJoin(str: string) {
     .split('\n')
     .map(i => i.trim())
     .join('');
+}
+
+export function trimHTMLComments(str: string) {
+  return str.replace(/<!--[^<]*-->/gm, '');
 }

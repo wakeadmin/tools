@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
 import { VNodeChild, ref, StyleValue } from 'vue-demi';
 import {
@@ -10,7 +9,7 @@ import {
   declareEmits,
 } from './declareComponent';
 
-export declare function expectType<T>(value: T): void;
+import { expectType } from '../__tests__/helper';
 
 declare let t: any;
 
@@ -31,7 +30,9 @@ test('测试 defineComponent 类型推断', () => {
     const Test = declareComponent({
       setup(props, { slots, emit, expose }) {
         expectType<{}>(props);
-        expectType<{}>(slots);
+
+        // 包含默认 slots
+        expectType<{ default?: () => VNodeChild }>(slots);
 
         // 可以 emit 任何内容
         emit('event', t);
@@ -91,10 +92,10 @@ test('测试 defineComponent 类型推断', () => {
 
   test('slot 定义', () => {
     const Test = declareComponent({
-      slots: declareSlots<{ default: () => VNodeChild; named: (scope: string) => VNodeChild }>(),
+      slots: declareSlots<{ default: never; named: string }>(),
       setup(props, { slots }) {
         expectType<{}>(props);
-        expectType<{}>(slots);
+        expectType<{ default?: () => VNodeChild; named?: (scope: string) => VNodeChild }>(slots);
       },
     });
 
@@ -105,10 +106,9 @@ test('测试 defineComponent 类型推断', () => {
           default: () => {
             return '';
           },
-          // @ts-expect-error 不能返回非 VNode
           named: scope => {
             expectType<string>(scope);
-            return /x/;
+            return '';
           },
         }}
       </Test>
@@ -127,6 +127,23 @@ test('测试 defineComponent 类型推断', () => {
           },
         }}
       />
+    );
+
+    // 不适用 slots
+    t = <Test>hello world</Test>;
+
+    // 混合使用
+    t = (
+      <Test
+        v-slots={{
+          named: scope => {
+            expectType<string>(scope);
+            return 'hello';
+          },
+        }}
+      >
+        hello world
+      </Test>
     );
   });
 
@@ -153,7 +170,7 @@ test('测试 defineComponent 类型推断', () => {
       name: 'Comp',
       props: declareProps<{ a?: string; b: number }>(['a', 'b']),
       expose: declareExpose<{ hello: string }>(),
-      slots: declareSlots<{ default: () => VNodeChild }>(),
+      slots: declareSlots<{ default: never }>(),
       emits: declareEmits<{ change: (data: number) => void }>(),
       setup: (props, { emit, expose, slots, attrs }) => {
         // vue3 可以访问 class、style
@@ -173,7 +190,7 @@ test('测试 defineComponent 类型推断', () => {
           hello: 1,
         });
 
-        expectType<(() => VNodeChild) | undefined>(slots.default);
+        expectType<((scope: never) => VNodeChild) | undefined>(slots.default);
 
         // @ts-expect-error
         slots.foo();

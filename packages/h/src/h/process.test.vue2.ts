@@ -223,6 +223,17 @@ describe('processChildren', () => {
       expect(Object.keys(props.scopedSlots)).toEqual(['foo', 'default']);
       expect(props['v-slots']).toBeUndefined();
     }
+    // slots 合并2
+    {
+      const props: any = {
+        'v-slots': {
+          foo: () => null,
+        },
+      };
+      expect(() => processChildren('', props, [{ bar: () => null }])).toThrowError(
+        '已经使用 v-slots 定义了命名 slot, 禁止使用 children 设置 slots'
+      );
+    }
     // slots 冲突
     {
       const props: any = {

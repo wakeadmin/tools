@@ -20,7 +20,10 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {},
+      "rules": {
+        // 使用 typescript 检查
+        "@typescript-eslint/no-unused-vars": "off"
+      },
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "warnOnUnsupportedTypeScriptVersion": true,

@@ -34,7 +34,7 @@
   const Foo = declareComponent({
     props: declareProps<{ a: number; b?: string }>(['a', 'b']),
     emits: declareEmits<{ change: (data: string) => void }>(),
-    slots: declareSlots<{ foo: (scope: { a: number }) => void }>(),
+    slots: declareSlots<{ foo: { a: number } }>(),
     expose: declareExpose<{ open: () => void }>(),
     setup() {
       return () => {

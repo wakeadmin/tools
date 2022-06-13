@@ -23,7 +23,7 @@ test('declareExpose', () => {
 });
 
 test('declareSlots', () => {
-  expect(declareSlots<{ a: () => any }>()).toEqual(undefined);
+  expect(declareSlots<{ a: any }>()).toEqual(undefined);
 });
 
 describe('withDefaults', () => {

@@ -13,6 +13,7 @@ import {
   isVue2,
   getCurrentInstance,
   isReactive,
+  VNodeChild,
 } from 'vue-demi';
 import kebabCase from 'lodash/kebabCase';
 import upperFirst from 'lodash/upperFirst';
@@ -27,7 +28,7 @@ declare module 'vue' {
     textContent?: string;
 
     // 避免原生组件报错
-    'v-slots'?: any;
+    'v-children'?: VNodeChild;
   }
 }
 
@@ -36,7 +37,15 @@ declare global {
     interface ElementChildrenAttribute {
       // JSX 从 v-slots 推断子元素
       // 和 vue 的 jsx 插件语法保持一致
-      'v-slots': {};
+      // 'v-slots': {};
+      // 为什么不直接用 v-slots, 因为 children 的类型应该更加宽松，v-slots 则必须为对象
+      'v-children': {};
+    }
+
+    // fix: 自定义组件在未声明情况下， 也能使用 class/style
+    interface IntrinsicAttributes {
+      class?: any;
+      style?: StyleValue;
     }
   }
 }
@@ -75,7 +84,7 @@ export type ReservedAttrs = {
 
 export interface SetupContext<Emit, Slot, Expose, Attrs> {
   attrs: Attrs;
-  slots: Partial<Slot>;
+  slots: Readonly<Partial<Slot>>;
   emit: EmitFn<Emit>;
   expose: (exposed?: Expose) => void;
 }
@@ -84,6 +93,10 @@ export type Data = Record<string, unknown>;
 
 export type MergeDefaultProps<DefaultProps extends {}, Props extends DefaultProps> = DefaultProps &
   Required<Pick<Props, keyof DefaultProps>>;
+
+export type DefaultSlots = {
+  default?: () => VNodeChild;
+};
 
 export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
   name?: string;
@@ -95,16 +108,25 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
     this: void,
     props: Props,
     // 因为关闭了 inheritAttrs，所以可以通过 attrs 访问 class、style
-    ctx: SetupContext<Emit, Slots, Expose, Data & ReservedAttrs>
+    ctx: SetupContext<Emit, DefaultSlots & Slots, Expose, Data & ReservedAttrs>
   ) => Promise<RenderFunction | void> | RenderFunction | void;
   inheritAttrs?: boolean;
   serverPrefetch?(): Promise<any>;
 } & ThisType<void>;
 
+export type VSlotType<Slots extends {}> = DefaultSlots & Slots;
+export type VChildrenType<Slots extends {}> = VNodeChild | VSlotType<Slots>;
+
+export type RefType<Expose extends {}> = Ref<Expose | null> | string; // string 用于兼容 template 引用
+
 export type DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
   new (...args: any[]): {
-    $props: Props & EmitsToProps<Emit> & { 'v-slots'?: Partial<Slots> } & { ref?: Ref<Expose | null> | string }; // string 用于兼容 template 引用
-    $slots: Slots;
+    $props: Props &
+      EmitsToProps<Emit> & { 'v-slots'?: Partial<VSlotType<Slots>> } & { 'v-children'?: VChildrenType<Slots> } & {
+        ref?: RefType<Expose>;
+      };
+    // 支持 volar 推断
+    $slots: VSlotType<Slots>;
     $emit: EmitFn<Emit>;
   };
 
@@ -133,8 +155,10 @@ export function declareExpose<T extends {}>(): T {
  * 声明插槽
  * @returns
  */
-export function declareSlots<T extends { [key: string]: Function }>(): T {
-  return undefined as any as T;
+export function declareSlots<T extends { [key: string]: {} }>(): {
+  [K in keyof T]: T[K] extends never ? () => VNodeChild : (scope: T[K]) => VNodeChild;
+} {
+  return undefined as any;
 }
 
 /**

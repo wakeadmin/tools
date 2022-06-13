@@ -29,6 +29,17 @@ test('processChildren', () => {
     const r = () => {};
     expect(processChildren('', props, [{ foo: r }])).toEqual({ foo: r });
   }
+  // slots 合并2
+  {
+    const props: any = {
+      'v-slots': {
+        foo: () => null,
+      },
+    };
+    expect(() => processChildren('', props, [{ bar: () => null }])).toThrowError(
+      '已经使用 v-slots 定义了命名 slot, 禁止使用 children 设置 slots'
+    );
+  }
   {
     const props = {};
     expect(processChildren('', props, ['hello'])).toEqual(['hello']);
