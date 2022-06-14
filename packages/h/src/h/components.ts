@@ -5,6 +5,7 @@ import {
   KeepAlive as VueKeepAlive,
   Teleport as VueTeleport,
   Suspense as VueSuspense,
+  Fragment as VueFragment,
 } from 'vue-demi';
 
 /**
@@ -44,10 +45,8 @@ const notSupportedInVue2 = (message: string) => ({
   },
 });
 
-export const Teleport: typeof VueTeleport = isVue2
-  ? (notSupportedInVue2('Teleport 在 Vue 2 下不支持') as any)
-  : VueTeleport;
+export const Teleport: typeof VueTeleport = VueTeleport ?? (notSupportedInVue2('Teleport 在 Vue 2 下不支持') as any);
 
-export const Suspense: typeof VueSuspense = isVue2
-  ? (notSupportedInVue2('Suspense 在 Vue 2 下不支持') as any)
-  : VueSuspense;
+export const Suspense: typeof VueSuspense = VueSuspense ?? (notSupportedInVue2('Suspense 在 Vue 2 下不支持') as any);
+
+export const Fragment: typeof VueFragment = VueFragment ?? (notSupportedInVue2('Fragment 在 Vue 2 下不支持') as any);
