@@ -6,7 +6,7 @@ import {
   Teleport as VueTeleport,
   Suspense as VueSuspense,
   Fragment as VueFragment,
-} from 'vue-demi';
+} from '@wakeadmin/demi';
 
 /**
  * Vue3 Transition 变动

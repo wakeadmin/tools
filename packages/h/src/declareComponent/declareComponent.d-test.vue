@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue-demi';
+  import { ref } from '@wakeadmin/demi';
 
   import { exactType } from '../__tests__/helper';
 

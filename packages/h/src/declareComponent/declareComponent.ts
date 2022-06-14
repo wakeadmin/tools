@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/array-type */
-import { defineComponent as vueDefineComponent, isVue2, VNodeChild } from 'vue-demi';
+import { defineComponent as vueDefineComponent, isVue2, VNodeChild } from '@wakeadmin/demi';
 import omit from 'lodash/omit';
 
 import { DefineComponent, SimpleComponentOptions } from './types';

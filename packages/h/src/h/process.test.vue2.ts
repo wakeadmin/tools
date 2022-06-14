@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ref } from 'vue-demi';
+import { ref } from '@wakeadmin/demi';
 import {
   processChildren,
   isSlots,

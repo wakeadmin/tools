@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref } from 'vue-demi';
+import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref } from '@wakeadmin/demi';
 import kebabCase from 'lodash/kebabCase';
 import lowerFirst from 'lodash/lowerFirst';
 

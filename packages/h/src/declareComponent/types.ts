@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue, VNodeChild } from 'vue-demi';
+import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue, VNodeChild } from '@wakeadmin/demi';
 
 export type UnionToIntersection<U> = (U extends never ? never : (arg: U) => never) extends (arg: infer I) => void
   ? I

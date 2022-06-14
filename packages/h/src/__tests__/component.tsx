@@ -1,6 +1,6 @@
 /** @jsx h */
 import { screen, cleanup } from '@testing-library/vue';
-import { isVue2 } from 'vue-demi';
+import { isVue2 } from '@wakeadmin/demi';
 
 import { h, Transition } from '../h';
 

@@ -9,7 +9,7 @@ import {
   VNode,
   isVue2,
   vShow,
-} from 'vue-demi';
+} from '@wakeadmin/demi';
 import { isWrapped } from './process';
 
 export declare type Directive<T = any, V = any> = Vue3Directive<T, V> | string;

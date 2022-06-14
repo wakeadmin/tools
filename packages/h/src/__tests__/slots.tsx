@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /** @jsx h */
 import { screen, cleanup } from '@testing-library/vue';
-import { defineComponent, isVue2 } from 'vue-demi';
+import { defineComponent, isVue2 } from '@wakeadmin/demi';
 
 import { h } from '../h';
 import { declareComponent, declareSlots } from '../declareComponent';

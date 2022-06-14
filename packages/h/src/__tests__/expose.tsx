@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 /** @jsx h */
 import { cleanup } from '@testing-library/vue';
-import { ref } from 'vue-demi';
+import { ref } from '@wakeadmin/demi';
 
 import { h } from '../h';
 import { declareComponent, declareExpose, ExtraArrayRef, ExtraRef } from '../declareComponent';

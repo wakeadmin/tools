@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { VNodeChild, ref, StyleValue } from 'vue-demi';
+import { VNodeChild, ref, StyleValue } from '@wakeadmin/demi';
 import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './declareComponent';
 import { withDefaults } from './helper';
 

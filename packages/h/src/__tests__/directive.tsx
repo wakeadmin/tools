@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 /** @jsx h */
-import { ref, nextTick } from 'vue-demi';
+import { ref, nextTick } from '@wakeadmin/demi';
 import { screen, fireEvent } from '@testing-library/vue';
 
 import { declareComponent, declareEmits, declareProps } from '../declareComponent';

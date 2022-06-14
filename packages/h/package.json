@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.21",
-    "vue-demi": "latest"
+    "@wakeadmin/demi": "latest"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

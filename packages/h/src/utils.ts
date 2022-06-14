@@ -1,4 +1,4 @@
-import { version } from 'vue-demi';
+import { version } from '@wakeadmin/demi';
 
 const objectPrototype = Object.prototype;
 const plainObjectString = Object.toString();

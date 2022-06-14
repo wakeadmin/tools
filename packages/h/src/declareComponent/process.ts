@@ -1,4 +1,4 @@
-import { getCurrentInstance, isRef } from 'vue-demi';
+import { getCurrentInstance, isRef } from '@wakeadmin/demi';
 import kebabCase from 'lodash/kebabCase';
 import upperFirst from 'lodash/upperFirst';
 

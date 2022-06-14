@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h } from 'vue-demi';
+import { h } from '@wakeadmin/demi';
 import { wrap, isWrapped, processChildren } from './process';
 
 test('wrap', () => {

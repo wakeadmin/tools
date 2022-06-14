@@ -1,4 +1,4 @@
-import { set, isVue2, isReactive } from 'vue-demi';
+import { set, isVue2, isReactive } from '@wakeadmin/demi';
 
 import { isPlainObject } from '../utils';
 

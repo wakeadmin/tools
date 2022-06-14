@@ -20,7 +20,7 @@ import {
   VNodeArrayChildren,
   Component,
   isVue2,
-} from 'vue-demi';
+} from '@wakeadmin/demi';
 import { directiveBindingToArguments, isDirectiveArgumentsBinding, withDirectives, DirectiveProperty } from './helper';
 
 import { processProps, processChildren, wrap, processRef } from './process';

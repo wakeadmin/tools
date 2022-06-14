@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { render as _render } from '@testing-library/vue';
-import { isVue2, VNodeChild } from 'vue-demi';
+import { isVue2, VNodeChild } from '@wakeadmin/demi';
 
 import { h } from '../h';
 import { declareComponent } from '../declareComponent';

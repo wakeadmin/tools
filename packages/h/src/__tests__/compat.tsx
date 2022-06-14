@@ -1,6 +1,6 @@
 /** @jsx h */
 import { screen, cleanup } from '@testing-library/vue';
-import { defineComponent, PropType } from 'vue-demi';
+import { defineComponent, PropType } from '@wakeadmin/demi';
 
 import { h } from '../h';
 import { declareComponent } from '../declareComponent';
