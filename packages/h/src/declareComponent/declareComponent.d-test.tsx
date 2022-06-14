@@ -68,11 +68,19 @@ test('测试 defineComponent 类型推断', () => {
 
   test('ref 定义', () => {
     const Test = declareComponent({
-      expose: declareExpose<{ a: number }>(),
+      expose: declareExpose<{ a: number; b?: () => void }>(),
       setup(props, { expose }) {
+        const refNumber = ref(1);
+        const refFunction = ref(() => {});
+
         // @ts-expect-error
         expose({ a: 'string' });
         expose({ a: 1 });
+        expose({ a: 1, b: () => {} });
+
+        // 支持 ref
+        expose({ a: refNumber });
+        expose({ a: 1, b: refFunction });
       },
     });
 

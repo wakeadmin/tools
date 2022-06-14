@@ -1,10 +1,25 @@
+import { version } from 'vue-demi';
+
+const objectPrototype = Object.prototype;
 const plainObjectString = Object.toString();
 const hasGetOwnPropertySymbols = typeof Object.getOwnPropertySymbols !== 'undefined';
+
+export const isVue2Dot7 = version.startsWith('2.7.');
 
 export const isBrowser = typeof window !== 'undefined';
 
 export function isObject(obj: any): obj is object {
   return obj != null && typeof obj === 'object';
+}
+
+/**
+ * 查看属性是否定义
+ * @param target
+ * @param key
+ * @returns
+ */
+export function hasProp(target: Object, key: PropertyKey): boolean {
+  return objectPrototype.hasOwnProperty.call(target, key);
 }
 
 export function isPlainObject(value: any) {

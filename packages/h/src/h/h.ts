@@ -23,7 +23,7 @@ import {
 } from 'vue-demi';
 import { directiveBindingToArguments, isDirectiveArgumentsBinding, withDirectives, DirectiveProperty } from './helper';
 
-import { processProps, processChildren, wrap } from './process';
+import { processProps, processChildren, wrap, processRef } from './process';
 
 type RawChildren = string | number | boolean | VNode | VNodeArrayChildren | (() => any) | RawSlots;
 
@@ -91,6 +91,7 @@ export function h(type: any, props: any, ...children: any[]): VNode {
   props = props ?? {};
   const finalChildren = processChildren(type, props, children);
   const finalProps = processProps(type, props) ?? {};
+  processRef(type, finalProps);
 
   if (!isVue2) {
     // 需要使用 withDirectives 来包装

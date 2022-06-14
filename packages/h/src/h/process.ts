@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
+import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref } from 'vue-demi';
 import kebabCase from 'lodash/kebabCase';
-import { Vue2, isVue2, isVNode } from 'vue-demi';
 import lowerFirst from 'lodash/lowerFirst';
 
-import { isBrowser, shallowMerge, isPlainObject, ownKeys } from '../utils';
+import { isBrowser, shallowMerge, isPlainObject, ownKeys, isVue2Dot7 } from '../utils';
 
 const WRAP_SYMBOL = Symbol('__vnode__');
 const EVENT_KEY = /^on[A-Z][a-zA-Z0-9:]*/;
@@ -23,7 +23,8 @@ const RESERVED_KEYS = new Set([
   'class',
   'style',
   'domProps',
-  'children',
+  // vue3
+  'ref_for',
 ]);
 const EVENT_MODIFIER_PREFIX: Record<string, string> = {
   capture: '!',
@@ -31,7 +32,8 @@ const EVENT_MODIFIER_PREFIX: Record<string, string> = {
   passive: '&',
   native: '',
 };
-// Vue2 下必须以 domProps 传入的属性
+const VUE2_ELEMENT_INSTANCE_CACHE: Record<string, any> = {};
+const VUE2_REFS_CACHE = Symbol('ref-cache');
 
 export interface IEventHandler {
   isNative: boolean;
@@ -103,13 +105,11 @@ export function processVue2Event(key: string, value: any): IEventHandler | null 
   return null;
 }
 
-const vue2ElementInstanceCache: Record<string, any> = {};
-
 export function vue2GetElementInstance(tag: string) {
   const normalizedTag = tag.toLowerCase();
 
-  if (normalizedTag in vue2ElementInstanceCache) {
-    return vue2ElementInstanceCache[normalizedTag];
+  if (normalizedTag in VUE2_ELEMENT_INSTANCE_CACHE) {
+    return VUE2_ELEMENT_INSTANCE_CACHE[normalizedTag];
   }
 
   // 内置组件, 或 自定义组件
@@ -120,9 +120,9 @@ export function vue2GetElementInstance(tag: string) {
 
   // 未知元素
   if (isUnknown) {
-    return (vue2ElementInstanceCache[normalizedTag] = null);
+    return (VUE2_ELEMENT_INSTANCE_CACHE[normalizedTag] = null);
   } else {
-    return (vue2ElementInstanceCache[normalizedTag] = el);
+    return (VUE2_ELEMENT_INSTANCE_CACHE[normalizedTag] = el);
   }
 }
 
@@ -306,4 +306,70 @@ export function processChildren(tag: any, props: any, children: any[]) {
   }
 
   return null;
+}
+
+/**
+ * 预处理 ref
+ *
+ * 在 vue2 下，ref 只能是字符串。
+ *
+ * @param tag
+ * @param props
+ */
+export function processRef(tag: any, props: any) {
+  // 处理 ref_for
+  const refInFor = props?.refInFor || props?.ref_for;
+  if (refInFor) {
+    props[isVue2 ? 'refInFor' : 'ref_for'] = true;
+  }
+
+  // Vue3/ 2.7 都支持
+  if (!isVue2 || isVue2Dot7) {
+    return;
+  }
+
+  const ref = props?.ref as string | undefined | Ref<any>;
+
+  if (ref == null || typeof ref === 'string') {
+    return;
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    if (!isRef(ref)) {
+      throw new Error('ref 只能是字符串或者 Ref 对象');
+    }
+  }
+
+  const instance = getCurrentInstance() as unknown as { refs: object; [VUE2_REFS_CACHE]?: Map<Ref, string> } | null;
+
+  if (instance == null) {
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error('h 必须在 render 函数中使用');
+    }
+
+    // 不起作用
+    return;
+  }
+
+  const cache = (instance[VUE2_REFS_CACHE] = instance[VUE2_REFS_CACHE] ?? new Map());
+
+  // 已设置
+  if (!cache.has(ref)) {
+    const uid = `__ref_${cache.size}__`;
+    cache.set(ref, uid);
+
+    Object.defineProperty(instance.refs, uid, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        return ref.value;
+      },
+      set(value) {
+        ref.value = value;
+      },
+    });
+  }
+
+  // 转换为字符串
+  props.ref = cache.get(ref);
 }

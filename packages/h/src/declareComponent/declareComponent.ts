@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/array-type */
-import { defineComponent as vueDefineComponent, isVue2, getCurrentInstance, VNodeChild } from 'vue-demi';
+import { defineComponent as vueDefineComponent, isVue2, VNodeChild } from 'vue-demi';
 import kebabCase from 'lodash/kebabCase';
 import upperFirst from 'lodash/upperFirst';
 import omit from 'lodash/omit';
 
 import { DefineComponent, SimpleComponentOptions } from './types';
-import { isObject } from '../utils';
+import { vue2Expose } from './process';
+
+export { ExtraRef, ExtraArrayRef } from './types';
 
 /**
  * 声明属性
@@ -43,8 +45,6 @@ export function declareEmits<T extends { [key: string]: Function }>(): T {
   return undefined as any as T;
 }
 
-export type ExtraRef<T extends DefineComponent<any, any, any, any>> = T['__ref'] | null;
-
 const FORCE_OMIT_PROPS = ['emits'];
 
 /**
@@ -77,19 +77,7 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
     setup: isVue2
       ? function (props: any, context: any) {
           // vue2 不支持 expose
-          const expose =
-            context.expose ??
-            ((values: any) => {
-              if (!isObject(values) && process.env.NODE_ENV !== 'production') {
-                throw new Error(`expose 必须为对象`);
-              }
-              const instance = getCurrentInstance();
-
-              if (instance) {
-                // 追加到 vm 实例上
-                Object.assign(instance, values);
-              }
-            });
+          const expose = context.expose ?? vue2Expose;
 
           const findEventHandler = (name: string) => {
             if (name in context.listeners) {

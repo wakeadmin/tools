@@ -75,11 +75,16 @@ export interface ReservedAttrs {
   style?: StyleValue;
 }
 
+/**
+ * 支持 Ref 形式展开
+ */
+export type WithRef<T extends {}> = { [K in keyof T]: T[K] | Ref<T[K]> };
+
 export interface SetupContext<Emit, Slot, Expose, Attrs> {
   attrs: Attrs;
   slots: Readonly<Partial<Slot>>;
   emit: EmitFn<Emit>;
-  expose: (exposed?: Expose) => void;
+  expose: (exposed: WithRef<Expose>) => void;
 }
 
 export type Data = Record<string, unknown>;
@@ -112,11 +117,15 @@ export type VChildrenType<Slots extends {}> = VNodeChild | VSlotType<Slots>;
 
 export type RefType<Expose extends {}> = Ref<Expose | null> | string; // string 用于兼容 template 引用
 
+export type ExtraRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose | null;
+
+export type ExtraArrayRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose[] | null;
+
 export interface DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> {
   new (...args: any[]): {
     $props: Props &
       EmitsToProps<Emit> & { 'v-slots'?: Partial<VSlotType<Slots>> } & { 'v-children'?: VChildrenType<Slots> } & {
-        ref?: RefType<Expose>;
+        ref?: RefType<Expose | Expose[]>;
       };
     // 支持 volar 推断
     $slots: VSlotType<Slots>;
