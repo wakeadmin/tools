@@ -22,6 +22,20 @@ export function hasProp(target: Object, key: PropertyKey): boolean {
   return objectPrototype.hasOwnProperty.call(target, key);
 }
 
+/**
+ * 添加不能枚举的字段
+ * @param target
+ * @param key
+ */
+export function addHiddenProp(target: Object, key: PropertyKey, value: any) {
+  Object.defineProperty(target, key, {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value,
+  });
+}
+
 export function isPlainObject(value: any) {
   if (!isObject(value)) {
     return false;
@@ -64,3 +78,9 @@ export function shallowMerge<T extends {}, S extends {}>(target: T, source: S): 
 
   return target as T & S;
 }
+
+export function isCamelCase(str: string): boolean {
+  return typeof str === 'string' && !str.includes('-');
+}
+
+export const identity = <T = any>(i: T) => i;

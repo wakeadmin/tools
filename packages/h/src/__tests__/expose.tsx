@@ -33,12 +33,21 @@ test('expose', async () => {
     },
   });
 
-  render(App, {});
+  const { rerender } = render(App, {});
 
-  expect(instanceRef.value).toBeTruthy();
-  expect(instanceRef.value?.a).toBe(1);
-  expect(instanceRef.value?.b?.()).toBe(1);
-  expect(instanceRef.value?.refValue).toEqual(1);
+  const assertions = () => {
+    expect(instanceRef.value).toBeTruthy();
+    expect(instanceRef.value?.a).toBe(1);
+    expect(instanceRef.value?.b?.()).toBe(1);
+    expect(instanceRef.value?.refValue).toEqual(1);
+  };
+
+  assertions();
+
+  // 重新渲染也能获取到值
+  rerender({});
+
+  assertions();
 });
 
 test('expose v-for', () => {
@@ -60,12 +69,18 @@ test('expose v-for', () => {
     },
   });
 
-  render(App, {});
+  const { rerender } = render(App, {});
 
-  expect(instanceRef.value).toBeTruthy();
-  expect(instanceRef.value?.length).toBe(3);
+  const assertions = () => {
+    expect(instanceRef.value).toBeTruthy();
+    expect(instanceRef.value?.length).toBe(3);
 
-  expect(instanceRef.value?.[0].a).toBe(1);
-  expect(instanceRef.value?.[0].b?.()).toBe(1);
-  expect(instanceRef.value?.[0].refValue).toEqual(1);
+    expect(instanceRef.value?.[0].a).toBe(1);
+    expect(instanceRef.value?.[0].b?.()).toBe(1);
+    expect(instanceRef.value?.[0].refValue).toEqual(1);
+  };
+
+  assertions();
+  rerender({});
+  assertions();
 });

@@ -1,6 +1,8 @@
 import { getCurrentInstance, isRef } from 'vue-demi';
+import kebabCase from 'lodash/kebabCase';
+import upperFirst from 'lodash/upperFirst';
 
-import { hasProp } from '../utils';
+import { hasProp, identity, isCamelCase, addHiddenProp } from '../utils';
 
 export function vue2AsVmProperty(vm: any, key: string, getter: () => any) {
   const props = vm.$options.props;
@@ -61,4 +63,72 @@ export function vue2Expose(exposed: Record<string, any>): void {
       return value;
     });
   }
+}
+
+const EVENT_NAME_FIND_CACHE = Symbol('event-name-cache');
+
+function getEventNameFindCache(target: any): Record<string, string | null> {
+  if (hasProp(target, EVENT_NAME_FIND_CACHE)) {
+    return target[EVENT_NAME_FIND_CACHE];
+  }
+
+  const cache: Record<string, string> = {};
+  addHiddenProp(target, EVENT_NAME_FIND_CACHE, cache);
+  return cache;
+}
+
+export function vue3EventNameCapitalized(name: string) {
+  return `on${upperFirst(name)}`;
+}
+
+/**
+ * 期望传入一个 camelCase 的事件名称，在 attrs 中查找符合的事件处理器
+ *
+ * vue 传入事件处理器的名称可能千奇百怪，比如
+ *
+ * click
+ * clickMe
+ * click-me
+ * update:modelValue
+ * update:model-value
+ * update:modelvalue
+ *
+ * @param name 驼峰式的事件名
+ * @param target 事件处理器集合
+ * @param postprocess 对名称进行处理，比如加上 on 前缀
+ *
+ */
+export function findEventHandler(
+  name: string,
+  target: Record<string, any>,
+  postprocess: (name: string) => string = identity
+) {
+  if (process.env.NODE_ENV !== 'production' && !isCamelCase(name)) {
+    throw new Error(`emit(${name}) 统一使用驼峰式命名`);
+  }
+
+  // 查找缓存
+  const cache = getEventNameFindCache(target);
+  if (name in cache) {
+    return cache[name];
+  }
+
+  const test = (candidate: string) => {
+    const normalized = postprocess(candidate);
+    return normalized in target ? normalized : null;
+  };
+
+  const found =
+    test(name) ??
+    test(name.toLowerCase()) ??
+    test(
+      name
+        .split(':')
+        .map(i => kebabCase(i))
+        .join(':')
+    );
+
+  cache[name] = found;
+
+  return found;
 }

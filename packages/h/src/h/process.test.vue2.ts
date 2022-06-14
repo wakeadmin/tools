@@ -1,5 +1,6 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { ref } from 'vue-demi';
 import {
   processChildren,
   isSlots,
@@ -10,7 +11,9 @@ import {
   processProps,
   vue2GetElementInstance,
   vue2MustUseProps,
+  processRef,
 } from './process';
+import { render } from '../__tests__/helper';
 
 test('wrap', () => {
   const a = {};
@@ -245,5 +248,47 @@ describe('processChildren', () => {
         '在 v-slots 已经定义了 default slot, 不能同时设置 children'
       );
     }
+  });
+});
+
+describe('processRef', () => {
+  test('ref for', () => {
+    const props1 = {
+      refInFor: true,
+    };
+    processRef('', props1);
+    expect(props1).toEqual({ refInFor: true });
+
+    const props2 = {
+      ref_for: true,
+    };
+
+    processRef('', props2);
+    expect(props2).toEqual({ refInFor: true, ref_for: true });
+  });
+
+  test('异常情况', () => {
+    expect(() => {
+      processRef('', { ref: () => {} });
+    }).toThrowError('ref 只能是字符串或者 Ref 对象');
+  });
+
+  test('ref', () => {
+    let nodeRef = ref<any>(null);
+
+    const App = {
+      render() {
+        const props = { ref: nodeRef };
+        processRef('tag', props);
+
+        expect(props).toEqual({ ref: '__ref_0__' });
+
+        return null;
+      },
+    };
+
+    const { rerender } = render(App, {});
+
+    rerender({});
   });
 });
