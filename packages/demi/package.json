@@ -12,7 +12,8 @@
   ],
   "author": "ivan",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
     "@vue/runtime-dom": ">=3.0.0",
     "vue-demi": "latest"
   }

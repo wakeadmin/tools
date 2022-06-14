@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "target": "ES6",
     "noEmit": false
   },
   "exclude": ["dist", "**/*.test.*"]

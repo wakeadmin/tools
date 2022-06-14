@@ -46,18 +46,14 @@ importers:
       babel-plugin-transform-typescript-metadata: 172.26.59.72+4873/babel-plugin-transform-typescript-metadata/0.3.2
 
   packages/demi:
-    specifiers:
-      '@vue/runtime-dom': '>=3.0.0'
-      vue-demi: latest
-    dependencies:
-      '@vue/runtime-dom': 172.26.59.72+4873/@vue/runtime-dom/3.2.37
-      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1
+    specifiers: {}
 
   packages/framework:
     specifiers:
       '@testing-library/jest-dom': ^5.16.4
       '@testing-library/vue': ^6.6.0
       '@types/jest': ^28.1.1
+      '@wakeadmin/h': latest
       '@wakeapp/framework-core': latest
       babel-jest: ^28.1.1
       babel-preset-wakeadmin-for-test: '*'
@@ -65,6 +61,7 @@ importers:
       vue: ^3.2.37
       vue-demi: latest
     dependencies:
+      '@wakeadmin/h': link:../h
       '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220607139
       vue-demi: 172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37
     devDependencies:
@@ -84,7 +81,7 @@ importers:
       '@types/lodash': ^4.14.182
       '@vue/composition-api': ^1.6.2
       '@vue/test-utils': next
-      '@wakeadmin/demi': '*'
+      '@wakeadmin/demi': latest
       babel-jest: ^28.1.1
       babel-preset-wakeadmin-for-test: workspace:*
       jest: ^28.1.1
@@ -92,12 +89,14 @@ importers:
       lodash: ^4.17.21
       testing-library-vue-2: npm:@testing-library/vue@5
       vue: ^3.2.37
+      vue-demi: latest
       vue-template-compiler: ^2.6.14
       vue-test-utils-2: npm:@vue/test-utils@1
       vue2: npm:vue@2
     dependencies:
       '@wakeadmin/demi': link:../demi
       lodash: 172.26.59.72+4873/lodash/4.17.21
+      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1_u2gkp2u25pdfnxvdjnifvavkfu
     devDependencies:
       '@testing-library/jest-dom': 172.26.59.72+4873/@testing-library/jest-dom/5.16.4
       '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
@@ -3738,7 +3737,6 @@ packages:
       vue: '>= 2.5 < 3'
     dependencies:
       vue: 172.26.59.72+4873/vue/3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/reactivity-transform/3.2.37:
     resolution:
@@ -10934,13 +10932,14 @@ packages:
       convert-source-map: 172.26.59.72+4873/convert-source-map/1.8.0
     dev: true
 
-  172.26.59.72+4873/vue-demi/0.13.1:
+  172.26.59.72+4873/vue-demi/0.13.1_u2gkp2u25pdfnxvdjnifvavkfu:
     resolution:
       {
         integrity: sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg==,
         registry: http://npm.wakedata-inc.com/,
         tarball: http://172.26.59.72:4873/vue-demi/-/vue-demi-0.13.1.tgz,
       }
+    id: 172.26.59.72+4873/vue-demi/0.13.1
     name: vue-demi
     version: 0.13.1
     engines: { node: '>=12' }
@@ -10952,6 +10951,9 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
+    dependencies:
+      '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.6.2_vue@3.2.37
+      vue: 172.26.59.72+4873/vue/3.2.37
     dev: false
 
   172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37:

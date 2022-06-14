@@ -11,12 +11,14 @@
     "test:vue3": "vue-demi-switch 3 && cross-env VUE3=true jest",
     "test": "npm run test:vue2 && npm run test:vue3"
   },
+  "module": "dist/index.js",
   "keywords": [],
-  "author": "",
+  "author": "ivan",
   "license": "ISC",
   "dependencies": {
+    "@wakeadmin/demi": "latest",
     "lodash": "^4.17.21",
-    "@wakeadmin/demi": "latest"
+    "vue-demi": "latest"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -34,5 +36,14 @@
     "vue-template-compiler": "^2.6.14",
     "vue-test-utils-2": "npm:@vue/test-utils@1",
     "vue2": "npm:vue@2"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
   }
 }

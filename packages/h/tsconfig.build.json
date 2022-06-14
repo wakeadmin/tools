@@ -1,7 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "noEmit": false
+    "noEmit": false,
+    "target": "ES6"
   },
   "exclude": ["dist", "**/__tests__/*", "**/*.test.*", "**/*.d-test.*", "**/*.vue", "**/*.d.ts"]
 }

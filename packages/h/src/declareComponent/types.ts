@@ -12,7 +12,7 @@ export type UnionToTuple<T> = UnionToIntersection<T extends never ? never : (t: 
 
 export type NotUndefined<T> = T extends undefined ? never : T;
 
-declare module 'vue' {
+declare module '@vue/runtime-dom' {
   interface HTMLAttributes {
     // FIXME: vue 没有设置这个属性
     textContent?: string;

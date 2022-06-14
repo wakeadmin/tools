@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@wakeapp/framework-core": "latest",
+    "@wakeadmin/h": "latest",
     "vue-demi": "latest"
   },
   "peerDependencies": {
