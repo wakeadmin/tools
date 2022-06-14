@@ -1,138 +1,11 @@
 /* eslint-disable @typescript-eslint/array-type */
-/* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
-/* eslint-disable @typescript-eslint/no-invalid-void-type */
-import {
-  Ref,
-  EmitsOptions,
-  ObjectEmitsOptions,
-  RenderFunction,
-  StyleValue,
-  defineComponent as vueDefineComponent,
-  set,
-  isVue2,
-  getCurrentInstance,
-  isReactive,
-  VNodeChild,
-} from 'vue-demi';
+import { defineComponent as vueDefineComponent, isVue2, getCurrentInstance, VNodeChild } from 'vue-demi';
 import kebabCase from 'lodash/kebabCase';
 import upperFirst from 'lodash/upperFirst';
 import omit from 'lodash/omit';
 
-import { UnionToIntersection, NotUndefined } from './typeUtils';
-import { isObject, isPlainObject } from '../utils';
-
-declare module 'vue' {
-  interface HTMLAttributes {
-    // FIXME: vue 没有设置这个属性
-    textContent?: string;
-
-    // 避免原生组件报错
-    'v-children'?: VNodeChild;
-  }
-}
-
-declare global {
-  namespace JSX {
-    interface ElementChildrenAttribute {
-      // JSX 从 v-slots 推断子元素
-      // 和 vue 的 jsx 插件语法保持一致
-      // 'v-slots': {};
-      // 为什么不直接用 v-slots, 因为 children 的类型应该更加宽松，v-slots 则必须为对象
-      'v-children': {};
-    }
-
-    // fix: 自定义组件在未声明情况下， 也能使用 class/style
-    interface IntrinsicAttributes {
-      class?: any;
-      style?: StyleValue;
-    }
-  }
-}
-
-type EmitsToProps<T extends EmitsOptions> = T extends string[]
-  ? {
-      [K in string & `on${Capitalize<T[number]>}`]?: (...args: any[]) => any;
-    }
-  : T extends ObjectEmitsOptions
-  ? {
-      [K in string & `on${Capitalize<string & keyof T>}`]?: K extends `on${infer C}`
-        ? T[Uncapitalize<C>] extends null
-          ? (...args: any[]) => any
-          : // eslint-disable-next-line @typescript-eslint/no-shadow
-            (...args: T[Uncapitalize<C>] extends (...args: infer P) => any ? P : never) => any
-        : never;
-    }
-  : {};
-
-type EmitFn<Options = ObjectEmitsOptions, Event extends keyof Options = keyof Options> = Options extends (infer V)[]
-  ? (event: V, ...args: any[]) => void
-  : {} extends Options
-  ? (event: string, ...args: any[]) => void
-  : UnionToIntersection<
-      {
-        [key in Event]: Options[key] extends (...args: infer Args) => any
-          ? (event: key, ...args: Args) => void
-          : (event: key, ...args: any[]) => void;
-      }[Event]
-    >;
-
-export type ReservedAttrs = {
-  class?: any;
-  style?: StyleValue;
-};
-
-export interface SetupContext<Emit, Slot, Expose, Attrs> {
-  attrs: Attrs;
-  slots: Readonly<Partial<Slot>>;
-  emit: EmitFn<Emit>;
-  expose: (exposed?: Expose) => void;
-}
-
-export type Data = Record<string, unknown>;
-
-export type MergeDefaultProps<DefaultProps extends {}, Props extends DefaultProps> = DefaultProps &
-  Required<Pick<Props, keyof DefaultProps>>;
-
-export type DefaultSlots = {
-  default?: () => VNodeChild;
-};
-
-export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
-  name?: string;
-  props?: Props;
-  emits?: Emit;
-  slots?: Slots;
-  expose?: Expose;
-  setup: (
-    this: void,
-    props: Props,
-    // 因为关闭了 inheritAttrs，所以可以通过 attrs 访问 class、style
-    ctx: SetupContext<Emit, DefaultSlots & Slots, Expose, Data & ReservedAttrs>
-  ) => Promise<RenderFunction | void> | RenderFunction | void;
-  inheritAttrs?: boolean;
-  serverPrefetch?(): Promise<any>;
-} & ThisType<void>;
-
-export type VSlotType<Slots extends {}> = DefaultSlots & Slots;
-export type VChildrenType<Slots extends {}> = VNodeChild | VSlotType<Slots>;
-
-export type RefType<Expose extends {}> = Ref<Expose | null> | string; // string 用于兼容 template 引用
-
-export type DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
-  new (...args: any[]): {
-    $props: Props &
-      EmitsToProps<Emit> & { 'v-slots'?: Partial<VSlotType<Slots>> } & { 'v-children'?: VChildrenType<Slots> } & {
-        ref?: RefType<Expose>;
-      };
-    // 支持 volar 推断
-    $slots: VSlotType<Slots>;
-    $emit: EmitFn<Emit>;
-  };
-
-  // 方便外部提取
-  __ref: Expose;
-};
+import { DefineComponent, SimpleComponentOptions } from './types';
+import { isObject } from '../utils';
 
 /**
  * 声明属性
@@ -171,57 +44,6 @@ export function declareEmits<T extends { [key: string]: Function }>(): T {
 }
 
 export type ExtraRef<T extends DefineComponent<any, any, any, any>> = T['__ref'] | null;
-
-/**
- * 给 props 添加默认值，只能在 setup 中使用
- */
-export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
-  props: T,
-  defaultValue: D
-): T & { [K in keyof D]: K extends keyof T ? NotUndefined<T[K]> : never } {
-  if (process.env.NODE_ENV !== 'production' && (!isReactive(props) || !isPlainObject(props))) {
-    throw new Error(`withDefaults() expects a reactive object but received a plain one.`);
-  }
-
-  const DEFAULT_VALUE_KEYS = Object.keys(defaultValue);
-
-  // vue2 如果 props 属性为空，可能不会响应，这里最好设置默认值
-  if (isVue2) {
-    for (const key in defaultValue) {
-      if (!Object.prototype.hasOwnProperty.call(props, key)) {
-        set(props, key, defaultValue[key]);
-      }
-    }
-  }
-
-  return new Proxy(props, {
-    get(target, p) {
-      const value = Reflect.get(target, p);
-      if (value === undefined && Reflect.has(defaultValue, p)) {
-        return Reflect.get(defaultValue, p);
-      }
-      return value;
-    },
-    // 让 default value 可被枚举
-    getOwnPropertyDescriptor(target, p) {
-      if (Reflect.has(target, p)) {
-        return Reflect.getOwnPropertyDescriptor(target, p);
-      }
-
-      return Reflect.getOwnPropertyDescriptor(defaultValue, p);
-    },
-    ownKeys(target) {
-      const keys = Reflect.ownKeys(target);
-      for (const key of DEFAULT_VALUE_KEYS) {
-        if (!keys.includes(key)) {
-          keys.push(key);
-        }
-      }
-
-      return keys;
-    },
-  }) as any;
-}
 
 const FORCE_OMIT_PROPS = ['emits'];
 
@@ -321,7 +143,7 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
           return setup.call(this, props, contextProxy);
         }
       : function (props: any, context: any) {
-          const findEventHandler = (name: string) => {
+          const findEventHandler = (name: string): string | undefined => {
             let normalized = `on${upperFirst(name)}`;
             if (normalized in context.attrs) {
               return normalized;
@@ -338,6 +160,8 @@ export function declareComponent<Props extends {}, Emit extends {}, Expose exten
             if (normalized in context.attrs) {
               return normalized;
             }
+
+            return undefined;
           };
 
           // @ts-expect-error

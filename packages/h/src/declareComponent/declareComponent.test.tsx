@@ -1,14 +1,8 @@
 import { isVue2, toRefs, reactive, isReactive, watchEffect } from 'vue-demi';
 import { render } from '../__tests__/helper';
 
-import {
-  declareComponent,
-  withDefaults,
-  declareProps,
-  declareEmits,
-  declareExpose,
-  declareSlots,
-} from './declareComponent';
+import { declareComponent, declareProps, declareEmits, declareExpose, declareSlots } from './declareComponent';
+import { withDefaults } from './helper';
 
 test('declareProps', () => {
   expect(declareProps<{ foo: string; bar: string }>(['foo', 'bar'])).toEqual(['foo', 'bar']);

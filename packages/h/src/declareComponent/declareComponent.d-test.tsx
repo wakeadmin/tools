@@ -1,13 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { VNodeChild, ref, StyleValue } from 'vue-demi';
-import {
-  withDefaults,
-  declareComponent,
-  declareProps,
-  declareExpose,
-  declareSlots,
-  declareEmits,
-} from './declareComponent';
+import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './declareComponent';
+import { withDefaults } from './helper';
 
 import { expectType } from '../__tests__/helper';
 

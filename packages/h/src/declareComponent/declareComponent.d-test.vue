@@ -18,6 +18,9 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue-demi';
+
+  import { exactType } from '../__tests__/helper';
+
   import {
     declareComponent,
     declareEmits,
@@ -26,7 +29,6 @@
     declareSlots,
     ExtraRef,
   } from './declareComponent';
-  import { exactType } from './shared.d-test';
 
   const stringType = '';
   const scopeType = {} as { a: number };

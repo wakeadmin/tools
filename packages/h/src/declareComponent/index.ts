@@ -1,8 +1,2 @@
-export {
-  declareComponent,
-  declareEmits,
-  declareExpose,
-  declareProps,
-  declareSlots,
-  withDefaults,
-} from './declareComponent';
+export * from './declareComponent';
+export * from './helper';

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-magic-numbers */
 /** @jsx h */
 import { ref, nextTick } from 'vue-demi';
 import { screen, fireEvent } from '@testing-library/vue';
@@ -53,6 +53,13 @@ const App = declareComponent({
         <button title="button" onClick={toggle}>
           toggle
         </button>
+
+        {/* v-for */}
+        <div title="list">
+          {[1, 2, 3].map(i => (
+            <div key={i}>{i}</div>
+          ))}
+        </div>
       </div>
     );
   },
@@ -69,6 +76,7 @@ test('Directive', async () => {
   const inputValue = screen.getByTitle('inputValue');
   const customInput = screen.getByTitle('customInput') as HTMLInputElement;
   const customInputValue = screen.getByTitle('customInputValue');
+  const list = screen.getByTitle('list');
 
   // v-html
   expect(innerHTML.innerHTML).toBe('<div class="inner">innerHTML</div>');
@@ -99,4 +107,7 @@ test('Directive', async () => {
   fireEvent(button, new MouseEvent('click'));
   await nextTick();
   expect(content.outerHTML).toBe('<span title="content" style="">show</span>');
+
+  // v-for
+  expect(list.outerHTML).toBe('<div title="list"><div>1</div><div>2</div><div>3</div></div>');
 });
