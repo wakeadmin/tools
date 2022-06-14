@@ -46,7 +46,10 @@ importers:
       babel-plugin-transform-typescript-metadata: 172.26.59.72+4873/babel-plugin-transform-typescript-metadata/0.3.2
 
   packages/demi:
-    specifiers: {}
+    specifiers:
+      vue-demi: latest
+    dependencies:
+      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1
 
   packages/framework:
     specifiers:
@@ -89,14 +92,12 @@ importers:
       lodash: ^4.17.21
       testing-library-vue-2: npm:@testing-library/vue@5
       vue: ^3.2.37
-      vue-demi: latest
       vue-template-compiler: ^2.6.14
       vue-test-utils-2: npm:@vue/test-utils@1
       vue2: npm:vue@2
     dependencies:
       '@wakeadmin/demi': link:../demi
       lodash: 172.26.59.72+4873/lodash/4.17.21
-      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1_u2gkp2u25pdfnxvdjnifvavkfu
     devDependencies:
       '@testing-library/jest-dom': 172.26.59.72+4873/@testing-library/jest-dom/5.16.4
       '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
@@ -3737,6 +3738,7 @@ packages:
       vue: '>= 2.5 < 3'
     dependencies:
       vue: 172.26.59.72+4873/vue/3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/reactivity-transform/3.2.37:
     resolution:
@@ -10932,14 +10934,13 @@ packages:
       convert-source-map: 172.26.59.72+4873/convert-source-map/1.8.0
     dev: true
 
-  172.26.59.72+4873/vue-demi/0.13.1_u2gkp2u25pdfnxvdjnifvavkfu:
+  172.26.59.72+4873/vue-demi/0.13.1:
     resolution:
       {
         integrity: sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg==,
         registry: http://npm.wakedata-inc.com/,
         tarball: http://172.26.59.72:4873/vue-demi/-/vue-demi-0.13.1.tgz,
       }
-    id: 172.26.59.72+4873/vue-demi/0.13.1
     name: vue-demi
     version: 0.13.1
     engines: { node: '>=12' }
@@ -10951,9 +10952,6 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
-    dependencies:
-      '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.6.2_vue@3.2.37
-      vue: 172.26.59.72+4873/vue/3.2.37
     dev: false
 
   172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37:

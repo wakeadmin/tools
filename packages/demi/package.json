@@ -12,9 +12,10 @@
   ],
   "author": "ivan",
   "license": "MIT",
-  "dependencies": {},
-  "peerDependencies": {
-    "@vue/runtime-dom": ">=3.0.0",
+  "dependencies": {
     "vue-demi": "latest"
+  },
+  "peerDependencies": {
+    "@vue/runtime-dom": ">=3.0.0"
   }
 }
