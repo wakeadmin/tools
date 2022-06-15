@@ -5,6 +5,7 @@ import {
   resolveComponent,
   resolveDirective,
   isVNode,
+  assertNotFragment,
 } from './helper';
 import { wrap } from './process';
 
@@ -63,5 +64,24 @@ test('withDirectives', () => {
         value: undefined,
       },
     ],
+  });
+});
+
+test('assertNotFragment', () => {
+  // children throw
+  [
+    ['ok', false],
+    [null, false],
+    [[null, null], false],
+    [{}, false],
+    [['ok'], false],
+    [['ok', 'ok'], true],
+  ].forEach(([children, expectThrow]) => {
+    const expected = expect(() => assertNotFragment(children));
+    if (expectThrow) {
+      expected.toThrowError();
+    } else {
+      expected.not.toThrowError();
+    }
   });
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable @typescript-eslint/array-type */
 import {
   Directive as Vue3Directive,
@@ -111,9 +112,9 @@ export function withDirectives<T extends VNode>(
   if (isVNode(arg1)) {
     // 注入模式
     if (!isVue2) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return vueWithDirectives(
         arg1,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         (arg2! as Vue3DirectiveArguments).map(i => {
           const dir = i[0];
           // 需要转换
@@ -138,4 +139,18 @@ export function withDirectives<T extends VNode>(
   } else {
     return directiveArgumentsToBinding(arg1);
   }
+}
+
+/**
+ * 禁止 fragment
+ * 这个函数在 Vue3 下无效
+ */
+export function assertNotFragment(children: any) {
+  if (process.env.NODE_ENV !== 'production' && isVue2) {
+    if (Array.isArray(children) && children.filter(v => v != null).length > 1) {
+      throw new Error('Fragment is not allowed in Vue2');
+    }
+  }
+
+  return children;
 }
