@@ -1,4 +1,4 @@
-import { shallowRef, reactive, shallowReactive } from 'vue-demi';
+import { shallowRef, reactive, shallowReactive } from '@wakeadmin/demi';
 
 import { Annotation, AnnotationMaker, AnnotationType, IObservableFactory } from './types';
 import { createAnnotationDecorator } from './decorators';

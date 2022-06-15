@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-new */
 /* eslint-disable no-magic-numbers */
-import { isReactive, isShallow, effect } from 'vue-demi';
+import { isReactive, isShallow, effect } from '@wakeadmin/demi';
 import { collectAnnotations } from './decorators';
 import { makeObservable } from './makeObservable';
 import { observable } from './observable';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { DebuggerOptions } from 'vue-demi';
+import { DebuggerOptions } from '@wakeadmin/demi';
 
 /**
  * @observable 类型定义

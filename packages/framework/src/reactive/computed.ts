@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { computed as vueComputed } from 'vue-demi';
+import { computed as vueComputed } from '@wakeadmin/demi';
 import { isPlainObject, isPropertyKey, NOOP } from '../utils';
 
 import { createAnnotationDecorator, storeAnnotation } from './decorators';

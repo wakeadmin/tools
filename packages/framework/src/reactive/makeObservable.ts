@@ -1,3 +1,4 @@
+import { markRaw } from '@wakeadmin/demi';
 import { ownKeys } from '../utils';
 
 import { apply } from './administrator';
@@ -14,6 +15,9 @@ export function makeObservable<T extends object>(target: T): T {
     const annotation = annotations[key];
     apply(target, key, annotation);
   });
+
+  // 避免被转换
+  markRaw(target);
 
   return target;
 }

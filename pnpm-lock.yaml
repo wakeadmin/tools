@@ -104,6 +104,14 @@ importers:
   packages/jest-preset-universe-vue:
     specifiers: {}
 
+  packages/test-helper-vue:
+    specifiers:
+      '@wakeadmin/demi': workspace:latest
+      '@wakeadmin/h': workspace:latest
+    dependencies:
+      '@wakeadmin/demi': link:../demi
+      '@wakeadmin/h': link:../h
+
 packages:
   172.26.59.72+4873/@ampproject/remapping/2.2.0:
     resolution:

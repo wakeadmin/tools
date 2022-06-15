@@ -2,7 +2,7 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-new */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ref } from 'vue-demi';
+import { ref } from '@wakeadmin/demi';
 import { computed } from './computed';
 import { collectAnnotations } from './decorators';
 import { makeObservable } from './makeObservable';
