@@ -4,27 +4,59 @@ importers:
   .:
     specifiers:
       '@babel/core': ~7.18.2
+      '@testing-library/jest-dom': ^5.16.4
+      '@testing-library/vue': ^6.6.0
+      '@types/jest': ^28.1.1
+      '@types/lodash': ^4.14.182
+      '@vue/composition-api': ^1.6.2
+      '@vue/test-utils': next
+      babel-jest: ^28.1.1
+      babel-preset-wakeadmin-for-test: workspace:*
       cross-env: ^7.0.3
       eslint: ~8.0.0
       eslint-config-wkts: ^0.2.0
       eslint-config-wkvue: ^0.1.20
       husky: ^8.0.1
+      jest: ^28.1.1
+      jest-environment-jsdom: ^28.1.1
+      jest-preset-universe-vue: 'workspace: *'
       prettier: ^2.6.2
       prettier-config-wk: ^0.2.0
       rimraf: ^3.0.2
+      testing-library-vue-2: npm:@testing-library/vue@5
       typescript: ^4.7.3
+      vue: ^3.2.37
+      vue-template-compiler: ^2.6.14
+      vue-test-utils-2: npm:@vue/test-utils@1
+      vue2: npm:vue@2
       wkstd: ^0.2.0
     devDependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@testing-library/jest-dom': 172.26.59.72+4873/@testing-library/jest-dom/5.16.4
+      '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
+      '@types/jest': 172.26.59.72+4873/@types/jest/28.1.1
+      '@types/lodash': 172.26.59.72+4873/@types/lodash/4.14.182
+      '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.6.2_vue@3.2.37
+      '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0-rc.18_vue@3.2.37
+      babel-jest: 172.26.59.72+4873/babel-jest/28.1.1_@babel+core@7.18.2
+      babel-preset-wakeadmin-for-test: link:packages/babel-preset-wakeadmin-for-test
       cross-env: 172.26.59.72+4873/cross-env/7.0.3
       eslint: 172.26.59.72+4873/eslint/8.0.1
       eslint-config-wkts: 172.26.59.72+4873/eslint-config-wkts/0.2.0_m2l4u43prldju63hje6u2e2pxi
       eslint-config-wkvue: 172.26.59.72+4873/eslint-config-wkvue/0.1.20_po3f3yna63fv4ebz5w7caehabm
       husky: 172.26.59.72+4873/husky/8.0.1
+      jest: 172.26.59.72+4873/jest/28.1.1
+      jest-environment-jsdom: 172.26.59.72+4873/jest-environment-jsdom/28.1.1
+      jest-preset-universe-vue: link:packages/jest-preset-universe-vue
       prettier: 172.26.59.72+4873/prettier/2.6.2
       prettier-config-wk: 172.26.59.72+4873/prettier-config-wk/0.2.0
       rimraf: 172.26.59.72+4873/rimraf/3.0.2
+      testing-library-vue-2: 172.26.59.72+4873/@testing-library/vue/5.8.3_pwxjod6agbp7a622cc7eenqu7e
       typescript: 172.26.59.72+4873/typescript/4.7.3
+      vue: 172.26.59.72+4873/vue/3.2.37
+      vue-template-compiler: 172.26.59.72+4873/vue-template-compiler/2.6.14
+      vue-test-utils-2: 172.26.59.72+4873/@vue/test-utils/1.3.0_pwxjod6agbp7a622cc7eenqu7e
+      vue2: 172.26.59.72+4873/vue/2.6.14
       wkstd: 172.26.59.72+4873/wkstd/0.2.0_eslint@8.0.1
 
   packages/babel-preset-wakeadmin-for-test:
@@ -53,67 +85,24 @@ importers:
 
   packages/framework:
     specifiers:
-      '@testing-library/jest-dom': ^5.16.4
-      '@testing-library/vue': ^6.6.0
-      '@types/jest': ^28.1.1
+      '@wakeadmin/demi': latest
       '@wakeadmin/h': latest
       '@wakeapp/framework-core': latest
-      babel-jest: ^28.1.1
-      babel-preset-wakeadmin-for-test: '*'
-      jest: ^28.1.1
-      vue: ^3.2.37
-      vue-demi: latest
     dependencies:
+      '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
       '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220607139
-      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37
-    devDependencies:
-      '@testing-library/jest-dom': 172.26.59.72+4873/@testing-library/jest-dom/5.16.4
-      '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
-      '@types/jest': 172.26.59.72+4873/@types/jest/28.1.1
-      babel-jest: 172.26.59.72+4873/babel-jest/28.1.1
-      babel-preset-wakeadmin-for-test: link:../babel-preset-wakeadmin-for-test
-      jest: 172.26.59.72+4873/jest/28.1.1
-      vue: 172.26.59.72+4873/vue/3.2.37
 
   packages/h:
     specifiers:
-      '@testing-library/jest-dom': ^5.16.4
-      '@testing-library/vue': ^6.6.0
-      '@types/jest': ^28.1.1
-      '@types/lodash': ^4.14.182
-      '@vue/composition-api': ^1.6.2
-      '@vue/test-utils': next
       '@wakeadmin/demi': latest
-      babel-jest: ^28.1.1
-      babel-preset-wakeadmin-for-test: workspace:*
-      jest: ^28.1.1
-      jest-environment-jsdom: ^28.1.1
       lodash: ^4.17.21
-      testing-library-vue-2: npm:@testing-library/vue@5
-      vue: ^3.2.37
-      vue-template-compiler: ^2.6.14
-      vue-test-utils-2: npm:@vue/test-utils@1
-      vue2: npm:vue@2
     dependencies:
       '@wakeadmin/demi': link:../demi
       lodash: 172.26.59.72+4873/lodash/4.17.21
-    devDependencies:
-      '@testing-library/jest-dom': 172.26.59.72+4873/@testing-library/jest-dom/5.16.4
-      '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
-      '@types/jest': 172.26.59.72+4873/@types/jest/28.1.1
-      '@types/lodash': 172.26.59.72+4873/@types/lodash/4.14.182
-      '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.6.2_vue@3.2.37
-      '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0-rc.18_vue@3.2.37
-      babel-jest: 172.26.59.72+4873/babel-jest/28.1.1
-      babel-preset-wakeadmin-for-test: link:../babel-preset-wakeadmin-for-test
-      jest: 172.26.59.72+4873/jest/28.1.1
-      jest-environment-jsdom: 172.26.59.72+4873/jest-environment-jsdom/28.1.1
-      testing-library-vue-2: 172.26.59.72+4873/@testing-library/vue/5.8.3_pwxjod6agbp7a622cc7eenqu7e
-      vue: 172.26.59.72+4873/vue/3.2.37
-      vue-template-compiler: 172.26.59.72+4873/vue-template-compiler/2.6.14
-      vue-test-utils-2: 172.26.59.72+4873/@vue/test-utils/1.3.0_pwxjod6agbp7a622cc7eenqu7e
-      vue2: 172.26.59.72+4873/vue/2.6.14
+
+  packages/jest-preset-universe-vue:
+    specifiers: {}
 
 packages:
   172.26.59.72+4873/@ampproject/remapping/2.2.0:
@@ -997,21 +986,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: false
 
-  172.26.59.72+4873/@babel/plugin-syntax-async-generators/7.8.4:
-    resolution:
-      {
-        integrity: sha1-qYP7Gusuw/btBCohD2QOkOeG/g0=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-async-generators/-/plugin-syntax-async-generators-7.8.4.tgz,
-      }
-    name: '@babel/plugin-syntax-async-generators'
-    version: 7.8.4
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
   172.26.59.72+4873/@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.18.2:
     resolution:
       {
@@ -1028,21 +1002,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
 
-  172.26.59.72+4873/@babel/plugin-syntax-bigint/7.8.3:
-    resolution:
-      {
-        integrity: sha1-TJpvZp9dDN8bkKFnHpoUa+UwDOo=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-bigint/-/plugin-syntax-bigint-7.8.3.tgz,
-      }
-    name: '@babel/plugin-syntax-bigint'
-    version: 7.8.3
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
   172.26.59.72+4873/@babel/plugin-syntax-bigint/7.8.3_@babel+core@7.18.2:
     resolution:
       {
@@ -1057,21 +1016,6 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
-  172.26.59.72+4873/@babel/plugin-syntax-class-properties/7.12.13:
-    resolution:
-      {
-        integrity: sha1-tcmHJ0xKOoK4lxR5aTGmtTVErhA=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-class-properties/-/plugin-syntax-class-properties-7.12.13.tgz,
-      }
-    name: '@babel/plugin-syntax-class-properties'
-    version: 7.12.13
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: true
 
@@ -1179,21 +1123,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: false
 
-  172.26.59.72+4873/@babel/plugin-syntax-import-meta/7.10.4:
-    resolution:
-      {
-        integrity: sha1-7mATSMNw+jNNIge+FYd3SWUh/VE=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-import-meta/-/plugin-syntax-import-meta-7.10.4.tgz,
-      }
-    name: '@babel/plugin-syntax-import-meta'
-    version: 7.10.4
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
   172.26.59.72+4873/@babel/plugin-syntax-import-meta/7.10.4_@babel+core@7.18.2:
     resolution:
       {
@@ -1208,21 +1137,6 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
-  172.26.59.72+4873/@babel/plugin-syntax-json-strings/7.8.3:
-    resolution:
-      {
-        integrity: sha1-AcohtmjNghjJ5kDLbdiMVBKyyWo=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-json-strings/-/plugin-syntax-json-strings-7.8.3.tgz,
-      }
-    name: '@babel/plugin-syntax-json-strings'
-    version: 7.8.3
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: true
 
@@ -1260,21 +1174,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: false
 
-  172.26.59.72+4873/@babel/plugin-syntax-logical-assignment-operators/7.10.4:
-    resolution:
-      {
-        integrity: sha1-ypHvRjA1MESLkGZSusLp/plB9pk=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-logical-assignment-operators/-/plugin-syntax-logical-assignment-operators-7.10.4.tgz,
-      }
-    name: '@babel/plugin-syntax-logical-assignment-operators'
-    version: 7.10.4
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
   172.26.59.72+4873/@babel/plugin-syntax-logical-assignment-operators/7.10.4_@babel+core@7.18.2:
     resolution:
       {
@@ -1290,21 +1189,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-
-  172.26.59.72+4873/@babel/plugin-syntax-nullish-coalescing-operator/7.8.3:
-    resolution:
-      {
-        integrity: sha1-Fn7XA2iIYIH3S1w2xlqIwDtm0ak=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-nullish-coalescing-operator/-/plugin-syntax-nullish-coalescing-operator-7.8.3.tgz,
-      }
-    name: '@babel/plugin-syntax-nullish-coalescing-operator'
-    version: 7.8.3
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
 
   172.26.59.72+4873/@babel/plugin-syntax-nullish-coalescing-operator/7.8.3_@babel+core@7.18.2:
     resolution:
@@ -1322,21 +1206,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
 
-  172.26.59.72+4873/@babel/plugin-syntax-numeric-separator/7.10.4:
-    resolution:
-      {
-        integrity: sha1-ubBws+M1cM2f0Hun+pHA3Te5r5c=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-numeric-separator/-/plugin-syntax-numeric-separator-7.10.4.tgz,
-      }
-    name: '@babel/plugin-syntax-numeric-separator'
-    version: 7.10.4
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
   172.26.59.72+4873/@babel/plugin-syntax-numeric-separator/7.10.4_@babel+core@7.18.2:
     resolution:
       {
@@ -1352,21 +1221,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-
-  172.26.59.72+4873/@babel/plugin-syntax-object-rest-spread/7.8.3:
-    resolution:
-      {
-        integrity: sha1-YOIl7cvZimQDMqLnLdPmbxr1WHE=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.8.3.tgz,
-      }
-    name: '@babel/plugin-syntax-object-rest-spread'
-    version: 7.8.3
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
 
   172.26.59.72+4873/@babel/plugin-syntax-object-rest-spread/7.8.3_@babel+core@7.18.2:
     resolution:
@@ -1384,21 +1238,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
 
-  172.26.59.72+4873/@babel/plugin-syntax-optional-catch-binding/7.8.3:
-    resolution:
-      {
-        integrity: sha1-YRGiZbz7Ag6579D9/X0mQCue1sE=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-optional-catch-binding/-/plugin-syntax-optional-catch-binding-7.8.3.tgz,
-      }
-    name: '@babel/plugin-syntax-optional-catch-binding'
-    version: 7.8.3
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
-
   172.26.59.72+4873/@babel/plugin-syntax-optional-catch-binding/7.8.3_@babel+core@7.18.2:
     resolution:
       {
@@ -1414,21 +1253,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-
-  172.26.59.72+4873/@babel/plugin-syntax-optional-chaining/7.8.3:
-    resolution:
-      {
-        integrity: sha1-T2nCq5UWfgGAzVM2YT+MV4j31Io=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-optional-chaining/-/plugin-syntax-optional-chaining-7.8.3.tgz,
-      }
-    name: '@babel/plugin-syntax-optional-chaining'
-    version: 7.8.3
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
 
   172.26.59.72+4873/@babel/plugin-syntax-optional-chaining/7.8.3_@babel+core@7.18.2:
     resolution:
@@ -1463,22 +1287,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: false
-
-  172.26.59.72+4873/@babel/plugin-syntax-top-level-await/7.14.5:
-    resolution:
-      {
-        integrity: sha1-wc/a3DWmRiQAAfBhOCR7dBw02Uw=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@babel%2fplugin-syntax-top-level-await/-/plugin-syntax-top-level-await-7.14.5.tgz,
-      }
-    name: '@babel/plugin-syntax-top-level-await'
-    version: 7.14.5
-    engines: { node: '>=6.9.0' }
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: true
 
   172.26.59.72+4873/@babel/plugin-syntax-top-level-await/7.14.5_@babel+core@7.18.2:
     resolution:
@@ -2402,7 +2210,7 @@ packages:
     version: 7.18.3
     engines: { node: '>=6.9.0' }
     dependencies:
-      core-js-pure: 172.26.59.72+4873/core-js-pure/3.22.8
+      core-js-pure: 172.26.59.72+4873/core-js-pure/3.23.1
       regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.13.9
     dev: true
 
@@ -3676,6 +3484,7 @@ packages:
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       estree-walker: 172.26.59.72+4873/estree-walker/2.0.2
       source-map: 172.26.59.72+4873/source-map/0.6.1
+    dev: true
 
   172.26.59.72+4873/@vue/compiler-dom/3.2.37:
     resolution:
@@ -3689,6 +3498,7 @@ packages:
     dependencies:
       '@vue/compiler-core': 172.26.59.72+4873/@vue/compiler-core/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/compiler-sfc/3.2.37:
     resolution:
@@ -3710,6 +3520,7 @@ packages:
       magic-string: 172.26.59.72+4873/magic-string/0.25.9
       postcss: 172.26.59.72+4873/postcss/8.4.14
       source-map: 172.26.59.72+4873/source-map/0.6.1
+    dev: true
 
   172.26.59.72+4873/@vue/compiler-ssr/3.2.37:
     resolution:
@@ -3723,6 +3534,7 @@ packages:
     dependencies:
       '@vue/compiler-dom': 172.26.59.72+4873/@vue/compiler-dom/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/composition-api/1.6.2_vue@3.2.37:
     resolution:
@@ -3755,6 +3567,7 @@ packages:
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       estree-walker: 172.26.59.72+4873/estree-walker/2.0.2
       magic-string: 172.26.59.72+4873/magic-string/0.25.9
+    dev: true
 
   172.26.59.72+4873/@vue/reactivity/3.2.37:
     resolution:
@@ -3767,6 +3580,7 @@ packages:
     version: 3.2.37
     dependencies:
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/runtime-core/3.2.37:
     resolution:
@@ -3780,6 +3594,7 @@ packages:
     dependencies:
       '@vue/reactivity': 172.26.59.72+4873/@vue/reactivity/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/runtime-dom/3.2.37:
     resolution:
@@ -3794,6 +3609,7 @@ packages:
       '@vue/runtime-core': 172.26.59.72+4873/@vue/runtime-core/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       csstype: 172.26.59.72+4873/csstype/2.6.20
+    dev: true
 
   172.26.59.72+4873/@vue/server-renderer/3.2.37_vue@3.2.37:
     resolution:
@@ -3811,6 +3627,7 @@ packages:
       '@vue/compiler-ssr': 172.26.59.72+4873/@vue/compiler-ssr/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       vue: 172.26.59.72+4873/vue/3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/shared/3.2.37:
     resolution:
@@ -3821,6 +3638,7 @@ packages:
       }
     name: '@vue/shared'
     version: 3.2.37
+    dev: true
 
   172.26.59.72+4873/@vue/test-utils/1.3.0_pwxjod6agbp7a622cc7eenqu7e:
     resolution:
@@ -4333,30 +4151,6 @@ packages:
     hasBin: true
     dev: true
 
-  172.26.59.72+4873/babel-jest/28.1.1:
-    resolution:
-      {
-        integrity: sha512-MEt0263viUdAkTq5D7upHPNxvt4n9uLUGa6pPz3WviNBMtOmStb1lIXS3QobnoqM+qnH+vr4EKlvhe8QcmxIYw==,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/babel-jest/-/babel-jest-28.1.1.tgz,
-      }
-    name: babel-jest
-    version: 28.1.1
-    engines: { node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0 }
-    peerDependencies:
-      '@babel/core': ^7.8.0
-    dependencies:
-      '@jest/transform': 172.26.59.72+4873/@jest/transform/28.1.1
-      '@types/babel__core': 172.26.59.72+4873/@types/babel__core/7.1.19
-      babel-plugin-istanbul: 172.26.59.72+4873/babel-plugin-istanbul/6.1.1
-      babel-preset-jest: 172.26.59.72+4873/babel-preset-jest/28.1.1
-      chalk: 172.26.59.72+4873/chalk/4.1.2
-      graceful-fs: 172.26.59.72+4873/graceful-fs/4.2.10
-      slash: 172.26.59.72+4873/slash/3.0.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   172.26.59.72+4873/babel-jest/28.1.1_@babel+core@7.18.2:
     resolution:
       {
@@ -4506,32 +4300,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     dev: false
 
-  172.26.59.72+4873/babel-preset-current-node-syntax/1.0.1:
-    resolution:
-      {
-        integrity: sha1-tDmSObibKgEfndvj5PQB/EDP9zs=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/babel-preset-current-node-syntax/-/babel-preset-current-node-syntax-1.0.1.tgz,
-      }
-    name: babel-preset-current-node-syntax
-    version: 1.0.1
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    dependencies:
-      '@babel/plugin-syntax-async-generators': 172.26.59.72+4873/@babel/plugin-syntax-async-generators/7.8.4
-      '@babel/plugin-syntax-bigint': 172.26.59.72+4873/@babel/plugin-syntax-bigint/7.8.3
-      '@babel/plugin-syntax-class-properties': 172.26.59.72+4873/@babel/plugin-syntax-class-properties/7.12.13
-      '@babel/plugin-syntax-import-meta': 172.26.59.72+4873/@babel/plugin-syntax-import-meta/7.10.4
-      '@babel/plugin-syntax-json-strings': 172.26.59.72+4873/@babel/plugin-syntax-json-strings/7.8.3
-      '@babel/plugin-syntax-logical-assignment-operators': 172.26.59.72+4873/@babel/plugin-syntax-logical-assignment-operators/7.10.4
-      '@babel/plugin-syntax-nullish-coalescing-operator': 172.26.59.72+4873/@babel/plugin-syntax-nullish-coalescing-operator/7.8.3
-      '@babel/plugin-syntax-numeric-separator': 172.26.59.72+4873/@babel/plugin-syntax-numeric-separator/7.10.4
-      '@babel/plugin-syntax-object-rest-spread': 172.26.59.72+4873/@babel/plugin-syntax-object-rest-spread/7.8.3
-      '@babel/plugin-syntax-optional-catch-binding': 172.26.59.72+4873/@babel/plugin-syntax-optional-catch-binding/7.8.3
-      '@babel/plugin-syntax-optional-chaining': 172.26.59.72+4873/@babel/plugin-syntax-optional-chaining/7.8.3
-      '@babel/plugin-syntax-top-level-await': 172.26.59.72+4873/@babel/plugin-syntax-top-level-await/7.14.5
-    dev: true
-
   172.26.59.72+4873/babel-preset-current-node-syntax/1.0.1_@babel+core@7.18.2:
     resolution:
       {
@@ -4558,23 +4326,6 @@ packages:
       '@babel/plugin-syntax-optional-catch-binding': 172.26.59.72+4873/@babel/plugin-syntax-optional-catch-binding/7.8.3_@babel+core@7.18.2
       '@babel/plugin-syntax-optional-chaining': 172.26.59.72+4873/@babel/plugin-syntax-optional-chaining/7.8.3_@babel+core@7.18.2
       '@babel/plugin-syntax-top-level-await': 172.26.59.72+4873/@babel/plugin-syntax-top-level-await/7.14.5_@babel+core@7.18.2
-    dev: true
-
-  172.26.59.72+4873/babel-preset-jest/28.1.1:
-    resolution:
-      {
-        integrity: sha512-FCq9Oud0ReTeWtcneYf/48981aTfXYuB9gbU4rBNNJVBSQ6ssv7E6v/qvbBxtOWwZFXjLZwpg+W3q7J6vhH25g==,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/babel-preset-jest/-/babel-preset-jest-28.1.1.tgz,
-      }
-    name: babel-preset-jest
-    version: 28.1.1
-    engines: { node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0 }
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    dependencies:
-      babel-plugin-jest-hoist: 172.26.59.72+4873/babel-plugin-jest-hoist/28.1.1
-      babel-preset-current-node-syntax: 172.26.59.72+4873/babel-preset-current-node-syntax/1.0.1
     dev: true
 
   172.26.59.72+4873/babel-preset-jest/28.1.1_@babel+core@7.18.2:
@@ -5088,15 +4839,15 @@ packages:
       semver: 172.26.59.72+4873/semver/7.0.0
     dev: false
 
-  172.26.59.72+4873/core-js-pure/3.22.8:
+  172.26.59.72+4873/core-js-pure/3.23.1:
     resolution:
       {
-        integrity: sha512-bOxbZIy9S5n4OVH63XaLVXZ49QKicjowDx/UELyJ68vxfCRpYsbyh/WNZNfEfAk+ekA8vSjt+gCDpvh672bc3w==,
+        integrity: sha512-3qNgf6TqI3U1uhuSYRzJZGfFd4T+YlbyVPl+jgRiKjdZopvG4keZQwWZDAWpu1UH9nCgTpUzIV3GFawC7cJsqg==,
         registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/core-js-pure/-/core-js-pure-3.22.8.tgz,
+        tarball: http://172.26.59.72:4873/core-js-pure/-/core-js-pure-3.23.1.tgz,
       }
     name: core-js-pure
-    version: 3.22.8
+    version: 3.23.1
     requiresBuild: true
     dev: true
 
@@ -5202,6 +4953,7 @@ packages:
       }
     name: csstype
     version: 2.6.20
+    dev: true
 
   172.26.59.72+4873/data-urls/3.0.2:
     resolution:
@@ -6291,6 +6043,7 @@ packages:
       }
     name: estree-walker
     version: 2.0.2
+    dev: true
 
   172.26.59.72+4873/esutils/2.0.3:
     resolution:
@@ -8758,6 +8511,7 @@ packages:
     version: 0.25.9
     dependencies:
       sourcemap-codec: 172.26.59.72+4873/sourcemap-codec/1.4.8
+    dev: true
 
   172.26.59.72+4873/make-dir/3.1.0:
     resolution:
@@ -8959,6 +8713,7 @@ packages:
     version: 3.3.4
     engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
     hasBin: true
+    dev: true
 
   172.26.59.72+4873/natural-compare/1.4.0:
     resolution:
@@ -9443,6 +9198,7 @@ packages:
       nanoid: 172.26.59.72+4873/nanoid/3.3.4
       picocolors: 172.26.59.72+4873/picocolors/1.0.0
       source-map-js: 172.26.59.72+4873/source-map-js/1.0.2
+    dev: true
 
   172.26.59.72+4873/prelude-ls/1.1.2:
     resolution:
@@ -10206,6 +9962,7 @@ packages:
     name: source-map-js
     version: 1.0.2
     engines: { node: '>=0.10.0' }
+    dev: true
 
   172.26.59.72+4873/source-map-resolve/0.6.0:
     resolution:
@@ -10245,6 +10002,7 @@ packages:
     name: source-map
     version: 0.6.1
     engines: { node: '>=0.10.0' }
+    dev: true
 
   172.26.59.72+4873/sourcemap-codec/1.4.8:
     resolution:
@@ -10255,6 +10013,7 @@ packages:
       }
     name: sourcemap-codec
     version: 1.4.8
+    dev: true
 
   172.26.59.72+4873/split-on-first/1.1.0:
     resolution:
@@ -10954,29 +10713,6 @@ packages:
         optional: true
     dev: false
 
-  172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37:
-    resolution:
-      {
-        integrity: sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg==,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/vue-demi/-/vue-demi-0.13.1.tgz,
-      }
-    id: 172.26.59.72+4873/vue-demi/0.13.1
-    name: vue-demi
-    version: 0.13.1
-    engines: { node: '>=12' }
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dependencies:
-      vue: 172.26.59.72+4873/vue/3.2.37
-    dev: false
-
   172.26.59.72+4873/vue-eslint-parser/7.11.0_eslint@8.0.1:
     resolution:
       {
@@ -11043,6 +10779,7 @@ packages:
       '@vue/runtime-dom': 172.26.59.72+4873/@vue/runtime-dom/3.2.37
       '@vue/server-renderer': 172.26.59.72+4873/@vue/server-renderer/3.2.37_vue@3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
 
   172.26.59.72+4873/w3c-hr-time/1.0.2:
     resolution:

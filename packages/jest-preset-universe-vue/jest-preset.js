@@ -2,14 +2,13 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
+const { isVue2 } = require('vue-demi');
+const path = require('path');
 
-const VUE2_MODE = !!process.env.VUE2;
-const VUE3_MODE = !!process.env.VUE3;
-
-if (VUE2_MODE) {
-  console.log('vue2 mode');
-} else if (VUE3_MODE) {
-  console.log('vue3 mode');
+if (isVue2) {
+  console.log('****** VUE 2 mode ******');
+} else {
+  console.log('****** VUE 3 mode ******');
 }
 
 module.exports = {
@@ -97,14 +96,14 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: VUE2_MODE
+  moduleNameMapper: isVue2
     ? {
         '^vue$': 'vue2',
         '^@vue/test-utils$': 'vue-test-utils-2',
         '^@testing-library/vue$': 'testing-library-vue-2',
       }
     : {
-        '^@vue/test-utils$': '<rootDir>/node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js',
+        '^@vue/test-utils$': require.resolve('@vue/test-utils'),
       },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -149,10 +148,10 @@ module.exports = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: ['./jest.env.js'],
+  setupFiles: [path.join(__dirname, './jest.env.js')],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['./jest.env.js'],
+  setupFilesAfterEnv: [path.join(__dirname, './jest.after.env.js')],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -170,12 +169,10 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: VUE2_MODE
+  testMatch: isVue2
     ? // .vue2.* 为特定的文件名，用于匹配vue2的文件
       ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)', '**/?(*.)+(spec|test).vue2.[tj]s?(x)']
-    : VUE3_MODE
-    ? ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)', '**/?(*.)+(spec|test).vue3.[tj]s?(x)']
-    : ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
+    : ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)', '**/?(*.)+(spec|test).vue3.[tj]s?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: ['/node_modules/', '__tests__/helper'],

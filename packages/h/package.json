@@ -7,11 +7,12 @@
     "prebuild": "rimraf dist .tsBuildInfo",
     "build": "tsc -b tsconfig.build.json",
     "type-check": "tsc",
-    "test:vue2": "vue-demi-switch 2 vue2 && cross-env VUE2=true jest",
-    "test:vue3": "vue-demi-switch 3 && cross-env VUE3=true jest",
-    "test": "npm run test:vue2 && npm run test:vue3"
+    "test:vue2": "vue-demi-switch 2 vue2 && jest --verbose",
+    "test:vue3": "vue-demi-switch 3 && jest --verbose",
+    "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
   "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [],
   "author": "ivan",
   "license": "ISC",
@@ -19,23 +20,10 @@
     "@wakeadmin/demi": "latest",
     "lodash": "^4.17.21"
   },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/vue": "^6.6.0",
-    "@types/jest": "^28.1.1",
-    "@types/lodash": "^4.14.182",
-    "@vue/composition-api": "^1.6.2",
-    "@vue/test-utils": "next",
-    "babel-jest": "^28.1.1",
-    "babel-preset-wakeadmin-for-test": "workspace:*",
-    "jest": "^28.1.1",
-    "jest-environment-jsdom": "^28.1.1",
-    "testing-library-vue-2": "npm:@testing-library/vue@5",
-    "vue": "^3.2.37",
-    "vue-template-compiler": "^2.6.14",
-    "vue-test-utils-2": "npm:@vue/test-utils@1",
-    "vue2": "npm:vue@2"
+  "jest": {
+    "preset": "jest-preset-universe-vue"
   },
+  "devDependencies": {},
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0-rc.1",
     "vue": "^2.0.0 || >=3.0.0"
