@@ -5,7 +5,7 @@ import omit from 'lodash/omit';
 import { DefineComponent, SimpleComponentOptions } from './types';
 import { vue2Expose, findEventHandler, vue3EventNameCapitalized } from './process';
 
-export { ExtraRef, ExtraArrayRef } from './types';
+export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
 
 /**
  * 声明属性

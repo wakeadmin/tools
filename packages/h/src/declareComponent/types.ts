@@ -117,9 +117,20 @@ export type VChildrenType<Slots extends {}> = VNodeChild | VSlotType<Slots>;
 
 export type RefType<Expose extends {}> = Ref<Expose | null> | string; // string 用于兼容 template 引用
 
+/**
+ * 提取 ref 类型
+ */
 export type ExtraRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose | null;
 
+/**
+ * 提取 ref 类型，用于列表渲染 ref
+ */
 export type ExtraArrayRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose[] | null;
+
+/**
+ * 提取 Props 类型
+ */
+export type ExtraProps<T extends DefineComponent<any, any, any, any>, Props = T['__props']> = Props;
 
 export interface DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> {
   new (...args: any[]): {
@@ -134,4 +145,7 @@ export interface DefineComponent<Props extends {}, Emit extends {}, Expose exten
 
   // 方便外部提取
   __ref: Expose;
+  __props: Props;
+  __emits: Emit;
+  __slots: Slots;
 }
