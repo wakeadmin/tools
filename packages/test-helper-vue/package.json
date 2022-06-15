@@ -1,0 +1,27 @@
+{
+  "name": "test-helper-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/commonjs/index.jsx",
+  "module": "dist/index.jsx",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build:common": "tsc -b tsconfig.build.common.json",
+    "build:es": "tsc -b tsconfig.build.json",
+    "build": "npm run build:es && npm run build:common",
+    "type-check": "tsc",
+    "test:vue2": "vue-demi-switch 2 vue2 && jest --verbose",
+    "test:vue3": "vue-demi-switch 3 && jest --verbose",
+    "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wakeadmin/demi": "workspace:latest",
+    "@wakeadmin/h": "workspace:latest"
+  },
+  "jest": {
+    "preset": "jest-preset-universe-vue"
+  }
+}
