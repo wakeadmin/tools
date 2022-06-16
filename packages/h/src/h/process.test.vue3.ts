@@ -40,8 +40,12 @@ test('processChildren', () => {
       '已经使用 v-slots 定义了命名 slot, 禁止使用 children 设置 slots'
     );
   }
+  // 转换成 slots children
   {
     const props = {};
-    expect(processChildren('', props, ['hello'])).toEqual(['hello']);
+    const children = processChildren('', props, ['hello', 'world']);
+
+    expect(typeof children.default).toBe('function');
+    expect(children.default()).toEqual(['hello', 'world']);
   }
 });

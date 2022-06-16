@@ -195,7 +195,7 @@ describe('processChildren', () => {
   test('无法识别 slots', () => {
     {
       const props = {};
-      expect(processChildren('', props, [])).toEqual([]);
+      expect(processChildren('', props, [])).toEqual(null);
       expect(processChildren('', props, ['hello'])).toEqual(['hello']);
       expect(processChildren('', props, [{}])).toEqual([{}]);
     }

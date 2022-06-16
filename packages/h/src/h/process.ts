@@ -253,6 +253,7 @@ export function isSlots(children: any) {
 export function processChildren(tag: any, props: any, children: any[]) {
   const slots: Record<string, Function> | undefined = props?.['v-slots'];
   const slotsFromChildren = children.length === 1 && isSlots(children[0]) ? children[0] : undefined;
+  const normalizedChildren = children.length ? children : null;
 
   if (slots != null) {
     if (process.env.NODE_ENV !== 'production') {
@@ -288,9 +289,11 @@ export function processChildren(tag: any, props: any, children: any[]) {
       return slotsFromChildren;
     }
 
-    return children;
+    // 转换为 slots 对象，避免性能警告
+    return normalizedChildren ? { default: () => normalizedChildren } : null;
   }
 
+  // vue2
   const set = (_slots: any) => {
     Object.assign((props.scopedSlots = props.scopedSlots ?? {}), _slots);
   };
@@ -301,8 +304,8 @@ export function processChildren(tag: any, props: any, children: any[]) {
   } else if (slotsFromChildren) {
     // 数组的话，只能是第一个
     set(slotsFromChildren);
-  } else {
-    return children;
+  } else if (normalizedChildren) {
+    return normalizedChildren;
   }
 
   return null;
