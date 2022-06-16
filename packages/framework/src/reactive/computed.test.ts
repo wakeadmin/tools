@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-new */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ref } from '@wakeadmin/demi';
+import { ref, isVue2 } from '@wakeadmin/demi';
 import { computed } from './computed';
 import { collectAnnotations } from './decorators';
 import { makeObservable } from './makeObservable';
@@ -173,24 +172,27 @@ describe('computed observable', () => {
     expect(child.count).toBe(8);
   });
 
-  test('参数设置', () => {
-    const count = ref(0);
-    const trigger = jest.fn();
-    class Base {
-      @computed({ onTrigger: trigger })
-      get count() {
-        return count.value;
+  // vue2 暂时不支持这些参数
+  if (!isVue2) {
+    test('参数设置', () => {
+      const count = ref(0);
+      const trigger = jest.fn();
+      class Base {
+        @computed({ onTrigger: trigger })
+        get count() {
+          return count.value;
+        }
+
+        constructor() {
+          makeObservable(this);
+        }
       }
 
-      constructor() {
-        makeObservable(this);
-      }
-    }
+      const base = new Base();
+      expect(base.count).toBe(0);
 
-    const base = new Base();
-    expect(base.count).toBe(0);
-
-    count.value = 1;
-    expect(trigger).toBeCalled();
-  });
+      count.value = 1;
+      expect(trigger).toBeCalled();
+    });
+  }
 });
