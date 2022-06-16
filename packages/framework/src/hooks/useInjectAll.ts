@@ -32,29 +32,32 @@ export function useInjectAll<I extends DIIdentifier, T extends DIValue<I>>(
   });
 
   // 尝试销毁
-  watchEffect(onCleanup => {
-    const _instances = unref(instances);
-    const disposers: Function[] = [];
+  watchEffect(
+    onCleanup => {
+      const _instances = unref(instances);
+      const disposers: Function[] = [];
 
-    _instances.forEach(_instance => {
-      if (isObject(_instance) && !isLongTimeScope(_instance)) {
-        const disposerMethods = getDisposerMethods(_instance);
-        if (disposerMethods.length) {
-          disposers.push(() => {
-            disposerMethods.forEach(method => {
-              (_instance as any)[method]?.();
+      _instances.forEach(_instance => {
+        if (isObject(_instance) && !isLongTimeScope(_instance)) {
+          const disposerMethods = getDisposerMethods(_instance);
+          if (disposerMethods.length) {
+            disposers.push(() => {
+              disposerMethods.forEach(method => {
+                (_instance as any)[method]?.();
+              });
             });
-          });
+          }
         }
-      }
-    });
-
-    if (disposers.length) {
-      onCleanup(() => {
-        disposers.forEach(fn => fn());
       });
-    }
-  });
+
+      if (disposers.length) {
+        onCleanup(() => {
+          disposers.forEach(fn => fn());
+        });
+      }
+    },
+    { flush: 'sync' }
+  );
 
   return instances;
 }
