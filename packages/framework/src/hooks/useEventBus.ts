@@ -1,15 +1,14 @@
 import { Ref, inject, computed } from '@wakeadmin/demi';
 import { EventBus, eventBus } from '@wakeapp/framework-core';
 
-import { ContainerProviderKey } from '../constants';
-import { DIContainerProviderProps } from '../components';
+import { DIContainerContext } from '../components';
 
 /**
  * 获取事件总线
  * @returns
  */
 export function useEventBus(): Ref<EventBus> {
-  const injected = inject<DIContainerProviderProps>(ContainerProviderKey);
+  const injected = inject(DIContainerContext);
 
   return computed(() => injected?.eventBus ?? eventBus);
 }
