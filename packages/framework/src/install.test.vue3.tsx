@@ -6,15 +6,10 @@ import { createApp, App, defineComponent } from '@wakeadmin/demi';
 import { h } from '@wakeadmin/h';
 import { RouterView, Router, createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
 import { plugin } from './install';
-
-const NoopComponent = (name: string) =>
-  defineComponent({
-    render() {
-      return <div title="page">{name}</div>;
-    },
-  });
+import { testSuite, NoopComponent } from './install.test.share';
 
 const Wrapper = defineComponent({
+  name: 'Wrapper',
   render() {
     return (
       <div title="wrapper">
@@ -31,11 +26,11 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/foo',
-        component: NoopComponent('Foo'),
+        component: async () => NoopComponent('Foo'),
       },
       {
         path: '/bar',
-        component: NoopComponent('Bar'),
+        component: async () => NoopComponent('Bar'),
       },
     ],
   },
@@ -43,6 +38,7 @@ const routes: RouteRecordRaw[] = [
 
 function initialApp(): [App, Router] {
   const app = createApp({
+    name: 'App',
     render() {
       return (
         <div class="app">
@@ -69,8 +65,14 @@ test('挂载到页面实例', async () => {
 
   app.mount('body');
 
-  router.push('/');
+  await router.isReady();
 
+  await router.push('/foo');
 
-  console.log(document.body.innerHTML);
+  // 等待渲染完成，相当于在 setup 中调用
+  testSuite({
+    async nextPage() {
+      await router.push('/bar');
+    },
+  });
 });

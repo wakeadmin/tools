@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-new */
 /* eslint-disable no-magic-numbers */
-import { isReactive, isShallow, effect } from '@wakeadmin/demi';
+import { isReactive, isShallow, watchEffect, isVue2 } from '@wakeadmin/demi';
 import { collectAnnotations } from './decorators';
 import { makeObservable } from './makeObservable';
 import { observable } from './observable';
@@ -115,8 +115,10 @@ describe('observable 数据响应', () => {
     expect(isReactive(base.ref)).toBe(false);
     expect(isReactive(base.shallow)).toBe(true);
     expect(isReactive(base.deep)).toBe(true);
-    expect(isShallow(base.deep)).toBe(false);
-    expect(isShallow(base.shallow)).toBe(true);
+    if (!isVue2) {
+      expect(isShallow(base.deep)).toBe(false);
+      expect(isShallow(base.shallow)).toBe(true);
+    }
   });
 
   test('字段重新赋值应该能够响应', () => {
@@ -132,9 +134,12 @@ describe('observable 数据响应', () => {
 
       let count = 0;
       const base = new Base();
-      effect(() => {
-        count = base.count;
-      });
+      watchEffect(
+        () => {
+          count = base.count;
+        },
+        { flush: 'sync' }
+      );
 
       // 设置新的值应该能响应
       base.count = 2;
@@ -170,7 +175,10 @@ describe('observable 数据响应', () => {
     expect(isReactive(base.ref)).toBe(false);
     expect(isReactive(base.shallow)).toBe(true);
     expect(isReactive(base.deep)).toBe(true);
-    expect(isShallow(base.shallow)).toBe(true);
+
+    if (!isVue2) {
+      expect(isShallow(base.shallow)).toBe(true);
+    }
   });
 
   test('observable.ref 响应测试', () => {
@@ -186,9 +194,12 @@ describe('observable 数据响应', () => {
     const ref = new Ref();
     let count = 0;
 
-    effect(() => {
-      count = ref.count;
-    });
+    watchEffect(
+      () => {
+        count = ref.count;
+      },
+      { flush: 'sync' }
+    );
 
     expect(count).toBe(1);
 
@@ -208,10 +219,13 @@ describe('observable 数据响应', () => {
 
     let count = 0;
     const shallow = new Shallow();
-    effect(() => {
-      JSON.stringify(shallow.obj);
-      count++;
-    }, {});
+    watchEffect(
+      () => {
+        JSON.stringify(shallow.obj);
+        count++;
+      },
+      { flush: 'sync' }
+    );
 
     expect(count).toBe(1);
     shallow.obj.foo++;
@@ -234,10 +248,13 @@ describe('observable 数据响应', () => {
 
     let count = 0;
     const deep = new Deep();
-    effect(() => {
-      JSON.stringify(deep.obj);
-      count++;
-    }, {});
+    watchEffect(
+      () => {
+        JSON.stringify(deep.obj);
+        count++;
+      },
+      { flush: 'sync' }
+    );
 
     expect(count).toBe(1);
     deep.obj.foo++;
