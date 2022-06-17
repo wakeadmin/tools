@@ -13,6 +13,7 @@
     "test:vue3": "vue-demi-switch 3 && jest --verbose",
     "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
+  "sideEffects": false,
   "module": "dist/index.js",
   "main": "dist/commonjs/index.js",
   "types": "dist/index.d.ts",
