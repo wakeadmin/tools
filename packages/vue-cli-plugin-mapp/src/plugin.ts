@@ -90,6 +90,21 @@ module.exports = defineConfig({
         : '/' // 本地开发，直接 '/' 即可
       : _publicPath;
 
+  if (options.publicPath !== '/') {
+    console.warn(`[${PLUGIN_NAME}] publicPath 将被忽略，请使用下列方式, 定义 publicPath, 大部分情况下推荐 auto：
+
+// vue.config.js
+module.exports = {
+  pluginOptions: {
+    ...defineMapp({
+      publicPath: 'YOUR_PUBLIC_PATH',
+    })
+  }
+}
+
+ `);
+  }
+
   const table = new Table({});
 
   table.push(

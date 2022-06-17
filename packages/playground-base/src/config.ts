@@ -13,9 +13,9 @@ const apps: RegistrableApp<any>[] =
           container: '#root',
         },
         {
-          name: 'vue3',
+          name: 'playgroundVue3',
           activeRule: '/vue3',
-          entry: '//localhost:17355',
+          entry: '//localhost:63285',
           container: '#root',
         },
       ]

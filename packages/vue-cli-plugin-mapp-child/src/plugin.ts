@@ -90,7 +90,7 @@ export const plugin: ServicePlugin = (api, options) => {
         : `//localhost:${port}/` // 本地开发，硬编码 port, 这样不需要在代码中引入  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
       : _publicPath;
 
-  if (options.publicPath != null) {
+  if (options.publicPath !== '/') {
     console.warn(`[${PLUGIN_NAME}] publicPath 将被忽略，请使用下列方式, 定义 publicPath：
 
 // vue.config.js
@@ -117,6 +117,9 @@ module.exports = {
     ['outputDir', outputDir],
     ['shared', JSON.stringify(_shared, null, 2)]
   );
+
+  console.log(table.toString());
+  console.log('\n\n');
 
   options.publicPath = publicPath;
   options.assetsDir = assetsDir;

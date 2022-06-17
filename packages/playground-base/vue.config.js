@@ -11,7 +11,10 @@ module.exports = defineConfig({
   pluginOptions: {
     ...defineMapp({
       baseUrl: '/base',
-      shared: ['shared', { name: 'vue3', module: 'vue' }, { name: 'vue-router3', module: 'vue-router' }],
+      shared: [
+        { name: 'vue3', module: 'vue' },
+        { name: 'vue-router3', module: 'vue-router' },
+      ],
     }),
     customElement: {
       isCustomElement: tag => tag.startsWith('wkc-'),
