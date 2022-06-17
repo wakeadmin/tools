@@ -1,0 +1,26 @@
+{
+  "name": "@wakeadmin/utils",
+  "version": "0.1.0",
+  "description": "工具库",
+  "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build:es": "tsc -b tsconfig.build.json",
+    "build:common": "tsc -b tsconfig.build.common.json",
+    "build": "npm run build:es && npm run build:common",
+    "type-check": "tsc",
+    "test": "jest"
+  },
+  "main": "dist/commonjs/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "dependencies": {
+    "@wakeapp/utils": "latest"
+  },
+  "jest": {
+    "preset": "jest-preset-universe-vue"
+  }
+}
