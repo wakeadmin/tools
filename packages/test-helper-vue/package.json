@@ -19,8 +19,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:latest",
-    "@wakeadmin/h": "workspace:latest"
+    "@wakeadmin/demi": "workspace:0.1.0",
+    "@wakeadmin/h": "workspace:0.1.0"
   },
   "jest": {
     "preset": "jest-preset-universe-vue"

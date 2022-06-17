@@ -22,12 +22,12 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:latest",
-    "@wakeadmin/h": "workspace:latest",
+    "@wakeadmin/demi": "workspace:0.1.0",
+    "@wakeadmin/h": "workspace:0.1.0",
     "@wakeapp/framework-core": "latest"
   },
   "devDependencies": {
-    "test-helper-vue": "workspace:latest"
+    "test-helper-vue": "workspace:0.1.0"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.6.2",
