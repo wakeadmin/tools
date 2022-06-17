@@ -8,6 +8,7 @@ importers:
       '@testing-library/vue': ^6.6.0
       '@types/jest': ^28.1.1
       '@types/lodash': ^4.14.182
+      '@types/node': ^17.0.36
       '@vue/composition-api': ^1.6.2
       '@vue/test-utils': next
       babel-jest: ^28.1.1
@@ -38,6 +39,7 @@ importers:
       '@testing-library/vue': 172.26.59.72+4873/@testing-library/vue/6.6.0_vue@3.2.37
       '@types/jest': 172.26.59.72+4873/@types/jest/28.1.1
       '@types/lodash': 172.26.59.72+4873/@types/lodash/4.14.182
+      '@types/node': 172.26.59.72+4873/@types/node/17.0.40
       '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.6.2_vue@3.2.37
       '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0-rc.18_vue@3.2.37
       babel-jest: 172.26.59.72+4873/babel-jest/28.1.1_@babel+core@7.18.2
@@ -47,7 +49,7 @@ importers:
       eslint-config-wkts: 172.26.59.72+4873/eslint-config-wkts/0.2.0_m2l4u43prldju63hje6u2e2pxi
       eslint-config-wkvue: 172.26.59.72+4873/eslint-config-wkvue/0.1.20_po3f3yna63fv4ebz5w7caehabm
       husky: 172.26.59.72+4873/husky/8.0.1
-      jest: 172.26.59.72+4873/jest/28.1.1
+      jest: 172.26.59.72+4873/jest/28.1.1_@types+node@17.0.40
       jest-environment-jsdom: 172.26.59.72+4873/jest-environment-jsdom/28.1.1
       jest-preset-universe-vue: link:packages/jest-preset-universe-vue
       prettier: 172.26.59.72+4873/prettier/2.6.2
@@ -89,10 +91,10 @@ importers:
 
   packages/framework:
     specifiers:
-      '@wakeadmin/demi': workspace:latest
-      '@wakeadmin/h': workspace:latest
+      '@wakeadmin/demi': workspace:0.1.0
+      '@wakeadmin/h': workspace:0.1.0
       '@wakeapp/framework-core': latest
-      test-helper-vue: workspace:latest
+      test-helper-vue: workspace:0.1.0
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
@@ -102,7 +104,7 @@ importers:
 
   packages/h:
     specifiers:
-      '@wakeadmin/demi': latest
+      '@wakeadmin/demi': workspace:0.1.0
       lodash: ^4.17.21
     dependencies:
       '@wakeadmin/demi': link:../demi
@@ -111,17 +113,52 @@ importers:
   packages/jest-preset-universe-vue:
     specifiers: {}
 
+  packages/playground-base:
+    specifiers:
+      '@vue/cli-plugin-babel': ~5.0.4
+      '@vue/cli-plugin-router': ~5.0.4
+      '@vue/cli-plugin-typescript': ~5.0.4
+      '@vue/cli-plugin-vuex': ~5.0.4
+      '@vue/cli-service': ~5.0.4
+      '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.1.0
+      core-js: ^3.22.7
+      path-browserify: ^1.0.1
+      qiankun: ^2.7.0
+      sass: ^1.52.1
+      sass-loader: ^12.6.0
+      typescript: ~4.5.5
+      vue: ^3.2.36
+      vue-router: ^4.0.15
+      vuex: ^4.0.2
+    dependencies:
+      core-js: 172.26.59.72+4873/core-js/3.23.1
+      qiankun: 172.26.59.72+4873/qiankun/2.7.3
+      vue: 172.26.59.72+4873/vue/3.2.37
+      vue-router: 172.26.59.72+4873/vue-router/4.0.16_vue@3.2.37
+      vuex: 172.26.59.72+4873/vuex/4.0.2_vue@3.2.37
+    devDependencies:
+      '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_amyxu2ixb6ykbcrzsxd4obqs24
+      '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6_@vue+cli-service@5.0.6
+      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_jaidngi7a2h4753nddr4mehyq4
+      '@vue/cli-plugin-vuex': 172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6_@vue+cli-service@5.0.6
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
+      '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
+      path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
+      sass: 172.26.59.72+4873/sass/1.52.3
+      sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.52.3
+      typescript: 172.26.59.72+4873/typescript/4.5.5
+
   packages/test-helper-vue:
     specifiers:
-      '@wakeadmin/demi': workspace:latest
-      '@wakeadmin/h': workspace:latest
+      '@wakeadmin/demi': workspace:0.1.0
+      '@wakeadmin/h': workspace:0.1.0
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
 
   packages/utils:
     specifiers:
-      '@wakeapp/utils': 0.1.0-daily20220616143
+      '@wakeapp/utils': latest
     dependencies:
       '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220616143
 
@@ -271,7 +308,6 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
-    dev: false
 
   172.26.59.72+4873/@babel/helper-builder-binary-assignment-operator-visitor/7.16.7:
     resolution:
@@ -286,7 +322,6 @@ packages:
     dependencies:
       '@babel/helper-explode-assignable-expression': 172.26.59.72+4873/@babel/helper-explode-assignable-expression/7.16.7
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
-    dev: false
 
   172.26.59.72+4873/@babel/helper-compilation-targets/7.18.2:
     resolution:
@@ -351,7 +386,6 @@ packages:
       '@babel/helper-split-export-declaration': 172.26.59.72+4873/@babel/helper-split-export-declaration/7.16.7
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/helper-create-regexp-features-plugin/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -370,7 +404,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-annotate-as-pure': 172.26.59.72+4873/@babel/helper-annotate-as-pure/7.16.7
       regexpu-core: 172.26.59.72+4873/regexpu-core/5.0.1
-    dev: false
 
   172.26.59.72+4873/@babel/helper-define-polyfill-provider/0.3.1_@babel+core@7.18.2:
     resolution:
@@ -396,7 +429,6 @@ packages:
       semver: 172.26.59.72+4873/semver/6.3.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/helper-environment-visitor/7.18.2:
     resolution:
@@ -421,7 +453,6 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
-    dev: false
 
   172.26.59.72+4873/@babel/helper-function-name/7.17.9:
     resolution:
@@ -462,7 +493,6 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
-    dev: false
 
   172.26.59.72+4873/@babel/helper-module-imports/7.16.7:
     resolution:
@@ -511,7 +541,6 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
-    dev: false
 
   172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12:
     resolution:
@@ -540,7 +569,6 @@ packages:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/helper-replace-supers/7.18.2:
     resolution:
@@ -560,7 +588,6 @@ packages:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/helper-simple-access/7.18.2:
     resolution:
@@ -587,7 +614,6 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
-    dev: false
 
   172.26.59.72+4873/@babel/helper-split-export-declaration/7.16.7:
     resolution:
@@ -641,7 +667,6 @@ packages:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/helpers/7.18.2:
     resolution:
@@ -705,7 +730,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -725,7 +749,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/helper-skip-transparent-expression-wrappers': 172.26.59.72+4873/@babel/helper-skip-transparent-expression-wrappers/7.16.0
       '@babel/plugin-proposal-optional-chaining': 172.26.59.72+4873/@babel/plugin-proposal-optional-chaining/7.17.12_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-async-generator-functions/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -747,7 +770,6 @@ packages:
       '@babel/plugin-syntax-async-generators': 172.26.59.72+4873/@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.18.2
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-class-properties/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -768,7 +790,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-class-static-block/7.18.0_@babel+core@7.18.2:
     resolution:
@@ -790,7 +811,6 @@ packages:
       '@babel/plugin-syntax-class-static-block': 172.26.59.72+4873/@babel/plugin-syntax-class-static-block/7.14.5_@babel+core@7.18.2
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-decorators/7.18.2_@babel+core@7.18.2:
     resolution:
@@ -815,7 +835,6 @@ packages:
       charcodes: 172.26.59.72+4873/charcodes/0.2.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-dynamic-import/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -834,7 +853,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-dynamic-import': 172.26.59.72+4873/@babel/plugin-syntax-dynamic-import/7.8.3_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-export-namespace-from/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -853,7 +871,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-export-namespace-from': 172.26.59.72+4873/@babel/plugin-syntax-export-namespace-from/7.8.3_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-json-strings/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -872,7 +889,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-json-strings': 172.26.59.72+4873/@babel/plugin-syntax-json-strings/7.8.3_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-logical-assignment-operators/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -891,7 +907,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-logical-assignment-operators': 172.26.59.72+4873/@babel/plugin-syntax-logical-assignment-operators/7.10.4_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-nullish-coalescing-operator/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -910,7 +925,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-nullish-coalescing-operator': 172.26.59.72+4873/@babel/plugin-syntax-nullish-coalescing-operator/7.8.3_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-numeric-separator/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -929,7 +943,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-numeric-separator': 172.26.59.72+4873/@babel/plugin-syntax-numeric-separator/7.10.4_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-object-rest-spread/7.18.0_@babel+core@7.18.2:
     resolution:
@@ -951,7 +964,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-object-rest-spread': 172.26.59.72+4873/@babel/plugin-syntax-object-rest-spread/7.8.3_@babel+core@7.18.2
       '@babel/plugin-transform-parameters': 172.26.59.72+4873/@babel/plugin-transform-parameters/7.17.12_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-optional-catch-binding/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -970,7 +982,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/plugin-syntax-optional-catch-binding': 172.26.59.72+4873/@babel/plugin-syntax-optional-catch-binding/7.8.3_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-optional-chaining/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -990,7 +1001,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/helper-skip-transparent-expression-wrappers': 172.26.59.72+4873/@babel/helper-skip-transparent-expression-wrappers/7.16.0
       '@babel/plugin-syntax-optional-chaining': 172.26.59.72+4873/@babel/plugin-syntax-optional-chaining/7.8.3_@babel+core@7.18.2
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-private-methods/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1011,7 +1021,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-private-property-in-object/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1034,7 +1043,6 @@ packages:
       '@babel/plugin-syntax-private-property-in-object': 172.26.59.72+4873/@babel/plugin-syntax-private-property-in-object/7.14.5_@babel+core@7.18.2
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-proposal-unicode-property-regex/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1053,7 +1061,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-create-regexp-features-plugin': 172.26.59.72+4873/@babel/helper-create-regexp-features-plugin/7.17.12_@babel+core@7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.18.2:
     resolution:
@@ -1120,7 +1127,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-decorators/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1138,7 +1144,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-dynamic-import/7.8.3_@babel+core@7.18.2:
     resolution:
@@ -1155,7 +1160,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-export-namespace-from/7.8.3_@babel+core@7.18.2:
     resolution:
@@ -1172,7 +1176,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-import-assertions/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1190,7 +1193,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-import-meta/7.10.4_@babel+core@7.18.2:
     resolution:
@@ -1241,7 +1243,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-logical-assignment-operators/7.10.4_@babel+core@7.18.2:
     resolution:
@@ -1355,7 +1356,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-syntax-top-level-await/7.14.5_@babel+core@7.18.2:
     resolution:
@@ -1407,7 +1407,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-async-to-generator/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1429,7 +1428,6 @@ packages:
       '@babel/helper-remap-async-to-generator': 172.26.59.72+4873/@babel/helper-remap-async-to-generator/7.16.8
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-block-scoped-functions/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1447,7 +1445,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-block-scoping/7.18.4_@babel+core@7.18.2:
     resolution:
@@ -1465,7 +1462,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-classes/7.18.4_@babel+core@7.18.2:
     resolution:
@@ -1492,7 +1488,6 @@ packages:
       globals: 172.26.59.72+4873/globals/11.12.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-computed-properties/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1510,7 +1505,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-destructuring/7.18.0_@babel+core@7.18.2:
     resolution:
@@ -1528,7 +1522,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-dotall-regex/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1547,7 +1540,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-create-regexp-features-plugin': 172.26.59.72+4873/@babel/helper-create-regexp-features-plugin/7.17.12_@babel+core@7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-duplicate-keys/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1565,7 +1557,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-exponentiation-operator/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1584,7 +1575,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-builder-binary-assignment-operator-visitor': 172.26.59.72+4873/@babel/helper-builder-binary-assignment-operator-visitor/7.16.7
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-for-of/7.18.1_@babel+core@7.18.2:
     resolution:
@@ -1602,7 +1592,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-function-name/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1622,7 +1611,6 @@ packages:
       '@babel/helper-compilation-targets': 172.26.59.72+4873/@babel/helper-compilation-targets/7.18.2_@babel+core@7.18.2
       '@babel/helper-function-name': 172.26.59.72+4873/@babel/helper-function-name/7.17.9
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-literals/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1640,7 +1628,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-member-expression-literals/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1658,7 +1645,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-modules-amd/7.18.0_@babel+core@7.18.2:
     resolution:
@@ -1680,7 +1666,6 @@ packages:
       babel-plugin-dynamic-import-node: 172.26.59.72+4873/babel-plugin-dynamic-import-node/2.3.3
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-modules-commonjs/7.18.2_@babel+core@7.18.2:
     resolution:
@@ -1703,7 +1688,6 @@ packages:
       babel-plugin-dynamic-import-node: 172.26.59.72+4873/babel-plugin-dynamic-import-node/2.3.3
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-modules-systemjs/7.18.4_@babel+core@7.18.2:
     resolution:
@@ -1727,7 +1711,6 @@ packages:
       babel-plugin-dynamic-import-node: 172.26.59.72+4873/babel-plugin-dynamic-import-node/2.3.3
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-modules-umd/7.18.0_@babel+core@7.18.2:
     resolution:
@@ -1748,7 +1731,6 @@ packages:
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-named-capturing-groups-regex/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1767,7 +1749,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-create-regexp-features-plugin': 172.26.59.72+4873/@babel/helper-create-regexp-features-plugin/7.17.12_@babel+core@7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-new-target/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1785,7 +1766,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-object-super/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1806,7 +1786,6 @@ packages:
       '@babel/helper-replace-supers': 172.26.59.72+4873/@babel/helper-replace-supers/7.18.2
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-parameters/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1824,7 +1803,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-property-literals/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1842,7 +1820,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-react-display-name/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1938,7 +1915,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       regenerator-transform: 172.26.59.72+4873/regenerator-transform/0.15.0
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-reserved-words/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1956,7 +1932,31 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
+
+  172.26.59.72+4873/@babel/plugin-transform-runtime/7.18.5_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha512-Q17hHxXr2fplrE+5BSC1j1Fo5cOA8YeP8XW3/1paI8MzF/faZGh0MaH1KC4jLAvqLPamQWHB5/B7KqSLY1kuHA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@babel%2fplugin-transform-runtime/-/plugin-transform-runtime-7.18.5.tgz,
+      }
+    id: 172.26.59.72+4873/@babel/plugin-transform-runtime/7.18.5
+    name: '@babel/plugin-transform-runtime'
+    version: 7.18.5
+    engines: { node: '>=6.9.0' }
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/helper-module-imports': 172.26.59.72+4873/@babel/helper-module-imports/7.16.7
+      '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
+      babel-plugin-polyfill-corejs2: 172.26.59.72+4873/babel-plugin-polyfill-corejs2/0.3.1_@babel+core@7.18.2
+      babel-plugin-polyfill-corejs3: 172.26.59.72+4873/babel-plugin-polyfill-corejs3/0.5.2_@babel+core@7.18.2
+      babel-plugin-polyfill-regenerator: 172.26.59.72+4873/babel-plugin-polyfill-regenerator/0.3.1_@babel+core@7.18.2
+      semver: 172.26.59.72+4873/semver/6.3.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   172.26.59.72+4873/@babel/plugin-transform-shorthand-properties/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -1974,7 +1974,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-spread/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -1993,7 +1992,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
       '@babel/helper-skip-transparent-expression-wrappers': 172.26.59.72+4873/@babel/helper-skip-transparent-expression-wrappers/7.16.0
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-sticky-regex/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -2011,7 +2009,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-template-literals/7.18.2_@babel+core@7.18.2:
     resolution:
@@ -2029,7 +2026,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-typeof-symbol/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -2047,7 +2043,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-typescript/7.18.4_@babel+core@7.18.2:
     resolution:
@@ -2087,7 +2082,6 @@ packages:
     dependencies:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/plugin-transform-unicode-regex/7.16.7_@babel+core@7.18.2:
     resolution:
@@ -2106,7 +2100,6 @@ packages:
       '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
       '@babel/helper-create-regexp-features-plugin': 172.26.59.72+4873/@babel/helper-create-regexp-features-plugin/7.17.12_@babel+core@7.18.2
       '@babel/helper-plugin-utils': 172.26.59.72+4873/@babel/helper-plugin-utils/7.17.12
-    dev: false
 
   172.26.59.72+4873/@babel/preset-env/7.18.2_@babel+core@7.18.2:
     resolution:
@@ -2200,7 +2193,6 @@ packages:
       semver: 172.26.59.72+4873/semver/6.3.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/@babel/preset-modules/0.1.5_@babel+core@7.18.2:
     resolution:
@@ -2221,7 +2213,6 @@ packages:
       '@babel/plugin-transform-dotall-regex': 172.26.59.72+4873/@babel/plugin-transform-dotall-regex/7.16.7_@babel+core@7.18.2
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
       esutils: 172.26.59.72+4873/esutils/2.0.3
-    dev: false
 
   172.26.59.72+4873/@babel/preset-react/7.17.12_@babel+core@7.18.2:
     resolution:
@@ -3744,6 +3735,17 @@ packages:
     version: 4.0.2
     dev: true
 
+  172.26.59.72+4873/@types/webpack-env/1.17.0:
+    resolution:
+      {
+        integrity: sha512-eHSaNYEyxRA5IAG0Ym/yCyf86niZUIF/TpWKofQI/CVfh5HsMEUyfE2kwFxha4ow0s5g0LfISQxpDKjbRDrizw==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@types%2fwebpack-env/-/webpack-env-1.17.0.tgz,
+      }
+    name: '@types/webpack-env'
+    version: 1.17.0
+    dev: true
+
   172.26.59.72+4873/@types/ws/8.5.3:
     resolution:
       {
@@ -3981,6 +3983,247 @@ packages:
       eslint-visitor-keys: 172.26.59.72+4873/eslint-visitor-keys/3.3.0
     dev: true
 
+  172.26.59.72+4873/@vue/babel-helper-vue-jsx-merge-props/1.2.1:
+    resolution:
+      {
+        integrity: sha1-MWJKelBfsU2h1YAjclpMXycOaoE=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.2.1.tgz,
+      }
+    name: '@vue/babel-helper-vue-jsx-merge-props'
+    version: 1.2.1
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-helper-vue-transform-on/1.0.2:
+    resolution:
+      {
+        integrity: sha1-m5xpHNBvyFUiGiR1w8yDHXdLx9w=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-helper-vue-transform-on/-/babel-helper-vue-transform-on-1.0.2.tgz,
+      }
+    name: '@vue/babel-helper-vue-transform-on'
+    version: 1.0.2
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-plugin-jsx/1.1.1_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-DFusJ4gNI/iYlM0Daje1XvYd38E=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-plugin-jsx/-/babel-plugin-jsx-1.1.1.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-plugin-jsx/1.1.1
+    name: '@vue/babel-plugin-jsx'
+    version: 1.1.1
+    dependencies:
+      '@babel/helper-module-imports': 172.26.59.72+4873/@babel/helper-module-imports/7.16.7
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+      '@babel/template': 172.26.59.72+4873/@babel/template/7.16.7
+      '@babel/traverse': 172.26.59.72+4873/@babel/traverse/7.18.2
+      '@babel/types': 172.26.59.72+4873/@babel/types/7.18.4
+      '@vue/babel-helper-vue-transform-on': 172.26.59.72+4873/@vue/babel-helper-vue-transform-on/1.0.2
+      camelcase: 172.26.59.72+4873/camelcase/6.3.0
+      html-tags: 172.26.59.72+4873/html-tags/3.2.0
+      svg-tags: 172.26.59.72+4873/svg-tags/1.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-plugin-transform-vue-jsx/1.2.1_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-ZGBGxlLC8CQnJ/NFGdkXsGQEHtc=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-plugin-transform-vue-jsx/-/babel-plugin-transform-vue-jsx-1.2.1.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-plugin-transform-vue-jsx/1.2.1
+    name: '@vue/babel-plugin-transform-vue-jsx'
+    version: 1.2.1
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/helper-module-imports': 172.26.59.72+4873/@babel/helper-module-imports/7.16.7
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+      '@vue/babel-helper-vue-jsx-merge-props': 172.26.59.72+4873/@vue/babel-helper-vue-jsx-merge-props/1.2.1
+      html-tags: 172.26.59.72+4873/html-tags/2.0.0
+      lodash.kebabcase: 172.26.59.72+4873/lodash.kebabcase/4.1.1
+      svg-tags: 172.26.59.72+4873/svg-tags/1.0.0
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-preset-app/5.0.6_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha512-hoVr5M5RIvAL8F6MX8ZG0RvjA7MB7eDOkykK+M+qThkkrsAvlianzygnE86xN1N7JVSq7kGOyZk0Te+L20KqeQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-preset-app/-/babel-preset-app-5.0.6.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-preset-app/5.0.6
+    name: '@vue/babel-preset-app'
+    version: 5.0.6
+    peerDependencies:
+      vue: ^2 || ^3.2.13
+    peerDependenciesMeta:
+      core-js:
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/helper-compilation-targets': 172.26.59.72+4873/@babel/helper-compilation-targets/7.18.2_@babel+core@7.18.2
+      '@babel/helper-module-imports': 172.26.59.72+4873/@babel/helper-module-imports/7.16.7
+      '@babel/plugin-proposal-class-properties': 172.26.59.72+4873/@babel/plugin-proposal-class-properties/7.17.12_@babel+core@7.18.2
+      '@babel/plugin-proposal-decorators': 172.26.59.72+4873/@babel/plugin-proposal-decorators/7.18.2_@babel+core@7.18.2
+      '@babel/plugin-syntax-dynamic-import': 172.26.59.72+4873/@babel/plugin-syntax-dynamic-import/7.8.3_@babel+core@7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+      '@babel/plugin-transform-runtime': 172.26.59.72+4873/@babel/plugin-transform-runtime/7.18.5_@babel+core@7.18.2
+      '@babel/preset-env': 172.26.59.72+4873/@babel/preset-env/7.18.2_@babel+core@7.18.2
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
+      '@vue/babel-plugin-jsx': 172.26.59.72+4873/@vue/babel-plugin-jsx/1.1.1_@babel+core@7.18.2
+      '@vue/babel-preset-jsx': 172.26.59.72+4873/@vue/babel-preset-jsx/1.2.4_@babel+core@7.18.2
+      babel-plugin-dynamic-import-node: 172.26.59.72+4873/babel-plugin-dynamic-import-node/2.3.3
+      core-js: 172.26.59.72+4873/core-js/3.23.1
+      core-js-compat: 172.26.59.72+4873/core-js-compat/3.22.8
+      semver: 172.26.59.72+4873/semver/7.3.7
+      vue: 172.26.59.72+4873/vue/3.2.37
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-preset-jsx/1.2.4_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-kv6nnbbxOwHoDToAmeKSS9y+Toc=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-preset-jsx/-/babel-preset-jsx-1.2.4.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-preset-jsx/1.2.4
+    name: '@vue/babel-preset-jsx'
+    version: 1.2.4
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@vue/babel-helper-vue-jsx-merge-props': 172.26.59.72+4873/@vue/babel-helper-vue-jsx-merge-props/1.2.1
+      '@vue/babel-plugin-transform-vue-jsx': 172.26.59.72+4873/@vue/babel-plugin-transform-vue-jsx/1.2.1_@babel+core@7.18.2
+      '@vue/babel-sugar-composition-api-inject-h': 172.26.59.72+4873/@vue/babel-sugar-composition-api-inject-h/1.2.1_@babel+core@7.18.2
+      '@vue/babel-sugar-composition-api-render-instance': 172.26.59.72+4873/@vue/babel-sugar-composition-api-render-instance/1.2.4_@babel+core@7.18.2
+      '@vue/babel-sugar-functional-vue': 172.26.59.72+4873/@vue/babel-sugar-functional-vue/1.2.2_@babel+core@7.18.2
+      '@vue/babel-sugar-inject-h': 172.26.59.72+4873/@vue/babel-sugar-inject-h/1.2.2_@babel+core@7.18.2
+      '@vue/babel-sugar-v-model': 172.26.59.72+4873/@vue/babel-sugar-v-model/1.2.3_@babel+core@7.18.2
+      '@vue/babel-sugar-v-on': 172.26.59.72+4873/@vue/babel-sugar-v-on/1.2.3_@babel+core@7.18.2
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-sugar-composition-api-inject-h/1.2.1_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-BdbgxDJxDjdYKyvppgSbaJtvA+s=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-sugar-composition-api-inject-h/-/babel-sugar-composition-api-inject-h-1.2.1.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-sugar-composition-api-inject-h/1.2.1
+    name: '@vue/babel-sugar-composition-api-inject-h'
+    version: 1.2.1
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-sugar-composition-api-render-instance/1.2.4_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-5MvGmXw0T6wnF4WteikyXFHWjRk=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-sugar-composition-api-render-instance/-/babel-sugar-composition-api-render-instance-1.2.4.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-sugar-composition-api-render-instance/1.2.4
+    name: '@vue/babel-sugar-composition-api-render-instance'
+    version: 1.2.4
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-sugar-functional-vue/1.2.2_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-JnqayNeHyW7b8Dzj85LEnam9Jlg=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-sugar-functional-vue/-/babel-sugar-functional-vue-1.2.2.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-sugar-functional-vue/1.2.2
+    name: '@vue/babel-sugar-functional-vue'
+    version: 1.2.2
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-sugar-inject-h/1.2.2_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-1zjTyJM2fshJHcu2abAAkZKT46o=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-sugar-inject-h/-/babel-sugar-inject-h-1.2.2.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-sugar-inject-h/1.2.2
+    name: '@vue/babel-sugar-inject-h'
+    version: 1.2.2
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-sugar-v-model/1.2.3_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-+h8pulHr8KoabDX6ZtU5vEWaGPI=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-sugar-v-model/-/babel-sugar-v-model-1.2.3.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-sugar-v-model/1.2.3
+    name: '@vue/babel-sugar-v-model'
+    version: 1.2.3
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+      '@vue/babel-helper-vue-jsx-merge-props': 172.26.59.72+4873/@vue/babel-helper-vue-jsx-merge-props/1.2.1
+      '@vue/babel-plugin-transform-vue-jsx': 172.26.59.72+4873/@vue/babel-plugin-transform-vue-jsx/1.2.1_@babel+core@7.18.2
+      camelcase: 172.26.59.72+4873/camelcase/5.3.1
+      html-tags: 172.26.59.72+4873/html-tags/2.0.0
+      svg-tags: 172.26.59.72+4873/svg-tags/1.0.0
+    dev: true
+
+  172.26.59.72+4873/@vue/babel-sugar-v-on/1.2.3_@babel+core@7.18.2:
+    resolution:
+      {
+        integrity: sha1-NCNnF4WGpp85LwS/ujICHQKROto=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fbabel-sugar-v-on/-/babel-sugar-v-on-1.2.3.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/babel-sugar-v-on/1.2.3
+    name: '@vue/babel-sugar-v-on'
+    version: 1.2.3
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@babel/plugin-syntax-jsx': 172.26.59.72+4873/@babel/plugin-syntax-jsx/7.17.12_@babel+core@7.18.2
+      '@vue/babel-plugin-transform-vue-jsx': 172.26.59.72+4873/@vue/babel-plugin-transform-vue-jsx/1.2.1_@babel+core@7.18.2
+      camelcase: 172.26.59.72+4873/camelcase/5.3.1
+    dev: true
+
   172.26.59.72+4873/@vue/cli-overlay/5.0.6:
     resolution:
       {
@@ -3990,6 +4233,36 @@ packages:
       }
     name: '@vue/cli-overlay'
     version: 5.0.6
+    dev: true
+
+  172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_amyxu2ixb6ykbcrzsxd4obqs24:
+    resolution:
+      {
+        integrity: sha512-ruQhfhj2WM6Fe/VDQneQc/kqNp/p138SjQMfz7q/rxMTMG1kpV5B0jYWschXHXLQ6aDsFnqmBmIK+XjU3XTF3g==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fcli-plugin-babel/-/cli-plugin-babel-5.0.6.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6
+    name: '@vue/cli-plugin-babel'
+    version: 5.0.6
+    peerDependencies:
+      '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@vue/babel-preset-app': 172.26.59.72+4873/@vue/babel-preset-app/5.0.6_vue@3.2.37
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
+      '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
+      babel-loader: 172.26.59.72+4873/babel-loader/8.2.5_dzrarqmejens5o5lr5bdn3kdtu
+      thread-loader: 172.26.59.72+4873/thread-loader/3.0.4_webpack@5.73.0
+      webpack: 172.26.59.72+4873/webpack/5.73.0
+    transitivePeerDependencies:
+      - '@swc/core'
+      - encoding
+      - esbuild
+      - supports-color
+      - uglify-js
+      - vue
+      - webpack-cli
     dev: true
 
   172.26.59.72+4873/@vue/cli-plugin-router/5.0.6_@vue+cli-service@5.0.6:
@@ -4005,10 +4278,54 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
       '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
     transitivePeerDependencies:
       - encoding
+    dev: true
+
+  172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_jaidngi7a2h4753nddr4mehyq4:
+    resolution:
+      {
+        integrity: sha512-DKw3SZEWs+9v6oUMTJAGcmJY4XCIdLhwXU1MsXDmhea/VqoGTcY9yl1mb/QfZ3AttdRtC7n4Vk01tGa0pnewsA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fcli-plugin-typescript/-/cli-plugin-typescript-5.0.6.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
+    name: '@vue/cli-plugin-typescript'
+    version: 5.0.6
+    peerDependencies:
+      '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
+      cache-loader: ^4.1.0
+      typescript: '>=2'
+      vue: ^2 || ^3.2.13
+      vue-template-compiler: ^2.0.0
+    peerDependenciesMeta:
+      cache-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      '@types/webpack-env': 172.26.59.72+4873/@types/webpack-env/1.17.0
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
+      '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
+      babel-loader: 172.26.59.72+4873/babel-loader/8.2.5_dzrarqmejens5o5lr5bdn3kdtu
+      fork-ts-checker-webpack-plugin: 172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2_aqql6fqjnucmdfn6etiifn2koq
+      globby: 172.26.59.72+4873/globby/11.1.0
+      thread-loader: 172.26.59.72+4873/thread-loader/3.0.4_webpack@5.73.0
+      ts-loader: 172.26.59.72+4873/ts-loader/9.3.0_aqql6fqjnucmdfn6etiifn2koq
+      typescript: 172.26.59.72+4873/typescript/4.5.5
+      vue: 172.26.59.72+4873/vue/3.2.37
+      webpack: 172.26.59.72+4873/webpack/5.73.0
+    transitivePeerDependencies:
+      - '@swc/core'
+      - encoding
+      - esbuild
+      - eslint
+      - supports-color
+      - uglify-js
+      - webpack-cli
     dev: true
 
   172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6_@vue+cli-service@5.0.6:
@@ -4024,7 +4341,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
     dev: true
 
   172.26.59.72+4873/@vue/cli-service/5.0.6:
@@ -4189,6 +4506,170 @@ packages:
       - whiskers
     dev: true
 
+  172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0:
+    resolution:
+      {
+        integrity: sha512-XSiTCjUMk8adjvQIJXBxk3ltEBLyBme8rpqdhJrpgCgSj+8pcPPyYKs1M0petkhwLMv3mEXVPNQmXKFzpdWVrw==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@vue%2fcli-service/-/cli-service-5.0.6.tgz,
+      }
+    id: 172.26.59.72+4873/@vue/cli-service/5.0.6
+    name: '@vue/cli-service'
+    version: 5.0.6
+    engines: { node: ^12.0.0 || >= 14.0.0 }
+    hasBin: true
+    peerDependencies:
+      cache-loader: '*'
+      less-loader: '*'
+      pug-plain-loader: '*'
+      raw-loader: '*'
+      sass-loader: '*'
+      stylus-loader: '*'
+      vue-template-compiler: ^2.0.0
+      webpack-sources: '*'
+    peerDependenciesMeta:
+      cache-loader:
+        optional: true
+      less-loader:
+        optional: true
+      pug-plain-loader:
+        optional: true
+      raw-loader:
+        optional: true
+      sass-loader:
+        optional: true
+      stylus-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
+      webpack-sources:
+        optional: true
+    dependencies:
+      '@babel/helper-compilation-targets': 172.26.59.72+4873/@babel/helper-compilation-targets/7.18.2
+      '@soda/friendly-errors-webpack-plugin': 172.26.59.72+4873/@soda/friendly-errors-webpack-plugin/1.8.1_webpack@5.73.0
+      '@soda/get-current-script': 172.26.59.72+4873/@soda/get-current-script/1.0.2
+      '@types/minimist': 172.26.59.72+4873/@types/minimist/1.2.2
+      '@vue/cli-overlay': 172.26.59.72+4873/@vue/cli-overlay/5.0.6
+      '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6_@vue+cli-service@5.0.6
+      '@vue/cli-plugin-vuex': 172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6_@vue+cli-service@5.0.6
+      '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
+      '@vue/component-compiler-utils': 172.26.59.72+4873/@vue/component-compiler-utils/3.3.0
+      '@vue/vue-loader-v15': 172.26.59.72+4873/vue-loader/15.9.8_jmkrogeftkdotxjvanivswc4hi
+      '@vue/web-component-wrapper': 172.26.59.72+4873/@vue/web-component-wrapper/1.3.0
+      acorn: 172.26.59.72+4873/acorn/8.7.1
+      acorn-walk: 172.26.59.72+4873/acorn-walk/8.2.0
+      address: 172.26.59.72+4873/address/1.2.0
+      autoprefixer: 172.26.59.72+4873/autoprefixer/10.4.7_postcss@8.4.14
+      browserslist: 172.26.59.72+4873/browserslist/4.20.4
+      case-sensitive-paths-webpack-plugin: 172.26.59.72+4873/case-sensitive-paths-webpack-plugin/2.4.0
+      cli-highlight: 172.26.59.72+4873/cli-highlight/2.1.11
+      clipboardy: 172.26.59.72+4873/clipboardy/2.3.0
+      cliui: 172.26.59.72+4873/cliui/7.0.4
+      copy-webpack-plugin: 172.26.59.72+4873/copy-webpack-plugin/9.1.0_webpack@5.73.0
+      css-loader: 172.26.59.72+4873/css-loader/6.7.1_webpack@5.73.0
+      css-minimizer-webpack-plugin: 172.26.59.72+4873/css-minimizer-webpack-plugin/3.4.1_webpack@5.73.0
+      cssnano: 172.26.59.72+4873/cssnano/5.1.11_postcss@8.4.14
+      debug: 172.26.59.72+4873/debug/4.3.4
+      default-gateway: 172.26.59.72+4873/default-gateway/6.0.3
+      dotenv: 172.26.59.72+4873/dotenv/10.0.0
+      dotenv-expand: 172.26.59.72+4873/dotenv-expand/5.1.0
+      fs-extra: 172.26.59.72+4873/fs-extra/9.1.0
+      globby: 172.26.59.72+4873/globby/11.1.0
+      hash-sum: 172.26.59.72+4873/hash-sum/2.0.0
+      html-webpack-plugin: 172.26.59.72+4873/html-webpack-plugin/5.5.0_webpack@5.73.0
+      is-file-esm: 172.26.59.72+4873/is-file-esm/1.0.0
+      launch-editor-middleware: 172.26.59.72+4873/launch-editor-middleware/2.4.0
+      lodash.defaultsdeep: 172.26.59.72+4873/lodash.defaultsdeep/4.6.1
+      lodash.mapvalues: 172.26.59.72+4873/lodash.mapvalues/4.6.0
+      mini-css-extract-plugin: 172.26.59.72+4873/mini-css-extract-plugin/2.6.1_webpack@5.73.0
+      minimist: 172.26.59.72+4873/minimist/1.2.6
+      module-alias: 172.26.59.72+4873/module-alias/2.2.2
+      portfinder: 172.26.59.72+4873/portfinder/1.0.28
+      postcss: 172.26.59.72+4873/postcss/8.4.14
+      postcss-loader: 172.26.59.72+4873/postcss-loader/6.2.1_mepnsno3xmng6eyses4tepu7bu
+      progress-webpack-plugin: 172.26.59.72+4873/progress-webpack-plugin/1.0.16_webpack@5.73.0
+      sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.52.3
+      ssri: 172.26.59.72+4873/ssri/8.0.1
+      terser-webpack-plugin: 172.26.59.72+4873/terser-webpack-plugin/5.3.3_webpack@5.73.0
+      thread-loader: 172.26.59.72+4873/thread-loader/3.0.4_webpack@5.73.0
+      vue-loader: 172.26.59.72+4873/vue-loader/17.0.0_webpack@5.73.0
+      vue-style-loader: 172.26.59.72+4873/vue-style-loader/4.1.3
+      webpack: 172.26.59.72+4873/webpack/5.73.0
+      webpack-bundle-analyzer: 172.26.59.72+4873/webpack-bundle-analyzer/4.5.0
+      webpack-chain: 172.26.59.72+4873/webpack-chain/6.5.1
+      webpack-dev-server: 172.26.59.72+4873/webpack-dev-server/4.9.2_debug@4.3.4+webpack@5.73.0
+      webpack-merge: 172.26.59.72+4873/webpack-merge/5.8.0
+      webpack-virtual-modules: 172.26.59.72+4873/webpack-virtual-modules/0.4.3
+      whatwg-fetch: 172.26.59.72+4873/whatwg-fetch/3.6.2
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@parcel/css'
+      - '@swc/core'
+      - '@vue/compiler-sfc'
+      - arc-templates
+      - atpl
+      - babel-core
+      - bracket-template
+      - bufferutil
+      - clean-css
+      - coffee-script
+      - csso
+      - dot
+      - dust
+      - dustjs-helpers
+      - dustjs-linkedin
+      - eco
+      - ect
+      - ejs
+      - encoding
+      - esbuild
+      - haml-coffee
+      - hamlet
+      - hamljs
+      - handlebars
+      - hogan.js
+      - htmling
+      - jade
+      - jazz
+      - jqtpl
+      - just
+      - liquid-node
+      - liquor
+      - lodash
+      - marko
+      - mote
+      - mustache
+      - nunjucks
+      - plates
+      - pug
+      - qejs
+      - ractive
+      - razor-tmpl
+      - react
+      - react-dom
+      - slm
+      - squirrelly
+      - supports-color
+      - swig
+      - swig-templates
+      - teacup
+      - templayed
+      - then-jade
+      - then-pug
+      - tinyliquid
+      - toffee
+      - twig
+      - twing
+      - uglify-js
+      - underscore
+      - utf-8-validate
+      - vash
+      - velocityjs
+      - walrus
+      - webpack-cli
+      - whiskers
+    dev: true
+
   172.26.59.72+4873/@vue/cli-shared-utils/5.0.6:
     resolution:
       {
@@ -4229,7 +4710,6 @@ packages:
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       estree-walker: 172.26.59.72+4873/estree-walker/2.0.2
       source-map: 172.26.59.72+4873/source-map/0.6.1
-    dev: true
 
   172.26.59.72+4873/@vue/compiler-dom/3.2.37:
     resolution:
@@ -4243,7 +4723,6 @@ packages:
     dependencies:
       '@vue/compiler-core': 172.26.59.72+4873/@vue/compiler-core/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/compiler-sfc/3.2.37:
     resolution:
@@ -4265,7 +4744,6 @@ packages:
       magic-string: 172.26.59.72+4873/magic-string/0.25.9
       postcss: 172.26.59.72+4873/postcss/8.4.14
       source-map: 172.26.59.72+4873/source-map/0.6.1
-    dev: true
 
   172.26.59.72+4873/@vue/compiler-ssr/3.2.37:
     resolution:
@@ -4279,7 +4757,6 @@ packages:
     dependencies:
       '@vue/compiler-dom': 172.26.59.72+4873/@vue/compiler-dom/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/component-compiler-utils/3.3.0:
     resolution:
@@ -4382,7 +4859,6 @@ packages:
       }
     name: '@vue/devtools-api'
     version: 6.1.4
-    dev: true
 
   172.26.59.72+4873/@vue/reactivity-transform/3.2.37:
     resolution:
@@ -4399,7 +4875,6 @@ packages:
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       estree-walker: 172.26.59.72+4873/estree-walker/2.0.2
       magic-string: 172.26.59.72+4873/magic-string/0.25.9
-    dev: true
 
   172.26.59.72+4873/@vue/reactivity/3.2.37:
     resolution:
@@ -4412,7 +4887,6 @@ packages:
     version: 3.2.37
     dependencies:
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/runtime-core/3.2.37:
     resolution:
@@ -4426,7 +4900,6 @@ packages:
     dependencies:
       '@vue/reactivity': 172.26.59.72+4873/@vue/reactivity/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/runtime-dom/3.2.37:
     resolution:
@@ -4441,7 +4914,6 @@ packages:
       '@vue/runtime-core': 172.26.59.72+4873/@vue/runtime-core/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       csstype: 172.26.59.72+4873/csstype/2.6.20
-    dev: true
 
   172.26.59.72+4873/@vue/server-renderer/3.2.37_vue@3.2.37:
     resolution:
@@ -4459,7 +4931,6 @@ packages:
       '@vue/compiler-ssr': 172.26.59.72+4873/@vue/compiler-ssr/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
       vue: 172.26.59.72+4873/vue/3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/shared/3.2.37:
     resolution:
@@ -4470,7 +4941,6 @@ packages:
       }
     name: '@vue/shared'
     version: 3.2.37
-    dev: true
 
   172.26.59.72+4873/@vue/test-utils/1.3.0_pwxjod6agbp7a622cc7eenqu7e:
     resolution:
@@ -5487,6 +5957,29 @@ packages:
       - supports-color
     dev: true
 
+  172.26.59.72+4873/babel-loader/8.2.5_dzrarqmejens5o5lr5bdn3kdtu:
+    resolution:
+      {
+        integrity: sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/babel-loader/-/babel-loader-8.2.5.tgz,
+      }
+    id: 172.26.59.72+4873/babel-loader/8.2.5
+    name: babel-loader
+    version: 8.2.5
+    engines: { node: '>= 8.9' }
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      webpack: '>=2'
+    dependencies:
+      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
+      find-cache-dir: 172.26.59.72+4873/find-cache-dir/3.3.2
+      loader-utils: 172.26.59.72+4873/loader-utils/2.0.2
+      make-dir: 172.26.59.72+4873/make-dir/3.1.0
+      schema-utils: 172.26.59.72+4873/schema-utils/2.7.1
+      webpack: 172.26.59.72+4873/webpack/5.73.0
+    dev: true
+
   172.26.59.72+4873/babel-plugin-dynamic-import-node/2.3.3:
     resolution:
       {
@@ -5498,7 +5991,6 @@ packages:
     version: 2.3.3
     dependencies:
       object.assign: 172.26.59.72+4873/object.assign/4.1.2
-    dev: false
 
   172.26.59.72+4873/babel-plugin-istanbul/6.1.1:
     resolution:
@@ -5556,7 +6048,6 @@ packages:
       semver: 172.26.59.72+4873/semver/6.3.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/babel-plugin-polyfill-corejs3/0.5.2_@babel+core@7.18.2:
     resolution:
@@ -5576,7 +6067,6 @@ packages:
       core-js-compat: 172.26.59.72+4873/core-js-compat/3.22.8
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/babel-plugin-polyfill-regenerator/0.3.1_@babel+core@7.18.2:
     resolution:
@@ -5595,7 +6085,6 @@ packages:
       '@babel/helper-define-polyfill-provider': 172.26.59.72+4873/@babel/helper-define-polyfill-provider/0.3.1_@babel+core@7.18.2
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   172.26.59.72+4873/babel-plugin-transform-typescript-metadata/0.3.2:
     resolution:
@@ -6104,7 +6593,6 @@ packages:
     name: charcodes
     version: 0.2.0
     engines: { node: '>=6' }
-    dev: false
 
   172.26.59.72+4873/chardet/0.7.0:
     resolution:
@@ -6497,6 +6985,17 @@ packages:
     engines: { node: '>= 12' }
     dev: true
 
+  172.26.59.72+4873/commondir/1.0.1:
+    resolution:
+      {
+        integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/commondir/-/commondir-1.0.1.tgz,
+      }
+    name: commondir
+    version: 1.0.1
+    dev: true
+
   172.26.59.72+4873/compressible/2.0.18:
     resolution:
       {
@@ -6857,7 +7356,6 @@ packages:
     dependencies:
       browserslist: 172.26.59.72+4873/browserslist/4.20.4
       semver: 172.26.59.72+4873/semver/7.0.0
-    dev: false
 
   172.26.59.72+4873/core-js-pure/3.23.1:
     resolution:
@@ -6871,6 +7369,17 @@ packages:
     requiresBuild: true
     dev: true
 
+  172.26.59.72+4873/core-js/3.23.1:
+    resolution:
+      {
+        integrity: sha512-wfMYHWi1WQjpgZNC9kAlN4ut04TM9fUTdi7CqIoTVM7yaiOUQTklOzfb+oWH3r9edQcT3F887swuVmxrV+CC8w==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/core-js/-/core-js-3.23.1.tgz,
+      }
+    name: core-js
+    version: 3.23.1
+    requiresBuild: true
+
   172.26.59.72+4873/core-util-is/1.0.3:
     resolution:
       {
@@ -6880,6 +7389,24 @@ packages:
       }
     name: core-util-is
     version: 1.0.3
+    dev: true
+
+  172.26.59.72+4873/cosmiconfig/6.0.0:
+    resolution:
+      {
+        integrity: sha1-2k/uhTxS9rHmk19BwaL8UL1KmYI=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/cosmiconfig/-/cosmiconfig-6.0.0.tgz,
+      }
+    name: cosmiconfig
+    version: 6.0.0
+    engines: { node: '>=8' }
+    dependencies:
+      '@types/parse-json': 172.26.59.72+4873/@types/parse-json/4.0.0
+      import-fresh: 172.26.59.72+4873/import-fresh/3.3.0
+      parse-json: 172.26.59.72+4873/parse-json/5.2.0
+      path-type: 172.26.59.72+4873/path-type/4.0.0
+      yaml: 172.26.59.72+4873/yaml/1.10.2
     dev: true
 
   172.26.59.72+4873/cosmiconfig/7.0.1:
@@ -7252,7 +7779,6 @@ packages:
       }
     name: csstype
     version: 2.6.20
-    dev: true
 
   172.26.59.72+4873/data-urls/3.0.2:
     resolution:
@@ -8689,7 +9215,6 @@ packages:
       }
     name: estree-walker
     version: 2.0.2
-    dev: true
 
   172.26.59.72+4873/esutils/2.0.3:
     resolution:
@@ -9099,6 +9624,22 @@ packages:
       - supports-color
     dev: true
 
+  172.26.59.72+4873/find-cache-dir/3.3.2:
+    resolution:
+      {
+        integrity: sha1-swxbbv8HMHMa6pu9nb7L2AJW1ks=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/find-cache-dir/-/find-cache-dir-3.3.2.tgz,
+      }
+    name: find-cache-dir
+    version: 3.3.2
+    engines: { node: '>=8' }
+    dependencies:
+      commondir: 172.26.59.72+4873/commondir/1.0.1
+      make-dir: 172.26.59.72+4873/make-dir/3.1.0
+      pkg-dir: 172.26.59.72+4873/pkg-dir/4.2.0
+    dev: true
+
   172.26.59.72+4873/find-up/2.1.0:
     resolution:
       {
@@ -9172,6 +9713,45 @@ packages:
         optional: true
     dependencies:
       debug: 172.26.59.72+4873/debug/4.3.4
+    dev: true
+
+  172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2_aqql6fqjnucmdfn6etiifn2koq:
+    resolution:
+      {
+        integrity: sha512-m5cUmF30xkZ7h4tWUgTAcEaKmUW7tfyUyTqNNOz7OxWJ0v1VWKTcOvH8FWHUwSjlW/356Ijc9vi3XfcPstpQKA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-6.5.2.tgz,
+      }
+    id: 172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2
+    name: fork-ts-checker-webpack-plugin
+    version: 6.5.2
+    engines: { node: '>=10', yarn: '>=1.0.0' }
+    peerDependencies:
+      eslint: '>= 6'
+      typescript: '>= 2.7'
+      vue-template-compiler: '*'
+      webpack: '>= 4'
+    peerDependenciesMeta:
+      eslint:
+        optional: true
+      vue-template-compiler:
+        optional: true
+    dependencies:
+      '@babel/code-frame': 172.26.59.72+4873/@babel/code-frame/7.16.7
+      '@types/json-schema': 172.26.59.72+4873/@types/json-schema/7.0.11
+      chalk: 172.26.59.72+4873/chalk/4.1.2
+      chokidar: 172.26.59.72+4873/chokidar/3.5.3
+      cosmiconfig: 172.26.59.72+4873/cosmiconfig/6.0.0
+      deepmerge: 172.26.59.72+4873/deepmerge/4.2.2
+      fs-extra: 172.26.59.72+4873/fs-extra/9.1.0
+      glob: 172.26.59.72+4873/glob/7.2.3
+      memfs: 172.26.59.72+4873/memfs/3.4.4
+      minimatch: 172.26.59.72+4873/minimatch/3.1.2
+      schema-utils: 172.26.59.72+4873/schema-utils/2.7.0
+      semver: 172.26.59.72+4873/semver/7.3.7
+      tapable: 172.26.59.72+4873/tapable/1.1.3
+      typescript: 172.26.59.72+4873/typescript/4.5.5
+      webpack: 172.26.59.72+4873/webpack/5.73.0
     dev: true
 
   172.26.59.72+4873/form-data/4.0.0:
@@ -9782,6 +10362,30 @@ packages:
       terser: 172.26.59.72+4873/terser/5.14.1
     dev: true
 
+  172.26.59.72+4873/html-tags/2.0.0:
+    resolution:
+      {
+        integrity: sha1-ELMKOGCF9Dzt41PMj6fLDe7qZos=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/html-tags/-/html-tags-2.0.0.tgz,
+      }
+    name: html-tags
+    version: 2.0.0
+    engines: { node: '>=4' }
+    dev: true
+
+  172.26.59.72+4873/html-tags/3.2.0:
+    resolution:
+      {
+        integrity: sha512-vy7ClnArOZwCnqZgvv+ddgHgJiAFXe3Ge9ML5/mBctVJoUoYPCdxVucOywjDARn6CVoh3dRSFdPHy2sX80L0Wg==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/html-tags/-/html-tags-3.2.0.tgz,
+      }
+    name: html-tags
+    version: 3.2.0
+    engines: { node: '>=8' }
+    dev: true
+
   172.26.59.72+4873/html-webpack-plugin/5.5.0_webpack@5.73.0:
     resolution:
       {
@@ -10075,6 +10679,17 @@ packages:
     engines: { node: '>= 4' }
     dev: true
 
+  172.26.59.72+4873/immutable/4.1.0:
+    resolution:
+      {
+        integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/immutable/-/immutable-4.1.0.tgz,
+      }
+    name: immutable
+    version: 4.1.0
+    dev: true
+
   172.26.59.72+4873/import-fresh/3.3.0:
     resolution:
       {
@@ -10089,6 +10704,19 @@ packages:
       parent-module: 172.26.59.72+4873/parent-module/1.0.1
       resolve-from: 172.26.59.72+4873/resolve-from/4.0.0
     dev: true
+
+  172.26.59.72+4873/import-html-entry/1.12.0:
+    resolution:
+      {
+        integrity: sha512-wloMEMwupKJ8DWvKsEzJTXhHVieEH8ylu9ebeQg7T9JUsPTo0Zwa1EkuSKgKJvOiA2MxAFkeYYvd/E2pKiFtWQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/import-html-entry/-/import-html-entry-1.12.0.tgz,
+      }
+    name: import-html-entry
+    version: 1.12.0
+    dependencies:
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
+    dev: false
 
   172.26.59.72+4873/import-local/3.1.0:
     resolution:
@@ -10838,13 +11466,14 @@ packages:
       - supports-color
     dev: true
 
-  172.26.59.72+4873/jest-cli/28.1.1:
+  172.26.59.72+4873/jest-cli/28.1.1_@types+node@17.0.40:
     resolution:
       {
         integrity: sha512-+sUfVbJqb1OjBZ0OdBbI6OWfYM1i7bSfzYy6gze1F1w3OKWq8ZTEKkZ8a7ZQPq6G/G1qMh/uKqpdWhgl11NFQQ==,
         registry: http://npm.wakedata-inc.com/,
         tarball: http://172.26.59.72:4873/jest-cli/-/jest-cli-28.1.1.tgz,
       }
+    id: 172.26.59.72+4873/jest-cli/28.1.1
     name: jest-cli
     version: 28.1.1
     engines: { node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0 }
@@ -10862,7 +11491,7 @@ packages:
       exit: 172.26.59.72+4873/exit/0.1.2
       graceful-fs: 172.26.59.72+4873/graceful-fs/4.2.10
       import-local: 172.26.59.72+4873/import-local/3.1.0
-      jest-config: 172.26.59.72+4873/jest-config/28.1.1
+      jest-config: 172.26.59.72+4873/jest-config/28.1.1_@types+node@17.0.40
       jest-util: 172.26.59.72+4873/jest-util/28.1.1
       jest-validate: 172.26.59.72+4873/jest-validate/28.1.1
       prompts: 172.26.59.72+4873/prompts/2.4.2
@@ -10871,51 +11500,6 @@ packages:
       - '@types/node'
       - supports-color
       - ts-node
-    dev: true
-
-  172.26.59.72+4873/jest-config/28.1.1:
-    resolution:
-      {
-        integrity: sha512-tASynMhS+jVV85zKvjfbJ8nUyJS/jUSYZ5KQxLUN2ZCvcQc/OmhQl2j6VEL3ezQkNofxn5pQ3SPYWPHb0unTZA==,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/jest-config/-/jest-config-28.1.1.tgz,
-      }
-    name: jest-config
-    version: 28.1.1
-    engines: { node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0 }
-    peerDependencies:
-      '@types/node': '*'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      '@babel/core': 172.26.59.72+4873/@babel/core/7.18.2
-      '@jest/test-sequencer': 172.26.59.72+4873/@jest/test-sequencer/28.1.1
-      '@jest/types': 172.26.59.72+4873/@jest/types/28.1.1
-      babel-jest: 172.26.59.72+4873/babel-jest/28.1.1_@babel+core@7.18.2
-      chalk: 172.26.59.72+4873/chalk/4.1.2
-      ci-info: 172.26.59.72+4873/ci-info/3.3.1
-      deepmerge: 172.26.59.72+4873/deepmerge/4.2.2
-      glob: 172.26.59.72+4873/glob/7.2.3
-      graceful-fs: 172.26.59.72+4873/graceful-fs/4.2.10
-      jest-circus: 172.26.59.72+4873/jest-circus/28.1.1
-      jest-environment-node: 172.26.59.72+4873/jest-environment-node/28.1.1
-      jest-get-type: 172.26.59.72+4873/jest-get-type/28.0.2
-      jest-regex-util: 172.26.59.72+4873/jest-regex-util/28.0.2
-      jest-resolve: 172.26.59.72+4873/jest-resolve/28.1.1
-      jest-runner: 172.26.59.72+4873/jest-runner/28.1.1
-      jest-util: 172.26.59.72+4873/jest-util/28.1.1
-      jest-validate: 172.26.59.72+4873/jest-validate/28.1.1
-      micromatch: 172.26.59.72+4873/micromatch/4.0.5
-      parse-json: 172.26.59.72+4873/parse-json/5.2.0
-      pretty-format: 172.26.59.72+4873/pretty-format/28.1.1
-      slash: 172.26.59.72+4873/slash/3.0.0
-      strip-json-comments: 172.26.59.72+4873/strip-json-comments/3.1.1
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   172.26.59.72+4873/jest-config/28.1.1_@types+node@17.0.40:
@@ -11485,13 +12069,14 @@ packages:
       supports-color: 172.26.59.72+4873/supports-color/8.1.1
     dev: true
 
-  172.26.59.72+4873/jest/28.1.1:
+  172.26.59.72+4873/jest/28.1.1_@types+node@17.0.40:
     resolution:
       {
         integrity: sha512-qw9YHBnjt6TCbIDMPMpJZqf9E12rh6869iZaN08/vpOGgHJSAaLLUn6H8W3IAEuy34Ls3rct064mZLETkxJ2XA==,
         registry: http://npm.wakedata-inc.com/,
         tarball: http://172.26.59.72:4873/jest/-/jest-28.1.1.tgz,
       }
+    id: 172.26.59.72+4873/jest/28.1.1
     name: jest
     version: 28.1.1
     engines: { node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0 }
@@ -11505,7 +12090,7 @@ packages:
       '@jest/core': 172.26.59.72+4873/@jest/core/28.1.1
       '@jest/types': 172.26.59.72+4873/@jest/types/28.1.1
       import-local: 172.26.59.72+4873/import-local/3.1.0
-      jest-cli: 172.26.59.72+4873/jest-cli/28.1.1
+      jest-cli: 172.26.59.72+4873/jest-cli/28.1.1_@types+node@17.0.40
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -11657,7 +12242,6 @@ packages:
     name: jsesc
     version: 0.5.0
     hasBin: true
-    dev: false
 
   172.26.59.72+4873/jsesc/2.5.2:
     resolution:
@@ -11991,7 +12575,6 @@ packages:
       }
     name: lodash.debounce
     version: 4.0.8
-    dev: false
 
   172.26.59.72+4873/lodash.defaultsdeep/4.6.1:
     resolution:
@@ -12002,6 +12585,17 @@ packages:
       }
     name: lodash.defaultsdeep
     version: 4.6.1
+    dev: true
+
+  172.26.59.72+4873/lodash.kebabcase/4.1.1:
+    resolution:
+      {
+        integrity: sha1-hImxyw0p/4gZXM7KRI/21swpXDY=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz,
+      }
+    name: lodash.kebabcase
+    version: 4.1.1
     dev: true
 
   172.26.59.72+4873/lodash.mapvalues/4.6.0:
@@ -12164,7 +12758,6 @@ packages:
     version: 0.25.9
     dependencies:
       sourcemap-codec: 172.26.59.72+4873/sourcemap-codec/1.4.8
-    dev: true
 
   172.26.59.72+4873/make-dir/3.1.0:
     resolution:
@@ -12585,7 +13178,6 @@ packages:
     version: 3.3.4
     engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
     hasBin: true
-    dev: true
 
   172.26.59.72+4873/natural-compare/1.4.0:
     resolution:
@@ -13272,6 +13864,17 @@ packages:
     dependencies:
       no-case: 172.26.59.72+4873/no-case/3.0.4
       tslib: 172.26.59.72+4873/tslib/2.4.0
+    dev: true
+
+  172.26.59.72+4873/path-browserify/1.0.1:
+    resolution:
+      {
+        integrity: sha1-2YRUqcN1PVeQhg8W9ohnueRr4f0=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/path-browserify/-/path-browserify-1.0.1.tgz,
+      }
+    name: path-browserify
+    version: 1.0.1
     dev: true
 
   172.26.59.72+4873/path-exists/3.0.0:
@@ -14106,7 +14709,6 @@ packages:
       nanoid: 172.26.59.72+4873/nanoid/3.3.4
       picocolors: 172.26.59.72+4873/picocolors/1.0.0
       source-map-js: 172.26.59.72+4873/source-map-js/1.0.2
-    dev: true
 
   172.26.59.72+4873/prelude-ls/1.1.2:
     resolution:
@@ -14369,6 +14971,23 @@ packages:
     engines: { node: '>=6' }
     dev: true
 
+  172.26.59.72+4873/qiankun/2.7.3:
+    resolution:
+      {
+        integrity: sha512-o0hEXgpMxkmlADiiEfQBMFo1cp84LfsEP6xhMT5R7QbGa3uGFR/T8EtyeOlvmhzjAaGExP6+r1bxiF8w4JV71A==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/qiankun/-/qiankun-2.7.3.tgz,
+      }
+    name: qiankun
+    version: 2.7.3
+    dependencies:
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
+      import-html-entry: 172.26.59.72+4873/import-html-entry/1.12.0
+      lodash: 172.26.59.72+4873/lodash/4.17.21
+      single-spa: 172.26.59.72+4873/single-spa/5.9.4
+      tslib: 172.26.59.72+4873/tslib/1.14.1
+    dev: false
+
   172.26.59.72+4873/qs/6.10.3:
     resolution:
       {
@@ -14595,7 +15214,6 @@ packages:
     engines: { node: '>=4' }
     dependencies:
       regenerate: 172.26.59.72+4873/regenerate/1.4.2
-    dev: false
 
   172.26.59.72+4873/regenerate/1.4.2:
     resolution:
@@ -14606,7 +15224,6 @@ packages:
       }
     name: regenerate
     version: 1.4.2
-    dev: false
 
   172.26.59.72+4873/regenerator-runtime/0.13.9:
     resolution:
@@ -14629,7 +15246,6 @@ packages:
     version: 0.15.0
     dependencies:
       '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.3
-    dev: false
 
   172.26.59.72+4873/regexp.prototype.flags/1.4.3:
     resolution:
@@ -14676,7 +15292,6 @@ packages:
       regjsparser: 172.26.59.72+4873/regjsparser/0.8.4
       unicode-match-property-ecmascript: 172.26.59.72+4873/unicode-match-property-ecmascript/2.0.0
       unicode-match-property-value-ecmascript: 172.26.59.72+4873/unicode-match-property-value-ecmascript/2.0.0
-    dev: false
 
   172.26.59.72+4873/regjsgen/0.6.0:
     resolution:
@@ -14687,7 +15302,6 @@ packages:
       }
     name: regjsgen
     version: 0.6.0
-    dev: false
 
   172.26.59.72+4873/regjsparser/0.8.4:
     resolution:
@@ -14701,7 +15315,6 @@ packages:
     hasBin: true
     dependencies:
       jsesc: 172.26.59.72+4873/jsesc/0.5.0
-    dev: false
 
   172.26.59.72+4873/relateurl/0.2.7:
     resolution:
@@ -14971,6 +15584,55 @@ packages:
     version: 2.1.2
     dev: true
 
+  172.26.59.72+4873/sass-loader/12.6.0_sass@1.52.3:
+    resolution:
+      {
+        integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/sass-loader/-/sass-loader-12.6.0.tgz,
+      }
+    id: 172.26.59.72+4873/sass-loader/12.6.0
+    name: sass-loader
+    version: 12.6.0
+    engines: { node: '>= 12.13.0' }
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+      sass: ^1.3.0
+      sass-embedded: '*'
+      webpack: ^5.0.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+    dependencies:
+      klona: 172.26.59.72+4873/klona/2.0.5
+      neo-async: 172.26.59.72+4873/neo-async/2.6.2
+      sass: 172.26.59.72+4873/sass/1.52.3
+    dev: true
+
+  172.26.59.72+4873/sass/1.52.3:
+    resolution:
+      {
+        integrity: sha512-LNNPJ9lafx+j1ArtA7GyEJm9eawXN8KlA1+5dF6IZyoONg1Tyo/g+muOsENWJH/2Q1FHbbV4UwliU0cXMa/VIA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/sass/-/sass-1.52.3.tgz,
+      }
+    name: sass
+    version: 1.52.3
+    engines: { node: '>=12.0.0' }
+    hasBin: true
+    dependencies:
+      chokidar: 172.26.59.72+4873/chokidar/3.5.3
+      immutable: 172.26.59.72+4873/immutable/4.1.0
+      source-map-js: 172.26.59.72+4873/source-map-js/1.0.2
+    dev: true
+
   172.26.59.72+4873/saxes/5.0.1:
     resolution:
       {
@@ -14983,6 +15645,38 @@ packages:
     engines: { node: '>=10' }
     dependencies:
       xmlchars: 172.26.59.72+4873/xmlchars/2.2.0
+    dev: true
+
+  172.26.59.72+4873/schema-utils/2.7.0:
+    resolution:
+      {
+        integrity: sha1-FxUfdtjq5n+793lgwzxnatn078c=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/schema-utils/-/schema-utils-2.7.0.tgz,
+      }
+    name: schema-utils
+    version: 2.7.0
+    engines: { node: '>= 8.9.0' }
+    dependencies:
+      '@types/json-schema': 172.26.59.72+4873/@types/json-schema/7.0.11
+      ajv: 172.26.59.72+4873/ajv/6.12.6
+      ajv-keywords: 172.26.59.72+4873/ajv-keywords/3.5.2_ajv@6.12.6
+    dev: true
+
+  172.26.59.72+4873/schema-utils/2.7.1:
+    resolution:
+      {
+        integrity: sha1-HKTzLRskxZDCA7jnpQvw6kzTlNc=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/schema-utils/-/schema-utils-2.7.1.tgz,
+      }
+    name: schema-utils
+    version: 2.7.1
+    engines: { node: '>= 8.9.0' }
+    dependencies:
+      '@types/json-schema': 172.26.59.72+4873/@types/json-schema/7.0.11
+      ajv: 172.26.59.72+4873/ajv/6.12.6
+      ajv-keywords: 172.26.59.72+4873/ajv-keywords/3.5.2_ajv@6.12.6
     dev: true
 
   172.26.59.72+4873/schema-utils/3.1.1:
@@ -15076,7 +15770,6 @@ packages:
     name: semver
     version: 7.0.0
     hasBin: true
-    dev: false
 
   172.26.59.72+4873/semver/7.3.7:
     resolution:
@@ -15311,6 +16004,17 @@ packages:
     version: 3.0.7
     dev: true
 
+  172.26.59.72+4873/single-spa/5.9.4:
+    resolution:
+      {
+        integrity: sha512-QkEoh0AzGuU82qnbUUk0ydF78QbU5wMKqKKJn7uUQfBiOYlRQEfIOpLM4m23Sab+kTOLI1kbYhYeiQ7fX5KVVw==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/single-spa/-/single-spa-5.9.4.tgz,
+      }
+    name: single-spa
+    version: 5.9.4
+    dev: false
+
   172.26.59.72+4873/sirv/1.0.19:
     resolution:
       {
@@ -15391,7 +16095,6 @@ packages:
     name: source-map-js
     version: 1.0.2
     engines: { node: '>=0.10.0' }
-    dev: true
 
   172.26.59.72+4873/source-map-resolve/0.6.0:
     resolution:
@@ -15445,7 +16148,6 @@ packages:
     name: source-map
     version: 0.6.1
     engines: { node: '>=0.10.0' }
-    dev: true
 
   172.26.59.72+4873/sourcemap-codec/1.4.8:
     resolution:
@@ -15456,7 +16158,6 @@ packages:
       }
     name: sourcemap-codec
     version: 1.4.8
-    dev: true
 
   172.26.59.72+4873/spdx-correct/3.1.1:
     resolution:
@@ -15947,6 +16648,17 @@ packages:
     version: 1.0.0
     engines: { node: '>= 0.4' }
 
+  172.26.59.72+4873/svg-tags/1.0.0:
+    resolution:
+      {
+        integrity: sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/svg-tags/-/svg-tags-1.0.0.tgz,
+      }
+    name: svg-tags
+    version: 1.0.0
+    dev: true
+
   172.26.59.72+4873/svgo/2.8.0:
     resolution:
       {
@@ -15995,6 +16707,18 @@ packages:
       slice-ansi: 172.26.59.72+4873/slice-ansi/4.0.0
       string-width: 172.26.59.72+4873/string-width/4.2.3
       strip-ansi: 172.26.59.72+4873/strip-ansi/6.0.1
+    dev: true
+
+  172.26.59.72+4873/tapable/1.1.3:
+    resolution:
+      {
+        integrity: sha1-ofzMBrWNth/XpF2i2kT186Pme6I=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/tapable/-/tapable-1.1.3.tgz,
+      }
+    name: tapable
+    version: 1.1.3
+    engines: { node: '>=6' }
     dev: true
 
   172.26.59.72+4873/tapable/2.2.1:
@@ -16298,6 +17022,29 @@ packages:
       punycode: 172.26.59.72+4873/punycode/2.1.1
     dev: true
 
+  172.26.59.72+4873/ts-loader/9.3.0_aqql6fqjnucmdfn6etiifn2koq:
+    resolution:
+      {
+        integrity: sha512-2kLLAdAD+FCKijvGKi9sS0OzoqxLCF3CxHpok7rVgCZ5UldRzH0TkbwG9XECKjBzHsAewntC5oDaI/FwKzEUog==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/ts-loader/-/ts-loader-9.3.0.tgz,
+      }
+    id: 172.26.59.72+4873/ts-loader/9.3.0
+    name: ts-loader
+    version: 9.3.0
+    engines: { node: '>=12.0.0' }
+    peerDependencies:
+      typescript: '*'
+      webpack: ^5.0.0
+    dependencies:
+      chalk: 172.26.59.72+4873/chalk/4.1.2
+      enhanced-resolve: 172.26.59.72+4873/enhanced-resolve/5.9.3
+      micromatch: 172.26.59.72+4873/micromatch/4.0.5
+      semver: 172.26.59.72+4873/semver/7.3.7
+      typescript: 172.26.59.72+4873/typescript/4.5.5
+      webpack: 172.26.59.72+4873/webpack/5.73.0
+    dev: true
+
   172.26.59.72+4873/tsconfig-paths/3.14.1:
     resolution:
       {
@@ -16323,7 +17070,6 @@ packages:
       }
     name: tslib
     version: 1.14.1
-    dev: true
 
   172.26.59.72+4873/tslib/2.4.0:
     resolution:
@@ -16456,6 +17202,19 @@ packages:
       mime-types: 172.26.59.72+4873/mime-types/2.1.35
     dev: true
 
+  172.26.59.72+4873/typescript/4.5.5:
+    resolution:
+      {
+        integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/typescript/-/typescript-4.5.5.tgz,
+      }
+    name: typescript
+    version: 4.5.5
+    engines: { node: '>=4.2.0' }
+    hasBin: true
+    dev: true
+
   172.26.59.72+4873/typescript/4.7.3:
     resolution:
       {
@@ -16495,7 +17254,6 @@ packages:
     name: unicode-canonical-property-names-ecmascript
     version: 2.0.0
     engines: { node: '>=4' }
-    dev: false
 
   172.26.59.72+4873/unicode-match-property-ecmascript/2.0.0:
     resolution:
@@ -16510,7 +17268,6 @@ packages:
     dependencies:
       unicode-canonical-property-names-ecmascript: 172.26.59.72+4873/unicode-canonical-property-names-ecmascript/2.0.0
       unicode-property-aliases-ecmascript: 172.26.59.72+4873/unicode-property-aliases-ecmascript/2.0.0
-    dev: false
 
   172.26.59.72+4873/unicode-match-property-value-ecmascript/2.0.0:
     resolution:
@@ -16522,7 +17279,6 @@ packages:
     name: unicode-match-property-value-ecmascript
     version: 2.0.0
     engines: { node: '>=4' }
-    dev: false
 
   172.26.59.72+4873/unicode-property-aliases-ecmascript/2.0.0:
     resolution:
@@ -16534,7 +17290,6 @@ packages:
     name: unicode-property-aliases-ecmascript
     version: 2.0.0
     engines: { node: '>=4' }
-    dev: false
 
   172.26.59.72+4873/universalify/0.1.2:
     resolution:
@@ -16873,7 +17628,6 @@ packages:
     dependencies:
       '@vue/devtools-api': 172.26.59.72+4873/@vue/devtools-api/6.1.4
       vue: 172.26.59.72+4873/vue/3.2.37
-    dev: true
 
   172.26.59.72+4873/vue-style-loader/4.1.3:
     resolution:
@@ -16940,7 +17694,23 @@ packages:
       '@vue/runtime-dom': 172.26.59.72+4873/@vue/runtime-dom/3.2.37
       '@vue/server-renderer': 172.26.59.72+4873/@vue/server-renderer/3.2.37_vue@3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
-    dev: true
+
+  172.26.59.72+4873/vuex/4.0.2_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha1-+Jbb1b8qDpY/AMZ+m2EN50nMrMk=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/vuex/-/vuex-4.0.2.tgz,
+      }
+    id: 172.26.59.72+4873/vuex/4.0.2
+    name: vuex
+    version: 4.0.2
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
+      '@vue/devtools-api': 172.26.59.72+4873/@vue/devtools-api/6.1.4
+      vue: 172.26.59.72+4873/vue/3.2.37
+    dev: false
 
   172.26.59.72+4873/w3c-hr-time/1.0.2:
     resolution:

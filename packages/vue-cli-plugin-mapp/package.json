@@ -1,8 +1,8 @@
 {
-  "name": "@wakeamin/vue-cli-plugin-mapp",
+  "name": "@wakeadmin/vue-cli-plugin-mapp",
   "version": "0.1.0",
   "description": "wakeadmin 主应用配置",
-  "main": "dist/index.js",
+  "main": "index.js",
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=16.0.0"
@@ -19,7 +19,8 @@
     "vue-cli-plugin"
   ],
   "files": [
-    "dist"
+    "dist",
+    "index.js"
   ],
   "author": "ivan-lee",
   "license": "MIT",
