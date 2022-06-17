@@ -1,10 +1,10 @@
 {
   "extends": ["wkts", "wkvue/vue3"],
   "plugins": [],
-  "globals": {
-    "h": "readonly"
+  "globals": {},
+  "rules": {
+    "no-magic-numbers": "off"
   },
-  "rules": {},
   "parser": "vue-eslint-parser",
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
