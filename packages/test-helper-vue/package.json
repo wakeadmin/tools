@@ -1,11 +1,12 @@
 {
   "name": "test-helper-vue",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/commonjs/index.jsx",
-  "module": "dist/index.jsx",
+  "version": "0.1.0",
+  "description": "跨版本 vue 测试辅助",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prebuild": "rimraf dist",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build:es": "tsc -b tsconfig.build.json",
     "build": "npm run build:es && npm run build:common",

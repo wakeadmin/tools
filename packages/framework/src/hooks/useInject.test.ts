@@ -25,12 +25,12 @@ test('默认值', () => {
 });
 
 test('ref 标识符', () => {
-  const id = ref<DIIdentifier>('Demo1');
   const scope = effectScope();
   const dispose = jest.fn();
-  stubDisposer(dispose);
 
   scope.run(() => {
+    const id = ref<DIIdentifier>('Demo1');
+    stubDisposer(dispose);
     const instance = useInject(id, undefined, container);
     expect(instance.value).toBeInstanceOf(Demo1);
     expect(dispose).toBeCalledTimes(0);
@@ -38,9 +38,11 @@ test('ref 标识符', () => {
     // 切换标识符
     id.value = 'Demo2';
     expect(instance.value).toBeInstanceOf(Demo2);
+    // FIXME: vue 2 并不能像 vue3 一样释放，原因待查
     expect(dispose).toBeCalledTimes(1);
   });
 
   scope.stop();
+  // FIXME: vue 2 并不能像 vue3 一样释放，原因待查
   expect(dispose).toBeCalledTimes(2);
 });
