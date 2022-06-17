@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "noEmit": false,
+    "importHelpers": false
+  },
+  "exclude": ["dist", "**/*.test.*"]
+}

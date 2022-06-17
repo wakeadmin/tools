@@ -175,6 +175,19 @@ importers:
       '@types/cli-table': 172.26.59.72+4873/@types/cli-table/0.3.0
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
 
+  packages/vue-cli-plugin-mapp-child:
+    specifiers:
+      '@types/cli-table': ^0.3.0
+      '@vue/cli-service': 5.*
+      '@wakeadmin/utils': workspace:^0.1.0
+      cli-table: ^0.3.11
+    dependencies:
+      '@wakeadmin/utils': link:../utils
+      cli-table: 172.26.59.72+4873/cli-table/0.3.11
+    devDependencies:
+      '@types/cli-table': 172.26.59.72+4873/@types/cli-table/0.3.0
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
+
 packages:
   172.26.59.72+4873/@achrinza/node-ipc/9.2.5:
     resolution:

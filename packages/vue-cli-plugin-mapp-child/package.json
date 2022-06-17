@@ -1,0 +1,38 @@
+{
+  "name": "@wakeadmin/vue-cli-plugin-mapp-child",
+  "version": "0.1.0",
+  "description": "子应用集成",
+  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
+    "test": "jest"
+  },
+  "keywords": [
+    "vue-cli",
+    "vue-cli-plugin"
+  ],
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cli-table": "^0.3.0",
+    "@vue/cli-service": "5.*"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": "5.*"
+  },
+  "dependencies": {
+    "@wakeadmin/utils": "workspace:^0.1.0",
+    "cli-table": "^0.3.11"
+  }
+}
