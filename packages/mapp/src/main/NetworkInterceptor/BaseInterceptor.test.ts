@@ -26,12 +26,16 @@ test('BaseInterceptor', async () => {
 
   const result = await interceptor.apply(req, request);
 
-  expect(result).toEqual([res, res]);
+  expect(result).toEqual({ type: 'success', result: [res, res] });
+
   expect(fn1).toBeCalledTimes(1);
   expect(fn2).toBeCalledTimes(1);
 
   expect(fn1.mock.calls[0][0]).toBe(req);
   expect(fn2.mock.calls[0][0]).toBe(req);
+
+  expect(fn1.mock.results[0].value).resolves.toBe(res);
+  expect(fn2.mock.results[0].value).resolves.toBe(res);
 });
 
 test('BaseInterceptor error', async () => {
@@ -48,5 +52,6 @@ test('BaseInterceptor error', async () => {
     throw new Error('test');
   };
 
-  expect(interceptor.apply(req, request)).rejects.toThrowError('test');
+  const rt = await interceptor.apply(req, request);
+  expect(rt.type).toBe('error');
 });

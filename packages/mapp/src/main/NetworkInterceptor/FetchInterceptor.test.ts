@@ -1,4 +1,5 @@
 import { FetchInterceptor } from './FetchInterceptor';
+import { stringifyHeaders } from './helper.test.share';
 
 describe('FetchInterceptor', () => {
   const successResponse = new Response('response', {
@@ -20,7 +21,6 @@ describe('FetchInterceptor', () => {
   const register = jest.fn((req, next) => Promise.resolve(next()));
 
   const getRequest = () => register.mock.calls[0][0];
-  const stringifyHeaders = (headers: Headers) => JSON.stringify(Array.from(headers.entries()));
 
   beforeEach(() => {
     interceptor.clean();
