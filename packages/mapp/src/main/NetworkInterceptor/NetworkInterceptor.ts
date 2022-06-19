@@ -4,5 +4,5 @@
  * https://github.com/slorber/ajax-interceptor
  * https://github.com/forthealllight/request-intercept
  * https://github.com/mswjs/interceptors
-*/
-export {}
+ */
+export {};
