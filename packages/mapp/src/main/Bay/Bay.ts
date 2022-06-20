@@ -12,6 +12,7 @@ import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
 
 import { groupAppsByIndependent, normalizeOptions } from './options';
 import { createRoutes, Navigator } from './route';
+import { AppContext } from './AppContext';
 
 export class Bay implements IBay {
   app: App;
@@ -52,6 +53,8 @@ export class Bay implements IBay {
 
   private navigator: Navigator;
 
+  private appContext: AppContext;
+
   constructor(options: BayOptions) {
     /**
      * 参数初始化
@@ -69,6 +72,7 @@ export class Bay implements IBay {
       this.registerNetworkInterceptor(...this.options.networkInterceptors);
     }
     this.navigator = new Navigator(this);
+    this.appContext = new AppContext(this);
 
     /**
      * 应用初始化
@@ -154,7 +158,7 @@ export class Bay implements IBay {
 
     this.triggerHooks('beforeAppsRegister', apps);
 
-    registerMicroApps(apps as RegistrableApp<any>[]);
+    registerMicroApps(apps as RegistrableApp<any>[], this.appContext);
   }
 
   /**

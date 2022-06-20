@@ -126,6 +126,20 @@ export interface BayHooks {
    * 路由变动
    */
   locationChange(location: UniverseLocation): void;
+
+  /**
+   * 微应用加载前调用，对应 qiankun 的生命周期方法
+   * @param app
+   */
+  beforeAppLoad(app: MicroApp): void;
+
+  beforeAppMount(app: MicroApp): void;
+
+  afterAppMount(app: MicroApp): void;
+
+  beforeAppUnmount(app: MicroApp): void;
+
+  afterAppUnmount(app: MicroApp): void;
 }
 
 /**
