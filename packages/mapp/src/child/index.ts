@@ -14,3 +14,5 @@ export const getBaseUrl = (): string => {
  * 获取当前子应用的配置
  */
 export const getMircroApp = () => {};
+
+export * from '../types';
