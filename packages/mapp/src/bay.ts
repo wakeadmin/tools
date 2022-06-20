@@ -1,7 +1,9 @@
 import type { DefineComponent, App } from 'vue';
 import type { RouteRecordRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
+
 import { UniverseLocation, RouteLocationOptions, RouteLocation } from './route';
+import { INetworkInterceptorRegister } from './network-interceptor';
 
 /**
  * 微应用描述
@@ -128,7 +130,7 @@ export interface BayOptions {
   /**
    * 基础路径, 默认从 process.env.MAPP_BASE_URL 中获取，如果没有则使用 /
    */
-  base?: string;
+  baseUrl?: string;
 
   /**
    * 页面实现
@@ -144,10 +146,15 @@ export interface BayOptions {
    * 基座钩子
    */
   hooks?: Partial<BayHooks>;
+
+  /**
+   * 网络拦截器，可以用于检测 AJAX/fetch 的请求和响应
+   * 你也可以通过 registerNetworkInterceptor 方法来注册
+   */
+  networkInterceptors?: INetworkInterceptorRegister[];
 }
 /**
  * 基座实例
- * TODO: 路由拦截
  */
 export interface IBay {
   /**
@@ -165,25 +172,10 @@ export interface IBay {
    */
   eventBus: EventEmitter;
 
+  /**
+   * 当前路径。这个是响应式数据
+   */
   readonly location: UniverseLocation;
-
-  /**
-   * 挂载和启动应用
-   * @param target 可选，默认是 #app
-   */
-  mount(target?: string | HTMLElement): void;
-
-  /**
-   * 打开错误页面
-   */
-  openError(data: ErrorPageProps & RouteLocationOptions): void;
-
-  /**
-   * 打开应用
-   * @param name
-   * @param route 应用路由
-   */
-  openApp(name: string, route: RouteLocation): void;
 
   /**
    * 路由实例
@@ -204,6 +196,29 @@ export interface IBay {
    * 基础路径
    */
   baseUrl: string;
+
+  /**
+   * 挂载和启动应用
+   * @param target 可选，默认是 #app
+   */
+  mount(target?: string | HTMLElement): void;
+
+  /**
+   * 打开错误页面
+   */
+  openError(data: ErrorPageProps & RouteLocationOptions): void;
+
+  /**
+   * 打开应用
+   * @param name
+   * @param route 应用路由
+   */
+  openApp(name: string, route: RouteLocation): void;
+
+  /**
+   * 注册网络拦截器
+   */
+  registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void;
 
   /**
    * TODO: 其他方法

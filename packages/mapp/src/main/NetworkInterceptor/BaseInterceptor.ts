@@ -11,8 +11,8 @@ export class BaseInterceptor implements INetworkInterceptor {
    * 注册拦截器
    * @param interceptor
    */
-  register(interceptor: INetworkInterceptorRegister): void {
-    this.interceptors.push(interceptor);
+  register(...interceptor: INetworkInterceptorRegister[]): void {
+    this.interceptors.push(...interceptor);
   }
 
   clean(): void {

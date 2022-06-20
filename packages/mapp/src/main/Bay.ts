@@ -13,11 +13,13 @@ import {
   Parameter,
   RouteLocation,
   RouteLocationOptions,
+  INetworkInterceptorRegister,
 } from '../types';
 
 import { ErrorPage, IndependentPage, LandingPage, MainPage, NoopPage } from './components';
 import { BayProviderContext, DEFAULT_ROOT, ERROR_PAGE, LANDING_PAGE } from './constants';
 import { UniverseHistory } from './UniverseHistory';
+import { AJAXInterceptor, FetchInterceptor } from './NetworkInterceptor';
 
 export class Bay implements IBay {
   app: App;
@@ -36,7 +38,7 @@ export class Bay implements IBay {
   eventBus = new EventEmitter();
 
   get baseUrl(): string {
-    return this.options.base ?? '/';
+    return this.options.baseUrl ?? '/';
   }
 
   get apps() {
@@ -49,9 +51,18 @@ export class Bay implements IBay {
 
   private history: UniverseHistory;
 
+  private networkInterceptors: INetworkInterceptorRegister[] = [];
+  private ajaxInterceptor?: AJAXInterceptor;
+  private fetchInterceptor?: FetchInterceptor;
+
   constructor(options: BayOptions) {
     this.rawOptions = options;
     this.options = this.normalizedOptions(options);
+
+    if (this.options.networkInterceptors?.length) {
+      this.registerNetworkInterceptor(...this.options.networkInterceptors);
+    }
+
     this.app = createApp(NoopPage);
     this.router = this.createRouter();
     this.history = new UniverseHistory(l => {
@@ -88,8 +99,24 @@ export class Bay implements IBay {
    */
   openApp(name: string, route: RouteLocation): void {}
 
+  registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void {
+    const shouldAttach = !this.networkInterceptors.length && interceptors.length;
+
+    if (shouldAttach) {
+      this.ajaxInterceptor = new AJAXInterceptor();
+      this.fetchInterceptor = new FetchInterceptor();
+
+      this.ajaxInterceptor.attach();
+      this.fetchInterceptor.attach();
+    }
+
+    this.networkInterceptors.push(...interceptors);
+    this.ajaxInterceptor?.register(...interceptors);
+    this.fetchInterceptor?.register(...interceptors);
+  }
+
   private normalizedOptions(options: BayOptions) {
-    let { base = process.env.MAPP_BASE_URL ?? '/', apps, ...others } = options;
+    let { baseUrl: base = process.env.MAPP_BASE_URL ?? '/', apps, ...others } = options;
 
     // 所有 activeRule 都基于基座 base
     const tryAddBaseToActiveRule = (activeRule: string) => {

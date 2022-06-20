@@ -54,7 +54,7 @@ export interface INetworkInterceptor {
    * @param request 请求内容
    * @param next 发起请求并返回响应，如果请求错误会抛出异常
    */
-  register(interceptor: INetworkInterceptorRegister): void;
+  register(...interceptor: INetworkInterceptorRegister[]): void;
 
   /**
    * 清除注册器
