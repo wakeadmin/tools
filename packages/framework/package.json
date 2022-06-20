@@ -2,7 +2,8 @@
   "name": "@wakeadmin/framework",
   "version": "0.1.0",
   "description": "wakeadmin 依赖注入框架",
-  "main": "index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
     "prebuild": "rimraf dist .tsBuildInfo",

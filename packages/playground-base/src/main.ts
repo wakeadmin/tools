@@ -2,10 +2,12 @@ import { createApp } from 'vue';
 import { registerMicroApps, RegistrableApp, start } from 'qiankun';
 import { createRouter, createWebHistory } from 'vue-router';
 import path from 'path';
+import Framework from '@wakeadmin/framework';
 
 import { getConfig } from './config';
 import App from './Root.vue';
 import Home from './Home.vue';
+import './di-test';
 
 const app = createApp(App);
 const base = process.env.MAPP_BASE_URL;
@@ -21,6 +23,7 @@ const router = createRouter({
 });
 
 app.use(router);
+app.use(Framework);
 
 let microApps = getConfig();
 
