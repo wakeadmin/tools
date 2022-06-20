@@ -1,10 +1,12 @@
-import path from 'path-browserify';
-import type { RouteRecordRaw, RouteLocationRaw } from 'vue-router';
+import { NoopObject } from '@wakeadmin/utils';
+import pathUtils from 'path-browserify';
+import { RouteRecordRaw, RouteLocationRaw, stringifyQuery } from 'vue-router';
 
-import { MicroApp, ErrorPageProps, RouteLocationOptions } from '../../types';
+import { MicroApp, ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
 
 import { ErrorPage, IndependentPage, LandingPage, MainPage } from '../components';
 import { ERROR_PAGE, LANDING_PAGE } from '../constants';
+import { groupAppsByIndependent } from './options';
 
 /**
  * 构造错误页面路由描述
@@ -33,7 +35,7 @@ export function createRoutes(baseUrl: string, apps: MicroApp[]) {
 
   builtinRoutes.push({
     name: 'error',
-    path: path.join(baseUrl, ERROR_PAGE),
+    path: pathUtils.join(baseUrl, ERROR_PAGE),
     component: ErrorPage,
     meta: {
       builtin: true,
@@ -42,7 +44,7 @@ export function createRoutes(baseUrl: string, apps: MicroApp[]) {
 
   builtinRoutes.push({
     name: 'landing',
-    path: path.join(baseUrl, LANDING_PAGE),
+    path: pathUtils.join(baseUrl, LANDING_PAGE),
     component: LandingPage,
     meta: {
       builtin: true,
@@ -53,16 +55,7 @@ export function createRoutes(baseUrl: string, apps: MicroApp[]) {
    * 独立页面路由
    */
   const independentRoutes: RouteRecordRaw[] = [];
-  const independentApps: MicroApp[] = [];
-  const nonIndependentApps: MicroApp[] = [];
-
-  for (const app of apps) {
-    if (app.independent) {
-      independentApps.push(app);
-    } else {
-      nonIndependentApps.push(app);
-    }
-  }
+  const { independentApps, nonIndependentApps } = groupAppsByIndependent(apps);
 
   for (const app of independentApps) {
     independentRoutes.push({
@@ -106,4 +99,74 @@ export function createRoutes(baseUrl: string, apps: MicroApp[]) {
   const routes: RouteRecordRaw[] = [...builtinRoutes, ...independentRoutes, mainRoutes];
 
   return routes;
+}
+
+/**
+ * 路由导航相关工具集
+ */
+export class Navigator {
+  private bay: IBay;
+  constructor(bay: IBay) {
+    this.bay = bay;
+  }
+
+  /**
+   * 打开错误页面
+   * @param data
+   */
+  openError: IBay['openError'] = data => {
+    this.bay.router.push(getErrorRoute(data));
+  };
+
+  openApp: IBay['openApp'] = option => {
+    const { name, route } = option;
+
+    const app = this.bay.getApp(name);
+
+    if (app == null) {
+      throw new Error(`[mapp] openApp 未找到应用：${name}`);
+    }
+
+    const { path = '/', query = NoopObject, mode = 'hash', redirect } = route;
+    const mainPath = app.activeRule;
+    const queryString = query && stringifyQuery(query);
+    const appPath = `${path}${queryString ? `?${queryString}` : ''}`;
+
+    const fullPath = mode === 'history' ? pathUtils.join(mainPath, appPath) : `${mainPath}#${appPath}`;
+
+    this.navigate(fullPath, redirect);
+  };
+
+  openUrl: IBay['openUrl'] = url => {
+    if (typeof url === 'string') {
+      this.navigate(url);
+    } else {
+      const { path, query = NoopObject, hashPath, hashQuery, redirect } = url;
+      const queryString = query && stringifyQuery(query);
+      let fullPath = `${path}${queryString ? `?${queryString}` : ''}`;
+
+      // 设置 hash
+      if (hashPath || hashQuery) {
+        const hashQueryString = hashQuery && stringifyQuery(hashQuery);
+        fullPath += `#${hashPath ?? '/'}${hashQueryString ? `?${hashQueryString}` : ''}`;
+      }
+
+      this.navigate(fullPath, redirect);
+    }
+  };
+
+  openMain: IBay['openMain'] = options => {
+    const redirect = options?.redirect;
+
+    const firstMainApp = this.bay.nonIndependentApps[0];
+    if (firstMainApp == null) {
+      throw new Error(`[mapp] 未配置子应用, 无法跳转`);
+    }
+
+    this.navigate(firstMainApp.activeRule, redirect);
+  };
+
+  private navigate(target: string, redirect: boolean = false) {
+    window.history[redirect ? 'replaceState' : 'pushState'](null, '', target);
+  }
 }

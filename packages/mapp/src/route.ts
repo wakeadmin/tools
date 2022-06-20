@@ -1,4 +1,4 @@
-import type { LocationAsPath, RouteQueryAndHash } from 'vue-router';
+import type { LocationQueryRaw } from 'vue-router';
 
 export interface RouteLocationOptions {
   /**
@@ -7,7 +7,36 @@ export interface RouteLocationOptions {
   redirect?: boolean;
 }
 
-export type RouteLocation = string | (LocationAsPath & RouteQueryAndHash & RouteLocationOptions);
+export interface RouteLocationMode {
+  /**
+   * 路由模式, 基座默认为 path, 子应用默认为 hash
+   */
+  mode?: 'hash' | 'history';
+}
+
+export interface RouteLocationAsPath {
+  /**
+   * 路由路径
+   */
+  path: string;
+
+  /**
+   * 查询字符串
+   */
+  query?: LocationQueryRaw;
+}
+
+export interface RouteLocationAsPathAndHash extends RouteLocationAsPath {
+  /**
+   * hash 路由路径
+   */
+  hashPath?: string;
+
+  /**
+   * hash 路由查询字符串
+   */
+  hashQuery?: LocationQueryRaw;
+}
 
 /**
  * 统一路由监听, 可以监听 history 路由和 hash 路由的变化

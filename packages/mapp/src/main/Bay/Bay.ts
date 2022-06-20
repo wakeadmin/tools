@@ -3,24 +3,15 @@ import { createRouter, createWebHistory, Router } from 'vue-router';
 import { EventEmitter } from '@wakeadmin/utils';
 import { registerMicroApps, start, RegistrableApp } from 'qiankun';
 
-import {
-  BayHooks,
-  BayOptions,
-  ErrorPageProps,
-  IBay,
-  Parameter,
-  RouteLocation,
-  RouteLocationOptions,
-  INetworkInterceptorRegister,
-} from '../../types';
+import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister, MicroApp } from '../../types';
 
 import { NoopPage } from '../components';
 import { BayProviderContext, DEFAULT_ROOT } from '../constants';
 import { UniverseHistory } from '../UniverseHistory';
 import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
 
-import { normalizeOptions } from './options';
-import { createRoutes, getErrorRoute } from './route';
+import { groupAppsByIndependent, normalizeOptions } from './options';
+import { createRoutes, Navigator } from './route';
 
 export class Bay implements IBay {
   app: App;
@@ -38,13 +29,16 @@ export class Bay implements IBay {
    */
   eventBus = new EventEmitter();
 
-  get baseUrl(): string {
-    return this.options.baseUrl ?? '/';
-  }
+  baseUrl: string;
 
-  get apps() {
-    return this.options.apps;
-  }
+  /**
+   * 所有应用
+   */
+  apps: MicroApp[];
+
+  independentApps: MicroApp[];
+
+  nonIndependentApps: MicroApp[];
 
   get location() {
     return this.history.location;
@@ -56,14 +50,29 @@ export class Bay implements IBay {
   private ajaxInterceptor?: AJAXInterceptor;
   private fetchInterceptor?: FetchInterceptor;
 
+  private navigator: Navigator;
+
   constructor(options: BayOptions) {
+    /**
+     * 参数初始化
+     */
     this.rawOptions = options;
     this.options = normalizeOptions(options);
+
+    this.baseUrl = this.options.baseUrl ?? '/';
+    this.apps = this.options.apps;
+    const { independentApps, nonIndependentApps } = groupAppsByIndependent(this.apps);
+    this.independentApps = independentApps;
+    this.nonIndependentApps = nonIndependentApps;
 
     if (this.options.networkInterceptors?.length) {
       this.registerNetworkInterceptor(...this.options.networkInterceptors);
     }
+    this.navigator = new Navigator(this);
 
+    /**
+     * 应用初始化
+     */
     this.app = createApp(NoopPage);
     this.router = this.createRouter();
     this.history = new UniverseHistory(l => {
@@ -89,16 +98,27 @@ export class Bay implements IBay {
     this.stared = true;
   }
 
-  openError(data: ErrorPageProps & RouteLocationOptions): void {
-    this.router.push(getErrorRoute(data));
-  }
+  openError: IBay['openError'] = (...args) => {
+    this.navigator.openError(...args);
+  };
+  openApp: IBay['openApp'] = (...args) => {
+    this.navigator.openApp(...args);
+  };
+  openUrl: IBay['openUrl'] = (...args) => {
+    this.navigator.openUrl(...args);
+  };
+  openMain: IBay['openMain'] = (...args) => {
+    this.navigator.openMain(...args);
+  };
 
   /**
-   * TODO: 跨应用跳转
+   * 获取应用配置
    * @param name
-   * @param route
+   * @returns
    */
-  openApp(name: string, route: RouteLocation): void {}
+  getApp(name: string) {
+    return this.apps.find(i => i.name === name) ?? null;
+  }
 
   registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void {
     const shouldAttach = !this.networkInterceptors.length && interceptors.length;

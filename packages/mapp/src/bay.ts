@@ -2,7 +2,13 @@ import type { DefineComponent, App } from 'vue';
 import type { RouteRecordRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
 
-import { UniverseLocation, RouteLocationOptions, RouteLocation } from './route';
+import {
+  UniverseLocation,
+  RouteLocationOptions,
+  RouteLocationAsPath,
+  RouteLocationAsPathAndHash,
+  RouteLocationMode,
+} from './route';
 import { INetworkInterceptorRegister } from './network-interceptor';
 
 /**
@@ -192,6 +198,10 @@ export interface IBay {
    */
   apps: MicroApp[];
 
+  independentApps: MicroApp[];
+
+  nonIndependentApps: MicroApp[];
+
   /**
    * 基础路径
    */
@@ -204,21 +214,43 @@ export interface IBay {
   mount(target?: string | HTMLElement): void;
 
   /**
+   * 注册网络拦截器
+   */
+  registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void;
+
+  // ---------------- 路由导航相关方法 ---------------------
+
+  /**
    * 打开错误页面
    */
   openError(data: ErrorPageProps & RouteLocationOptions): void;
 
   /**
-   * 打开应用
-   * @param name
-   * @param route 应用路由
+   * 打开子应用
+   * @param name 子应用名称
+   * @param route 子应用路由, 假设为 hash
    */
-  openApp(name: string, route: RouteLocation): void;
+  openApp(data: { name: string; route: RouteLocationAsPath & RouteLocationMode & RouteLocationOptions }): void;
 
   /**
-   * 注册网络拦截器
+   * 直接打开路径
+   * @param url
    */
-  registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void;
+  openUrl(url: string | (RouteLocationAsPathAndHash & RouteLocationOptions)): void;
+
+  /**
+   * 打开主页面。将打开非 independent 的第一个子应用
+   * @param options
+   */
+  openMain(options?: RouteLocationOptions): void;
+
+  // ---------------------------- 应用相关方法 ------------------------------------
+
+  /**
+   * 获取应用
+   * @param name
+   */
+  getApp(name: string): MicroApp | null;
 
   /**
    * TODO: 其他方法

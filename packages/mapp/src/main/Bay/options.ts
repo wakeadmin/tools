@@ -64,6 +64,21 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]) {
   });
 }
 
+export function groupAppsByIndependent(apps: MicroApp[]) {
+  const independentApps: MicroApp[] = [];
+  const nonIndependentApps: MicroApp[] = [];
+
+  for (const app of apps) {
+    if (app.independent) {
+      independentApps.push(app);
+    } else {
+      nonIndependentApps.push(app);
+    }
+  }
+
+  return { independentApps, nonIndependentApps };
+}
+
 /**
  * 规范化参数
  * @param options

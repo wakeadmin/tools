@@ -1,6 +1,6 @@
 import { ErrorPage, LandingPage, IndependentPage, MainPage } from '../components';
 
-import { createRoutes } from './route';
+import { createRoutes, Navigator } from './route';
 import { normalizeApps } from './options';
 
 test('create routes', () => {
@@ -66,4 +66,60 @@ test('create routes', () => {
       },
     },
   ]);
+});
+
+describe('navigator', () => {
+  const bay = {
+    router: {
+      push: jest.fn(),
+    },
+    nonIndependentApps: [
+      {
+        activeRule: '/base/foo',
+      },
+    ],
+    getApp: jest.fn(() => ({
+      activeRule: '/base/foo',
+    })),
+  };
+
+  const nav = new Navigator(bay as any);
+  const push = jest.spyOn(window.history, 'pushState');
+  const replace = jest.spyOn(window.history, 'replaceState');
+
+  beforeEach(() => {
+    push.mockClear();
+    replace.mockClear();
+  });
+
+  test('openError', () => {
+    nav.openError({ type: 'http', code: '404' });
+
+    expect(bay.router.push).toBeCalledWith({ name: 'error', query: { code: '404', type: 'http' }, replace: undefined });
+  });
+
+  test('openApp', () => {
+    nav.openApp({ name: 'foo', route: { path: '/custom', query: { foo: 'bar' }, redirect: true } });
+
+    expect(replace).toBeCalledWith(null, '', '/base/foo#/custom?foo=bar');
+  });
+
+  test('openUrl', () => {
+    nav.openUrl('/full');
+    expect(push).toBeCalledWith(null, '', '/full');
+
+    nav.openUrl({
+      path: '/full',
+      query: { foo: 'bar' },
+      hashPath: '/path',
+      hashQuery: { bar: 'bar' },
+    });
+
+    expect(push).toBeCalledWith(null, '', '/full?foo=bar#/path?bar=bar');
+  });
+
+  test('openMain', () => {
+    nav.openMain();
+    expect(push).toBeCalledWith(null, '', '/base/foo');
+  });
 });
