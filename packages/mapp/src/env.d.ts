@@ -3,6 +3,11 @@ interface Window {
   __POWERED_BY_QIANKUN__?: boolean;
 
   /**
+   * Bay 实例
+   */
+  __MAPP_BAY__?: import('./types').IBay;
+
+  /**
    * 当前应用
    * 子应用可见
    */
