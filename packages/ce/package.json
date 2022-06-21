@@ -1,0 +1,10 @@
+{
+  "name": "@wakeadmin/ce",
+  "version": "0.1.0",
+  "description": "Vue 自定义组件创建",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

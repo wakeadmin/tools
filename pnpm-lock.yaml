@@ -97,6 +97,9 @@ importers:
       '@babel/preset-typescript': 172.26.59.72+4873/@babel/preset-typescript/7.17.12_@babel+core@7.18.2
       babel-plugin-transform-typescript-metadata: 172.26.59.72+4873/babel-plugin-transform-typescript-metadata/0.3.2
 
+  packages/ce:
+    specifiers: {}
+
   packages/demi:
     specifiers:
       vue-demi: latest
@@ -224,6 +227,14 @@ importers:
       '@wakeapp/utils': latest
     dependencies:
       '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220616143
+
+  packages/vue-cli-plugin-ce:
+    specifiers:
+      '@vue/cli-service': 5.*
+      '@vue/cli-shared-utils': 5.*
+    devDependencies:
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
+      '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
 
   packages/vue-cli-plugin-mapp:
     specifiers:
