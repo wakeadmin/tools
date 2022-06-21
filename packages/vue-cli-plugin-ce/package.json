@@ -3,7 +3,15 @@
   "version": "0.1.0",
   "description": "vue 自定义元素增强插件",
   "main": "index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "index.js",
+    "dist"
+  ],
   "scripts": {
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
     "test": "jest"
   },
   "keywords": [],

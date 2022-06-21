@@ -1,6 +1,7 @@
 /* eslint-disable import/no-commonjs */
 const { defineMapp } = require('@wakeadmin/vue-cli-plugin-mapp');
 const { defineConfig } = require('@vue/cli-service');
+const { defineCE } = require('@wakeadmin/vue-cli-plugin-ce');
 
 // const webpack = require('webpack');
 
@@ -16,9 +17,7 @@ module.exports = defineConfig({
         { name: 'vue-router3', module: 'vue-router' },
       ],
     }),
-    customElement: {
-      isCustomElement: tag => tag.startsWith('wkc-'),
-    },
+    ...defineCE({ customElement: /wkc-/ }),
   },
   configureWebpack() {
     return {

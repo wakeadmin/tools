@@ -158,6 +158,7 @@ importers:
       '@vue/cli-service': ~5.0.4
       '@wakeadmin/framework': workspace:^0.1.0
       '@wakeadmin/h': workspace:^0.1.0
+      '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.1.0
       babel-preset-wakeadmin: workspace:^0.1.0
       core-js: ^3.22.7
@@ -172,6 +173,7 @@ importers:
     dependencies:
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
+      '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
       core-js: 172.26.59.72+4873/core-js/3.23.1
       qiankun: 172.26.59.72+4873/qiankun/2.7.3
       vue: 172.26.59.72+4873/vue/3.2.37

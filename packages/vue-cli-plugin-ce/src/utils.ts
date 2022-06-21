@@ -36,7 +36,7 @@ export const createMatcher = (options: PluginOptions): Matcher => {
 
       return (tag: string) => {
         if (strings.size && strings.has(tag)) {
-          return false;
+          return true;
         }
 
         for (const reg of regexp) {

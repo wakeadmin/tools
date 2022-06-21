@@ -33,8 +33,8 @@ export const plugin: ServicePlugin = (api, options) => {
   const pluginOptions: PluginOptions = (options.pluginOptions as any)?.[PLUGIN_NAME] || {};
 
   // thread-loader 不支持传递不可序列化的参数
-  if (options.parallel) {
-    throw new Error(`[${PLUGIN_NAME}] 开启 parallel 将导致编译失败`);
+  if (options.parallel && process.env.NODE_ENV === 'production') {
+    throw new Error(`[${PLUGIN_NAME}] 开启 parallel 将导致编译失败, 请关闭`);
   }
 
   if (typeof pluginOptions.customElement === 'undefined') {
@@ -60,6 +60,7 @@ module.exports = defineConfig({
       .plugin('ceDefine')
       .use(webpack.DefinePlugin, [
         {
+          // 配置 @wakeadmin/ce 插件使用
           __CE_OPTIONS__: stringifyOptions(pluginOptions),
         },
       ])
