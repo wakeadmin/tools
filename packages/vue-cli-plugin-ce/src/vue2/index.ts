@@ -133,7 +133,7 @@ export class TransformModule implements ModuleOptions {
       return;
     }
 
-    const mustUseDomProp = this.matcher.mustUseDomProp(tag);
+    const mustUseProp = this.matcher.mustUseProp(tag);
 
     /**
      * 迁移属性
@@ -168,7 +168,7 @@ export class TransformModule implements ModuleOptions {
     };
 
     // 没有强制使用 dom 属性传入
-    if (!mustUseDomProp) {
+    if (!mustUseProp) {
       return;
     }
 

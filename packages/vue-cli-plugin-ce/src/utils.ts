@@ -2,11 +2,11 @@ import { ElementMatcher, PluginOptions } from './types';
 
 export interface Matcher {
   isCustomElement(tag: string): boolean;
-  mustUseDomProp(tag: string): boolean;
+  mustUseProp(tag: string): boolean;
 }
 
 export const createMatcher = (options: PluginOptions): Matcher => {
-  const { customElement, mustUseDomProp } = options ?? {};
+  const { customElement, mustUseProp } = options ?? {};
 
   const normalized = (rules: ElementMatcher | undefined) => {
     const arr = Array.isArray(rules) ? rules : rules ? [rules] : null;
@@ -45,6 +45,6 @@ export const createMatcher = (options: PluginOptions): Matcher => {
     isCustomElement: tag => {
       return typeof tag === 'string' && tag.includes('-') && isCustomElement(tag);
     },
-    mustUseDomProp: normalized(mustUseDomProp),
+    mustUseProp: normalized(mustUseProp),
   };
 };

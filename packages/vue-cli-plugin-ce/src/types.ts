@@ -9,5 +9,5 @@ export interface PluginOptions {
   /**
    * 声明强制使用 domProp 元素
    */
-  mustUseDomProp?: ElementMatcher;
+  mustUseProp?: ElementMatcher;
 }

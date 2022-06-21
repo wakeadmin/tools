@@ -21,7 +21,7 @@ const baseOptions = {
   modules: [
     new TransformModule({
       customElement: /wkc-/,
-      mustUseDomProp: /wkc-/,
+      mustUseProp: /wkc-/,
     }),
   ],
   whitespace: 'condense' as 'condense',

@@ -20,8 +20,5 @@
   "license": "MIT",
   "dependencies": {
     "@wakeapp/utils": "latest"
-  },
-  "jest": {
-    "preset": "jest-preset-universe-vue"
   }
 }

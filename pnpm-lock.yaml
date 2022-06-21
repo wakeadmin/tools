@@ -98,7 +98,12 @@ importers:
       babel-plugin-transform-typescript-metadata: 172.26.59.72+4873/babel-plugin-transform-typescript-metadata/0.3.2
 
   packages/ce:
-    specifiers: {}
+    specifiers:
+      '@wakeadmin/utils': workspace:^0.1.0
+      lodash: 4.*
+    dependencies:
+      '@wakeadmin/utils': link:../utils
+      lodash: 172.26.59.72+4873/lodash/4.17.21
 
   packages/demi:
     specifiers:
@@ -110,11 +115,13 @@ importers:
     specifiers:
       '@wakeadmin/demi': workspace:0.1.0
       '@wakeadmin/h': workspace:0.1.0
+      '@wakeadmin/utils': workspace:^0.1.0
       '@wakeapp/framework-core': latest
       test-helper-vue: workspace:0.1.0
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
+      '@wakeadmin/utils': link:../utils
       '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220616143
     devDependencies:
       test-helper-vue: link:../test-helper-vue

@@ -1,44 +1,13 @@
+import { isPropertyKey } from '@wakeadmin/utils';
+
+export { hasProp, addHiddenProp, isPropertyKey } from '@wakeadmin/utils';
+
 const objectPrototype = Object.prototype;
 const plainObjectString = Object.toString();
 const hasGetOwnPropertySymbols = typeof Object.getOwnPropertySymbols !== 'undefined';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const NOOP = () => {};
-
-/**
- * 查看属性是否定义
- * @param target
- * @param key
- * @returns
- */
-export function hasProp(target: Object, key: PropertyKey): boolean {
-  return objectPrototype.hasOwnProperty.call(target, key);
-}
-
-/**
- * 添加不能枚举的字段
- * @param target
- * @param key
- */
-export function addHiddenProp(target: Object, key: PropertyKey, value: any) {
-  Object.defineProperty(target, key, {
-    enumerable: false,
-    configurable: true,
-    writable: true,
-    value,
-  });
-}
-
-export function isPropertyKey(key: any): key is PropertyKey {
-  switch (typeof key) {
-    case 'string':
-    case 'number':
-    case 'symbol':
-      return true;
-    default:
-      return false;
-  }
-}
 
 export function isObject(value: any): value is Object {
   return value !== null && typeof value === 'object';
@@ -84,7 +53,6 @@ export const getDescriptor = (target: any, key: PropertyKey): PropertyDescriptor
  * @param args
  */
 export const assertPropertyDecorator = (name: string, args: any[]) => {
-  // eslint-disable-next-line no-magic-numbers
   if (args.length < 2 || typeof args[0] !== 'object' || !isPropertyKey(args[1])) {
     throw new TypeError(`@${name} 只能用于装饰属性`);
   }

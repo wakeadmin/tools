@@ -25,6 +25,7 @@
   "dependencies": {
     "@wakeadmin/demi": "workspace:0.1.0",
     "@wakeadmin/h": "workspace:0.1.0",
+    "@wakeadmin/utils": "workspace:^0.1.0",
     "@wakeapp/framework-core": "latest"
   },
   "devDependencies": {

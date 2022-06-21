@@ -1,5 +1,4 @@
-/* eslint-disable no-magic-numbers */
-import { hasProp, isPropertyKey } from './utils';
+import { hasProp, isPropertyKey } from './object';
 
 test('hasProp', () => {
   const a = { foo: 'foo' };
