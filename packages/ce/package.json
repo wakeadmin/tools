@@ -4,7 +4,9 @@
   "description": "Vue 自定义组件创建和使用",
   "sideEffects": false,
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

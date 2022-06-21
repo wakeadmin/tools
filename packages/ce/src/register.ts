@@ -1,7 +1,6 @@
 import { defineCustomElement } from 'vue';
 import kebabCase from 'lodash/kebabCase';
-
-const IGNORE_PROPS = new Set(['style', 'class', 'key', 'ref']);
+import { IGNORE_PROPS } from './constants';
 
 export function registerCustomElement(prefix: string, name: string, comp: any) {
   let CustomElement = defineCustomElement(comp);

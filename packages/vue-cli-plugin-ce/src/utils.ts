@@ -14,7 +14,7 @@ export function stringifyOptions(options: PluginOptions) {
 
   const { customElement, mustUseProp } = options;
 
-  return `{ customElement: ${stringifyRules(customElement)}, mustUseProp: ${stringifyRules(mustUseProp)} }`;
+  return `"{ customElement: ${stringifyRules(customElement)}, mustUseProp: ${stringifyRules(mustUseProp)} }"`;
 }
 
 export const createMatcher = (options: PluginOptions): Matcher => {

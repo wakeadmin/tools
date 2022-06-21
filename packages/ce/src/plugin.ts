@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/array-type */
 import { Plugin } from 'vue';
 import { hasProp, addHiddenProp } from '@wakeadmin/utils';
+import { IGNORE_PROPS } from './constants';
 
 const INSTALLED_MARK = Symbol('ce-installed');
 
@@ -22,8 +23,6 @@ export interface PluginOptions {
   mustUseProp?: ElementMatcher;
 }
 
-export type MustUseProp = (tag: string, type?: string | null, name?: string) => boolean;
-
 export const createMatcher = (rules: ElementMatcher | undefined) => {
   const arr = Array.isArray(rules) ? rules : rules ? [rules] : null;
   if (arr) {
@@ -40,7 +39,7 @@ export const createMatcher = (rules: ElementMatcher | undefined) => {
 
     return (tag: string) => {
       if (strings.size && strings.has(tag)) {
-        return false;
+        return true;
       }
 
       for (const reg of regexp) {
@@ -58,15 +57,20 @@ export const createMatcher = (rules: ElementMatcher | undefined) => {
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const __CE_OPTIONS__: PluginOptions | undefined;
+  const __CE_OPTIONS__: string | undefined;
 }
 
-function getOptionsFromEnv(): PluginOptions | undefined {
+export function getOptionsFromEnv(): PluginOptions | undefined {
   if (typeof __CE_OPTIONS__ !== 'undefined') {
-    return __CE_OPTIONS__;
+    // eslint-disable-next-line
+    return new Function(`return ${__CE_OPTIONS__}`)();
   }
 
   return undefined;
+}
+
+export function isIgnoreAttribute(attr: string) {
+  return IGNORE_PROPS.has(attr);
 }
 
 /**
@@ -85,7 +89,7 @@ export const plugin: Plugin = (app, option?: PluginOptions) => {
 
   const isVue2 = app.version.startsWith('2.');
   const options: Partial<PluginOptions> = {
-    ...(getOptionsFromEnv() ?? {}),
+    ...getOptionsFromEnv(),
     ...option,
   };
 
@@ -93,20 +97,26 @@ export const plugin: Plugin = (app, option?: PluginOptions) => {
 
   if (isVue2) {
     // Vue2
-    const ignoredElements: Array<string | RegExp> = ((app.config as any).ignoredElements ??= []);
+    const config = app.config as any;
+
+    // 自定义元素识别
+    const ignoredElements: Array<string | RegExp> = (config.ignoredElements ??= []);
     if (customElement) {
       ignoredElements.push(...(Array.isArray(customElement) ? customElement : [customElement]));
     }
 
+    // 强制使用 props
     if (mustUseProp) {
-      const originMustUseProp = (app.config as any).mustUseProp as MustUseProp | undefined;
+      type MustUseProp = (tag: string, type: string | null, name: string) => boolean;
+
+      const originMustUseProp = config.mustUseProp as MustUseProp | undefined;
       const matcher = createMatcher(mustUseProp);
 
       const patchedMustUseProp: MustUseProp = function (this: any, tag, type, name) {
-        return originMustUseProp?.apply(this, arguments as any) || matcher(tag);
+        return originMustUseProp?.apply(this, arguments as any) || (!isIgnoreAttribute(name) && matcher(tag));
       };
 
-      (app.config as any).mustUseProp = patchedMustUseProp;
+      config.mustUseProp = patchedMustUseProp;
     }
   } else {
     // Vue3
@@ -119,7 +129,10 @@ export const plugin: Plugin = (app, option?: PluginOptions) => {
       return originIsCustomElement?.(tag) || isCustomElementMatcher(tag);
     };
 
+    // 和 vue2 兼容
     // @ts-expect-error
-    app.config.compilerOptions.mustUseProp = mustUsePropMatcher;
+    app.config.compilerOptions.mustUseProp = (tag: string, type: string | null, name) => {
+      return !isIgnoreAttribute(name) && mustUsePropMatcher(tag);
+    };
   }
 };

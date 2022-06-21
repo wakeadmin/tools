@@ -8,13 +8,23 @@ export interface ASTAttribute {
   dynamic?: boolean;
 }
 
-/**
- * @typedef {{
- *   isCustomElement: (tag: string, element: import('vue-template-compiler').ASTElement) => boolean,
- *   ignoreAttribute?: (attr: string, tag: string, element: import('vue-template-compiler').ASTElement, attribute: ASTAttribute) => boolean,
- *   enableDotBinding?: boolean, // 支持 .bind="v" 语法, 默认开启
- * }} PluginOptions
- */
+export const IGNORE_PROPS = new Set([
+  'ref',
+  'refInFor',
+  'slot',
+  'props',
+  'attrs',
+  'on',
+  'nativeOn',
+  'directives',
+  'scopedSlots',
+  'key',
+  'class',
+  'style',
+  'domProps',
+  // vue3
+  'ref_for',
+]);
 
 export class TransformModule implements ModuleOptions {
   private matcher: Matcher;
@@ -200,7 +210,7 @@ export class TransformModule implements ModuleOptions {
    * @param {string} attr
    */
   _defaultAttributeIgnore(attr: string) {
-    return attr === 'class' || attr === 'style';
+    return IGNORE_PROPS.has(attr);
   }
 
   _hasAttribute(attrs: ASTAttribute[] | undefined) {

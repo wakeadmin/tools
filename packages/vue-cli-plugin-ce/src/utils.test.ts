@@ -1,12 +1,12 @@
 import { stringifyOptions, createMatcher } from './utils';
 
 test('stringifyOptions', () => {
-  expect(stringifyOptions({ customElement: 'string' })).toEqual('{ customElement: ["string"], mustUseProp: [] }');
+  expect(stringifyOptions({ customElement: 'string' })).toEqual('"{ customElement: ["string"], mustUseProp: [] }"');
   expect(stringifyOptions({ customElement: /a/, mustUseProp: 'string' })).toEqual(
-    '{ customElement: [/a/], mustUseProp: ["string"] }'
+    '"{ customElement: [/a/], mustUseProp: ["string"] }"'
   );
   expect(stringifyOptions({ customElement: [/a/], mustUseProp: ['string'] })).toEqual(
-    '{ customElement: [/a/], mustUseProp: ["string"] }'
+    '"{ customElement: [/a/], mustUseProp: ["string"] }"'
   );
 });
 
