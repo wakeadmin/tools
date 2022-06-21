@@ -55,6 +55,20 @@ export const createMatcher = (rules: ElementMatcher | undefined) => {
 
   return () => false;
 };
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const __CE_OPTIONS__: PluginOptions | undefined;
+}
+
+function getOptionsFromEnv(): PluginOptions | undefined {
+  if (typeof __CE_OPTIONS__ !== 'undefined') {
+    return __CE_OPTIONS__;
+  }
+
+  return undefined;
+}
+
 /**
  * 运行时插件
  */
@@ -71,7 +85,7 @@ export const plugin: Plugin = (app, option?: PluginOptions) => {
 
   const isVue2 = app.version.startsWith('2.');
   const options: Partial<PluginOptions> = {
-    ...((process.env.CE_OPTIONS as PluginOptions | undefined) ?? {}),
+    ...(getOptionsFromEnv() ?? {}),
     ...option,
   };
 
@@ -97,11 +111,15 @@ export const plugin: Plugin = (app, option?: PluginOptions) => {
   } else {
     // Vue3
     const isCustomElementMatcher = createMatcher(customElement);
+    const mustUsePropMatcher = createMatcher(mustUseProp);
 
     const originIsCustomElement = app.config.compilerOptions.isCustomElement;
 
     app.config.compilerOptions.isCustomElement = tag => {
       return originIsCustomElement?.(tag) || isCustomElementMatcher(tag);
     };
+
+    // @ts-expect-error
+    app.config.compilerOptions.mustUseProp = mustUsePropMatcher;
   }
 };

@@ -2,13 +2,14 @@
 // @ts-check
 import { ServicePlugin } from '@vue/cli-service';
 import { semver, loadModule } from '@vue/cli-shared-utils';
+import webpack from 'webpack';
 
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore
 import pkg from '../package.json';
 
 import { PluginOptions } from './types';
-import { createMatcher } from './utils';
+import { createMatcher, stringifyOptions } from './utils';
 
 const PLUGIN_NAME = pkg.name;
 
@@ -54,6 +55,16 @@ module.exports = defineConfig({
   const matcher = createMatcher(pluginOptions);
 
   api.chainWebpack(chain => {
+    // 注入配置参数
+    chain
+      .plugin('ceDefine')
+      .use(webpack.DefinePlugin, [
+        {
+          __CE_OPTIONS__: stringifyOptions(pluginOptions),
+        },
+      ])
+      .end();
+
     if (isVue3) {
       const { nodeTransform } = require('./vue3');
       chain.module
