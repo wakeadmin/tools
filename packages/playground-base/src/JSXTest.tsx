@@ -1,5 +1,5 @@
 import { useInject } from '@wakeadmin/framework';
-import { h, declareComponent } from '@wakeadmin/h';
+import { declareComponent } from '@wakeadmin/h';
 import { unref } from 'vue';
 
 export const JSXTest = declareComponent({

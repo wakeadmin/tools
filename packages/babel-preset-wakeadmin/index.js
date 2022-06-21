@@ -5,9 +5,10 @@ module.exports = () => ({
     [
       '@babel/plugin-transform-react-jsx',
       {
-        runtime: 'classic',
-        pragma: 'h',
-        pragmaFrag: 'h.Fragment',
+        runtime: 'automatic',
+        pragma: undefined,
+        pragmaFrag: undefined,
+        importSource: '@wakeadmin/h',
         throwIfNamespace: false,
       },
     ],

@@ -4,8 +4,6 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "h.Fragment",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,

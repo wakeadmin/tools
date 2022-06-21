@@ -15,12 +15,23 @@ export function jsx(
   __self?: string,
   __source?: string
 ) {
-  const { children = [], ...finalProps } = props;
-  Object.assign(finalProps, {
-    key,
-  });
+  const { children, ...finalProps } = props;
 
-  return h(type, finalProps, ...children);
+  if (key != null) {
+    Object.assign(finalProps, {
+      key,
+    });
+  }
+
+  if (Array.isArray(children)) {
+    if (children.length) {
+      return h(type, finalProps, ...children);
+    } else {
+      return h(type, finalProps);
+    }
+  }
+
+  return h(type, finalProps, children);
 }
 
 export const jsxs = jsx;

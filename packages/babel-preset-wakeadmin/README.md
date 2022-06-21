@@ -22,11 +22,8 @@ module.exports = {
     "target": "esnext",
     "module": "esnext",
     "strict": true,
-+   // 支持 JSX
++   // 支持 JSX, 不转换 JSX，让 babel 统一处理就行
 +    "jsx": "preserve",
-+   // 一定要声明，否则会被 Typescript 视作无用代码移除掉
-+    "jsxFactory": "h",
-+    "jsxFragmentFactory": "h.Fragment",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,
