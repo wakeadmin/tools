@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/** @jsx h */
+/** @jsxImportSource .. */
 import { screen, cleanup } from '@testing-library/vue';
 import { defineComponent, isVue2 } from '@wakeadmin/demi';
 
-import { h } from '../h';
 import { declareComponent, declareSlots } from '../declareComponent';
 
 import { ignoreNewlineJoin, render } from './helper';

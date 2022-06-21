@@ -1,4 +1,3 @@
-/** @jsx h */
 import { VNodeChild, isVue2 } from '@wakeadmin/demi';
 import { declareComponent, h } from '@wakeadmin/h';
 import { render as _render } from '@testing-library/vue';

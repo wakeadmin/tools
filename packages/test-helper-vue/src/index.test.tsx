@@ -1,7 +1,5 @@
-/** @jsx h */
-/* eslint-disable no-magic-numbers */
 import { ref, computed, nextTick, provide, inject } from '@wakeadmin/demi';
-import { declareComponent, h } from '@wakeadmin/h';
+import { declareComponent } from '@wakeadmin/h';
 
 import { renderHook } from '.';
 

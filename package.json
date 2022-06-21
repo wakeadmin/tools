@@ -11,6 +11,7 @@
     "local-check": "wkstd local-check",
     "prepare": "husky install",
     "build": "pnpm run -r --filter=!playground-* build",
+    "test": "pnpm run -r --filter=!playground-* test --passWithNoTests --silent",
     "type-check": "pnpm run -r type-check"
   },
   "author": "ivan-lee",

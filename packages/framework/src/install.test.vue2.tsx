@@ -1,9 +1,6 @@
 /* eslint-disable vue/one-component-per-file */
 // vue2 页面作用域测试
-/** @jsx h */
-import {} from '@testing-library/vue';
 import { createApp, defineComponent } from '@wakeadmin/demi';
-import { h } from '@wakeadmin/h';
 import VueRouter, { RouteConfig } from 'vue-router-3';
 import { plugin } from './install';
 import { NoopComponent, testSuite } from './install.test.share';

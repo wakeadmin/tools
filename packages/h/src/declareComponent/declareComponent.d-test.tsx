@@ -1,5 +1,4 @@
-/* eslint-disable no-magic-numbers */
-import { h } from '../h';
+/** @jsxImportSource .. */
 import { VNodeChild, ref, StyleValue } from '@wakeadmin/demi';
 import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './declareComponent';
 import { withDefaults } from './helper';

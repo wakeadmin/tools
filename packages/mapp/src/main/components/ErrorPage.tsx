@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from '@wakeadmin/h';
 import { useRoute } from 'vue-router';
 
 import { ErrorPageProps } from '../../types';

@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from '@wakeadmin/h';
 import { useBay } from '../hooks';
 import { DEFAULT_ROOT_WITHOUT_PREFIX } from '../constants';
 

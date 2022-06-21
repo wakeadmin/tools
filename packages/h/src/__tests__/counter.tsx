@@ -1,9 +1,8 @@
-/** @jsx h */
+/** @jsxImportSource .. */
 import { screen, fireEvent } from '@testing-library/vue';
 import { ref, nextTick } from '@wakeadmin/demi';
 
 import { declareComponent, declareEmits, declareProps } from '../declareComponent';
-import { h } from '../h';
 
 import { render } from './helper';
 

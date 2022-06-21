@@ -1,8 +1,7 @@
-/** @jsx h */
+/** @jsxImportSource .. */
 import { screen, cleanup } from '@testing-library/vue';
 import { defineComponent, PropType } from '@wakeadmin/demi';
 
-import { h } from '../h';
 import { declareComponent } from '../declareComponent';
 
 import { render, expectType, createComponent, trimHTMLComments } from './helper';

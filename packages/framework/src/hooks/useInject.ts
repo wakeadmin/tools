@@ -51,7 +51,7 @@ export function useInject<I extends DIIdentifier, T extends DIValue<I>>(
         }
       }
     },
-    { flush: 'sync' }
+    { flush: 'pre' }
   );
 
   return instance;

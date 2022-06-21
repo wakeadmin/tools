@@ -23,7 +23,7 @@ export function jsx(
     });
   }
 
-  if (Array.isArray(children)) {
+  if (Array.isArray(children) && children.length) {
     if (children.length) {
       return h(type, finalProps, ...children);
     } else {
@@ -31,7 +31,11 @@ export function jsx(
     }
   }
 
-  return h(type, finalProps, children);
+  if (children != null) {
+    return h(type, finalProps, children);
+  }
+
+  return h(type, finalProps);
 }
 
 export const jsxs = jsx;

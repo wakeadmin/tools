@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-shadow */
+/** @jsxImportSource .. */
 import { render as _render } from '@testing-library/vue';
 import { isVue2, VNodeChild } from '@wakeadmin/demi';
 
@@ -14,8 +14,8 @@ type IfEquals<T, U, Y = unknown, N = never> = (<G>() => G extends T ? 1 : 2) ext
   : N;
 export declare function exactType<T, U>(draft: T & IfEquals<T, U>, expected: U & IfEquals<T, U>): IfEquals<T, U>;
 
-export function createComponent(render: () => VNodeChild) {
-  return declareComponent({ setup: () => render });
+export function createComponent(r: () => VNodeChild) {
+  return declareComponent({ setup: () => r });
 }
 
 export function render(component: any, props: Record<string, any>, ...children: any[]) {
@@ -30,8 +30,8 @@ export function render(component: any, props: Record<string, any>, ...children: 
 
   const result = _render(App, { props: { ...props, __children: children } });
 
-  const rerender = (props: Record<string, any>, ...children: any[]) => {
-    const p = Object.assign(props, { __children: children });
+  const rerender = (newProps: Record<string, any>, ...newChildren: any[]) => {
+    const p = Object.assign(newProps, { __children: newChildren });
     if (isVue2) {
       // @ts-expect-error
       return result.updateProps(p);

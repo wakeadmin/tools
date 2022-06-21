@@ -1,4 +1,4 @@
-import { effectScope, ref } from '@wakeadmin/demi';
+import { effectScope, nextTick, ref } from '@wakeadmin/demi';
 import { useInject } from './useInject';
 import { cleanAndRebind, container, stubDisposer, Demo1, Demo2 } from './helper.test.share';
 import { DIIdentifier } from '@wakeapp/framework-core';
@@ -24,7 +24,7 @@ test('默认值', () => {
   expect(instance.value).toBe('default');
 });
 
-test('ref 标识符', () => {
+test('ref 标识符', async () => {
   const scope = effectScope();
   const dispose = jest.fn();
 
@@ -38,11 +38,13 @@ test('ref 标识符', () => {
     // 切换标识符
     id.value = 'Demo2';
     expect(instance.value).toBeInstanceOf(Demo2);
-    // FIXME: vue 2 并不能像 vue3 一样释放，原因待查
-    expect(dispose).toBeCalledTimes(1);
   });
 
+  // 等待队列清空
+  await nextTick();
+  expect(dispose).toBeCalledTimes(1);
+
+  // 手动释放
   scope.stop();
-  // FIXME: vue 2 并不能像 vue3 一样释放，原因待查
   expect(dispose).toBeCalledTimes(2);
 });

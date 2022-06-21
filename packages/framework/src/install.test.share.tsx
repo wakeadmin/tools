@@ -1,7 +1,5 @@
-/** @jsx h */
 import { getInject, injectable, page, disposer, Container, registerPageClass } from '.';
 import { defineComponent } from '@wakeadmin/demi';
-import { h } from '@wakeadmin/h';
 
 let createStub: Function;
 let disposerStub: Function;
@@ -71,6 +69,7 @@ export async function testSuite(scheduler: { nextPage(): Promise<void> }) {
 
   // 自动清空
   expect(dispose).toBeCalledTimes(1);
+
   // 新的实例
   const instance3 = getInstance();
   expect(instance1).not.toBe(instance3);

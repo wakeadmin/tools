@@ -1,9 +1,7 @@
 /* eslint-disable vue/one-component-per-file */
 // vue3 页面作用域测试
-/** @jsx h */
 import { cleanup } from '@testing-library/vue';
 import { createApp, App, defineComponent } from '@wakeadmin/demi';
-import { h } from '@wakeadmin/h';
 import { RouterView, Router, createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
 import { plugin } from './install';
 import { testSuite, NoopComponent } from './install.test.share';
@@ -69,7 +67,6 @@ test('挂载到页面实例', async () => {
 
   await router.push('/foo');
 
-  // 等待渲染完成，相当于在 setup 中调用
   testSuite({
     async nextPage() {
       await router.push('/bar');

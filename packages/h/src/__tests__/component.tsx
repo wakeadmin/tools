@@ -1,8 +1,8 @@
-/** @jsx h */
+/** @jsxImportSource .. */
 import { screen, cleanup } from '@testing-library/vue';
 import { isVue2 } from '@wakeadmin/demi';
 
-import { h, Transition } from '../h';
+import { Transition } from '../h';
 
 import { render, createComponent } from './helper';
 

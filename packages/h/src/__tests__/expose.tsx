@@ -1,9 +1,7 @@
-/* eslint-disable no-magic-numbers */
-/** @jsx h */
+/** @jsxImportSource .. */
 import { cleanup } from '@testing-library/vue';
 import { ref } from '@wakeadmin/demi';
 
-import { h } from '../h';
 import { declareComponent, declareExpose, ExtraArrayRef, ExtraRef } from '../declareComponent';
 
 import { render } from './helper';

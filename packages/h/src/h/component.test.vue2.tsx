@@ -1,7 +1,6 @@
-/** @jsx h */
+/** @jsxImportSource .. */
 import { screen, cleanup } from '@testing-library/vue';
 
-import { h } from '../h';
 import { Teleport, Suspense } from './components';
 
 import { render, createComponent } from '../__tests__/helper';

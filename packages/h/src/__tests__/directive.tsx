@@ -1,10 +1,9 @@
-/* eslint-disable no-magic-numbers */
-/** @jsx h */
+/** @jsxImportSource .. */
 import { ref, nextTick } from '@wakeadmin/demi';
 import { screen, fireEvent } from '@testing-library/vue';
 
 import { declareComponent, declareEmits, declareProps } from '../declareComponent';
-import { h, withDirectives } from '../h';
+import { withDirectives } from '../h';
 
 import { render } from './helper';
 

@@ -56,7 +56,7 @@ export function useInjectAll<I extends DIIdentifier, T extends DIValue<I>>(
         });
       }
     },
-    { flush: 'sync' }
+    { flush: 'pre' }
   );
 
   return instances;
