@@ -2,6 +2,26 @@
   "name": "@wakeadmin/h",
   "version": "0.1.0",
   "description": "支持跨 Vue 2/3, 兼容 React JSX 协议的渲染方法",
+  "sideEffects": false,
+  "module": "dist/index.js",
+  "main": "dist/commonjs/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "jsx-runtime",
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/commonjs/index.js",
+      "import": "./dist/index.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "require": "./dist/commonjs/jsx-runtime.js",
+      "import": "./dist/jsx-runtime.js"
+    }
+  },
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
     "prebuild": "rimraf dist .tsBuildInfo",
@@ -13,10 +33,6 @@
     "test:vue3": "vue-demi-switch 3 && jest --verbose",
     "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
-  "sideEffects": false,
-  "module": "dist/index.js",
-  "main": "dist/commonjs/index.js",
-  "types": "dist/index.d.ts",
   "keywords": [],
   "author": "ivan",
   "license": "ISC",

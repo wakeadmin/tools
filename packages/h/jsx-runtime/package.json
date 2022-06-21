@@ -1,0 +1,12 @@
+{
+  "name": "jsx-runtime",
+  "version": "1.0.0",
+  "description": "jsx runtime",
+  "private": true,
+  "main": "../dist/commonjs/jsx-runtime.js",
+  "module": "../dist/jsx-runtime.js",
+  "types": "../dist/jsx-runtime.d.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

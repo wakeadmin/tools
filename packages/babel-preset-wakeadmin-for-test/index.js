@@ -3,7 +3,16 @@ module.exports = () => ({
   presets: [
     ['@babel/preset-env', { targets: { node: 'current' } }],
     '@babel/preset-typescript',
-    ['@babel/preset-react', { throwIfNamespace: false }],
+    [
+      '@babel/preset-react',
+      {
+        throwIfNamespace: false,
+        pragma: undefined,
+        pragmaFrag: undefined,
+        runtime: 'automatic',
+        importSource: '@wakeadmin/h',
+      },
+    ],
   ],
   plugins: [
     'babel-plugin-transform-typescript-metadata',

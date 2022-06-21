@@ -5,12 +5,9 @@ import {
   h as vueh,
   Text,
   Comment,
-  Fragment,
-  Teleport,
   TeleportProps,
   ConcreteComponent,
   ComponentOptions,
-  Suspense,
   DefineComponent,
   SuspenseProps,
   FunctionalComponent,
@@ -24,6 +21,7 @@ import {
 import { directiveBindingToArguments, isDirectiveArgumentsBinding, withDirectives, DirectiveProperty } from './helper';
 
 import { processProps, processChildren, wrap, processRef } from './process';
+import { Fragment, Teleport, Suspense } from './components';
 
 type RawChildren = string | number | boolean | VNode | VNodeArrayChildren | (() => any) | RawSlots;
 
@@ -110,3 +108,8 @@ export function h(type: any, props: any, ...children: any[]): VNode {
     return wrap(vueh(type, finalProps, finalChildren));
   }
 }
+
+/**
+ * 支持从 h.Fragment 中访问 Fragment
+ */
+h.Fragment = Fragment;
