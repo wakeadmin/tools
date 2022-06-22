@@ -3,6 +3,8 @@
   "compilerOptions": {
     "outDir": "./dist" /* Redirect output structure to the directory. */,
     "tsBuildInfoFile": ".tsBuildInfo" /* Specify file to store incremental compilation information */,
-    "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+    "jsx": "preserve",
+    "jsxImportSource": null
   }
 }

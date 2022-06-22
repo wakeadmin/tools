@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "description": "Vue 自定义组件创建和使用",
   "sideEffects": false,
-  "main": "index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
+  "author": "ivan-lee",
   "license": "MIT",
   "peerDependencies": {
     "vue": "^3.2.37"

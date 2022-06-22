@@ -1,6 +1,8 @@
-import { defineCustomElement } from 'vue';
+import { defineCustomElement, DefineComponent } from 'vue';
 import kebabCase from 'lodash/kebabCase';
+
 import { IGNORE_PROPS } from './constants';
+import { CustomElements } from './type-utils';
 
 export function registerCustomElement(prefix: string, name: string, comp: any) {
   let CustomElement = defineCustomElement(comp);
@@ -76,14 +78,28 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
   const ComponentName = `${prefix.endsWith('-') ? prefix : `${prefix}-`}${kebabCase(name)}`;
 
   customElements.define(ComponentName, CustomElement);
+
+  return {
+    name: ComponentName,
+    component: CustomElement,
+  };
 }
 
 /**
+ * 注册自定义组件
  * @param prefix 元素前缀
  * @param components
  */
-export function registerCustomElements(prefix: string, components: Record<string, any>) {
+export function registerCustomElements<
+  PREFIX extends string,
+  COMPONENTS extends { [key: string]: DefineComponent<any, any, any, any, any, any, any, any, any> }
+>(prefix: PREFIX, components: COMPONENTS): CustomElements<PREFIX, COMPONENTS> {
+  const results: any = {};
   Object.keys(components).forEach(key => {
-    registerCustomElement(prefix, key, components[key]);
+    const { name, component } = registerCustomElement(prefix, key, components[key]);
+
+    results[name] = component;
   });
+
+  return results;
 }

@@ -4,5 +4,5 @@
     "target": "ES6",
     "noEmit": false
   },
-  "exclude": ["dist", "**/*.test.*"]
+  "exclude": ["dist", "**/*.test.*", "**/*.test-d.*"]
 }
