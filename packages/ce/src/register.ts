@@ -37,7 +37,25 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
       constructor(...args: any[]) {
         super(...args);
 
+        // FIXME: 这里依赖了内部细节
+        const getVM = () => (this as any)._instance;
+
         const expose = (exposed: string[], getter: (vueInstance: any) => any, exposeType: string) => {
+          const resolve = (key: string) => {
+            const contexts = getter(getVM());
+            if (Array.isArray(contexts)) {
+              for (const context of contexts) {
+                if (context && key in context) {
+                  return context[key];
+                }
+              }
+
+              return undefined;
+            }
+
+            return contexts?.[key];
+          };
+
           exposed.forEach(ep => {
             if (isDefinedInProps(ep)) {
               if (process.env.NODE_ENV !== 'production') {
@@ -50,7 +68,11 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
               configurable: true,
               enumerable: false,
               get() {
-                return getter(this._instance)?.[ep];
+                if (getVM() == null) {
+                  throw new Error(`[${name}]#${ep} 只能在自定义元素挂载到 DOM 后才能访问`);
+                }
+
+                return resolve(ep);
               },
             });
           });
@@ -58,18 +80,17 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
 
         // 注意 expose 不要和 props 冲突
         // 原生 option 语法 expose。将从实例全局读取属性
+        // expose 选项和 setup 的 expose 是冲突的，不要混用
         if (comp.expose) {
           expose(comp.expose, instance => instance.ctx, 'expose');
         }
 
         if (comp.customElementExpose) {
-          if (comp.setup) {
-            // 使用 setup 语法, 从 exposed 中读取
-            expose(comp.customElementExpose, instance => instance.exposed, 'customElementExpose');
-          } else {
-            // option 语法, 从实例全局读取属性
-            expose(comp.customElementExpose, instance => instance.ctx, 'customElementExpose');
+          if (process.env.NODE_ENV !== 'production' && !Array.isArray(comp.customElementExpose)) {
+            throw new Error(`customElementExpose 选项必须是字符串数组`);
           }
+
+          expose(comp.customElementExpose, instance => [instance.exposed, instance.ctx], 'customElementExpose');
         }
       }
     };
@@ -77,7 +98,7 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
 
   const ComponentName = `${prefix.endsWith('-') ? prefix : `${prefix}-`}${kebabCase(name)}`;
 
-  customElements.define(ComponentName, CustomElement);
+  window.customElements.define(ComponentName, CustomElement);
 
   return {
     name: ComponentName,

@@ -101,11 +101,14 @@ importers:
 
   packages/ce:
     specifiers:
+      '@wakeadmin/h': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.0
       lodash: 4.*
     dependencies:
       '@wakeadmin/utils': link:../utils
       lodash: 172.26.59.72+4873/lodash/4.17.21
+    devDependencies:
+      '@wakeadmin/h': link:../h
 
   packages/demi:
     specifiers:
@@ -175,7 +178,6 @@ importers:
     dependencies:
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
-      '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
       core-js: 172.26.59.72+4873/core-js/3.23.1
       qiankun: 172.26.59.72+4873/qiankun/2.7.3
       vue: 172.26.59.72+4873/vue/3.2.37
@@ -187,6 +189,7 @@ importers:
       '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_jaidngi7a2h4753nddr4mehyq4
       '@vue/cli-plugin-vuex': 172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6_@vue+cli-service@5.0.6
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
+      '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
       '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
       babel-preset-wakeadmin: link:../babel-preset-wakeadmin
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1

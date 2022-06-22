@@ -99,7 +99,8 @@ type MyCustomElements = typeof c;
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    type IntrinsicElements = MyCustomElements;
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements extends MyCustomElements {}
   }
 }
 

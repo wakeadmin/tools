@@ -21,5 +21,8 @@
   "dependencies": {
     "@wakeadmin/utils": "workspace:^0.1.0",
     "lodash": "4.*"
+  },
+  "devDependencies": {
+    "@wakeadmin/h": "workspace:^0.1.0"
   }
 }
