@@ -23,18 +23,11 @@ export class TreeContainer {
     return this.roots.find(i => i.active);
   }
 
+  @observable.ref
   /**
-   * 当前激活的节点路径，从子节点开始
+   * 当前激活的节点，从子节点开始
    */
-  get activeNodes() {
-    return this.currentBurnings;
-  }
-
-  /**
-   * 当前激活的节点
-   * TODO: 是否需要响应式?
-   */
-  private currentBurnings: TreeNode[] = [];
+  activeNode?: TreeNode;
 
   /**
    * 根据权限标识符索引
@@ -107,7 +100,7 @@ export class TreeContainer {
       return this.findByPath(identifier);
     }
 
-    const activeNode = this.activeNodes[0];
+    const activeNode = this.activeNode;
 
     if (activeNode == null) {
       console.warn('[bay] 基于上下文查找节点失败，当前没有激活的上下文');
@@ -204,13 +197,6 @@ export class TreeContainer {
   }
 
   /**
-   * 此方法由 TreeNode 内部调用。由于 Typescript 没有所谓的包权限控制，因此这里使用 _ 下划线开头
-   */
-  _registerBurning(node: TreeNode) {
-    this.currentBurnings.push(node);
-  }
-
-  /**
    * 收集节点信息并建立索引
    * @param node
    */
@@ -232,15 +218,14 @@ export class TreeContainer {
    *
    */
   private lightUp(node: TreeNode, exact: boolean = false) {
-    const waitExtinguish = this.currentBurnings;
-    this.currentBurnings = [];
+    const oldNode = this.activeNode;
 
     // 激活
     node._lightUp(exact);
 
+    this.activeNode = node;
+
     // 取消旧的节点
-    for (const i of waitExtinguish) {
-      i._extinguish();
-    }
+    oldNode?._extinguish();
   }
 }

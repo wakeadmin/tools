@@ -246,9 +246,6 @@ export class TreeNode {
     // 自动展开
     this.collapsed = false;
 
-    // 注册
-    this.container._registerBurning(this);
-
     // 向上冒泡
     this.parent?._lightUp();
   };
@@ -260,6 +257,8 @@ export class TreeNode {
    */
   _extinguish() {
     this.burning--;
+
+    this.parent?._extinguish();
   }
 
   /**
