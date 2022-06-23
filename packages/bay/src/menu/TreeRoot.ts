@@ -57,10 +57,10 @@ export class TreeRoot {
     // 记录索引信息
     if (node.matchKey) {
       if (this.indexByMatchKey.has(node.matchKey)) {
-        console.warn(`[bay] 存在重复的路由: ${node.matchKey}`);
+        console.warn(`[bay] 存在重复的路由: ${node.matchKey}, 请检查菜单配置`);
+      } else {
+        this.indexByMatchKey.set(node.matchKey, node);
       }
-
-      this.indexByMatchKey.set(node.matchKey, node);
     }
 
     return node;

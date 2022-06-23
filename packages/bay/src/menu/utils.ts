@@ -3,6 +3,13 @@ import { addHeadingSlash, removeTrailingSlash } from '@wakeadmin/utils';
 
 const HAS_PROTOCOL = /^(http|https|file):\/\//;
 
+export function splitIdentifierPath(path: string): string[] {
+  return path
+    .split('.')
+    .map(i => i.trim())
+    .filter(Boolean);
+}
+
 /**
  * 非空字符串
  * @param str

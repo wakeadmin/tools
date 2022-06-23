@@ -20,6 +20,10 @@ export class TreeNode {
     return this.parent ? this.parent.root : this;
   }
 
+  get isRoot(): boolean {
+    return this.root === this;
+  }
+
   readonly container: TreeContainer;
 
   /**
@@ -96,10 +100,21 @@ export class TreeNode {
    */
   readonly matchKey?: string;
 
+  private childNodes: TreeNode[] = [];
+  // 索引，方便提高查找效率
+  private childNodesByIdentifier: Map<string, TreeNode> = new Map();
+
   /**
    * 下级节点
    */
-  children: TreeNode[] = [];
+  get children() {
+    return this.childNodes;
+  }
+
+  set children(children: TreeNode[]) {
+    this.childNodes = children;
+    this.childNodesByIdentifier = new Map(children.map(i => [i.identifier, i]));
+  }
 
   /**
    * 激活状态
@@ -108,6 +123,11 @@ export class TreeNode {
   get active() {
     return !!this.burning;
   }
+
+  /**
+   * 是否精确匹配
+   */
+  readonly exactMatched: boolean = false;
 
   /**
    * 是否为叶子节点
@@ -166,19 +186,62 @@ export class TreeNode {
   };
 
   /**
+   * 判断是否包含指定标识符的子节点
+   * @param identifier
+   */
+  containsIdentifier(identifier: string) {
+    return this.childNodesByIdentifier.has(identifier);
+  }
+
+  getChildByIdentifier(identifier: string) {
+    return this.childNodesByIdentifier.get(identifier);
+  }
+
+  /**
+   * 判断是否包含指定节点
+   * @param node
+   */
+  contains(node: TreeNode): boolean {
+    if (this.root !== node.root) {
+      // 不是在同一棵树
+      return false;
+    }
+
+    if (this.isRoot) {
+      return true;
+    }
+
+    let current: TreeNode | undefined = node;
+    while (current) {
+      if (current === this) {
+        return true;
+      }
+
+      current = current.parent;
+    }
+
+    return false;
+  }
+
+  /**
    * 打开
    */
   open = () => {
     // TODO: 实现
+    // TODO: 支持拦截
   };
 
   /**
    * 点燃，激活
    *
    * 这个方法由 TreeContainer 调用
+   * @param exact 是否为精确匹配
    */
-  _lightUp = () => {
+  _lightUp = (exact?: boolean) => {
     this.burning++;
+
+    // @ts-expect-error
+    this.exactMatched = !!exact;
 
     // 自动展开
     this.collapsed = false;
