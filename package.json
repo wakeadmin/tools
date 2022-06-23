@@ -10,7 +10,7 @@
     "preinstall": "npx only-allow pnpm",
     "local-check": "wkstd local-check",
     "prepare": "husky install",
-    "build": "pnpm run -r --filter=!playground-* build",
+    "build": "pnpm run -r --filter=!playground-* --filter=!bay build",
     "test": "pnpm run -r --filter=!playground-* test --passWithNoTests --silent",
     "type-check": "pnpm run -r type-check"
   },

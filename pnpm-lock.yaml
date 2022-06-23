@@ -109,7 +109,14 @@ importers:
       '@vue/cli-service': ~5.0.0
       '@vue/test-utils': ^2.0.0-0
       '@vue/vue3-jest': ^27.0.0-alpha.1
+      '@wakeadmin/ce': workspace:^0.1.0
+      '@wakeadmin/framework': workspace:^0.1.0
+      '@wakeadmin/mapp': workspace:^0.1.0
+      '@wakeadmin/utils': workspace:^0.1.0
+      '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
+      '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.1.0
       babel-jest: ^27.0.6
+      babel-preset-wakeadmin: workspace:^0.1.0
       core-js: ^3.8.3
       jest: ^27.0.5
       sass: ^1.32.7
@@ -119,6 +126,10 @@ importers:
       vue: ^3.2.13
       vue-router: ^4.0.3
     dependencies:
+      '@wakeadmin/ce': link:../ce
+      '@wakeadmin/framework': link:../framework
+      '@wakeadmin/mapp': link:../mapp
+      '@wakeadmin/utils': link:../utils
       core-js: 172.26.59.72+4873/core-js/3.23.1
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-router: 172.26.59.72+4873/vue-router/4.0.16_vue@3.2.37
@@ -131,7 +142,10 @@ importers:
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
       '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0_vue@3.2.37
       '@vue/vue3-jest': 172.26.59.72+4873/@vue/vue3-jest/27.0.0_wu2rv2niyuvgniwdjhd5im7ui4
+      '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
+      '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
       babel-jest: 172.26.59.72+4873/babel-jest/27.5.1
+      babel-preset-wakeadmin: link:../babel-preset-wakeadmin
       jest: 172.26.59.72+4873/jest/27.5.1
       sass: 172.26.59.72+4873/sass/1.52.3
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.52.3
