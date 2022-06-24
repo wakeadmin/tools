@@ -23,10 +23,10 @@ export class TreeContainer {
     return this.roots.find(i => i.active);
   }
 
-  @observable.ref
   /**
    * 当前激活的节点，从子节点开始
    */
+  @observable.ref
   activeNode?: TreeNode;
 
   /**

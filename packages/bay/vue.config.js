@@ -11,4 +11,23 @@ module.exports = defineConfig({
       baseUrl: '/base',
     }),
   },
+  configureWebpack() {
+    return {
+      resolve: {
+        fallback: {
+          path: require.resolve('path-browserify'),
+        },
+      },
+    };
+  },
+  devServer: {
+    port: 3000,
+    proxy: {
+      '/permission': {
+        target: 'https://bizpf-test.wakedt.cn/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

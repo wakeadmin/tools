@@ -69,12 +69,12 @@ export enum MenuType {
   /**
    * 菜单
    */
-  Menu,
+  Menu = 'menu',
 
   /**
    * 按钮
    */
-  Button,
+  Button = 'button',
 }
 
 /**

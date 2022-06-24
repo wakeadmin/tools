@@ -10,7 +10,7 @@ interface RawLocation {
   hash: string;
 }
 
-const HASH_URL_REGEXP = /#(\/.*)(\?.*)/;
+const HASH_URL_REGEXP = /#(\/.*)(\?.*)?/;
 
 export class UniverseHistory {
   /**

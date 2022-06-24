@@ -1,5 +1,8 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
+import { configureBackend, configureBay } from './configure';
+import './menu';
 
-createApp(App).use(router).mount('#app');
+const bay = configureBay();
+
+configureBackend();
+
+bay.mount();

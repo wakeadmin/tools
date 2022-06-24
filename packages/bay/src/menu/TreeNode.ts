@@ -46,8 +46,8 @@ export class TreeNode {
   /**
    * 完整的权限标识符路径
    */
-  get identifierPath() {
-    return this.parent ? `${this.parent.identifier}.${this.identifier}` : this.identifier;
+  get identifierPath(): string {
+    return this.parent ? `${this.parent.identifierPath}.${this.identifier}` : this.identifier;
   }
 
   /**
