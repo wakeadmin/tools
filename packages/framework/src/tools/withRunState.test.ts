@@ -53,4 +53,33 @@ describe('withRunState', () => {
     expect(test.fn.loading).toBeTruthy();
     expect(result).resolves.toBe('bar');
   });
+
+  it('并发', async () => {
+    jest.useFakeTimers();
+
+    const mock = jest.fn();
+    const fn = withRunState(() => {
+      return new Promise(resolve => {
+        mock();
+        setTimeout(() => {
+          resolve('test');
+        });
+      });
+    });
+
+    const results: Promise<any>[] = [];
+    results.push(fn());
+    results.push(fn());
+    results.push(fn());
+
+    expect(fn.loading).toBe(true);
+    // 只会被调用一次
+    expect(mock).toBeCalledTimes(1);
+
+    jest.runAllTimers();
+
+    expect(Promise.all(results)).resolves.toEqual(['test', 'test', 'test']);
+
+    jest.useRealTimers();
+  });
 });

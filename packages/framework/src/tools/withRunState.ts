@@ -11,14 +11,37 @@ export function withRunState<T extends Function>(action: T) {
     error: undefined,
   });
 
+  // 并发调用合并
+  let queue: [Function, Function][] = [];
+  const flushQueue = (type: 'resolve' | 'reject', value: any) => {
+    if (queue.length === 0) {
+      return;
+    }
+
+    const q = queue;
+    queue = [];
+    q.forEach(([resolve, reject]) => {
+      const fn = type === 'resolve' ? resolve : reject;
+      fn(value);
+    });
+  };
+
   const wrapped = async (...args: any[]) => {
+    if (state.loading) {
+      return await new Promise((resolve, reject) => {
+        queue.push([resolve, reject]);
+      });
+    }
+
     try {
       state.loading = true;
       state.error = undefined;
       const rtn = await action(...args);
+      flushQueue('resolve', rtn);
       return rtn;
     } catch (err) {
       state.error = err as Error;
+      flushQueue('reject', err);
       throw err;
     } finally {
       state.loading = false;
