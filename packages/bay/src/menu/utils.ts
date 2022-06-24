@@ -28,23 +28,38 @@ export function trimQuery(path: string) {
   return path;
 }
 
+export function trimHash(path: string) {
+  const hIdx = path.indexOf('#');
+  if (hIdx !== -1) {
+    return path.substring(0, hIdx);
+  }
+
+  return path;
+}
+
+/**
+ * 逐级裁剪路径, 如果无法继续裁剪，将返回 null
+ *
+ * @param url 这里假设传入的是规范化后的 url
+ * @returns
+ */
 export function trimPathSection(url: string): string | null {
-  let [path, hash] = url.split('#');
+  let [path, hash = ''] = url.split('#');
   const hashLastIndex = hash.lastIndexOf('/');
 
-  if (hashLastIndex > 0) {
+  if (hashLastIndex >= 0 && hash !== '/') {
     // 可以裁剪
     hash = hash.slice(0, hashLastIndex);
 
-    return `${path}#${hash}`;
+    return `${path}#${hash || '/'}`;
   }
 
   const pathLastIndex = path.lastIndexOf('/');
 
-  if (pathLastIndex > 0) {
+  if (pathLastIndex >= 0 && path !== '/') {
     path = path.slice(0, pathLastIndex);
 
-    return `${path}#${hash}`;
+    return `${path || '/'}#${hash || '/'}`;
   }
 
   // 无法继续裁剪
@@ -53,10 +68,12 @@ export function trimPathSection(url: string): string | null {
 
 /**
  * 规范化 url，去掉干扰因素，方便进行匹配
+ *
+ * 一定会携带 hash
  * @param url
  */
 export function purifyUrl(url: string) {
-  let [path, hash] = url.split('#');
+  let [path, hash = ''] = url.split('#');
   path = trimQuery(path);
   hash = trimQuery(hash);
 
@@ -73,11 +90,29 @@ export function purifyUrl(url: string) {
 }
 
 /**
- * 规范化 url 地址
+ * 规范化路径
+ * @param url
+ */
+export function normalizeUrl(url: string) {
+  let [path, hash] = url.split('#');
+  const normalize = (p: string) => {
+    const qIdx = p.indexOf('?');
+    if (qIdx !== -1) {
+      return addHeadingSlash(removeTrailingSlash(p.slice(0, qIdx))) + p.slice(qIdx);
+    } else {
+      return addHeadingSlash(removeTrailingSlash(p));
+    }
+  };
+
+  return `${normalize(path)}${hash ? '#' + normalize(hash) : ''}`;
+}
+
+/**
+ * 规范化惟客云后端配置的 url 地址
  * @param url
  * @param rootUrl 根节点 url, 下级 url 将于 root url 进行拼接。注意这里的 root 是最后一个包含 url 的节点。
  */
-export function normalizeUrl(url: string, root?: string): NormalizedUrl {
+export function normalizeRoute(url: string, root?: string): NormalizedUrl {
   url = url.trim();
 
   // HTTP 外部链接
@@ -87,10 +122,11 @@ export function normalizeUrl(url: string, root?: string): NormalizedUrl {
 
   // 外挂链接
   if (url.startsWith('@')) {
+    const sliced = normalizeUrl(url.slice(1));
     return {
       raw: url,
-      url: url.slice(1),
-      matchable: purifyUrl(url),
+      url: sliced,
+      matchable: purifyUrl(sliced),
     };
   }
 
@@ -100,7 +136,7 @@ export function normalizeUrl(url: string, root?: string): NormalizedUrl {
 
   // 如果传入了根节点，将作为 hash 拼接起来
   if (root) {
-    const combined = root + '#' + url;
+    const combined = normalizeUrl(trimHash(root) + '#' + url);
 
     return {
       raw: url,
@@ -110,9 +146,10 @@ export function normalizeUrl(url: string, root?: string): NormalizedUrl {
   }
 
   // 可能本身就是根节点
+  const normalized = normalizeUrl(url);
   return {
     raw: url,
-    url,
-    matchable: purifyUrl(url),
+    url: normalized,
+    matchable: purifyUrl(normalized),
   };
 }

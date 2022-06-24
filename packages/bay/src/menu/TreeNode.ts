@@ -2,7 +2,7 @@ import { computed, makeObservable, observable } from '@wakeadmin/framework';
 import { TreeContainer } from './TreeContainer';
 
 import { MenuType, TreeNodeRaw } from './types';
-import { noEmptyString, normalizeUrl } from './utils';
+import { noEmptyString, normalizeRoute } from './utils';
 
 /**
  * 菜单节点
@@ -159,7 +159,7 @@ export class TreeNode {
      */
     if (noEmptyString(node.url)) {
       const root = this.findMenuRoot();
-      const { url, matchable } = normalizeUrl(node.url, root?.url);
+      const { url, matchable } = normalizeRoute(node.url, root?.url);
       this.url = url;
       this.matchKey = matchable;
     }

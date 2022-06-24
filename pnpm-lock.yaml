@@ -125,6 +125,7 @@ importers:
       typescript: ~4.5.5
       vue: ^3.2.13
       vue-router: ^4.0.3
+      vue-tsc: ^0.38.1
     dependencies:
       '@wakeadmin/ce': link:../ce
       '@wakeadmin/framework': link:../framework
@@ -151,6 +152,7 @@ importers:
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.52.3
       ts-jest: 172.26.59.72+4873/ts-jest/27.1.5_vv26jhn7qo5cgutfchk376fp4e
       typescript: 172.26.59.72+4873/typescript/4.5.5
+      vue-tsc: 172.26.59.72+4873/vue-tsc/0.38.1_typescript@4.5.5
 
   packages/ce:
     specifiers:
@@ -4823,6 +4825,64 @@ packages:
     dependencies:
       '@typescript-eslint/types': 172.26.59.72+4873/@typescript-eslint/types/5.27.1
       eslint-visitor-keys: 172.26.59.72+4873/eslint-visitor-keys/3.3.0
+    dev: true
+
+  172.26.59.72+4873/@volar/code-gen/0.38.1:
+    resolution:
+      {
+        integrity: sha512-QnEJfCPhPqzhQY/iN7euGoUWphyv4TmN1xK/HEpnXwgqgvIyLk/Ih3rvAFqlP6I5fTaCu6TGf9kZmjw9AlEeMA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@volar%2fcode-gen/-/code-gen-0.38.1.tgz,
+      }
+    name: '@volar/code-gen'
+    version: 0.38.1
+    dependencies:
+      '@volar/source-map': 172.26.59.72+4873/@volar/source-map/0.38.1
+    dev: true
+
+  172.26.59.72+4873/@volar/source-map/0.38.1:
+    resolution:
+      {
+        integrity: sha512-1DoB8BYTle81DdLChnurYteN208qvsfz4IgwjH6T2YcnBtUvtscxMOwg0bfQJskfoLrJ5gESBvEpU8tWsEVyrQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@volar%2fsource-map/-/source-map-0.38.1.tgz,
+      }
+    name: '@volar/source-map'
+    version: 0.38.1
+    dev: true
+
+  172.26.59.72+4873/@volar/vue-code-gen/0.38.1:
+    resolution:
+      {
+        integrity: sha512-tgJ2uySZKZqiq6HFKmjeVmUhJttd2LMhqtlqSukdqGx2Xw/OWnL0Di7+q6AScC6tu9/Bw570HKMHbhhLIrQm2Q==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@volar%2fvue-code-gen/-/vue-code-gen-0.38.1.tgz,
+      }
+    name: '@volar/vue-code-gen'
+    version: 0.38.1
+    dependencies:
+      '@volar/code-gen': 172.26.59.72+4873/@volar/code-gen/0.38.1
+      '@volar/source-map': 172.26.59.72+4873/@volar/source-map/0.38.1
+      '@vue/compiler-core': 172.26.59.72+4873/@vue/compiler-core/3.2.37
+      '@vue/compiler-dom': 172.26.59.72+4873/@vue/compiler-dom/3.2.37
+      '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
+
+  172.26.59.72+4873/@volar/vue-typescript/0.38.1:
+    resolution:
+      {
+        integrity: sha512-D4bTuiJ2WiRppJuZ34r3pstFLTwpweke3haszJwp0ioUI9BqKgh02TFqM+qhPezH6fF0NrWCxXMMQVxZL6d7gA==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@volar%2fvue-typescript/-/vue-typescript-0.38.1.tgz,
+      }
+    name: '@volar/vue-typescript'
+    version: 0.38.1
+    dependencies:
+      '@volar/code-gen': 172.26.59.72+4873/@volar/code-gen/0.38.1
+      '@volar/source-map': 172.26.59.72+4873/@volar/source-map/0.38.1
+      '@volar/vue-code-gen': 172.26.59.72+4873/@volar/vue-code-gen/0.38.1
+      '@vue/compiler-sfc': 172.26.59.72+4873/@vue/compiler-sfc/3.2.37
+      '@vue/reactivity': 172.26.59.72+4873/@vue/reactivity/3.2.37
     dev: true
 
   172.26.59.72+4873/@vue/babel-helper-vue-jsx-merge-props/1.2.1:
@@ -20099,6 +20159,24 @@ packages:
       }
     name: vue-template-es2015-compiler
     version: 1.9.1
+    dev: true
+
+  172.26.59.72+4873/vue-tsc/0.38.1_typescript@4.5.5:
+    resolution:
+      {
+        integrity: sha512-jwR4uwTkjsYhAW8o/BvnkeZsariNoi2Y53XSqWIbjtj7X9Laob+qwC2iVuQyRymYdqbbiqqX+CxfPWtwLACXfg==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/vue-tsc/-/vue-tsc-0.38.1.tgz,
+      }
+    id: 172.26.59.72+4873/vue-tsc/0.38.1
+    name: vue-tsc
+    version: 0.38.1
+    hasBin: true
+    peerDependencies:
+      typescript: '*'
+    dependencies:
+      '@volar/vue-typescript': 172.26.59.72+4873/@volar/vue-typescript/0.38.1
+      typescript: 172.26.59.72+4873/typescript/4.5.5
     dev: true
 
   172.26.59.72+4873/vue/2.6.14:
