@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, Router } from 'vue-router';
 import { EventEmitter } from '@wakeadmin/utils';
 import { registerMicroApps, start, RegistrableApp } from 'qiankun';
 
-import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister, MicroApp } from '../../types';
+import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister } from '../../types';
 
 import { NoopPage } from '../components';
 import { BayProviderContext, DEFAULT_ROOT } from '../constants';
@@ -13,6 +13,7 @@ import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
 import { groupAppsByIndependent, normalizeOptions } from './options';
 import { createRoutes, Navigator } from './route';
 import { AppContext } from './AppContext';
+import { MicroAppNormalized } from './types';
 
 export class Bay implements IBay {
   app: App;
@@ -35,11 +36,11 @@ export class Bay implements IBay {
   /**
    * 所有应用
    */
-  apps: MicroApp[];
+  apps: MicroAppNormalized[];
 
-  independentApps: MicroApp[];
+  independentApps: MicroAppNormalized[];
 
-  nonIndependentApps: MicroApp[];
+  nonIndependentApps: MicroAppNormalized[];
 
   get location() {
     return this.history.location;
@@ -63,7 +64,7 @@ export class Bay implements IBay {
     this.options = normalizeOptions(options);
 
     this.baseUrl = this.options.baseUrl ?? '/';
-    this.apps = this.options.apps;
+    this.apps = this.options.apps as MicroAppNormalized[];
     const { independentApps, nonIndependentApps } = groupAppsByIndependent(this.apps);
     this.independentApps = independentApps;
     this.nonIndependentApps = nonIndependentApps;
@@ -143,10 +144,16 @@ export class Bay implements IBay {
   private createRouter() {
     const routes = createRoutes(this.baseUrl, this.apps);
 
+    // 自定义路由
+    // 追加路由前缀
+    if (this.options.routes) {
+      routes.unshift(...this.options.routes);
+    }
+
     this.triggerHooks('beforeRouterCreate', routes);
 
     const router = createRouter({
-      history: createWebHistory(),
+      history: createWebHistory(this.baseUrl),
       routes,
     });
 

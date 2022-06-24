@@ -52,6 +52,7 @@ test('normalizeApps', () => {
     {
       name: '1',
       activeRule: '/base/1',
+      activeRuleRaw: '/1',
       entry: 'http://localhost',
       // 默认值
       container: '#root',
@@ -60,6 +61,7 @@ test('normalizeApps', () => {
       name: '2',
       // 会加上 base
       activeRule: '/base/2',
+      activeRuleRaw: '/2',
       // 不会修改
       entry: '/',
       container: '#app',
@@ -68,6 +70,7 @@ test('normalizeApps', () => {
       name: '3',
       // 已经配置了 base
       activeRule: '/base/3',
+      activeRuleRaw: '/3',
       // 不会修改
       entry: '//localhost',
       container: '#root',
@@ -76,6 +79,7 @@ test('normalizeApps', () => {
       name: '4',
       // 已经配置了 base
       activeRule: '/base/4',
+      activeRuleRaw: '/4',
       entry: '/base/app',
       container: '#root',
     },

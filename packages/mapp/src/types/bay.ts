@@ -112,7 +112,8 @@ export interface BuiltinPages {
 
 export interface BayHooks {
   /**
-   * 在路由创建之前调用. 可以在这里修改即将注册的路由配置
+   * 在路由创建之前调用. 可以在这里修改即将注册的路由配置.
+   *
    * @param routes
    */
   beforeRouterCreate(routes: RouteRecordRaw[]): void;
@@ -161,6 +162,11 @@ export interface BayOptions {
    * 微应用注册
    */
   apps: MicroApp[];
+
+  /**
+   * 自定义路由
+   */
+  routes?: RouteRecordRaw[];
 
   /**
    * 基座钩子

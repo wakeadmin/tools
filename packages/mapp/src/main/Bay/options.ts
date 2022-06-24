@@ -3,9 +3,11 @@ import path from 'path-browserify';
 
 import { BayOptions, MicroApp } from '../../types';
 
-import { DEFAULT_ROOT } from '../constants';
+import { DEFAULT_ROOT_FOR_CHILD } from '../constants';
+import { MicroAppNormalized } from './types';
+import { normalizeUrl, trimBaseUrl } from './utils';
 
-export function normalizeApps(baseUrl: string, apps: MicroApp[]) {
+export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormalized[] {
   // 所有 activeRule 都基于基座 base
   const tryAddBaseToActiveRule = (activeRule: string) => {
     if (activeRule.startsWith(baseUrl)) {
@@ -57,16 +59,17 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]) {
 
     return {
       activeRule: normalizedActiveRule,
+      activeRuleRaw: trimBaseUrl(baseUrl, normalizedActiveRule),
       entry: normalizedEntry,
-      container: app.container ?? DEFAULT_ROOT,
+      container: app.container ?? DEFAULT_ROOT_FOR_CHILD,
       ...other,
     };
   });
 }
 
-export function groupAppsByIndependent(apps: MicroApp[]) {
-  const independentApps: MicroApp[] = [];
-  const nonIndependentApps: MicroApp[] = [];
+export function groupAppsByIndependent(apps: MicroAppNormalized[]) {
+  const independentApps: MicroAppNormalized[] = [];
+  const nonIndependentApps: MicroAppNormalized[] = [];
 
   for (const app of apps) {
     if (app.independent) {
@@ -86,6 +89,8 @@ export function groupAppsByIndependent(apps: MicroApp[]) {
  */
 export function normalizeOptions(options: BayOptions): BayOptions {
   let { baseUrl = process.env.MAPP_BASE_URL ?? '/', apps, ...others } = options;
+
+  baseUrl = normalizeUrl(baseUrl);
 
   return {
     baseUrl,

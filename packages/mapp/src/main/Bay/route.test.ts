@@ -28,7 +28,7 @@ test('create routes', () => {
   expect(routes).toMatchObject([
     {
       name: 'error',
-      path: '/base/error',
+      path: '/error',
       component: ErrorPage,
       meta: {
         builtin: true,
@@ -36,7 +36,7 @@ test('create routes', () => {
     },
     {
       name: 'landing',
-      path: '/base/landing',
+      path: '/landing',
       component: LandingPage,
       meta: {
         builtin: true,
@@ -44,7 +44,7 @@ test('create routes', () => {
     },
     {
       name: '3',
-      path: '/base/3',
+      path: '/3',
       component: IndependentPage,
       meta: {
         app: {

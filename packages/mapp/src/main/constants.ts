@@ -13,10 +13,15 @@ export const ERROR_PAGE = '/error';
 export const LANDING_PAGE = '/landing';
 
 /**
- * 默认挂载的 root
+ * 基座挂载的默认 root
  */
-export const DEFAULT_ROOT = '#root';
-export const DEFAULT_ROOT_WITHOUT_PREFIX = DEFAULT_ROOT.slice(1);
+export const DEFAULT_ROOT = '#app';
+
+/**
+ * 子应用默认挂载的 root
+ */
+export const DEFAULT_ROOT_FOR_CHILD = '#root';
+export const DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX = DEFAULT_ROOT_FOR_CHILD.slice(1);
 
 /**
  * 获取 bay 实例

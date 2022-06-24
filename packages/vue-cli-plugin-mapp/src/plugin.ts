@@ -135,10 +135,12 @@ module.exports = {
       .end();
 
     // 注入共享依赖
-    const entries = chain.entryPoints.entries();
-    Object.keys(entries).forEach(n => {
-      chain.entry(n).prepend(sharedEntryPath).end();
-    });
+    if (_shared.length) {
+      const entries = chain.entryPoints.entries();
+      Object.keys(entries).forEach(n => {
+        chain.entry(n).prepend(sharedEntryPath).end();
+      });
+    }
   });
 };
 

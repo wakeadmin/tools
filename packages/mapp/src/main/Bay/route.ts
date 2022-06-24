@@ -2,11 +2,12 @@ import { NoopObject } from '@wakeadmin/utils';
 import pathUtils from 'path-browserify';
 import { RouteRecordRaw, RouteLocationRaw, stringifyQuery } from 'vue-router';
 
-import { MicroApp, ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
+import { ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
 
 import { ErrorPage, IndependentPage, LandingPage, MainPage } from '../components';
 import { ERROR_PAGE, LANDING_PAGE } from '../constants';
 import { groupAppsByIndependent } from './options';
+import { MicroAppNormalized } from './types';
 
 /**
  * 构造错误页面路由描述
@@ -27,24 +28,26 @@ export function getErrorRoute(data: ErrorPageProps & RouteLocationOptions): Rout
  * @param baseUrl
  * @param apps
  */
-export function createRoutes(baseUrl: string, apps: MicroApp[]) {
+export function createRoutes(baseUrl: string, apps: MicroAppNormalized[]) {
   /**
    * 内置路由
    */
   const builtinRoutes: RouteRecordRaw[] = [];
 
+  // 错误页面
   builtinRoutes.push({
     name: 'error',
-    path: pathUtils.join(baseUrl, ERROR_PAGE),
+    path: ERROR_PAGE,
     component: ErrorPage,
     meta: {
       builtin: true,
     },
   });
 
+  // 落地页
   builtinRoutes.push({
     name: 'landing',
-    path: pathUtils.join(baseUrl, LANDING_PAGE),
+    path: LANDING_PAGE,
     component: LandingPage,
     meta: {
       builtin: true,
@@ -60,7 +63,7 @@ export function createRoutes(baseUrl: string, apps: MicroApp[]) {
   for (const app of independentApps) {
     independentRoutes.push({
       name: app.name,
-      path: app.activeRule,
+      path: app.activeRuleRaw,
       component: IndependentPage,
       meta: {
         independent: true,
@@ -84,8 +87,9 @@ export function createRoutes(baseUrl: string, apps: MicroApp[]) {
     beforeEnter: to => {
       // 验证是否为 nonIndependentApps 的子路由
       // 如果不是，将重定向到 404 页面
-      const found = nonIndependentApps.some(a => to.path.startsWith(a.activeRule));
+      const found = nonIndependentApps.some(a => to.path.startsWith(a.activeRuleRaw));
       if (!found) {
+        console.warn(`[mapp] ${to.path} 未匹配到任何子应用，将重定向到 404 页面`);
         return getErrorRoute({
           type: 'http',
           code: '404',
