@@ -6,7 +6,15 @@ import {
   purifyUrl,
   normalizeRoute,
   normalizeUrl,
+  sortByLevel,
 } from './utils';
+
+test('sortByLevel', () => {
+  const a: any = { level: 1 };
+  const b: any = { level: 2 };
+  // 降序
+  expect(sortByLevel([a, b])).toEqual([{ level: 2 }, { level: 1 }]);
+});
 
 test('splitIdentifierPath', () => {
   expect(splitIdentifierPath('')).toEqual([]);

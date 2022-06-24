@@ -1,3 +1,5 @@
+import type { TreeNode } from './TreeNode';
+
 /**
  * 惟客云菜单项配置
  */
@@ -96,4 +98,13 @@ export interface NormalizedUrl {
    * 会去掉查询字符串等干扰因素
    */
   matchable: string;
+}
+
+export interface FindResult {
+  result?: TreeNode;
+
+  /**
+   * 是否精确匹配
+   */
+  exact?: boolean;
 }

@@ -61,7 +61,10 @@ export class MenuModel {
           return;
         }
 
-        container.matchRoute(location);
+        const { result, exact } = container.findByRoute(location);
+        if (result) {
+          container.lightUp(result, exact);
+        }
       },
       { immediate: true, flush: 'pre' }
     );

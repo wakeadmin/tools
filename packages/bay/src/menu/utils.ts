@@ -1,7 +1,19 @@
 import { NormalizedUrl } from './types';
+import type { TreeNode } from './TreeNode';
 import { addHeadingSlash, removeTrailingSlash } from '@wakeadmin/utils';
 
 const HAS_PROTOCOL = /^(http|https|file):\/\//;
+
+/**
+ * 根据深度降序排序节点列表
+ * @param list
+ * @returns
+ */
+export function sortByLevel(list: TreeNode[]) {
+  return list.sort((a, b) => {
+    return b.level - a.level;
+  });
+}
 
 export function splitIdentifierPath(path: string): string[] {
   return path

@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { computed, makeObservable, observable } from '@wakeadmin/framework';
 
 import { TreeNode } from './TreeNode';
 import { TreeRoot } from './TreeRoot';
-import { TreeNodeRaw } from './types';
+import { TreeNodeRaw, FindResult } from './types';
 import { purifyUrl, splitIdentifierPath, trimPathSection } from './utils';
+
+const EMPTY_RESULT: FindResult = {
+  result: undefined,
+  exact: false,
+};
 
 /**
  * 容器，用于控制菜单的逻辑
@@ -34,7 +40,14 @@ export class TreeContainer {
    */
   private indexByIdentifier: Map<string, TreeNode[]> = new Map();
 
-  private findByPathCache: Map<string, TreeNode | undefined> = new Map();
+  /**
+   * 根据匹配键索引
+   * 同一个 matchKey 下，一棵树只能一个节点
+   */
+  private indexByMatchKey: Map<string, TreeNode[]> = new Map();
+
+  private findByIdentifierPathCache: Map<string, FindResult> = new Map();
+  private findByMatchKeyCache: Map<string, FindResult> = new Map();
 
   constructor(roots: TreeNodeRaw[]) {
     this.roots = roots.map(i => {
@@ -46,27 +59,40 @@ export class TreeContainer {
 
   /**
    * 路由匹配
+   * @param route 当前路由
    */
-  matchRoute(route: string) {
+  findByRoute(route: string): FindResult {
     const normalized = purifyUrl(route);
 
-    // 待匹配的分组，已经激活的优先级最高
-    const matchGroups: TreeRoot[] = this.roots.slice(0);
-    const activeIdx = matchGroups.findIndex(i => i.active);
-    if (activeIdx !== -1) {
-      const removed = matchGroups.splice(activeIdx, 1);
-      matchGroups.unshift(...removed);
+    if (this.findByMatchKeyCache.has(normalized)) {
+      return this.findByMatchKeyCache.get(normalized)!;
     }
 
     // 开始匹配
     let matchedNode: TreeNode | undefined;
     let matchedKey: string | null = normalized;
+
+    // 是否精确匹配
     let exactMatched = true;
 
-    while (!matchedNode && matchedKey) {
-      for (const group of matchGroups) {
-        matchedNode = group.findByMatchKey(matchedKey);
-        if (matchedNode) {
+    while (matchedKey) {
+      const matcheds = this.indexByMatchKey.get(matchedKey);
+
+      if (matcheds?.length) {
+        if (matcheds.length === 1) {
+          matchedNode = matcheds[0];
+          break;
+        } else {
+          // 存在冲突
+          console.warn(`[bay] 路由匹配存在冲突: ${route}, 将就近匹配`, matcheds);
+
+          // 优先从当前激活树中获取
+          if (this.activeNode != null && (matchedNode = matcheds.find(i => i.root === this.activeNode?.root))) {
+            break;
+          }
+
+          // 选择第一个节点
+          matchedNode = matcheds[0];
           break;
         }
       }
@@ -77,13 +103,18 @@ export class TreeContainer {
     }
 
     // 点亮激活
-    if (matchedNode) {
-      this.lightUp(matchedNode, exactMatched);
-    } else {
+    if (!matchedNode) {
       console.warn(`[bay] 路由匹配失败: ${route}, 未找到匹配该节点的菜单节点`);
     }
 
-    return matchedNode;
+    const result: FindResult = {
+      result: matchedNode,
+      exact: exactMatched,
+    };
+
+    this.findByMatchKeyCache.set(normalized, result);
+
+    return result;
   }
 
   /**
@@ -91,34 +122,36 @@ export class TreeContainer {
    *
    * 即按照当前激活的节点路径，向上查找是否包含指定标识符的下级节点
    */
-  findUnderActiveContext(identifier: string) {
+  findByIdentifierUnderActiveContext(identifier: string): FindResult {
     if (identifier.includes('.')) {
       console.warn(
         `[bay] 基于上下文查找节点，不推荐使用'权限标识符路径'，这会使用查找效率更低的'路径查找方法': ${identifier}`
       );
 
-      return this.findByPath(identifier);
+      return this.findByIdentifierPath(identifier);
     }
 
     const activeNode = this.activeNode;
 
     if (activeNode == null) {
       console.warn('[bay] 基于上下文查找节点失败，当前没有激活的上下文');
-      return undefined;
+      return EMPTY_RESULT;
     }
 
     let current: TreeNode | undefined = activeNode;
+    let exactMatched = true;
 
     // 从激活节点开始，上溯查找包含指定标识符的节点
     while (current) {
       if (current.containsIdentifier(identifier)) {
-        return current;
+        return { result: current, exact: exactMatched };
       }
 
       current = current.parent;
+      exactMatched = false;
     }
 
-    return undefined;
+    return EMPTY_RESULT;
   }
 
   /**
@@ -127,9 +160,9 @@ export class TreeContainer {
    * 在冲突较多的情况下，性能会比较差
    * TODO: 需要节点树就绪后才能安全使用缓存
    */
-  findByPath(path: string): TreeNode | undefined {
-    if (this.findByPathCache.has(path)) {
-      return this.findByPathCache.get(path);
+  findByIdentifierPath(path: string): FindResult {
+    if (this.findByIdentifierPathCache.has(path)) {
+      return this.findByIdentifierPathCache.get(path)!;
     }
 
     const identifiers = splitIdentifierPath(path);
@@ -137,7 +170,7 @@ export class TreeContainer {
       throw new Error(`[bay] 权限标识符路径不合法: ${path}`);
     }
 
-    // 递归查找
+    let exactMatched = true;
     const find = (list: string[], parentMatched?: TreeNode): TreeNode | undefined => {
       const root = list[0];
 
@@ -148,7 +181,10 @@ export class TreeContainer {
 
       const nodes = this.indexByIdentifier.get(root);
       const rest = list.slice(1);
+
       const conflictWarn = (results: TreeNode[]) => {
+        // 一旦冲突就不是精确匹配了
+        exactMatched = false;
         console.warn(
           `[bay] 查找 ${path} 时， 存在多个节点匹配到同一个标识符: ${root}, 请检查菜单配置或程序，避免标识符冲突. 默认会采用第一个作为结果`,
           results
@@ -178,7 +214,6 @@ export class TreeContainer {
         }
       } else {
         // 基于 parentMatched 查找
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const nodesUnderParentMatched = nodes.filter(n => parentMatched!.contains(n));
         const results: TreeNode[] = nodesUnderParentMatched.map(n => find(rest, n)).filter((n): n is TreeNode => !!n);
 
@@ -190,25 +225,15 @@ export class TreeContainer {
       }
     };
 
-    const result = find(identifiers);
-    this.findByPathCache.set(path, result);
+    const matched = find(identifiers);
+    const result: FindResult = {
+      result: matched,
+      exact: exactMatched,
+    };
+
+    this.findByIdentifierPathCache.set(path, result);
 
     return result;
-  }
-
-  /**
-   * 收集节点信息并建立索引
-   * @param node
-   */
-  _registerNode(node: TreeNode) {
-    const identifier = node.identifier;
-
-    const value = this.indexByIdentifier.get(identifier);
-    if (value != null) {
-      value.push(node);
-    } else {
-      this.indexByIdentifier.set(identifier, [node]);
-    }
   }
 
   /**
@@ -217,7 +242,7 @@ export class TreeContainer {
    * @param exact 是否为精确匹配
    *
    */
-  private lightUp(node: TreeNode, exact: boolean = false) {
+  lightUp(node: TreeNode, exact: boolean = false) {
     const oldNode = this.activeNode;
 
     // 激活
@@ -227,5 +252,80 @@ export class TreeContainer {
 
     // 取消旧的节点
     oldNode?._extinguish();
+  }
+
+  /**
+   * 收集节点信息并建立索引
+   * @param node
+   */
+  _registerNode(node: TreeNode) {
+    this.createIndexByIdentifier(node);
+    this.createIndexByMatchedKey(node);
+  }
+
+  /**
+   * 创建菜单匹配索引
+   * @param node
+   * @returns
+   */
+  private createIndexByMatchedKey(node: TreeNode) {
+    if (node.matchKey == null) {
+      return;
+    }
+
+    const rawList = this.indexByMatchKey.get(node.matchKey);
+    const list = rawList ?? [];
+    const key = node.matchKey;
+
+    if (list.length) {
+      // 可能存在冲突
+      // 在同一颗树中
+      const nodeIndexUnderSameRoot = list.findIndex(i => i.root === node.root);
+
+      if (nodeIndexUnderSameRoot !== -1) {
+        // 存在同一个树下的节点
+        const nodeUnderSameRoot = list[nodeIndexUnderSameRoot];
+        if (node.contains(nodeUnderSameRoot)) {
+          // 不做处理，优先使用更深的节点
+          return;
+        } else if (nodeUnderSameRoot.contains(node)) {
+          // 当前节点优先级更好，替换掉
+          list[nodeIndexUnderSameRoot] = node;
+        } else {
+          // 没有交集的两个节点
+          console.warn(
+            `[bay] 同一棵树下，存在重复的路由: ${key}, 这可能导致路由匹配出现歧义，请检查菜单配置`,
+            node,
+            nodeUnderSameRoot
+          );
+          // 选择层级更深的节点
+          list[nodeIndexUnderSameRoot] = node.level > nodeUnderSameRoot.level ? node : nodeUnderSameRoot;
+        }
+      } else {
+        list.push(node);
+        console.warn(`[bay] 存在重复的路由: ${key}, 这可能导致路由匹配出现歧义，请检查菜单配置`, list);
+      }
+    } else {
+      list.push(node);
+    }
+
+    if (rawList !== list) {
+      this.indexByMatchKey.set(key, list);
+    }
+  }
+
+  /**
+   * 创建标识符匹配索引
+   * @param node
+   */
+  private createIndexByIdentifier(node: TreeNode) {
+    const identifier = node.identifier;
+
+    const value = this.indexByIdentifier.get(identifier);
+    if (value != null) {
+      value.push(node);
+    } else {
+      this.indexByIdentifier.set(identifier, [node]);
+    }
   }
 }

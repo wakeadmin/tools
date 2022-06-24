@@ -20,24 +20,11 @@ export class TreeRoot {
     return this.root.active;
   }
 
-  /**
-   * 根据规范化后的路径匹配索引
-   */
-  private indexByMatchKey: Map<string, TreeNode> = new Map();
-
   constructor(root: TreeNodeRaw, container: TreeContainer) {
     this.container = container;
     this.root = this.createNode(root);
 
     makeObservable(this);
-  }
-
-  /**
-   * 这里假设这个 key 是规范化之后的
-   * @param key
-   */
-  findByMatchKey(key: string) {
-    return this.indexByMatchKey.get(key);
   }
 
   /**
@@ -54,18 +41,7 @@ export class TreeRoot {
       });
     }
 
-    // 记录索引信息
-    if (node.matchKey) {
-      if (this.indexByMatchKey.has(node.matchKey)) {
-        console.warn(
-          `[bay] 存在重复的路由: ${node.matchKey}, 这可能导致路由匹配出现歧义，请检查菜单配置`,
-          this.indexByMatchKey.get(node.matchKey),
-          node
-        );
-      } else {
-        this.indexByMatchKey.set(node.matchKey, node);
-      }
-    }
+    this.container._registerNode(node);
 
     return node;
   }
