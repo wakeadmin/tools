@@ -45,7 +45,7 @@ export class TreeRoot {
    * @param data
    */
   createNode(data: TreeNodeRaw, parent?: TreeNode): TreeNode {
-    const node = new TreeNode(data, this.container, parent);
+    const node = new TreeNode(data, parent);
 
     // 递归创建
     if (data.childMenu?.length) {

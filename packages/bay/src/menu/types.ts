@@ -5,7 +5,7 @@ export interface TreeNodeRaw {
   /**
    * 禁用状态, 没有实际意义，后端接口会过滤掉已经禁用的菜单
    */
-  disabled: number;
+  disabled?: number;
 
   /**
    * 唯一 id
@@ -52,8 +52,9 @@ export interface TreeNodeRaw {
    */
   seq?: number;
 
-  createTime: number;
-  updateTime: number;
+  createTime?: number;
+
+  updateTime?: number;
 
   /**
    * 子级

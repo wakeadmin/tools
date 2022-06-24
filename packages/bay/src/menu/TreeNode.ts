@@ -24,8 +24,6 @@ export class TreeNode {
     return this.root === this;
   }
 
-  readonly container: TreeContainer;
-
   /**
    * 原始配置
    */
@@ -48,7 +46,6 @@ export class TreeNode {
   /**
    * 完整的权限标识符路径
    */
-  @computed
   get identifierPath() {
     return this.parent ? `${this.parent.identifier}.${this.identifier}` : this.identifier;
   }
@@ -149,8 +146,7 @@ export class TreeNode {
    * @param node 原始数据
    * @param parent 父节点
    */
-  constructor(node: TreeNodeRaw, container: TreeContainer, parent?: TreeNode) {
-    this.container = container;
+  constructor(node: TreeNodeRaw, parent?: TreeNode) {
     this.parent = parent;
     this.raw = node;
 
