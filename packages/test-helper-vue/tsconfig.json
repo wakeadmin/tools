@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "tsBuildInfoFile": ".tsBuildInfo" /* Specify file to store incremental compilation information */,
-    "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+    "jsx": "react-jsx"
   }
 }
