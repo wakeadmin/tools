@@ -1,6 +1,7 @@
 import { computed, makeObservable, observable } from '@wakeadmin/framework';
+import { TOP_LEVEL } from './constants';
 
-import { MenuType, TreeNodeRaw } from './types';
+import { MenuType, RouteType, TreeNodeRaw } from './types';
 import { noEmptyString, normalizeRoute } from './utils';
 
 /**
@@ -97,6 +98,11 @@ export class TreeNode {
    */
   readonly matchKey?: string;
 
+  /**
+   * 节点路由类型
+   */
+  readonly routeType: RouteType;
+
   private childNodes: TreeNode[] = [];
   // 索引，方便提高查找效率
   private childNodesByIdentifier: Map<string, TreeNode> = new Map();
@@ -150,15 +156,11 @@ export class TreeNode {
     this.parent = parent;
     this.raw = node;
 
-    /**
-     * 规范化 url
-     */
-    if (noEmptyString(node.url)) {
-      const root = this.findMenuRoot();
-      const { url, matchable } = normalizeRoute(node.url, root?.url);
-      this.url = url;
-      this.matchKey = matchable;
-    }
+    // 获取规范化路由
+    const { url, matchKey, routeType } = this.getRouteInfo();
+    this.url = url;
+    this.matchKey = matchKey;
+    this.routeType = routeType;
 
     makeObservable(this);
   }
@@ -258,26 +260,66 @@ export class TreeNode {
   }
 
   /**
+   * 获取路由信息
+   */
+  private getRouteInfo() {
+    const sourceUrl = this.raw.url;
+    let url: string | undefined;
+    let matchKey: string | undefined;
+    let routeType: RouteType = RouteType.None;
+
+    /**
+     * 规范化 url
+     */
+    if (noEmptyString(sourceUrl)) {
+      const root = this.findRootUrl();
+
+      // 下级节点应该都能够找到 root, 除了二级节点可能为分组项
+      if (root == null && this.level > 1) {
+        console.warn(`[bay] 未找到根路径, 请检查菜单配置, 节点: `, this);
+      }
+
+      // TODO: 支持相对路径
+      // 相对路径会基于父 url 拼接, 形成 sourceUrl 再进行规范化
+      // 相对路径只能用于子路由, 即父节点的 routeType 不能 Main
+      // @ 路径的相对路径也是基于 hash 进行计算的。
+      const result = normalizeRoute(sourceUrl, root?.url);
+      url = result.url;
+      matchKey = result.matchable;
+      routeType = result.routeType;
+    } else if (this.type === MenuType.Menu && this.level !== TOP_LEVEL) {
+      // 顶层节点可以不指定，作为分组使用
+      console.warn(`[bay] 菜单类型的节点应该指定 url, 节点: ${this.raw.name}(${this.identifierPath})`, this);
+    }
+
+    return {
+      url,
+      matchKey,
+      routeType,
+    };
+  }
+
+  /**
    * 查找菜单(包含 url)根节点
    */
-  private findMenuRoot() {
+  private findRootUrl() {
     // 本身就是根节点
     if (this.root === this) {
       return undefined;
     }
 
     // 上溯找到第一个节点
-    let lastMenuRoot: TreeNode | undefined;
+    let lastRootHasUrl: TreeNode | undefined;
     let current: TreeNode | undefined = this.parent;
 
     while (current) {
       if (current.url != null) {
-        lastMenuRoot = current;
+        lastRootHasUrl = current;
       }
 
       current = current.parent;
     }
 
-    return lastMenuRoot;
+    return lastRootHasUrl;
   }
 }

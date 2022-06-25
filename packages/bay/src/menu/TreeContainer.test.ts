@@ -10,6 +10,11 @@ describe('TreeContainer', () => {
 
   test('索引警告信息', () => {
     expect(getWarnings()).toEqual([
+      '[bay] 菜单类型的节点应该指定 url, 节点: 批量导出(company.company_mgr.store_manage.store_manage_export)',
+      '[bay] 菜单类型的节点应该指定 url, 节点: 视频列表(marketing.materials.video.video_list)',
+      '[bay] 菜单类型的节点应该指定 url, 节点: 音频列表(marketing.materials.audio.audio_list)',
+      '[bay] 菜单类型的节点应该指定 url, 节点: PDF列表(marketing.materials.pdf.pdf_list)',
+      '[bay] 菜单类型的节点应该指定 url, 节点: 删除(wkb.goods_available_mgr.available_list.available_manage.del_goods)',
       '[bay] 同一棵树下，存在重复的路由: /demo.html#/foo, 这可能导致路由匹配出现歧义，请检查菜单配置',
       '[bay] 存在重复的路由: /demo.html#/, 这可能导致路由匹配出现歧义，请检查菜单配置',
       '[bay] 全限定标识符冲突，请检查菜单配置：demo',

@@ -97,12 +97,14 @@ test('normalizeRoute', () => {
     raw: 'http://example.com',
     url: 'http://example.com',
     matchable: 'http://example.com',
+    routeType: 'href',
   });
 
   expect(normalizeRoute(`@/hello/world?query#/hello/world?hashQuery`)).toEqual({
     raw: '@/hello/world?query#/hello/world?hashQuery',
     url: '/hello/world?query#/hello/world?hashQuery',
     matchable: '/hello/world#/hello/world',
+    routeType: 'outside',
   });
 
   // with root
@@ -110,11 +112,13 @@ test('normalizeRoute', () => {
     raw: '/hello/world?hashQuery',
     url: '/hello?query#/hello/world?hashQuery',
     matchable: '/hello#/hello/world',
+    routeType: 'subRoute',
   });
 
   expect(normalizeRoute('hello/world?hashQuery')).toEqual({
     raw: 'hello/world?hashQuery',
     url: '/hello/world?hashQuery',
     matchable: '/hello/world#/',
+    routeType: 'main',
   });
 });

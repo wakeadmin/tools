@@ -80,6 +80,36 @@ export enum MenuType {
 }
 
 /**
+ * 菜单节点路由类型
+ */
+export enum RouteType {
+  /**
+   * 入口节点, 即 history 类型，比如 /wkb.html
+   */
+  Main = 'main',
+
+  /**
+   * 子路由，即 hash 类型
+   */
+  SubRoute = 'subRoute',
+
+  /**
+   * 外挂路由，即以 @ 开头的子路由，基座将不会将其视作 hash 子路由
+   */
+  Outside = 'outside',
+
+  /**
+   * 外部链接
+   */
+  Href = 'href',
+
+  /**
+   * 未定义路由
+   */
+  None = 'none',
+}
+
+/**
  * 规范化后的链接
  */
 export interface NormalizedUrl {
@@ -98,6 +128,11 @@ export interface NormalizedUrl {
    * 会去掉查询字符串等干扰因素
    */
   matchable: string;
+
+  /**
+   * 路由类型
+   */
+  routeType: RouteType;
 }
 
 export interface FindResult {

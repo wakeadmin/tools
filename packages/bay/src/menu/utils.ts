@@ -1,4 +1,4 @@
-import { NormalizedUrl } from './types';
+import { NormalizedUrl, RouteType } from './types';
 import type { TreeNode } from './TreeNode';
 import { addHeadingSlash, removeTrailingSlash } from '@wakeadmin/utils';
 
@@ -129,7 +129,7 @@ export function normalizeRoute(url: string, root?: string): NormalizedUrl {
 
   // HTTP 外部链接
   if (HAS_PROTOCOL.test(url)) {
-    return { raw: url, url, matchable: url };
+    return { raw: url, url, matchable: url, routeType: RouteType.Href };
   }
 
   // 外挂链接
@@ -139,6 +139,7 @@ export function normalizeRoute(url: string, root?: string): NormalizedUrl {
       raw: url,
       url: sliced,
       matchable: purifyUrl(sliced),
+      routeType: RouteType.Outside,
     };
   }
 
@@ -154,6 +155,7 @@ export function normalizeRoute(url: string, root?: string): NormalizedUrl {
       raw: url,
       url: combined,
       matchable: purifyUrl(combined),
+      routeType: RouteType.SubRoute,
     };
   }
 
@@ -163,5 +165,6 @@ export function normalizeRoute(url: string, root?: string): NormalizedUrl {
     raw: url,
     url: normalized,
     matchable: purifyUrl(normalized),
+    routeType: RouteType.Main,
   };
 }
