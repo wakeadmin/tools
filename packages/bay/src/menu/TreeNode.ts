@@ -1,5 +1,4 @@
 import { computed, makeObservable, observable } from '@wakeadmin/framework';
-import { TreeContainer } from './TreeContainer';
 
 import { MenuType, TreeNodeRaw } from './types';
 import { noEmptyString, normalizeRoute } from './utils';
@@ -46,6 +45,7 @@ export class TreeNode {
   /**
    * 完整的权限标识符路径
    */
+  @computed
   get identifierPath(): string {
     return this.parent ? `${this.parent.identifierPath}.${this.identifier}` : this.identifier;
   }

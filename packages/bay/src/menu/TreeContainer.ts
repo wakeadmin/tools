@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { computed, makeObservable, observable } from '@wakeadmin/framework';
+import { WARNING_CODE_CHILD_CONFLICT, WARNING_CODE_ROOT_CONFLICT } from './constants';
 
 import { TreeNode } from './TreeNode';
 import { TreeRoot } from './TreeRoot';
@@ -46,6 +47,12 @@ export class TreeContainer {
    */
   private indexByMatchKey: Map<string, TreeNode[]> = new Map();
 
+  /**
+   * 根据完整的权限标识符路径索引，用于快速查找
+   * 全限定权限标识符肯定是唯一的
+   */
+  private indexByIdentifierPath: Map<string, TreeNode> = new Map();
+
   private findByIdentifierPathCache: Map<string, FindResult> = new Map();
   private findByMatchKeyCache: Map<string, FindResult> = new Map();
 
@@ -55,6 +62,17 @@ export class TreeContainer {
     });
 
     makeObservable(this);
+  }
+
+  /**
+   * 根据全限定权限标识符查找
+   * @param path
+   */
+  findByPullIdentifierPath(path: string): FindResult {
+    return {
+      result: this.indexByIdentifierPath.get(path),
+      exact: true,
+    };
   }
 
   /**
@@ -125,7 +143,7 @@ export class TreeContainer {
   findByIdentifierUnderActiveContext(identifier: string): FindResult {
     if (identifier.includes('.')) {
       console.warn(
-        `[bay] 基于上下文查找节点，不推荐使用'权限标识符路径'，这会使用查找效率更低的'路径查找方法': ${identifier}`
+        `[bay] 基于上下文查找节点时，不推荐使用'权限标识符路径'，这会使用查找效率更低的'路径查找方法': ${identifier}`
       );
 
       return this.findByIdentifierPath(identifier);
@@ -134,33 +152,44 @@ export class TreeContainer {
     const activeNode = this.activeNode;
 
     if (activeNode == null) {
-      console.warn('[bay] 基于上下文查找节点失败，当前没有激活的上下文');
+      console.warn(`[bay] 基于上下文查找节点失败，当前没有激活的上下文: ${identifier}`);
       return EMPTY_RESULT;
     }
 
     let current: TreeNode | undefined = activeNode;
+    // 如果在当前节点找到就是精确匹配
     let exactMatched = true;
+    let matched: TreeNode | undefined;
 
     // 从激活节点开始，上溯查找包含指定标识符的节点
     while (current) {
-      if (current.containsIdentifier(identifier)) {
-        return { result: current, exact: exactMatched };
+      // 当前节点就是
+      if (current.identifier === identifier) {
+        matched = current;
+        break;
+      }
+
+      if ((matched = current.getChildByIdentifier(identifier))) {
+        break;
       }
 
       current = current.parent;
       exactMatched = false;
     }
 
-    return EMPTY_RESULT;
+    return { result: matched, exact: exactMatched };
   }
 
   /**
    * 根据全限定标识符来查找节点，支持宽松模式，即不要求完全匹配
    *
    * 在冲突较多的情况下，性能会比较差
-   * TODO: 需要节点树就绪后才能安全使用缓存
    */
   findByIdentifierPath(path: string): FindResult {
+    if (this.indexByIdentifierPath.has(path)) {
+      return this.findByPullIdentifierPath(path);
+    }
+
     if (this.findByIdentifierPathCache.has(path)) {
       return this.findByIdentifierPathCache.get(path)!;
     }
@@ -182,11 +211,11 @@ export class TreeContainer {
       const nodes = this.indexByIdentifier.get(root);
       const rest = list.slice(1);
 
-      const conflictWarn = (results: TreeNode[]) => {
+      const conflictWarn = (code: number, results: TreeNode[]) => {
         // 一旦冲突就不是精确匹配了
         exactMatched = false;
         console.warn(
-          `[bay] 查找 ${path} 时， 存在多个节点匹配到同一个标识符: ${root}, 请检查菜单配置或程序，避免标识符冲突. 默认会采用第一个作为结果`,
+          `[bay: ${code}] 查找 ${path} 时， 存在多个节点匹配到同一个标识符: ${root}, 请检查菜单配置或程序，避免标识符冲突. 默认会采用第一个作为结果`,
           results
         );
       };
@@ -207,7 +236,7 @@ export class TreeContainer {
           const results: TreeNode[] = nodes.map(n => find(rest, n)).filter((n): n is TreeNode => !!n);
 
           if (results.length > 1) {
-            conflictWarn(results);
+            conflictWarn(WARNING_CODE_ROOT_CONFLICT, results);
           }
 
           return results[0];
@@ -218,7 +247,7 @@ export class TreeContainer {
         const results: TreeNode[] = nodesUnderParentMatched.map(n => find(rest, n)).filter((n): n is TreeNode => !!n);
 
         if (results.length > 1) {
-          conflictWarn(results);
+          conflictWarn(WARNING_CODE_CHILD_CONFLICT, results);
         }
 
         return results[0];
@@ -255,12 +284,43 @@ export class TreeContainer {
   }
 
   /**
+   * 取消当前节点
+   */
+  extinguish() {
+    if (this.activeNode == null) {
+      return;
+    }
+
+    this.activeNode._extinguish();
+    this.activeNode = undefined;
+  }
+
+  /**
+   * 清除查找缓存
+   */
+  clearFindCache() {
+    this.findByIdentifierPathCache.clear();
+    this.findByMatchKeyCache.clear();
+  }
+
+  /**
    * 收集节点信息并建立索引
    * @param node
    */
   _registerNode(node: TreeNode) {
     this.createIndexByIdentifier(node);
     this.createIndexByMatchedKey(node);
+    this.createIndexByIdentifierPath(node);
+  }
+
+  private createIndexByIdentifierPath(node: TreeNode) {
+    const path = node.identifierPath;
+
+    if (this.indexByIdentifierPath.has(path)) {
+      console.warn(`[bay] 全限定标识符冲突，请检查菜单配置：${path}`, this.indexByIdentifierPath.get(path), node);
+    }
+
+    this.indexByIdentifierPath.set(path, node);
   }
 
   /**

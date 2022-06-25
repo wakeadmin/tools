@@ -1,7 +1,7 @@
 import { TreeNode } from './TreeNode';
 import { MenuType, TreeNodeRaw } from './types';
 
-const root: TreeNodeRaw = {
+const data0: TreeNodeRaw = {
   id: '9',
   parentId: '0',
   identifier: 'root',
@@ -18,6 +18,16 @@ const data1: TreeNodeRaw = {
   name: 'create',
   url: '/create/page',
   level: 1,
+  isMenu: 1,
+};
+
+const data2: TreeNodeRaw = {
+  id: '2',
+  parentId: '1',
+  identifier: 'delete',
+  name: 'delete',
+  url: '/create/page/delete',
+  level: 2,
   isMenu: 1,
 };
 
@@ -39,33 +49,44 @@ test('基本属性', () => {
 });
 
 test('基本方法', () => {
-  const node = new TreeNode(root);
-  const child = new TreeNode(data1, node);
+  const root = new TreeNode(data0);
+  const child = new TreeNode(data1, root);
+  const grandchild = new TreeNode(data2, child);
 
-  node.children = [child];
+  root.children = [child];
+  child.children = [grandchild];
 
-  expect(node.contains(child)).toBe(true);
-  expect(node.contains(node)).toBe(true);
+  expect(root.contains(child)).toBe(true);
+  expect(root.contains(root)).toBe(true);
+  expect(root.contains(grandchild)).toBe(true);
 
   expect(child.identifierPath).toBe('root.create');
-  expect(node.isLeaf).toBe(false);
-  expect(node.isRoot).toBe(true);
-  expect(child.isLeaf).toBe(true);
+  expect(grandchild.identifierPath).toBe('root.create.delete');
+
+  expect(root.isLeaf).toBe(false);
+  expect(root.isRoot).toBe(true);
+  expect(child.isLeaf).toBe(false);
+  expect(child.isRoot).toBe(false);
+  expect(grandchild.isLeaf).toBe(true);
+  expect(grandchild.isRoot).toBe(false);
 
   expect(child.url).toBe('/root#/create/page');
   expect(child.matchKey).toBe('/root#/create/page');
 
   // 激活
-  child._lightUp(true);
+  grandchild._lightUp(true);
 
+  expect(grandchild.active).toBe(true);
+  expect(grandchild.exactMatched).toBe(true);
   expect(child.active).toBe(true);
-  expect(child.exactMatched).toBe(true);
+  expect(child.exactMatched).toBe(false);
   expect(child.collapsed).toBe(false);
-  expect(node.active).toBe(true);
-  expect(node.exactMatched).toBe(false);
+  expect(root.active).toBe(true);
+  expect(root.exactMatched).toBe(false);
 
   // 取消激活
-  child._extinguish();
+  grandchild._extinguish();
+  expect(grandchild.active).toBe(false);
   expect(child.active).toBe(false);
-  expect(node.active).toBe(false);
+  expect(root.active).toBe(false);
 });
