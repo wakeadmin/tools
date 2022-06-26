@@ -1,12 +1,3 @@
 {
-  "cSpell.words": [
-    "demi",
-    "mapp",
-    "Matcheds",
-    "qiankun",
-    "vnode",
-    "wakeadmin",
-    "wakeapp",
-    "wakedata"
-  ]
+  "cSpell.words": ["demi", "mapp", "Matcheds", "qiankun", "retryable", "vnode", "wakeadmin", "wakeapp", "wakedata"]
 }

@@ -3,7 +3,6 @@ import { computed, makeObservable, observable } from '@wakeadmin/framework';
 import { WARNING_CODE_CHILD_CONFLICT, WARNING_CODE_ROOT_CONFLICT } from './constants';
 
 import { TreeNode } from './TreeNode';
-import { TreeRoot } from './TreeRoot';
 import { TreeNodeRaw, FindResult, RouteType } from './types';
 import { purifyUrl, splitIdentifierPath, trimPathSection, trimQueryAndHash } from './utils';
 
@@ -20,13 +19,13 @@ export class TreeContainer {
    * 菜单树
    */
   @observable.shallow
-  roots: TreeRoot[] = [];
+  roots: TreeNode[] = [];
 
   /**
    * 当前激活菜单树
    */
   @computed
-  get activeRoot(): TreeRoot | undefined {
+  get activeRoot(): TreeNode | undefined {
     return this.roots.find(i => i.active);
   }
 
@@ -64,7 +63,7 @@ export class TreeContainer {
 
   constructor(roots: TreeNodeRaw[]) {
     this.roots = roots.map(i => {
-      return new TreeRoot(i, this);
+      return this.createNode(i);
     });
 
     makeObservable(this);
@@ -310,10 +309,29 @@ export class TreeContainer {
   }
 
   /**
+   * 创建并索引节点信息
+   * @param data
+   */
+  private createNode(data: TreeNodeRaw, parent?: TreeNode): TreeNode {
+    const node = new TreeNode(data, parent);
+
+    // 递归创建
+    if (data.childMenu?.length) {
+      node.children = data.childMenu.map(i => {
+        return this.createNode(i, node);
+      });
+    }
+
+    this.registerNode(node);
+
+    return node;
+  }
+
+  /**
    * 收集节点信息并建立索引
    * @param node
    */
-  _registerNode(node: TreeNode) {
+  private registerNode(node: TreeNode) {
     this.createIndexByIdentifier(node);
     this.createIndexByMatchedKey(node);
     this.createIndexByIdentifierPath(node);
