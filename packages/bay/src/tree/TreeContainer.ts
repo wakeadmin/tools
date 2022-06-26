@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { computed, makeObservable, observable } from '@wakeadmin/framework';
+import { NoopArray } from '@wakeadmin/utils';
 import { WARNING_CODE_CHILD_CONFLICT, WARNING_CODE_ROOT_CONFLICT } from './constants';
 
 import { TreeNode } from './TreeNode';
-import { TreeNodeRaw, FindResult, RouteType } from './types';
+import { TreeNodeRaw, FindResult, RouteType, MenuType } from './types';
 import { purifyUrl, splitIdentifierPath, trimPathSection, trimQueryAndHash } from './utils';
 
 const EMPTY_RESULT: FindResult = {
@@ -30,7 +31,69 @@ export class TreeContainer {
   }
 
   /**
-   * 当前激活的节点，从子节点开始
+   * 一级菜单
+   */
+  @computed
+  get topMenus() {
+    return this.roots.filter(i => i.type === MenuType.Menu);
+  }
+
+  /**
+   * 一级按钮
+   */
+  @computed
+  get topButtons() {
+    return this.roots.filter(i => i.type === MenuType.Button);
+  }
+
+  /**
+   * 侧边栏二级菜单
+   */
+  get sidebarMenus(): TreeNode[] {
+    const node = this.activeRoot;
+    if (node == null) {
+      return [];
+    }
+
+    // 第一级为菜单
+    if (node.url != null) {
+      return node.children;
+    }
+
+    // 第一级为分组
+    const activeRoot = node.children.find(i => i.active);
+    if (activeRoot) {
+      return activeRoot.children;
+    }
+
+    return NoopArray;
+  }
+
+  /**
+   * 四级菜单
+   */
+  get tabMenus(): TreeNode[] {
+    const sidebarMenus = this.sidebarMenus;
+    // 从二级菜单开始，向下找出两级
+    let level = 2;
+
+    let children: TreeNode[] | undefined = sidebarMenus;
+
+    while (level > 0 && children?.length) {
+      children = children.find(i => i.active)?.children;
+
+      level--;
+    }
+
+    if (level === 0 && children?.length) {
+      return children;
+    }
+
+    return NoopArray;
+  }
+
+  /**
+   * 当前激活的叶子节点，从子节点开始
    */
   @observable.ref
   activeNode?: TreeNode;

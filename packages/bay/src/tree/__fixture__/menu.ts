@@ -4498,7 +4498,7 @@ export default [
     disabled: 0,
     id: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-demo-2',
     identifier: 'demo',
-    isMenu: 1,
+    isMenu: 0,
     isShow: 1,
     level: 0,
     name: 'DEMO',
