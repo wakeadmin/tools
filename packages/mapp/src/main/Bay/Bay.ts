@@ -1,9 +1,9 @@
 import { createApp, App } from 'vue';
 import { createRouter, createWebHistory, Router } from 'vue-router';
-import { EventEmitter } from '@wakeadmin/utils';
+import { EventEmitter, trimQueryAndHash } from '@wakeadmin/utils';
 import { registerMicroApps, start, RegistrableApp } from 'qiankun';
 
-import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister } from '../../types';
+import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister, MicroApp } from '../../types';
 
 import { NoopPage } from '../components';
 import { BayProviderContext, DEFAULT_ROOT } from '../constants';
@@ -13,6 +13,7 @@ import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
 import { groupAppsByIndependent, normalizeOptions } from './options';
 import { createRoutes, Navigator } from './route';
 import { AppContext } from './AppContext';
+import { normalizeUrl } from './utils';
 import { MicroAppNormalized } from './types';
 
 export class Bay implements IBay {
@@ -123,6 +124,16 @@ export class Bay implements IBay {
    */
   getApp(name: string) {
     return this.apps.find(i => i.name === name) ?? null;
+  }
+
+  getAppByRoute(router: string): MicroApp | null {
+    const normalized = normalizeUrl(trimQueryAndHash(router));
+
+    return this.apps.find(i => i.activeRule === normalized) ?? null;
+  }
+
+  getAppByAlias(alias: string): MicroApp[] {
+    return this.apps.filter(i => i.alias === alias);
   }
 
   registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void {

@@ -18,7 +18,7 @@ export interface RouteLocationAsPath {
   /**
    * 路由路径
    */
-  path: string;
+  path?: string;
 
   /**
    * 查询字符串

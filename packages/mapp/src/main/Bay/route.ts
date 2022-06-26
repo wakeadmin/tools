@@ -145,7 +145,7 @@ export class Navigator {
     if (typeof url === 'string') {
       this.navigate(url);
     } else {
-      const { path, query = NoopObject, hashPath, hashQuery, redirect } = url;
+      const { path = '/', query = NoopObject, hashPath, hashQuery, redirect } = url;
       const queryString = query && stringifyQuery(query);
       let fullPath = `${path}${queryString ? `?${queryString}` : ''}`;
 

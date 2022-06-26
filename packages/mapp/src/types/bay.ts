@@ -273,6 +273,18 @@ export interface IBay {
   getApp(name: string): MicroApp | null;
 
   /**
+   * 根据路由获取应用，即匹配 activeRule
+   * activeRule 和给定的 route 的 pathname 部分必须精确匹配
+   */
+  getAppByRoute(route: string): MicroApp | null;
+
+  /**
+   * 根据别名获取应用
+   * @param alias
+   */
+  getAppByAlias(alias: string): MicroApp[];
+
+  /**
    * TODO: 其他方法
    */
 }

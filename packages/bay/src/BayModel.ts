@@ -10,10 +10,10 @@ import {
   postConstruct,
   BaseModel,
 } from '@wakeadmin/framework';
-import type { IBay } from '@wakeadmin/mapp/main';
+import type { IBay, RouteLocationOptions } from '@wakeadmin/mapp/main';
 
 import { BayRepo } from './BayRepo';
-import { TreeContainer } from './tree';
+import { TreeContainer, TreeNode, RouteType } from './tree';
 import { PromiseQueue } from './base';
 
 declare global {
@@ -88,15 +88,15 @@ export class BayModel extends BaseModel {
    * 在后台菜单配置中定义了路由的微应用
    */
   @computed
-  get definedApps() {
+  get appsInMenus() {
     const entries = this.menu?.entries;
     const apps = this.bay.apps;
 
     if (entries == null) {
-      return [];
+      return new Set();
     }
 
-    return apps.filter(i => entries.has(i.activeRule));
+    return new Set(apps.filter(i => entries.has(i.activeRule)));
   }
 
   @inject('DI.bay.promiseQueue')
@@ -131,6 +131,104 @@ export class BayModel extends BaseModel {
     }
 
     this.retryableInitialize();
+  }
+
+  /**
+   * 根据微应用的名称打开。
+   * TODO: 支持参数
+   */
+  openByAppName(name: string, options: RouteLocationOptions) {
+    const app = this.bay.getApp(name);
+
+    if (app == null) {
+      console.warn(`[bay] openByAppName(${name}) 所指定的子应用未找到`);
+      return;
+    }
+
+    if (!this.appsInMenus.has(app)) {
+      console.warn(`[bay] openByAppName(${name}) 所指定的子应用未在菜单中定义`);
+    }
+
+    this.bay.openApp({ name, route: options });
+  }
+
+  /**
+   *
+   * 根据微应用的别名打开, 常用于多态应用。这里会优先打开在菜单中定义的微应用
+   *
+   * @param alias
+   * @param options
+   */
+  openByAppAlias(alias: string, options: RouteLocationOptions) {}
+
+  /**
+   * 打开主界面, 即菜单中定义的第一个根节点
+   * @param options
+   */
+  openMain(options: RouteLocationOptions) {}
+
+  /**
+   * 根据权限标识符路径打开
+   * @param path
+   *
+   * TODO: 支持参数
+   */
+  openByIdentifierPath(path: string, options: RouteLocationOptions) {
+    if (this.menu == null) {
+      console.warn(`[bay] openByIdentifierPath 需要等待基座启动后才能调用`);
+      return;
+    }
+
+    const result = this.menu.findByIdentifierPath(path);
+    if (result.result != null) {
+      this.openTreeNode(result.result, options);
+    } else {
+      console.warn(`[bay] openByIdentifierPath 未找到标识符路径为 ${path} 的节点`);
+    }
+  }
+
+  /**
+   * 打开菜单节点
+   * TODO: 支持参数
+   * @param node
+   */
+  openTreeNode(node: TreeNode, options: RouteLocationOptions): void {
+    if (!node.url) {
+      console.warn(`[bay] 无法打开菜单节点，url 为空`, node);
+      return;
+    }
+
+    switch (node.routeType) {
+      case RouteType.Href: {
+        // 外部链接, 直接打开
+        this.openOutside(node.url, options);
+        break;
+      }
+      case RouteType.None:
+        break;
+      default: {
+        // 首先判断是否是微应用, 如果是微应用, 则使用 history 打开
+        const app = this.bay.getAppByRoute(node.url);
+        if (app) {
+          this.bay.openUrl({ path: node.url, ...options });
+        } else {
+          // 外部链接
+          this.openOutside(node.url, options);
+        }
+      }
+    }
+  }
+
+  /**
+   * 打开外部链接
+   */
+  openOutside(url: string, options: RouteLocationOptions) {
+    const redirect = options.redirect;
+    if (redirect) {
+      window.location.replace(url);
+    } else {
+      window.location.assign(url);
+    }
   }
 
   // watch 和 createMenus 不能在构造函数中调用因为依赖注入还没完成
