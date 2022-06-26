@@ -1,5 +1,5 @@
 import { configureBackend, configureBay } from './configure';
-import './menu';
+import './tree';
 
 const bay = configureBay();
 
