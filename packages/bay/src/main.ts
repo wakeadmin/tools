@@ -1,8 +1,3 @@
-import { configureBackend, configureBay } from './configure';
-import './tree';
+import { createApp } from './configure';
 
-const bay = configureBay();
-
-configureBackend();
-
-bay.mount();
+createApp().mount();

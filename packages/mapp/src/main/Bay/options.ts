@@ -1,4 +1,4 @@
-import { removeTrailingSlash, addHeadingSlash } from '@wakeadmin/utils';
+import { removeTrailingSlash } from '@wakeadmin/utils';
 import path from 'path-browserify';
 
 import { BayOptions, MicroApp } from '../../types';
@@ -11,10 +11,10 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
   // 所有 activeRule 都基于基座 base
   const tryAddBaseToActiveRule = (activeRule: string) => {
     if (activeRule.startsWith(baseUrl)) {
-      return activeRule;
+      return normalizeUrl(activeRule);
     }
 
-    return `${removeTrailingSlash(baseUrl)}${addHeadingSlash(removeTrailingSlash(activeRule))}`;
+    return `${removeTrailingSlash(baseUrl)}${normalizeUrl(activeRule)}`;
   };
 
   // 如果是相对路径，都相对于基座 base

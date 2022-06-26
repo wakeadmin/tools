@@ -1,6 +1,8 @@
-import Framework, { registerConstant } from '@wakeadmin/framework';
+import Framework, { configureDI } from '@wakeadmin/framework';
 import { initial, compose } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
+import { BayModel } from './BayModel';
+import { BayRepo } from './BayRepo';
 
 declare global {
   interface DIMapper {
@@ -27,7 +29,11 @@ export function configureBay() {
     ],
   });
 
-  registerConstant('DI.bay', bay);
+  configureDI(({ registerConstant, registerSingletonClass }) => {
+    registerConstant('DI.bay', bay);
+    registerSingletonClass('DI.bay.BayModel', BayModel);
+    registerSingletonClass('DI.bay.BayRepo', BayRepo);
+  });
 
   bay.app.use(Framework);
 
@@ -51,4 +57,11 @@ export function configureBackend() {
     //   return next();
     // },
   });
+}
+
+export function createApp() {
+  configureBackend();
+  const bay = configureBay();
+
+  return bay;
 }

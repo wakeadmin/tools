@@ -7,8 +7,11 @@ import {
   requestPaginationByPost,
 } from '@wakeapp/wakedata-backend';
 import { configureDI } from '@wakeadmin/framework';
+import { PromiseQueue } from './PromiseQueue';
 
-configureDI(({ registerSingletonCreator }) => {
+configureDI(({ registerSingletonCreator, registerClass }) => {
+  registerClass('DI.bay.promiseQueue', PromiseQueue);
+
   // 注册接口请求器
   registerSingletonCreator('DI.bay.requestor', () => {
     return {
@@ -25,3 +28,4 @@ configureDI(({ registerSingletonCreator }) => {
 });
 
 export * from './BaseRepoImplement';
+export * from './PromiseQueue';

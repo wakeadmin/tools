@@ -1,11 +1,11 @@
 import { injectable, singleton } from '@wakeadmin/framework';
 import { BaseRepoImplement } from '@/base';
 
-import { TreeNodeRaw } from './types';
+import { TreeNodeRaw } from './tree';
 
 declare global {
   interface DIMapper {
-    'DI.bay.MenuRepo': MenuRepo;
+    'DI.bay.BayRepo': BayRepo;
   }
 }
 
@@ -14,7 +14,7 @@ declare global {
  */
 @injectable()
 @singleton()
-export class MenuRepo extends BaseRepoImplement {
+export class BayRepo extends BaseRepoImplement {
   /**
    * 获取所有菜单
    * @returns
