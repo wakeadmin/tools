@@ -4,8 +4,8 @@ import { WARNING_CODE_CHILD_CONFLICT, WARNING_CODE_ROOT_CONFLICT } from './const
 
 import { TreeNode } from './TreeNode';
 import { TreeRoot } from './TreeRoot';
-import { TreeNodeRaw, FindResult } from './types';
-import { purifyUrl, splitIdentifierPath, trimPathSection } from './utils';
+import { TreeNodeRaw, FindResult, RouteType } from './types';
+import { purifyUrl, splitIdentifierPath, trimPathSection, trimQueryAndHash } from './utils';
 
 const EMPTY_RESULT: FindResult = {
   result: undefined,
@@ -35,6 +35,12 @@ export class TreeContainer {
    */
   @observable.ref
   activeNode?: TreeNode;
+
+  /**
+   * 所有菜单里面定义的页面入口
+   */
+  @observable
+  entries: Set<string> = new Set<string>();
 
   /**
    * 根据权限标识符索引
@@ -311,6 +317,17 @@ export class TreeContainer {
     this.createIndexByIdentifier(node);
     this.createIndexByMatchedKey(node);
     this.createIndexByIdentifierPath(node);
+    this.collectionEntry(node);
+  }
+
+  /**
+   * 收集页面入口
+   * @param node
+   */
+  private collectionEntry(node: TreeNode) {
+    if (node.routeType === RouteType.Main || node.routeType === RouteType.Outside) {
+      this.entries.add(trimQueryAndHash(node.url!));
+    }
   }
 
   private createIndexByIdentifierPath(node: TreeNode) {

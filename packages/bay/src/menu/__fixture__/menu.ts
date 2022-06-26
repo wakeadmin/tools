@@ -4478,6 +4478,22 @@ export default [
         // 根路由冲突
         url: '/baz',
       },
+      // @ 外挂路由
+      {
+        childMenu: [],
+        disabled: 0,
+        id: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-demo-outside',
+        identifier: 'outside',
+        isMenu: 1,
+        isShow: 1,
+        level: 0,
+        name: 'DEMO-outside',
+        parentId: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-demo-2',
+        seq: 3,
+        status: 1,
+        // 根路由冲突
+        url: '@/outside#/hello',
+      },
     ],
     disabled: 0,
     id: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-demo-2',

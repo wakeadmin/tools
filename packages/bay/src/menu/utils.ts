@@ -49,6 +49,10 @@ export function trimHash(path: string) {
   return path;
 }
 
+export function trimQueryAndHash(path: string) {
+  return trimQuery(trimHash(path));
+}
+
 /**
  * 逐级裁剪路径, 如果无法继续裁剪，将返回 null
  *

@@ -283,6 +283,7 @@ export class TreeNode {
       // 相对路径会基于父 url 拼接, 形成 sourceUrl 再进行规范化
       // 相对路径只能用于子路由, 即父节点的 routeType 不能 Main
       // @ 路径的相对路径也是基于 hash 进行计算的。
+      // 上溯找出路径, 跳过空 url
       const result = normalizeRoute(sourceUrl, root?.url);
       url = result.url;
       matchKey = result.matchable;

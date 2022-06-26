@@ -21,6 +21,19 @@ describe('TreeContainer', () => {
     ]);
   });
 
+  test('入口页面收集', () => {
+    expect(Array.from(container.entries.values())).toEqual([
+      '/console.html',
+      '/dsp.html',
+      '/ad.html',
+      '/app.html',
+      '/wkb.html',
+      '/dmp.html',
+      '/demo.html',
+      '/outside',
+    ]);
+  });
+
   describe('查找', () => {
     beforeEach(() => {
       warn.mockClear();
