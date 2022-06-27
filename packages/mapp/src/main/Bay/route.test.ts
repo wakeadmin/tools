@@ -99,23 +99,63 @@ describe('navigator', () => {
   });
 
   test('openApp', () => {
-    nav.openApp({ name: 'foo', route: { path: '/custom', query: { foo: 'bar' }, redirect: true } });
-
-    expect(replace).toBeCalledWith(null, '', '/base/foo#/custom?foo=bar');
-  });
-
-  test('openUrl', () => {
-    nav.openUrl('/full');
-    expect(push).toBeCalledWith(null, '', '/full');
-
-    nav.openUrl({
-      path: '/full',
+    nav.openApp({
+      name: 'foo',
       query: { foo: 'bar' },
-      hashPath: '/path',
-      hashQuery: { bar: 'bar' },
+      hashPath: '/hash/path',
+      hashQuery: { bar: 'baz' },
+      redirect: true,
     });
 
-    expect(push).toBeCalledWith(null, '', '/full?foo=bar#/path?bar=bar');
+    expect(replace).toBeCalledWith(null, '', '/base/foo?foo=bar#/hash/path?bar=baz');
+  });
+
+  describe('openUrl', () => {
+    test('常规调用', () => {
+      nav.openUrl('/full');
+      expect(push).toBeCalledWith(null, '', '/full');
+
+      nav.openUrl({
+        path: '/full',
+        query: { foo: 'bar' },
+        hashPath: '/path',
+        hashQuery: { bar: 'bar' },
+      });
+
+      expect(push).toBeCalledWith(null, '', '/full?foo=bar#/path?bar=bar');
+    });
+
+    test('已包含query', () => {
+      nav.openUrl({
+        path: '/full?a=b',
+        query: { foo: 'bar' },
+        hashPath: '/path?c=d',
+        hashQuery: { bar: 'bar' },
+      });
+
+      expect(push).toBeCalledWith(null, '', '/full?a=b&foo=bar#/path?c=d&bar=bar');
+    });
+
+    test('已包含hash', () => {
+      nav.openUrl({
+        path: '/full?a=b#/oh/my/god',
+        query: { foo: 'bar' },
+        hashPath: '/path?c=d',
+        hashQuery: { bar: 'bar' },
+      });
+
+      expect(push).toBeCalledWith(null, '', '/full?a=b&foo=bar#/path?c=d&bar=bar');
+    });
+
+    test('已包含 hash 2', () => {
+      nav.openUrl({
+        path: '/full?a=b#/oh/my/god?c=d',
+        query: { foo: 'bar' },
+        hashQuery: { bar: 'bar' },
+      });
+
+      expect(push).toBeCalledWith(null, '', '/full?a=b&foo=bar#/oh/my/god?c=d&bar=bar');
+    });
   });
 
   test('openMain', () => {

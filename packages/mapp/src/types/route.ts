@@ -7,13 +7,6 @@ export interface RouteLocationOptions {
   redirect?: boolean;
 }
 
-export interface RouteLocationMode {
-  /**
-   * 路由模式, 基座默认为 path, 子应用默认为 hash
-   */
-  mode?: 'hash' | 'history';
-}
-
 export interface RouteLocationAsPath {
   /**
    * 路由路径

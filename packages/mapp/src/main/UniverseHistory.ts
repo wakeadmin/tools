@@ -10,7 +10,7 @@ interface RawLocation {
   hash: string;
 }
 
-const HASH_URL_REGEXP = /#(\/.*)(\?.*)?/;
+const HASH_URL_REGEXP = /#(\/[^?]*)(\?.*)?/;
 
 export class UniverseHistory {
   /**
@@ -29,7 +29,7 @@ export class UniverseHistory {
       if (matched) {
         return {
           path: matched[1],
-          query: matched[2],
+          query: matched[2] ?? '',
         };
       }
     }

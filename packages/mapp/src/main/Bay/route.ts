@@ -1,5 +1,4 @@
-import { NoopObject } from '@wakeadmin/utils';
-import pathUtils from 'path-browserify';
+import { joinQuery } from '@wakeadmin/utils';
 import { RouteRecordRaw, RouteLocationRaw, stringifyQuery } from 'vue-router';
 
 import { ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
@@ -123,7 +122,7 @@ export class Navigator {
   };
 
   openApp: IBay['openApp'] = option => {
-    const { name, route } = option;
+    const { name, ...route } = option;
 
     const app = this.bay.getApp(name);
 
@@ -131,28 +130,32 @@ export class Navigator {
       throw new Error(`[mapp] openApp 未找到应用：${name}`);
     }
 
-    const { path = '/', query = NoopObject, mode = 'hash', redirect } = route;
-    const mainPath = app.activeRule;
-    const queryString = query && stringifyQuery(query);
-    const appPath = `${path}${queryString ? `?${queryString}` : ''}`;
-
-    const fullPath = mode === 'history' ? pathUtils.join(mainPath, appPath) : `${mainPath}#${appPath}`;
-
-    this.navigate(fullPath, redirect);
+    this.openUrl({ ...route, path: app.activeRule });
   };
 
   openUrl: IBay['openUrl'] = url => {
     if (typeof url === 'string') {
       this.navigate(url);
     } else {
-      const { path = '/', query = NoopObject, hashPath, hashQuery, redirect } = url;
+      let { path = '/', query, hashPath, hashQuery, redirect } = url;
       const queryString = query && stringifyQuery(query);
-      let fullPath = `${path}${queryString ? `?${queryString}` : ''}`;
+      const hashIdx = path.indexOf('#');
+
+      if (hashIdx !== -1) {
+        // 分离 hash
+        const hashPart = path.slice(hashIdx + 1);
+        path = path.slice(0, hashIdx);
+        hashPath ??= hashPart;
+      }
+
+      let fullPath = queryString ? joinQuery(path, queryString) : path;
 
       // 设置 hash
       if (hashPath || hashQuery) {
         const hashQueryString = hashQuery && stringifyQuery(hashQuery);
-        fullPath += `#${hashPath ?? '/'}${hashQueryString ? `?${hashQueryString}` : ''}`;
+        hashPath ??= '/';
+
+        fullPath += `#${hashQueryString ? joinQuery(hashPath, hashQueryString) : hashPath}`;
       }
 
       this.navigate(fullPath, redirect);

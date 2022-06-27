@@ -2,13 +2,7 @@ import type { DefineComponent, App } from 'vue';
 import type { RouteRecordRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
 
-import {
-  UniverseLocation,
-  RouteLocationOptions,
-  RouteLocationAsPath,
-  RouteLocationAsPathAndHash,
-  RouteLocationMode,
-} from './route';
+import { UniverseLocation, RouteLocationOptions, RouteLocationAsPathAndHash } from './route';
 import { INetworkInterceptorRegister } from './network-interceptor';
 
 /**
@@ -248,9 +242,9 @@ export interface IBay {
   /**
    * 打开子应用
    * @param name 子应用名称
-   * @param route 子应用路由, 假设为 hash
+   * @param route 子应用路由
    */
-  openApp(data: { name: string; route: RouteLocationAsPath & RouteLocationMode & RouteLocationOptions }): void;
+  openApp(options: Omit<RouteLocationAsPathAndHash, 'path'> & RouteLocationOptions & { name: string }): void;
 
   /**
    * 直接打开路径
