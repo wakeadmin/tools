@@ -16,6 +16,7 @@ import { BayRepo } from './BayRepo';
 import { TreeContainer, RouteType } from './tree';
 import { PromiseQueue } from './base';
 import { IBayModel } from './types';
+import type { SessionInfo } from './session';
 
 declare global {
   interface DIMapper {
@@ -74,6 +75,12 @@ export class BayModel extends BaseModel implements IBayModel {
    */
   @observable.ref
   menu?: TreeContainer;
+
+  /**
+   * 会话信息
+   */
+  @observable.ref
+  sessionInfo?: SessionInfo;
 
   get loading() {
     return this.status !== BayStatus.READY && this.status !== BayStatus.ERROR;
@@ -319,7 +326,7 @@ export class BayModel extends BaseModel implements IBayModel {
       this.status = BayStatus.PENDING;
       this.error = undefined;
 
-      await Promise.all([this.createMenus()]);
+      await Promise.all([this.getSessionInfo(), this.createMenus()]);
       this.status = BayStatus.READY;
 
       this.emit('Event.bay.setup', this);
@@ -335,11 +342,20 @@ export class BayModel extends BaseModel implements IBayModel {
   }
 
   /**
-   * 配置菜单
+   * 获取会话信息
+   * @returns
    */
-  private createMenus = withRunState(async () => {
+  private getSessionInfo = async () => {
+    return (this.sessionInfo = await this.repo.getSessionInfo());
+  };
+
+  /**
+   * 配置菜单
+   * TODO: 菜单配置缓存，以提升加载效率
+   */
+  private createMenus = async () => {
     const menus = await this.repo.getMenus();
 
-    this.menu = new TreeContainer(menus);
-  });
+    return (this.menu = new TreeContainer(menus));
+  };
 }
