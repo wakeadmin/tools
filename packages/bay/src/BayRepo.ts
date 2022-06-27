@@ -1,7 +1,8 @@
 import { injectable, singleton } from '@wakeadmin/framework';
 import { BaseRepoImplement } from '@/base';
 
-import { TreeNodeRaw } from './tree';
+// import { TreeNodeRaw } from './tree';
+import menus from './tree/__fixture__/menu';
 
 declare global {
   interface DIMapper {
@@ -20,16 +21,17 @@ export class BayRepo extends BaseRepoImplement {
    * @returns
    */
   getMenus() {
-    return this.requestor.requestByPost<TreeNodeRaw[]>(
-      '/permission/web/wd/menu/show/menu',
-      {
-        // 根节点为 0
-        menuIdList: [0],
-        allChildren: true,
-      },
-      {
-        headers: { 'content-Type': 'application/x-www-form-urlencoded' },
-      }
-    );
+    return menus;
+    // return this.requestor.requestByPost<TreeNodeRaw[]>(
+    //   '/permission/web/wd/menu/show/menu',
+    //   {
+    //     // 根节点为 0
+    //     menuIdList: [0],
+    //     allChildren: true,
+    //   },
+    //   {
+    //     headers: { 'content-Type': 'application/x-www-form-urlencoded' },
+    //   }
+    // );
   }
 }

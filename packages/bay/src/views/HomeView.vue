@@ -1,9 +1,12 @@
 <template>
-  <div class="home">
-    <Top />
-  </div>
+  <Suspense>
+    <div class="bay">
+      <Header />
+    </div>
+    <template #fallback>loading...</template>
+  </Suspense>
 </template>
 
 <script lang="ts" setup>
-  import Top from '@/components/Top.vue'; // @ is an alias to /src
+  import Header from '@/components/Header.vue';
 </script>

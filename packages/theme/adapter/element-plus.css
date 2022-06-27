@@ -3,12 +3,11 @@
  * https://element-plus.org/zh-CN/guide/theming.html#%E9%80%9A%E8%BF%87-css-%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE
  * 相关的变量定义，可以打开 element-plus 网页控制台查看
  */
-@import url(./theme.css);
 :root {
-  /* --el-color-white: #ffffff; */
-  --el-color-white: var(--wk-color-white);
+  /* --el-color-white: #ffffff;
+  --el-color-black: #000000; */
 
-  /* --el-color-black: #000000; */
+  --el-color-white: var(--wk-color-white);
   --el-color-black: var(--wk-color-black);
 
   /* --el-color-primary: #409eff;
@@ -108,10 +107,11 @@
   --el-color-info-light-9: var(--wk-color-info-50);
   --el-color-info-dark-2: var(--wk-color-info-900);
 
-  /* --el-bg-color: #ffffff; */
-  /* --el-bg-color-page: #f2f3f5; */
+  /* --el-bg-color: #ffffff;
+  --el-bg-color-page: #f2f3f5;
+  --el-bg-color-overlay: #ffffff; */
+
   --el-bg-color-page: var(--wk-color-bg-200);
-  /* --el-bg-color-overlay: #ffffff; */
 
   /* --el-text-color-primary: #303133;
   --el-text-color-regular: #606266;
@@ -195,7 +195,7 @@
   --el-border-radius-round: 20px;
   --el-border-radius-circle: 100%; */
 
-  --el-border-radius-base: var(--wk-border-radius-bar);
+  --el-border-radius-base: var(--wk-border-radius-base);
   --el-border-radius-small: var(--wk-border-radius-sm);
   --el-border-radius-round: var(--wk-border-radius-md);
   --el-border-radius-circle: var(--wk-border-radius-full);

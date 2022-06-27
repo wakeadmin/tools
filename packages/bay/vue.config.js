@@ -22,11 +22,14 @@ module.exports = defineConfig({
         },
       },
       plugins: [
+        // 专注于自动导入
         AutoImport({
-          resolvers: [ElementPlusResolver()],
+          // 关闭样式导入，我们使用全局导入，并覆盖变量配置
+          resolvers: [ElementPlusResolver({ importStyle: false })],
         }),
+        // 支持 Vue 组件自动导入
         Components({
-          resolvers: [ElementPlusResolver()],
+          resolvers: [ElementPlusResolver({ importStyle: false })],
         }),
       ],
     };

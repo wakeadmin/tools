@@ -5,10 +5,10 @@ import '@vue/runtime-core';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
+    ElButton: typeof import('element-plus/es')['ElButton'];
+    Header: typeof import('./src/components/Header.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
-    Top: typeof import('./src/components/Top.vue')['default'];
   }
 }
 
