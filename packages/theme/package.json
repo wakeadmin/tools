@@ -1,0 +1,16 @@
+{
+  "name": "@wakeadmin/theme",
+  "version": "0.1.0",
+  "description": "主题变量定义",
+  "main": "theme.css",
+  "types": "theme.d.ts",
+  "files": [
+    "theme.css",
+    "theme.css",
+    "adapter"
+  ],
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
