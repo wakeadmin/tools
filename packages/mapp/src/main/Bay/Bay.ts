@@ -79,7 +79,7 @@ export class Bay implements IBay {
     /**
      * 应用初始化
      */
-    this.app = createApp(NoopPage);
+    this.app = createApp(this.options.rootComponent ?? NoopPage);
     this.router = this.createRouter();
     this.history = new UniverseHistory(l => {
       this.triggerHooks('locationChange', l);

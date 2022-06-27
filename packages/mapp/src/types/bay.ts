@@ -1,4 +1,4 @@
-import type { DefineComponent, App } from 'vue';
+import type { DefineComponent, App, Component } from 'vue';
 import type { RouteRecordRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
 
@@ -172,6 +172,12 @@ export interface BayOptions {
    * 你也可以通过 registerNetworkInterceptor 方法来注册
    */
   networkInterceptors?: INetworkInterceptorRegister[];
+
+  /**
+   * 根组件。将传递给 createApp
+   * 必须携带 RouterView
+   */
+  rootComponent?: Component;
 }
 /**
  * 基座实例

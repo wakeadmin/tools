@@ -1,8 +1,10 @@
 import Framework, { configureDI } from '@wakeadmin/framework';
 import { initial, compose } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
+
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
+import App from './App.vue';
 
 declare global {
   interface DIMapper {
@@ -12,6 +14,7 @@ declare global {
 
 export function configureBay() {
   const bay = createBay({
+    rootComponent: App,
     apps: [],
     hooks: {},
     routes: [
