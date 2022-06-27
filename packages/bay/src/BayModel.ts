@@ -13,8 +13,9 @@ import {
 import type { IBay, RouteLocationOptions } from '@wakeadmin/mapp/main';
 
 import { BayRepo } from './BayRepo';
-import { TreeContainer, TreeNode, RouteType } from './tree';
+import { TreeContainer, RouteType } from './tree';
 import { PromiseQueue } from './base';
+import { IBayModel } from './types';
 
 declare global {
   interface DIMapper {
@@ -49,7 +50,7 @@ export enum BayStatus {
  */
 @injectable()
 @singleton()
-export class BayModel extends BaseModel {
+export class BayModel extends BaseModel implements IBayModel {
   @inject('DI.bay.BayRepo')
   repo!: BayRepo;
 
@@ -135,9 +136,12 @@ export class BayModel extends BaseModel {
 
   /**
    * 根据微应用的名称打开。
-   * TODO: 支持参数
    */
-  openByAppName(name: string, options: RouteLocationOptions) {
+  openByAppName: IBayModel['openByAppName'] = (name, options) => {
+    if (!this.assetOpen()) {
+      return;
+    }
+
     const app = this.bay.getApp(name);
 
     if (app == null) {
@@ -149,8 +153,8 @@ export class BayModel extends BaseModel {
       console.warn(`[bay] openByAppName(${name}) 所指定的子应用未在菜单中定义`);
     }
 
-    this.bay.openApp({ name, route: options });
-  }
+    this.bay.openApp({ name, ...options });
+  };
 
   /**
    *
@@ -159,40 +163,75 @@ export class BayModel extends BaseModel {
    * @param alias
    * @param options
    */
-  openByAppAlias(alias: string, options: RouteLocationOptions) {}
+  openByAppAlias: IBayModel['openByAppAlias'] = (alias, options) => {
+    const apps = this.bay.getAppByAlias(alias);
+
+    if (apps.length === 0) {
+      console.warn(`[bay] openByAppAlias(${alias}) 所指定的子应用未找到`);
+      return;
+    }
+
+    if (apps.length > 1) {
+      if (!this.assetOpen()) {
+        return;
+      }
+      // 查找在菜单中定义的微应用
+      const definedApps = apps.filter(i => this.appsInMenus.has(i));
+      const finalApps = definedApps.length > 0 ? definedApps : apps;
+
+      if (finalApps.length > 1) {
+        console.warn(`[bay] openByAppAlias(${alias}) 所指定的子应用存在多个，出现歧义将打开第一个`, finalApps);
+      }
+      this.openByAppName(finalApps[0].name, options);
+    } else {
+      this.openByAppName(apps[0].name, options);
+    }
+  };
 
   /**
    * 打开主界面, 即菜单中定义的第一个根节点
    * @param options
    */
-  openMain(options: RouteLocationOptions) {}
-
-  /**
-   * 根据权限标识符路径打开
-   * @param path
-   *
-   * TODO: 支持参数
-   */
-  openByIdentifierPath(path: string, options: RouteLocationOptions) {
-    if (this.menu == null) {
-      console.warn(`[bay] openByIdentifierPath 需要等待基座启动后才能调用`);
+  openMain: IBayModel['openMain'] = options => {
+    if (!this.assetOpen()) {
+      return;
+    }
+    const first = this.menu?.topMenus?.[0];
+    if (first == null) {
+      console.warn(`[bay] openMain 菜单未配置`);
       return;
     }
 
-    const result = this.menu.findByIdentifierPath(path);
-    if (result.result != null) {
+    const node = !first.url ? first.children[0] : first;
+
+    if (node == null) {
+      console.warn(`[bay] openMain 菜单未配置`);
+      return;
+    }
+
+    this.openTreeNode(node, options);
+  };
+
+  /**
+   * 根据权限标识符路径打开
+   */
+  openByIdentifierPath: IBayModel['openByIdentifierPath'] = (path, options) => {
+    if (!this.assetOpen()) {
+      return;
+    }
+
+    const result = this.menu?.findByIdentifierPath(path);
+    if (result?.result != null) {
       this.openTreeNode(result.result, options);
     } else {
       console.warn(`[bay] openByIdentifierPath 未找到标识符路径为 ${path} 的节点`);
     }
-  }
+  };
 
   /**
    * 打开菜单节点
-   * TODO: 支持参数
-   * @param node
    */
-  openTreeNode(node: TreeNode, options: RouteLocationOptions): void {
+  openTreeNode: IBayModel['openTreeNode'] = (node, options) => {
     if (!node.url) {
       console.warn(`[bay] 无法打开菜单节点，url 为空`, node);
       return;
@@ -217,18 +256,34 @@ export class BayModel extends BaseModel {
         }
       }
     }
-  }
+  };
 
   /**
    * 打开外部链接
    */
-  openOutside(url: string, options: RouteLocationOptions) {
+  openOutside: IBayModel['openOutside'] = (url: string, options: RouteLocationOptions) => {
     const redirect = options.redirect;
     if (redirect) {
       window.location.replace(url);
     } else {
       window.location.assign(url);
     }
+  };
+
+  /**
+   * 打开错误页面
+   * @param args
+   */
+  openError: IBayModel['openError'] = (...args) => {
+    this.bay.openError(...args);
+  };
+
+  private assetOpen(): boolean {
+    if (this.menu == null) {
+      console.warn(`[bay] openByIdentifierPath 需要等待基座启动后才能调用`);
+      return false;
+    }
+    return true;
   }
 
   // watch 和 createMenus 不能在构造函数中调用因为依赖注入还没完成

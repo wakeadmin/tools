@@ -34,14 +34,6 @@ test('noEmptyString', () => {
   expect(noEmptyString('x')).toBeTruthy();
 });
 
-test('trimQuery', () => {
-  expect(trimQuery('')).toBe('');
-  expect(trimQuery('hello')).toBe('hello');
-  expect(trimQuery('hello?')).toBe('hello');
-  expect(trimQuery('hello?hello')).toBe('hello');
-  expect(trimQuery('hello?hello?world')).toBe('hello');
-});
-
 test('purifyUrl', () => {
   expect(purifyUrl('')).toBe('/#/');
   expect(purifyUrl('#')).toBe('/#/');
