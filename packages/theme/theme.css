@@ -39,16 +39,16 @@
   --wk-color-success-100: #d0eec0;
   --wk-color-success-50: #ecf8e6;
 
-  --wk-color-error-900: #c8000f;
-  --wk-color-error-800: #d6001f;
-  --wk-color-error-700: #e31127;
-  --wk-color-error-600: #f5222d;
-  --wk-color-error-500: #ff2f2c;
-  --wk-color-error-400: #fe474a;
-  --wk-color-error-300: #f26d70;
-  --wk-color-error-200: #f99798;
-  --wk-color-error-100: #ffccd2;
-  --wk-color-error-50: #ffebee;
+  --wk-color-danger-900: #c8000f;
+  --wk-color-danger-800: #d6001f;
+  --wk-color-danger-700: #e31127;
+  --wk-color-danger-600: #f5222d;
+  --wk-color-danger-500: #ff2f2c;
+  --wk-color-danger-400: #fe474a;
+  --wk-color-danger-300: #f26d70;
+  --wk-color-danger-200: #f99798;
+  --wk-color-danger-100: #ffccd2;
+  --wk-color-danger-50: #ffebee;
 
   --wk-color-warning-900: #e35919;
   --wk-color-warning-800: #ed721c;
@@ -102,19 +102,24 @@
    * 功能色需符合用户对颜色操作的基本认知，建议整个产品体系所有的设计师及开发者固定使用同一套功能色板。
    */
   --wk-color-success: var(--wk-color-success-500);
-  --wk-color-error: var(--wk-color-error-600);
+  --wk-color-danger: var(--wk-color-danger-600);
   --wk-color-warning: var(--wk-color-warning-500);
   --wk-color-info: var(--wk-color-info-500);
+
+  --wk-color-white: var(--wk-color-gray-0);
+  --wk-color-black: var(--wk-color-gray-900);
 
   /**
    * 中性色是界面的灰度颜色，主要作用于界面的字体颜色、背景色、分割线、边框…
    * 合理地选择中性色能够令页面信息具备良好的主次关系，助力阅读体验。
    */
   /* 字体颜色, 数字表示色重， 越大(0-1000 大概分为 10级), 颜色越重 */
-  --wk-color-font-600: #717378;
-  --wk-color-font-300: #b1b5bd;
-  --wk-color-font-dark: var(--wk-color-gray-900);
-  --wk-color-font-light: var(--wk-color-gray-0);
+  --wk-color-font-primary: var(--wk-color-gray-900); /* 主色 */
+  --wk-color-font-regular: #717378; /* 常规颜色, 常用于大面积的正文 */
+  --wk-color-font-secondary: #909399; /* 次要颜色，常用于描述语 */
+  --wk-color-font-placeholder: #b1b5bd; /* 占位符 */
+  --wk-color-font-disabled: #c0c4cc; /* 禁用 */
+  --wk-color-font-inverse: var(--wk-color-gray-0); /* 主色反转, 用于深色背景 */
 
   /* 边框/分割线颜色 */
   --wk-color-border-300: #cfd4d9;
@@ -146,23 +151,27 @@
    * 字体大小
    */
   --wk-font-size-h1: 20px;
-  --wk-line-height-h1: 32px;
+  --wk-font-line-height-h1: 32px;
 
   --wk-font-size-h2: 18px;
-  --wk-line-height-h2: 28px;
+  --wk-font-line-height-h2: 28px;
 
   --wk-font-size-h3: 16px;
-  --wk-line-height-h3: 26px;
+  --wk-font-line-height-h3: 26px;
 
   --wk-font-size-h4: 14px;
-  --wk-line-height-h4: 22px;
+  --wk-font-line-height-h4: 22px;
 
-  --wk-font-size-h5: 12px;
-  --wk-line-height-h5: 20px;
+  --wk-font-size-h5: 13px;
+  --wk-font-line-height-h5: 21px;
+
+  --wk-font-size-h6: 12px;
+  --wk-font-line-height-h6: 20px;
 
   /* 正文 */
   --wk-font-size: var(--wk-font-size-h4);
-  --wk-line-height: var(--wk-line-height-h4);
+  --wk-font-line-height: var(--wk-font-line-height-h4);
+  --wk-font-weight: 500;
 }
 
 /**
@@ -172,8 +181,8 @@
   /**
    * 边框:大小、圆角
    */
-  --wk-border-radius-sm: 4px;
-  --wk-border-radius-base: 8px;
+  --wk-border-radius-sm: 2px;
+  --wk-border-radius-base: 4px;
   --wk-border-radius-md: 16px;
   --wk-border-radius-lg: 24px;
   --wk-border-radius-full: 9999px;
@@ -187,6 +196,7 @@
   --wk-spacing-xl: 64px;
 
   /* 叠层顺序 z-index */
+  --wk-z-index-normal: 1; /* 常规, 高于默认优先级 */
   --wk-z-index-dropdown: 1000; /* 下拉列表 */
   --wk-z-index-sticky: 1020; /* 粘顶元素 */
   --wk-z-index-fixed: 1030; /* fixed 定位元素 */
