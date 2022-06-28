@@ -1,8 +1,8 @@
-import { set, isVue2, isReactive } from '@wakeadmin/demi';
+import { set, isVue2, isReactive, h, getCurrentInstance } from '@wakeadmin/demi';
 
 import { isPlainObject } from '../utils';
 
-import { NotUndefined } from './types';
+import { NotUndefined, SetupContextLike } from './types';
 
 /**
  * 给 props 添加默认值，只能在 setup 中使用
@@ -53,4 +53,28 @@ export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
       return keys;
     },
   }) as any;
+}
+
+/**
+ * JSX 属性透传
+ *
+ * 指令不支持透传，Vue 会自动处理
+ */
+export function fallthrough(component: any, props: any, context: SetupContextLike) {
+  if (isVue2) {
+    const instance = getCurrentInstance() as any;
+
+    return h(
+      component,
+      {
+        attrs: { ...props, ...context.attrs },
+        on: context.listeners,
+        scopedSlots: instance?.proxy?.$scopedSlots,
+      },
+      // 对于 HTML 元素，不支持 scopedSlots, 这里特殊透传
+      instance?.proxy?.$slots?.default
+    );
+  } else {
+    return h(component, { ...props, ...context.attrs }, context.slots);
+  }
 }

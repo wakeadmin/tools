@@ -1,6 +1,6 @@
 /** @jsxImportSource .. */
 import { render as _render } from '@testing-library/vue';
-import { isVue2, VNodeChild } from '@wakeadmin/demi';
+import { isVue2, VNodeChild, markRaw } from '@wakeadmin/demi';
 
 import { h } from '../h';
 import { declareComponent } from '../declareComponent';
@@ -28,10 +28,10 @@ export function render(component: any, props: Record<string, any>, ...children: 
     },
   };
 
-  const result = _render(App, { props: { ...props, __children: children } });
+  const result = _render(App, { props: { ...props, __children: markRaw(children) } });
 
   const rerender = (newProps: Record<string, any>, ...newChildren: any[]) => {
-    const p = Object.assign(newProps, { __children: newChildren });
+    const p = Object.assign(newProps, { __children: markRaw(newChildren) });
     if (isVue2) {
       // @ts-expect-error
       return result.updateProps(p);

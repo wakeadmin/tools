@@ -3,7 +3,7 @@ import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref } from '@wakeadmi
 import kebabCase from 'lodash/kebabCase';
 import lowerFirst from 'lodash/lowerFirst';
 
-import { isBrowser, shallowMerge, isPlainObject, ownKeys, isVue2Dot7 } from '../utils';
+import { isBrowser, shallowMerge, isPlainObject, isVue2Dot7 } from '../utils';
 
 const WRAP_SYMBOL = Symbol('__vnode__');
 const EVENT_KEY = /^on[A-Z][a-zA-Z0-9:]*/;
@@ -234,7 +234,7 @@ export function isSlots(children: any) {
     return false;
   }
 
-  const keys = ownKeys(children);
+  const keys = Object.keys(children);
 
   return !!(
     keys.length &&

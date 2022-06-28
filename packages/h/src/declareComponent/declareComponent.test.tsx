@@ -1,8 +1,11 @@
+/** @jsxImportSource .. */
+
 import { isVue2, toRefs, reactive, isReactive, watchEffect } from '@wakeadmin/demi';
+import { screen, fireEvent } from '@testing-library/vue';
 import { render } from '../__tests__/helper';
 
 import { declareComponent, declareProps, declareEmits, declareExpose, declareSlots } from './declareComponent';
-import { withDefaults } from './helper';
+import { withDefaults, fallthrough } from './helper';
 
 test('declareProps', () => {
   expect(declareProps<{ foo: string; bar: string }>(['foo', 'bar'])).toEqual(['foo', 'bar']);
@@ -71,6 +74,76 @@ describe('withDefaults', () => {
     expect(withDefaultValue.bar).toBe('baz');
     expect(bar).toBe('baz');
     expect(refs.bar.value).toBe('baz');
+  });
+});
+
+describe('fallthrough', () => {
+  test('host component fallthrough', () => {
+    const Component1 = declareComponent({
+      setup(props, context) {
+        return () => fallthrough('div', props, context);
+      },
+    });
+    const handleClick = jest.fn();
+    render(Component1, { onClick: handleClick, title: 'host', class: 'host', style: { color: 'red' } }, 'hello world');
+
+    const node = screen.getByTitle('host');
+
+    expect(node).toHaveClass('host');
+    expect(node.innerHTML).toBe('hello world');
+
+    fireEvent(node, new MouseEvent('click'));
+    expect(handleClick).toBeCalled();
+  });
+
+  test('component fallthrough', () => {
+    const Component1 = declareComponent({
+      props: declareProps<{ foo: string; bar: number }>(['foo', 'bar']),
+      emits: declareEmits<{ click: () => void }>(),
+      slots: declareSlots<{ header: never; default: number }>(),
+      setup(props, context) {
+        return () => {
+          return (
+            <div
+              class={['my-component', context.attrs.class]}
+              title="my-component"
+              style={context.attrs.style}
+              onClick={() => context.emit('click')}
+            >
+              <header>{context.slots.header?.()}</header>
+              {context.slots.default?.()}
+              <div>
+                foo: {props.foo} bar: {props.bar}
+              </div>
+            </div>
+          );
+        };
+      },
+    });
+
+    const Component2 = declareComponent({
+      setup(props, context) {
+        return () => fallthrough(Component1, props, context);
+      },
+    });
+    const handleClick = jest.fn();
+    render(
+      Component2,
+      { onClick: handleClick, title: 'host', class: 'host', style: { color: 'red' }, foo: 'foo', bar: 1 },
+      {
+        header: () => <div>my header</div>,
+        default: () => <div>my default</div>,
+      }
+    );
+
+    const node = screen.getByTitle('my-component');
+
+    expect(node.outerHTML).toBe(
+      '<div class="my-component host" title="my-component" style="color: red;"><header><div>my header</div></header><div>my default</div><div>foo: foo bar: 1</div></div>'
+    );
+
+    fireEvent(node, new MouseEvent('click'));
+    expect(handleClick).toBeCalled();
   });
 });
 

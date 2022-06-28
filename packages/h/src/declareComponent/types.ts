@@ -19,6 +19,7 @@ declare module '@vue/runtime-dom' {
 
     // 避免原生组件报错
     'v-children'?: VNodeChild;
+    'v-slots'?: Record<string, () => VNodeChild>;
   }
 }
 
@@ -85,6 +86,14 @@ export interface SetupContext<Emit, Slot, Expose, Attrs> {
   slots: Readonly<Partial<Slot>>;
   emit: EmitFn<Emit>;
   expose: (exposed: WithRef<Expose>) => void;
+}
+
+export interface SetupContextLike {
+  attrs: Data;
+  slots: Record<string, Function>;
+
+  // vue2
+  listeners?: Record<string, Function>;
 }
 
 export type Data = Record<string, unknown>;
