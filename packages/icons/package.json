@@ -1,9 +1,10 @@
 {
-  "name": "@wakeapp/icons",
+  "name": "@wakeadmin/icons",
   "version": "0.1.0",
   "description": "惟客云图标库",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "files": [
     "svg",
     "dist"
