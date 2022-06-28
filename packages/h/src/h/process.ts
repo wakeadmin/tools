@@ -148,6 +148,10 @@ export function vue2MustUseProps(tag: any, type: string | undefined, key: string
   return false;
 }
 
+export function vue2IsReservedElement(tag: any): boolean {
+  return typeof tag === 'string' && Vue2?.config?.isReservedTag(tag);
+}
+
 export function processVue2Attr(el: { tag: string; type?: string }, key: string, value: any): IAttr {
   // Vue3 .prop
   if (key.startsWith('.')) {
@@ -297,6 +301,10 @@ export function processChildren(tag: any, props: any, children: any[]) {
   const set = (_slots: any) => {
     Object.assign((props.scopedSlots = props.scopedSlots ?? {}), _slots);
   };
+
+  if ((slots || slotsFromChildren) && vue2IsReservedElement(tag)) {
+    throw new Error(`[h] 内置组件不支持 scopedSlots`);
+  }
 
   if (slots) {
     // 显式定义了 slots

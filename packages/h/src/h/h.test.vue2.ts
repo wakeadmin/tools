@@ -32,7 +32,7 @@ test('h props 转换', () => {
 });
 
 test('h slots 转换', () => {
-  const vnode1: any = h('div', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world');
+  const vnode1: any = h('my-component', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world');
 
   expect(Object.keys(vnode1.data.scopedSlots)).toEqual(['foo', 'default']);
 
@@ -40,6 +40,12 @@ test('h slots 转换', () => {
   expect(Object.keys(vnode1.data.attrs)).toEqual(['foo']);
 
   // slots 放在 children
-  const vnode2: any = h('div', { foo: 'bar' }, { foo: () => 'hello' });
+  const vnode2: any = h('my-component', { foo: 'bar' }, { foo: () => 'hello' });
   expect(Object.keys(vnode2.data.scopedSlots)).toEqual(['foo']);
+
+  // 内置组件不支持 scopedSlots
+
+  expect(() => {
+    h('div', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world');
+  }).toThrowError('[h] 内置组件不支持 scopedSlots');
 });

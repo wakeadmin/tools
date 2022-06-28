@@ -5,7 +5,7 @@ import { defineComponent, isVue2 } from '@wakeadmin/demi';
 
 import { declareComponent, declareSlots } from '../declareComponent';
 
-import { createComponent, ignoreNewlineJoin, render } from './helper';
+import { ignoreNewlineJoin, render } from './helper';
 
 afterEach(cleanup);
 
@@ -31,16 +31,6 @@ test('image 100% 在  vue3 表现为 0', () => {
   const img = screen.getByAltText('Apple M2 芯片');
   expect(img).toHaveAttribute('width', '0');
   expect(img).toHaveAttribute('height', '0');
-});
-
-test('host 元素 slot 对象', () => {
-  const App = createComponent(() => {
-    return <div title="demo">hello</div>;
-  });
-
-  render(App, {});
-
-  // expect(document.body.innerHTML).toBe('');
 });
 
 test('复杂 JSX 结构', () => {
