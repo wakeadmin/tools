@@ -50,9 +50,12 @@ const FORCE_OMIT_PROPS = ['emits'];
  * @param options
  * @returns
  */
-export function declareComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}>(
-  options: SimpleComponentOptions<Props, Emit, Expose, Slots>
-): DefineComponent<Props, Emit, Expose, Slots> {
+export function declareComponent<
+  Props extends {} = {},
+  Emit extends {} = {},
+  Expose extends {} = {},
+  Slots extends {} = {}
+>(options: SimpleComponentOptions<Props, Emit, Expose, Slots>): DefineComponent<Props, Emit, Expose, Slots> {
   const { setup, ...other } = options;
 
   const vueOptions = {

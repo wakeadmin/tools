@@ -21,6 +21,8 @@ importers:
       jest: ^28.1.1
       jest-environment-jsdom: ^28.1.1
       jest-preset-universe-vue: 'workspace: *'
+      lodash: ^4.17.21
+      lodash-es: ^4.17.21
       prettier: ^2.6.2
       prettier-config-wk: ^0.2.0
       rimraf: ^3.0.2
@@ -54,6 +56,8 @@ importers:
       jest: 172.26.59.72+4873/jest/28.1.1_@types+node@17.0.40
       jest-environment-jsdom: 172.26.59.72+4873/jest-environment-jsdom/28.1.1
       jest-preset-universe-vue: link:packages/jest-preset-universe-vue
+      lodash: 172.26.59.72+4873/lodash/4.17.21
+      lodash-es: 172.26.59.72+4873/lodash-es/4.17.21
       prettier: 172.26.59.72+4873/prettier/2.6.2
       prettier-config-wk: 172.26.59.72+4873/prettier-config-wk/0.2.0
       rimraf: 172.26.59.72+4873/rimraf/3.0.2
@@ -182,7 +186,7 @@ importers:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
       '@wakeadmin/utils': link:../utils
-      '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220616143
+      '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220627147
     devDependencies:
       test-helper-vue: link:../test-helper-vue
 
@@ -193,6 +197,19 @@ importers:
     dependencies:
       '@wakeadmin/demi': link:../demi
       lodash: 172.26.59.72+4873/lodash/4.17.21
+
+  packages/icons:
+    specifiers:
+      '@wakeadmin/demi': workspace:^0.1.0
+      '@wakeadmin/h': workspace:^0.1.0
+      svgo: ^2.8.0
+      test-helper-vue: workspace:0.1.0
+    dependencies:
+      '@wakeadmin/demi': link:../demi
+      '@wakeadmin/h': link:../h
+    devDependencies:
+      svgo: 172.26.59.72+4873/svgo/2.8.0
+      test-helper-vue: link:../test-helper-vue
 
   packages/jest-preset-universe-vue:
     specifiers: {}
@@ -291,11 +308,14 @@ importers:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
 
+  packages/theme:
+    specifiers: {}
+
   packages/utils:
     specifiers:
       '@wakeapp/utils': latest
     dependencies:
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220616143
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220627147
 
   packages/vue-cli-plugin-ce:
     specifiers:
@@ -751,7 +771,7 @@ packages:
       '@babel/traverse': 172.26.59.72+4873/@babel/traverse/7.18.2
       debug: 172.26.59.72+4873/debug/4.3.4
       lodash.debounce: 172.26.59.72+4873/lodash.debounce/4.0.8
-      resolve: 172.26.59.72+4873/resolve/1.22.1
+      resolve: 172.26.59.72+4873/resolve/1.22.0
       semver: 172.26.59.72+4873/semver/6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -6696,7 +6716,7 @@ packages:
       postcss: 172.26.59.72+4873/postcss/8.4.14
       postcss-loader: 172.26.59.72+4873/postcss-loader/6.2.1_mepnsno3xmng6eyses4tepu7bu
       progress-webpack-plugin: 172.26.59.72+4873/progress-webpack-plugin/1.0.16_webpack@5.73.0
-      sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
+      sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.52.3
       ssri: 172.26.59.72+4873/ssri/8.0.1
       terser-webpack-plugin: 172.26.59.72+4873/terser-webpack-plugin/5.3.3_webpack@5.73.0
       thread-loader: 172.26.59.72+4873/thread-loader/3.0.4_webpack@5.73.0
@@ -7174,18 +7194,18 @@ packages:
       vue-demi: 172.26.59.72+4873/vue-demi/0.13.1_vue@3.2.37
     dev: false
 
-  172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220616143:
+  172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220627147:
     resolution:
       {
-        integrity: sha512-J70peCx2f7tjKtUBddsD8TSfKrgWx/ZLBq3NDiAfGY/Md9sAHOU35A/LzZ3x6pY2QZ4cgQruJcsw1rbeO1Hr4g==,
+        integrity: sha512-2f4aAeMwYimBFDHeCtSb3dp28BLND1tTDppwJ+Y71yK2ufReptfHl3HNiN+k2a4Gem40oaEx+KLMe8rKrpA9aQ==,
         registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@wakeapp%2fframework-core/-/framework-core-0.1.0-daily20220616143.tgz,
+        tarball: http://172.26.59.72:4873/@wakeapp%2fframework-core/-/framework-core-0.1.0-daily20220627147.tgz,
       }
     name: '@wakeapp/framework-core'
-    version: 0.1.0-daily20220616143
+    version: 0.1.0-daily20220627147
     dependencies:
       '@wakeapp/inversify': 172.26.59.72+4873/@wakeapp/inversify/6.1.0_tslib@2.4.0
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220616143
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220627147
       reflect-metadata: 172.26.59.72+4873/reflect-metadata/0.1.13
       tslib: 172.26.59.72+4873/tslib/2.4.0
     transitivePeerDependencies:
@@ -7217,6 +7237,26 @@ packages:
       }
     name: '@wakeapp/utils'
     version: 0.1.0-daily20220616143
+    peerDependencies:
+      lodash: 4.*
+    dependencies:
+      '@types/big.js': 172.26.59.72+4873/@types/big.js/6.1.4
+      big.js: 172.26.59.72+4873/big.js/6.2.0
+      dayjs: 172.26.59.72+4873/dayjs/1.11.3
+      events: 172.26.59.72+4873/events/3.3.0
+      polished: 172.26.59.72+4873/polished/4.2.2
+      query-string: 172.26.59.72+4873/query-string/7.1.1
+    dev: false
+
+  172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220627147:
+    resolution:
+      {
+        integrity: sha512-/L9iJZP2LpA7zGREMfqnlvBGZJfEve/8ulKaqnhEMCUWDt0lcD3onEv2eGc7uIUoqTtEh+TgMyabJQSkcYWkSQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@wakeapp%2futils/-/utils-0.1.0-daily20220627147.tgz,
+      }
+    name: '@wakeapp/utils'
+    version: 0.1.0-daily20220627147
     peerDependencies:
       lodash: 4.*
     dependencies:
@@ -15204,7 +15244,6 @@ packages:
       }
     name: lodash-es
     version: 4.17.21
-    dev: false
 
   172.26.59.72+4873/lodash-unified/1.0.2_3ib2ivapxullxkx3xftsimdk7u:
     resolution:

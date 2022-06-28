@@ -1,0 +1,43 @@
+{
+  "name": "@wakeapp/icons",
+  "version": "0.1.0",
+  "description": "惟客云图标库",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "svg",
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
+    "test:vue2": "vue-demi-switch 2 vue2 && jest --verbose",
+    "test:vue3": "vue-demi-switch 3 && jest --verbose",
+    "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
+  },
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "ISC",
+  "jest": {
+    "preset": "jest-preset-universe-vue"
+  },
+  "dependencies": {
+    "@wakeadmin/demi": "workspace:^0.1.0",
+    "@wakeadmin/h": "workspace:^0.1.0"
+  },
+  "devDependencies": {
+    "svgo": "^2.8.0",
+    "test-helper-vue": "workspace:0.1.0"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.6.2",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  }
+}
