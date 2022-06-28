@@ -18,14 +18,14 @@
   "author": "ivan-lee",
   "license": "MIT",
   "devDependencies": {
-    "@vue/cli-service": "5.*",
-    "@vue/cli-shared-utils": "5.*"
+    "@vue/cli-service": "~5.0.6",
+    "@vue/cli-shared-utils": "~5.0.6"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.2.37",
-    "vue-template-compiler": "^2.6.14",
     "@vue/cli-service": "5.*",
-    "@vue/cli-shared-utils": "5.*"
+    "@vue/cli-shared-utils": "5.*",
+    "@vue/compiler-sfc": "^3.2.37",
+    "vue-template-compiler": "^2.6.14"
   },
   "peerDependenciesMeta": {
     "@vue/compiler-sfc": {

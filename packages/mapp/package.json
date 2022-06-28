@@ -30,7 +30,7 @@
     "@wakeadmin/h": "workspace:^0.1.0",
     "@wakeadmin/utils": "workspace:^0.1.0",
     "path-browserify": "^1.0.1",
-    "qiankun": "^2.7.0"
+    "qiankun": "^2.7.3"
   },
   "peerDependencies": {
     "vue": "^3.2.37",

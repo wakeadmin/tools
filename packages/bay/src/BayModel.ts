@@ -312,7 +312,7 @@ export class BayModel extends BaseModel implements IBayModel {
           container.lightUp(result, exact);
         }
       },
-      { immediate: true, flush: 'pre' }
+      { flush: 'pre' }
     );
 
     this.retryableInitialize();

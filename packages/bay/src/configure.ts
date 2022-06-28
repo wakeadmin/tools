@@ -4,7 +4,7 @@ import { createBay, IBay } from '@wakeadmin/mapp/main';
 
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
-import App from './App.vue';
+import App from './App';
 
 declare global {
   interface DIMapper {

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@wakeadmin/utils": "workspace:^0.1.0",
-    "lodash": "4.*"
+    "lodash": "~4.17.21"
   },
   "devDependencies": {
     "@wakeadmin/h": "workspace:^0.1.0"
