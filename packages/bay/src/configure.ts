@@ -20,7 +20,7 @@ export function configureBay() {
     routes: [
       // TODO: 移除，自定义路由
       {
-        path: '/home',
+        path: '/wkb.html',
         name: 'home',
         component: () => import('./views/HomeView.vue'),
       },

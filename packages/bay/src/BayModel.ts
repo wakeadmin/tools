@@ -268,8 +268,8 @@ export class BayModel extends BaseModel implements IBayModel {
   /**
    * 打开外部链接
    */
-  openOutside: IBayModel['openOutside'] = (url: string, options: RouteLocationOptions) => {
-    const redirect = options.redirect;
+  openOutside: IBayModel['openOutside'] = (url, options) => {
+    const redirect = options?.redirect;
     if (redirect) {
       window.location.replace(url);
     } else {

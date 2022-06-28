@@ -51,28 +51,28 @@ export interface INavigation {
    * 打开主界面, 即菜单定义的第一个根节点
    * @param options
    */
-  openMain(options: RouteLocationOptions): void;
+  openMain(options?: RouteLocationOptions): void;
 
   /**
    * 根据权限标识符路径导航
    * @param path
    * @param options
    */
-  openByIdentifierPath(path: string, options: NodeNavigateOptions): void;
+  openByIdentifierPath(path: string, options?: NodeNavigateOptions): void;
 
   /**
    * 打开菜单节点
    * @param node
    * @param options
    */
-  openTreeNode(node: TreeNode, options: NodeNavigateOptions): void;
+  openTreeNode(node: TreeNode, options?: NodeNavigateOptions): void;
 
   /**
    * 打开外部链接
    * @param url
    * @param options
    */
-  openOutside(url: string, options: RouteLocationOptions): void;
+  openOutside(url: string, options?: RouteLocationOptions): void;
 
   /**
    * 打开错误页面

@@ -4508,4 +4508,49 @@ export default [
     // 根路由冲突
     url: '/demo.html',
   },
+  // 分组测试
+  {
+    childMenu: [
+      {
+        childMenu: [],
+        disabled: 0,
+        id: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-group-1',
+        identifier: 'group1',
+        isMenu: 1,
+        isShow: 1,
+        level: 0,
+        name: '分组1',
+        parentId: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-group',
+        seq: 3,
+        status: 1,
+        // 根路由冲突
+        url: '/group1',
+      },
+      {
+        childMenu: [],
+        disabled: 0,
+        id: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-group-2',
+        identifier: 'group2',
+        isMenu: 1,
+        isShow: 1,
+        level: 0,
+        name: '分组2',
+        parentId: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-group',
+        seq: 3,
+        status: 1,
+        // 根路由冲突
+        url: '/group2',
+      },
+    ],
+    disabled: 0,
+    id: 'fc8af4bc-6b13-4107-8e7d-a6066017909a-group',
+    identifier: 'group',
+    isMenu: 1,
+    isShow: 1,
+    level: 0,
+    name: '分组',
+    parentId: '0',
+    seq: 3,
+    status: 1,
+  },
 ];

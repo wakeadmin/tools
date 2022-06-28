@@ -11,7 +11,7 @@ module.exports = defineConfig({
   pluginOptions: {
     ...defineCE({ customElement: /wkc-/, mustUseProp: /wkc-/ }),
     ...defineMapp({
-      baseUrl: '/base',
+      // baseUrl: '/base',
     }),
   },
   configureWebpack() {
