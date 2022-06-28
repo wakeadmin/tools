@@ -1,5 +1,6 @@
 import { set, isVue2, isReactive, h, getCurrentInstance } from '@wakeadmin/demi';
 
+import { processProps } from '../h/process';
 import { isPlainObject } from '../utils';
 
 import { NotUndefined, SetupContextLike } from './types';
@@ -60,21 +61,24 @@ export function withDefaults<T extends {}, D extends { [K in keyof T]?: T[K] }>(
  *
  * 指令不支持透传，Vue 会自动处理
  */
-export function fallthrough(component: any, props: any, context: SetupContextLike) {
+export function fallthrough(component: any, context: SetupContextLike, props: any) {
   if (isVue2) {
     const instance = getCurrentInstance() as any;
+    // 支持覆盖参数
+    const finalProps = processProps(component, {
+      attrs: { ...context.attrs },
+      on: { ...context.listeners },
+      scopedSlots: instance?.proxy?.$scopedSlots,
+      ...props,
+    });
 
     return h(
       component,
-      {
-        attrs: { ...props, ...context.attrs },
-        on: context.listeners,
-        scopedSlots: instance?.proxy?.$scopedSlots,
-      },
+      finalProps,
       // 对于 HTML 元素，不支持 scopedSlots, 这里特殊透传
       instance?.proxy?.$slots?.default
     );
   } else {
-    return h(component, { ...props, ...context.attrs }, context.slots);
+    return h(component, { ...context.attrs, ...props }, context.slots);
   }
 }

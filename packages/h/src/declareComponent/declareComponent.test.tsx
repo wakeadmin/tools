@@ -79,12 +79,14 @@ describe('withDefaults', () => {
 
 describe('fallthrough', () => {
   test('host component fallthrough', () => {
+    const handleDblclick = jest.fn();
+    const handleClick = jest.fn();
+
     const Component1 = declareComponent({
       setup(props, context) {
-        return () => fallthrough('div', props, context);
+        return () => fallthrough('div', context, { ...props, onDblclickOnce: handleDblclick });
       },
     });
-    const handleClick = jest.fn();
     render(Component1, { onClick: handleClick, title: 'host', class: 'host', style: { color: 'red' } }, 'hello world');
 
     const node = screen.getByTitle('host');
@@ -94,9 +96,18 @@ describe('fallthrough', () => {
 
     fireEvent(node, new MouseEvent('click'));
     expect(handleClick).toBeCalled();
+
+    fireEvent(node, new MouseEvent('dblclick'));
+    expect(handleDblclick).toBeCalled();
+
+    fireEvent(node, new MouseEvent('dblclick'));
+    expect(handleDblclick).toBeCalledTimes(1);
   });
 
   test('component fallthrough', () => {
+    const handleClick = jest.fn();
+    const handleClick2 = jest.fn();
+
     const Component1 = declareComponent({
       props: declareProps<{ foo: string; bar: number }>(['foo', 'bar']),
       emits: declareEmits<{ click: () => void }>(),
@@ -123,10 +134,18 @@ describe('fallthrough', () => {
 
     const Component2 = declareComponent({
       setup(props, context) {
-        return () => fallthrough(Component1, props, context);
+        return () =>
+          fallthrough(Component1, context, {
+            ...props,
+            foo: 'hello foo',
+            onClick: () => {
+              handleClick2();
+              context.emit('click');
+            },
+          });
       },
     });
-    const handleClick = jest.fn();
+
     render(
       Component2,
       { onClick: handleClick, title: 'host', class: 'host', style: { color: 'red' }, foo: 'foo', bar: 1 },
@@ -139,11 +158,12 @@ describe('fallthrough', () => {
     const node = screen.getByTitle('my-component');
 
     expect(node.outerHTML).toBe(
-      '<div class="my-component host" title="my-component" style="color: red;"><header><div>my header</div></header><div>my default</div><div>foo: foo bar: 1</div></div>'
+      '<div class="my-component host" title="my-component" style="color: red;"><header><div>my header</div></header><div>my default</div><div>foo: hello foo bar: 1</div></div>'
     );
 
     fireEvent(node, new MouseEvent('click'));
     expect(handleClick).toBeCalled();
+    expect(handleClick2).toBeCalled();
   });
 });
 
