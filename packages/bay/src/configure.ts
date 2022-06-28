@@ -22,7 +22,7 @@ export function configureBay() {
       {
         path: '/wkb.html',
         name: 'home',
-        component: () => import('./views/HomeView.vue'),
+        component: () => import('./views/Main'),
       },
     ],
   });
