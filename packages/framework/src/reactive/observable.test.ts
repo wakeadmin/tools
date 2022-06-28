@@ -125,7 +125,10 @@ describe('observable 数据响应', () => {
     decorators.forEach(d => {
       class Base {
         @d
-        count = 0;
+        count = 1;
+
+        @d
+        mayBeUndefined?: number;
 
         constructor() {
           makeObservable(this);
@@ -133,7 +136,9 @@ describe('observable 数据响应', () => {
       }
 
       let count = 0;
+      let mayBeUndefined: number | undefined;
       const base = new Base();
+
       watchEffect(
         () => {
           count = base.count;
@@ -141,9 +146,22 @@ describe('observable 数据响应', () => {
         { flush: 'sync' }
       );
 
+      watchEffect(
+        () => {
+          mayBeUndefined = base.mayBeUndefined;
+        },
+        { flush: 'sync' }
+      );
+
+      expect(count).toBe(1);
+      expect(mayBeUndefined).toBe(undefined);
+
       // 设置新的值应该能响应
       base.count = 2;
       expect(count).toBe(2);
+
+      base.mayBeUndefined = 2;
+      expect(mayBeUndefined).toBe(2);
     });
   });
 
