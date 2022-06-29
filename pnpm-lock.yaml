@@ -127,7 +127,6 @@ importers:
       path-browserify: ^1.0.1
       sass: ^1.53.0
       sass-loader: ^12.6.0
-      typescript: ~4.5.5
       vue: ^3.2.37
       vue-router: ^4.0.16
       vue-tsc: ^0.38.2
@@ -148,15 +147,14 @@ importers:
     devDependencies:
       '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_vue@3.2.37
       '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6
-      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_typescript@4.5.5
+      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
       '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
       '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
       babel-preset-wakeadmin: link:../babel-preset-wakeadmin
       sass: 172.26.59.72+4873/sass/1.53.0
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
-      typescript: 172.26.59.72+4873/typescript/4.5.5
-      vue-tsc: 172.26.59.72+4873/vue-tsc/0.38.2_typescript@4.5.5
+      vue-tsc: 172.26.59.72+4873/vue-tsc/0.38.2
 
   packages/ce:
     specifiers:
@@ -243,7 +241,6 @@ importers:
       qiankun: ^2.7.3
       sass: ^1.53.0
       sass-loader: ^12.6.0
-      typescript: ~4.5.5
       vue: ^3.2.37
       vue-router: ^4.0.16
       vuex: ^4.0.2
@@ -258,7 +255,7 @@ importers:
     devDependencies:
       '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_vue@3.2.37
       '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6
-      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_typescript@4.5.5
+      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
       '@vue/cli-plugin-vuex': 172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
       '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
@@ -267,7 +264,6 @@ importers:
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
       sass: 172.26.59.72+4873/sass/1.53.0
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
-      typescript: 172.26.59.72+4873/typescript/4.5.5
 
   packages/playground-vue3:
     specifiers:
@@ -280,7 +276,6 @@ importers:
       core-js: ^3.23.3
       sass: ^1.53.0
       sass-loader: ^12.6.0
-      typescript: ~4.5.5
       vue: ^3.2.37
       vue-router: ^4.0.16
       vuex: ^4.0.2
@@ -292,13 +287,12 @@ importers:
     devDependencies:
       '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_vue@3.2.37
       '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6
-      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_typescript@4.5.5
+      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
       '@vue/cli-plugin-vuex': 172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
       '@wakeadmin/vue-cli-plugin-mapp-child': link:../vue-cli-plugin-mapp-child
       sass: 172.26.59.72+4873/sass/1.53.0
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
-      typescript: 172.26.59.72+4873/typescript/4.5.5
 
   packages/test-helper-vue:
     specifiers:
@@ -4751,14 +4745,13 @@ packages:
       - encoding
     dev: true
 
-  172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_typescript@4.5.5:
+  172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6:
     resolution:
       {
         integrity: sha512-DKw3SZEWs+9v6oUMTJAGcmJY4XCIdLhwXU1MsXDmhea/VqoGTcY9yl1mb/QfZ3AttdRtC7n4Vk01tGa0pnewsA==,
         registry: http://npm.wakedata-inc.com/,
         tarball: http://172.26.59.72:4873/@vue%2fcli-plugin-typescript/-/cli-plugin-typescript-5.0.6.tgz,
       }
-    id: 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
     name: '@vue/cli-plugin-typescript'
     version: 5.0.6
     peerDependencies:
@@ -4775,11 +4768,10 @@ packages:
       '@types/webpack-env': 172.26.59.72+4873/@types/webpack-env/1.17.0
       '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
       babel-loader: 172.26.59.72+4873/babel-loader/8.2.5_fswvdo7jykdwhfxrdcvghfn6pa
-      fork-ts-checker-webpack-plugin: 172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2_aqql6fqjnucmdfn6etiifn2koq
+      fork-ts-checker-webpack-plugin: 172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2_webpack@5.73.0
       globby: 172.26.59.72+4873/globby/11.1.0
       thread-loader: 172.26.59.72+4873/thread-loader/3.0.4_webpack@5.73.0
-      ts-loader: 172.26.59.72+4873/ts-loader/9.3.1_aqql6fqjnucmdfn6etiifn2koq
-      typescript: 172.26.59.72+4873/typescript/4.5.5
+      ts-loader: 172.26.59.72+4873/ts-loader/9.3.1_webpack@5.73.0
       webpack: 172.26.59.72+4873/webpack/5.73.0
     transitivePeerDependencies:
       - '@swc/core'
@@ -10328,7 +10320,7 @@ packages:
       debug: 172.26.59.72+4873/debug/4.3.4
     dev: true
 
-  172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2_aqql6fqjnucmdfn6etiifn2koq:
+  172.26.59.72+4873/fork-ts-checker-webpack-plugin/6.5.2_webpack@5.73.0:
     resolution:
       {
         integrity: sha512-m5cUmF30xkZ7h4tWUgTAcEaKmUW7tfyUyTqNNOz7OxWJ0v1VWKTcOvH8FWHUwSjlW/356Ijc9vi3XfcPstpQKA==,
@@ -10363,7 +10355,6 @@ packages:
       schema-utils: 172.26.59.72+4873/schema-utils/2.7.0
       semver: 172.26.59.72+4873/semver/7.3.7
       tapable: 172.26.59.72+4873/tapable/1.1.3
-      typescript: 172.26.59.72+4873/typescript/4.5.5
       webpack: 172.26.59.72+4873/webpack/5.73.0
     dev: true
 
@@ -17821,7 +17812,7 @@ packages:
     engines: { node: '>=8' }
     dev: true
 
-  172.26.59.72+4873/ts-loader/9.3.1_aqql6fqjnucmdfn6etiifn2koq:
+  172.26.59.72+4873/ts-loader/9.3.1_webpack@5.73.0:
     resolution:
       {
         integrity: sha512-OkyShkcZTsTwyS3Kt7a4rsT/t2qvEVQuKCTg4LJmpj9fhFR7ukGdZwV6Qq3tRUkqcXtfGpPR7+hFKHCG/0d3Lw==,
@@ -17840,7 +17831,6 @@ packages:
       enhanced-resolve: 172.26.59.72+4873/enhanced-resolve/5.9.3
       micromatch: 172.26.59.72+4873/micromatch/4.0.5
       semver: 172.26.59.72+4873/semver/7.3.7
-      typescript: 172.26.59.72+4873/typescript/4.5.5
       webpack: 172.26.59.72+4873/webpack/5.73.0
     dev: true
 
@@ -18031,19 +18021,6 @@ packages:
     dependencies:
       media-typer: 172.26.59.72+4873/media-typer/0.3.0
       mime-types: 172.26.59.72+4873/mime-types/2.1.35
-    dev: true
-
-  172.26.59.72+4873/typescript/4.5.5:
-    resolution:
-      {
-        integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/typescript/-/typescript-4.5.5.tgz,
-      }
-    name: typescript
-    version: 4.5.5
-    engines: { node: '>=4.2.0' }
-    hasBin: true
     dev: true
 
   172.26.59.72+4873/typescript/4.7.4:
@@ -18512,14 +18489,13 @@ packages:
     version: 1.9.1
     dev: true
 
-  172.26.59.72+4873/vue-tsc/0.38.2_typescript@4.5.5:
+  172.26.59.72+4873/vue-tsc/0.38.2:
     resolution:
       {
         integrity: sha512-+OMmpw9BZC9khul3I1HGtWchv7BCiaM7NvfdilVAiOFkjnivIoaW6jJm6YPQJaEPouePtpkDUWovyzgNxWdDsw==,
         registry: http://npm.wakedata-inc.com/,
         tarball: http://172.26.59.72:4873/vue-tsc/-/vue-tsc-0.38.2.tgz,
       }
-    id: 172.26.59.72+4873/vue-tsc/0.38.2
     name: vue-tsc
     version: 0.38.2
     hasBin: true
@@ -18527,7 +18503,6 @@ packages:
       typescript: '*'
     dependencies:
       '@volar/vue-typescript': 172.26.59.72+4873/@volar/vue-typescript/0.38.2
-      typescript: 172.26.59.72+4873/typescript/4.5.5
     dev: true
 
   172.26.59.72+4873/vue/2.6.14:
