@@ -2,7 +2,7 @@ import { defineComponent } from 'vue';
 import { ElDropdown, ElIcon } from 'element-plus';
 import { ArrowDown, Signout, Translate, ClassificationSquare } from '@wakeadmin/icons';
 
-import { useBayModel } from '@/hooks';
+import { useBayModel, useAsset } from '@/hooks';
 
 import AVATAR_DEFAULT from './avatar-default.png';
 
@@ -18,6 +18,7 @@ export const DropdownMenus = defineComponent({
   name: 'DropdownMenus',
   setup() {
     const bay = useBayModel();
+    const defaultAvatar = useAsset('BAY_AVATAR', AVATAR_DEFAULT);
 
     const handleCommand = (name: string) => {
       switch (name) {
@@ -36,7 +37,7 @@ export const DropdownMenus = defineComponent({
 
     return () => {
       const name = bay.sessionInfo?.userInfo.userName;
-      const avatar = AVATAR_DEFAULT;
+      const avatar = defaultAvatar.value;
       const buttons = bay.menu?.topButtons;
 
       return (
