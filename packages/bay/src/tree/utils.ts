@@ -17,6 +17,15 @@ export function sortByLevel(list: TreeNode[]) {
   });
 }
 
+/**
+ * 截断权限标识符
+ * @param path
+ * @param level
+ */
+export function truncateIdentifierPath(path: string, level: number) {
+  return path.split('.').slice(0, level).join('.');
+}
+
 export function splitIdentifierPath(path: string): string[] {
   return path
     .split('.')

@@ -20,7 +20,7 @@ export function configureBay() {
     routes: [
       // TODO: 移除，自定义路由
       {
-        path: '/wkb.html',
+        path: '/wkb.html:any*',
         name: 'home',
         component: () => import('./views/Main'),
       },

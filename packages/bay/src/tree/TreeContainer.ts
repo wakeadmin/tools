@@ -5,7 +5,7 @@ import { WARNING_CODE_CHILD_CONFLICT, WARNING_CODE_ROOT_CONFLICT } from './const
 
 import { TreeNode } from './TreeNode';
 import { TreeNodeRaw, FindResult, RouteType, MenuType } from './types';
-import { purifyUrl, splitIdentifierPath, trimPathSection, trimQueryAndHash } from './utils';
+import { purifyUrl, splitIdentifierPath, trimPathSection, trimQueryAndHash, truncateIdentifierPath } from './utils';
 
 const EMPTY_RESULT: FindResult = {
   result: undefined,
@@ -21,6 +21,18 @@ export class TreeContainer {
    */
   @observable.shallow
   roots: TreeNode[] = [];
+
+  /**
+   * 当前激活的叶子节点，从子节点开始
+   */
+  @observable.ref
+  activeNode?: TreeNode;
+
+  /**
+   * 所有菜单里面定义的页面入口
+   */
+  @observable
+  entries: Set<string> = new Set<string>();
 
   /**
    * 当前激活菜单树
@@ -49,10 +61,11 @@ export class TreeContainer {
   /**
    * 侧边栏二级菜单
    */
-  get sidebarMenus(): TreeNode[] {
+  @computed
+  get secondaryNodes(): TreeNode[] {
     const node = this.activeRoot;
     if (node == null) {
-      return [];
+      return NoopArray;
     }
 
     // 第一级为菜单
@@ -69,11 +82,17 @@ export class TreeContainer {
     return NoopArray;
   }
 
+  @computed
+  get secondaryMenus() {
+    return this.secondaryNodes.filter(i => i.type === MenuType.Menu);
+  }
+
   /**
    * 四级菜单
    */
+  @computed
   get tabMenus(): TreeNode[] {
-    const sidebarMenus = this.sidebarMenus;
+    const sidebarMenus = this.secondaryMenus;
     // 从二级菜单开始，向下找出两级
     let level = 2;
 
@@ -93,16 +112,20 @@ export class TreeContainer {
   }
 
   /**
-   * 当前激活的叶子节点，从子节点开始
+   * 当前激活的二级叶子节点，用于配合 ElMenu 实现激活和打开
    */
-  @observable.ref
-  activeNode?: TreeNode;
+  @computed
+  get activeSecondaryNode(): TreeNode | undefined {
+    const activeNode = this.activeNode;
+    if (!activeNode) {
+      return undefined;
+    }
 
-  /**
-   * 所有菜单里面定义的页面入口
-   */
-  @observable
-  entries: Set<string> = new Set<string>();
+    // 如果根节点为分组，那么叶子节点就是 4 级
+    const path = truncateIdentifierPath(activeNode.identifierPath, activeNode.root.isGroup ? 4 : 3);
+
+    return this.findByPullIdentifierPath(path).result;
+  }
 
   /**
    * 根据权限标识符索引

@@ -15,6 +15,7 @@ $color: var(--wk-color-font-regular);
   box-shadow: 0 1px 0 0 #dce1e6;
   padding: 0 20px;
   box-sizing: border-box;
+  z-index: 1;
 
   &__before {
     width: var(--bay-sidebar-width);
@@ -96,6 +97,7 @@ $color: var(--wk-color-font-regular);
     color: $color;
     cursor: pointer;
     padding: $menu-padding;
+    white-space: nowrap;
 
     &:hover,
     &.active {
@@ -121,7 +123,6 @@ $color: var(--wk-color-font-regular);
   &__submenu {
     height: 38px;
     line-height: 38px;
-    white-space: nowrap;
     text-align: center;
   }
 

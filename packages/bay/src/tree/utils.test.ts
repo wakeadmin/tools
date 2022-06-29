@@ -1,7 +1,7 @@
 import {
+  truncateIdentifierPath,
   splitIdentifierPath,
   noEmptyString,
-  trimQuery,
   trimPathSection,
   purifyUrl,
   normalizeRoute,
@@ -14,6 +14,12 @@ test('sortByLevel', () => {
   const b: any = { level: 2 };
   // 降序
   expect(sortByLevel([a, b])).toEqual([{ level: 2 }, { level: 1 }]);
+});
+
+test('truncateIdentifierPath', () => {
+  expect(truncateIdentifierPath('a.b.c', 3)).toBe('a.b.c');
+  expect(truncateIdentifierPath('a.b.c.d', 3)).toBe('a.b.c');
+  expect(truncateIdentifierPath('a.b', 3)).toBe('a.b');
 });
 
 test('splitIdentifierPath', () => {

@@ -34,6 +34,8 @@ describe('TreeContainer', () => {
         '/dmp.html',
         '/demo.html',
         '/outside',
+        '/group1',
+        '/group2',
       ]);
     });
   });
@@ -213,7 +215,15 @@ describe('TreeContainer', () => {
 
     describe('菜单信息', () => {
       test('顶级菜单', () => {
-        expect(serializeNodes(container.topMenus)).toEqual(['company', 'marketing', 'ad', 'wkb', 'customer', 'demo']);
+        expect(serializeNodes(container.topMenus)).toEqual([
+          'company',
+          'marketing',
+          'ad',
+          'wkb',
+          'customer',
+          'demo',
+          'group',
+        ]);
         expect(serializeNodes(container.topButtons)).toEqual(['switchApp', 'demo']);
       });
 
@@ -222,7 +232,13 @@ describe('TreeContainer', () => {
         expect(result.result).toBeDefined();
         container.lightUp(result.result!);
 
-        expect(serializeNodes(container.sidebarMenus)).toEqual([
+        expect(serializeNodes(container.secondaryNodes)).toEqual([
+          'marketing.message',
+          'marketing.materials',
+          'marketing.marketing_tools',
+          'marketing.marketing_tools_create',
+        ]);
+        expect(serializeNodes(container.secondaryMenus)).toEqual([
           'marketing.message',
           'marketing.materials',
           'marketing.marketing_tools',
@@ -240,6 +256,8 @@ describe('TreeContainer', () => {
           'marketing.message.sms.sms_sign',
         ]);
 
+        expect(container.activeSecondaryNode?.identifierPath).toBe('marketing.message.sms');
+
         // 激活的是三级节点
         result = container.findByIdentifierPath('marketing.message.sms');
         expect(result.result?.identifierPath).toBe('marketing.message.sms');
@@ -249,6 +267,7 @@ describe('TreeContainer', () => {
           'marketing.message.sms.sms_group',
           'marketing.message.sms.sms_sign',
         ]);
+        expect(container.activeSecondaryNode?.identifierPath).toBe('marketing.message.sms');
       });
 
       test('四级菜单, 当激活的不包含四级菜单时, 返回空', () => {

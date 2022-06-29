@@ -9,7 +9,7 @@ import DEFAULT_LOGO from './logo-default.png';
 import { DropdownMenus } from './DropdownMenus';
 
 export const Header = defineComponent({
-  name: 'Header',
+  name: 'BayHeader',
   setup: async () => {
     const bay = unref(useInject('DI.bay.BayModel'));
 

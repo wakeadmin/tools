@@ -1,0 +1,27 @@
+.bay-ready {
+  overflow: hidden;
+}
+
+.bay {
+  // 参考了 jd.com
+  min-width: 990px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  &-sidebar {
+    flex-shrink: 0;
+  }
+
+  &-content {
+    flex: 1;
+    overflow: auto;
+  }
+}

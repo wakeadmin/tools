@@ -1,0 +1,21 @@
+.bay-sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+
+  &__menu {
+    flex: 1;
+
+    &:not(.el-menu--collapse) {
+      width: var(--bay-sidebar-width);
+    }
+
+    .is-active .bay-sidebar__submenu-title,
+    .is-active .bay-sidebar__submenu-icon {
+      color: var(--wk-color-primary);
+      font-weight: var(--wk-font-weight);
+    }
+  }
+}

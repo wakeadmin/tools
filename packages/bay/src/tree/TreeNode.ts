@@ -25,6 +25,14 @@ export class TreeNode {
   }
 
   /**
+   * 根节点是否为分组
+   * 如果为分组，那么其子节点是实际意义上的 ‘入口’
+   */
+  get isGroup() {
+    return this.isRoot && this.type === MenuType.Menu && this.routeType === RouteType.None;
+  }
+
+  /**
    * 原始配置
    */
   readonly raw: TreeNodeRaw;
