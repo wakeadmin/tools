@@ -2,6 +2,7 @@ import Framework, { configureDI } from '@wakeadmin/framework';
 import { initial, compose } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
 
+import * as services from './services';
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
 import { Main } from './components';
@@ -61,6 +62,9 @@ export function configureBackend() {
 }
 
 export function createApp() {
+  // 暴露给下级子应用的服务
+  window.__MAPP_SERVICES__ = services;
+
   configureBackend();
   const bay = configureBay();
 

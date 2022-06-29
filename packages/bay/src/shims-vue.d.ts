@@ -8,3 +8,10 @@ declare module '*.vue' {
 declare module '*.png' {
   export default string;
 }
+
+interface Window {
+  /**
+   * 基座服务挂载点, 子应用从这里读取
+   */
+  __MAPP_SERVICES__?: any;
+}

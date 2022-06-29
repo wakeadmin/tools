@@ -1,12 +1,21 @@
 {
-  "name": "bay",
+  "name": "@wakeadmin/bay",
   "version": "0.1.0",
-  "description": "基座",
-  "private": true,
+  "description": "惟客云基座",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.mjs",
+    "index.d.ts",
+    "expose"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "type-check": "vue-tsc --noEmit",
+    "build:production": "vue-cli-service build",
+    "build": "tsc -b ./tsconfig.expose.json",
+    "type-check": "tsc --noEmit",
     "test": "jest"
   },
   "dependencies": {
@@ -34,7 +43,6 @@
     "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.1.0",
     "babel-preset-wakeadmin": "workspace:^0.1.0",
     "sass": "^1.53.0",
-    "sass-loader": "^12.6.0",
-    "vue-tsc": "^0.38.2"
+    "sass-loader": "^12.6.0"
   }
 }

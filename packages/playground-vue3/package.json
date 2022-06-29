@@ -8,6 +8,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@wakeadmin/bay": "workspace:^0.1.0",
     "core-js": "^3.23.3",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16",

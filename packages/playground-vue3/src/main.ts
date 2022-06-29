@@ -1,5 +1,6 @@
 import { createApp, App as TApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import bay from '@wakeadmin/bay';
 
 import App from './App.vue';
 import { routes } from './router';
@@ -10,6 +11,8 @@ export async function bootstrap() {
 }
 
 let app: TApp;
+
+console.log(bay);
 
 export async function mount(props?: { container: HTMLElement }) {
   console.log('mount vue3', props);
