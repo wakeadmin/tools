@@ -6,31 +6,35 @@ import { ClassificationSquare } from '@wakeadmin/icons';
 import { useBayModel } from '@/hooks';
 
 import './index.scss';
-import { TreeNode } from '@/tree';
+import { TreeContainer, TreeNode } from '@/tree';
+import { BayModel } from '@/BayModel';
 
-const SubMenu = (props: { menu: TreeNode }) => {
-  const { menu } = props;
-  const shareProps = {
-    key: menu.uid,
-    index: menu.identifierPath,
-    'v-slots': {
-      title: () => (
-        <>
-          <ElIcon class="bay-sidebar__submenu-icon">
-            <ClassificationSquare />
-          </ElIcon>
-          <span class="bay-sidebar__submenu-title">{menu.name}</span>
-        </>
-      ),
-    },
-  };
+const SubMenu = (props: { menu: TreeNode; bay: BayModel }) => {
+  const { menu, bay } = props;
 
-  if (menu.children.length) {
+  const title = (
+    <>
+      <ElIcon class="bay-sidebar__submenu-icon">
+        <ClassificationSquare />
+      </ElIcon>
+      <span class="bay-sidebar__submenu-title">{menu.name}</span>
+    </>
+  );
+
+  const submenus = TreeContainer.filterMenu(menu.children);
+
+  if (submenus.length) {
     return (
-      <ElMenu.SubMenu {...shareProps}>
-        {menu.children.map(submenu => {
+      <ElMenu.SubMenu
+        key={menu.uid}
+        index={menu.identifierPath}
+        v-slots={{
+          title: () => title,
+        }}
+      >
+        {submenus.map(submenu => {
           return (
-            <ElMenu.MenuItem key={submenu.uid} index={submenu.identifierPath}>
+            <ElMenu.MenuItem key={submenu.uid} index={submenu.identifierPath} onClick={() => bay.openTreeNode(submenu)}>
               {submenu.name}
             </ElMenu.MenuItem>
           );
@@ -38,7 +42,11 @@ const SubMenu = (props: { menu: TreeNode }) => {
       </ElMenu.SubMenu>
     );
   } else {
-    return <ElMenu.MenuItem {...shareProps}></ElMenu.MenuItem>;
+    return (
+      <ElMenu.MenuItem key={menu.uid} index={menu.identifierPath} onClick={() => bay.openTreeNode(menu)}>
+        {title}
+      </ElMenu.MenuItem>
+    );
   }
 };
 
@@ -62,7 +70,7 @@ export const Sidebar = defineComponent({
             collapseTransition={false}
           >
             {menus.map(menu => {
-              return <SubMenu key={menu.uid} menu={menu} />;
+              return <SubMenu key={menu.uid} menu={menu} bay={bay} />;
             })}
           </ElMenu>
         </div>

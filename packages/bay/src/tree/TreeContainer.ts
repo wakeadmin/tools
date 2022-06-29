@@ -17,6 +17,14 @@ const EMPTY_RESULT: FindResult = {
  */
 export class TreeContainer {
   /**
+   * 过滤出菜单节点
+   * @param node
+   */
+  static filterMenu(nodes: TreeNode[]): TreeNode[] {
+    return nodes.filter(node => node.type === MenuType.Menu);
+  }
+
+  /**
    * 菜单树
    */
   @observable.shallow
@@ -47,7 +55,7 @@ export class TreeContainer {
    */
   @computed
   get topMenus() {
-    return this.roots.filter(i => i.type === MenuType.Menu);
+    return TreeContainer.filterMenu(this.roots);
   }
 
   /**
@@ -84,7 +92,7 @@ export class TreeContainer {
 
   @computed
   get secondaryMenus() {
-    return this.secondaryNodes.filter(i => i.type === MenuType.Menu);
+    return TreeContainer.filterMenu(this.secondaryNodes);
   }
 
   /**
