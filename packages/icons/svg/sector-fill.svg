@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg class="icon" width="200px" height="200.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M489.664 174.176v359.936h359.36v33.184C848.992 784.192 673.28 960 456.48 960S64 784.192 64 567.296C64 357.664 228.448 185.76 436.544 175.136l9.92-0.384 43.2-0.576zM567.04 64c209.6 0 381.376 164.512 392 372.736l0.384 9.92 0.576 43.2H533.888V64h33.184z" />
+</svg>

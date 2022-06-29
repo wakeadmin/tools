@@ -60,6 +60,15 @@ const compressed = await Promise.all(
   })
 );
 
+// clean
+if (fs.existsSync(componentsDir)) {
+  await fs.promises.rm(componentsDir, { recursive: true });
+}
+
+await fs.promises.mkdir(componentsDir);
+
+// write
+
 const modules = [];
 
 const prettierConfig = { ...(await prettier.resolveConfig(process.cwd())), parser: 'typescript' };

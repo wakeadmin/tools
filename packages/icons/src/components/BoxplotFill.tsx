@@ -2,8 +2,8 @@
 import { defineComponent, SVGAttributes, isVue2 } from '@wakeadmin/demi';
 
 // eslint-disable-next-line spaced-comment
-export const Arrow = /*#__PURE__*/ defineComponent<SVGAttributes>({
-  name: 'WKSvgArrow',
+export const BoxplotFill = /*#__PURE__*/ defineComponent<SVGAttributes>({
+  name: 'WKSvgBoxplotFill',
   inheritAttrs: true,
   render() {
     let fallthroughProps: any;
@@ -16,7 +16,7 @@ export const Arrow = /*#__PURE__*/ defineComponent<SVGAttributes>({
     }
     return (
       <svg {...fallthroughProps} viewBox="0 0 1024 1024" class="wk-svg">
-        <path d="m312.608 916.48 389.76-370.56a47.104 47.104 0 0 0 3.392-64.256l-3.392-3.552L312.64 107.52a3.2 3.2 0 0 0-5.408 2.304v86.4a6.4 6.4 0 0 0 1.984 4.608L636.384 512l-327.2 311.104a6.4 6.4 0 0 0-1.984 4.64v86.4a3.2 3.2 0 0 0 5.408 2.304z" />
+        <path d="M96 160a32 32 0 0 1 32 32v288h64V320a64 64 0 0 1 59.2-63.84l4.8-.16h96v512h-96a64 64 0 0 1-63.84-59.2L192 704V544h-64v288a32 32 0 0 1-64 0V192a32 32 0 0 1 32-32zm736 544a64 64 0 0 1-59.2 63.84l-4.8.16H416V256h352a64 64 0 0 1 63.84 59.2l.16 4.8v160h64V192a32 32 0 0 1 64 0v640a32 32 0 0 1-64 0V544h-64v160z" />
       </svg>
     );
   },
