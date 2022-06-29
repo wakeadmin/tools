@@ -5,12 +5,11 @@ import {
   makeObservable,
   observable,
   singleton,
-  withRunState,
   watch,
   postConstruct,
   BaseModel,
 } from '@wakeadmin/framework';
-import type { IBay, RouteLocationOptions } from '@wakeadmin/mapp/main';
+import type { IBay } from '@wakeadmin/mapp/main';
 
 import { BayRepo } from './BayRepo';
 import { TreeContainer, RouteType } from './tree';
@@ -82,6 +81,12 @@ export class BayModel extends BaseModel implements IBayModel {
   @observable.ref
   sessionInfo?: SessionInfo;
 
+  /**
+   * 菜单折叠
+   */
+  @observable.ref
+  menuCollasped = false;
+
   get loading() {
     return this.status !== BayStatus.READY && this.status !== BayStatus.ERROR;
   }
@@ -140,6 +145,17 @@ export class BayModel extends BaseModel implements IBayModel {
 
     this.retryableInitialize();
   }
+
+  /**
+   * 退出登录
+   */
+  signout = () => {
+    // TODO:
+  };
+
+  toggleMenuCollapse = () => {
+    this.menuCollasped = !this.menuCollasped;
+  };
 
   /**
    * 根据微应用的名称打开。

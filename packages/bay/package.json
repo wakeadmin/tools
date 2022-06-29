@@ -13,6 +13,7 @@
     "@wakeadmin/ce": "workspace:^0.1.0",
     "@wakeadmin/framework": "workspace:^0.1.0",
     "@wakeadmin/h": "workspace:^0.1.0",
+    "@wakeadmin/icons": "workspace:^0.1.0",
     "@wakeadmin/mapp": "workspace:^0.1.0",
     "@wakeadmin/theme": "workspace:^0.1.0",
     "@wakeadmin/utils": "workspace:^0.1.0",

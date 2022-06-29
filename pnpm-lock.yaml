@@ -114,6 +114,7 @@ importers:
       '@wakeadmin/ce': workspace:^0.1.0
       '@wakeadmin/framework': workspace:^0.1.0
       '@wakeadmin/h': workspace:^0.1.0
+      '@wakeadmin/icons': workspace:^0.1.0
       '@wakeadmin/mapp': workspace:^0.1.0
       '@wakeadmin/theme': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.0
@@ -134,6 +135,7 @@ importers:
       '@wakeadmin/ce': link:../ce
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
+      '@wakeadmin/icons': link:../icons
       '@wakeadmin/mapp': link:../mapp
       '@wakeadmin/theme': link:../theme
       '@wakeadmin/utils': link:../utils
@@ -5973,17 +5975,6 @@ packages:
         optional: true
     dependencies:
       ajv: 172.26.59.72+4873/ajv/8.11.0
-    dev: true
-
-  172.26.59.72+4873/ajv-keywords/3.5.2:
-    resolution:
-      {
-        integrity: sha1-MfKdpatuANHC0yms97WSlhTVAU0=,
-        registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/ajv-keywords/-/ajv-keywords-3.5.2.tgz,
-      }
-    name: ajv-keywords
-    version: 3.5.2
     dev: true
 
   172.26.59.72+4873/ajv-keywords/3.5.2_ajv@6.12.6:
@@ -16438,7 +16429,7 @@ packages:
     dependencies:
       '@types/json-schema': 172.26.59.72+4873/@types/json-schema/7.0.11
       ajv: 172.26.59.72+4873/ajv/6.12.6
-      ajv-keywords: 172.26.59.72+4873/ajv-keywords/3.5.2
+      ajv-keywords: 172.26.59.72+4873/ajv-keywords/3.5.2_ajv@6.12.6
     dev: true
 
   172.26.59.72+4873/schema-utils/2.7.1:
@@ -16454,7 +16445,7 @@ packages:
     dependencies:
       '@types/json-schema': 172.26.59.72+4873/@types/json-schema/7.0.11
       ajv: 172.26.59.72+4873/ajv/6.12.6
-      ajv-keywords: 172.26.59.72+4873/ajv-keywords/3.5.2
+      ajv-keywords: 172.26.59.72+4873/ajv-keywords/3.5.2_ajv@6.12.6
     dev: true
 
   172.26.59.72+4873/schema-utils/3.1.1:
