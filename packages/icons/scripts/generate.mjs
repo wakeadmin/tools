@@ -2,13 +2,14 @@
 import fs from 'fs';
 import path from 'path';
 import svgo from 'svgo';
+import glob from 'fast-glob';
 import { camelCase, upperFirst } from 'lodash-es';
 import { fileURLToPath } from 'url';
 import prettier from 'prettier';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
-const svgDir = path.join(dirname, '../svg');
-const list = fs.readdirSync(svgDir).filter(i => i.endsWith('.svg'));
+const svgDir = path.join(dirname, '../svg/');
+const list = await glob('**/*.svg', { cwd: svgDir });
 const componentsDir = path.join(dirname, '../src/components/');
 
 const compressed = await Promise.all(
@@ -30,6 +31,13 @@ const compressed = await Promise.all(
           params: {
             selector: 'svg',
             attributes: 'class',
+          },
+        },
+        {
+          name: 'removeAttributesBySelector',
+          params: {
+            selector: '[fill="currentColor"]',
+            attributes: 'fill',
           },
         },
         {

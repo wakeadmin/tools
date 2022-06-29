@@ -16,7 +16,7 @@ export const ArrowRight = /*#__PURE__*/ defineComponent<SVGAttributes>({
     }
     return (
       <svg {...fallthroughProps} viewBox="0 0 1024 1024" class="wk-svg">
-        <path d="m562.005 512-211.2-211.2 60.331-60.33L682.666 512l-271.53 271.53-60.33-60.33z" fill="currentColor" />
+        <path d="m562.005 512-211.2-211.2 60.331-60.33L682.666 512l-271.53 271.53-60.33-60.33z" />
       </svg>
     );
   },

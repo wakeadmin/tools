@@ -16,10 +16,7 @@ export const HeartFill = /*#__PURE__*/ defineComponent<SVGAttributes>({
     }
     return (
       <svg {...fallthroughProps} viewBox="0 0 1024 1024" class="wk-svg">
-        <path
-          d="m903.637 545.877.555.598L512 938.667 119.808 546.475l.555-.598A277.333 277.333 0 0 1 512 155.307a277.333 277.333 0 0 1 391.637 390.57z"
-          fill="currentColor"
-        />
+        <path d="m903.637 545.877.555.598L512 938.667 119.808 546.475l.555-.598A277.333 277.333 0 0 1 512 155.307a277.333 277.333 0 0 1 391.637 390.57z" />
       </svg>
     );
   },

@@ -16,7 +16,7 @@ export const Minus = /*#__PURE__*/ defineComponent<SVGAttributes>({
     }
     return (
       <svg {...fallthroughProps} viewBox="0 0 1024 1024" class="wk-svg">
-        <path fill="currentColor" d="M102.4 477.856h819.2v68.256H102.4z" />
+        <path d="M102.4 477.856h819.2v68.256H102.4z" />
       </svg>
     );
   },

@@ -17,6 +17,7 @@ importers:
       eslint: ~8.0.1
       eslint-config-wkts: ^0.2.0
       eslint-config-wkvue: ^0.1.20
+      fast-glob: ^3.2.11
       husky: ^8.0.1
       jest: ^28.1.1
       jest-environment-jsdom: ^28.1.1
@@ -52,6 +53,7 @@ importers:
       eslint: 172.26.59.72+4873/eslint/8.0.1
       eslint-config-wkts: 172.26.59.72+4873/eslint-config-wkts/0.2.0_uhaujixt4myxtnzhmcamhb342a
       eslint-config-wkvue: 172.26.59.72+4873/eslint-config-wkvue/0.1.20_srx7v5crnrxbvbcpp6l4isaa5y
+      fast-glob: 172.26.59.72+4873/fast-glob/3.2.11
       husky: 172.26.59.72+4873/husky/8.0.1
       jest: 172.26.59.72+4873/jest/28.1.1_@types+node@17.0.45
       jest-environment-jsdom: 172.26.59.72+4873/jest-environment-jsdom/28.1.1

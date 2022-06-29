@@ -16,7 +16,7 @@ export const Loading = /*#__PURE__*/ defineComponent<SVGAttributes>({
     }
     return (
       <svg {...fallthroughProps} viewBox="0 0 1024 1024" class="wk-svg">
-        <path d="M512 128a384 384 0 0 1 384 384h-85.333A298.667 298.667 0 0 0 512 213.333V128z" fill="currentColor" />
+        <path d="M512 128a384 384 0 0 1 384 384h-85.333A298.667 298.667 0 0 0 512 213.333V128z" />
       </svg>
     );
   },
