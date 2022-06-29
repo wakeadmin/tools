@@ -86,27 +86,43 @@ export function h<P>(
 ): VNode;
 
 export function h(type: any, props: any, ...children: any[]): VNode {
-  props = props ?? {};
-  const finalChildren = processChildren(type, props, children);
-  const finalProps = processProps(type, props) ?? {};
-  processRef(type, finalProps);
-
-  if (!isVue2) {
-    // 需要使用 withDirectives 来包装
-    let directives: DirectiveProperty[] | undefined;
-    if (finalProps.directives && isDirectiveArgumentsBinding(finalProps.directives)) {
-      directives = finalProps.directives;
-      delete finalProps.directives;
-    }
-
-    const vnode = vueh(type, finalProps, finalChildren);
-    if (directives) {
-      return withDirectives(vnode, directiveBindingToArguments({ directives }));
-    }
-    return vnode;
-  } else {
-    return wrap(vueh(type, finalProps, finalChildren));
+  // 支持直传模式，兼容 vue 原生，另外在某些场景可以避免数组转换
+  if (children.length === 1 && Array.isArray(children[0])) {
+    children = children[0];
   }
+
+  // Fragment 比较特殊，不要将 slot 转换成对象模式, 而且 props 仅支持 key
+  let vnode: VNode;
+  if (type === Fragment) {
+    vnode = vueh(type, props, children);
+  } else {
+    props = props ?? {};
+    const finalChildren = processChildren(type, props, children);
+    const finalProps = processProps(type, props) ?? {};
+    processRef(type, finalProps);
+
+    if (!isVue2) {
+      // 需要使用 withDirectives 来包装
+      let directives: DirectiveProperty[] | undefined;
+      if (finalProps.directives && isDirectiveArgumentsBinding(finalProps.directives)) {
+        directives = finalProps.directives;
+        delete finalProps.directives;
+      }
+
+      vnode = vueh(type, finalProps, finalChildren);
+      if (directives) {
+        vnode = withDirectives(vnode, directiveBindingToArguments({ directives }));
+      }
+    } else {
+      vnode = vueh(type, finalProps, finalChildren);
+    }
+  }
+
+  if (isVue2) {
+    return wrap(vnode);
+  }
+
+  return vnode;
 }
 
 /**

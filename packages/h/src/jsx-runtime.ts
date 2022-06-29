@@ -1,4 +1,4 @@
-import { h } from './h';
+import { h, Fragment } from './h';
 
 /**
  * 支持 自动 JSX, used by Babel's {runtime:"automatic"} JSX transform
@@ -25,7 +25,7 @@ export function jsx(
 
   if (Array.isArray(children) && children.length) {
     if (children.length) {
-      return h(type, finalProps, ...children);
+      return h(type, finalProps, children);
     } else {
       return h(type, finalProps);
     }
@@ -40,3 +40,4 @@ export function jsx(
 
 export const jsxs = jsx;
 export const jsxDEV = jsx;
+export { Fragment };
