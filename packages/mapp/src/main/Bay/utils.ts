@@ -15,5 +15,5 @@ export function normalizeUrl(url: string) {
  * @param path
  */
 export function trimBaseUrl(baseUrl: string, path: string) {
-  return normalizeUrl(path).replace(normalizeUrl(baseUrl), '');
+  return normalizeUrl(normalizeUrl(path).replace(normalizeUrl(baseUrl), ''));
 }
