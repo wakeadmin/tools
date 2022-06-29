@@ -15,6 +15,7 @@ $color: var(--wk-color-font-regular);
   box-shadow: 0 1px 0 0 #dce1e6;
   padding: 0 20px;
   box-sizing: border-box;
+  flex-shrink: 0;
   z-index: 1;
 
   &__before {

@@ -8,10 +8,9 @@ module.exports = defineConfig({
   pluginOptions: {
     // 微前端集成配置
     ...defineMappChild({
-      baseUrl: '/base',
       shared: [
-        { name: 'vue3', module: 'vue' },
-        { name: 'vue-router3', module: 'vue-router' },
+        { name: 'vue', module: 'vue' },
+        { name: 'vue-router', module: 'vue-router' },
       ],
     }),
   },

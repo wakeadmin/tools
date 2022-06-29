@@ -4,6 +4,7 @@ import { createBay, IBay } from '@wakeadmin/mapp/main';
 
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
+import { Main } from './components';
 import App from './App';
 
 declare global {
@@ -15,16 +16,18 @@ declare global {
 export function configureBay() {
   const bay = createBay({
     rootComponent: App,
-    apps: [],
-    hooks: {},
-    routes: [
-      // TODO: 移除，自定义路由
+    apps: [
       {
-        path: '/wkb.html:any*',
-        name: 'home',
-        component: () => import('./views/Main'),
+        name: 'playgroundVue3',
+        activeRule: '/wkb.html',
+        entry: '//localhost:63285',
       },
     ],
+    pages: {
+      main: Main,
+    },
+    hooks: {},
+    routes: [],
   });
 
   configureDI(({ registerConstant, registerSingletonClass }) => {

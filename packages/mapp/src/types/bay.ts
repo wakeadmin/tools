@@ -58,7 +58,7 @@ export interface MicroApp {
   independent?: boolean;
 }
 
-export type PageComponent<T = any> = DefineComponent<T>;
+export type PageComponent<T = any> = DefineComponent<T, any, any, any, any, any, any, any, any>;
 
 export type ErrorPageProps =
   | {
@@ -95,6 +95,7 @@ export interface BuiltinPages {
 
   /**
    * 落地页, 默认路由为 /landing
+   * TODO: 移除
    */
   landing: PageComponent;
 

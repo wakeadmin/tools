@@ -1,4 +1,3 @@
-import { defineComponent } from 'vue';
 import { BayModel } from '@/BayModel';
 
 export interface MenusProps {
@@ -9,7 +8,7 @@ export const Menus = (props: MenusProps) => {
   const { bay } = props;
 
   return (
-    <nav class="bay-header__menus">
+    <div class="bay-header__menus">
       {bay.menu?.topMenus.map(item => {
         return (
           <div
@@ -20,7 +19,7 @@ export const Menus = (props: MenusProps) => {
           >
             {item.name}
             {!!(!item.url && item.children.length) && (
-              <nav class="bay-header__submenus">
+              <div class="bay-header__submenus">
                 {item.children.map(child => {
                   return (
                     <div
@@ -33,11 +32,11 @@ export const Menus = (props: MenusProps) => {
                     </div>
                   );
                 })}
-              </nav>
+              </div>
             )}
           </div>
         );
       })}
-    </nav>
+    </div>
   );
 };

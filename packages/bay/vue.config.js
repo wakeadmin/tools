@@ -9,6 +9,10 @@ module.exports = defineConfig({
     ...defineCE({ customElement: /wkc-/, mustUseProp: /wkc-/ }),
     ...defineMapp({
       // baseUrl: '/base',
+      shared: [
+        { name: 'vue', module: 'vue' },
+        { name: 'vue-router', module: 'vue-router' },
+      ],
     }),
   },
   configureWebpack() {
