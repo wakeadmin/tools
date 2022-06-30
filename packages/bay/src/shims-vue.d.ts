@@ -9,6 +9,10 @@ declare module '*.png' {
   export default string;
 }
 
+declare module '*.scss?inline' {
+  export default string;
+}
+
 interface Window {
   /**
    * 基座服务挂载点, 子应用从这里读取

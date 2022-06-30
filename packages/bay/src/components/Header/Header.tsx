@@ -26,7 +26,7 @@ export const Header = defineComponent({
       const name = bay.sessionInfo?.appInfo.appName;
 
       return (
-        <div class="bay-header">
+        <header class="bay-header">
           <div class="bay-header__before">
             <MenuCollaspe />
             <div class="bay-header__logo" title={name} onClick={handleClickLogo}>
@@ -40,7 +40,7 @@ export const Header = defineComponent({
           </div>
           <Menus bay={bay} />
           <DropdownMenus />
-        </div>
+        </header>
       );
     };
   },

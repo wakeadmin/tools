@@ -1,8 +1,15 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <wkc-header>
+    <div slot="title">title</div>
+  </wkc-header>
+
+  <wkc-header title="hello world" style="margin-top: 10px">
+    <button slot="extra">submit</button>
+    <div class="home">
+      <img alt="Vue logo" src="../assets/logo.png" />
+      <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    </div>
+  </wkc-header>
 </template>
 
 <script lang="ts">

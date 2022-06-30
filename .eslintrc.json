@@ -3,7 +3,8 @@
   "plugins": [],
   "globals": {},
   "rules": {
-    "no-magic-numbers": "off"
+    "no-magic-numbers": "off",
+    "vue/no-deprecated-slot-attribute": "off"
   },
   "parser": "vue-eslint-parser",
   "parserOptions": {

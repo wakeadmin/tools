@@ -15,6 +15,25 @@ module.exports = defineConfig({
       ],
     }),
   },
+  chainWebpack(chain) {
+    // 支持内联 style
+    const config = chain.module.rule('scss').oneOf('normal').toConfig().use;
+    const cssLoaderIndex = config.findIndex(i => i.loader.includes('css-loader'));
+    const rule = chain.module
+      .rule('scss')
+      .oneOf('inline')
+      .before('normal')
+      .resourceQuery(/\\?inline/);
+
+    const cssLoader = config[cssLoaderIndex];
+    cssLoader.options = { ...cssLoader.options, exportType: 'string' };
+
+    const loadersBeforeCSS = config.slice(cssLoaderIndex);
+
+    loadersBeforeCSS.forEach(l => {
+      rule.use(l.__useName).loader(l.loader).options(l.options);
+    });
+  },
   configureWebpack() {
     return {
       resolve: {

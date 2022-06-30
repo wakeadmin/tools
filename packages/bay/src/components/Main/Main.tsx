@@ -28,10 +28,10 @@ export const Main = defineComponent({
             <Sidebar />
           </Suspense>
           <div class="bay-content">
-            <div class="bay-app-landing" id={DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX}>
+            <main class="bay-app-landing" id={DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX}>
               {/* 微应用将挂载到这里 */}
-            </div>
-            <div class="bay-footer">{FOOTER.value}</div>
+            </main>
+            <footer class="bay-footer">{FOOTER.value}</footer>
           </div>
         </div>
       </main>

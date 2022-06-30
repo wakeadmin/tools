@@ -1,3 +1,3 @@
-import * as services from './expose';
+import * as services from './expose/services';
 
 export default services;

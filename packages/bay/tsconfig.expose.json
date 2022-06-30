@@ -5,5 +5,5 @@
     "declarationDir": "./expose",
     "emitDeclarationOnly": true
   },
-  "include": ["src/services/**/*"]
+  "include": ["src/**/*"]
 }

@@ -113,7 +113,7 @@ export class TreeContainer {
     }
 
     if (level === 0 && children?.length) {
-      return children;
+      return TreeContainer.filterMenu(children);
     }
 
     return NoopArray;
