@@ -20,7 +20,7 @@ export const Header = defineComponent({
       bay.openMain();
     };
 
-    const defaultLogo = useAsset('BAY_LOGO', DEFAULT_LOGO);
+    const defaultLogo = useAsset('IMG_BAY_LOGO', DEFAULT_LOGO);
 
     return () => {
       const name = bay.sessionInfo?.appInfo.appName;

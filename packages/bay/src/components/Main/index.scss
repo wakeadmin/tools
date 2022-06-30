@@ -1,5 +1,6 @@
 .bay-ready {
   overflow: hidden;
+  overflow-x: auto;
 }
 
 .bay {
@@ -9,6 +10,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: var(--wk-color-bg-200);
 
   &-body {
     flex: 1;
@@ -23,5 +25,25 @@
   &-content {
     flex: 1;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 20px 0;
+
+    @media screen and (max-width: 990px) {
+      padding: 20px 10px 0;
+    }
+  }
+
+  &-app-landing {
+    flex: 1;
+  }
+
+  &-footer {
+    flex-shrink: 0;
+    height: 44px;
+    line-height: 44px;
+    font-size: var(--wk-font-size-h6);
+    color: var(--wk-color-font-secondary);
   }
 }

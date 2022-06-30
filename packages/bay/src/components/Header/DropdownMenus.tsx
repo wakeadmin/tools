@@ -20,7 +20,7 @@ export const DropdownMenus = defineComponent({
   name: 'DropdownMenus',
   setup() {
     const bay = useBayModel();
-    const defaultAvatar = useAsset('BAY_AVATAR', AVATAR_DEFAULT);
+    const defaultAvatar = useAsset('IMG_BAY_AVATAR', AVATAR_DEFAULT);
 
     const handleCommand = (name: string) => {
       switch (name) {

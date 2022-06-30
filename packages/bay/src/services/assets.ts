@@ -9,10 +9,16 @@ import { NamedRegistry } from '@wakeadmin/utils';
 declare global {
   /**
    * 声明资源，方便只能提示
+   * 命名规范:
+   *   TYPE_MODULE_NAME:
+   *     TYPE: 类型，如 IMG、ICO、TXT,
+   *     MODULE: 模块名称，如 BAY
+   *     NAME: 资源命名
    */
   interface MappAssetKey {
-    BAY_LOGO: 'logo';
-    BAY_AVATAR: '头像';
+    IMG_BAY_LOGO: 'logo';
+    IMG_BAY_AVATAR: '头像';
+    TXT_BAY_FOOTER: '底部文本';
   }
 
   interface Window {
