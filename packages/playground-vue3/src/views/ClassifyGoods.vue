@@ -13,6 +13,7 @@
     <div slot="expand">expand</div>
   </wkc-sidebar-bottom-slot>
 
+  <wkc-header-slot>hello</wkc-header-slot>
   <wkc-sidebar-bottom-slot>hello</wkc-sidebar-bottom-slot>
 </template>
 

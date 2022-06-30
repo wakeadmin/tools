@@ -8,6 +8,7 @@ import { MenuCollaspe } from './MenuCollaspe';
 import DEFAULT_LOGO from './logo-default.png';
 import { DropdownMenus } from './DropdownMenus';
 import { useAsset } from '@/hooks';
+import { MOUNT_POINT_HEADER } from '@/constants';
 
 export const Header = defineComponent({
   name: 'BayHeader',
@@ -39,6 +40,7 @@ export const Header = defineComponent({
             </div>
           </div>
           <Menus bay={bay} />
+          <div id={MOUNT_POINT_HEADER}></div>
           <DropdownMenus />
         </header>
       );

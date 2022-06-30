@@ -9,7 +9,7 @@ $color: var(--wk-color-font-regular);
 }
 
 .bay-header {
-  display: flex;
+  @extend %flex-center;
   height: 56px;
   background-color: $bg-color;
   box-shadow: 0 1px 0 0 #dce1e6;
@@ -68,6 +68,7 @@ $color: var(--wk-color-font-regular);
     flex: 1;
     display: flex;
     font-size: var(--wk-font-size);
+    height: 100%;
   }
 
   &__menu {
