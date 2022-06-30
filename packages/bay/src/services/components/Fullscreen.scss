@@ -1,0 +1,9 @@
+.bay-layout-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--wk-color-white);
+  z-index: 100;
+}
