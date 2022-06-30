@@ -8,6 +8,7 @@ import { useBayModel } from '@/hooks';
 import './index.scss';
 import { TreeContainer, TreeNode } from '@/tree';
 import { BayModel } from '@/BayModel';
+import { Icon } from '../Icon';
 
 const SubMenu = (props: { menu: TreeNode; bay: BayModel }) => {
   const { menu, bay } = props;
@@ -15,7 +16,7 @@ const SubMenu = (props: { menu: TreeNode; bay: BayModel }) => {
   const title = (
     <>
       <ElIcon class="bay-sidebar__submenu-icon">
-        <ClassificationSquare />
+        <Icon icon={menu.icon ?? ClassificationSquare} />
       </ElIcon>
       <span class="bay-sidebar__submenu-title">{menu.name}</span>
     </>

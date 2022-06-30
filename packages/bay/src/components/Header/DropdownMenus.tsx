@@ -4,6 +4,8 @@ import { ArrowDown, Signout, Translate, ClassificationSquare } from '@wakeadmin/
 
 import { useBayModel, useAsset } from '@/hooks';
 
+import { Icon } from '../Icon';
+
 import AVATAR_DEFAULT from './avatar-default.png';
 
 /**
@@ -51,13 +53,13 @@ export const DropdownMenus = defineComponent({
                 <ElDropdown.DropdownItem command={BuiltinCommands.SWITCH_LANGUAGE} icon={Translate}>
                   多语言 TODO:
                 </ElDropdown.DropdownItem>
+                {/* 扩展 */}
                 {buttons?.map(button => {
                   return (
-                    <ElDropdown.DropdownItem
-                      key={button.uid}
-                      command={button.identifierPath}
-                      icon={button.icon ?? ClassificationSquare}
-                    >
+                    <ElDropdown.DropdownItem key={button.uid} command={button.identifierPath}>
+                      <ElIcon>
+                        <Icon icon={button.icon ?? ClassificationSquare} />
+                      </ElIcon>
                       {button.name}
                     </ElDropdown.DropdownItem>
                   );
