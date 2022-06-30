@@ -24,8 +24,10 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
 
         // 设置 props 初始值，让 vue3 可以始终识别引用数据的传递
         props.forEach(prop => {
-          // @ts-expect-error
-          this[prop] = null;
+          if (!(prop in this)) {
+            // @ts-expect-error
+            this[prop] = null;
+          }
         });
       }
     };
