@@ -14,13 +14,13 @@ export const Header = defineComponent({
   async setup() {
     const bay = unref(useInject('DI.bay.BayModel'));
 
-    await bay.setup();
-
     const handleClickLogo = () => {
       bay.openMain();
     };
 
     const defaultLogo = useAsset('IMG_BAY_LOGO', DEFAULT_LOGO);
+
+    await bay.setup();
 
     return () => {
       const name = bay.sessionInfo?.appInfo.appName;

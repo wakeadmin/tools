@@ -1,6 +1,6 @@
 import { createApp, App as TApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import '@wakeadmin/bay';
+import Bay from '@wakeadmin/bay';
 
 import App from './App.vue';
 import { routes } from './router';
@@ -20,7 +20,7 @@ export async function mount(props?: { container: HTMLElement }) {
     routes,
   });
 
-  app = createApp(App).use(store).use(router);
+  app = createApp(App).use(store).use(router).use(Bay);
 
   app.mount(props?.container?.querySelector('#app') ?? '#app');
   // @ts-expect-error

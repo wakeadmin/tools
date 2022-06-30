@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/array-type */
 import { Plugin } from 'vue';
 import { hasProp, addHiddenProp } from '@wakeadmin/utils';
@@ -120,19 +119,17 @@ export const plugin: Plugin = (app, option?: PluginOptions) => {
     }
   } else {
     // Vue3
-    const isCustomElementMatcher = createMatcher(customElement);
-    const mustUsePropMatcher = createMatcher(mustUseProp);
-
-    const originIsCustomElement = app.config.compilerOptions.isCustomElement;
-
-    app.config.compilerOptions.isCustomElement = tag => {
-      return originIsCustomElement?.(tag) || isCustomElementMatcher(tag);
-    };
-
-    // 和 vue2 兼容
-    // @ts-expect-error
-    app.config.compilerOptions.mustUseProp = (tag: string, type: string | null, name) => {
-      return !isIgnoreAttribute(name) && mustUsePropMatcher(tag);
-    };
+    // 不做处理，避免警告
+    // const isCustomElementMatcher = createMatcher(customElement);
+    // const mustUsePropMatcher = createMatcher(mustUseProp);
+    // const originIsCustomElement = app.config.compilerOptions.isCustomElement;
+    // app.config.compilerOptions.isCustomElement = tag => {
+    //   return originIsCustomElement?.(tag) || isCustomElementMatcher(tag);
+    // };
+    // // 和 vue2 兼容
+    // // @ts-expect-error
+    // app.config.compilerOptions.mustUseProp = (tag: string, type: string | null, name) => {
+    //   return !isIgnoreAttribute(name) && mustUsePropMatcher(tag);
+    // };
   }
 };

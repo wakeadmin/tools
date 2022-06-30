@@ -55,6 +55,7 @@ export const Sidebar = defineComponent({
   name: 'BaySidebar',
   async setup() {
     const bay = useBayModel();
+
     await bay.setup();
 
     return () => {
