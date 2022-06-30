@@ -1,7 +1,9 @@
+/* eslint-disable vue/one-component-per-file */
 import { defineComponent, onMounted, ref, Teleport, Ref, onBeforeUnmount } from 'vue';
 import { Disposer } from '@wakeadmin/utils';
 
-import { MOUNT_POINT_HEADER } from '@/constants';
+import { MOUNT_POINT_HEADER, MOUNT_POINT_HEADER_DROPDOWN } from '@/constants';
+import { registerHeaderDropdownItem } from '../header-dropdown';
 
 function factory(mountPoint: string) {
   return defineComponent({
@@ -56,5 +58,35 @@ function factory(mountPoint: string) {
     },
   });
 }
+
+export const HeaderDropdownMenu = defineComponent({
+  name: 'BayLayoutHeaderDropdownMenu',
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    icon: {
+      type: String,
+      default: undefined,
+    },
+  },
+  emits: {
+    click() {
+      return true;
+    },
+  },
+  setup(props, context) {
+    const dispose = registerHeaderDropdownItem({
+      title: () => props.title,
+      icon: () => props.icon,
+      onClick: () => context.emit('click'),
+    });
+
+    onBeforeUnmount(dispose);
+
+    return () => null;
+  },
+});
 
 export const HeaderSlot = factory(MOUNT_POINT_HEADER);

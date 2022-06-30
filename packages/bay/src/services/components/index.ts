@@ -2,7 +2,7 @@ import { registerCustomElements } from '@wakeadmin/ce';
 import { Header } from './Header';
 import { Content } from './Content';
 import { SidebarBottomSlot, SidebarTopSlot } from './SidebarSlot';
-import { HeaderSlot } from './HeaderSlot';
+import { HeaderSlot, HeaderDropdownMenu } from './HeaderSlot';
 
 // 注册自定义组件
 const components = registerCustomElements('wkc', {
@@ -11,6 +11,7 @@ const components = registerCustomElements('wkc', {
   SidebarBottomSlot,
   SidebarTopSlot,
   HeaderSlot,
+  HeaderDropdownMenu,
 });
 
 export type BayLayoutComponents = typeof components;

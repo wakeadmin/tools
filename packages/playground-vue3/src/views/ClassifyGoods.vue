@@ -15,6 +15,8 @@
 
   <wkc-header-slot>hello</wkc-header-slot>
   <wkc-sidebar-bottom-slot>hello</wkc-sidebar-bottom-slot>
+  <wkc-header-dropdown-menu title="hello" @click="handleMenuClick"></wkc-header-dropdown-menu>
+  <wkc-header-dropdown-menu icon="Add" title="world" @click="handleMenuClick"></wkc-header-dropdown-menu>
 </template>
 
 <script lang="ts" setup>
@@ -22,4 +24,5 @@
 
   const show = ref(false);
   const count = ref(0);
+  const handleMenuClick = () => console.log('menu-click');
 </script>

@@ -2,6 +2,11 @@ import { defineComponent, PropType, Component, h } from 'vue';
 import * as BuiltinIcons from '@wakeadmin/icons';
 import { getAsset } from '@/services';
 
+const NormalizeBuiltinIcons = Object.keys(BuiltinIcons).reduce<Record<string, Component>>((prev, cur) => {
+  prev[cur.toLowerCase()] = (BuiltinIcons as any)[cur];
+  return prev;
+}, {});
+
 /**
  * 图标渲染
  */
@@ -24,8 +29,8 @@ export const Icon = defineComponent({
       let children: any;
 
       if (typeof icon === 'string') {
-        if (icon in BuiltinIcons) {
-          children = h((BuiltinIcons as any)[icon]);
+        if (icon.toLowerCase() in NormalizeBuiltinIcons) {
+          children = h(NormalizeBuiltinIcons[icon.toLowerCase()]);
         } else {
           const asset = getAsset(icon, icon);
 
