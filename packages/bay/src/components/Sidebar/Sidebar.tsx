@@ -9,6 +9,7 @@ import './index.scss';
 import { TreeContainer, TreeNode } from '@/tree';
 import { BayModel } from '@/BayModel';
 import { Icon } from '../Icon';
+import { MOUNT_POINT_SIDEBAR_BOTTOM, MOUNT_POINT_SIDEBAR_TOP } from '@/constants';
 
 const SubMenu = (props: { menu: TreeNode; bay: BayModel }) => {
   const { menu, bay } = props;
@@ -63,7 +64,8 @@ export const Sidebar = defineComponent({
       const activeIdentifierPath = bay.menu?.activeSecondaryNode?.identifierPath;
 
       return (
-        <div class="bay-sidebar">
+        <div class={['bay-sidebar', { collapse: bay.menuCollasped }]}>
+          <div id={MOUNT_POINT_SIDEBAR_TOP}></div>
           <ElMenu
             defaultActive={activeIdentifierPath}
             class="bay-sidebar__menu"
@@ -75,6 +77,7 @@ export const Sidebar = defineComponent({
               return <SubMenu key={menu.uid} menu={menu} bay={bay} />;
             })}
           </ElMenu>
+          <div id={MOUNT_POINT_SIDEBAR_BOTTOM}></div>
         </div>
       );
     };

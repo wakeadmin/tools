@@ -5,6 +5,7 @@
     "Matcheds",
     "qiankun",
     "retryable",
+    "slotchange",
     "unref",
     "vnode",
     "wakeadmin",

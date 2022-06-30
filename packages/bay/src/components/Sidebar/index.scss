@@ -4,9 +4,11 @@
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+  background-color: var(--wk-color-white);
+  box-shadow: 1px 0 0 0 #dce1e6;
 
   &__menu {
-    flex: 1;
+    border-right: none !important;
 
     &:not(.el-menu--collapse) {
       width: var(--bay-sidebar-width);

@@ -2,7 +2,6 @@ import { defineComponent, ref } from 'vue';
 import { useBayModel } from '@/hooks';
 
 import style from './Header.scss?inline';
-import { HEADER_MOUNT_POINT as HEADER_EXTRA_MOUNT_POINT } from './constants';
 
 /**
  * 页面头部布局
@@ -59,7 +58,6 @@ export const Header = defineComponent({
             </div>
             {/* 扩展区域，通常放置按钮 */}
             <div class="bay-layout-header__extra">
-              <span id={HEADER_EXTRA_MOUNT_POINT}></span>
               <slot name="extra" />
             </div>
           </div>

@@ -1,0 +1,8 @@
+.bay-layout-content {
+  background-color: var(--wk-color-white);
+  border-radius: var(--wk-border-radius-sm);
+
+  &:not(:only-child) {
+    margin-top: 16px;
+  }
+}

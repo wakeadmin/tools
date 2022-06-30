@@ -2,6 +2,8 @@ import { RouteRecordRaw } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 
 export const routes: RouteRecordRaw[] = [
+  { path: '/retail/goods-mgr/classfiy/goods', component: () => import('../views/ClassifyGoods.vue') },
+  { path: '/retail/goods-mgr/classfiy/visible', component: () => import('../views/ClassifyVisible.vue') },
   {
     path: '/:any*',
     name: 'home',
