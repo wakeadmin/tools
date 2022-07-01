@@ -16,7 +16,7 @@ $color: var(--wk-color-font-regular);
   padding: 0 20px;
   box-sizing: border-box;
   flex-shrink: 0;
-  z-index: 1;
+  z-index: 2;
 
   &__before {
     width: var(--bay-sidebar-width);
@@ -141,6 +141,7 @@ $color: var(--wk-color-font-regular);
 
     &-name {
       margin-right: 10px;
+      white-space: nowrap;
     }
   }
 }

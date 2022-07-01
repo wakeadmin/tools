@@ -5,6 +5,7 @@ import { SidebarBottomSlot, SidebarTopSlot } from './SidebarSlot';
 import { HeaderSlot, HeaderDropdownMenu } from './HeaderSlot';
 import { Fullscreen } from './Fullscreen';
 import { Breadcrumb } from './Breadcrumb';
+import { FloatFooter } from './FloatFooter';
 
 // 注册自定义组件
 const components = registerCustomElements('wkc', {
@@ -16,6 +17,7 @@ const components = registerCustomElements('wkc', {
   HeaderDropdownMenu,
   Fullscreen,
   Breadcrumb,
+  FloatFooter,
 });
 
 export type BayLayoutComponents = typeof components;

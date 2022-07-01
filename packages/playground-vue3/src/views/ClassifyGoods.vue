@@ -18,6 +18,7 @@
   <wkc-header-dropdown-menu title="hello" @click="handleMenuClick"></wkc-header-dropdown-menu>
   <wkc-header-dropdown-menu icon="Add" title="world" @click="handleMenuClick"></wkc-header-dropdown-menu>
   <wkc-breadcrumb />
+  <wkc-float-footer style="background-color: red"><button>hello</button></wkc-float-footer>
 </template>
 
 <script lang="ts" setup>

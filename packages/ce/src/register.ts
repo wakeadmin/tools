@@ -5,6 +5,9 @@ import { IGNORE_PROPS } from './constants';
 import { CustomElements } from './type-utils';
 
 export function registerCustomElement(prefix: string, name: string, comp: any) {
+  // FIXME: 补全 props, 否则某些情况下会报错
+  comp.props ??= {};
+
   let CustomElement = defineCustomElement(comp);
 
   const props = (

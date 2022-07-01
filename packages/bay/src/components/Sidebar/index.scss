@@ -6,6 +6,7 @@
   position: relative;
   background-color: var(--wk-color-white);
   box-shadow: 1px 0 0 0 #dce1e6;
+  z-index: 1;
 
   &__menu {
     border-right: none !important;
