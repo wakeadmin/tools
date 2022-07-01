@@ -1,0 +1,27 @@
+@use 'share' as *;
+
+.bay-layout-breadcrumb {
+  display: flex;
+  font-size: getVar(breadcrumb-font-size, --wk-font-size-h4);
+  color: getVar(breadcrumb-color, --wk-color-font-secondary);
+  user-select: none;
+
+  &__item {
+    cursor: pointer;
+  }
+
+  &__item.leaf {
+    cursor: auto;
+    color: getVar(breadcrumb-color-active, --wk-color-font-primary);
+  }
+
+  &__separator {
+    margin: 0 5px;
+    font-size: 0.8em;
+  }
+
+  &__separator,
+  &__name {
+    vertical-align: middle;
+  }
+}

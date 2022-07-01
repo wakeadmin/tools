@@ -1,7 +1,9 @@
+@use 'share' as *;
+
 .bay-layout-header {
   $radius: var(--wk-border-radius-sm);
-  $height: var(--bay-layout-header-height, 58px);
-  $body-padding: var(--bay-layout-header-body-padding, 20px 16px);
+  $height: getVar(header-height, 58px);
+  $body-padding: getVar(header-body-padding, 20px 16px);
 
   background-color: var(--wk-color-white);
   border-radius: $radius;
@@ -12,6 +14,7 @@
     height: $height;
     display: flex;
     align-items: center;
+    font-size: var(--wk-font-size-h3);
 
     &:not(.lonely) {
       border-bottom: 1px solid var(--wk-color-border-200);

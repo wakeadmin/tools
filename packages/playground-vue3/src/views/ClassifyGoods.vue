@@ -17,6 +17,7 @@
   <wkc-sidebar-bottom-slot>hello</wkc-sidebar-bottom-slot>
   <wkc-header-dropdown-menu title="hello" @click="handleMenuClick"></wkc-header-dropdown-menu>
   <wkc-header-dropdown-menu icon="Add" title="world" @click="handleMenuClick"></wkc-header-dropdown-menu>
+  <wkc-breadcrumb />
 </template>
 
 <script lang="ts" setup>
