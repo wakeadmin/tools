@@ -8,7 +8,7 @@ import { DIContainerContext } from '../components';
  * @returns
  */
 export function useEventBus(): Ref<EventBus> {
-  const injected = inject(DIContainerContext);
+  const injected = inject(DIContainerContext, {});
 
   return computed(() => injected?.eventBus ?? eventBus);
 }

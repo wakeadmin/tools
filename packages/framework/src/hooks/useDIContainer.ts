@@ -8,7 +8,7 @@ import { DIContainerContext } from '../components';
  * @returns
  */
 export function useDIContainer(): Ref<Container> {
-  const injected = inject(DIContainerContext);
+  const injected = inject(DIContainerContext, {});
 
   return computed(() => injected?.container ?? container);
 }
