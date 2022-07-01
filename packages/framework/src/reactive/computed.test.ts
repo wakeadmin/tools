@@ -1,7 +1,9 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable no-new */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ref, isVue2 } from '@wakeadmin/demi';
+import { ref, isVue2, watchEffect, defineComponent, nextTick } from '@wakeadmin/demi';
+
+import { render } from 'test-helper-vue';
+
 import { computed } from './computed';
 import { collectAnnotations } from './decorators';
 import { makeObservable } from './makeObservable';
@@ -195,4 +197,62 @@ describe('computed observable', () => {
       expect(trigger).toBeCalled();
     });
   }
+
+  test('不受 vue 实例卸载影响，依旧能够保持响应', async () => {
+    const count = ref(0);
+    let result1: number | undefined;
+    let result2: number | undefined;
+    class Base {
+      @computed
+      get count() {
+        return count.value * 2;
+      }
+
+      constructor() {
+        makeObservable(this);
+      }
+    }
+
+    let base: Base;
+
+    const App = defineComponent({
+      setup() {
+        base = new Base();
+
+        // 内部监听，会跟随组件卸载而释放
+        watchEffect(() => {
+          result2 = base.count;
+        });
+
+        return () => null;
+      },
+    });
+
+    const { unmount } = render(App, {});
+
+    // 外部监听
+    watchEffect(() => {
+      result1 = base.count;
+    });
+
+    expect(result1).toBe(0);
+    expect(result2).toBe(0);
+
+    count.value = 1;
+
+    await nextTick();
+
+    expect(result1).toBe(2);
+    expect(result2).toBe(2);
+
+    // 卸载
+    unmount();
+
+    count.value = 2;
+
+    await nextTick();
+
+    expect(result1).toBe(4);
+    expect(result2).toBe(2); // 不会再响应
+  });
 });

@@ -3,6 +3,7 @@ import { computed as vueComputed } from '@wakeadmin/demi';
 import { isPlainObject, isPropertyKey, NOOP } from '../utils';
 
 import { createAnnotationDecorator, storeAnnotation } from './decorators';
+import { getEffectScope } from './effect-scope';
 import { IComputedFactory, Annotation, AnnotationType, AnnotationMaker } from './types';
 
 const makeComputed: AnnotationMaker = (target, key, annotation, descriptor) => {
@@ -11,13 +12,17 @@ const makeComputed: AnnotationMaker = (target, key, annotation, descriptor) => {
     throw new Error(`@computed 只能作用于 getter(+setter) 属性`);
   }
 
-  const value = vueComputed(
-    {
-      get: descriptor.get!.bind(target),
-      set: descriptor.set?.bind(target) ?? NOOP,
-    },
-    annotation.options
-  );
+  const effectScope = getEffectScope(target);
+
+  const value = effectScope.run(() =>
+    vueComputed(
+      {
+        get: descriptor.get!.bind(target),
+        set: descriptor.set?.bind(target) ?? NOOP,
+      },
+      annotation.options
+    )
+  )!;
 
   Object.defineProperty(target, key, {
     configurable: true,
