@@ -4,8 +4,46 @@ import path from 'path-browserify';
 import { BayOptions, MicroApp } from '../../types';
 
 import { DEFAULT_ROOT_FOR_CHILD } from '../constants';
+import { pushMountQueue } from './mount-delay';
 import { MicroAppNormalized } from './types';
 import { normalizeUrl, trimBaseUrl } from './utils';
+
+function hasContainer(container: string | HTMLElement) {
+  if (typeof container === 'string') {
+    return !!document.querySelector(container);
+  }
+
+  return !!container;
+}
+
+const createLoader = (container: string | HTMLElement) => {
+  // qiankun 会等待这里 resolve 才会开始挂载
+  // 我们在这里等待路由 resolve
+  let loaded = false;
+
+  return async (loading: boolean): Promise<void> => {
+    if (!loading) {
+      return undefined;
+    }
+
+    if (!loaded) {
+      // 首次加载时不需要阻塞，这里耗时比较长，通常vue-router 已经挂载了
+      loaded = true;
+      return undefined;
+    }
+
+    if (!hasContainer(container)) {
+      // 等待路由就绪
+      return await new Promise<void>(resolve => {
+        pushMountQueue(() => {
+          resolve();
+        });
+      });
+    }
+
+    return undefined;
+  };
+};
 
 export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormalized[] {
   // 所有 activeRule 都基于基座 base
@@ -57,11 +95,14 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
       // entrySet.add(normalizedEntry);
     }
 
+    const container = app.container ?? DEFAULT_ROOT_FOR_CHILD;
+
     return {
       activeRule: normalizedActiveRule,
       activeRuleRaw: trimBaseUrl(baseUrl, normalizedActiveRule),
       entry: normalizedEntry,
-      container: app.container ?? DEFAULT_ROOT_FOR_CHILD,
+      container,
+      loader: createLoader(container),
       ...other,
     };
   });

@@ -1,5 +1,6 @@
 import { joinQuery } from '@wakeadmin/utils';
 import { RouteRecordRaw, RouteLocationRaw, stringifyQuery } from 'vue-router';
+import pathUtils from 'path-browserify';
 
 import { ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
 
@@ -88,6 +89,7 @@ export function createRoutes(baseUrl: string, apps: MicroAppNormalized[]) {
       // 如果不是，将重定向到 404 页面
       const found = nonIndependentApps.some(a => to.path.startsWith(a.activeRuleRaw));
       if (!found) {
+        // TODO: 移除
         console.warn(`[mapp] ${to.path} 未匹配到任何子应用，将重定向到 404 页面`);
         return getErrorRoute({
           type: 'http',
@@ -118,7 +120,11 @@ export class Navigator {
    * @param data
    */
   openError: IBay['openError'] = data => {
-    this.bay.router.push(getErrorRoute(data));
+    const target = pathUtils.join(this.bay.baseUrl, ERROR_PAGE);
+    const { redirect, ...query } = data;
+
+    // 外部调用时，避免携带 state，否则可能会导致子应用误解析
+    this.openUrl({ path: target, query: query as any, redirect });
   };
 
   openApp: IBay['openApp'] = option => {

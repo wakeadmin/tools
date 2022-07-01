@@ -15,6 +15,7 @@ import { createRoutes, Navigator } from './route';
 import { AppContext } from './AppContext';
 import { normalizeUrl } from './utils';
 import { MicroAppNormalized } from './types';
+import { flushMountQueue } from './mount-delay';
 
 export class Bay implements IBay {
   app: App;
@@ -166,6 +167,10 @@ export class Bay implements IBay {
     const router = createRouter({
       history: createWebHistory(this.baseUrl),
       routes,
+    });
+
+    router.afterEach(() => {
+      flushMountQueue();
     });
 
     return router;
