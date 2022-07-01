@@ -57,7 +57,7 @@ export const Sidebar = defineComponent({
   async setup() {
     const bay = useBayModel();
 
-    await bay.setup();
+    await bay.waitSetup();
 
     return () => {
       const menus = bay.menu?.secondaryMenus ?? NoopArray;
@@ -70,7 +70,7 @@ export const Sidebar = defineComponent({
             defaultActive={activeIdentifierPath}
             class="bay-sidebar__menu"
             collapse={bay.menuCollasped}
-            style="--el-menu-text-color: var(--wk-color-font-regular)"
+            style="--el-menu-text-color: var(--wk-color-font-regular);--el-menu-bg-color: var(--wk-color-white)"
             collapseTransition={false}
           >
             {menus.map(menu => {

@@ -14,7 +14,7 @@ export type PermissionCheckType = 'AND' | 'OR';
 export async function allows(to: string[], type: PermissionCheckType = 'OR') {
   const bayModel = getInject('DI.bay.BayModel');
 
-  await bayModel.setup();
+  await bayModel.waitSetup();
 
   const check = (id: string) => {
     return !!bayModel.menu?.findByIdentifierUnderActiveContext(id)?.result;

@@ -21,7 +21,7 @@ export const Header = defineComponent({
 
     const defaultLogo = useAsset('IMG_BAY_LOGO', DEFAULT_LOGO);
 
-    await bay.setup();
+    await bay.waitSetup();
 
     return () => {
       const name = bay.sessionInfo?.appInfo.appName;

@@ -115,6 +115,8 @@ export class BayModel extends BaseModel implements IBayModel {
   @inject('DI.bay.promiseQueue')
   private setupQueue!: PromiseQueue<this>;
 
+  private initialized = false;
+
   constructor() {
     super();
 
@@ -127,13 +129,22 @@ export class BayModel extends BaseModel implements IBayModel {
    * 等待启动, 只有基座正常启动之后才会 resolve。
    * 异常也不会抛出错误, 适用于要等待基座正常启动之后才进行的操作
    */
-  async setup(): Promise<this> {
+  async waitSetup(): Promise<this> {
     if (this.status !== BayStatus.READY) {
       // 推入队列中，
       return await this.setupQueue.push();
     }
 
     return this;
+  }
+
+  /**
+   * 这个方法只能在主界面启动时调用
+   */
+  initialize() {
+    this.singletonInitialize();
+    this.retryableInitialize();
+    this.initialized = true;
   }
 
   /**
@@ -311,9 +322,14 @@ export class BayModel extends BaseModel implements IBayModel {
     return true;
   }
 
-  // watch 和 createMenus 不能在构造函数中调用因为依赖注入还没完成
-  @postConstruct()
-  protected initialize() {
+  /**
+   * 仅需执行一次
+   */
+  private singletonInitialize() {
+    if (this.initialized) {
+      return;
+    }
+
     // 监听路由变动并匹配菜单
     watch(
       () => ({
@@ -332,8 +348,6 @@ export class BayModel extends BaseModel implements IBayModel {
       },
       { flush: 'pre' }
     );
-
-    this.retryableInitialize();
   }
 
   /**
