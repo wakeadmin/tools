@@ -6,7 +6,6 @@ import {
   observable,
   singleton,
   watch,
-  postConstruct,
   BaseModel,
 } from '@wakeadmin/framework';
 import type { IBay } from '@wakeadmin/mapp/main';
