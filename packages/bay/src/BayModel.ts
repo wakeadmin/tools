@@ -119,6 +119,8 @@ export class BayModel extends BaseModel implements IBayModel {
     super();
 
     makeObservable(this);
+
+    window.__MAPP_BAY_MODEL__ = this;
   }
 
   /**

@@ -8,6 +8,7 @@ import style from './FloatFooter.scss?inline';
 export const FloatFooter = defineComponent({
   name: 'BayLayoutFloatFooter',
   styles: [style],
+  inheritAttrs: false,
   setup() {
     const disposer = useDisposer();
     const left = ref<string | number>(0);

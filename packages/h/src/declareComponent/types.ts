@@ -17,8 +17,9 @@ declare module '@vue/runtime-dom' {
     // FIXME: vue 没有设置这个属性
     textContent?: string;
 
-    // 支持 shadow dom part 样式
+    // 支持 shadow dom
     part?: string;
+    slot?: string;
 
     // 避免原生组件报错
     'v-children'?: VNodeChild;

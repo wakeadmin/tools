@@ -111,6 +111,7 @@ importers:
       '@vue/cli-plugin-router': ~5.0.6
       '@vue/cli-plugin-typescript': ~5.0.6
       '@vue/cli-service': ~5.0.6
+      '@vueuse/core': ^8.7.5
       '@wakeadmin/ce': workspace:^0.1.0
       '@wakeadmin/framework': workspace:^0.1.0
       '@wakeadmin/h': workspace:^0.1.0
@@ -131,6 +132,7 @@ importers:
       vue: ^3.2.37
       vue-router: ^4.0.16
     dependencies:
+      '@vueuse/core': 172.26.59.72+4873/@vueuse/core/8.7.5_vue@3.2.37
       '@wakeadmin/ce': link:../ce
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
