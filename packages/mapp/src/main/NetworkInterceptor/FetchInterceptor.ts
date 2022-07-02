@@ -1,4 +1,7 @@
+import { concurrently } from '@wakeadmin/utils';
+
 import { InterceptRequest, InterceptResponse } from '../../types';
+
 import { BaseInterceptor } from './BaseInterceptor';
 import { isJSONResponse } from './utils';
 
@@ -58,6 +61,10 @@ export class FetchInterceptor extends BaseInterceptor {
         that.apply(_request, async () => {
           try {
             const result = await originFetch(input, { ...init, headers: _request.headers });
+
+            const clone = result.clone();
+            let jsonCache: any;
+
             const response: InterceptResponse = {
               headers: result.headers,
               status: result.status,
@@ -67,18 +74,22 @@ export class FetchInterceptor extends BaseInterceptor {
                 type: 'fetch',
                 response: result,
               },
-              async json() {
+              json: concurrently(async () => {
                 if (!isJSONResponse(result.headers)) {
                   return null;
                 }
 
                 try {
-                  return await result.json();
+                  // json() 方法只能调用一次, 因此这里使用缓存
+                  if (jsonCache !== undefined) {
+                    return jsonCache;
+                  }
+                  return (jsonCache = await clone.json());
                 } catch (err) {
                   console.debug(`[mapp] failed to get json from fetch`, response, err);
                   return null;
                 }
-              },
+              }),
             };
 
             resolve(result);

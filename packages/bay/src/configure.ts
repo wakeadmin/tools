@@ -1,18 +1,34 @@
 import Framework, { configureDI } from '@wakeadmin/framework';
-import { initial, compose } from '@wakeapp/wakedata-backend';
+import { initial } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
+import { ElMessage } from 'element-plus';
+import debounce from 'lodash/debounce';
 
 import * as services from './services';
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
 import { ErrorPage, Main } from './components';
+import { UNAUTH } from './constants';
 import App from './App';
+import { getAsset } from './services';
 
 declare global {
   interface DIMapper {
     'DI.bay': IBay;
   }
 }
+
+const gotoLogin = debounce(
+  () => {
+    ElMessage.error('会话失效，请重新登录');
+    window.setTimeout(() => {
+      const LOGIN_URL = getAsset('URL_LOGIN', '/login.html');
+      window.location.assign(`${LOGIN_URL}?url=${window.encodeURIComponent(window.location.href)}`);
+    }, 1000);
+  },
+  1000,
+  { leading: true }
+);
 
 export function configureBay() {
   const bay = createBay({
@@ -30,6 +46,21 @@ export function configureBay() {
     },
     hooks: {},
     routes: [],
+    networkInterceptors: [
+      async (_, next) => {
+        const response = await next();
+        // 判断是否会话过期
+        const json = await response.json();
+        if (json) {
+          const errorCode = json.errorCode ?? json.code;
+
+          // 会话失效，跳转到登录页面
+          if (errorCode === UNAUTH) {
+            gotoLogin();
+          }
+        }
+      },
+    ],
   });
 
   configureDI(({ registerConstant, registerSingletonClass }) => {
@@ -50,8 +81,6 @@ export function configureBackend() {
     fetch: window.fetch.bind(window),
     baseURL: BASE_URL,
     defaultErrorMessage: '系统出差中',
-    // 拦截器
-    interceptor: compose(),
     /**
      * 多语言
      */
@@ -66,8 +95,10 @@ export function createApp() {
   // 暴露给下级子应用的服务
   window.__MAPP_SERVICES__ = services;
 
-  configureBackend();
   const bay = configureBay();
+
+  // 在 bay 初始化之后执行，否则无法拦截到请求
+  configureBackend();
 
   return bay;
 }

@@ -24,6 +24,8 @@ declare global {
     TXT_BAY_FOOTER: '底部文本';
     TXT_BAY_404: '404 错误文本';
     TXT_BAY_403: '403 错误文本';
+
+    URL_LOGIN: '登录页面';
   }
 
   interface Window {
