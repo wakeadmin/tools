@@ -5,13 +5,16 @@ import { ErrorPageProps } from '../../types';
 import { useBay } from '../hooks';
 
 export const DefaultErrorPageImplementation = (props: ErrorPageProps) => {
-  return <div>TODO: error page</div>;
+  return <div>error page</div>;
 };
 
-export const ErrorPage = defineComponent(() => {
-  const route = useRoute();
-  const bay = useBay();
-  const ErrorPageImplementation = bay.options.pages?.error ?? DefaultErrorPageImplementation;
+export const ErrorPage = defineComponent({
+  name: 'MappErrorPage',
+  setup() {
+    const route = useRoute();
+    const bay = useBay();
+    const ErrorPageImplementation = bay.options.pages?.error ?? DefaultErrorPageImplementation;
 
-  return () => <ErrorPageImplementation {...(route.query as ErrorPageProps)} />;
+    return () => <ErrorPageImplementation {...(route.query as ErrorPageProps)} />;
+  },
 });

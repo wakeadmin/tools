@@ -11,7 +11,7 @@ import { UniverseHistory } from '../UniverseHistory';
 import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
 
 import { groupAppsByIndependent, normalizeOptions } from './options';
-import { createRoutes, Navigator } from './route';
+import { createRoutes, generateLandingUrl, Navigator } from './route';
 import { AppContext } from './AppContext';
 import { normalizeUrl } from './utils';
 import { MicroAppNormalized } from './types';
@@ -116,6 +116,10 @@ export class Bay implements IBay {
   };
   openMain: IBay['openMain'] = (...args) => {
     this.navigator.openMain(...args);
+  };
+
+  generateLandingUrl: IBay['generateLandingUrl'] = (data, addHost) => {
+    return generateLandingUrl(this.baseUrl, data, addHost);
   };
 
   /**

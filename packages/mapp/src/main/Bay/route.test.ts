@@ -1,6 +1,6 @@
 import { ErrorPage, LandingPage, IndependentPage, MainPage } from '../components';
 
-import { createRoutes, Navigator } from './route';
+import { createRoutes, generateLandingUrl, Navigator, parseLandingData } from './route';
 import { normalizeApps } from './options';
 
 test('create routes', () => {
@@ -66,6 +66,21 @@ test('create routes', () => {
       },
     },
   ]);
+});
+
+describe('landingPage', () => {
+  test('generate landing url', () => {
+    expect(generateLandingUrl('/base', { foo: 'bar' })).toBe('/base/landing?s=eyJmb28iOiJiYXIifQ%3D%3D');
+    expect(generateLandingUrl('/', { foo: 'bar' })).toBe('/landing?s=eyJmb28iOiJiYXIifQ%3D%3D');
+    expect(generateLandingUrl('/', { foo: 'bar' }, true)).toBe('http://localhost/landing?s=eyJmb28iOiJiYXIifQ%3D%3D');
+  });
+
+  test('parse landing page', () => {
+    expect(() => parseLandingData({})).toThrowError();
+    expect(parseLandingData({ s: 'eyJmb28iOiJiYXIifQ%3D%3D' })).toEqual({ foo: 'bar' });
+    // 二次 decode 不影响
+    expect(parseLandingData({ s: decodeURIComponent('eyJmb28iOiJiYXIifQ%3D%3D') })).toEqual({ foo: 'bar' });
+  });
 });
 
 describe('navigator', () => {

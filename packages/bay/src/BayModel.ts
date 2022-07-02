@@ -140,14 +140,15 @@ export class BayModel extends BaseModel implements IBayModel {
   /**
    * 这个方法只能在主界面启动时调用
    */
-  initialize() {
+  async initialize() {
     if (this.initialized) {
       return;
     }
 
-    this.singletonInitialize();
-    this.retryableInitialize();
     this.initialized = true;
+
+    await this.singletonInitialize();
+    await this.retryableInitialize();
   }
 
   /**
@@ -310,11 +311,29 @@ export class BayModel extends BaseModel implements IBayModel {
   };
 
   /**
+   * 打开链接
+   * @param url
+   */
+  openUrl: IBayModel['openUrl'] = url => {
+    this.bay.openUrl(url);
+  };
+
+  /**
    * 打开错误页面
    * @param args
    */
   openError: IBayModel['openError'] = (...args) => {
     this.bay.openError(...args);
+  };
+
+  /**
+   * 生成落地页链接
+   * @param props
+   * @param addHost
+   * @returns
+   */
+  generateLandingUrl: IBayModel['generateLandingUrl'] = (props, addHost) => {
+    return this.bay.generateLandingUrl(props, addHost);
   };
 
   private assetOpen(): boolean {
@@ -329,10 +348,6 @@ export class BayModel extends BaseModel implements IBayModel {
    * 仅需执行一次
    */
   private singletonInitialize() {
-    if (this.initialized) {
-      return;
-    }
-
     // 监听路由变动并匹配菜单
     watch(
       () => ({

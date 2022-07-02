@@ -1,5 +1,5 @@
 import { joinQuery } from '@wakeadmin/utils';
-import { RouteRecordRaw, RouteLocationRaw, stringifyQuery } from 'vue-router';
+import { RouteRecordRaw, RouteLocationRaw, stringifyQuery, LocationQueryRaw } from 'vue-router';
 import pathUtils from 'path-browserify';
 
 import { ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
@@ -8,6 +8,35 @@ import { ErrorPage, IndependentPage, LandingPage, MainPage } from '../components
 import { ERROR_PAGE, LANDING_PAGE } from '../constants';
 import { groupAppsByIndependent } from './options';
 import { MicroAppNormalized } from './types';
+
+/**
+ * 生成落地页链接
+ * @param baseUrl
+ * @param data
+ * @param addHost
+ * @returns
+ */
+export function generateLandingUrl(baseUrl: string, data: any, addHost: boolean = false) {
+  let url = pathUtils.join(baseUrl, LANDING_PAGE);
+  url = joinQuery(url, `s=${encodeURIComponent(btoa(JSON.stringify(data)))}`);
+  if (addHost) {
+    url = window.location.origin + url;
+  }
+
+  return url;
+}
+
+/**
+ * 解析落地页参数
+ */
+export function parseLandingData(query: LocationQueryRaw) {
+  const s = query?.s;
+  if (s == null) {
+    throw new Error(`[bay] 落地页参数丢失`);
+  }
+
+  return JSON.parse(atob(decodeURIComponent(s as string)));
+}
 
 /**
  * 构造错误页面路由描述

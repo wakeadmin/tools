@@ -56,6 +56,11 @@ export interface MicroApp {
    * 可选，默认为 false。一般情况下微应用都是挂载在由基座的提供的页面框架内，某些特殊场景，微应用要完全接管一个页面，比如登录。这时候就开启
    */
   independent?: boolean;
+
+  /**
+   * 自定义元数据
+   */
+  meta?: Record<string, any>;
 }
 
 export type PageComponent<T = any> =
@@ -78,6 +83,10 @@ export type ErrorPageProps =
       detail?: string;
     };
 
+export interface LandingPageProps {
+  data: any;
+}
+
 /**
  * 内置界面定义
  */
@@ -97,9 +106,8 @@ export interface BuiltinPages {
 
   /**
    * 落地页, 默认路由为 /landing
-   * TODO: 移除
    */
-  landing: PageComponent;
+  landing: PageComponent<LandingPageProps>;
 
   /**
    * 异常页面，默认路由为 /error?type=http&code=400, 也支持 /error?type=custom&title=xx&message=xx 这种形式
@@ -286,6 +294,13 @@ export interface IBay {
    * @param alias
    */
   getAppByAlias(alias: string): MicroApp[];
+
+  /**
+   * 生成 landing 地址
+   * @param data
+   * @param addHost 是否追加域名信息
+   */
+  generateLandingUrl(data: Record<string, any>, addHost?: boolean): string;
 
   /**
    * TODO: 其他方法

@@ -14,6 +14,9 @@ describe('FetchInterceptor', () => {
     statusText: 'OK',
   });
   successResponse.json = async () => ({ foo: 'bar' });
+  successResponse.clone = () => {
+    return successResponse;
+  };
 
   const successResponsePromise = Promise.resolve(successResponse);
 

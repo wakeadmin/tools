@@ -7,7 +7,7 @@ import debounce from 'lodash/debounce';
 import * as services from './services';
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
-import { ErrorPage, Main } from './components';
+import { ErrorPage, LandingPage, Main } from './components';
 import { UNAUTH } from './constants';
 import App from './App';
 import { getAsset } from './services';
@@ -43,6 +43,7 @@ export function configureBay() {
     pages: {
       main: Main,
       error: ErrorPage,
+      landing: LandingPage,
     },
     hooks: {},
     routes: [],

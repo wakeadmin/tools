@@ -37,3 +37,6 @@ export const openByIdentifierPath = bindApi('openByIdentifierPath');
 export const openTreeNode = bindApi('openTreeNode');
 export const openOutside = bindApi('openOutside');
 export const openError = bindApi('openError');
+export const openUrl = bindApi('openUrl');
+
+export const generateLandingUrl = bindApi('generateLandingUrl');
