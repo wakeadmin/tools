@@ -86,7 +86,9 @@ export const AllowsPage = defineComponent({
     return (
       <wkc-allows to={this.to} type={this.type} onAllow={this.handleAllow}>
         <slot></slot>
-        <div slot="deny">403 您无权操作该页面</div>
+        <div slot="deny">
+          <wkc-error-page-forbidden></wkc-error-page-forbidden>
+        </div>
       </wkc-allows>
     );
   },

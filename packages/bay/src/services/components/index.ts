@@ -7,6 +7,7 @@ import { Fullscreen } from './Fullscreen';
 import { Breadcrumb } from './Breadcrumb';
 import { FloatFooter } from './FloatFooter';
 import { Allows, AllowsPage } from './Allows';
+import { ErrorPage, ErrorPageNotFound, ErrorPageForbidden } from './ErrorPage';
 
 // 注册自定义组件
 const components = registerCustomElements('wkc', {
@@ -21,6 +22,9 @@ const components = registerCustomElements('wkc', {
   FloatFooter,
   Allows,
   AllowsPage,
+  ErrorPage,
+  ErrorPageNotFound,
+  ErrorPageForbidden,
 });
 
 export type BayLayoutComponents = typeof components;

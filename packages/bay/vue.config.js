@@ -6,7 +6,7 @@ const { defineMapp } = require('@wakeadmin/vue-cli-plugin-mapp');
 module.exports = defineConfig({
   transpileDependencies: [/(wakeapp|wakeadmin)/],
   pluginOptions: {
-    ...defineCE({ customElement: /wkc-/, mustUseProp: /wkc-/ }),
+    ...defineCE({ customElement: /wkc-/ }),
     ...defineMapp({
       // baseUrl: '/base',
       shared: [
@@ -36,6 +36,8 @@ module.exports = defineConfig({
   },
   configureWebpack() {
     return {
+      // 可以获取更好的调试体验
+      devtool: 'source-map',
       resolve: {
         fallback: {
           path: require.resolve('path-browserify'),

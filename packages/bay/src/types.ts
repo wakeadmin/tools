@@ -1,5 +1,5 @@
 import { LocationQueryRaw } from 'vue-router';
-import { IBay, RouteLocationAsPath, RouteLocationOptions } from '@wakeadmin/mapp/main';
+import { IBay, RouteLocationOptions } from '@wakeadmin/mapp/main';
 
 import { TreeNode } from './tree';
 

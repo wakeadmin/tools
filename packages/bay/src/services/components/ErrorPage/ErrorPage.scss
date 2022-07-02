@@ -1,0 +1,34 @@
+@use '../share' as *;
+
+.bay-layout-error {
+  $desc-color: getVar(error-desc-color, --wk-color-font-placeholder);
+  $desc-top: getVar(error-desc-top, 20px);
+  $font-size: getVar(error-font-size, --wk-font-size-h4);
+  $image-size: getVar(error-image-size, 220px);
+  $extra-top: getVar(error-extra-top, 20px);
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size;
+
+  &__image > img {
+    width: $image-size;
+    object-fit: contain;
+  }
+
+  &__desc {
+    color: $desc-color;
+    margin-top: $desc-top;
+  }
+
+  &__extra {
+    margin-top: $extra-top;
+  }
+}

@@ -2,7 +2,7 @@
 import { defineComponent, onMounted, ref, Teleport, Ref, onBeforeUnmount } from 'vue';
 import { Disposer } from '@wakeadmin/utils';
 
-import { MOUNT_POINT_HEADER, MOUNT_POINT_HEADER_DROPDOWN } from '@/constants';
+import { MOUNT_POINT_HEADER } from '@/constants';
 import { registerHeaderDropdownItem } from '../header-dropdown';
 
 function factory(mountPoint: string) {

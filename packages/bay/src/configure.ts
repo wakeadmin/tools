@@ -5,7 +5,7 @@ import { createBay, IBay } from '@wakeadmin/mapp/main';
 import * as services from './services';
 import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
-import { Main } from './components';
+import { ErrorPage, Main } from './components';
 import App from './App';
 
 declare global {
@@ -26,6 +26,7 @@ export function configureBay() {
     ],
     pages: {
       main: Main,
+      error: ErrorPage,
     },
     hooks: {},
     routes: [],

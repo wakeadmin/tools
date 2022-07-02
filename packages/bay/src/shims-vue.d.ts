@@ -9,6 +9,10 @@ declare module '*.png' {
   export default string;
 }
 
+declare module '*.svg' {
+  export default string;
+}
+
 declare module '*.scss?inline' {
   export default string;
 }

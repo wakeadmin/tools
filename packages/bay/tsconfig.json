@@ -5,6 +5,7 @@
     "strict": true,
     "jsx": "preserve",
     "jsxImportSource": "@wakeadmin/h",
+    "noUnusedLocals": true,
     "moduleResolution": "node",
     "incremental": true,
     "tsBuildInfoFile": ".tsbuildinfo",

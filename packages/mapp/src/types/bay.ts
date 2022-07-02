@@ -1,4 +1,4 @@
-import type { DefineComponent, App, Component } from 'vue';
+import type { DefineComponent, App, Component, FunctionalComponent } from 'vue';
 import type { RouteRecordRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
 
@@ -58,7 +58,9 @@ export interface MicroApp {
   independent?: boolean;
 }
 
-export type PageComponent<T = any> = DefineComponent<T, any, any, any, any, any, any, any, any>;
+export type PageComponent<T = any> =
+  | DefineComponent<T, any, any, any, any, any, any, any, any>
+  | FunctionalComponent<T>;
 
 export type ErrorPageProps =
   | {

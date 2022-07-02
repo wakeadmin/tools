@@ -141,6 +141,10 @@ export class BayModel extends BaseModel implements IBayModel {
    * 这个方法只能在主界面启动时调用
    */
   initialize() {
+    if (this.initialized) {
+      return;
+    }
+
     this.singletonInitialize();
     this.retryableInitialize();
     this.initialized = true;
@@ -339,6 +343,8 @@ export class BayModel extends BaseModel implements IBayModel {
         if (container == null || location == null) {
           return;
         }
+
+        console.debug('开始匹配节点', location);
 
         const { result, exact } = container.findByRoute(location);
         if (result) {
