@@ -1,4 +1,4 @@
-import { InterceptRequest } from '../../types';
+import { InterceptRequest, InterceptResponse } from '../../types';
 
 import { FetchInterceptor } from './FetchInterceptor';
 import { stringifyHeaders } from './helper.test.share';
@@ -8,10 +8,12 @@ describe('FetchInterceptor', () => {
     headers: {
       'X-Foo': 'foo',
       'X-Bar': 'bar',
+      'Content-Type': 'application/json',
     },
     status: 200,
     statusText: 'OK',
   });
+  successResponse.json = async () => ({ foo: 'bar' });
 
   const successResponsePromise = Promise.resolve(successResponse);
 
@@ -38,7 +40,7 @@ describe('FetchInterceptor', () => {
     expect(window.fetch).not.toBe(fakeFetch);
   });
 
-  test('InterceptRequest by single url', () => {
+  test('InterceptRequest by single url', async () => {
     interceptor.register(register);
 
     const response = window.fetch('/foo/bar');
@@ -56,7 +58,9 @@ describe('FetchInterceptor', () => {
 
     expect(fakeFetch).toBeCalledWith('/foo/bar', { headers: req.headers });
 
-    expect(register.mock.results[0].value).resolves.toEqual({
+    const res = (await register.mock.results[0].value) as InterceptResponse;
+
+    expect(res).toMatchObject({
       body: successResponse.body,
       status: 200,
       statusText: 'OK',
@@ -66,6 +70,9 @@ describe('FetchInterceptor', () => {
         response: successResponse,
       },
     });
+
+    // json 获取
+    expect(await res.json()).toEqual({ foo: 'bar' });
   });
 
   test('InterceptRequest by request', () => {

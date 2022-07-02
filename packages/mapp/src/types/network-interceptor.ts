@@ -72,6 +72,11 @@ export interface InterceptResponse {
    * 原始响应对象
    */
   readonly raw: RawResponse;
+
+  /**
+   * 尝试获取 json，如果获取失败将返回 null
+   */
+  json(): Promise<any>;
 }
 
 export type INetworkInterceptorRegister = (

@@ -4,6 +4,7 @@ import { NoopArray } from '@wakeadmin/utils';
 import { InterceptRequest, InterceptResponse } from '../../types';
 
 import { BaseInterceptor } from './BaseInterceptor';
+import { isJSONResponse } from './utils';
 
 export enum AJAXState {
   UNSENT = 0,
@@ -177,6 +178,18 @@ export class AJAXInterceptor extends BaseInterceptor {
                 raw: {
                   type: 'ajax',
                   xhr,
+                },
+                async json() {
+                  if (!isJSONResponse(this.headers) || !xhr.responseText) {
+                    return null;
+                  }
+
+                  try {
+                    return JSON.parse(xhr.responseText);
+                  } catch (err) {
+                    console.debug(`[mapp] failed to get json from xhr`, xhr, err);
+                    return null;
+                  }
                 },
               };
 

@@ -1,5 +1,5 @@
 import { EventEmitter } from '@wakeadmin/utils';
-import { InterceptRequest } from '../../types';
+import { InterceptRequest, InterceptResponse } from '../../types';
 
 import { parseHeaders, spyHeaders, AJAXInterceptor, AJAXState } from './AJAXInterceptor';
 import { stringifyHeaders } from './helper.test.share';
@@ -69,7 +69,7 @@ describe('AJAXInterceptor', () => {
     }
 
     getAllResponseHeaders() {
-      return `date: Fri, 08 Dec 2017 21:04:30 GMT\r\ncontent-encoding: gzip\r\nx-content-type-options: nosniff\r\n`;
+      return `date: Fri, 08 Dec 2017 21:04:30 GMT\r\ncontent-encoding: gzip\r\nx-content-type-options: nosniff\r\ncontent-type: application/json`;
     }
 
     send(body: any) {
@@ -122,18 +122,18 @@ describe('AJAXInterceptor', () => {
     interceptor.register(register);
     const xhr = new window.XMLHttpRequest() as unknown as MockAJAX;
     xhr.open('POST', '/foo/bar');
-    xhr.send('body');
+    xhr.send('{"foo": "bar"}');
 
-    expect(xhr.body).toBe('body');
+    expect(xhr.body).toBe('{"foo": "bar"}');
     xhr.readyState = AJAXState.DONE;
     xhr.status = 400;
     xhr.statusText = 'Not Ok';
     xhr.emit('readystatechange');
 
-    const response = await register.mock.results[0].value;
+    const response = (await register.mock.results[0].value) as InterceptResponse;
 
     expect(response).toMatchObject({
-      body: 'body',
+      body: '{"foo": "bar"}',
       status: 400,
       statusText: 'Not Ok',
       raw: {
@@ -141,9 +141,13 @@ describe('AJAXInterceptor', () => {
         xhr,
       },
     });
+
     expect(stringifyHeaders(response.headers)).toBe(
-      '[["date","Fri, 08 Dec 2017 21:04:30 GMT"],["content-encoding","gzip"],["x-content-type-options","nosniff"]]'
+      '[["date","Fri, 08 Dec 2017 21:04:30 GMT"],["content-encoding","gzip"],["x-content-type-options","nosniff"],["content-type","application/json"]]'
     );
+
+    // json 解析
+    expect(await response.json()).toEqual({ foo: 'bar' });
   });
 
   test('异常数据响应', () => {

@@ -1,5 +1,6 @@
 import { InterceptRequest, InterceptResponse } from '../../types';
 import { BaseInterceptor } from './BaseInterceptor';
+import { isJSONResponse } from './utils';
 
 export class FetchInterceptor extends BaseInterceptor {
   attach() {
@@ -65,6 +66,18 @@ export class FetchInterceptor extends BaseInterceptor {
               raw: {
                 type: 'fetch',
                 response: result,
+              },
+              async json() {
+                if (!isJSONResponse(result.headers)) {
+                  return null;
+                }
+
+                try {
+                  return await result.json();
+                } catch (err) {
+                  console.debug(`[mapp] failed to get json from fetch`, response, err);
+                  return null;
+                }
               },
             };
 
