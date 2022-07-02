@@ -61,6 +61,10 @@ describe('FetchInterceptor', () => {
       status: 200,
       statusText: 'OK',
       headers: successResponse.headers,
+      raw: {
+        type: 'fetch',
+        response: successResponse,
+      },
     });
   });
 

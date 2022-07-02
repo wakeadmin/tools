@@ -136,6 +136,10 @@ describe('AJAXInterceptor', () => {
       body: 'body',
       status: 400,
       statusText: 'Not Ok',
+      raw: {
+        type: 'ajax',
+        xhr,
+      },
     });
     expect(stringifyHeaders(response.headers)).toBe(
       '[["date","Fri, 08 Dec 2017 21:04:30 GMT"],["content-encoding","gzip"],["x-content-type-options","nosniff"]]'

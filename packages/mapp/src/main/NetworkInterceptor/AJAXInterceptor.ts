@@ -162,6 +162,7 @@ export class AJAXInterceptor extends BaseInterceptor {
 
               // 请求完成
               const responseType = xhr.responseType;
+              let parsedHeaders: Headers;
               const response: InterceptResponse = {
                 status: xhr.status,
                 statusText: xhr.statusText,
@@ -171,7 +172,11 @@ export class AJAXInterceptor extends BaseInterceptor {
                     : xhr.response;
                 },
                 get headers() {
-                  return parseHeaders(xhr.getAllResponseHeaders?.() ?? '');
+                  return (parsedHeaders ??= parseHeaders(xhr.getAllResponseHeaders?.() ?? ''));
+                },
+                raw: {
+                  type: 'ajax',
+                  xhr,
                 },
               };
 

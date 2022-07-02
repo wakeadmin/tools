@@ -12,6 +12,16 @@ export type RawRequest =
       readonly xhr: XMLHttpRequest;
     };
 
+export type RawResponse =
+  | {
+      type: 'fetch';
+      readonly response: Response;
+    }
+  | {
+      type: 'ajax';
+      readonly xhr: XMLHttpRequest;
+    };
+
 export interface InterceptRequest {
   /**
    * 请求的 url
@@ -57,6 +67,11 @@ export interface InterceptResponse {
    * 响应内容
    */
   readonly body: any;
+
+  /**
+   * 原始响应对象
+   */
+  readonly raw: RawResponse;
 }
 
 export type INetworkInterceptorRegister = (

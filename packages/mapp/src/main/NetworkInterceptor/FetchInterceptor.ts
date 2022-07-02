@@ -62,6 +62,10 @@ export class FetchInterceptor extends BaseInterceptor {
               status: result.status,
               statusText: result.statusText,
               body: result.body,
+              raw: {
+                type: 'fetch',
+                response: result,
+              },
             };
 
             resolve(result);
