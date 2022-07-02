@@ -110,6 +110,10 @@ describe('AJAXInterceptor', () => {
       url: 'http://foo:bar@localhost/foo/bar',
       method: 'POST',
       body: 'body',
+      raw: {
+        type: 'ajax',
+        xhr,
+      },
     });
     expect(stringifyHeaders(req.headers)).toBe('[["foo","foo"],["bar","bar"],["x-add-by-interceptor","yes"]]');
   });

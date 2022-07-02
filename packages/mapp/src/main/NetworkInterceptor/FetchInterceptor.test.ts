@@ -1,3 +1,5 @@
+import { InterceptRequest } from '../../types';
+
 import { FetchInterceptor } from './FetchInterceptor';
 import { stringifyHeaders } from './helper.test.share';
 
@@ -18,7 +20,7 @@ describe('FetchInterceptor', () => {
   window.fetch = fakeFetch;
 
   const interceptor = new FetchInterceptor();
-  const register = jest.fn((req, next) => Promise.resolve(next()));
+  const register = jest.fn((req: InterceptRequest, next) => Promise.resolve(next()));
 
   const getRequest = () => register.mock.calls[0][0];
 
@@ -47,6 +49,10 @@ describe('FetchInterceptor', () => {
     expect(req.url).toBe('/foo/bar');
     expect(req.method).toBe('GET');
     expect(stringifyHeaders(req.headers)).toBe('[]');
+    expect(req.raw).toEqual({
+      type: 'fetch',
+      input: '/foo/bar',
+    });
 
     expect(fakeFetch).toBeCalledWith('/foo/bar', { headers: req.headers });
 
@@ -68,6 +74,10 @@ describe('FetchInterceptor', () => {
     expect(req.url).toBe('/foo/bar');
     expect(req.method).toBe('POST');
     expect(stringifyHeaders(req.headers)).toBe('[["x-foo","foo"],["content-type","text/plain;charset=UTF-8"]]');
+    expect(req.raw).toEqual({
+      type: 'fetch',
+      input: request,
+    });
 
     expect(fakeFetch).toBeCalledWith(request, { headers: req.headers });
   });
@@ -81,6 +91,15 @@ describe('FetchInterceptor', () => {
     expect(req.url).toBe('/foo/bar');
     expect(req.method).toBe('POST');
     expect(stringifyHeaders(req.headers)).toBe('[["x-foo","foo"]]');
+    expect(req.raw).toEqual({
+      type: 'fetch',
+      input: '/foo/bar',
+      init: {
+        method: 'POST',
+        body: 'body',
+        headers: { 'X-Foo': 'foo' },
+      },
+    });
 
     expect(fakeFetch).toBeCalledWith('/foo/bar', { method: 'POST', body: 'body', headers: req.headers });
   });

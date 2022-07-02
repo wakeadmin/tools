@@ -70,6 +70,7 @@ test('create routes', () => {
 
 describe('navigator', () => {
   const bay = {
+    baseUrl: '/',
     router: {
       push: jest.fn(),
     },
@@ -95,7 +96,7 @@ describe('navigator', () => {
   test('openError', () => {
     nav.openError({ type: 'http', code: '404' });
 
-    expect(bay.router.push).toBeCalledWith({ name: 'error', query: { code: '404', type: 'http' }, replace: undefined });
+    expect(push).toBeCalledWith(null, '', '/error?type=http&code=404');
   });
 
   test('openApp', () => {

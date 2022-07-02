@@ -49,7 +49,7 @@ test('normalizeApps', () => {
         entry: 'app',
       },
     ])
-  ).toEqual([
+  ).toMatchObject([
     {
       name: '1',
       activeRule: '/1',
@@ -117,7 +117,7 @@ test('normalizeApps', () => {
         entry: 'app',
       },
     ])
-  ).toEqual([
+  ).toMatchObject([
     {
       name: '1',
       activeRule: '/base/1',

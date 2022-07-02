@@ -110,6 +110,10 @@ export class AJAXInterceptor extends BaseInterceptor {
           method,
           headers,
           body,
+          raw: {
+            type: 'ajax',
+            xhr,
+          },
         };
 
         if (process.env.NODE_ENV !== 'production') {

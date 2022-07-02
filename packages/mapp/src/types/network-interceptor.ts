@@ -1,3 +1,17 @@
+/**
+ * 原始请求数据
+ */
+export type RawRequest =
+  | {
+      type: 'fetch';
+      readonly input: RequestInfo | URL;
+      readonly init?: RequestInit;
+    }
+  | {
+      type: 'ajax';
+      readonly xhr: XMLHttpRequest;
+    };
+
 export interface InterceptRequest {
   /**
    * 请求的 url
@@ -16,9 +30,11 @@ export interface InterceptRequest {
   readonly headers: Headers;
 
   /**
-   * 请求主体. 这个无法靠谱的获取, 不要依赖这个数据
+   * 请求主体. 这个无法靠谱的获取, 不要依赖这个数据。
    */
   readonly body: any;
+
+  readonly raw: RawRequest;
 }
 
 export interface InterceptResponse {
@@ -32,6 +48,9 @@ export interface InterceptResponse {
    */
   readonly status: number;
 
+  /**
+   * 响应状态描述
+   */
   readonly statusText: string;
 
   /**

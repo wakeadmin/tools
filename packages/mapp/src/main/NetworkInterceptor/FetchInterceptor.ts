@@ -27,11 +27,11 @@ export class FetchInterceptor extends BaseInterceptor {
         url = input.url;
       }
 
-      // init 的优先级会高于 request
       if (init) {
         requestInit = init;
       }
 
+      // init 的优先级会高于 request
       headers = requestInit?.headers ? new Headers(requestInit.headers) : request?.headers ?? new Headers();
       method = requestInit?.method ?? request?.method ?? 'GET';
       body = requestInit?.body ?? request?.body ?? null;
@@ -42,6 +42,11 @@ export class FetchInterceptor extends BaseInterceptor {
         method,
         headers,
         body,
+        raw: {
+          type: 'fetch',
+          input,
+          init,
+        },
       };
 
       if (process.env.NODE_ENV !== 'production') {
