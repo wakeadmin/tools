@@ -1,0 +1,23 @@
+{
+  "name": "@wakeadmin/i18n-shared",
+  "version": "0.1.0",
+  "description": "惟客云规范的，i18n 封装, 共享部分",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@wakeadmin/utils": "workspace:^0.1.0"
+  }
+}

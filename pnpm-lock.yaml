@@ -212,6 +212,12 @@ importers:
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-i18n: 172.26.59.72+4873/vue-i18n/9.1.10
 
+  packages/i18n-shared:
+    specifiers:
+      '@wakeadmin/utils': workspace:^0.1.0
+    dependencies:
+      '@wakeadmin/utils': link:../utils
+
   packages/icons:
     specifiers:
       '@wakeadmin/demi': workspace:^0.1.0
