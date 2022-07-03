@@ -2,7 +2,7 @@
 // 此文件从 https://github.dev/intlify/vue-i18n-next/blob/dab6db19a1ef917425939275a41dfde9b6c61fe9/packages/core-base/src/fallbacker.ts#L1
 // 移植
 import { isString, isArray, isBoolean, isPlainObject } from '@wakeadmin/utils';
-import { DEFAULT_LOCALE } from './constants';
+import { DEFAULT_LOCALE } from '@wakeadmin/i18n-shared';
 
 import type { Locale, FallbackLocale } from 'vue-i18n';
 

@@ -1,4 +1,4 @@
-import { LocaleMapper } from './types';
+import { LocaleMapper, NumberFormats, DateTimeFormats } from './types';
 
 /**
  * 语言变动
@@ -33,7 +33,7 @@ export const DEFAULT_MAPPER: LocaleMapper = {
 /**
  * 默认时间格式
  */
-export const DEFAULT_DATETIME_FORMATS = {
+export const DEFAULT_DATETIME_FORMATS: DateTimeFormats = {
   en: {
     short: {
       year: 'numeric',
@@ -176,7 +176,7 @@ export const DEFAULT_DATETIME_FORMATS = {
 /**
  * 默认数字格式
  */
-export const DEFAULT_NUMBER_FORMATS = {
+export const DEFAULT_NUMBER_FORMATS: NumberFormats = {
   en: {
     currency: {
       style: 'currency',

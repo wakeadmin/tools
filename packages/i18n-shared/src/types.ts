@@ -1,13 +1,26 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import { EventEmitter } from '@wakeadmin/utils';
 
+/**
+ * 语言检测/持久化
+ */
 export interface LocaleDetector {
   locale: string;
 }
 
+/**
+ * 语言标识符映射
+ */
 export type LocaleMapper = Record<string, string> | ((source: string) => string);
 
+/**
+ * 语言包类型
+ */
 export type I18nBundle = Record<string, any> | (() => Promise<{ default: Record<string, any> }>);
 
+/**
+ * 扩展的初始化参数
+ */
 export interface ExtendedI18nOptions {
   /**
    * 当前语言检测
@@ -22,7 +35,7 @@ export interface ExtendedI18nOptions {
 
 declare global {
   /**
-   * 供子模块详细定义类型
+   * 供子模块详细定义类型参数
    */
   interface I18nSharedTypeParams {
     // VueI18nInstance: vue i18n 实例类型
@@ -32,9 +45,9 @@ declare global {
 }
 
 // @ts-expect-error
-type ExtraParams<T, D = unknown> = I18nSharedTypeParams[T] extends unknown ? D : I18nSharedTypeParams[T];
+type ExtraParams<T, V = I18nSharedTypeParams[T]> = V;
 
-export type FallbackLocale = ExtraParams<'FallbackLocale', string>;
+export type FallbackLocale = ExtraParams<'FallbackLocale'>;
 export type VueApp = ExtraParams<'VueApp'>;
 export type VueI18nInstance = ExtraParams<'VueI18nInstance'>;
 
@@ -84,4 +97,66 @@ export interface I18nInstance {
    * @param bundles
    */
   registerBundles(bundles: { [locale: string]: I18nBundle }): Promise<void>;
+}
+
+/* ------------- 以下类型从 vue-i18n 中拷贝 ----------------- */
+
+export interface DateTimeFormats {
+  [locale: string]: DateTimeFormat;
+}
+
+export interface DateTimeFormat {
+  [key: string]: DateTimeFormatOptions;
+}
+
+export type DateTimeFormatOptions = Intl.DateTimeFormatOptions | SpecificDateTimeFormatOptions;
+
+export type DateTimeHumanReadable = 'long' | 'short' | 'narrow';
+
+export interface SpecificDateTimeFormatOptions extends Intl.DateTimeFormatOptions {
+  year?: DateTimeDigital;
+  month?: DateTimeDigital | DateTimeHumanReadable;
+  day?: DateTimeDigital;
+  hour?: DateTimeDigital;
+  minute?: DateTimeDigital;
+  second?: DateTimeDigital;
+  weekday?: DateTimeHumanReadable;
+  era?: DateTimeHumanReadable;
+  timeZoneName?: 'long' | 'short';
+  localeMatcher?: LocaleMatcher;
+  formatMatcher?: FormatMatcher;
+}
+
+export type LocaleMatcher = 'lookup' | 'best fit';
+
+export type DateTimeDigital = 'numeric' | '2-digit';
+
+export type FormatMatcher = 'basic' | 'best fit';
+
+export interface NumberFormat {
+  [key: string]: NumberFormatOptions;
+}
+
+export type NumberFormatOptions = Intl.NumberFormatOptions | SpecificNumberFormatOptions | CurrencyNumberFormatOptions;
+
+export interface NumberFormats {
+  [locale: string]: NumberFormat;
+}
+
+export interface SpecificNumberFormatOptions extends Intl.NumberFormatOptions {
+  style?: 'decimal' | 'percent';
+  currency?: string;
+  currencyDisplay?: CurrencyDisplay;
+  localeMatcher?: LocaleMatcher;
+  formatMatcher?: FormatMatcher;
+}
+
+export type CurrencyDisplay = 'symbol' | 'code' | 'name';
+
+export interface CurrencyNumberFormatOptions extends Intl.NumberFormatOptions {
+  style: 'currency';
+  currency: string;
+  currencyDisplay?: CurrencyDisplay;
+  localeMatcher?: LocaleMatcher;
+  formatMatcher?: FormatMatcher;
 }

@@ -1,8 +1,8 @@
 /* eslint-disable vue/one-component-per-file */
 import { isRef, unref, createApp } from 'vue';
 
-import { DEFAULT_LOCALE_PERSIST_KEY } from './detect';
 import {
+  DEFAULT_LOCALE_PERSIST_KEY,
   createI18n,
   getLocale,
   getGlobalInstance,

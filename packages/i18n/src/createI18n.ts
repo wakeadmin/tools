@@ -1,11 +1,11 @@
-import { BundleRegister } from './register';
 import { createI18n as _createI18n, FallbackLocale } from 'vue-i18n';
 import { unref, watch, isRef } from 'vue';
-import { EventEmitter } from '@wakeadmin/utils';
 
-import { normalizeMapper } from './locale-mapper';
-import { LocaleDetect } from './detect';
 import {
+  BundleRegister,
+  normalizeMapper,
+  createEventBus,
+  LocaleDetect,
   DEFAULT_LOCALE,
   DEFAULT_DATETIME_FORMATS,
   DEFAULT_NUMBER_FORMATS,
@@ -13,10 +13,13 @@ import {
   EVENT_LOCALE_CHANGE,
   EVENT_READY,
   EVENT_MESSAGE_CHANGE,
-} from './constants';
+  __getGlobalInstance,
+  __resetReadyState,
+  __setGlobalInstance,
+  __flushReadyWaitQueue,
+} from '@wakeadmin/i18n-shared';
 import { fallbackWithLocaleChain } from './fallback';
 import { I18nInstance, I18nOptions } from './types';
-import { __getGlobalInstance, __resetReadyState, __setGlobalInstance, __flushReadyWaitQueue } from './global-api';
 
 /**
  * 创建 i18n 实例
@@ -56,7 +59,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
 
   let SET_LOCALE_CONTEXT = false;
   const vueI18nInstance = i18n.global as I18nInstance['instance'];
-  const eventBus = new EventEmitter();
+  const eventBus = createEventBus();
 
   const setLocale = (nextLocale: string) => {
     try {
