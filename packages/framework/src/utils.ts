@@ -1,29 +1,11 @@
-import { isPropertyKey } from '@wakeadmin/utils';
+import { isPropertyKey, Noop } from '@wakeadmin/utils';
 
-export { hasProp, addHiddenProp, isPropertyKey } from '@wakeadmin/utils';
+export { hasProp, addHiddenProp, isPropertyKey, isObject, isPlainObject } from '@wakeadmin/utils';
 
 const objectPrototype = Object.prototype;
-const plainObjectString = Object.toString();
 const hasGetOwnPropertySymbols = typeof Object.getOwnPropertySymbols !== 'undefined';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const NOOP = () => {};
-
-export function isObject(value: any): value is Object {
-  return value !== null && typeof value === 'object';
-}
-
-export function isPlainObject(value: any) {
-  if (!isObject(value)) {
-    return false;
-  }
-  const proto = Object.getPrototypeOf(value);
-  if (proto == null) {
-    return true;
-  }
-  const protoConstructor = Object.hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return typeof protoConstructor === 'function' && protoConstructor.toString() === plainObjectString;
-}
+export const NOOP = Noop;
 
 export const ownKeys: (target: any) => PropertyKey[] =
   typeof Reflect !== 'undefined' && Reflect.ownKeys
