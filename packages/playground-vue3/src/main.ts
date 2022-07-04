@@ -37,7 +37,7 @@ export function update() {
   console.log('update vue3');
 }
 
-if (typeof window.__POWERED_BY_QIANKUN__ === 'undefined') {
+if (!Bay.isMicroApp) {
   bootstrap();
 
   mount();

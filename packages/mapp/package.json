@@ -5,13 +5,21 @@
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
     "prebuild": "rimraf dist .tsBuildInfo",
-    "build": "tsc -b tsconfig.build.json",
+    "build:es": "tsc -b tsconfig.build.json",
+    "build:common": "tsc -b tsconfig.build.common.json",
+    "build": "npm run build:es && npm run build:common",
     "type-check": "tsc",
     "test": "vue-demi-switch 3 && jest --verbose"
   },
   "exports": {
-    "./main": "./dist/main/index.js",
-    "./child": "./dist/child/index.js"
+    "./main": {
+      "import": "./dist/main/index.js",
+      "require": "./dist/common/main/index.js"
+    },
+    "./child": {
+      "import": "./dist/child/index.js",
+      "require": "./dist/common/child/index.js"
+    }
   },
   "typesVersions": {
     "*": {

@@ -1,11 +1,13 @@
 import Vue from 'vue';
+import Bay from '@wakeadmin/bay';
 
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
-Vue.config.ignoredElements = [/^wkc-/];
+
+Vue.use(Bay);
 
 let instance: Vue;
 
@@ -38,7 +40,7 @@ export function update(props: any) {
   console.log('update vue2', props);
 }
 
-if (typeof window.__POWERED_BY_QIANKUN__ === 'undefined') {
+if (!Bay.isMicroApp) {
   bootstrap();
 
   mount();

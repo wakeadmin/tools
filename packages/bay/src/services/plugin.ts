@@ -5,5 +5,5 @@ import CEPlugin from '@wakeadmin/ce';
  * @param app
  */
 export function install(app: any) {
-  app.use(CEPlugin);
+  app.use(CEPlugin, { customElement: /wkc-/ });
 }

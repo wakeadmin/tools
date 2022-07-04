@@ -52,10 +52,16 @@ export function configureBay() {
   const bay = createBay({
     rootComponent: App,
     apps: [
+      // TODO: 测试后移除
       {
         name: 'playgroundVue3',
         activeRule: '/wkb.html',
         entry: '//localhost:63285',
+      },
+      {
+        name: 'playgroundVue2',
+        activeRule: '/dsp.html',
+        entry: '//localhost:58681',
       },
     ],
     pages: {

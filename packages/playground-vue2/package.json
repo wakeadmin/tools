@@ -10,12 +10,14 @@
     "inspect": "vue-cli-service inspect"
   },
   "dependencies": {
+    "@wakeadmin/bay": "workspace:^0.1.0",
     "core-js": "^3.23.3",
     "vue": "^2.7.0",
     "vue-router": "^3.5.4",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.1.0",
     "@vue/cli-plugin-babel": "~5.0.6",
     "@vue/cli-plugin-eslint": "~5.0.6",
     "@vue/cli-plugin-router": "~5.0.6",
