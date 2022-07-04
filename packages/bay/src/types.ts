@@ -1,5 +1,6 @@
 import { LocationQueryRaw } from 'vue-router';
 import { IBay, RouteLocationOptions, RouteLocationAsPathAndHash } from '@wakeadmin/mapp/main';
+import { I18nInstance } from '@wakeadmin/i18n';
 
 import { TreeNode } from './tree';
 
@@ -32,6 +33,9 @@ export interface NodeNavigateOptions extends RouteLocationOptions {
   hashQuery?: LocationQueryRaw;
 }
 
+/**
+ * 导航相关方法
+ */
 export interface INavigation {
   /**
    * 根据微应用的名称打开。
@@ -92,7 +96,23 @@ export interface INavigation {
   generateLandingUrl(props: LandingProps, addHost?: boolean): string;
 }
 
-export type IBayModel = INavigation;
+export interface ISession {
+  /**
+   * 退出登录
+   */
+  logout(): void;
+}
+
+export interface IBayModel extends INavigation, ISession {
+  menuCollasped: boolean;
+  toggleMenuCollapse(): void;
+
+  registerBundles: I18nInstance['registerBundles'];
+
+  getLocale: I18nInstance['getLocale'];
+
+  setLocale: I18nInstance['setLocale'];
+}
 
 /**
  * 落地页参数

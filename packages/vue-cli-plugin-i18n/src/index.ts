@@ -25,7 +25,7 @@ export const plugin: ServicePlugin = (api, options) => {
       const translateMerge = {
         chunks: 'async',
         test: /\.tr$/,
-        maxSize: 500 * 1024, // 500kb
+        maxSize: 200 * 1024, // 500kb
         name: (module: { rawRequest: string }) => {
           const request = module.rawRequest;
           if (request == null) {

@@ -9,6 +9,7 @@ import {
   BaseModel,
 } from '@wakeadmin/framework';
 import type { IBay } from '@wakeadmin/mapp/main';
+import type { I18nInstance } from '@wakeadmin/i18n';
 
 import { BayRepo } from './BayRepo';
 import { TreeContainer, RouteType } from './tree';
@@ -55,6 +56,9 @@ export class BayModel extends BaseModel implements IBayModel {
 
   @inject('DI.bay')
   bay!: IBay;
+
+  @inject('DI.bay.i18n')
+  i18n!: I18nInstance;
 
   /**
    * 基座状态
@@ -166,7 +170,7 @@ export class BayModel extends BaseModel implements IBayModel {
   /**
    * 退出登录
    */
-  signout = () => {
+  logout = () => {
     // TODO:
   };
 
@@ -334,6 +338,31 @@ export class BayModel extends BaseModel implements IBayModel {
    */
   generateLandingUrl: IBayModel['generateLandingUrl'] = (props, addHost) => {
     return this.bay.generateLandingUrl(props, addHost);
+  };
+
+  /**
+   * 注册语言包
+   * @param bundles
+   */
+  registerBundles: IBayModel['registerBundles'] = bundles => {
+    return this.i18n.registerBundles(bundles);
+  };
+
+  /**
+   * 设置语言
+   * @param locale
+   * @returns
+   */
+  setLocale: IBayModel['setLocale'] = locale => {
+    return this.i18n.setLocale(locale);
+  };
+
+  /**
+   * 获取语言
+   * @returns
+   */
+  getLocale: IBayModel['getLocale'] = () => {
+    return this.i18n.getLocale();
   };
 
   private assetOpen(): boolean {

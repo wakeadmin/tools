@@ -115,6 +115,7 @@ importers:
       '@wakeadmin/ce': workspace:^0.1.0
       '@wakeadmin/framework': workspace:^0.1.0
       '@wakeadmin/h': workspace:^0.1.0
+      '@wakeadmin/i18n': workspace:^0.1.0
       '@wakeadmin/icons': workspace:^0.1.0
       '@wakeadmin/mapp': workspace:^0.1.0
       '@wakeadmin/theme': workspace:^0.1.0
@@ -131,12 +132,14 @@ importers:
       sass: ^1.53.0
       sass-loader: ^12.6.0
       vue: ^3.2.37
+      vue-i18n: ^9.1.10
       vue-router: ^4.0.16
     dependencies:
       '@vueuse/core': 172.26.59.72+4873/@vueuse/core/8.7.5_vue@3.2.37
       '@wakeadmin/ce': link:../ce
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
+      '@wakeadmin/i18n': link:../i18n
       '@wakeadmin/icons': link:../icons
       '@wakeadmin/mapp': link:../mapp
       '@wakeadmin/theme': link:../theme
@@ -148,6 +151,7 @@ importers:
       normalize.css: 172.26.59.72+4873/normalize.css/8.0.1
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
       vue: 172.26.59.72+4873/vue/3.2.37
+      vue-i18n: 172.26.59.72+4873/vue-i18n/9.1.10
       vue-router: 172.26.59.72+4873/vue-router/4.0.16
     devDependencies:
       '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_vue@3.2.37
@@ -2836,7 +2840,6 @@ packages:
       '@intlify/runtime': 172.26.59.72+4873/@intlify/runtime/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
       '@intlify/vue-devtools': 172.26.59.72+4873/@intlify/vue-devtools/9.1.10
-    dev: true
 
   172.26.59.72+4873/@intlify/devtools-if/9.1.10:
     resolution:
@@ -2850,7 +2853,6 @@ packages:
     engines: { node: '>= 10' }
     dependencies:
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
-    dev: true
 
   172.26.59.72+4873/@intlify/message-compiler/9.1.10:
     resolution:
@@ -2866,7 +2868,6 @@ packages:
       '@intlify/message-resolver': 172.26.59.72+4873/@intlify/message-resolver/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
       source-map: 172.26.59.72+4873/source-map/0.6.1
-    dev: true
 
   172.26.59.72+4873/@intlify/message-resolver/9.1.10:
     resolution:
@@ -2878,7 +2879,6 @@ packages:
     name: '@intlify/message-resolver'
     version: 9.1.10
     engines: { node: '>= 10' }
-    dev: true
 
   172.26.59.72+4873/@intlify/runtime/9.1.10:
     resolution:
@@ -2894,7 +2894,6 @@ packages:
       '@intlify/message-compiler': 172.26.59.72+4873/@intlify/message-compiler/9.1.10
       '@intlify/message-resolver': 172.26.59.72+4873/@intlify/message-resolver/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
-    dev: true
 
   172.26.59.72+4873/@intlify/shared/9.1.10:
     resolution:
@@ -2906,7 +2905,6 @@ packages:
     name: '@intlify/shared'
     version: 9.1.10
     engines: { node: '>= 10' }
-    dev: true
 
   172.26.59.72+4873/@intlify/vue-devtools/9.1.10:
     resolution:
@@ -2922,7 +2920,6 @@ packages:
       '@intlify/message-resolver': 172.26.59.72+4873/@intlify/message-resolver/9.1.10
       '@intlify/runtime': 172.26.59.72+4873/@intlify/runtime/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
-    dev: true
 
   172.26.59.72+4873/@istanbuljs/load-nyc-config/1.1.0:
     resolution:
@@ -18446,7 +18443,6 @@ packages:
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
       '@intlify/vue-devtools': 172.26.59.72+4873/@intlify/vue-devtools/9.1.10
       '@vue/devtools-api': 172.26.59.72+4873/@vue/devtools-api/6.1.4
-    dev: true
 
   172.26.59.72+4873/vue-loader/15.9.8_jmkrogeftkdotxjvanivswc4hi:
     resolution:

@@ -2,7 +2,8 @@ import Framework, { configureDI } from '@wakeadmin/framework';
 import { initial } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
 import { ElMessage } from 'element-plus';
-import debounce from 'lodash/debounce';
+import { debounce } from '@wakeadmin/utils';
+import { createI18n, I18nInstance } from '@wakeadmin/i18n';
 
 import * as services from './services';
 import { BayModel } from './BayModel';
@@ -11,10 +12,25 @@ import { ErrorPage, LandingPage, Main } from './components';
 import { UNAUTH } from './constants';
 import App from './App';
 import { getAsset } from './services';
+import './i18n';
 
 declare global {
   interface DIMapper {
     'DI.bay': IBay;
+
+    /**
+     * I18n 实例
+     */
+    'DI.bay.i18n': I18nInstance;
+
+    /**
+     * Vue I18n 实例
+     */
+    'DI.bay.i18n.instance': I18nInstance['i18n'];
+    /**
+     * 翻译函数
+     */
+    'DI.bay.i18n.t': I18nInstance['i18n']['t'];
   }
 }
 
@@ -31,6 +47,8 @@ const gotoLogin = debounce(
 );
 
 export function configureBay() {
+  const i18nInstance = createI18n();
+
   const bay = createBay({
     rootComponent: App,
     apps: [
@@ -48,8 +66,12 @@ export function configureBay() {
     hooks: {},
     routes: [],
     networkInterceptors: [
-      async (_, next) => {
+      async (request, next) => {
+        // 注入当前语言
+        request.headers.set('Accept-Language', i18nInstance.getLocale());
+
         const response = await next();
+
         // 判断是否会话过期
         const json = await response.json();
         if (json) {
@@ -64,13 +86,18 @@ export function configureBay() {
     ],
   });
 
+  bay.app.use(Framework);
+  bay.app.use(i18nInstance);
+
   configureDI(({ registerConstant, registerSingletonClass }) => {
     registerConstant('DI.bay', bay);
+    registerConstant('DI.bay.i18n', i18nInstance);
+    registerConstant('DI.bay.i18n.instance', i18nInstance.i18n);
+    registerConstant('DI.bay.i18n.t', i18nInstance.i18n.t.bind(i18nInstance.i18n));
+
     registerSingletonClass('DI.bay.BayModel', BayModel);
     registerSingletonClass('DI.bay.BayRepo', BayRepo);
   });
-
-  bay.app.use(Framework);
 
   return bay;
 }
@@ -82,13 +109,6 @@ export function configureBackend() {
     fetch: window.fetch.bind(window),
     baseURL: BASE_URL,
     defaultErrorMessage: '系统出差中',
-    /**
-     * 多语言
-     */
-    // (request, next) => {
-    //   request.headers['Accept-Language'] = i18n.language;
-    //   return next();
-    // },
   });
 }
 

@@ -1,9 +1,12 @@
 import { defineComponent, onBeforeUnmount, ref } from 'vue';
 import { ElDropdown, ElIcon } from 'element-plus';
 import { ArrowDown, Signout, Translate, ClassificationSquare } from '@wakeadmin/icons';
+import { useInject } from '@wakeadmin/framework';
+import { useI18n } from 'vue-i18n';
 
 import { getHeaderDropdowns, HeaderDropdownItemDesc, subscribeHeaderDropdownChange } from '@/services';
 import { useBayModel, useAsset } from '@/hooks';
+import { DEFAULT_LANGUAGE_SUPPORTS } from '@/constants';
 
 import { Icon } from '../Icon';
 
@@ -20,22 +23,31 @@ const enum BuiltinCommands {
 export const DropdownMenus = defineComponent({
   name: 'DropdownMenus',
   setup() {
+    const { t } = useI18n();
     const bay = useBayModel();
     const defaultAvatar = useAsset('IMG_BAY_AVATAR', AVATAR_DEFAULT);
     const extendsMenus = ref(getHeaderDropdowns());
     const dispose = subscribeHeaderDropdownChange(() => {
       extendsMenus.value = getHeaderDropdowns();
     });
+    const i18nInstance = useInject('DI.bay.i18n');
+
+    // 切换语言
+    const handleLanguageSwitchCommand = (locale: string) => {
+      i18nInstance.value.setLocale(locale);
+
+      // WARN: 刷新页面, 目前这种兼容性最好
+      window.location.reload();
+    };
 
     onBeforeUnmount(dispose);
 
     const handleCommand = (name: string) => {
       switch (name) {
         case BuiltinCommands.EXIT:
-          bay.signout();
+          bay.logout();
           break;
         case BuiltinCommands.SWITCH_LANGUAGE:
-          // TODO:
           break;
         default: {
           let menuItem: HeaderDropdownItemDesc | undefined;
@@ -61,6 +73,7 @@ export const DropdownMenus = defineComponent({
           size="large"
           placement="bottom-end"
           onCommand={handleCommand}
+          trigger="click"
           v-slots={{
             dropdown: () => (
               <ElDropdown.DropdownMenu>
@@ -79,7 +92,25 @@ export const DropdownMenus = defineComponent({
                 })}
 
                 <ElDropdown.DropdownItem command={BuiltinCommands.SWITCH_LANGUAGE} icon={Translate}>
-                  多语言 TODO:
+                  <ElDropdown
+                    onCommand={handleLanguageSwitchCommand}
+                    placement="left-start"
+                    v-slots={{
+                      dropdown: () => (
+                        <ElDropdown.DropdownMenu>
+                          {DEFAULT_LANGUAGE_SUPPORTS.map(i => {
+                            return (
+                              <ElDropdown.DropdownItem key={i.key} command={i.key}>
+                                {i.name}
+                              </ElDropdown.DropdownItem>
+                            );
+                          })}
+                        </ElDropdown.DropdownMenu>
+                      ),
+                    }}
+                  >
+                    {t('bay.switch-language')}
+                  </ElDropdown>
                 </ElDropdown.DropdownItem>
 
                 {/* 扩展 */}
@@ -94,7 +125,7 @@ export const DropdownMenus = defineComponent({
                   );
                 })}
                 <ElDropdown.DropdownItem command={BuiltinCommands.EXIT} icon={Signout}>
-                  退出登录
+                  {t('bay.logout')}
                 </ElDropdown.DropdownItem>
               </ElDropdown.DropdownMenu>
             ),

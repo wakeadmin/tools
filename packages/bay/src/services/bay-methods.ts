@@ -28,7 +28,7 @@ const bindApi = <
 };
 
 export const waitSetup = bindApi('waitSetup');
-export const signout = bindApi('signout');
+export const logout = bindApi('logout');
 export const toggleMenuCollapse = bindApi('toggleMenuCollapse');
 export const openByAppName = bindApi('openByAppName');
 export const openByAppAlias = bindApi('openByAppAlias');
@@ -40,3 +40,8 @@ export const openError = bindApi('openError');
 export const openUrl = bindApi('openUrl');
 
 export const generateLandingUrl = bindApi('generateLandingUrl');
+
+export const registerBundles = bindApi('registerBundles');
+
+export const getLocale = bindApi('getLocale');
+export const setLocale = bindApi('setLocale');
