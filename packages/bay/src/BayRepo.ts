@@ -1,10 +1,9 @@
+// TODO: bay 后续不会关心具体的业务接口，这里的内容后续会移除，由外部配置
 import { injectable, singleton } from '@wakeadmin/framework';
 import { BaseRepoImplement } from '@/base';
 
-// import { TreeNodeRaw } from './tree';
-import menus from './tree/__fixture__/menu';
+import { TreeNodeRaw } from './tree';
 import { RoleInfo, SessionInfo, AppInfo, IndustryInfo } from './session';
-import mockSessionData from './session/__fixtures__/session';
 
 declare global {
   interface DIMapper {
@@ -37,22 +36,27 @@ export class BayRepo extends BaseRepoImplement {
    * @returns
    */
   getMenus() {
-    return menus;
-    // return this.requestor.requestByPost<TreeNodeRaw[]>(
-    //   '/permission/web/wd/menu/show/menu',
-    //   {
-    //     // 根节点为 0
-    //     menuIdList: [0],
-    //     allChildren: true,
-    //   },
-    //   {
-    //     headers: { 'content-Type': 'application/x-www-form-urlencoded' },
-    //   }
-    // );
+    return this.requestor.requestByPost<TreeNodeRaw[]>(
+      '/permission/web/wd/menu/show/menu',
+      {
+        // 根节点为 0
+        menuIdList: [0],
+        allChildren: true,
+      },
+      {
+        headers: { 'content-Type': 'application/x-www-form-urlencoded' },
+      }
+    );
   }
 
+  /**
+   * 获取会话信息
+   * @returns
+   */
   async getSessionInfo(): Promise<SessionInfo> {
-    const { selectApp, selectRole, roleList, ...other } = mockSessionData as SessionData;
+    const { selectApp, selectRole, roleList, ...other } = await this.requestor.requestByGet<SessionData>(
+      '/wd/employee/web/login/query'
+    );
 
     return {
       appInfo: selectApp,
@@ -63,5 +67,17 @@ export class BayRepo extends BaseRepoImplement {
         currentRole: selectRole,
       },
     };
+  }
+
+  /**
+   * 退出登录
+   */
+  async logout(): Promise<void> {
+    try {
+      await this.requestor.requestByGet('/permission/web/wd/login/logout');
+    } catch (err) {
+      // 忽略错误，无所谓
+      console.error(`[bay] 退出登录失败:`, err);
+    }
   }
 }

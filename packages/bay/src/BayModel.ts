@@ -16,6 +16,7 @@ import { TreeContainer, RouteType } from './tree';
 import { PromiseQueue } from './base';
 import { IBayModel } from './types';
 import type { SessionInfo } from './session';
+import { gotoLogin } from './utils';
 
 declare global {
   interface DIMapper {
@@ -170,8 +171,9 @@ export class BayModel extends BaseModel implements IBayModel {
   /**
    * 退出登录
    */
-  logout = () => {
-    // TODO:
+  logout = async () => {
+    await this.repo.logout();
+    gotoLogin();
   };
 
   toggleMenuCollapse = () => {

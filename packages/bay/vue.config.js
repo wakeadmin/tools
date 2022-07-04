@@ -48,12 +48,14 @@ module.exports = defineConfig({
   },
   devServer: {
     port: 3000,
-    proxy: {
-      '/permission': {
+    proxy: ['/permission', '/wd'].reduce((prev, cur) => {
+      prev[cur] = {
         target: 'https://bizpf-test.wakedt.cn/',
         changeOrigin: true,
         secure: false,
-      },
-    },
+      };
+
+      return prev;
+    }, {}),
   },
 });

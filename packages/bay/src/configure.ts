@@ -1,8 +1,6 @@
 import Framework, { configureDI } from '@wakeadmin/framework';
 import { initial } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
-import { ElMessage } from 'element-plus';
-import { debounce } from '@wakeadmin/utils';
 import { createI18n, I18nInstance } from '@wakeadmin/i18n';
 
 import * as services from './services';
@@ -10,8 +8,8 @@ import { BayModel } from './BayModel';
 import { BayRepo } from './BayRepo';
 import { ErrorPage, LandingPage, Main } from './components';
 import { UNAUTH } from './constants';
+import { gotoLogin } from './utils';
 import App from './App';
-import { getAsset } from './services';
 import './i18n';
 
 declare global {
@@ -33,18 +31,6 @@ declare global {
     'DI.bay.i18n.t': I18nInstance['i18n']['t'];
   }
 }
-
-const gotoLogin = debounce(
-  () => {
-    ElMessage.error('会话失效，请重新登录');
-    window.setTimeout(() => {
-      const LOGIN_URL = getAsset('URL_LOGIN', '/login.html');
-      window.location.assign(`${LOGIN_URL}?url=${window.encodeURIComponent(window.location.href)}`);
-    }, 1000);
-  },
-  1000,
-  { leading: true }
-);
 
 export function configureBay() {
   const i18nInstance = createI18n();
