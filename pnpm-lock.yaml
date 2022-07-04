@@ -120,6 +120,7 @@ importers:
       '@wakeadmin/theme': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
+      '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.1.0
       '@wakeapp/wakedata-backend': 0.1.0-daily20220616143
       babel-preset-wakeadmin: workspace:^0.1.0
@@ -140,6 +141,7 @@ importers:
       '@wakeadmin/mapp': link:../mapp
       '@wakeadmin/theme': link:../theme
       '@wakeadmin/utils': link:../utils
+      '@wakeadmin/vue-cli-plugin-i18n': link:../vue-cli-plugin-i18n
       '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220616143
       core-js: 172.26.59.72+4873/core-js/3.23.3
       element-plus: 172.26.59.72+4873/element-plus/2.2.6_vue@3.2.37
@@ -359,6 +361,15 @@ importers:
     devDependencies:
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
       '@vue/cli-shared-utils': 172.26.59.72+4873/@vue/cli-shared-utils/5.0.6
+
+  packages/vue-cli-plugin-i18n:
+    specifiers:
+      '@vue/cli-service': ~5.0.6
+      json-loader: ^0.5.7
+    dependencies:
+      json-loader: 172.26.59.72+4873/json-loader/0.5.7
+    devDependencies:
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6
 
   packages/vue-cli-plugin-mapp:
     specifiers:
@@ -3841,7 +3852,7 @@ packages:
     version: 3.7.3
     dependencies:
       '@types/eslint': 172.26.59.72+4873/@types/eslint/8.4.3
-      '@types/estree': 172.26.59.72+4873/@types/estree/0.0.51
+      '@types/estree': 172.26.59.72+4873/@types/estree/0.0.52
     dev: true
 
   172.26.59.72+4873/@types/eslint/7.29.0:
@@ -3868,7 +3879,7 @@ packages:
     name: '@types/eslint'
     version: 8.4.3
     dependencies:
-      '@types/estree': 172.26.59.72+4873/@types/estree/0.0.51
+      '@types/estree': 172.26.59.72+4873/@types/estree/0.0.52
       '@types/json-schema': 172.26.59.72+4873/@types/json-schema/7.0.11
     dev: true
 
@@ -12939,6 +12950,17 @@ packages:
     version: 2.5.2
     engines: { node: '>=4' }
     hasBin: true
+
+  172.26.59.72+4873/json-loader/0.5.7:
+    resolution:
+      {
+        integrity: sha1-3KFKcCNf+C8KyaOr62DTN6NlGF0=,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/json-loader/-/json-loader-0.5.7.tgz,
+      }
+    name: json-loader
+    version: 0.5.7
+    dev: false
 
   172.26.59.72+4873/json-parse-better-errors/1.0.2:
     resolution:

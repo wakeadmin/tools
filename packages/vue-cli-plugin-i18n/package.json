@@ -1,0 +1,29 @@
+{
+  "name": "@wakeadmin/vue-cli-plugin-i18n",
+  "version": "0.1.0",
+  "description": "vue i18n 插件",
+  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "devDependencies": {
+    "@vue/cli-service": "~5.0.6"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": "5.*"
+  },
+  "dependencies": {
+    "json-loader": "^0.5.7"
+  }
+}

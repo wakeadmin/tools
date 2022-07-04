@@ -4,6 +4,7 @@ const { defineCE } = require('@wakeadmin/vue-cli-plugin-ce');
 const { defineMapp } = require('@wakeadmin/vue-cli-plugin-mapp');
 
 module.exports = defineConfig({
+  parallel: false,
   transpileDependencies: [/(wakeapp|wakeadmin)/],
   pluginOptions: {
     ...defineCE({ customElement: /wkc-/ }),
