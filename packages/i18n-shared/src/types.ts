@@ -61,7 +61,7 @@ export interface I18nInstance {
    */
   install(app: VueApp): void;
 
-  instance: VueI18nInstance;
+  i18n: VueI18nInstance;
   /**
    * 可以用于监听 i18n 的相关事件
    */

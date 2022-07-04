@@ -1,6 +1,3 @@
-/* eslint-disable vue/one-component-per-file */
-import { isRef, unref, createApp } from 'vue';
-
 import {
   DEFAULT_LOCALE_PERSIST_KEY,
   createI18n,
@@ -14,7 +11,10 @@ import {
   EVENT_LOCALE_CHANGE,
   EVENT_READY,
 } from '.';
-import { useI18n } from 'vue-i18n';
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+
+Vue.use(VueI18n);
 
 beforeEach(() => {
   window.localStorage.clear();
@@ -42,20 +42,16 @@ const suite = async (options: I18nOptions) => {
     const handleLocaleChange = jest.fn();
     instance.eventBus.on(EVENT_LOCALE_CHANGE, handleLocaleChange);
 
-    const error = jest.spyOn(global.console, 'error');
     // 直接设置 locale 应该给出警告
-    if (isRef(instance.i18n.locale)) {
-      instance.i18n.locale.value = 'zh-CN';
-    } else {
+
+    expect(() => {
       instance.i18n.locale = 'zh-CN';
-    }
-
-    expect(handleLocaleChange).toBeCalledWith('zh-CN');
-
-    expect(error).toBeCalledWith('[i18n] 禁止直接设置 .locale 来设置当前语言， 必须使用 setLocale()');
+    }).toThrowError('[i18n] 禁止直接设置 .locale 来设置当前语言， 必须使用 setLocale()');
 
     // 通过 setLocale 设置
     setLocale('zh-cn');
+
+    expect(handleLocaleChange).toBeCalledWith('zh');
 
     // 标识符映射
     expect(getLocale()).toBe('zh');
@@ -79,11 +75,10 @@ const suite = async (options: I18nOptions) => {
 
       await defer;
 
-      expect(unref(instance.i18n.messages)).toEqual({
+      expect(instance.i18n.messages).toEqual({
         en: {
           hello: 'hello',
         },
-        'en-US': {},
         zh: {
           hello: '你好',
         },
@@ -93,11 +88,10 @@ const suite = async (options: I18nOptions) => {
       instance.setLocale('zhHant');
       await Promise.resolve();
 
-      expect(unref(instance.i18n.messages)).toEqual({
+      expect(instance.i18n.messages).toEqual({
         en: {
           hello: 'hello',
         },
-        'en-US': {},
         zh: {
           hello: '你好',
         },
@@ -113,41 +107,21 @@ const suite = async (options: I18nOptions) => {
     });
   });
 
-  describe('test in vue', () => {
-    // legacy 模式不支持传统 API
-    if (options.legacy !== false) {
-      test('legacy', () => {
-        const i = createI18n({ ...options, messages: { en: { hello: 'world' } } });
-        const app = createApp({
-          template: `<p>{{$t('hello')}}</p>`,
-        });
-        app.use(i);
-        app.mount('body');
-        expect(document.body.outerHTML).toBe('<body data-v-app=""><p>world</p></body>');
-      });
-    }
-
-    // legacy 为 true 时，底层也是 composition 模式，所以都支持
-    test('composition', () => {
-      const i = createI18n({ ...options, messages: { en: { hello: 'world' } } });
-      const app = createApp({
-        template: `<p>{{t('hello')}}</p>`,
-        setup() {
-          const { t } = useI18n();
-          return { t };
-        },
-      });
-      app.use(i);
-      app.mount('body');
-      expect(document.body.outerHTML).toBe('<body data-v-app=""><p>world</p></body>');
+  test('render', () => {
+    const { i18n } = createI18n({ ...options, messages: { en: { hello: 'world' } } });
+    const app = new Vue({
+      i18n,
+      render(h) {
+        return h('p', {}, this.$t('hello') as string);
+      },
     });
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+    app.$mount(root);
+    expect(document.body.outerHTML).toBe('<body><p>world</p></body>');
   });
 };
 
 describe('createI18n', () => {
   suite({ locale: 'en-US' });
-});
-
-describe('createI18n legacy=false', () => {
-  suite({ legacy: false });
 });

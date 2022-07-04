@@ -64,8 +64,8 @@ export function getGlobalInstance(): I18nInstance {
 /**
  * 获取全局 vue i18n 实例
  */
-export function getGlobalI18n(): I18nInstance['instance'] {
-  return getGlobalInstance().instance;
+export function getGlobalI18n(): I18nInstance['i18n'] {
+  return getGlobalInstance().i18n;
 }
 
 /**

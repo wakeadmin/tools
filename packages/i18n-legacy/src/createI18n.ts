@@ -1,5 +1,4 @@
-import { createI18n as _createI18n, FallbackLocale } from 'vue-i18n';
-import { unref, watch, isRef } from 'vue';
+import VueI18n, { FallbackLocale } from 'vue-i18n';
 
 import {
   BundleRegister,
@@ -18,7 +17,6 @@ import {
   __setGlobalInstance,
   __flushReadyWaitQueue,
 } from '@wakeadmin/i18n-shared';
-import { fallbackWithLocaleChain } from './fallback';
 import { I18nInstance, I18nOptions } from './types';
 
 /**
@@ -37,20 +35,20 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   // 接受新的等待
   __resetReadyState();
 
-  let { detect, mapper, fallbackLocale, datetimeFormats, numberFormats, locale, ...other } = options ?? {};
+  let { detect, mapper, fallbackLocale, dateTimeFormats, numberFormats, locale, ...other } = options ?? {};
 
   const localeMapper = normalizeMapper(mapper ?? DEFAULT_MAPPER);
   const detector = detect ?? new LocaleDetect();
 
   fallbackLocale ??= DEFAULT_LOCALE;
-  datetimeFormats = { ...DEFAULT_DATETIME_FORMATS, ...datetimeFormats };
+  dateTimeFormats = { ...DEFAULT_DATETIME_FORMATS, ...dateTimeFormats };
   numberFormats = { ...DEFAULT_NUMBER_FORMATS, ...numberFormats };
   locale = localeMapper(locale ?? detector.locale);
 
-  const i18n = _createI18n({
+  const i18n = new VueI18n({
     locale,
     fallbackLocale,
-    datetimeFormats,
+    dateTimeFormats,
     numberFormats,
     ...other,
   });
@@ -58,36 +56,19 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   // 扩展方法
 
   let SET_LOCALE_CONTEXT = false;
-  const vueI18nInstance = i18n.global as I18nInstance['i18n'];
+  const vueI18nInstance = i18n as I18nInstance['i18n'];
   const eventBus = createEventBus();
-
-  const setLocale = (nextLocale: string) => {
-    try {
-      SET_LOCALE_CONTEXT = true;
-      nextLocale = localeMapper(nextLocale);
-      // 写入缓存
-      detector.locale = nextLocale;
-
-      if (isRef(vueI18nInstance.locale)) {
-        vueI18nInstance.locale.value = nextLocale;
-      } else {
-        vueI18nInstance.locale = nextLocale;
-      }
-      return nextLocale;
-    } finally {
-      SET_LOCALE_CONTEXT = false;
-    }
-  };
-
   const getLocale = () => {
-    return unref(vueI18nInstance.locale);
+    return vueI18nInstance.locale;
   };
 
   const getFallbackLocaleChain = (loc?: string, fallback?: FallbackLocale) => {
     loc ??= getLocale();
-    fallback ??= unref(vueI18nInstance.fallbackLocale);
+    fallback ??= vueI18nInstance.fallbackLocale;
 
-    return fallbackWithLocaleChain(vueI18nInstance, fallback, loc);
+    // WARN: 这里访问了 vue-i18n 的内部细节
+    // @ts-expect-error
+    return vueI18nInstance._getLocaleChain(loc, fallback);
   };
 
   const bundleRegister = new BundleRegister(
@@ -100,23 +81,58 @@ export function createI18n(options?: I18nOptions): I18nInstance {
     }
   );
 
-  // 监听语言变动
-  watch(
-    () => unref(vueI18nInstance.locale),
-    loc => {
-      // 检查是否通过 setLocale 调用
-      if (!SET_LOCALE_CONTEXT) {
-        console.error(`[i18n] 禁止直接设置 .locale 来设置当前语言， 必须使用 setLocale()`);
-      }
+  const setLocale = (nextLocale: string) => {
+    try {
+      SET_LOCALE_CONTEXT = true;
 
-      eventBus.emit(EVENT_LOCALE_CHANGE, loc);
+      // 标识符映射
+      nextLocale = localeMapper(nextLocale);
+      // 写入缓存
+      detector.locale = nextLocale;
+
+      vueI18nInstance.locale = nextLocale;
+
+      eventBus.emit(EVENT_LOCALE_CHANGE, nextLocale);
       bundleRegister.schedulerMerge();
-    },
-    { flush: 'sync' }
-  );
+
+      return nextLocale;
+    } finally {
+      SET_LOCALE_CONTEXT = false;
+    }
+  };
+
+  // patch set locale, 避免外部直接修改
+  const localeDesc =
+    Object.getOwnPropertyDescriptor(vueI18nInstance, 'locale') ??
+    Object.getOwnPropertyDescriptor(Object.getPrototypeOf(vueI18nInstance), 'locale');
+  if (localeDesc != null) {
+    // eslint-disable-next-line accessor-pairs
+    Object.defineProperty(vueI18nInstance, 'locale', {
+      ...localeDesc,
+      set(value) {
+        if (!SET_LOCALE_CONTEXT) {
+          throw new Error(`[i18n] 禁止直接设置 .locale 来设置当前语言， 必须使用 setLocale()`);
+        }
+        localeDesc.set?.call(this, value);
+      },
+    });
+  }
 
   const instance = {
-    install: i18n.install,
+    install: () => {
+      throw new Error(`在 vue2 环境不支持，请使用下列方法安装：
+
+import VueI18n from 'vue-i18n'
+import Vue from 'vue'
+
+Vue.use(VueI18n)
+
+const {i18n} = createI18n({...})
+
+new Vue({i18n})
+
+`);
+    },
     i18n: vueI18nInstance,
     eventBus,
     detect: detector,
