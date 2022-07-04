@@ -12,9 +12,10 @@
     "build:common": "tsc -b tsconfig.build.common.json",
     "build": "npm run build:es && npm run build:common",
     "type-check": "tsc",
-    "test:vue2": "vue-demi-switch 2 vue2 && jest --verbose",
+    "test:vue2": "vue-demi-switch 2.7 vue2 && jest --verbose",
+    "test:vue26": "vue-demi-switch 2 vue26 && jest --verbose",
     "test:vue3": "vue-demi-switch 3 && jest --verbose",
-    "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
+    "test": "npm run test:vue26 -- --silent && npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
   "keywords": [],
   "author": "ivan-lee",
@@ -35,7 +36,7 @@
     "test-helper-vue": "workspace:0.1.0"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.6.2",
+    "@vue/composition-api": "^1.7.0",
     "vue": "^2.0.0 || >=3.0.0"
   },
   "peerDependenciesMeta": {

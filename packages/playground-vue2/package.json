@@ -1,0 +1,30 @@
+{
+  "name": "playground-vue2",
+  "version": "0.1.0",
+  "description": "vue2 子应用游乐场",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "inspect": "vue-cli-service inspect"
+  },
+  "dependencies": {
+    "core-js": "^3.23.3",
+    "vue": "^2.7.0",
+    "vue-router": "^3.5.4",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.6",
+    "@vue/cli-plugin-eslint": "~5.0.6",
+    "@vue/cli-plugin-router": "~5.0.6",
+    "@vue/cli-plugin-typescript": "~5.0.6",
+    "@vue/cli-plugin-vuex": "~5.0.6",
+    "@vue/cli-service": "~5.0.6",
+    "sass": "^1.53.0",
+    "sass-loader": "^12.6.0",
+    "typescript": "~4.5.5",
+    "vue-template-compiler": "^2.7.0"
+  }
+}

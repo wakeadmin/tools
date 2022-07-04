@@ -31,7 +31,7 @@
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.0",
     "@wakeapp/wakedata-backend": "0.1.0-daily20220616143",
     "core-js": "^3.23.3",
-    "element-plus": "^2.2.6",
+    "element-plus": "^2.2.8",
     "normalize.css": "^8.0.1",
     "path-browserify": "^1.0.1",
     "vue": "^3.2.37",

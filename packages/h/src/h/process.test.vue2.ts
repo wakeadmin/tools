@@ -13,6 +13,7 @@ import {
   vue2MustUseProps,
   processRef,
 } from './process';
+import { isVue2Dot7 } from '../utils';
 import { render } from '../__tests__/helper';
 
 test('wrap', () => {
@@ -267,28 +268,30 @@ describe('processRef', () => {
     expect(props2).toEqual({ refInFor: true, ref_for: true });
   });
 
-  test('异常情况', () => {
-    expect(() => {
-      processRef('', { ref: () => {} });
-    }).toThrowError('ref 只能是字符串或者 Ref 对象');
-  });
+  if (!isVue2Dot7) {
+    test('异常情况', () => {
+      expect(() => {
+        processRef('', { ref: () => {} });
+      }).toThrowError('ref 只能是字符串或者 Ref 对象');
+    });
 
-  test('ref', () => {
-    let nodeRef = ref<any>(null);
+    test('ref', () => {
+      let nodeRef = ref<any>(null);
 
-    const App = {
-      render() {
-        const props = { ref: nodeRef };
-        processRef('tag', props);
+      const App = {
+        render() {
+          const props = { ref: nodeRef };
+          processRef('tag', props);
 
-        expect(props).toEqual({ ref: '__ref_0__' });
+          expect(props).toEqual({ ref: '__ref_0__' });
 
-        return null;
-      },
-    };
+          return null;
+        },
+      };
 
-    const { rerender } = render(App, {});
+      const { rerender } = render(App, {});
 
-    rerender({});
-  });
+      rerender({});
+    });
+  }
 });

@@ -95,9 +95,6 @@ export interface SetupContext<Emit, Slot, Expose, Attrs> {
 export interface SetupContextLike {
   attrs: Data;
   slots: Record<string, Function>;
-
-  // vue2
-  listeners?: Record<string, Function>;
 }
 
 export type Data = Record<string, unknown>;

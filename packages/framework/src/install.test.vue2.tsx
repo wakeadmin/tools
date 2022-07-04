@@ -1,6 +1,5 @@
-/* eslint-disable vue/one-component-per-file */
 // vue2 页面作用域测试
-import { createApp, defineComponent } from '@wakeadmin/demi';
+import { Vue2, defineComponent } from '@wakeadmin/demi';
 import VueRouter, { RouteConfig } from 'vue-router-3';
 import { plugin } from './install';
 import { NoopComponent, testSuite } from './install.test.share';
@@ -38,7 +37,10 @@ const router = new VueRouter({
   mode: 'history',
 });
 
-const app = createApp({
+Vue2.use(VueRouter);
+Vue2.use(plugin);
+
+const app = new Vue2({
   router,
   name: 'App',
   render() {
@@ -50,12 +52,9 @@ const app = createApp({
   },
 });
 
-app.use(plugin);
-app.use(VueRouter);
-
 test('页面作用域测试', async () => {
   document.body.innerHTML = `<div id="app"></div>`;
-  app.mount('#app');
+  app.$mount('#app');
   await router.push('/foo');
 
   testSuite({

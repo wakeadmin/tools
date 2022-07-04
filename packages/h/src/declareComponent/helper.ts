@@ -67,7 +67,7 @@ export function fallthrough(component: any, context: SetupContextLike, props: an
     // 支持覆盖参数
     const finalProps = processProps(component, {
       attrs: { ...context.attrs },
-      on: { ...context.listeners },
+      on: { ...instance.proxy.$listeners },
       scopedSlots: instance?.proxy?.$scopedSlots,
       ...props,
     });

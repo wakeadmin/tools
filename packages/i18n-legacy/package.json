@@ -18,8 +18,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "vue": "2.*",
-    "vue-i18n": "8.*"
+    "vue": "~2.7.0",
+    "vue-i18n": "~8.27.2"
   },
   "peerDependencies": {
     "vue": "2.*",

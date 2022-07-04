@@ -2,11 +2,13 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-const { isVue2 } = require('vue-demi');
+const { isVue2, Vue2 } = require('vue-demi');
 const path = require('path');
 
+const isVue27 = isVue2 && Vue2.version.startsWith('2.7');
+
 if (isVue2) {
-  console.log('****** VUE 2 mode ******');
+  console.log(`****** VUE 2${isVue27 ? '.7' : ''} mode ******`);
 } else {
   console.log('****** VUE 3 mode ******');
 }
@@ -102,9 +104,11 @@ module.exports = {
     },
     isVue2
       ? {
-          '^vue$': 'vue2',
+          '^vue$': isVue27 ? 'vue2' : 'vue26',
           '^@vue/test-utils$': 'vue-test-utils-2',
           '^@testing-library/vue$': 'testing-library-vue-2',
+          // 必须和 vue 版本严格对应
+          '^vue-template-compiler$': isVue27 ? 'vue-template-compiler' : 'vue-template-compiler26',
         }
       : {
           '^@vue/test-utils$': require.resolve('@vue/test-utils'),

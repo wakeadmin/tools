@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/array-type */
-import { defineComponent as vueDefineComponent, isVue2, VNodeChild } from '@wakeadmin/demi';
+import { defineComponent as vueDefineComponent, isVue2, VNodeChild, getCurrentInstance } from '@wakeadmin/demi';
 import omit from 'lodash/omit';
 
 import { DefineComponent, SimpleComponentOptions } from './types';
@@ -79,12 +79,13 @@ export function declareComponent<
       ? function (props: any, context: any) {
           // vue2 不支持 expose
           const expose = context.expose ?? vue2Expose;
+          const instance = getCurrentInstance() as any;
 
           // vue2 emit 规范化，支持多种命名规范
           const emit = (name: string, ...args: any[]) => {
-            const found = findEventHandler(name, context.listeners);
+            const found = findEventHandler(name, instance.proxy.$listeners);
             if (found) {
-              context.listeners[found]?.(...args);
+              instance.proxy.$listeners[found]?.(...args);
             } else {
               context.emit(name, ...args);
             }
