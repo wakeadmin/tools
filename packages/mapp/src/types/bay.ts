@@ -56,11 +56,6 @@ export interface MicroApp {
    * 可选，默认为 false。一般情况下微应用都是挂载在由基座的提供的页面框架内，某些特殊场景，微应用要完全接管一个页面，比如登录。这时候就开启
    */
   independent?: boolean;
-
-  /**
-   * 自定义元数据
-   */
-  meta?: Record<string, any>;
 }
 
 export type PageComponent<T = any> =
