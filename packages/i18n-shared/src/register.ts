@@ -1,19 +1,29 @@
 /* eslint-disable consistent-return */
-import { hasProp, addHiddenProp, isESModule, PromiseQueue } from '@wakeadmin/utils';
+import { hasProp, addHiddenProp, PromiseQueue } from '@wakeadmin/utils';
 
-import { I18nBundle } from './types';
+import { asyncModuleLoader, httpLoader } from './loader';
+import { I18nAsyncBundle, I18nBundle } from './types';
 
 /**
  * 语言包缓存
  */
 const LOADED = Symbol('loaded');
+const LOADED_URLS = new Set();
 
-function isLoaded(obj: any) {
-  return hasProp(obj, LOADED);
+function isLoaded(bundle: I18nBundle) {
+  if (typeof bundle === 'string') {
+    return LOADED_URLS.has(bundle);
+  }
+
+  return hasProp(bundle, LOADED);
 }
 
-function setLoaded(obj: any) {
-  addHiddenProp(obj, LOADED, 1);
+function setLoaded(bundle: I18nBundle) {
+  if (typeof bundle === 'string') {
+    LOADED_URLS.add(bundle);
+  } else {
+    addHiddenProp(bundle, LOADED, 1);
+  }
 }
 
 /**
@@ -63,12 +73,18 @@ export class BundleRegister {
             continue;
           }
 
-          // 异步加载函数
           if (typeof bundle === 'function') {
+            // 异步加载函数
             task.push(
               (async () => {
-                const module = await bundle();
-                (messages[locale] ??= []).push(isESModule(module) ? module.default : module);
+                (messages[locale] ??= []).push(await asyncModuleLoader(bundle as I18nAsyncBundle));
+              })()
+            );
+          } else if (typeof bundle === 'string') {
+            // http 链接
+            task.push(
+              (async () => {
+                (messages[locale] ??= []).push(await httpLoader(bundle));
               })()
             );
           } else {
