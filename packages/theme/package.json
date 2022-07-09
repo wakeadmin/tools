@@ -6,10 +6,12 @@
   "types": "theme.d.ts",
   "files": [
     "theme.css",
-    "theme.css",
+    "theme.scss",
     "adapter"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "node ./build.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
