@@ -186,7 +186,7 @@ importers:
     specifiers:
       vue-demi: latest
     dependencies:
-      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1
+      vue-demi: 172.26.59.72+4873/vue-demi/0.13.2
 
   packages/framework:
     specifiers:
@@ -332,7 +332,6 @@ importers:
       vuex: ^3.6.2
     dependencies:
       '@wakeadmin/bay': link:../bay
-      '@wakeadmin/vue-cli-plugin-mapp-child': link:../vue-cli-plugin-mapp-child
       core-js: 172.26.59.72+4873/core-js/3.23.3
       vue: 172.26.59.72+4873/vue/2.7.0
       vue-router: 172.26.59.72+4873/vue-router/3.5.4
@@ -344,6 +343,7 @@ importers:
       '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6_ospgdonfyx37ogfjfjddtrkkra
       '@vue/cli-plugin-vuex': 172.26.59.72+4873/@vue/cli-plugin-vuex/5.0.6
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_33lqo5x7wkykwecxfnyrnri6le
+      '@wakeadmin/vue-cli-plugin-mapp-child': link:../vue-cli-plugin-mapp-child
       sass: 172.26.59.72+4873/sass/1.53.0
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
       typescript: 172.26.59.72+4873/typescript/4.5.5
@@ -8098,7 +8098,7 @@ packages:
       lodash: ^4.17.20
       marko: ^3.14.4
       mote: ^0.2.0
-      mustache: ^4.0.1
+      mustache: ^3.0.0
       nunjucks: ^3.2.2
       plates: ~0.4.11
       pug: ^3.0.0
@@ -18926,6 +18926,25 @@ packages:
       }
     name: vue-demi
     version: 0.13.1
+    engines: { node: '>=12' }
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': '*'
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dev: false
+
+  172.26.59.72+4873/vue-demi/0.13.2:
+    resolution:
+      {
+        integrity: sha512-41ukrclEbMddAyP7PvxMSYqnOSzPV6r7GNnyTSKSCNTaz19GehxmTiXyP9kwHSUv2+Dr6hHqiUiF7L1VAw2KdQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/vue-demi/-/vue-demi-0.13.2.tgz,
+      }
+    name: vue-demi
+    version: 0.13.2
     engines: { node: '>=12' }
     hasBin: true
     requiresBuild: true
