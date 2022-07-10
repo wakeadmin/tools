@@ -1,0 +1,36 @@
+.debug {
+  padding: 50px;
+
+  &__hd {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 3px;
+    background: var(--ep-color-info-light-8);
+    color: white;
+    border-radius: 2px;
+    margin-right: 10px;
+    line-height: 1.2;
+  }
+
+  &__delete {
+    margin-left: 10px;
+    font-size: 1.3em;
+    color: var(--wk-color-danger);
+    cursor: pointer;
+  }
+
+  &__field {
+    color: var(--wk-color-info);
+  }
+
+  &-mapp {
+    display: flex;
+    align-items: center;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+}

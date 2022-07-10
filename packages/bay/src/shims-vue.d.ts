@@ -27,5 +27,10 @@ interface Window {
    */
   __MAPP_SERVICES__?: any;
 
+  /**
+   * 已注册的微应用
+   */
+  __MAPPS__?: import('@wakeadmin/mapp/main').MicroApp[];
+
   __MAPP_BAY_MODEL__?: import('./BayModel').BayModel;
 }

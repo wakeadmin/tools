@@ -3,9 +3,9 @@ import { defineComponent } from 'vue';
 import { useBay } from '../hooks';
 import { DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX } from '../constants';
 
-const DefaultIndependentPageImplementation = defineComponent(() => {
+const DefaultIndependentPageImplementation = () => {
   return <div class="independent" id={DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX}></div>;
-});
+};
 
 export const IndependentPage = defineComponent({
   name: 'MappIndependentPage',

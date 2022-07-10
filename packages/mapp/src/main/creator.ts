@@ -5,6 +5,14 @@ import { Bay } from './Bay';
 let bay: IBay;
 
 /**
+ * 获取基座实例
+ * @returns
+ */
+export function getBay() {
+  return bay;
+}
+
+/**
  * 创建基座实例
  * @param options
  * @returns

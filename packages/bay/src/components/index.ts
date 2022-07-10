@@ -4,3 +4,4 @@ export * from './Sidebar';
 export * from './Icon';
 export * from './ErrorPage';
 export * from './LandingPage';
+export * from './Debug';

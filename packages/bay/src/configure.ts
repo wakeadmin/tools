@@ -1,15 +1,16 @@
-import Framework, { configureDI } from '@wakeadmin/framework';
+import Framework, { configureDI, getInject } from '@wakeadmin/framework';
 import { initial } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
 import { createI18n, I18nInstance } from '@wakeadmin/i18n';
 
+import App from './App';
 import * as services from './services';
 import { BayModel } from './BayModel';
+import { MicroAppModel } from './MicroAppModel';
 import { BayRepo } from './BayRepo';
-import { ErrorPage, LandingPage, Main } from './components';
+import { ErrorPage, LandingPage, Main, Debug } from './components';
 import { UNAUTH } from './constants';
 import { gotoLogin } from './utils';
-import App from './App';
 import './i18n';
 
 declare global {
@@ -33,30 +34,30 @@ declare global {
 }
 
 export function configureBay() {
+  configureDI(({ registerSingletonClass }) => {
+    registerSingletonClass('DI.bay.MicroAppModel', MicroAppModel);
+  });
+
   const i18nInstance = createI18n();
+
+  const apps = getInject('DI.bay.MicroAppModel').getMapps();
 
   const bay = createBay({
     rootComponent: App,
-    apps: [
-      // TODO: 测试后移除
-      {
-        name: 'playgroundVue3',
-        activeRule: '/wkb.html',
-        entry: '//localhost:63285',
-      },
-      {
-        name: 'playgroundVue2',
-        activeRule: '/dsp.html',
-        entry: '//localhost:58681',
-      },
-    ],
+    apps,
     pages: {
       main: Main,
       error: ErrorPage,
       landing: LandingPage,
     },
     hooks: {},
-    routes: [],
+    routes: [
+      {
+        path: '/__debug__',
+        name: 'debug',
+        component: Debug,
+      },
+    ],
     networkInterceptors: [
       async (request, next) => {
         // 注入当前语言
