@@ -1,8 +1,8 @@
+/* 请勿编辑，此文件自动生成 */
 /**
  * 映射到 element-plus CSS 配置
  * https://element-plus.org/zh-CN/guide/theming.html#%E9%80%9A%E8%BF%87-css-%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE
  * 相关的变量定义，可以打开 element-plus 网页控制台查看
- * 使用了 ep 自定义命名空间
  */
 :root {
   /* --ep-color-white: #ffffff;
@@ -112,7 +112,7 @@
   --ep-bg-color-page: #f2f3f5;
   --ep-bg-color-overlay: #ffffff; */
 
-  --ep-bg-color-page: var(--wk-color-bg-200);
+  --ep-bg-color-page: var(--wk-color-bg);
 
   /* --ep-text-color-primary: #303133;
   --ep-text-color-regular: #606266;
@@ -131,9 +131,19 @@
   --ep-border-color-lighter: #ebeef5;
   --ep-border-color-extra-light: #f2f6fc;
   --ep-border-color-dark: #d4d7de;
+  --ep-border-color-darker: #cdd0d6;*/
+
+  --ep-border-color: var(--wk-color-border);
+  --ep-border-color-light: var(--wk-color-border-light);
+  --ep-border-color-lighter: var(--wk-color-border-lighter);
+  --ep-border-color-extra-light: var(--wk-color-border-extra-light);
+  --ep-border-color-dark: var(--wk-color-border-dark);
   --ep-border-color-darker: #cdd0d6;
 
-  --ep-fill-color: #f0f2f5;
+  --ep-link-text-color: var(--wk-color-link);
+  --ep-link-hover-text-color: var(--wk-color-link-hover);
+
+  /* --ep-fill-color: #f0f2f5;
   --ep-fill-color-light: #f5f7fa;
   --ep-fill-color-lighter: #fafafa;
   --ep-fill-color-extra-light: #fafcff;
