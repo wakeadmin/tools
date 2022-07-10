@@ -125,6 +125,7 @@ importers:
       '@wakeadmin/icons': workspace:^0.1.0
       '@wakeadmin/mapp': workspace:^0.1.0
       '@wakeadmin/theme': workspace:^0.1.0
+      '@wakeadmin/theme-wakedata': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.0
@@ -149,6 +150,7 @@ importers:
       '@wakeadmin/icons': link:../icons
       '@wakeadmin/mapp': link:../mapp
       '@wakeadmin/theme': link:../theme
+      '@wakeadmin/theme-wakedata': link:../theme-wakedata
       '@wakeadmin/utils': link:../utils
       '@wakeadmin/vue-cli-plugin-i18n': link:../vue-cli-plugin-i18n
       '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220616143

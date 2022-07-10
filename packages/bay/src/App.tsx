@@ -1,13 +1,13 @@
-import { h } from 'vue';
 import { RouterView } from 'vue-router';
+import { ElConfigProvider } from 'element-plus';
 
 import 'normalize.css';
-
-// 先导入 element-ui 样式, 后覆盖配置
-import 'element-plus/dist/index.css';
-import '@wakeadmin/theme';
-import '@wakeadmin/theme/adapter/element-plus.css';
-
+// 主题包，生产环境由运行容器注入
+import '@wakeadmin/theme-wakedata';
 import './App.scss';
 
-export default () => h(RouterView);
+export default () => (
+  <ElConfigProvider namespace="ep">
+    <RouterView />
+  </ElConfigProvider>
+);

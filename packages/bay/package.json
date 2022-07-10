@@ -27,6 +27,7 @@
     "@wakeadmin/icons": "workspace:^0.1.0",
     "@wakeadmin/mapp": "workspace:^0.1.0",
     "@wakeadmin/theme": "workspace:^0.1.0",
+    "@wakeadmin/theme-wakedata": "workspace:^0.1.0",
     "@wakeadmin/utils": "workspace:^0.1.0",
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.0",
     "@wakeapp/wakedata-backend": "0.1.0-daily20220616143",
