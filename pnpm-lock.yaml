@@ -18,6 +18,7 @@ importers:
       eslint-config-wkts: ^0.2.0
       eslint-config-wkvue: ^0.1.20
       fast-glob: ^3.2.11
+      fs-extra: ^10.1.0
       husky: ^8.0.1
       jest: ^28.1.2
       jest-environment-jsdom: ^28.1.2
@@ -56,6 +57,7 @@ importers:
       eslint-config-wkts: 172.26.59.72+4873/eslint-config-wkts/0.2.0_uhaujixt4myxtnzhmcamhb342a
       eslint-config-wkvue: 172.26.59.72+4873/eslint-config-wkvue/0.1.20_srx7v5crnrxbvbcpp6l4isaa5y
       fast-glob: 172.26.59.72+4873/fast-glob/3.2.11
+      fs-extra: 172.26.59.72+4873/fs-extra/10.1.0
       husky: 172.26.59.72+4873/husky/8.0.1
       jest: 172.26.59.72+4873/jest/28.1.2_@types+node@17.0.45
       jest-environment-jsdom: 172.26.59.72+4873/jest-environment-jsdom/28.1.2
@@ -5894,7 +5896,7 @@ packages:
       '@types/web-bluetooth': 172.26.59.72+4873/@types/web-bluetooth/0.0.14
       '@vueuse/metadata': 172.26.59.72+4873/@vueuse/metadata/8.7.5
       '@vueuse/shared': 172.26.59.72+4873/@vueuse/shared/8.7.5
-      vue-demi: 172.26.59.72+4873/vue-demi/0.13.2
+      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1
     dev: true
 
   172.26.59.72+4873/@vueuse/core/8.7.5_vue@3.2.37:
@@ -5951,7 +5953,7 @@ packages:
       vue:
         optional: true
     dependencies:
-      vue-demi: 172.26.59.72+4873/vue-demi/0.13.2
+      vue-demi: 172.26.59.72+4873/vue-demi/0.13.1
     dev: true
 
   172.26.59.72+4873/@vueuse/shared/8.7.5_vue@3.2.37:
@@ -11108,6 +11110,22 @@ packages:
     name: fresh
     version: 0.5.2
     engines: { node: '>= 0.6' }
+    dev: true
+
+  172.26.59.72+4873/fs-extra/10.1.0:
+    resolution:
+      {
+        integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/fs-extra/-/fs-extra-10.1.0.tgz,
+      }
+    name: fs-extra
+    version: 10.1.0
+    engines: { node: '>=12' }
+    dependencies:
+      graceful-fs: 172.26.59.72+4873/graceful-fs/4.2.10
+      jsonfile: 172.26.59.72+4873/jsonfile/6.1.0
+      universalify: 172.26.59.72+4873/universalify/2.0.0
     dev: true
 
   172.26.59.72+4873/fs-extra/9.1.0:
@@ -19122,7 +19140,6 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
-    dev: false
 
   172.26.59.72+4873/vue-demi/0.13.2:
     resolution:
@@ -19141,6 +19158,7 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
+    dev: false
 
   172.26.59.72+4873/vue-eslint-parser/7.11.0_eslint@8.0.1:
     resolution:

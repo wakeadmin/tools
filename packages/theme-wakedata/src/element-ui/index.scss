@@ -1,0 +1,5 @@
+// element-ui 不支持 css var 索引只能静态生成
+// 这里必须使用 @import 不能使用 @use，因为 $-- 会被视作私有变量
+@import '../../node_modules/@wakeadmin/theme/adapter/element-ui';
+
+@import '../../node_modules/element-ui/packages/theme-chalk/src';

@@ -1,0 +1,24 @@
+{
+  "name": "@wakeadmin/theme-wakedata",
+  "version": "0.1.0",
+  "description": "WakeData 主题包",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "node ./build"
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "index.js"
+  ],
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "devDependencies": {
+    "@wakeadmin/theme": "workspace:^0.1.0",
+    "element-plus": "^2.2.8",
+    "element-ui": "^2.15.9",
+    "sass": "^1.53.0"
+  }
+}
