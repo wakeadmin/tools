@@ -48,12 +48,12 @@ export interface PluginOptions {
 }
 
 const PLUGIN_NAME = pluginPkg.name;
-const isProduction = process.env.NODE_ENV === 'production';
 
 /**
  * 惟客云微应用接入插件
  */
 export const plugin: ServicePlugin = (api, options) => {
+  const isProduction = process.env.NODE_ENV === 'production';
   const pluginOptions = (options.pluginOptions as any)?.[PLUGIN_NAME] || {};
 
   const pkgPath = api.resolve('package.json');
@@ -105,11 +105,11 @@ module.exports = {
  `);
   }
 
-  const table = new Table();
+  const table = new Table({ colWidths: [15, 100] });
 
   table.push(
-    ['模式', '子应用'],
-    ['应用名称', _name],
+    ['mode', '子应用'],
+    ['name', _name],
     ['publicPath', publicPath],
     ['libraryType', _libraryType],
     ['port', port],

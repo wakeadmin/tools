@@ -17,6 +17,7 @@ import { PackageJSONLike, SharedDeclaration, getNameFromPackageJson, generateSha
 export interface PluginOptions {
   /**
    * CDN 域名，如果静态资源需要由 CDN 分发，则需要配置此项
+   * CDN 域名需要自己加上 https:// 或者 // 前缀，本插件不会处理
    */
   CDNDomain?: string;
 
@@ -37,12 +38,12 @@ export interface PluginOptions {
 }
 
 const PLUGIN_NAME = pluginPkg.name;
-const isProduction = process.env.NODE_ENV === 'production';
 
 /**
  * 惟客云主应用接入插件
  */
 export const plugin: ServicePlugin = (api, options) => {
+  const isProduction = process.env.NODE_ENV === 'production';
   const pluginOptions = (options.pluginOptions as any)?.[PLUGIN_NAME] as PluginOptions | undefined;
 
   if (pluginOptions == null) {
@@ -105,10 +106,10 @@ module.exports = {
  `);
   }
 
-  const table = new Table({});
+  const table = new Table({ colWidths: [15, 100] });
 
   table.push(
-    ['模式', '主应用'],
+    ['mode', '主应用'],
     ['publicPath', publicPath],
     ['baseUrl', `${_baseUrl}, 应用内可以通过 process.env.MAPP_BASE_URL 获取`],
     ['assetsDir', assetsDir],
