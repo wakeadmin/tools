@@ -84,12 +84,14 @@ module.exports = defineConfig({
   const joinCDNDomain = (p: string) => (_CDNDomain ? `${removeTrailingSlash(_CDNDomain)}${p}` : p);
   const defaultPublicPath = path.posix.join(_baseUrl, '__entry__');
 
-  const publicPath =
+  // publicPath 最好以 / 结束
+  const publicPath = addTrailingSlash(
     _publicPath === 'auto'
       ? isProduction
         ? joinCDNDomain(addTrailingSlash(defaultPublicPath))
         : '/' // 本地开发，直接 '/' 即可
-      : _publicPath;
+      : _publicPath
+  );
 
   if (options.publicPath !== '/') {
     console.warn(`[${PLUGIN_NAME}] publicPath 将被忽略，请使用下列方式, 定义 publicPath, 大部分情况下推荐 auto：
