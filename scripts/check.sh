@@ -14,10 +14,10 @@ npm i -g pnpm
 pnpm install
 
 # 构建
-pnpm run -r --filter=!playground-* build
+pnpm run build
 
 # eslint 检查
 pnpm wkstd gerrit-check '{"typescriptEnable": false}'
 
 # 单元测试
-pnpm run -r --filter=!playground-* test --passWithNoTests --silent
+pnpm run test
