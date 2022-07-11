@@ -5,6 +5,8 @@ export type SharedDeclaration = { name: string; module: string } | string;
 export interface PackageJSONLike {
   name: string;
   version: string;
+
+  description?: string;
 }
 
 /**

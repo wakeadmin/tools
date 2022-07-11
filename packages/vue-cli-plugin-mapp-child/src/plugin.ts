@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { camelCase, removeTrailingSlash } from '@wakeadmin/utils';
+import { camelCase, removeTrailingSlash, addTrailingSlash, addHeadingSlash } from '@wakeadmin/utils';
 import type { ServicePlugin } from '@vue/cli-service';
 import Table from 'cli-table';
+import type { MicroApp } from '@wakeadmin/mapp/main';
 
 import {
   SharedDeclaration,
@@ -15,12 +16,14 @@ import {
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore
 import pluginPkg from '../package.json';
+import { WebpackMAPPJsonPlugin } from './WebpackMAPPJsonPlugin';
 
 export interface PluginOptions {
   /**
    * CDN 域名，如果静态资源需要由 CDN 分发，则需要配置此项
    */
   CDNDomain?: string;
+
   /**
    * 微应用名称，默认从 package.json name 读取，并转换为驼峰形式
    */
@@ -32,7 +35,7 @@ export interface PluginOptions {
   baseUrl?: string;
 
   /**
-   * 微应用 publicPath，默认为 auto, 即 '<base>/__apps__/NAME/'
+   * 微应用 publicPath，默认为 auto, 即 '<CDNDomain><base>/__apps__/<name>/',
    */
   publicPath?: string;
 
@@ -45,6 +48,23 @@ export interface PluginOptions {
    * 从基座中共享的依赖，必须精确匹配
    */
   shared?: SharedDeclaration[];
+
+  // 以下是 MAPP 的一些配置项
+
+  /**
+   * 子应用的激活路由，默认为 /<name>
+   */
+  activeRule?: string;
+
+  /**
+   * 独立模式，默认为 false
+   */
+  independent?: boolean;
+
+  /**
+   * 用于多业态应用，绑定到同一个身份上
+   */
+  alias?: string;
 }
 
 const PLUGIN_NAME = pluginPkg.name;
@@ -54,7 +74,7 @@ const PLUGIN_NAME = pluginPkg.name;
  */
 export const plugin: ServicePlugin = (api, options) => {
   const isProduction = process.env.NODE_ENV === 'production';
-  const pluginOptions = (options.pluginOptions as any)?.[PLUGIN_NAME] || {};
+  const pluginOptions = ((options.pluginOptions as any)?.[PLUGIN_NAME] || {}) as PluginOptions;
 
   const pkgPath = api.resolve('package.json');
   const pkg = JSON.parse(fs.readFileSync(pkgPath).toString()) as PackageJSONLike;
@@ -83,12 +103,14 @@ export const plugin: ServicePlugin = (api, options) => {
 
   let defaultPublicPath = path.posix.join(_baseUrl, `__apps__/${_name}/`);
 
-  const publicPath =
+  // publicPath 最好以 / 结束
+  const publicPath = addTrailingSlash(
     _publicPath === 'auto'
       ? isProduction
         ? joinCDNDomain(defaultPublicPath) // 按照 wakedata 微前端部署路径
         : `//localhost:${port}/` // 本地开发，硬编码 port, 这样不需要在代码中引入  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
-      : _publicPath;
+      : _publicPath
+  );
 
   if (options.publicPath !== '/') {
     console.warn(`[${PLUGIN_NAME}] publicPath 将被忽略，请使用下列方式, 定义 publicPath：
@@ -105,6 +127,16 @@ module.exports = {
  `);
   }
 
+  const mapp: MicroApp = {
+    name: _name,
+    alias: pluginOptions.alias,
+    activeRule: pluginOptions.activeRule ?? addHeadingSlash(_name),
+    entry: isProduction ? `__apps__/${_name}` : publicPath,
+    version: pkg.version,
+    description: pkg.description,
+    independent: pluginOptions.independent,
+  };
+
   const table = new Table({ colWidths: [15, 100] });
 
   table.push(
@@ -115,7 +147,8 @@ module.exports = {
     ['port', port],
     ['assetsDir', assetsDir],
     ['outputDir', outputDir],
-    ['shared', JSON.stringify(_shared, null, 2)]
+    ['shared', JSON.stringify(_shared, null, 2)],
+    ['mapp', JSON.stringify(mapp, null, 2)]
   );
 
   console.log(table.toString());
@@ -135,6 +168,7 @@ module.exports = {
         },
       },
       externals,
+      plugins: [new WebpackMAPPJsonPlugin(mapp)],
     };
   });
 
