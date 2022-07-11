@@ -11,16 +11,17 @@
     <meta name="update-time" content="<?= `${year}-${month}-${date}` ?>" />
     <title><?= title ?></title>
     <!-- 注入主题包 -->
-    <!--!<?- theme.stylesheets.map(i => `<link rel="stylesheet" href="${domainJoin(cdnDomain, i + '?' + hash )}" />`).join('\n') ?>-->
-    <!--!<?- theme.scripts.map(i => `<script async="true" src="${domainJoin(cdnDomain, i + '?' + hash)}"></script>`).join('\n') ?>-->
-    <!--!<? if (microApps.length) { ?>-->
-    <!--<?- 
+    <!--! <?- theme.stylesheets.map(i => `<link rel="stylesheet" href="${domainJoin(cdnDomain, i + '?' + hash )}" />`).join('\n') ?> -->
+    <!--! <?- theme.scripts.map(i => `<script async="true" src="${domainJoin(cdnDomain, i + '?' + hash)}"></script>`).join('\n') ?> -->
+
+    <!--! <? if (microApps.length) { ?> -->
+    <!--! <?- 
       `<script>
         // 微应用注入
         (window.__MAPPS__ = (window.__MAPPS__ || [])).push(${microApps.map(i => JSON.stringify(i)).join(', ')});
       </script>`
-    ?>-->
-    <!--!<? } ?>-->
+    ?> -->
+    <!--! <? } ?>-->
 
     <!--! <?- `<script>
       // 静态资源注入
@@ -28,7 +29,8 @@
 
       // 语言包
       window.__MAPP_I18N = ${JSON.stringify(i18n)};
-    </script>` ?> -->
+    </script>` ?>
+    -->
   </head>
   <body>
     <noscript>

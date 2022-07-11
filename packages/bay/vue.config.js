@@ -12,8 +12,8 @@ module.exports = defineConfig({
       // 生产环境在运行容器中动态注入
       process.env.NODE_ENV === 'production'
         ? {
-            baseUrl: '<?= base ?>',
-            publicPath: "<?= domainJoin(cdnDomain, pathJoin(base, '__entry__')) ?>",
+            baseUrl: '<?= removeTrailingSlash(base) ?>',
+            CDNDomain: "<?= cdnDomain ? '//' + cdnDomain : '' ?>",
           }
         : {}
     ),
