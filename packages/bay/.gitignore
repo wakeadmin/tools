@@ -2,6 +2,7 @@
 node_modules
 /dist
 /expose
+/docker
 
 
 # local env files

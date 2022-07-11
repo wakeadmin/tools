@@ -18,13 +18,22 @@
   <wkc-header-dropdown-menu title="hello" @click="handleMenuClick"></wkc-header-dropdown-menu>
   <wkc-header-dropdown-menu icon="Add" title="world" @click="handleMenuClick"></wkc-header-dropdown-menu>
   <wkc-breadcrumb />
-  <wkc-float-footer style="background-color: red"><button>hello</button></wkc-float-footer>
+  <wkc-float-footer style="background-color: red"
+    ><button class="my-button">hello</button><ElButton>fukc</ElButton></wkc-float-footer
+  >
 </template>
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { ElButton } from 'element-plus';
 
   const show = ref(false);
   const count = ref(0);
   const handleMenuClick = () => console.log('menu-click');
 </script>
+
+<style>
+  .my-button {
+    background-color: red;
+  }
+</style>

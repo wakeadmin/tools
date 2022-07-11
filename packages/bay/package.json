@@ -5,6 +5,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "theme": "@wakeadmin/theme-wakedata",
   "files": [
     "index.js",
     "index.mjs",
@@ -13,7 +14,10 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build:production": "vue-cli-service build",
+    "build:assets": "vue-cli-service build",
+    "postbuild:assets": "node ./scripts/post-build.js",
+    "build:docker": "node ./scripts/build-docker.js",
+    "publish:docker": "node ./scripts/publish-docker.js",
     "build": "tsc -b ./tsconfig.expose.json",
     "type-check": "tsc --noEmit",
     "test": "jest"

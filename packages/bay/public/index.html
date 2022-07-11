@@ -4,14 +4,33 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="description" content="<?= description ?>" />
+    <meta name="keywords" content="<?= keywords ?>" />
+    <link rel="icon" href="<%= BASE_URL %>/favicon.png" />
+    <meta name="version" content="<?= version ?>" />
+    <meta name="update-time" content="<?= `${year}-${month}-${date}` ?>" />
+    <title><?= title ?></title>
+    <!-- 注入主题包 -->
+    <!--!<?- theme.stylesheets.map(i => `<link rel="stylesheet" href="${domainJoin(cdnDomain, i + '?' + hash )}" />`).join('\n') ?>-->
+    <!--!<?- theme.scripts.map(i => `<script async="true" src="${domainJoin(cdnDomain, i + '?' + hash)}"></script>`).join('\n') ?>-->
+
+    <!--! <?- `<script>
+      // 微应用注入
+      (window.__MAPPS__ = (window.__MAPPS__ || [])).push(${JSON.stringify(microApps)});
+
+      // 静态资源注入
+      (window.__MAPP_ASSETS__ = (window.__MAPP_ASSETS__ || [])).push(assets);
+
+      // 语言包
+      window.__MAPP_I18N = i18n;
+    </script>` ?> -->
   </head>
   <body>
     <noscript>
       <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please
-        enable it to continue.</strong
+        >We're sorry but
+        <?= title ?>
+        doesn't work properly without JavaScript enabled. Please enable it to continue.</strong
       >
     </noscript>
     <div id="app"></div>

@@ -8,13 +8,15 @@ module.exports = defineConfig({
   transpileDependencies: [/(wakeapp|wakeadmin)/],
   pluginOptions: {
     ...defineCE({ customElement: /wkc-/ }),
-    ...defineMapp({
-      // baseUrl: '/base',
-      shared: [
-        { name: 'vue', module: 'vue' },
-        { name: 'vue-router', module: 'vue-router' },
-      ],
-    }),
+    ...defineMapp(
+      // 生产环境在运行容器中动态注入
+      process.env.NODE_ENV === 'production'
+        ? {
+            baseUrl: '<?= base ?>',
+            publicPath: "<?= domainJoin(cdnDomain, pathJoin(base, '__entry__')) ?>",
+          }
+        : {}
+    ),
   },
   chainWebpack(chain) {
     // 支持内联 style

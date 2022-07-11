@@ -1,10 +1,11 @@
-import { NamedRegistry } from '@wakeadmin/utils';
-
 /**
  * 静态资源注册
  *
  * 通常用于主题配置场景，比如默认头像、logo. 可以通过这个方法获取外部注入的静态资源链接
  */
+import { NamedRegistry } from '@wakeadmin/utils';
+
+type MappAssetPayload = [string, string] | Record<string, string>;
 
 declare global {
   /**
@@ -34,8 +35,8 @@ declare global {
      * 使用方式: 一定要使用 push 方法
      * (window.__MAPP_ASSETS__ = window.__MAPP_ASSETS__ || []).push(['key', 'value'])
      */
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    __MAPP_ASSETS__: [string, string][];
+    // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/array-type
+    __MAPP_ASSETS__: Array<MappAssetPayload>;
   }
 }
 
@@ -72,17 +73,23 @@ export const listenAssets = registry.subscribe;
 // 初始化
 // eslint-disable-next-line no-lone-blocks
 {
+  const register = (payload: MappAssetPayload) => {
+    if (Array.isArray(payload)) {
+      registerAsset(payload[0], payload[1]);
+    } else {
+      Object.keys(payload).forEach(k => {
+        registerAsset(k, payload[k]);
+      });
+    }
+  };
+
   if (window.__MAPP_ASSETS__) {
-    window.__MAPP_ASSETS__.forEach(i => {
-      registerAsset(i[0], i[1]);
-    });
+    window.__MAPP_ASSETS__.forEach(register);
   }
 
   const mount = (window.__MAPP_ASSETS__ = []);
   mount.push = function (...items: any[]): number {
-    items.forEach(i => {
-      registerAsset(i[0], i[1]);
-    });
+    items.forEach(register);
     return 0;
   };
 }

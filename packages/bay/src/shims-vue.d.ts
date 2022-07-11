@@ -33,4 +33,9 @@ interface Window {
   __MAPPS__?: import('@wakeadmin/mapp/main').MicroApp[];
 
   __MAPP_BAY_MODEL__?: import('./BayModel').BayModel;
+
+  /**
+   * 外部注入的语言包
+   */
+  __MAPP_I18N__?: Record<string, string>;
 }

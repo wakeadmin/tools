@@ -6,3 +6,8 @@ registerBundles({
   tj: () => import('./th.tr'),
   en: () => import('./en.tr'),
 });
+
+// 外部语言包
+if (window.__MAPP_I18N__) {
+  registerBundles(window.__MAPP_I18N__);
+}
