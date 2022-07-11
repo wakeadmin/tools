@@ -14,7 +14,8 @@ import {
   FormInstance,
   FormRules,
 } from 'element-plus';
-import { DeleteBin } from '@wakeadmin/icons';
+import { DeleteBin, EditSquare } from '@wakeadmin/icons';
+import { clone } from '@wakeadmin/utils';
 
 import { useBayModel } from '@/hooks';
 
@@ -39,6 +40,12 @@ export const Debug = defineComponent({
         entry: '',
         activeRule: '',
       };
+    };
+
+    const handleEdit = (app: MicroApp) => {
+      adding.value = clone(app);
+
+      model.deleteLocalMapp(app);
     };
 
     const handleSaveAdd = async () => {
@@ -93,9 +100,16 @@ export const Debug = defineComponent({
                     <ElLink href={bayModel.generateLandingUrl({ type: 'app', name: i.name })} style="margin-left: 20px">
                       打开
                     </ElLink>
-                    <ElIcon class="debug__delete">
-                      <DeleteBin onClick={() => model.deleteLocalMapp(i)}></DeleteBin>
-                    </ElIcon>
+                    {removable && (
+                      <ElIcon class="debug__delete">
+                        <DeleteBin onClick={() => model.deleteLocalMapp(i)}></DeleteBin>
+                      </ElIcon>
+                    )}
+                    {removable && (
+                      <ElIcon class="debug__delete">
+                        <EditSquare onClick={() => handleEdit(i)}></EditSquare>
+                      </ElIcon>
+                    )}
                   </li>
                 );
               })}
