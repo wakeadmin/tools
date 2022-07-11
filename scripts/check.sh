@@ -11,7 +11,7 @@ node -v
 echo "开始规范化检查"
 
 npm i -g pnpm
-pnpm install
+pnpm install --no-frozen-lockfile
 
 # 构建
 pnpm run build

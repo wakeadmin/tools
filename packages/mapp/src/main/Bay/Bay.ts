@@ -1,7 +1,7 @@
 import { createApp, App } from 'vue';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import { EventEmitter, trimQueryAndHash } from '@wakeadmin/utils';
-import { registerMicroApps, start, RegistrableApp } from 'qiankun';
+import { registerMicroApps, start, RegistrableApp, prefetchApps } from 'qiankun';
 
 import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister, MicroApp } from '../../types';
 
@@ -100,9 +100,16 @@ export class Bay implements IBay {
     this.app.mount(root ?? DEFAULT_ROOT);
 
     // 启动 qiankun
-    start();
+    start({
+      // 关闭自动fetch，由开发者手动指定
+      prefetch: false,
+    });
 
     this.stared = true;
+  }
+
+  prefetch(apps: MicroApp[]): void {
+    prefetchApps(apps);
   }
 
   openError: IBay['openError'] = (...args) => {

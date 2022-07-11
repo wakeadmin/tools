@@ -298,6 +298,11 @@ export interface IBay {
   generateLandingUrl(data: Record<string, any>, addHost?: boolean): string;
 
   /**
+   * 预加载微应用
+   */
+  prefetch(apps: MicroApp[]): void;
+
+  /**
    * TODO: 其他方法
    */
 }

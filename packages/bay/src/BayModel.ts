@@ -8,7 +8,7 @@ import {
   watch,
   BaseModel,
 } from '@wakeadmin/framework';
-import type { IBay } from '@wakeadmin/mapp/main';
+import type { IBay, MicroApp } from '@wakeadmin/mapp/main';
 import type { I18nInstance } from '@wakeadmin/i18n';
 
 import { BayRepo } from './BayRepo';
@@ -105,7 +105,7 @@ export class BayModel extends BaseModel implements IBayModel {
    * 在后台菜单配置中定义了路由的微应用
    */
   @computed
-  get appsInMenus() {
+  get appsInMenus(): Set<MicroApp> {
     const entries = this.menu?.entries;
     const apps = this.bay.apps;
 
@@ -416,11 +416,22 @@ export class BayModel extends BaseModel implements IBayModel {
       this.setupQueue.flushResolve(this);
 
       console.info(`[bay] 基座已启动`, this);
+
+      // 开始预加载
+      this.prefetch();
     } catch (err) {
       console.error(`[bay] 基座启动异常`, err);
       this.status = BayStatus.ERROR;
       this.error = err as Error;
       this.emit('Event.bay.setupError', err as Error);
+    }
+  }
+
+  private prefetch() {
+    const list = Array.from(this.appsInMenus.values());
+    if (list.length) {
+      console.debug('[bay] 开始预加载微应用', list);
+      this.bay.prefetch(list);
     }
   }
 
