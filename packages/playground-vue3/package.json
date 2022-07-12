@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "build:docker": "node ./scripts/build-docker.js",
+    "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
     "@wakeadmin/bay": "workspace:^0.1.0",
