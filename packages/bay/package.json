@@ -19,7 +19,7 @@
     "postbuild:assets": "node ./scripts/post-build.js",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js",
-    "prebuild": "rimraf expose .tsbuildinfo",
+    "prebuild": "rimraf expose .tsBuildInfo",
     "build": "tsc -b ./tsconfig.expose.json",
     "type-check": "tsc --noEmit",
     "test": "jest"

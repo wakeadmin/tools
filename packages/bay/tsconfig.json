@@ -8,7 +8,7 @@
     "noUnusedLocals": true,
     "moduleResolution": "node",
     "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo",
+    "tsBuildInfoFile": ".tsBuildInfo",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

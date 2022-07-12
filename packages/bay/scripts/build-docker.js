@@ -22,6 +22,9 @@ const dockerfile = template(fs.readFileSync(path.join(__dirname, '../Dockerfile.
 
 fs.writeFileSync(path.join(workDir, 'Dockerfile'), dockerfile);
 
+// 退出登录，否则可能会报错
+ch.execSync(`docker logout`, { stdio: 'inherit' });
+
 ch.execSync(`docker build -t ${IMAGE_NAME} .`, {
   stdio: 'inherit',
 });
