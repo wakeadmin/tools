@@ -2,6 +2,7 @@
   "name": "test-helper-vue",
   "version": "0.1.0",
   "description": "跨版本 vue 测试辅助",
+  "private": true,
   "main": "dist/commonjs/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -12,7 +12,10 @@
     "index.d.ts",
     "index.js"
   ],
-  "keywords": [],
+  "keywords": [
+    "wakedata",
+    "wakedata-theme"
+  ],
   "author": "ivan-lee",
   "license": "MIT",
   "devDependencies": {

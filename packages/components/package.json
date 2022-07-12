@@ -1,7 +1,8 @@
 {
   "name": "@wakeadmin/components",
   "version": "0.1.0",
-  "description": "惟客云组件库",
+  "description": "惟客云组件库, TODO:",
+  "private": true,
   "main": "index.js",
   "scripts": {},
   "keywords": [],

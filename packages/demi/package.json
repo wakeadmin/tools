@@ -10,7 +10,7 @@
   "files": [
     "lib"
   ],
-  "author": "ivan",
+  "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
     "vue-demi": "latest"

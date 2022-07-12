@@ -5,6 +5,9 @@
   "module": "./dist/index.js",
   "main": "./dist/commonjs/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
     "prebuild": "rimraf dist .tsBuildInfo",

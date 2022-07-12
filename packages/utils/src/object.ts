@@ -1,3 +1,8 @@
+import omit from 'lodash/omit';
+import pick from 'lodash/pick';
+
+export { omit, pick };
+
 /**
  * 查看属性是否定义
  * @param target

@@ -36,10 +36,10 @@
   },
   "keywords": [],
   "author": "ivan",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@wakeadmin/demi": "workspace:0.1.0",
-    "lodash": "^4.17.21"
+    "@wakeadmin/utils": "workspace:0.1.0"
   },
   "jest": {
     "preset": "jest-preset-universe-vue"

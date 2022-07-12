@@ -1,5 +1,5 @@
 import { defineCustomElement, DefineComponent } from 'vue';
-import kebabCase from 'lodash/kebabCase';
+import { kebabCase } from '@wakeadmin/utils';
 
 import { IGNORE_PROPS } from './constants';
 import { CustomElements } from './type-utils';

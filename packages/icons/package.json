@@ -22,7 +22,7 @@
   },
   "keywords": [],
   "author": "ivan-lee",
-  "license": "ISC",
+  "license": "MIT",
   "jest": {
     "preset": "jest-preset-universe-vue"
   },

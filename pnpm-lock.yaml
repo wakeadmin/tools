@@ -142,44 +142,42 @@ importers:
       vue-i18n: ^9.1.10
       vue-router: ^4.0.16
     dependencies:
+      '@wakeadmin/mapp': link:../mapp
+    devDependencies:
+      '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_vue@3.2.37
+      '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6
+      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
+      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
       '@vueuse/core': 172.26.59.72+4873/@vueuse/core/8.7.5_vue@3.2.37
       '@wakeadmin/ce': link:../ce
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
       '@wakeadmin/i18n': link:../i18n
       '@wakeadmin/icons': link:../icons
-      '@wakeadmin/mapp': link:../mapp
       '@wakeadmin/theme': link:../theme
       '@wakeadmin/theme-wakedata': link:../theme-wakedata
       '@wakeadmin/utils': link:../utils
+      '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
       '@wakeadmin/vue-cli-plugin-i18n': link:../vue-cli-plugin-i18n
+      '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
       '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220616143
+      babel-preset-wakeadmin: link:../babel-preset-wakeadmin
       core-js: 172.26.59.72+4873/core-js/3.23.3
       element-plus: 172.26.59.72+4873/element-plus/2.2.8_vue@3.2.37
       normalize.css: 172.26.59.72+4873/normalize.css/8.0.1
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
+      sass: 172.26.59.72+4873/sass/1.53.0
+      sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-i18n: 172.26.59.72+4873/vue-i18n/9.1.10
       vue-router: 172.26.59.72+4873/vue-router/4.0.16
-    devDependencies:
-      '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.6_vue@3.2.37
-      '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.6
-      '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.6
-      '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.6_sass-loader@12.6.0
-      '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
-      '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
-      babel-preset-wakeadmin: link:../babel-preset-wakeadmin
-      sass: 172.26.59.72+4873/sass/1.53.0
-      sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
 
   packages/ce:
     specifiers:
       '@wakeadmin/h': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.0
-      lodash: ~4.17.21
     dependencies:
       '@wakeadmin/utils': link:../utils
-      lodash: 172.26.59.72+4873/lodash/4.17.21
     devDependencies:
       '@wakeadmin/h': link:../h
 
@@ -210,10 +208,10 @@ importers:
   packages/h:
     specifiers:
       '@wakeadmin/demi': workspace:0.1.0
-      lodash: ^4.17.21
+      '@wakeadmin/utils': workspace:0.1.0
     dependencies:
       '@wakeadmin/demi': link:../demi
-      lodash: 172.26.59.72+4873/lodash/4.17.21
+      '@wakeadmin/utils': link:../utils
 
   packages/i18n:
     specifiers:
@@ -2901,6 +2899,7 @@ packages:
       '@intlify/runtime': 172.26.59.72+4873/@intlify/runtime/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
       '@intlify/vue-devtools': 172.26.59.72+4873/@intlify/vue-devtools/9.1.10
+    dev: true
 
   172.26.59.72+4873/@intlify/devtools-if/9.1.10:
     resolution:
@@ -2914,6 +2913,7 @@ packages:
     engines: { node: '>= 10' }
     dependencies:
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
+    dev: true
 
   172.26.59.72+4873/@intlify/message-compiler/9.1.10:
     resolution:
@@ -2929,6 +2929,7 @@ packages:
       '@intlify/message-resolver': 172.26.59.72+4873/@intlify/message-resolver/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
       source-map: 172.26.59.72+4873/source-map/0.6.1
+    dev: true
 
   172.26.59.72+4873/@intlify/message-resolver/9.1.10:
     resolution:
@@ -2940,6 +2941,7 @@ packages:
     name: '@intlify/message-resolver'
     version: 9.1.10
     engines: { node: '>= 10' }
+    dev: true
 
   172.26.59.72+4873/@intlify/runtime/9.1.10:
     resolution:
@@ -2955,6 +2957,7 @@ packages:
       '@intlify/message-compiler': 172.26.59.72+4873/@intlify/message-compiler/9.1.10
       '@intlify/message-resolver': 172.26.59.72+4873/@intlify/message-resolver/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
+    dev: true
 
   172.26.59.72+4873/@intlify/shared/9.1.10:
     resolution:
@@ -2966,6 +2969,7 @@ packages:
     name: '@intlify/shared'
     version: 9.1.10
     engines: { node: '>= 10' }
+    dev: true
 
   172.26.59.72+4873/@intlify/vue-devtools/9.1.10:
     resolution:
@@ -2981,6 +2985,7 @@ packages:
       '@intlify/message-resolver': 172.26.59.72+4873/@intlify/message-resolver/9.1.10
       '@intlify/runtime': 172.26.59.72+4873/@intlify/runtime/9.1.10
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
+    dev: true
 
   172.26.59.72+4873/@istanbuljs/load-nyc-config/1.1.0:
     resolution:
@@ -3831,7 +3836,6 @@ packages:
       }
     name: '@types/big.js'
     version: 6.1.4
-    dev: false
 
   172.26.59.72+4873/@types/body-parser/1.19.2:
     resolution:
@@ -5933,7 +5937,6 @@ packages:
       '@vueuse/shared': 172.26.59.72+4873/@vueuse/shared/8.7.5_vue@3.2.37
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-demi: 172.26.59.72+4873/vue-demi/0.13.2
-    dev: false
 
   172.26.59.72+4873/@vueuse/metadata/8.7.5:
     resolution:
@@ -5987,7 +5990,6 @@ packages:
     dependencies:
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-demi: 172.26.59.72+4873/vue-demi/0.13.2
-    dev: false
 
   172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220711148:
     resolution:
@@ -6041,7 +6043,7 @@ packages:
       events: 172.26.59.72+4873/events/3.3.0
       polished: 172.26.59.72+4873/polished/4.2.2
       query-string: 172.26.59.72+4873/query-string/7.1.1
-    dev: false
+    dev: true
 
   172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220711148:
     resolution:
@@ -6076,7 +6078,7 @@ packages:
       '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220627147
     transitivePeerDependencies:
       - lodash
-    dev: false
+    dev: true
 
   172.26.59.72+4873/@webassemblyjs/ast/1.11.1:
     resolution:
@@ -7277,7 +7279,6 @@ packages:
       }
     name: big.js
     version: 6.2.0
-    dev: false
 
   172.26.59.72+4873/binary-extensions/2.2.0:
     resolution:
@@ -8216,7 +8217,7 @@ packages:
       lodash: ^4.17.20
       marko: ^3.14.4
       mote: ^0.2.0
-      mustache: ^3.0.0
+      mustache: ^4.0.1
       nunjucks: ^3.2.2
       plates: ~0.4.11
       pug: ^3.0.0
@@ -9561,7 +9562,6 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: false
 
   172.26.59.72+4873/element-ui/2.15.9:
     resolution:
@@ -10898,7 +10898,6 @@ packages:
     name: filter-obj
     version: 1.1.0
     engines: { node: '>=0.10.0' }
-    dev: false
 
   172.26.59.72+4873/finalhandler/1.2.0:
     resolution:
@@ -14914,7 +14913,7 @@ packages:
       }
     name: normalize.css
     version: 8.0.1
-    dev: false
+    dev: true
 
   172.26.59.72+4873/npm-run-path/2.0.2:
     resolution:
@@ -15613,7 +15612,6 @@ packages:
     engines: { node: '>=10' }
     dependencies:
       '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.6
-    dev: false
 
   172.26.59.72+4873/portfinder/1.0.28:
     resolution:
@@ -16589,7 +16587,6 @@ packages:
       filter-obj: 172.26.59.72+4873/filter-obj/1.1.0
       split-on-first: 172.26.59.72+4873/split-on-first/1.1.0
       strict-uri-encode: 172.26.59.72+4873/strict-uri-encode/2.0.0
-    dev: false
 
   172.26.59.72+4873/queue-microtask/1.2.3:
     resolution:
@@ -17865,7 +17862,6 @@ packages:
     name: split-on-first
     version: 1.1.0
     engines: { node: '>=6' }
-    dev: false
 
   172.26.59.72+4873/sprintf-js/1.0.3:
     resolution:
@@ -17962,7 +17958,6 @@ packages:
     name: strict-uri-encode
     version: 2.0.0
     engines: { node: '>=4' }
-    dev: false
 
   172.26.59.72+4873/string-length/4.0.2:
     resolution:
@@ -19234,6 +19229,7 @@ packages:
       '@intlify/shared': 172.26.59.72+4873/@intlify/shared/9.1.10
       '@intlify/vue-devtools': 172.26.59.72+4873/@intlify/vue-devtools/9.1.10
       '@vue/devtools-api': 172.26.59.72+4873/@vue/devtools-api/6.2.0
+    dev: true
 
   172.26.59.72+4873/vue-loader/15.10.0_j6gslqd25mkclhmq3adtz7loge:
     resolution:

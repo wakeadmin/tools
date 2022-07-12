@@ -5,6 +5,9 @@
   "sideEffects": false,
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
     "prebuild": "rimraf dist .tsBuildInfo",
@@ -19,8 +22,7 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "@wakeadmin/utils": "workspace:^0.1.0",
-    "lodash": "~4.17.21"
+    "@wakeadmin/utils": "workspace:^0.1.0"
   },
   "devDependencies": {
     "@wakeadmin/h": "workspace:^0.1.0"

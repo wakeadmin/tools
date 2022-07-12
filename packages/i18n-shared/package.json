@@ -18,7 +18,7 @@
     "dist"
   ],
   "keywords": [],
-  "author": "",
+  "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
     "@wakeadmin/utils": "workspace:^0.1.0"

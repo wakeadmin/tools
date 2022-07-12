@@ -1,6 +1,5 @@
 import { getCurrentInstance, isRef } from '@wakeadmin/demi';
-import kebabCase from 'lodash/kebabCase';
-import upperFirst from 'lodash/upperFirst';
+import { kebabCase, upperFirst } from '@wakeadmin/utils';
 
 import { hasProp, identity, isCamelCase, addHiddenProp } from '../utils';
 

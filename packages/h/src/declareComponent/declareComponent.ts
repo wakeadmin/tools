@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/array-type */
 import { defineComponent as vueDefineComponent, isVue2, VNodeChild, getCurrentInstance } from '@wakeadmin/demi';
-import omit from 'lodash/omit';
+import { omit } from '@wakeadmin/utils';
 
 import { DefineComponent, SimpleComponentOptions } from './types';
 import { vue2Expose, findEventHandler, vue3EventNameCapitalized } from './process';
