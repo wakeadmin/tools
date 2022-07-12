@@ -14,3 +14,4 @@ wk-docs-out
 wk-docs
 .tsBuildInfo*
 *.log
+.pnpm-store/
