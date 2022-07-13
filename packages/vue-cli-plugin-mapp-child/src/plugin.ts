@@ -49,11 +49,6 @@ export interface PluginOptions {
   publicPath?: string;
 
   /**
-   * 微应用导出的 library 类型， 默认为 umd
-   */
-  libraryType?: string;
-
-  /**
    * 从基座中共享的依赖，必须精确匹配
    */
   shared?: SharedDeclaration[];
@@ -92,7 +87,6 @@ export const plugin: ServicePlugin = (api, options) => {
   const _name = camelCase(pluginOptions.name || getNameFromPackageJson(pkg));
   const _CDNDomain = pluginOptions.CDNDomain ?? (terminalMode ? "<?= cdnDomain ? '//' + cdnDomain : '' ?>" : undefined);
   const _baseUrl = pluginOptions.baseUrl ?? (terminalMode ? '<?= removeTrailingSlash(base) ?>' : undefined) ?? '/';
-  const _libraryType = pluginOptions.libraryType || 'umd';
   const _shared = pluginOptions.shared || [];
   const _publicPath = pluginOptions.publicPath || 'auto';
 
@@ -154,7 +148,6 @@ module.exports = {
     ['terminalMode', terminalMode],
     ['name', _name],
     ['publicPath', publicPath],
-    ['libraryType', _libraryType],
     ['port', port],
     ['assetsDir', assetsDir],
     ['outputDir', outputDir],
@@ -172,12 +165,6 @@ module.exports = {
   // 合并 webpack 配置，如果用户在 vue.config.js 定义了，会以用户的为准
   api.configureWebpack(() => {
     return {
-      output: {
-        library: {
-          type: _libraryType,
-          name: _name,
-        },
-      },
       externals,
       plugins: [new WebpackMAPPJsonPlugin(mapp)],
     };

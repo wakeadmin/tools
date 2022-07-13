@@ -6,39 +6,34 @@ import App from './App.vue';
 import { routes } from './router';
 import store from './store';
 
-export async function bootstrap() {
-  console.log('bootstrap vue3');
-}
-
 let app: TApp;
 
-export async function mount(props?: { container: HTMLElement }) {
-  console.log('mount vue3', props);
+Bay.createMicroApp({
+  async bootstrap() {
+    console.log('bootstrap vue3');
+  },
+  async mount(container, props) {
+    console.log('mount vue3', props);
 
-  const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
-  });
+    const router = createRouter({
+      history: createWebHashHistory(),
+      routes,
+    });
 
-  app = createApp(App).use(store).use(router).use(Bay);
+    app = createApp(App).use(store).use(router).use(Bay);
 
-  app.mount(props?.container?.querySelector('#app') ?? '#app');
-  // @ts-expect-error
-  window.top.__vue3_app__ = app;
-}
+    app.mount(container?.querySelector('#app') ?? '#app');
+    // @ts-expect-error
+    window.top.__vue3_app__ = app;
+  },
 
-export async function unmount() {
-  console.log('unmount vue3');
+  async unmount() {
+    console.log('unmount vue3');
 
-  app.unmount();
-}
+    app.unmount();
+  },
 
-export function update() {
-  console.log('update vue3');
-}
-
-if (!Bay.isMicroApp) {
-  bootstrap();
-
-  mount();
-}
+  async update() {
+    console.log('update vue3');
+  },
+});
