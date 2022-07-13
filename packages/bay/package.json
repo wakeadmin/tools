@@ -14,9 +14,8 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "prebuild:assets": "rimraf dist docker",
+    "prebuild:assets": "rimraf dist",
     "build:assets": "vue-cli-service build",
-    "postbuild:assets": "node ./scripts/post-build.js",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js",
     "prebuild": "rimraf expose .tsBuildInfo",

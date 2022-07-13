@@ -1,0 +1,8 @@
+ARG HOST_PREFIX
+ARG VERSION
+FROM ${HOST_PREFIX}wkfe/mapp
+
+WORKDIR /data
+COPY ./dist  /data/source/__entry__
+
+ENV MAPP_VERSION=${VERSION}
