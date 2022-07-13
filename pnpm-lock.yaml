@@ -163,7 +163,7 @@ importers:
       '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
       '@wakeadmin/vue-cli-plugin-i18n': link:../vue-cli-plugin-i18n
       '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
-      '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220711148
+      '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220713149
       babel-preset-wakeadmin: link:../babel-preset-wakeadmin
       core-js: 172.26.59.72+4873/core-js/3.23.3
       element-plus: 172.26.59.72+4873/element-plus/2.2.8_vue@3.2.37
@@ -204,7 +204,7 @@ importers:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
       '@wakeadmin/utils': link:../utils
-      '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220711148
+      '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220713149
     devDependencies:
       test-helper-vue: link:../test-helper-vue
 
@@ -389,6 +389,23 @@ importers:
       sass: 172.26.59.72+4873/sass/1.53.0
       sass-loader: 172.26.59.72+4873/sass-loader/12.6.0_sass@1.53.0
 
+  packages/playground-vue3-vite:
+    specifiers:
+      '@vitejs/plugin-vue': ^2.3.3
+      '@wakeadmin/bay': workspace:^0.1.0
+      typescript: ^4.5.4
+      vite: ^2.9.9
+      vue: ^3.2.25
+      vue-tsc: ^0.34.7
+    dependencies:
+      '@wakeadmin/bay': link:../bay
+      vue: 172.26.59.72+4873/vue/3.2.37
+    devDependencies:
+      '@vitejs/plugin-vue': 172.26.59.72+4873/@vitejs/plugin-vue/2.3.3_vite@2.9.14
+      typescript: 172.26.59.72+4873/typescript/4.7.4
+      vite: 172.26.59.72+4873/vite/2.9.14
+      vue-tsc: 172.26.59.72+4873/vue-tsc/0.34.17_typescript@4.7.4
+
   packages/test-helper-vue:
     specifiers:
       '@wakeadmin/demi': workspace:0.1.0
@@ -420,7 +437,7 @@ importers:
     specifiers:
       '@wakeapp/utils': latest
     dependencies:
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220711148
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220713149
 
   packages/vue-cli-plugin-ce:
     specifiers:
@@ -3619,6 +3636,56 @@ packages:
       eslint-visitor-keys: 172.26.59.72+4873/eslint-visitor-keys/3.3.0
     dev: true
 
+  172.26.59.72+4873/@vitejs/plugin-vue/2.3.3_vite@2.9.14:
+    resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vitejs%2fplugin-vue/-/plugin-vue-2.3.3.tgz}
+    id: 172.26.59.72+4873/@vitejs/plugin-vue/2.3.3
+    name: '@vitejs/plugin-vue'
+    version: 2.3.3
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      vite: ^2.5.10
+    dependencies:
+      vite: 172.26.59.72+4873/vite/2.9.14
+    dev: true
+
+  172.26.59.72+4873/@volar/code-gen/0.34.17:
+    resolution: {integrity: sha512-rHR7BA71BJ/4S7xUOPMPiB7uk6iU9oTWpEMZxFi5VGC9iJmDncE82WzU5iYpcbOBCVHsOjMh0+5CGMgdO6SaPA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@volar%2fcode-gen/-/code-gen-0.34.17.tgz}
+    name: '@volar/code-gen'
+    version: 0.34.17
+    dependencies:
+      '@volar/source-map': 172.26.59.72+4873/@volar/source-map/0.34.17
+    dev: true
+
+  172.26.59.72+4873/@volar/source-map/0.34.17:
+    resolution: {integrity: sha512-3yn1IMXJGGWB/G817/VFlFMi8oh5pmE7VzUqvgMZMrppaZpKj6/juvJIEiXNxRsgWc0RxIO8OSp4htdPUg1Raw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@volar%2fsource-map/-/source-map-0.34.17.tgz}
+    name: '@volar/source-map'
+    version: 0.34.17
+    dev: true
+
+  172.26.59.72+4873/@volar/vue-code-gen/0.34.17:
+    resolution: {integrity: sha512-17pzcK29fyFWUc+C82J3JYSnA+jy3QNrIldb9kPaP9Itbik05ZjEIyEue9FjhgIAuHeYSn4LDM5s6nGjxyfhsQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@volar%2fvue-code-gen/-/vue-code-gen-0.34.17.tgz}
+    name: '@volar/vue-code-gen'
+    version: 0.34.17
+    dependencies:
+      '@volar/code-gen': 172.26.59.72+4873/@volar/code-gen/0.34.17
+      '@volar/source-map': 172.26.59.72+4873/@volar/source-map/0.34.17
+      '@vue/compiler-core': 172.26.59.72+4873/@vue/compiler-core/3.2.37
+      '@vue/compiler-dom': 172.26.59.72+4873/@vue/compiler-dom/3.2.37
+      '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
+    dev: true
+
+  172.26.59.72+4873/@volar/vue-typescript/0.34.17:
+    resolution: {integrity: sha512-U0YSVIBPRWVPmgJHNa4nrfq88+oS+tmyZNxmnfajIw9A/GOGZQiKXHC0k09SVvbYXlsjgJ6NIjhm9NuAhGRQjg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@volar%2fvue-typescript/-/vue-typescript-0.34.17.tgz}
+    name: '@volar/vue-typescript'
+    version: 0.34.17
+    dependencies:
+      '@volar/code-gen': 172.26.59.72+4873/@volar/code-gen/0.34.17
+      '@volar/source-map': 172.26.59.72+4873/@volar/source-map/0.34.17
+      '@volar/vue-code-gen': 172.26.59.72+4873/@volar/vue-code-gen/0.34.17
+      '@vue/compiler-sfc': 172.26.59.72+4873/@vue/compiler-sfc/3.2.37
+      '@vue/reactivity': 172.26.59.72+4873/@vue/reactivity/3.2.37
+    dev: true
+
   172.26.59.72+4873/@vue/babel-helper-vue-jsx-merge-props/1.2.1:
     resolution: {integrity: sha1-MWJKelBfsU2h1YAjclpMXycOaoE=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2fbabel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.2.1.tgz}
     name: '@vue/babel-helper-vue-jsx-merge-props'
@@ -4766,13 +4833,13 @@ packages:
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-demi: 172.26.59.72+4873/vue-demi/0.13.2
 
-  172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220711148:
-    resolution: {integrity: sha512-VIfm1VNlp5Z1ojWKMs94RZ8rQ6pOVubNfOiGlQlSl4Er/bPDGbc1mqN7AyeDRE0R/nbiVi2J5/6g5v3e07gzaQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@wakeapp%2fframework-core/-/framework-core-0.1.0-daily20220711148.tgz}
+  172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20220713149:
+    resolution: {integrity: sha512-csZxI+Gxx7vCMsideudGHVYZbwjoFzeORWcoLFqdTpS9DFZSmyhhn0CZrfA0UYH7L5zzR/EZYtnEG+0FM4s4/Q==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@wakeapp%2fframework-core/-/framework-core-0.1.0-daily20220713149.tgz}
     name: '@wakeapp/framework-core'
-    version: 0.1.0-daily20220711148
+    version: 0.1.0-daily20220713149
     dependencies:
       '@wakeapp/inversify': 172.26.59.72+4873/@wakeapp/inversify/6.1.0_tslib@2.4.0
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220711148
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220713149
       reflect-metadata: 172.26.59.72+4873/reflect-metadata/0.1.13
       tslib: 172.26.59.72+4873/tslib/2.4.0
     transitivePeerDependencies:
@@ -4790,10 +4857,10 @@ packages:
       tslib: 172.26.59.72+4873/tslib/2.4.0
     dev: false
 
-  172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220711148:
-    resolution: {integrity: sha512-dfVOaO9lH2gTrhmSY0nVDBE7AVWpRAdOespanM2hE75WS/ABxZTc95MuzbUbS6lX5bBaq5g6aWWk9YZzz61FDQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@wakeapp%2futils/-/utils-0.1.0-daily20220711148.tgz}
+  172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220713149:
+    resolution: {integrity: sha512-Rh7E/sWn65gIcB06IveXiFyTQmNOP6+JeQ2zpddp/E7ylvEJR+hErpK/CSOiFHixMdPf2thNS8DHhhCX8HHOFQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@wakeapp%2futils/-/utils-0.1.0-daily20220713149.tgz}
     name: '@wakeapp/utils'
-    version: 0.1.0-daily20220711148
+    version: 0.1.0-daily20220713149
     peerDependencies:
       lodash: 4.*
     dependencies:
@@ -4804,12 +4871,12 @@ packages:
       polished: 172.26.59.72+4873/polished/4.2.2
       query-string: 172.26.59.72+4873/query-string/7.1.1
 
-  172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220711148:
-    resolution: {integrity: sha512-57TyCwYAgo0vZOg6GuUx/sHEAd1ZO+oYd5RMNJ9U+qS29YnCE2xdFTKHidbkPhHbSGSbNGG2vL8tgCx6IFyU+A==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@wakeapp%2fwakedata-backend/-/wakedata-backend-0.1.0-daily20220711148.tgz}
+  172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20220713149:
+    resolution: {integrity: sha512-S/ZcpzpOvlPtk8dHIAX63nq2VvNxhygATkV34E8xIKXVsyPELOFG9/dqYLgzDubCZtG6+BAvGScFt7lQx37AEA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@wakeapp%2fwakedata-backend/-/wakedata-backend-0.1.0-daily20220713149.tgz}
     name: '@wakeapp/wakedata-backend'
-    version: 0.1.0-daily20220711148
+    version: 0.1.0-daily20220713149
     dependencies:
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220711148
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20220713149
     transitivePeerDependencies:
       - lodash
     dev: true
@@ -6213,7 +6280,7 @@ packages:
       lodash: ^4.17.20
       marko: ^3.14.4
       mote: ^0.2.0
-      mustache: ^3.0.0
+      mustache: ^4.0.1
       nunjucks: ^3.2.2
       plates: ~0.4.11
       pug: ^3.0.0
@@ -7324,6 +7391,256 @@ packages:
       is-callable: 172.26.59.72+4873/is-callable/1.2.4
       is-date-object: 172.26.59.72+4873/is-date-object/1.0.5
       is-symbol: 172.26.59.72+4873/is-symbol/1.0.4
+    dev: true
+
+  172.26.59.72+4873/esbuild-android-64/0.14.49:
+    resolution: {integrity: sha512-vYsdOTD+yi+kquhBiFWl3tyxnj2qZJsl4tAqwhT90ktUdnyTizgle7TjNx6Ar1bN7wcwWqZ9QInfdk2WVagSww==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-android-64/-/esbuild-android-64-0.14.49.tgz}
+    name: esbuild-android-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-android-arm64/0.14.49:
+    resolution: {integrity: sha512-g2HGr/hjOXCgSsvQZ1nK4nW/ei8JUx04Li74qub9qWrStlysaVmadRyTVuW32FGIpLQyc5sUjjZopj49eGGM2g==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-android-arm64/-/esbuild-android-arm64-0.14.49.tgz}
+    name: esbuild-android-arm64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-darwin-64/0.14.49:
+    resolution: {integrity: sha512-3rvqnBCtX9ywso5fCHixt2GBCUsogNp9DjGmvbBohh31Ces34BVzFltMSxJpacNki96+WIcX5s/vum+ckXiLYg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-darwin-64/-/esbuild-darwin-64-0.14.49.tgz}
+    name: esbuild-darwin-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-darwin-arm64/0.14.49:
+    resolution: {integrity: sha512-XMaqDxO846srnGlUSJnwbijV29MTKUATmOLyQSfswbK/2X5Uv28M9tTLUJcKKxzoo9lnkYPsx2o8EJcTYwCs/A==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.49.tgz}
+    name: esbuild-darwin-arm64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-freebsd-64/0.14.49:
+    resolution: {integrity: sha512-NJ5Q6AjV879mOHFri+5lZLTp5XsO2hQ+KSJYLbfY9DgCu8s6/Zl2prWXVANYTeCDLlrIlNNYw8y34xqyLDKOmQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-freebsd-64/-/esbuild-freebsd-64-0.14.49.tgz}
+    name: esbuild-freebsd-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-freebsd-arm64/0.14.49:
+    resolution: {integrity: sha512-lFLtgXnAc3eXYqj5koPlBZvEbBSOSUbWO3gyY/0+4lBdRqELyz4bAuamHvmvHW5swJYL7kngzIZw6kdu25KGOA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-freebsd-arm64/-/esbuild-freebsd-arm64-0.14.49.tgz}
+    name: esbuild-freebsd-arm64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-32/0.14.49:
+    resolution: {integrity: sha512-zTTH4gr2Kb8u4QcOpTDVn7Z8q7QEIvFl/+vHrI3cF6XOJS7iEI1FWslTo3uofB2+mn6sIJEQD9PrNZKoAAMDiA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-32/-/esbuild-linux-32-0.14.49.tgz}
+    name: esbuild-linux-32
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [ia32]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-64/0.14.49:
+    resolution: {integrity: sha512-hYmzRIDzFfLrB5c1SknkxzM8LdEUOusp6M2TnuQZJLRtxTgyPnZZVtyMeCLki0wKgYPXkFsAVhi8vzo2mBNeTg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-64/-/esbuild-linux-64-0.14.49.tgz}
+    name: esbuild-linux-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-arm/0.14.49:
+    resolution: {integrity: sha512-iE3e+ZVv1Qz1Sy0gifIsarJMQ89Rpm9mtLSRtG3AH0FPgAzQ5Z5oU6vYzhc/3gSPi2UxdCOfRhw2onXuFw/0lg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-arm/-/esbuild-linux-arm-0.14.49.tgz}
+    name: esbuild-linux-arm
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-arm64/0.14.49:
+    resolution: {integrity: sha512-KLQ+WpeuY+7bxukxLz5VgkAAVQxUv67Ft4DmHIPIW+2w3ObBPQhqNoeQUHxopoW/aiOn3m99NSmSV+bs4BSsdA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-arm64/-/esbuild-linux-arm64-0.14.49.tgz}
+    name: esbuild-linux-arm64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-mips64le/0.14.49:
+    resolution: {integrity: sha512-n+rGODfm8RSum5pFIqFQVQpYBw+AztL8s6o9kfx7tjfK0yIGF6tm5HlG6aRjodiiKkH2xAiIM+U4xtQVZYU4rA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-mips64le/-/esbuild-linux-mips64le-0.14.49.tgz}
+    name: esbuild-linux-mips64le
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [mips64el]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-ppc64le/0.14.49:
+    resolution: {integrity: sha512-WP9zR4HX6iCBmMFH+XHHng2LmdoIeUmBpL4aL2TR8ruzXyT4dWrJ5BSbT8iNo6THN8lod6GOmYDLq/dgZLalGw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-ppc64le/-/esbuild-linux-ppc64le-0.14.49.tgz}
+    name: esbuild-linux-ppc64le
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [ppc64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-riscv64/0.14.49:
+    resolution: {integrity: sha512-h66ORBz+Dg+1KgLvzTVQEA1LX4XBd1SK0Fgbhhw4akpG/YkN8pS6OzYI/7SGENiN6ao5hETRDSkVcvU9NRtkMQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-riscv64/-/esbuild-linux-riscv64-0.14.49.tgz}
+    name: esbuild-linux-riscv64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [riscv64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-linux-s390x/0.14.49:
+    resolution: {integrity: sha512-DhrUoFVWD+XmKO1y7e4kNCqQHPs6twz6VV6Uezl/XHYGzM60rBewBF5jlZjG0nCk5W/Xy6y1xWeopkrhFFM0sQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-linux-s390x/-/esbuild-linux-s390x-0.14.49.tgz}
+    name: esbuild-linux-s390x
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [s390x]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-netbsd-64/0.14.49:
+    resolution: {integrity: sha512-BXaUwFOfCy2T+hABtiPUIpWjAeWK9P8O41gR4Pg73hpzoygVGnj0nI3YK4SJhe52ELgtdgWP/ckIkbn2XaTxjQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-netbsd-64/-/esbuild-netbsd-64-0.14.49.tgz}
+    name: esbuild-netbsd-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [netbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-openbsd-64/0.14.49:
+    resolution: {integrity: sha512-lP06UQeLDGmVPw9Rg437Btu6J9/BmyhdoefnQ4gDEJTtJvKtQaUcOQrhjTq455ouZN4EHFH1h28WOJVANK41kA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-openbsd-64/-/esbuild-openbsd-64-0.14.49.tgz}
+    name: esbuild-openbsd-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [openbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-sunos-64/0.14.49:
+    resolution: {integrity: sha512-4c8Zowp+V3zIWje329BeLbGh6XI9c/rqARNaj5yPHdC61pHI9UNdDxT3rePPJeWcEZVKjkiAS6AP6kiITp7FSw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-sunos-64/-/esbuild-sunos-64-0.14.49.tgz}
+    name: esbuild-sunos-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [sunos]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-windows-32/0.14.49:
+    resolution: {integrity: sha512-q7Rb+J9yHTeKr9QTPDYkqfkEj8/kcKz9lOabDuvEXpXuIcosWCJgo5Z7h/L4r7rbtTH4a8U2FGKb6s1eeOHmJA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-windows-32/-/esbuild-windows-32-0.14.49.tgz}
+    name: esbuild-windows-32
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-windows-64/0.14.49:
+    resolution: {integrity: sha512-+Cme7Ongv0UIUTniPqfTX6mJ8Deo7VXw9xN0yJEN1lQMHDppTNmKwAM3oGbD/Vqff+07K2gN0WfNkMohmG+dVw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-windows-64/-/esbuild-windows-64-0.14.49.tgz}
+    name: esbuild-windows-64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild-windows-arm64/0.14.49:
+    resolution: {integrity: sha512-v+HYNAXzuANrCbbLFJ5nmO3m5y2PGZWLe3uloAkLt87aXiO2mZr3BTmacZdjwNkNEHuH3bNtN8cak+mzVjVPfA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild-windows-arm64/-/esbuild-windows-arm64-0.14.49.tgz}
+    name: esbuild-windows-arm64
+    version: 0.14.49
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  172.26.59.72+4873/esbuild/0.14.49:
+    resolution: {integrity: sha512-/TlVHhOaq7Yz8N1OJrjqM3Auzo5wjvHFLk+T8pIue+fhnhIMpfAzsG6PLVMbFveVxqD2WOp3QHei+52IMUNmCw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/esbuild/-/esbuild-0.14.49.tgz}
+    name: esbuild
+    version: 0.14.49
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      esbuild-android-64: 172.26.59.72+4873/esbuild-android-64/0.14.49
+      esbuild-android-arm64: 172.26.59.72+4873/esbuild-android-arm64/0.14.49
+      esbuild-darwin-64: 172.26.59.72+4873/esbuild-darwin-64/0.14.49
+      esbuild-darwin-arm64: 172.26.59.72+4873/esbuild-darwin-arm64/0.14.49
+      esbuild-freebsd-64: 172.26.59.72+4873/esbuild-freebsd-64/0.14.49
+      esbuild-freebsd-arm64: 172.26.59.72+4873/esbuild-freebsd-arm64/0.14.49
+      esbuild-linux-32: 172.26.59.72+4873/esbuild-linux-32/0.14.49
+      esbuild-linux-64: 172.26.59.72+4873/esbuild-linux-64/0.14.49
+      esbuild-linux-arm: 172.26.59.72+4873/esbuild-linux-arm/0.14.49
+      esbuild-linux-arm64: 172.26.59.72+4873/esbuild-linux-arm64/0.14.49
+      esbuild-linux-mips64le: 172.26.59.72+4873/esbuild-linux-mips64le/0.14.49
+      esbuild-linux-ppc64le: 172.26.59.72+4873/esbuild-linux-ppc64le/0.14.49
+      esbuild-linux-riscv64: 172.26.59.72+4873/esbuild-linux-riscv64/0.14.49
+      esbuild-linux-s390x: 172.26.59.72+4873/esbuild-linux-s390x/0.14.49
+      esbuild-netbsd-64: 172.26.59.72+4873/esbuild-netbsd-64/0.14.49
+      esbuild-openbsd-64: 172.26.59.72+4873/esbuild-openbsd-64/0.14.49
+      esbuild-sunos-64: 172.26.59.72+4873/esbuild-sunos-64/0.14.49
+      esbuild-windows-32: 172.26.59.72+4873/esbuild-windows-32/0.14.49
+      esbuild-windows-64: 172.26.59.72+4873/esbuild-windows-64/0.14.49
+      esbuild-windows-arm64: 172.26.59.72+4873/esbuild-windows-arm64/0.14.49
     dev: true
 
   172.26.59.72+4873/escalade/3.1.1:
@@ -12426,6 +12743,16 @@ packages:
       glob: 172.26.59.72+4873/glob/7.2.3
     dev: true
 
+  172.26.59.72+4873/rollup/2.76.0:
+    resolution: {integrity: sha512-9jwRIEY1jOzKLj3nsY/yot41r19ITdQrhs+q3ggNWhr9TQgduHqANvPpS32RNpzGklJu3G1AJfvlZLi/6wFgWA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/rollup/-/rollup-2.76.0.tgz}
+    name: rollup
+    version: 2.76.0
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 172.26.59.72+4873/fsevents/2.3.2
+    dev: true
+
   172.26.59.72+4873/run-async/2.4.1:
     resolution: {integrity: sha1-hEDsz5nqPnC9QJ1JqriOEMGJpFU=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/run-async/-/run-async-2.4.1.tgz}
     name: run-async
@@ -13791,6 +14118,32 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
+  172.26.59.72+4873/vite/2.9.14:
+    resolution: {integrity: sha512-P/UCjSpSMcE54r4mPak55hWAZPlyfS369svib/gpmz8/01L822lMPOJ/RYW6tLCe1RPvMvOsJ17erf55bKp4Hw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vite/-/vite-2.9.14.tgz}
+    name: vite
+    version: 2.9.14
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+    dependencies:
+      esbuild: 172.26.59.72+4873/esbuild/0.14.49
+      postcss: 172.26.59.72+4873/postcss/8.4.14
+      resolve: 172.26.59.72+4873/resolve/1.22.1
+      rollup: 172.26.59.72+4873/rollup/2.76.0
+    optionalDependencies:
+      fsevents: 172.26.59.72+4873/fsevents/2.3.2
+    dev: true
+
   172.26.59.72+4873/vue-demi/0.13.2:
     resolution: {integrity: sha512-41ukrclEbMddAyP7PvxMSYqnOSzPV6r7GNnyTSKSCNTaz19GehxmTiXyP9kwHSUv2+Dr6hHqiUiF7L1VAw2KdQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-demi/-/vue-demi-0.13.2.tgz}
     name: vue-demi
@@ -14085,6 +14438,19 @@ packages:
     resolution: {integrity: sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz}
     name: vue-template-es2015-compiler
     version: 1.9.1
+    dev: true
+
+  172.26.59.72+4873/vue-tsc/0.34.17_typescript@4.7.4:
+    resolution: {integrity: sha512-jzUXky44ZLHC4daaJag7FQr3idlPYN719/K1eObGljz5KaS2UnVGTU/XSYCd7d6ampYYg4OsyalbHyJIxV0aEQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-tsc/-/vue-tsc-0.34.17.tgz}
+    id: 172.26.59.72+4873/vue-tsc/0.34.17
+    name: vue-tsc
+    version: 0.34.17
+    hasBin: true
+    peerDependencies:
+      typescript: '*'
+    dependencies:
+      '@volar/vue-typescript': 172.26.59.72+4873/@volar/vue-typescript/0.34.17
+      typescript: 172.26.59.72+4873/typescript/4.7.4
     dev: true
 
   172.26.59.72+4873/vue/2.6.14:
