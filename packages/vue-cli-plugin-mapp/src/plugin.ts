@@ -16,13 +16,22 @@ import { PackageJSONLike, SharedDeclaration, getNameFromPackageJson, generateSha
  */
 export interface PluginOptions {
   /**
+   * 是否在微前端运行容器下运行。微前端运行容器支持模板
+   * 默认为 true
+   */
+  terminalMode?: boolean;
+
+  /**
    * CDN 域名，如果静态资源需要由 CDN 分发，则需要配置此项
    * CDN 域名需要自己加上 https:// 或者 // 前缀，本插件不会处理
+   * 如果开启了 terminalMode, CDNDomain 默认为 "<?= cdnDomain ? '//' + cdnDomain : '' ?>"
    */
   CDNDomain?: string;
 
   /**
    * 主应用基础路径，默认为 '/' ,  你可以在程序中通过 process.env.MAPP_BASE_URL 获取到该路径
+   *
+   * 如果开启了 terminalMode, baseUrl 默认为 "<?= removeTrailingSlash(base) ?>"
    */
   baseUrl?: string;
 
@@ -44,30 +53,15 @@ const PLUGIN_NAME = pluginPkg.name;
  */
 export const plugin: ServicePlugin = (api, options) => {
   const isProduction = process.env.NODE_ENV === 'production';
-  const pluginOptions = (options.pluginOptions as any)?.[PLUGIN_NAME] as PluginOptions | undefined;
-
-  if (pluginOptions == null) {
-    throw new Error(`[${PLUGIN_NAME}] 配置未找到，请按照以下方法添加配置:
-
-\`\`\`
-// vue.config.js
-const { defineMapp } = require('@wakeadmin/vue-cli-plugin-mapp');
-
-module.exports = defineConfig({
-  pluginOptions: {
-    ...defineMapp({/* 配置参数 */})
-  }
-})
-\`\`\`
-    `);
-  }
+  const pluginOptions = ((options.pluginOptions as any)?.[PLUGIN_NAME] ?? {}) as PluginOptions;
 
   const pkgPath = api.resolve('package.json');
   const context = api.service.context;
   const pkg = JSON.parse(fs.readFileSync(pkgPath).toString()) as PackageJSONLike;
 
-  const _CDNDomain = pluginOptions.CDNDomain;
-  const _baseUrl = pluginOptions.baseUrl ?? '/';
+  const terminalMode = (pluginOptions.terminalMode ?? true) && isProduction; // 生产环境才起作用
+  const _CDNDomain = pluginOptions.CDNDomain ?? (terminalMode ? "<?= cdnDomain ? '//' + cdnDomain : '' ?>" : undefined);
+  const _baseUrl = pluginOptions.baseUrl ?? (terminalMode ? '<?= removeTrailingSlash(base) ?>' : undefined) ?? '/';
   const _shared = pluginOptions.shared ?? [];
   const _publicPath = pluginOptions.publicPath ?? 'auto';
 
@@ -112,6 +106,7 @@ module.exports = {
 
   table.push(
     ['mode', '主应用'],
+    ['terminalMode', terminalMode],
     ['publicPath', publicPath],
     ['baseUrl', `${_baseUrl}, 应用内可以通过 process.env.MAPP_BASE_URL 获取`],
     ['assetsDir', assetsDir],

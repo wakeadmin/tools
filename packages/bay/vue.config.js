@@ -1,22 +1,12 @@
 /* eslint-disable import/no-commonjs */
 const { defineConfig } = require('@vue/cli-service');
 const { defineCE } = require('@wakeadmin/vue-cli-plugin-ce');
-const { defineMapp } = require('@wakeadmin/vue-cli-plugin-mapp');
 
 module.exports = defineConfig({
   parallel: false,
   transpileDependencies: [/(wakeapp|wakeadmin)/],
   pluginOptions: {
     ...defineCE({ customElement: /wkc-/ }),
-    ...defineMapp(
-      // 生产环境在运行容器中动态注入
-      process.env.NODE_ENV === 'production'
-        ? {
-            baseUrl: '<?= removeTrailingSlash(base) ?>',
-            CDNDomain: "<?= cdnDomain ? '//' + cdnDomain : '' ?>",
-          }
-        : {}
-    ),
   },
   chainWebpack(chain) {
     // 支持内联 style
