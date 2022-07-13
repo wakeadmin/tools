@@ -20,7 +20,14 @@ import { WebpackMAPPJsonPlugin } from './WebpackMAPPJsonPlugin';
 
 export interface PluginOptions {
   /**
+   * 是否在微前端运行容器下运行。微前端运行容器支持模板
+   * 默认为 true
+   */
+  terminalMode?: boolean;
+
+  /**
    * CDN 域名，如果静态资源需要由 CDN 分发，则需要配置此项
+   * 如果开启了 terminalMode, CDNDomain 默认为 "<?= cdnDomain ? '//' + cdnDomain : '' ?>"
    */
   CDNDomain?: string;
 
@@ -31,6 +38,8 @@ export interface PluginOptions {
 
   /**
    * 主应用基础路径，默认为 '/' , 建议和主应用配置一致
+   *
+   * 如果开启了 terminalMode, baseUrl 默认为 "<?= removeTrailingSlash(base) ?>"
    */
   baseUrl?: string;
 
@@ -79,9 +88,10 @@ export const plugin: ServicePlugin = (api, options) => {
   const pkgPath = api.resolve('package.json');
   const pkg = JSON.parse(fs.readFileSync(pkgPath).toString()) as PackageJSONLike;
 
+  const terminalMode = (pluginOptions.terminalMode ?? true) && isProduction; // 生产环境才起作用
   const _name = camelCase(pluginOptions.name || getNameFromPackageJson(pkg));
-  const _baseUrl = pluginOptions.baseUrl || '/';
-  const _CDNDomain = pluginOptions.CDNDomain;
+  const _CDNDomain = pluginOptions.CDNDomain ?? (terminalMode ? "<?= cdnDomain ? '//' + cdnDomain : '' ?>" : undefined);
+  const _baseUrl = pluginOptions.baseUrl ?? (terminalMode ? '<?= removeTrailingSlash(base) ?>' : undefined) ?? '/';
   const _libraryType = pluginOptions.libraryType || 'umd';
   const _shared = pluginOptions.shared || [];
   const _publicPath = pluginOptions.publicPath || 'auto';
@@ -141,6 +151,7 @@ module.exports = {
 
   table.push(
     ['mode', '子应用'],
+    ['terminalMode', terminalMode],
     ['name', _name],
     ['publicPath', publicPath],
     ['libraryType', _libraryType],

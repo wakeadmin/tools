@@ -10,14 +10,8 @@ module.exports = defineConfig({
   pluginOptions: {
     ...defineCE({ customElement: /wkc-/ }),
     // 微前端集成配置
-    ...defineMappChild(
-      process.env.NODE_ENV === 'production'
-        ? {
-            CDNDomain: "<?= cdnDomain ? `//${cdnDomain}` : '' ?>",
-            baseUrl: '<?= removeTrailingSlash(base) ?>',
-            activeRule: '/wkb.html',
-          }
-        : {}
-    ),
+    ...defineMappChild({
+      activeRule: '/wkb.html',
+    }),
   },
 });
