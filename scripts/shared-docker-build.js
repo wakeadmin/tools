@@ -4,14 +4,19 @@ const ch = require('child_process');
 /**
  * 构建
  * @param {string} imageName
+ * @param {Record<string, any>} [args]
  */
-function build(imageName) {
+function build(imageName, args = {}) {
   if (process.env.CI) {
-    // CI 构建时退出，避免因为账号问题无法拉取
     ch.execSync(`docker logout`, { stdio: 'inherit' });
   }
 
-  ch.execSync(`docker build -t ${imageName} .`, { stdio: 'inherit' });
+  const keys = Object.keys(args).filter(i => Boolean(args[i]));
+  const buildArgs = keys.length ? keys.reduce((prev, k) => `${prev}  --build-arg ${k}=${args[k]}`, '') : '';
+  const cmd = `docker build -t ${imageName} ${buildArgs} .`;
+
+  console.log(cmd);
+  ch.execSync(cmd, { stdio: 'inherit' });
 }
 
 module.exports = build;

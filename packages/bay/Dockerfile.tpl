@@ -1,4 +1,5 @@
-FROM wkfe/mapp
+ARG HOST_PREFIX
+FROM ${HOST_PREFIX}wkfe/mapp
 
 WORKDIR /data
 COPY ./__entry__  /data/source/__entry__
