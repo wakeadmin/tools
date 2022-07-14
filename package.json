@@ -9,6 +9,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "local-check": "wkstd local-check",
+    "update:wakeapp": "pnpm up -r -L \"@wakeapp/*\"",
     "prepare": "husky install",
     "build": "pnpm run -r --filter=!playground-* build",
     "test": "pnpm run -r --filter=!playground-* --workspace-concurrency=1 test --passWithNoTests --silent",

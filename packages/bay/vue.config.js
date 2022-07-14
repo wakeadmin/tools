@@ -31,11 +31,6 @@ module.exports = defineConfig({
     return {
       // 可以获取更好的调试体验
       devtool: 'source-map',
-      resolve: {
-        fallback: {
-          path: require.resolve('path-browserify'),
-        },
-      },
     };
   },
   devServer: {
