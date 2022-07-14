@@ -1,4 +1,6 @@
 import { registerCustomElements } from '@wakeadmin/ce';
+import { Icon } from '@/components';
+
 import { Header } from './Header';
 import { Content } from './Content';
 import { SidebarBottomSlot, SidebarTopSlot } from './SidebarSlot';
@@ -25,6 +27,7 @@ const components = registerCustomElements('wkc', {
   ErrorPage,
   ErrorPageNotFound,
   ErrorPageForbidden,
+  Icon,
 });
 
 export type BayLayoutComponents = typeof components;
