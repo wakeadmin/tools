@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/vue-cli-plugin-mapp-child",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "子应用集成",
   "main": "index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/cli-table": "^0.3.0",
     "@vue/cli-service": "~5.0.6",
-    "@wakeadmin/mapp": "workspace:^0.1.0"
+    "@wakeadmin/mapp": "workspace:^0.1.1"
   },
   "peerDependencies": {
     "@vue/cli-service": "5.*"
