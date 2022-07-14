@@ -170,6 +170,29 @@ module.exports = {
     };
   });
 
+  api.chainWebpack(chain => {
+    if (terminalMode) {
+      // 添加 hash 查询字符串，方便失效统一缓存失效
+      const hashQuery = '?<?= hash ?>';
+
+      const filename = chain.output.get('filename');
+      const chunkFilename = chain.output.get('chunkFilename');
+
+      chain.output.filename(`${filename}${hashQuery}`);
+      chain.output.chunkFilename(`${chunkFilename}${hashQuery}`);
+
+      chain.plugin('extract-css').tap(args => {
+        const [oldOptions, ...other] = args;
+        const newOptions: { filename: string; chunkFilename: string } = { ...oldOptions };
+
+        newOptions.filename = newOptions.filename + hashQuery;
+        newOptions.chunkFilename = newOptions.chunkFilename + hashQuery;
+
+        return [newOptions, ...other];
+      });
+    }
+  });
+
   // 开发服务器配置
   options.devServer = options.devServer ?? {};
   options.devServer.port = port;
