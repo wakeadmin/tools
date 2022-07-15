@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="description" content="<?= description ?>" />
     <meta name="keywords" content="<?= keywords ?>" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.png" />
+    <link rel="icon" href="<?= assets.IMG_BAY_FAVICON || entryPath + '/favicon.png' ?>" />
     <meta name="version" content="<?= version ?>" />
     <meta name="update-time" content="<?= `${year}-${month}-${date}` ?>" />
     <title><?= title ?></title>
     <!-- 注入主题包 -->
-    <!--! <?- theme.stylesheets.map(i => `<link rel="stylesheet" href="${domainJoin(cdnDomain, i + '?' + hash )}" />`).join('\n') ?> -->
-    <!--! <?- theme.scripts.map(i => `<script async="true" src="${domainJoin(cdnDomain, i + '?' + hash)}"></script>`).join('\n') ?> -->
+    <!--! <?- theme.stylesheets.map(i => `<link rel="stylesheet" href="${i + '?' + hash }" />`).join('\n') ?> -->
+    <!--! <?- theme.scripts.map(i => `<script async="true" src="${i + '?' + hash}"></script>`).join('\n') ?> -->
 
     <!--! <? if (microApps.length) { ?> -->
     <!--! <?- 

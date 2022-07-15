@@ -17,6 +17,7 @@ declare global {
    *     NAME: 资源命名
    */
   interface MappAssetKey {
+    IMG_BAY_FAVICON: 'favicon';
     IMG_BAY_LOGO: 'logo';
     IMG_BAY_AVATAR: '头像';
     IMG_BAY_ERROR: '默认错误图片';
