@@ -5,7 +5,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
-  "theme": "@wakeadmin/theme-wakedata",
+  "theme": "@wakeadmin/theme",
   "files": [
     "index.js",
     "index.mjs",
@@ -38,7 +38,6 @@
     "@wakeadmin/i18n": "workspace:^0.1.0",
     "@wakeadmin/icons": "workspace:^0.1.0",
     "@wakeadmin/theme": "workspace:^0.1.0",
-    "@wakeadmin/theme-wakedata": "workspace:^0.1.0",
     "@wakeadmin/utils": "workspace:^0.1.0",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.0",
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.0",

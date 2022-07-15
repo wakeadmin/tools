@@ -1,6 +1,6 @@
-@use '../theme' as *;
+@use './theme' as *;
 
-// 覆盖 element-ui 变量
+// 适配 element-ui 变量
 
 /* 颜色 */
 $--color-white: $wk-color-white;
