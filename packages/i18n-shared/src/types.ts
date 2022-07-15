@@ -45,6 +45,12 @@ declare global {
     // FallbackLocale
     // VueApp 应用类型
   }
+
+  interface Window {
+    // 支持从全局获取语言包
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    __I18N_BUNDLES__: { [locale: string]: I18nBundle };
+  }
 }
 
 // @ts-expect-error

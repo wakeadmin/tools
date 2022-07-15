@@ -132,6 +132,11 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   Promise.resolve().then(() => {
     eventBus.emit(EVENT_READY, instance);
     __flushReadyWaitQueue();
+
+    // 全局共享的语言包
+    if (typeof window !== 'undefined' && window.__I18N_BUNDLES__) {
+      bundleRegister.registerBundles(window.__I18N_BUNDLES__);
+    }
   });
 
   return instance;

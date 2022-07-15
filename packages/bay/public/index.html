@@ -27,8 +27,8 @@
       // 静态资源注入
       (window.__MAPP_ASSETS__ = (window.__MAPP_ASSETS__ || [])).push(${JSON.stringify(assets)});
 
-      // 语言包
-      window.__MAPP_I18N = ${JSON.stringify(i18n)};
+      // 全局共享的语言包
+      window.__I18N_BUNDLES__ = ${JSON.stringify(i18n)};
     </script>` ?>
     -->
   </head>
