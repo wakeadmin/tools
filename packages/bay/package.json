@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/bay",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "惟客云基座",
   "main": "index.js",
   "module": "index.mjs",
@@ -33,8 +33,8 @@
     "@vue/cli-service": "~5.0.6",
     "@vueuse/core": "^8.7.5",
     "@wakeadmin/ce": "workspace:^0.1.0",
-    "@wakeadmin/framework": "workspace:^0.1.0",
-    "@wakeadmin/h": "workspace:^0.1.0",
+    "@wakeadmin/framework": "workspace:^0.1.1",
+    "@wakeadmin/h": "workspace:^0.1.1",
     "@wakeadmin/i18n": "workspace:^0.1.0",
     "@wakeadmin/icons": "workspace:^0.1.0",
     "@wakeadmin/theme": "workspace:^0.1.0",
