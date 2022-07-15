@@ -130,11 +130,21 @@ export class BundleRegister {
     Object.keys(bundles).forEach(k => {
       const normalizedKey = k.toLowerCase();
       const list = (this.resources[normalizedKey] ??= new Set());
-      const b = bundles[k];
+      const bundle = bundles[k];
 
-      if (!list.has(b)) {
-        list.add(b);
-        dirty = true;
+      const add = (b: I18nBundle) => {
+        if (!list.has(b)) {
+          list.add(b);
+          dirty = true;
+        }
+      };
+
+      if (Array.isArray(bundle)) {
+        for (const child of bundle) {
+          add(child);
+        }
+      } else {
+        add(bundle);
       }
     });
 

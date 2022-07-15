@@ -19,7 +19,7 @@ export type I18nAsyncBundle = () => Promise<{ default: Record<string, any> }>;
  * 语言包类型
  * 支持 url、异步模块、语言包
  */
-export type I18nBundle = Record<string, any> | I18nAsyncBundle | string;
+export type I18nBundle = Record<string, any> | I18nAsyncBundle | I18nAsyncBundle[] | string | string[];
 
 /**
  * 扩展的初始化参数
