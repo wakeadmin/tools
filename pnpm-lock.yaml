@@ -123,10 +123,10 @@ importers:
       '@wakeadmin/ce': workspace:^0.1.0
       '@wakeadmin/framework': workspace:^0.1.1
       '@wakeadmin/h': workspace:^0.1.1
-      '@wakeadmin/i18n': workspace:^0.1.0
+      '@wakeadmin/i18n': workspace:^0.1.1
       '@wakeadmin/icons': workspace:^0.1.0
       '@wakeadmin/mapp': workspace:^0.1.1
-      '@wakeadmin/theme': workspace:^0.1.0
+      '@wakeadmin/theme': workspace:^0.1.1
       '@wakeadmin/utils': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.0
@@ -172,7 +172,7 @@ importers:
 
   packages/ce:
     specifiers:
-      '@wakeadmin/h': workspace:^0.1.0
+      '@wakeadmin/h': workspace:^0.1.1
       '@wakeadmin/utils': workspace:^0.1.0
     dependencies:
       '@wakeadmin/utils': link:../utils
@@ -213,7 +213,7 @@ importers:
 
   packages/i18n:
     specifiers:
-      '@wakeadmin/i18n-shared': workspace:^0.1.0
+      '@wakeadmin/i18n-shared': workspace:^0.1.1
       '@wakeadmin/utils': workspace:^0.1.0
       vue: ^3.2.37
       vue-i18n: ^9.1.10
@@ -226,7 +226,7 @@ importers:
 
   packages/i18n-legacy:
     specifiers:
-      '@wakeadmin/i18n-shared': workspace:^0.1.0
+      '@wakeadmin/i18n-shared': workspace:^0.1.1
       '@wakeadmin/utils': workspace:^0.1.0
       vue: ~2.7.0
       vue-i18n: ~8.27.2
@@ -261,7 +261,7 @@ importers:
 
   packages/mapp:
     specifiers:
-      '@wakeadmin/h': workspace:^0.1.0
+      '@wakeadmin/h': workspace:^0.1.1
       '@wakeadmin/utils': workspace:^0.1.0
       path-browserify: ^1.0.1
       qiankun: ^2.7.3
@@ -278,10 +278,10 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.6
       '@vue/cli-plugin-vuex': ~5.0.6
       '@vue/cli-service': ~5.0.6
-      '@wakeadmin/framework': workspace:^0.1.0
-      '@wakeadmin/h': workspace:^0.1.0
+      '@wakeadmin/framework': workspace:^0.1.1
+      '@wakeadmin/h': workspace:^0.1.1
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
-      '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.1.0
+      '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.1.1
       babel-preset-wakeadmin: workspace:^0.1.0
       core-js: ^3.23.3
       path-browserify: ^1.0.1
@@ -320,8 +320,8 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.6
       '@vue/cli-plugin-vuex': ~5.0.6
       '@vue/cli-service': ~5.0.6
-      '@wakeadmin/bay': workspace:^0.1.0
-      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.1.0
+      '@wakeadmin/bay': workspace:^0.1.2
+      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.1.1
       core-js: ^3.23.3
       sass: ^1.53.0
       sass-loader: ^12.6.0
@@ -356,9 +356,9 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.6
       '@vue/cli-plugin-vuex': ~5.0.6
       '@vue/cli-service': ~5.0.6
-      '@wakeadmin/bay': workspace:^0.1.0
+      '@wakeadmin/bay': workspace:^0.1.2
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
-      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.1.0
+      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.1.1
       core-js: ^3.23.3
       element-plus: ^2.2.8
       sass: ^1.53.0
@@ -387,7 +387,7 @@ importers:
   packages/playground-vue3-vite:
     specifiers:
       '@vitejs/plugin-vue': ^2.3.3
-      '@wakeadmin/bay': workspace:^0.1.0
+      '@wakeadmin/bay': workspace:^0.1.2
       typescript: ^4.5.4
       vite: ^2.9.9
       vue: ^3.2.25

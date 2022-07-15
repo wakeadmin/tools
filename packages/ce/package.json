@@ -25,6 +25,6 @@
     "@wakeadmin/utils": "workspace:^0.1.0"
   },
   "devDependencies": {
-    "@wakeadmin/h": "workspace:^0.1.0"
+    "@wakeadmin/h": "workspace:^0.1.1"
   }
 }

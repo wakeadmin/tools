@@ -9,8 +9,8 @@
     "inspect": "vue-cli-service inspect"
   },
   "dependencies": {
-    "@wakeadmin/framework": "workspace:^0.1.0",
-    "@wakeadmin/h": "workspace:^0.1.0",
+    "@wakeadmin/framework": "workspace:^0.1.1",
+    "@wakeadmin/h": "workspace:^0.1.1",
     "core-js": "^3.23.3",
     "qiankun": "^2.7.3",
     "vue": "^3.2.37",
@@ -24,7 +24,7 @@
     "@vue/cli-plugin-vuex": "~5.0.6",
     "@vue/cli-service": "~5.0.6",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.0",
-    "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.1.0",
+    "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.1.1",
     "babel-preset-wakeadmin": "workspace:^0.1.0",
     "path-browserify": "^1.0.1",
     "sass": "^1.53.0",
