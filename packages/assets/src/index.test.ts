@@ -1,6 +1,14 @@
 import { getAsset, registerAsset, listenAssets, useAsset } from '.';
 import { unref } from '@wakeadmin/demi';
 
+window.__MAPP_ASSETS__ = [{ global1: '1', global2: '2' }, ['global3', '3']];
+
+test('globalMount', () => {
+  expect(getAsset('global1', 'fallback')).toBe('1');
+  expect(getAsset('global2', 'fallback')).toBe('2');
+  expect(getAsset('global3', 'fallback')).toBe('3');
+});
+
 test('assets', () => {
   const listener = jest.fn();
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /**
  * 静态资源注册
  *
@@ -19,18 +20,48 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface MappAssetKey {}
 
-  interface Window {
-    /**
-     * 全局注册点, 借鉴 webpack 的 chunk 加载
-     * 使用方式: 一定要使用 push 方法
-     * (window.__MAPP_ASSETS__ = window.__MAPP_ASSETS__ || []).push(['key', 'value'])
-     */
-    // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/array-type
-    __MAPP_ASSETS__: Array<MappAssetPayload>;
-  }
+  /**
+   * 全局注册点, 借鉴 webpack 的 chunk 加载
+   * 使用方式: 一定要使用 push 方法
+   * (window.__MAPP_ASSETS__ = window.__MAPP_ASSETS__ || []).push(['key', 'value'])
+   */
+  // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/array-type, no-var
+  var __MAPP_ASSETS__: Array<MappAssetPayload> | undefined;
 }
 
 const registry = new NamedRegistry<string>();
+let mounted = false;
+
+function mountGlobalIfNeed() {
+  if (mounted) {
+    return;
+  }
+  mounted = true;
+
+  // 初始化
+  const register = (payload: MappAssetPayload) => {
+    if (Array.isArray(payload)) {
+      registerAsset(payload[0], payload[1]);
+    } else {
+      Object.keys(payload).forEach(k => {
+        registerAsset(k, payload[k]);
+      });
+    }
+  };
+
+  if (globalThis.__MAPP_ASSETS__) {
+    globalThis.__MAPP_ASSETS__.forEach(register);
+  }
+
+  const mount: any[] = (globalThis.__MAPP_ASSETS__ = []);
+  const _push = mount.push;
+
+  mount.push = function (...items: any[]): number {
+    items.forEach(register);
+
+    return _push.apply(mount, items);
+  };
+}
 
 /**
  * 获取静态资源
@@ -40,6 +71,7 @@ const registry = new NamedRegistry<string>();
 export function getAsset<T extends keyof MappAssetKey, Desc = MappAssetKey[T]>(key: T, fallback: string): string;
 export function getAsset(key: string, fallback: string): string;
 export function getAsset(key: string, fallback?: string): string | undefined {
+  mountGlobalIfNeed();
   return registry.registered(key) ?? fallback;
 }
 
@@ -51,6 +83,8 @@ export function getAsset(key: string, fallback?: string): string | undefined {
 export function registerAsset(key: keyof MappAssetKey, value: string): void;
 export function registerAsset(key: string, value: string): void;
 export function registerAsset(key: string, value: string): void {
+  mountGlobalIfNeed();
+
   registry.unregister(key);
   registry.register(key, value);
 }
@@ -59,30 +93,3 @@ export function registerAsset(key: string, value: string): void {
  * 监听静态资源变动
  */
 export const listenAssets = registry.subscribe;
-
-// 初始化
-// eslint-disable-next-line no-lone-blocks
-{
-  const register = (payload: MappAssetPayload) => {
-    if (Array.isArray(payload)) {
-      registerAsset(payload[0], payload[1]);
-    } else {
-      Object.keys(payload).forEach(k => {
-        registerAsset(k, payload[k]);
-      });
-    }
-  };
-
-  if (window.__MAPP_ASSETS__) {
-    window.__MAPP_ASSETS__.forEach(register);
-  }
-
-  const mount: any[] = (window.__MAPP_ASSETS__ = []);
-  const _push = mount.push;
-
-  mount.push = function (...items: any[]): number {
-    items.forEach(register);
-
-    return _push.apply(mount, items);
-  };
-}
