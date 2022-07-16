@@ -104,6 +104,7 @@ export const plugin: ServicePlugin = (api, options) => {
     : options.outputDir;
 
   const joinCDNDomain = (p: string) => (_CDNDomain ? `${removeTrailingSlash(_CDNDomain)}${p}` : p);
+  const isHttps = !!options.devServer?.https;
 
   let defaultPublicPath = path.posix.join(_baseUrl, `__apps__/${_name}/`);
 
@@ -112,7 +113,7 @@ export const plugin: ServicePlugin = (api, options) => {
     _publicPath === 'auto'
       ? isProduction
         ? joinCDNDomain(defaultPublicPath) // 按照 wakedata 微前端部署路径
-        : `//localhost:${port}/` // 本地开发，硬编码 port, 这样不需要在代码中引入  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+        : `${isHttps ? 'https' : 'http'}://localhost:${port}/` // 本地开发，硬编码 port, 这样不需要在代码中引入  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
       : _publicPath
   );
 
@@ -196,6 +197,7 @@ module.exports = {
   // 开发服务器配置
   options.devServer = options.devServer ?? {};
   options.devServer.port = port;
+  (options.devServer.client ??= {}).webSocketURL = `${isHttps ? 'wss' : 'ws'}://localhost:${port}/ws`;
 
   // 处理跨域问题
   options.devServer.headers = { ...(options.devServer.headers || {}), 'Access-Control-Allow-Origin': '*' };
