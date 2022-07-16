@@ -1,0 +1,27 @@
+{
+  "name": "@wakeadmin/assets",
+  "version": "0.1.0",
+  "description": "assets 协议",
+  "module": "dist/index.js",
+  "main": "dist/common/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build:common": "tsc -b tsconfig.build.common.json",
+    "build:es": "tsc -b tsconfig.build.json",
+    "build": "npm run build:es && npm run build:common",
+    "type-check": "tsc",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "dependencies": {
+    "@wakeadmin/demi": "workspace:^0.1.1",
+    "@wakeadmin/utils": "workspace:^0.1.0"
+  }
+}
