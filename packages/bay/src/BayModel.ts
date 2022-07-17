@@ -184,7 +184,7 @@ export class BayModel extends BaseModel implements IBayModel {
    * 根据微应用的名称打开。
    */
   openByAppName: IBayModel['openByAppName'] = (name, options) => {
-    if (!this.assetOpen()) {
+    if (!this.assertOpen()) {
       return;
     }
 
@@ -214,24 +214,30 @@ export class BayModel extends BaseModel implements IBayModel {
 
     if (apps.length === 0) {
       console.warn(`[bay] openByAppAlias(${alias}) 所指定的子应用未找到`);
+
+      // 回退
+      this.openByAppName(alias, options);
       return;
     }
 
-    if (apps.length > 1) {
-      if (!this.assetOpen()) {
-        return;
-      }
-      // 查找在菜单中定义的微应用
-      const definedApps = apps.filter(i => this.appsInMenus.has(i));
-      const finalApps = definedApps.length > 0 ? definedApps : apps;
-
-      if (finalApps.length > 1) {
-        console.warn(`[bay] openByAppAlias(${alias}) 所指定的子应用存在多个，出现歧义将打开第一个`, finalApps);
-      }
-      this.openByAppName(finalApps[0].name, options);
-    } else {
-      this.openByAppName(apps[0].name, options);
+    if (!this.assertOpen()) {
+      return;
     }
+
+    // 优先查找在菜单中定义的微应用
+    const definedApps = apps.filter(i => this.appsInMenus.has(i));
+
+    if (definedApps.length) {
+      if (definedApps.length > 1) {
+        console.warn(`[bay] openByAppAlias(${alias}) 所指定的子应用存在多个，出现歧义将打开第一个`, definedApps);
+      }
+
+      this.openByAppName(definedApps[0].name, options);
+      return;
+    }
+
+    // 默认打开第一个
+    this.openByAppName(apps[0].name, options);
   };
 
   /**
@@ -239,7 +245,7 @@ export class BayModel extends BaseModel implements IBayModel {
    * @param options
    */
   openMain: IBayModel['openMain'] = options => {
-    if (!this.assetOpen()) {
+    if (!this.assertOpen()) {
       return;
     }
     const first = this.menu?.topMenus?.[0];
@@ -262,7 +268,7 @@ export class BayModel extends BaseModel implements IBayModel {
    * 根据权限标识符路径打开
    */
   openByIdentifierPath: IBayModel['openByIdentifierPath'] = (path, options) => {
-    if (!this.assetOpen()) {
+    if (!this.assertOpen()) {
       return;
     }
 
@@ -367,7 +373,7 @@ export class BayModel extends BaseModel implements IBayModel {
     return this.i18n.getLocale();
   };
 
-  private assetOpen(): boolean {
+  private assertOpen(): boolean {
     if (this.menu == null) {
       console.warn(`[bay] openByIdentifierPath 需要等待基座启动后才能调用`);
       return false;
