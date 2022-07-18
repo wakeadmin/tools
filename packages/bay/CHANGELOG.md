@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.1.4
+
+### Patch Changes
+
+- assets 库迁移
+
 ## 0.1.2
 
 ### Patch Changes
