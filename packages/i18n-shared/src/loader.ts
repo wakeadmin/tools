@@ -12,7 +12,7 @@ export async function asyncModuleLoader(bundle: I18nAsyncBundle) {
     return isESModule(module) ? module.default : module;
   } catch (err) {
     console.error(`[i18n] 异步模块加载失败: `, err);
-    return {};
+    return null;
   }
 }
 
@@ -30,6 +30,6 @@ export async function httpLoader(url: string) {
     throw new Error(`请求失败：${res.status} ${res.statusText}`);
   } catch (err) {
     console.error(`[i18n] 语言包加载失败(${url}): `, err);
-    return {};
+    return null;
   }
 }

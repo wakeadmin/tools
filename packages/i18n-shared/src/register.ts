@@ -3,12 +3,15 @@ import { hasProp, addHiddenProp, PromiseQueue } from '@wakeadmin/utils';
 
 import { asyncModuleLoader, httpLoader } from './loader';
 import { I18nAsyncBundle, I18nBundle } from './types';
+import { LayerLink } from './layer';
 
 /**
  * 语言包缓存
  */
 const LOADED = Symbol('loaded');
 const LOADED_URLS = new Set();
+const LAYER = Symbol('layer');
+const DEFAULT_LAYER = 10;
 
 function isLoaded(bundle: I18nBundle) {
   if (typeof bundle === 'string') {
@@ -33,6 +36,13 @@ export class BundleRegister {
   private executing = false;
 
   private resources: { [locale: string]: Set<I18nBundle> } = {};
+
+  private layerLinks: { [locale: string]: LayerLink } = {};
+
+  /**
+   * 缓存资源的层级
+   */
+  private resourceLayer: Map<I18nBundle, number> = new Map();
 
   private pendingQueue = new PromiseQueue<void>();
 
@@ -73,22 +83,34 @@ export class BundleRegister {
             continue;
           }
 
+          const layer = this.resourceLayer.get(bundle) ?? DEFAULT_LAYER;
+
           if (typeof bundle === 'function') {
             // 异步加载函数
             task.push(
               (async () => {
-                (messages[locale] ??= []).push(await asyncModuleLoader(bundle as I18nAsyncBundle));
+                const loadedBundle = await asyncModuleLoader(bundle as I18nAsyncBundle);
+                if (loadedBundle) {
+                  this.setLayer(loadedBundle, layer);
+                  (messages[locale] ??= []).push(loadedBundle);
+                }
               })()
             );
           } else if (typeof bundle === 'string') {
             // http 链接
             task.push(
               (async () => {
-                (messages[locale] ??= []).push(await httpLoader(bundle));
+                const loadedBundle = await httpLoader(bundle);
+
+                if (loadedBundle) {
+                  this.setLayer(loadedBundle, layer);
+                  (messages[locale] ??= []).push(loadedBundle);
+                }
               })()
             );
           } else {
             // 直接就是语言包
+            this.setLayer(bundle, layer);
             (messages[locale] ??= []).push(bundle);
           }
 
@@ -105,13 +127,27 @@ export class BundleRegister {
       }
 
       const messageKeys = Object.keys(messages);
+
       if (messageKeys.length) {
+        const messageToUpdate: { [locale: string]: LayerLink } = {};
         // 合并
         for (const locale of messageKeys) {
+          const layerLink = (this.layerLinks[locale] ??= new LayerLink());
+
           for (const bundle of messages[locale]) {
-            this.registerBundle(locale, bundle);
+            const layer = this.getLayer(bundle);
+
+            layerLink.assignLayer(layer, bundle);
           }
+
+          messageToUpdate[locale] = layerLink;
         }
+
+        // 触发更新
+        for (const locale in messageToUpdate) {
+          this.registerBundle(locale, messageToUpdate[locale].flattenLayer());
+        }
+
         this.onBundleChange();
       }
     } catch (err) {
@@ -125,7 +161,7 @@ export class BundleRegister {
   /**
    * 注册语言包
    */
-  registerBundles = async (bundles: { [locale: string]: I18nBundle }): Promise<void> => {
+  registerBundles = async (bundles: { [locale: string]: I18nBundle }, layer: number = 10): Promise<void> => {
     let dirty = false;
     Object.keys(bundles).forEach(k => {
       const normalizedKey = k.toLowerCase();
@@ -135,6 +171,7 @@ export class BundleRegister {
       const add = (b: I18nBundle) => {
         if (!list.has(b)) {
           list.add(b);
+          this.resourceLayer.set(b, layer);
           dirty = true;
         }
       };
@@ -152,4 +189,15 @@ export class BundleRegister {
       return await this.schedulerMerge();
     }
   };
+
+  private getLayer(value: any): number {
+    return value?.[LAYER] ?? DEFAULT_LAYER;
+  }
+
+  private setLayer(value: object, layer: number) {
+    Object.defineProperty(value, LAYER, {
+      value: layer,
+      enumerable: false,
+    });
+  }
 }

@@ -92,7 +92,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
 
   const bundleRegister = new BundleRegister(
     (loc, bundle) => {
-      vueI18nInstance.mergeLocaleMessage(loc, bundle);
+      vueI18nInstance.setLocaleMessage(loc, bundle);
     },
     getFallbackLocaleChain,
     () => {
@@ -135,7 +135,8 @@ export function createI18n(options?: I18nOptions): I18nInstance {
 
     // 全局共享的语言包
     if (typeof window !== 'undefined' && window.__I18N_BUNDLES__) {
-      bundleRegister.registerBundles(window.__I18N_BUNDLES__);
+      // 远程加载的语言包优先级高一点，这里设置为 5， 默认是 10
+      bundleRegister.registerBundles(window.__I18N_BUNDLES__, 5);
     }
   });
 

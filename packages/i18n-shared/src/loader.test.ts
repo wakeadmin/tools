@@ -9,7 +9,7 @@ test('async loader', async () => {
     await asyncModuleLoader(async () => {
       throw new Error('error');
     })
-  ).toEqual({});
+  ).toEqual(null);
 });
 
 test('fetch loader', async () => {
