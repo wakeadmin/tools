@@ -85,7 +85,7 @@ test('测试 defineComponent 类型推断', () => {
     });
 
     const refTest = ref<{ a: string } | null>(null);
-    const refTestCorrect = ref<{ a: number } | null>(null);
+    const refTestCorrect = ref<{ a: number }>();
 
     // @ts-expect-error
     t = <Test ref={refTest} />;

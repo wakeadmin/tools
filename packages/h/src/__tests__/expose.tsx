@@ -19,7 +19,7 @@ const Ref = declareComponent({
 });
 
 test('expose', async () => {
-  const instanceRef = ref<ExtraRef<typeof Ref>>(null);
+  const instanceRef = ref<ExtraRef<typeof Ref>>();
 
   const App = declareComponent({
     setup() {
@@ -49,7 +49,7 @@ test('expose', async () => {
 });
 
 test('expose v-for', () => {
-  const instanceRef = ref<ExtraArrayRef<typeof Ref>>(null);
+  const instanceRef = ref<ExtraArrayRef<typeof Ref>>();
 
   const App = declareComponent({
     setup() {

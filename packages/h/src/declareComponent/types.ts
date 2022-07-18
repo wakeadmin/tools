@@ -125,17 +125,17 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
 export type VSlotType<Slots extends {}> = DefaultSlots & Slots;
 export type VChildrenType<Slots extends {}> = VNodeChild | VSlotType<Slots>;
 
-export type RefType<Expose extends {}> = Ref<Expose | null> | string; // string 用于兼容 template 引用
+export type RefType<Expose extends {}> = Ref<Expose | undefined> | string; // string 用于兼容 template 引用
 
 /**
  * 提取 ref 类型
  */
-export type ExtraRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose | null;
+export type ExtraRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose;
 
 /**
  * 提取 ref 类型，用于列表渲染 ref
  */
-export type ExtraArrayRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose[] | null;
+export type ExtraArrayRef<T extends DefineComponent<any, any, any, any>, Expose = T['__ref']> = Expose[];
 
 /**
  * 提取 Props 类型
