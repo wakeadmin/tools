@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "工具库",
   "sideEffects": false,
   "main": "dist/commonjs/index.js",

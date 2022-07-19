@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/ce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue 自定义组件创建和使用",
   "sideEffects": false,
   "main": "dist/common/index.js",
@@ -25,9 +25,9 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "@wakeadmin/utils": "workspace:^0.1.0"
+    "@wakeadmin/utils": "workspace:^0.1.1"
   },
   "devDependencies": {
-    "@wakeadmin/h": "workspace:^0.1.1"
+    "@wakeadmin/h": "workspace:^0.1.2"
   }
 }

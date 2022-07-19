@@ -1,5 +1,13 @@
 # @wakeadmin/framework
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/h@0.1.2
+  - @wakeadmin/utils@0.1.1
+
 ## 0.1.1
 
 ### Patch Changes

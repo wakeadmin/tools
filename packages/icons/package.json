@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/icons",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "惟客云图标库",
   "main": "./dist/common/index.js",
   "module": "./dist/index.js",
@@ -31,11 +31,11 @@
   },
   "dependencies": {
     "@wakeadmin/demi": "workspace:^0.1.1",
-    "@wakeadmin/h": "workspace:^0.1.1"
+    "@wakeadmin/h": "workspace:^0.1.2"
   },
   "devDependencies": {
     "svgo": "^2.8.0",
-    "test-helper-vue": "workspace:0.1.1"
+    "test-helper-vue": "workspace:^0.1.2"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.7.0",

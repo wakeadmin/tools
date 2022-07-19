@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/h",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "支持跨 Vue 2/3, 兼容 React JSX 协议的渲染方法",
   "sideEffects": false,
   "module": "dist/index.js",
@@ -38,8 +38,8 @@
   "author": "ivan",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:0.1.1",
-    "@wakeadmin/utils": "workspace:0.1.0"
+    "@wakeadmin/demi": "workspace:^0.1.1",
+    "@wakeadmin/utils": "workspace:^0.1.1"
   },
   "jest": {
     "preset": "jest-preset-universe-vue"
