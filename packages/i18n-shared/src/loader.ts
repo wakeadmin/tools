@@ -22,7 +22,7 @@ export async function asyncModuleLoader(bundle: I18nAsyncBundle) {
  */
 export async function httpLoader(url: string) {
   try {
-    const res = await window.fetch(url, { credentials: 'include' });
+    const res = await window.fetch(url);
     if (res.ok) {
       return await res.json();
     }
