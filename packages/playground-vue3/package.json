@@ -25,6 +25,7 @@
     "@vue/cli-service": "~5.0.8",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.0",
     "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.1.2",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.1.0",
     "sass": "^1.53.0",
     "sass-loader": "^12.6.0"
   }

@@ -1,0 +1,27 @@
+{
+  "name": "@wakeadmin/vue-cli-plugin-vendor",
+  "version": "0.1.0",
+  "description": "第三方依赖 UMD 加载",
+  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist .tsBuildInfo",
+    "build": "tsc -b tsconfig.build.json",
+    "type-check": "tsc",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "devDependencies": {
+    "@vue/cli-service": "~5.0.8"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": "5.*",
+    "html-webpack-plugin": "^5.5.0"
+  }
+}

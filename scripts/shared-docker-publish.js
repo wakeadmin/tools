@@ -46,6 +46,7 @@ function publish(imageName, version) {
   exec(`docker push ${versionTag}`);
 
   // 清理, 避免构建缓存
+  exec(`docker image prune -f`)
   const list = uniq(
     exec(`docker images -q ${host && host + '/'}${imageName}:*`, false)
       .toString()
