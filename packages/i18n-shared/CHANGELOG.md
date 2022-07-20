@@ -1,5 +1,11 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.3
+
+### Patch Changes
+
+- 修复语言包加载跨域问题
+
 ## 0.1.2
 
 ### Patch Changes

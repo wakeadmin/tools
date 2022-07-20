@@ -38,10 +38,10 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/h": "workspace:^0.1.1",
-    "@wakeadmin/utils": "workspace:^0.1.0",
+    "@wakeadmin/h": "workspace:^0.1.2",
+    "@wakeadmin/utils": "workspace:^0.1.1",
     "path-browserify": "^1.0.1",
-    "qiankun": "^2.7.3"
+    "qiankun": "^2.7.4"
   },
   "peerDependencies": {
     "vue": "^3.2.37",

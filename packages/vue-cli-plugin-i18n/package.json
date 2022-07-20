@@ -18,7 +18,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "devDependencies": {
-    "@vue/cli-service": "~5.0.6"
+    "@vue/cli-service": "~5.0.8"
   },
   "peerDependencies": {
     "@vue/cli-service": "5.*"

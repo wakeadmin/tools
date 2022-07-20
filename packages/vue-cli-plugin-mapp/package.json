@@ -26,13 +26,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/cli-table": "^0.3.0",
-    "@vue/cli-service": "~5.0.6"
+    "@vue/cli-service": "~5.0.8"
   },
   "peerDependencies": {
     "@vue/cli-service": "5.*"
   },
   "dependencies": {
-    "@wakeadmin/utils": "workspace:^0.1.0",
+    "@wakeadmin/utils": "workspace:^0.1.1",
     "cli-table": "^0.3.11"
   }
 }
