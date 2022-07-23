@@ -11,8 +11,18 @@
   &__menu {
     border-right: none !important;
 
-    &:not(.el-menu--collapse) {
+    &:not(.ep-menu--collapse) {
       width: var(--bay-sidebar-width);
+    }
+
+    // element-plus 只能识别 span，所以这里要处理一下隐藏
+    &.ep-menu--collapse .bay-sidebar__submenu-title,
+    &.ep-menu--collapse .bay-sidebar__menuitem-title {
+      height: 0;
+      width: 0;
+      overflow: hidden;
+      visibility: hidden;
+      display: inline-block;
     }
 
     .is-active .bay-sidebar__submenu-title,
@@ -20,5 +30,13 @@
       color: var(--wk-color-primary);
       font-weight: var(--wk-font-weight);
     }
+  }
+
+  &__submenu-title,
+  &__menuitem-title {
+    user-select: none;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
   }
 }

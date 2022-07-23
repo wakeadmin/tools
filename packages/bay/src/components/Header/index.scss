@@ -100,6 +100,8 @@ $color: var(--wk-color-font-regular);
     cursor: pointer;
     padding: $menu-padding;
     white-space: nowrap;
+    text-decoration: none;
+    user-select: none;
 
     &:hover,
     &.active {

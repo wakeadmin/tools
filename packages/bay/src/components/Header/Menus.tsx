@@ -10,31 +10,50 @@ export const Menus = (props: MenusProps) => {
   return (
     <div class="bay-header__menus">
       {bay.menu?.topMenus.map(item => {
+        const handleMenuClick = (evt: MouseEvent) => {
+          evt.preventDefault();
+          if (item.url) {
+            bay.openTreeNode(item);
+          }
+        };
         return (
-          <div
+          <a
             key={item.uid}
             class={['bay-header__menu', { active: item.active }]}
-            onClick={() => item.url && bay.openTreeNode(item)}
-            title={item.url}
+            data-id={item.identifierPath}
+            data-key={item.matchKey}
+            onClick={handleMenuClick}
+            href={item.url}
           >
             {item.name}
             {!!(!item.url && item.children.length) && (
               <div class="bay-header__submenus">
                 {item.children.map(child => {
+                  const handleSubMenuClick = (evt: MouseEvent) => {
+                    evt.preventDefault();
+                    evt.stopPropagation();
+
+                    if (child.url) {
+                      bay.openTreeNode(child);
+                    }
+                  };
+
                   return (
-                    <div
+                    <a
                       key={child.uid}
                       class={['bay-header__submenu', { active: child.active }]}
-                      onClick={() => bay.openTreeNode(child)}
+                      onClick={handleSubMenuClick}
+                      data-id={child.identifierPath}
+                      data-key={child.matchKey}
                       title={item.url}
                     >
                       {child.name}
-                    </div>
+                    </a>
                   );
                 })}
               </div>
             )}
-          </div>
+          </a>
         );
       })}
     </div>
