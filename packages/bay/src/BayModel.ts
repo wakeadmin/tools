@@ -127,6 +127,25 @@ export class BayModel extends BaseModel implements IBayModel {
     makeObservable(this);
 
     window.__MAPP_BAY_MODEL__ = this;
+
+    // 支持菜单节点调试
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const me = this;
+    Object.defineProperty(window, '$m', {
+      enumerable: false,
+      get() {
+        // @ts-expect-error
+        const currentSelectNode = window.$0 as HTMLElement | undefined;
+        if (currentSelectNode != null) {
+          const id = currentSelectNode?.dataset?.id;
+          if (typeof id === 'string') {
+            return me.menu?.findByPullIdentifierPath(id).result;
+          }
+        }
+
+        return null;
+      },
+    });
   }
 
   /**
