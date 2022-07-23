@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.1.3
+
+### Patch Changes
+
+- 支持多页应用
+
 ## 0.1.2
 
 ### Patch Changes
