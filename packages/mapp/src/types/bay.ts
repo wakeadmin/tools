@@ -1,5 +1,5 @@
 import type { DefineComponent, App, Component, FunctionalComponent } from 'vue';
-import type { RouteRecordRaw, Router } from 'vue-router';
+import type { RouteRecordRaw, RouteLocationNormalized, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
 
 import { UniverseLocation, RouteLocationOptions, RouteLocationAsPathAndHash } from './route';
@@ -117,6 +117,23 @@ export interface BayHooks {
    * @param routes
    */
   beforeRouterCreate(routes: RouteRecordRaw[]): void;
+
+  /**
+   * 路由进入主界面, 如果页面路径没有在子应用中注册, 默认会跳转到全局的 404 页面，可以返回 false 阻止默认行为
+   */
+  beforeRouterEnterMain(routeInfo: {
+    /**
+     * 是否找到子应用
+     */
+    matched: boolean;
+    /**
+     * 当前匹配的应用
+     */
+    matchedApp?: MicroApp;
+    to: RouteLocationNormalized;
+    from: RouteLocationNormalized;
+    apps: MicroApp[];
+  }): Promise<undefined | false>;
 
   /**
    * 在应用创建之前调用。可以在这里修改即将注册的微应用配置

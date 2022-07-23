@@ -165,7 +165,9 @@ export class Bay implements IBay {
   }
 
   private createRouter() {
-    const routes = createRoutes(this.baseUrl, this.apps);
+    const routes = createRoutes(this.baseUrl, this.apps, async context => {
+      return await this.triggerHooks('beforeRouterEnterMain', context);
+    });
 
     // 自定义路由
     // 追加路由前缀
@@ -202,6 +204,6 @@ export class Bay implements IBay {
    */
   private triggerHooks<Name extends keyof BayHooks, Option = Parameter<BayHooks[Name]>>(name: Name, option: Option) {
     // @ts-expect-error
-    this.options.hooks?.[name]?.call(null, option as any);
+    return this.options.hooks?.[name]?.call(null, option as any);
   }
 }

@@ -2,7 +2,7 @@ import { joinQuery } from '@wakeadmin/utils';
 import { RouteRecordRaw, RouteLocationRaw, stringifyQuery, LocationQueryRaw } from 'vue-router';
 import pathUtils from 'path-browserify';
 
-import { ErrorPageProps, RouteLocationOptions, IBay } from '../../types';
+import { ErrorPageProps, RouteLocationOptions, IBay, BayHooks } from '../../types';
 
 import { ErrorPage, IndependentPage, LandingPage, MainPage } from '../components';
 import { ERROR_PAGE, LANDING_PAGE } from '../constants';
@@ -57,7 +57,11 @@ export function getErrorRoute(data: ErrorPageProps & RouteLocationOptions): Rout
  * @param baseUrl
  * @param apps
  */
-export function createRoutes(baseUrl: string, apps: MicroAppNormalized[]) {
+export function createRoutes(
+  baseUrl: string,
+  apps: MicroAppNormalized[],
+  onBeforeEnterMain?: BayHooks['beforeRouterEnterMain']
+) {
   /**
    * 内置路由
    */
@@ -113,12 +117,22 @@ export function createRoutes(baseUrl: string, apps: MicroAppNormalized[]) {
       main: true,
       apps: nonIndependentApps,
     },
-    beforeEnter: to => {
+    beforeEnter: async (to, from) => {
       // 验证是否为 nonIndependentApps 的子路由
       // 如果不是，将重定向到 404 页面
-      const found = nonIndependentApps.some(a => to.path.startsWith(a.activeRuleRaw));
-      if (!found) {
-        // TODO: 移除
+      const found = nonIndependentApps.find(a => to.path.startsWith(a.activeRuleRaw));
+      const context = {
+        to,
+        from,
+        matched: !!found,
+        matchedApp: found,
+        apps: nonIndependentApps,
+      };
+
+      const rtn = await onBeforeEnterMain?.(context);
+
+      // 应用未找到, 默认行为是跳转到 404， 应用可以返回 false 取消默认行为
+      if (!found && rtn !== false) {
         console.warn(`[mapp] ${to.path} 未匹配到任何子应用，将重定向到 404 页面`);
         return getErrorRoute({
           type: 'http',
@@ -126,7 +140,7 @@ export function createRoutes(baseUrl: string, apps: MicroAppNormalized[]) {
         });
       }
 
-      return undefined;
+      return rtn;
     },
   };
 
