@@ -15,7 +15,7 @@ export const LANDING_PAGE = '/landing';
 /**
  * 基座挂载的默认 root
  */
-export const DEFAULT_ROOT = '#app';
+export const DEFAULT_ROOT = '#bay';
 
 /**
  * 子应用默认挂载的 root
