@@ -268,6 +268,8 @@ module.exports = {
   // 开发服务器配置
   options.devServer = options.devServer ?? {};
   options.devServer.port = port;
+  options.devServer.allowedHosts = 'all';
+
   (options.devServer.client ??= {}).webSocketURL = `${isHttps ? 'wss' : 'ws'}://localhost:${port}/ws`;
 
   // 处理跨域问题
