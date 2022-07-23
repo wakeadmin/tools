@@ -1,7 +1,7 @@
 import { createApp, App } from 'vue';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import { EventEmitter, trimQueryAndHash } from '@wakeadmin/utils';
-import { registerMicroApps, start, RegistrableApp, prefetchApps } from 'qiankun';
+import { registerMicroApps, start, RegistrableApp, prefetchApps, addGlobalUncaughtErrorHandler } from 'qiankun';
 
 import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister, MicroApp } from '../../types';
 
@@ -90,6 +90,9 @@ export class Bay implements IBay {
     this.app.provide(BayProviderContext, this);
 
     this.registerApps();
+    addGlobalUncaughtErrorHandler((event, source, lineno, colno, error) => {
+      this.triggerHooks('globalUncaughtError', { event, source, lineno, colno, error });
+    });
   }
 
   mount(root?: string | HTMLElement): void {
@@ -166,7 +169,7 @@ export class Bay implements IBay {
 
   private createRouter() {
     const routes = createRoutes(this.baseUrl, this.apps, async context => {
-      return await this.triggerHooks('beforeRouterEnterMain', context);
+      return this.triggerHooks('beforeRouterEnterMain', context);
     });
 
     // 自定义路由

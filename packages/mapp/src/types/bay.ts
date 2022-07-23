@@ -158,6 +158,17 @@ export interface BayHooks {
   beforeAppUnmount(app: MicroApp): void;
 
   afterAppUnmount(app: MicroApp): void;
+
+  /**
+   * 全局未补货错误
+   */
+  globalUncaughtError(info: {
+    event: Event | string;
+    source?: string;
+    lineno?: number;
+    colno?: number;
+    error?: Error;
+  }): any;
 }
 
 /**
