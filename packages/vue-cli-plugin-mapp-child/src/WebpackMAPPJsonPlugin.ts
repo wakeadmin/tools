@@ -7,7 +7,7 @@ const PLUGIN_NAME = 'WebpackMAPPJsonPlugin';
  * 输出 mapp.json 文件
  */
 export class WebpackMAPPJsonPlugin {
-  constructor(private mapp: MicroApp) {}
+  constructor(private mapp: MicroApp | MicroApp[]) {}
 
   apply(compile: Compiler) {
     compile.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation: Compilation) => {

@@ -1,3 +1,4 @@
+// @ts-check
 const { defineConfig } = require('@vue/cli-service');
 const { defineMappChild } = require('@wakeadmin/vue-cli-plugin-mapp-child');
 const { defineVendors } = require('@wakeadmin/vue-cli-plugin-vendor');
@@ -6,7 +7,9 @@ module.exports = defineConfig({
   transpileDependencies: false,
   pluginOptions: {
     ...defineMappChild({
-      activeRule: '/dsp.html',
+      mapp: {
+        activeRule: '/dsp.html',
+      },
     }),
     ...defineVendors({
       enableInDev: true,

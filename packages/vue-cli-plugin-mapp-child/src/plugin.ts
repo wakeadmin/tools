@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { camelCase, removeTrailingSlash, addTrailingSlash, addHeadingSlash } from '@wakeadmin/utils';
+import { camelCase, removeTrailingSlash, addTrailingSlash, addHeadingSlash, upperFirst } from '@wakeadmin/utils';
 import type { ServicePlugin } from '@vue/cli-service';
 import Table from 'cli-table';
 import type { MicroApp } from '@wakeadmin/mapp/main';
@@ -17,6 +17,35 @@ import {
 // @ts-ignore
 import pluginPkg from '../package.json';
 import { WebpackMAPPJsonPlugin } from './WebpackMAPPJsonPlugin';
+
+export interface MappSingle {
+  /**
+   * 子应用的激活路由，默认为 /<name>
+   */
+  activeRule?: string;
+
+  /**
+   * 独立模式，默认为 false
+   */
+  independent?: boolean;
+
+  /**
+   * 用于多业态应用，绑定到同一个身份上
+   */
+  alias?: string;
+}
+
+export interface MappMultiple extends MappSingle {
+  /**
+   * 应用名称, 默认为 defaultName + upperFirst(entry)
+   */
+  name?: string;
+
+  /**
+   * 入口名称, 即 vue-cli pages 的 key
+   */
+  entry: string;
+}
 
 export interface PluginOptions {
   /**
@@ -54,24 +83,60 @@ export interface PluginOptions {
   shared?: SharedDeclaration[];
 
   // 以下是 MAPP 的一些配置项
-
-  /**
-   * 子应用的激活路由，默认为 /<name>
-   */
-  activeRule?: string;
-
-  /**
-   * 独立模式，默认为 false
-   */
-  independent?: boolean;
-
-  /**
-   * 用于多业态应用，绑定到同一个身份上
-   */
-  alias?: string;
+  mapp?: MappSingle | MappMultiple[];
 }
 
 const PLUGIN_NAME = pluginPkg.name;
+
+/**
+ * 创建 mapp.json 内容
+ * @param options
+ */
+function createMappConfig(options: {
+  mapp?: MappSingle | MappMultiple[];
+  version?: string;
+  description?: string;
+  defaultName: string;
+  publicPath: string;
+  isProduction: boolean;
+  checkEntry: (name: string) => void;
+}) {
+  const { mapp, defaultName, isProduction, version, description, publicPath, checkEntry } = options;
+
+  if (mapp == null || !Array.isArray(mapp) || mapp.length === 0) {
+    // 单页应用
+    const userDefineConfig = (mapp ?? mapp?.[0] ?? {}) as MappSingle;
+
+    const name = defaultName;
+    return {
+      name,
+      alias: userDefineConfig.alias,
+      activeRule: userDefineConfig.activeRule ?? addHeadingSlash(name),
+      entry: isProduction ? `__apps__/${name}/` : publicPath,
+      independent: userDefineConfig.independent,
+      version,
+      description,
+    };
+  }
+
+  return mapp.map(i => {
+    // 多页应用
+
+    checkEntry(i.entry);
+
+    const name = i.name ?? defaultName + upperFirst(i.entry);
+
+    return {
+      name,
+      alias: i.alias,
+      activeRule: i.activeRule ?? addHeadingSlash(name),
+      entry: (isProduction ? `__apps__/${defaultName}/` : publicPath) + i.entry + '.html',
+      independent: i.independent,
+      version,
+      description,
+    };
+  });
+}
 
 /**
  * 惟客云微应用接入插件
@@ -132,15 +197,21 @@ module.exports = {
  `);
   }
 
-  const mapp: MicroApp = {
-    name: _name,
-    alias: pluginOptions.alias,
-    activeRule: pluginOptions.activeRule ?? addHeadingSlash(_name),
-    entry: isProduction ? `__apps__/${_name}` : publicPath,
+  const mapp: MicroApp | MicroApp[] = createMappConfig({
+    defaultName: _name,
     version: pkg.version,
     description: pkg.description,
-    independent: pluginOptions.independent,
-  };
+    publicPath,
+    isProduction,
+    mapp: pluginOptions.mapp,
+    checkEntry: name => {
+      if (options.pages == null || !Object.prototype.hasOwnProperty.call(options.pages, name)) {
+        throw new Error(
+          `mapp name 必须在 pages 中定义，现在接收到的是：${name}, 已定义的页面有：${Object.keys(options.pages ?? {})}`
+        );
+      }
+    },
+  });
 
   const table = new Table({ colWidths: [15, 100] });
 
