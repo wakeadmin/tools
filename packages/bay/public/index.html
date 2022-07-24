@@ -31,6 +31,8 @@
       window.__I18N_BUNDLES__ = ${JSON.stringify(i18n)};
     </script>` ?>
     -->
+    <!-- head 模板 注入 -->
+    <!--! <?- headInject || '' ?> -->
   </head>
   <body>
     <noscript>
@@ -42,5 +44,7 @@
     </noscript>
     <div id="bay"></div>
     <!-- built files will be auto injected -->
+    <!-- body 模板 注入 -->
+    <!--! <?- bodyInject || '' ?> -->
   </body>
 </html>
