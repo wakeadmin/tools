@@ -12,13 +12,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "node ./build"
+    "build": "node ./build",
+    "serve": "http-serve -p 5500 --cors ."
   },
   "devDependencies": {
     "cssnano": "^5.1.12",
     "element-plus": "^2.2.10",
     "element-ui": "^2.15.9",
     "fs-extra": "^10.1.0",
+    "http-serve": "^1.0.1",
     "postcss": "^8.4.14",
     "sass": "^1.54.0"
   },

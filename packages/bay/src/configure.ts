@@ -2,6 +2,7 @@ import Framework, { configureDI, getInject } from '@wakeadmin/framework';
 import { initial } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
 import { createI18n, I18nInstance } from '@wakeadmin/i18n';
+import { queryString } from '@wakeadmin/utils';
 
 import App from './App';
 import * as services from './services';
@@ -105,6 +106,23 @@ export function configureBackend() {
   });
 }
 
+/**
+ * 注入调试脚本
+ */
+const DEBUG_SCRIPT = '__debug_script__';
+export function injectDebugScripts() {
+  const qs = queryString.parse(window.location.search);
+
+  if (DEBUG_SCRIPT in qs) {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = qs[DEBUG_SCRIPT] as string;
+    script.defer = true;
+
+    document.head.append(script);
+  }
+}
+
 export function createApp() {
   // 暴露给下级子应用的服务
   window.__MAPP_SERVICES__ = services;
@@ -113,6 +131,7 @@ export function createApp() {
 
   // 在 bay 初始化之后执行，否则无法拦截到请求
   configureBackend();
+  injectDebugScripts();
 
   return bay;
 }
