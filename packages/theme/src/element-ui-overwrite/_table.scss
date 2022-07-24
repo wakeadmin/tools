@@ -1,0 +1,26 @@
+.el-table {
+  th,
+  td {
+    padding: 14px 0;
+    > .cell {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    &:first-child .cell {
+      padding-left: 24px;
+    }
+  }
+  .cell {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  td {
+    padding: 19px 0;
+    border-bottom: 1px solid #ebeef5;
+  }
+  thead {
+    th {
+      background: #fff;
+    }
+  }
+}

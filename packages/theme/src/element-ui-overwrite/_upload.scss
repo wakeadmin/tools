@@ -1,0 +1,28 @@
+.upload-box {
+  .btn-upload {
+    font-size: 0px;
+    .upload-icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      vertical-align: middle;
+      fill: var(--wk-color-font-regular);
+    }
+    .btn-upload-text {
+      font-size: 14px;
+      font-weight: 400;
+      vertical-align: middle;
+    }
+  }
+  .btn-upload:hover {
+    .upload-icon {
+      fill: var(--wk-color-primary);
+    }
+  }
+  .upload-tip {
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    color: var(--wk-color-font-placeholder);
+  }
+}
