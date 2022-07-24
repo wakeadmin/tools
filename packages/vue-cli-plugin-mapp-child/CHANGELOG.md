@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.1.4
+
+### Patch Changes
+
+- 本地开发 host 检查关闭
+
 ## 0.1.3
 
 ### Patch Changes
