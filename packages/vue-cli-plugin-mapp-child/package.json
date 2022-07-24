@@ -30,7 +30,8 @@
     "@wakeadmin/mapp": "workspace:^0.1.1"
   },
   "peerDependencies": {
-    "@vue/cli-service": "5.*"
+    "@vue/cli-service": "5.*",
+    "html-webpack-plugin": "^5.5.0"
   },
   "dependencies": {
     "@wakeadmin/utils": "workspace:^0.1.1",

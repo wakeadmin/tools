@@ -11,6 +11,8 @@ Vue.use(Bay);
 
 let instance: Vue;
 
+console.log(process.env.HELLO);
+
 Bay.createMicroApp({
   async bootstrap() {
     console.log('bootstrap', process.env.BASE_URL);

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import webpack from 'webpack';
 import { camelCase, removeTrailingSlash, addTrailingSlash, addHeadingSlash, upperFirst } from '@wakeadmin/utils';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { ServicePlugin } from '@vue/cli-service';
 import Table from 'cli-table';
 import type { MicroApp } from '@wakeadmin/mapp/main';
@@ -76,6 +78,12 @@ export interface PluginOptions {
    * 微应用 publicPath，默认为 auto, 即 '<CDNDomain><base>/__apps__/<name>/',
    */
   publicPath?: string;
+
+  /**
+   * 定义变量
+   * 这些变量可以在 HTML 模板或者在代码中通过 process.env.* 访问
+   */
+  constants?: { [key: string]: string };
 
   /**
    * 从基座中共享的依赖，必须精确匹配
@@ -261,6 +269,41 @@ module.exports = {
         newOptions.chunkFilename = newOptions.chunkFilename + hashQuery;
 
         return [newOptions, ...other];
+      });
+    }
+
+    const constants = pluginOptions.constants ?? {};
+    const constantKeys = Object.keys(constants);
+
+    if (constantKeys.length) {
+      // 代码注入
+      chain.plugin('mapp-constants').use(webpack.DefinePlugin, [
+        constantKeys.reduce<Record<string, string>>((prev, cur) => {
+          prev[`process.env.${cur}`] = JSON.stringify(constants[cur]);
+          return prev;
+        }, {}),
+      ]);
+
+      // HTML 模板注入
+      chain.plugins.values().forEach(plug => {
+        // @ts-expect-error
+        if (plug.name?.startsWith('html') && plug.get('plugin') === HtmlWebpackPlugin) {
+          plug.tap(config => {
+            const arg = config[0];
+
+            const templateParameters = arg.templateParameters;
+
+            arg.templateParameters = function () {
+              const result = templateParameters.apply(null, arguments);
+
+              Object.assign(result, constants);
+
+              return result;
+            };
+
+            return config;
+          });
+        }
       });
     }
   });

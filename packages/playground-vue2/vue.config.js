@@ -10,6 +10,9 @@ module.exports = defineConfig({
       mapp: {
         activeRule: '/dsp.html',
       },
+      constants: {
+        HELLO: 'world',
+      },
     }),
     ...defineVendors({
       enableInDev: true,
