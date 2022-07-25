@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.1.6
+
+### Patch Changes
+
+- 支持 LESS\SCSS 变量注入
+
 ## 0.1.5
 
 ### Patch Changes
