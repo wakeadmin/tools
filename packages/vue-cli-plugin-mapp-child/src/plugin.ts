@@ -1,7 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import { camelCase, removeTrailingSlash, addTrailingSlash, addHeadingSlash, upperFirst } from '@wakeadmin/utils';
+import {
+  camelCase,
+  removeTrailingSlash,
+  addTrailingSlash,
+  addHeadingSlash,
+  upperFirst,
+  set,
+  pick,
+} from '@wakeadmin/utils';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { ServicePlugin } from '@vue/cli-service';
 import Table from 'cli-table';
@@ -83,7 +91,7 @@ export interface PluginOptions {
    * 定义变量
    * 这些变量可以在 HTML 模板或者在代码中通过 process.env.* 访问
    */
-  constants?: { [key: string]: string };
+  constants?: { [key: string]: string | undefined };
 
   /**
    * 从基座中共享的依赖，必须精确匹配
@@ -250,6 +258,17 @@ module.exports = {
     };
   });
 
+  const constants = pluginOptions.constants ?? {};
+  const constantKeys = Object.keys(constants);
+  // 内置变量
+  constants.NODE_ENV = process.env.NODE_ENV;
+  constants.BASE_URL = publicPath;
+
+  // 规范化
+  for (const constantKey of constantKeys) {
+    constants[constantKey] ??= '';
+  }
+
   api.chainWebpack(chain => {
     if (terminalMode) {
       // 添加 hash 查询字符串，方便失效统一缓存失效
@@ -272,9 +291,6 @@ module.exports = {
       });
     }
 
-    const constants = pluginOptions.constants ?? {};
-    const constantKeys = Object.keys(constants);
-
     if (constantKeys.length) {
       // 代码注入
       chain.plugin('mapp-constants').use(webpack.DefinePlugin, [
@@ -296,7 +312,7 @@ module.exports = {
             arg.templateParameters = function () {
               const result = templateParameters.apply(null, arguments);
 
-              Object.assign(result, constants);
+              Object.assign(result, pick(constants, constantKeys));
 
               return result;
             };
@@ -307,6 +323,30 @@ module.exports = {
       });
     }
   });
+
+  const extendsKeys = constantKeys.concat(['NODE_ENV', 'BASE_URL']);
+  // @ts-expect-error
+  const defaultLessData = options.css?.loaderOptions?.less?.additionalData;
+  // @ts-expect-error
+  const defaultScssData = options.css?.loaderOptions?.scss?.additionalData;
+
+  const addSemiIfNeed = (str?: string) => {
+    return (str ? (str.trim().endsWith(';') ? str : str + ';') : '') ?? '';
+  };
+
+  // Less 变量注入
+  set(
+    options,
+    'css.loaderOptions.less.additionalData',
+    addSemiIfNeed(defaultLessData) + extendsKeys.map(k => `@${k}: "${constants[k]}";`).join('\n')
+  );
+
+  // scss 变量注入
+  set(
+    options,
+    'css.loaderOptions.scss.additionalData',
+    addSemiIfNeed(defaultScssData) + extendsKeys.map(k => `$${k}: "${constants[k]}";`).join('\n')
+  );
 
   // 开发服务器配置
   options.devServer = options.devServer ?? {};
