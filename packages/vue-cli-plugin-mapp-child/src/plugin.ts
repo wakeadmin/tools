@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
@@ -324,29 +325,65 @@ module.exports = {
     }
   });
 
-  const extendsKeys = constantKeys.concat(['NODE_ENV', 'BASE_URL']);
-  // @ts-expect-error
-  const defaultLessData = options.css?.loaderOptions?.less?.additionalData;
-  // @ts-expect-error
-  const defaultScssData = options.css?.loaderOptions?.scss?.additionalData;
+  {
+    const extendsKeys = constantKeys.concat(['NODE_ENV', 'BASE_URL']);
+    // @ts-expect-error
+    const defaultLessData = options.css?.loaderOptions?.less?.additionalData;
+    // @ts-expect-error
+    const defaultScssData = options.css?.loaderOptions?.scss?.additionalData;
 
-  const addSemiIfNeed = (str?: string) => {
-    return (str ? (str.trim().endsWith(';') ? str : str + ';') : '') ?? '';
-  };
+    const addSemiIfNeed = (str?: string) => {
+      return (str ? (str.trim().endsWith(';') ? str : str + ';') : '') ?? '';
+    };
 
-  // Less 变量注入
-  set(
-    options,
-    'css.loaderOptions.less.additionalData',
-    addSemiIfNeed(defaultLessData) + extendsKeys.map(k => `@${k}: "${constants[k]}";`).join('\n')
-  );
+    // Less 变量注入
+    set(
+      options,
+      'css.loaderOptions.less.additionalData',
+      addSemiIfNeed(defaultLessData) + extendsKeys.map(k => `@${k}: "${constants[k]}";`).join('\n')
+    );
 
-  // scss 变量注入
-  set(
-    options,
-    'css.loaderOptions.scss.additionalData',
-    addSemiIfNeed(defaultScssData) + extendsKeys.map(k => `$${k}: "${constants[k]}";`).join('\n')
-  );
+    // scss 变量注入
+    set(
+      options,
+      'css.loaderOptions.scss.additionalData',
+      addSemiIfNeed(defaultScssData) + extendsKeys.map(k => `$${k}: "${constants[k]}";`).join('\n')
+    );
+  }
+
+  {
+    // 避免 CSS loader 处理 url/import 中的模板
+    // @ts-expect-error
+    const defaultCSSLoaderUrlConfig = options.css?.loaderOptions?.css?.url as
+      | boolean
+      | ((url: string, resourcePath: string) => boolean)
+      | undefined;
+    // @ts-expect-error
+    const defaultCSSLoaderImportConfig = options.css?.loaderOptions?.css?.import as
+      | boolean
+      | ((url: string, media: string, resourcePath: string) => boolean)
+      | undefined;
+    const cssImportUrlFilter = (defaultValue: boolean | Function | undefined) => {
+      return {
+        filter(url: string) {
+          if (defaultValue === false) {
+            return false;
+          }
+
+          if (typeof defaultValue === 'function') {
+            if (!defaultValue.apply(null, arguments)) {
+              return false;
+            }
+          }
+
+          return !url.startsWith('<');
+        },
+      };
+    };
+
+    set(options, 'css.loaderOptions.css.url', cssImportUrlFilter(defaultCSSLoaderUrlConfig));
+    set(options, 'css.loaderOptions.css.import', cssImportUrlFilter(defaultCSSLoaderImportConfig));
+  }
 
   // 开发服务器配置
   options.devServer = options.devServer ?? {};
