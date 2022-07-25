@@ -422,10 +422,11 @@ export class BayModel extends BaseModel implements IBayModel {
 
         if (result) {
           // 自动跳转到叶子节点
-          if (AUTO_INDEX) {
+          if (AUTO_INDEX && exact) {
             const leaf = container.getFirstMenuLeaf(result);
             // 外部链接不太适合 auto_index
             if (leaf !== result && leaf.routeType !== RouteType.Href) {
+              console.debug(`[bay] 自动 index 重定向到: ${leaf.url}`, leaf);
               this.openTreeNode(leaf, {
                 redirect: true,
                 // 透传参数
