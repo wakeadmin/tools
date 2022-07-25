@@ -133,7 +133,8 @@ export interface BayHooks {
     to: RouteLocationNormalized;
     from: RouteLocationNormalized;
     apps: MicroApp[];
-  }): Promise<undefined | false>;
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  }): Promise<void | false>;
 
   /**
    * 在应用创建之前调用。可以在这里修改即将注册的微应用配置

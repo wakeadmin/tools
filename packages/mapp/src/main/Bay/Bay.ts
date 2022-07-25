@@ -26,7 +26,7 @@ export class Bay implements IBay {
 
   options: BayOptions;
 
-  stared: boolean = false;
+  started: boolean = false;
 
   /**
    * 事件总线，用于通信
@@ -96,7 +96,7 @@ export class Bay implements IBay {
   }
 
   mount(root?: string | HTMLElement): void {
-    if (this.stared && process.env.NODE_ENV !== 'production') {
+    if (this.started && process.env.NODE_ENV !== 'production') {
       throw new Error(`[mapp] 不能重复挂载`);
     }
 
@@ -108,7 +108,7 @@ export class Bay implements IBay {
       prefetch: false,
     });
 
-    this.stared = true;
+    this.started = true;
   }
 
   prefetch(apps: MicroApp[]): void {

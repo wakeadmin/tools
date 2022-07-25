@@ -10,7 +10,7 @@ import { BayModel } from './BayModel';
 import { MicroAppModel } from './MicroAppModel';
 import { BayRepo } from './BayRepo';
 import { ErrorPage, LandingPage, Main, Debug } from './components';
-import { UNAUTH } from './constants';
+import { AUTO_INDEX, UNAUTH } from './constants';
 import { gotoLogin } from './utils';
 import './i18n';
 
@@ -51,7 +51,22 @@ export function configureBay() {
       error: ErrorPage,
       landing: LandingPage,
     },
-    hooks: {},
+    hooks: {
+      async beforeRouterEnterMain(info) {
+        if (!info.matched && info.to.path === '/' && AUTO_INDEX) {
+          // 自动跳转到首页
+          const bayModel = getInject('DI.bay.BayModel');
+
+          // 这里被迫提取初始化
+          bayModel.initialize();
+          await bayModel.waitSetup();
+
+          bayModel.openMain();
+
+          return false;
+        }
+      },
+    },
     routes: [
       {
         path: '/__debug__',

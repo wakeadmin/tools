@@ -17,6 +17,7 @@ import { PromiseQueue } from './base';
 import { IBayModel } from './types';
 import type { SessionInfo } from './session';
 import { gotoLogin } from './utils';
+import { AUTO_INDEX } from './constants';
 
 declare global {
   interface DIMapper {
@@ -418,7 +419,22 @@ export class BayModel extends BaseModel implements IBayModel {
         console.debug('开始匹配节点', location);
 
         const { result, exact } = container.findByRoute(location);
+
         if (result) {
+          // 自动跳转到叶子节点
+          if (AUTO_INDEX) {
+            const leaf = container.getFirstMenuLeaf(result);
+            // 外部链接不太适合 auto_index
+            if (leaf !== result && leaf.routeType !== RouteType.Href) {
+              this.openTreeNode(leaf, {
+                redirect: true,
+                // 透传参数
+                hashQuery: this.bay.location.hashQuery,
+              });
+              return;
+            }
+          }
+
           container.lightUp(result, exact);
         }
       },

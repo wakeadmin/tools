@@ -365,6 +365,31 @@ export class TreeContainer {
   }
 
   /**
+   * 获取当前节点的首个菜单叶子节点
+   */
+  getFirstMenuLeaf(node: TreeNode): TreeNode {
+    if (node.children.length) {
+      for (const child of node.children) {
+        if (child.type === MenuType.Menu && child.url) {
+          if (child.children.length) {
+            // 继续递归
+            const found = this.getFirstMenuLeaf(child);
+
+            if (found) {
+              return found;
+            }
+          }
+
+          // 没有子节点了
+          return child;
+        }
+      }
+    }
+
+    return node;
+  }
+
+  /**
    * 激活
    * @param node 必须为叶子节点
    * @param exact 是否为精确匹配
