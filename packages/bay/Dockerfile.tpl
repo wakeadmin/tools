@@ -1,4 +1,3 @@
-ARG NOW=1
 FROM {{HOST_PREFIX}}wkfe/mapp
 
 WORKDIR /data
