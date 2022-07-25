@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.1.5
+
+### Patch Changes
+
+- 支持自定义变量
+
 ## 0.1.4
 
 ### Patch Changes

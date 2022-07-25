@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.1.5
+
+### Patch Changes
+
+- 支持 auto-index；支持 head、body 模板注入
+
 ## 0.1.4
 
 ### Patch Changes
