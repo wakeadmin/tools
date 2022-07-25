@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.1.7
+
+### Patch Changes
+
+- 修复 css-loader 将模板语法识别为模块导入
+
 ## 0.1.6
 
 ### Patch Changes
