@@ -9,6 +9,7 @@ import {
   registerBundles,
   I18nOptions,
   EVENT_LOCALE_CHANGE,
+  EVENT_MESSAGE_CHANGE,
   EVENT_READY,
 } from '.';
 import Vue from 'vue';
@@ -86,7 +87,9 @@ const suite = async (options: I18nOptions) => {
 
       // 切换语言
       instance.setLocale('zhHant');
-      await Promise.resolve();
+      await new Promise(resolve => {
+        instance.eventBus.once(EVENT_MESSAGE_CHANGE, resolve);
+      });
 
       expect(instance.i18n.messages).toEqual({
         en: {
@@ -107,6 +110,10 @@ const suite = async (options: I18nOptions) => {
     });
   });
 
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
   test('render', () => {
     const { i18n } = createI18n({ ...options, messages: { en: { hello: 'world' } } });
     const app = new Vue({
@@ -119,6 +126,28 @@ const suite = async (options: I18nOptions) => {
     document.body.appendChild(root);
     app.$mount(root);
     expect(document.body.outerHTML).toBe('<body><p>world</p></body>');
+  });
+
+  test('lazy bundle render', async () => {
+    const bundle = () => Promise.resolve({ missing: '不见了' });
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    const { i18n, registerBundles } = createI18n({ ...options, messages: { en: { hello: 'world' } } });
+    const defer = registerBundles({ en: bundle });
+
+    const app = new Vue({
+      i18n,
+      render(h) {
+        return h('p', {}, `${this.$t('hello') as string}[${this.$t('missing') as string}]`);
+      },
+    });
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+    app.$mount(root);
+    // 空白占位符
+    expect(document.body.outerHTML).toBe('<body><p>world[  ]</p></body>');
+
+    await defer;
+    expect(document.body.outerHTML).toBe('<body><p>hello[不见了]</p></body>');
   });
 };
 
