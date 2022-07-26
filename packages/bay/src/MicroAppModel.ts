@@ -1,7 +1,9 @@
 import { MicroApp, getBay } from '@wakeadmin/mapp/main';
 import { injectable, makeObservable, observable, singleton } from '@wakeadmin/framework';
+import { debounce } from '@wakeadmin/utils';
 
 const LOCAL_MAPP_KEY = '__LOCAL_MAPP__';
+const DEBUG_SCRIPT_KEY = '__DEBUG_SCRIPT__';
 
 declare global {
   interface DIMapper {
@@ -15,11 +17,19 @@ export class MicroAppModel {
   @observable
   apps: MicroApp[] = [];
 
+  /**
+   * 调试脚本, 这些脚本将使用 module 形式注入
+   */
+  @observable
+  debugScript: string = '';
+
   constructor() {
     const localAppsStr = window.localStorage.getItem(LOCAL_MAPP_KEY);
     if (localAppsStr != null) {
       this.apps.push(...JSON.parse(localAppsStr));
     }
+
+    this.debugScript = window.localStorage.getItem(DEBUG_SCRIPT_KEY) ?? '';
 
     /**
      * 微应用注册
@@ -102,4 +112,17 @@ export class MicroAppModel {
     const list = this.apps.filter(this.isLocalApp);
     window.localStorage.setItem(LOCAL_MAPP_KEY, JSON.stringify(list));
   }
+
+  /**
+   * 设置调试脚本
+   * @param value
+   */
+  saveDebugScript(value: string) {
+    this.debugScript = value;
+    this.debouncedSaveDebugScript(value);
+  }
+
+  private debouncedSaveDebugScript = debounce((value: string) => {
+    window.localStorage.setItem(DEBUG_SCRIPT_KEY, value);
+  }, 500);
 }

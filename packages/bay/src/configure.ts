@@ -2,7 +2,6 @@ import Framework, { configureDI, getInject } from '@wakeadmin/framework';
 import { initial } from '@wakeapp/wakedata-backend';
 import { createBay, IBay } from '@wakeadmin/mapp/main';
 import { createI18n, I18nInstance } from '@wakeadmin/i18n';
-import { queryString } from '@wakeadmin/utils';
 
 import App from './App';
 import * as services from './services';
@@ -124,17 +123,24 @@ export function configureBackend() {
 /**
  * 注入调试脚本
  */
-const DEBUG_SCRIPT = '__debug_script__';
 export function injectDebugScripts() {
-  const qs = queryString.parse(window.location.search);
+  const debugScript = getInject('DI.bay.MicroAppModel').debugScript;
+  const scripts = debugScript
+    .trim()
+    .split(/\s*,\s*/)
+    .filter(i => Boolean(i.trim()));
 
-  if (DEBUG_SCRIPT in qs) {
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = qs[DEBUG_SCRIPT] as string;
-    script.defer = true;
+  if (scripts.length) {
+    for (const src of scripts) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = src;
+      script.defer = true;
 
-    document.head.append(script);
+      document.head.append(script);
+
+      console.debug(`[bay] 正在注入调试脚本：${src}`);
+    }
   }
 }
 

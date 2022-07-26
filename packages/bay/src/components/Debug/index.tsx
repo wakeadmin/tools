@@ -22,6 +22,7 @@ import { useBayModel } from '@/hooks';
 import './index.scss';
 
 export const Debug = defineComponent({
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Debug',
   setup() {
     const bayModel = useBayModel();
@@ -85,72 +86,90 @@ export const Debug = defineComponent({
 
     return () => {
       return (
-        <div class="debug">
-          <div class="debug__hd">已注册微应用</div>
-          <div class="debug__bd">
-            <ul>
-              {model.apps.map(i => {
-                const removable = model.isLocalApp(i);
-                return (
-                  <li key={`${i.name}-${i.activeRule}-${i.entry}`} class="debug-mapp">
-                    {removable && <div class="debug__badge">本地</div>}
-                    name=<span class="debug__field">{i.name}</span>; entry=<span class="debug__field">{i.entry}</span>;
-                    activeRule=<span class="debug__field">{i.activeRule}</span>; independent=
-                    <span class="debug__field">{String(!!i.independent)}</span>
-                    <ElLink href={bayModel.generateLandingUrl({ type: 'app', name: i.name })} style="margin-left: 20px">
-                      打开
-                    </ElLink>
-                    {removable && (
-                      <ElIcon class="debug__delete">
-                        <DeleteBin onClick={() => model.deleteLocalMapp(i)}></DeleteBin>
-                      </ElIcon>
-                    )}
-                    {removable && (
-                      <ElIcon class="debug__delete">
-                        <EditSquare onClick={() => handleEdit(i)}></EditSquare>
-                      </ElIcon>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-            {!adding.value && <ElButton onClick={handleAdd}>添加本地应用</ElButton>}
-            {!!adding.value && (
-              <div class="debug__add">
-                <ElForm ref={addForm} labelWidth="180px" labelPosition="right" rules={rulesAdd} model={adding.value}>
-                  <ElFormItem label="名称(name)" prop="name">
-                    <ElInput
-                      modelValue={adding.value.name}
-                      onUpdate:modelValue={v => (adding.value!.name = v)}
-                      placeholder="微应用名称"
-                    />
-                  </ElFormItem>
-                  <ElFormItem label="入口(entry)" prop="entry">
-                    <ElInput
-                      modelValue={adding.value.entry}
-                      onUpdate:modelValue={v => (adding.value!.entry = v)}
-                      placeholder="//localhost:port"
-                    />
-                  </ElFormItem>
-                  <ElFormItem label="路由(activeRule)" prop="activeRule">
-                    <ElInput
-                      modelValue={adding.value.activeRule}
-                      onUpdate:modelValue={v => (adding.value!.activeRule = v)}
-                      placeholder="/my-app"
-                    />
-                  </ElFormItem>
-                  <ElFormItem label="独立模式(independent)" prop="independent">
-                    <ElCheckbox
-                      modelValue={adding.value.independent}
-                      onUpdate:modelValue={v => (adding.value!.independent = v as boolean)}
-                    />
-                  </ElFormItem>
-                  <ElFormItem>
-                    <ElButton onClick={handleSaveAdd}>添加</ElButton>
-                  </ElFormItem>
-                </ElForm>
-              </div>
-            )}
+        <div>
+          <div class="debug">
+            <div class="debug__hd">已注册微应用</div>
+            <div class="debug__bd">
+              <ul>
+                {model.apps.map(i => {
+                  const removable = model.isLocalApp(i);
+                  return (
+                    <li key={`${i.name}-${i.activeRule}-${i.entry}`} class="debug-mapp">
+                      {removable && <div class="debug__badge">本地</div>}
+                      name=<span class="debug__field">{i.name}</span>; entry=<span class="debug__field">{i.entry}</span>
+                      ; activeRule=<span class="debug__field">{i.activeRule}</span>; independent=
+                      <span class="debug__field">{String(!!i.independent)}</span>
+                      <ElLink
+                        href={bayModel.generateLandingUrl({ type: 'app', name: i.name })}
+                        style="margin-left: 20px"
+                      >
+                        打开
+                      </ElLink>
+                      {removable && (
+                        <ElIcon class="debug__delete">
+                          <DeleteBin onClick={() => model.deleteLocalMapp(i)}></DeleteBin>
+                        </ElIcon>
+                      )}
+                      {removable && (
+                        <ElIcon class="debug__delete">
+                          <EditSquare onClick={() => handleEdit(i)}></EditSquare>
+                        </ElIcon>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              {!adding.value && <ElButton onClick={handleAdd}>添加本地应用</ElButton>}
+              {!!adding.value && (
+                <div class="debug__add">
+                  <ElForm ref={addForm} labelWidth="180px" labelPosition="right" rules={rulesAdd} model={adding.value}>
+                    <ElFormItem label="名称(name)" prop="name">
+                      <ElInput
+                        modelValue={adding.value.name}
+                        onUpdate:modelValue={v => (adding.value!.name = v)}
+                        placeholder="微应用名称"
+                      />
+                    </ElFormItem>
+                    <ElFormItem label="入口(entry)" prop="entry">
+                      <ElInput
+                        modelValue={adding.value.entry}
+                        onUpdate:modelValue={v => (adding.value!.entry = v)}
+                        placeholder="//localhost:port"
+                      />
+                    </ElFormItem>
+                    <ElFormItem label="路由(activeRule)" prop="activeRule">
+                      <ElInput
+                        modelValue={adding.value.activeRule}
+                        onUpdate:modelValue={v => (adding.value!.activeRule = v)}
+                        placeholder="/my-app"
+                      />
+                    </ElFormItem>
+                    <ElFormItem label="独立模式(independent)" prop="independent">
+                      <ElCheckbox
+                        modelValue={adding.value.independent}
+                        onUpdate:modelValue={v => (adding.value!.independent = v as boolean)}
+                      />
+                    </ElFormItem>
+                    <ElFormItem>
+                      <ElButton onClick={handleSaveAdd}>添加</ElButton>
+                    </ElFormItem>
+                  </ElForm>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div class="debug">
+            <div class="debug__hd">调试脚本注入</div>
+            <div class="debug__bd">
+              <ElInput
+                modelValue={model.debugScript}
+                onUpdate:modelValue={e => {
+                  model.saveDebugScript(e);
+                }}
+                placeholder="调试脚本链接，多个脚本以 ',' 分隔, 重启后生效"
+              />
+            </div>
           </div>
         </div>
       );
