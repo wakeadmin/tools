@@ -13,6 +13,7 @@ import {
   I18nOptions,
   EVENT_LOCALE_CHANGE,
   EVENT_READY,
+  EVENT_MESSAGE_CHANGE,
 } from '.';
 import { useI18n } from 'vue-i18n';
 
@@ -91,7 +92,9 @@ const suite = async (options: I18nOptions) => {
 
       // 切换语言
       instance.setLocale('zhHant');
-      await Promise.resolve();
+      await new Promise(resolve => {
+        instance.eventBus.once(EVENT_MESSAGE_CHANGE, resolve);
+      });
 
       expect(unref(instance.i18n.messages)).toEqual({
         en: {
@@ -113,6 +116,10 @@ const suite = async (options: I18nOptions) => {
     });
   });
 
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
   describe('test in vue', () => {
     // legacy 模式不支持传统 API
     if (options.legacy !== false) {
@@ -131,15 +138,35 @@ const suite = async (options: I18nOptions) => {
     test('composition', () => {
       const i = createI18n({ ...options, messages: { en: { hello: 'world' } } });
       const app = createApp({
-        template: `<p>{{t('hello')}}</p>`,
         setup() {
           const { t } = useI18n();
           return { t };
         },
+        template: `<p>{{t('hello')}}</p>`,
       });
       app.use(i);
       app.mount('body');
       expect(document.body.outerHTML).toBe('<body data-v-app=""><p>world</p></body>');
+    });
+
+    test('lazy composition', async () => {
+      const bundle = () => Promise.resolve({ missing: '不见了' });
+      const i = createI18n({ ...options, messages: { en: { hello: 'world' } } });
+      const defer = i.registerBundles({ en: bundle });
+
+      const app = createApp({
+        setup() {
+          const { t } = useI18n();
+          return { t };
+        },
+        template: `<p>{{t('hello')}}[{{t('missing')}}]</p>`,
+      });
+      app.use(i);
+      app.mount('body');
+      expect(document.body.outerHTML).toBe('<body data-v-app=""><p>world[  ]</p></body>');
+
+      await defer;
+      expect(document.body.outerHTML).toBe('<body data-v-app=""><p>hello[不见了]</p></body>');
     });
   });
 };

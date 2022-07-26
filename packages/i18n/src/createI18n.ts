@@ -38,9 +38,20 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   __resetReadyState();
 
   let { detect, mapper, fallbackLocale, datetimeFormats, numberFormats, locale, ...other } = options ?? {};
+  let ready = false;
+  let bundleRegister: BundleRegister;
 
   const localeMapper = normalizeMapper(mapper ?? DEFAULT_MAPPER);
   const detector = detect ?? new LocaleDetect();
+
+  // 语言丢失处理器，如果语言包处于加载状态，则返回空字符串，避免出现闪烁
+  const missingHandler = () => {
+    if (!ready || bundleRegister.hasPendingBundle()) {
+      return '  ';
+    }
+
+    return undefined;
+  };
 
   fallbackLocale ??= DEFAULT_LOCALE;
   datetimeFormats = { ...DEFAULT_DATETIME_FORMATS, ...datetimeFormats };
@@ -52,6 +63,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
     fallbackLocale,
     datetimeFormats,
     numberFormats,
+    missing: missingHandler,
     ...other,
   });
 
@@ -90,7 +102,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
     return fallbackWithLocaleChain(vueI18nInstance, fallback, loc);
   };
 
-  const bundleRegister = new BundleRegister(
+  bundleRegister = new BundleRegister(
     (loc, bundle) => {
       vueI18nInstance.setLocaleMessage(loc, bundle);
     },
@@ -128,16 +140,17 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   };
 
   __setGlobalInstance(instance);
+  __flushReadyWaitQueue();
+
+  // 全局共享的语言包
+  if (typeof window !== 'undefined' && window.__I18N_BUNDLES__) {
+    // 远程加载的语言包优先级高一点，这里设置为 5， 默认是 10
+    bundleRegister.registerBundles(window.__I18N_BUNDLES__, 5);
+  }
 
   Promise.resolve().then(() => {
     eventBus.emit(EVENT_READY, instance);
-    __flushReadyWaitQueue();
-
-    // 全局共享的语言包
-    if (typeof window !== 'undefined' && window.__I18N_BUNDLES__) {
-      // 远程加载的语言包优先级高一点，这里设置为 5， 默认是 10
-      bundleRegister.registerBundles(window.__I18N_BUNDLES__, 5);
-    }
+    ready = true;
   });
 
   return instance;
