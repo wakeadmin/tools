@@ -1,5 +1,11 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.4
+
+### Patch Changes
+
+- 当前语言缓存 key 和现有惟客云保持一致
+
 ## 0.1.3
 
 ### Patch Changes
