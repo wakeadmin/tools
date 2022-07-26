@@ -53,6 +53,17 @@ export class BundleRegister {
   ) {}
 
   /**
+   * 判断是否存在正在加载中的语言包
+   */
+  hasPendingBundle() {
+    if (this.executing) {
+      return true;
+    }
+
+    return this.hasUnloadedBundle();
+  }
+
+  /**
    * 调度语言包加载和合并
    */
   async schedulerMerge(): Promise<void> {
@@ -60,10 +71,16 @@ export class BundleRegister {
       return await this.pendingQueue.push();
     }
 
+    let queue = this.pendingQueue;
+
     try {
       this.executing = true;
+
       // 等待更多 bundle 插入，批量执行
       await Promise.resolve();
+
+      // 下一批执行
+      this.pendingQueue = new PromiseQueue();
 
       // 加载当前语言
       const localeChain = this.getLocaleChain();
@@ -143,18 +160,30 @@ export class BundleRegister {
           messageToUpdate[locale] = layerLink;
         }
 
-        // 触发更新
-        for (const locale in messageToUpdate) {
-          this.registerBundle(locale, messageToUpdate[locale].flattenLayer());
-        }
+        Promise.resolve().then(() => {
+          // 为什么放在下一 tick? 这是为了 判断 hashPendingBundle 更加精确
+          // 触发更新
+          for (const locale in messageToUpdate) {
+            this.registerBundle(locale, messageToUpdate[locale].flattenLayer());
+          }
 
-        this.onBundleChange();
+          this.onBundleChange();
+        });
       }
     } catch (err) {
       console.error(`[i18n] 语言包加载失败`, err);
     } finally {
       this.executing = false;
-      this.pendingQueue.flushResolve();
+      queue.flushResolve();
+
+      // 判断是否有新的 bundle 加进来，需要继续调度加载
+      if (this.hasUnloadedBundle()) {
+        // 继续调度
+        this.schedulerMerge();
+      } else {
+        // 没有了，清空队列不需要继续等待了
+        this.pendingQueue.flushResolve();
+      }
     }
   }
 
@@ -189,6 +218,28 @@ export class BundleRegister {
       return await this.schedulerMerge();
     }
   };
+
+  /**
+   * 判断是否有未加载的语言包
+   */
+  private hasUnloadedBundle() {
+    const localeChain = this.getLocaleChain();
+    for (const locale of localeChain) {
+      const resource = this.resources[locale.toLowerCase()];
+
+      if (resource == null) {
+        continue;
+      }
+
+      for (const bundle of resource.values()) {
+        if (!isLoaded(bundle)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 
   private getLayer(value: any): number {
     return value?.[LAYER] ?? DEFAULT_LAYER;
