@@ -1,6 +1,6 @@
 import { LocaleDetector } from './types';
 
-export const DEFAULT_LOCALE_PERSIST_KEY = '__locale__';
+export const DEFAULT_LOCALE_PERSIST_KEY = '__i18n__';
 
 /**
  * 当前语言检查
