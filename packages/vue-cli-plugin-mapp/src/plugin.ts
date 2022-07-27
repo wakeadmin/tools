@@ -24,14 +24,14 @@ export interface PluginOptions {
   /**
    * CDN 域名，如果静态资源需要由 CDN 分发，则需要配置此项
    * CDN 域名需要自己加上 https:// 或者 // 前缀，本插件不会处理
-   * 如果开启了 terminalMode, CDNDomain 默认为 "<?= cdnDomain ? '//' + cdnDomain : '' ?>"
+   * 如果开启了 terminalMode, CDNDomain 默认为 "[%= cdnDomain ? '//' + cdnDomain : '' %]"
    */
   CDNDomain?: string;
 
   /**
    * 主应用基础路径，默认为 '/' ,  你可以在程序中通过 process.env.MAPP_BASE_URL 获取到该路径
    *
-   * 如果开启了 terminalMode, baseUrl 默认为 "<?= removeTrailingSlash(base) ?>"
+   * 如果开启了 terminalMode, baseUrl 默认为 "[%= removeTrailingSlash(base) %]"
    */
   baseUrl?: string;
 
@@ -60,8 +60,8 @@ export const plugin: ServicePlugin = (api, options) => {
   const pkg = JSON.parse(fs.readFileSync(pkgPath).toString()) as PackageJSONLike;
 
   const terminalMode = (pluginOptions.terminalMode ?? true) && isProduction; // 生产环境才起作用
-  const _CDNDomain = pluginOptions.CDNDomain ?? (terminalMode ? "<?= cdnDomain ? '//' + cdnDomain : '' ?>" : undefined);
-  const _baseUrl = pluginOptions.baseUrl ?? (terminalMode ? '<?= removeTrailingSlash(base) ?>' : undefined) ?? '/';
+  const _CDNDomain = pluginOptions.CDNDomain ?? (terminalMode ? "[%= cdnDomain ? '//' + cdnDomain : '' %]" : undefined);
+  const _baseUrl = pluginOptions.baseUrl ?? (terminalMode ? '[%= removeTrailingSlash(base) %]' : undefined) ?? '/';
   const _shared = pluginOptions.shared ?? [];
   const _publicPath = pluginOptions.publicPath ?? 'auto';
 
@@ -134,7 +134,7 @@ module.exports = {
 
     if (terminalMode) {
       // 添加 hash 查询字符串，方便失效统一缓存失效
-      const hashQuery = '?<?= hash ?>';
+      const hashQuery = '?[%= hash %]';
 
       const filename = chain.output.get('filename');
       const chunkFilename = chain.output.get('chunkFilename');

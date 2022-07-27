@@ -49,7 +49,7 @@ export const plugin: ServicePlugin = (api, options) => {
     return;
   }
 
-  const base = ownOptions.base ?? `<?= publicPath ?>__vendors__/`;
+  const base = ownOptions.base ?? `[%= publicPath %]__vendors__/`;
 
   const modules = Object.keys(ownOptions.modules ?? {}).reduce<{ [module: string]: { name: string; url: string } }>(
     (prev, cur) => {
