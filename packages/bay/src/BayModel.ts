@@ -416,7 +416,7 @@ export class BayModel extends BaseModel implements IBayModel {
           return;
         }
 
-        console.debug('开始匹配节点', location);
+        console.debug('[bay] 开始匹配节点', location);
 
         const { result, exact } = container.findByRoute(location);
 

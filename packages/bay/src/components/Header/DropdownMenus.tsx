@@ -120,7 +120,7 @@ export const DropdownMenus = defineComponent({
                       <ElIcon>
                         <Icon icon={button.icon ?? ClassificationSquare} />
                       </ElIcon>
-                      {button.name}
+                      {t(`menu.${button.identifierPath}`, button.name)}
                     </ElDropdown.DropdownItem>
                   );
                 })}

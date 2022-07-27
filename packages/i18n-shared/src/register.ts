@@ -109,6 +109,7 @@ export class BundleRegister {
                 const loadedBundle = await asyncModuleLoader(bundle as I18nAsyncBundle);
                 if (loadedBundle) {
                   this.setLayer(loadedBundle, layer);
+                  console.debug(`[i18n] bundle loaded: `, bundle);
                   (messages[locale] ??= []).push(loadedBundle);
                 }
               })()
@@ -121,6 +122,7 @@ export class BundleRegister {
 
                 if (loadedBundle) {
                   this.setLayer(loadedBundle, layer);
+                  console.debug(`[i18n] bundle loaded: `, bundle);
                   (messages[locale] ??= []).push(loadedBundle);
                 }
               })()
@@ -139,7 +141,7 @@ export class BundleRegister {
         try {
           await Promise.all(task);
         } catch (err) {
-          console.warn(`[bay] 加载语言包失败:`, err);
+          console.warn(`[i18n] 加载语言包失败:`, err);
         }
       }
 

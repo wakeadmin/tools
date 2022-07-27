@@ -17,6 +17,7 @@ const IMAGE_ICON_STYLE: CSSProperties = {
  * 图标渲染
  */
 export const Icon = defineComponent({
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Icon',
   props: {
     /**
@@ -46,7 +47,7 @@ export const Icon = defineComponent({
           } else if (asset.startsWith('http')) {
             children = h('img', { src: asset, style: IMAGE_ICON_STYLE, alt: 'icon' });
           } else {
-            console.warn(`[bay ] Icon 仅支持 svg 图片, 目前传入的是: `, asset);
+            console.warn(`[bay] Icon 仅支持 svg 图片, 目前传入的是: `, asset);
           }
         }
       } else if (icon != null) {
