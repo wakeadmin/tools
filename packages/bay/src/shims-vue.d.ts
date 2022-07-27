@@ -9,6 +9,10 @@ declare module '*.png' {
   export default string;
 }
 
+declare module '*.gif' {
+  export default string;
+}
+
 declare module '*.tr' {
   export default object;
 }

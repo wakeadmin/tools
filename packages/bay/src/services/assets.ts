@@ -17,8 +17,12 @@ declare global {
     IMG_BAY_LOGO: 'logo';
     IMG_BAY_AVATAR: '头像';
     IMG_BAY_ERROR: '默认错误图片';
+
+    IMG_BAY_APP_LOADING: '应用加载图片';
+
     IMG_BAY_ERROR_404: '默认 404 错误图片';
     IMG_BAY_ERROR_403: '默认 403 错误图片';
+
     TXT_BAY_FOOTER: '底部文本';
     TXT_BAY_404: '404 错误文本';
     TXT_BAY_403: '403 错误文本';

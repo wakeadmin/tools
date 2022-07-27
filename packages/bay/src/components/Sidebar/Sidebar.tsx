@@ -1,7 +1,7 @@
 /* eslint-disable vue/one-component-per-file */
 import { defineComponent, PropType } from 'vue';
 import { NoopArray } from '@wakeadmin/utils';
-import { ElMenu, ElIcon } from 'element-plus';
+import { ElMenu, ElIcon, ElLoadingDirective } from 'element-plus';
 import { ClassificationSquare } from '@wakeadmin/icons';
 import { useI18n } from 'vue-i18n';
 
@@ -9,9 +9,11 @@ import { useBayModel } from '@/hooks';
 import { MOUNT_POINT_SIDEBAR_BOTTOM, MOUNT_POINT_SIDEBAR_TOP } from '@/constants';
 import { TreeContainer, TreeNode } from '@/tree';
 import { BayModel } from '@/BayModel';
+import { getMenuI18nKey } from '@/utils';
 
 import './index.scss';
 import { Icon } from '../Icon';
+import { withDirectives } from '@wakeadmin/h';
 
 const preventDefault = (evt: MouseEvent) => {
   evt.preventDefault();
@@ -48,7 +50,7 @@ const SubMenu = defineComponent({
             data-id={menu.identifierPath}
             data-key={menu.matchKey}
           >
-            {t(`menu.${menu.identifierPath}`, menu.name)}
+            {t(getMenuI18nKey(menu.identifierPath), menu.name)}
           </TitleTag>
         </>
       );
@@ -78,7 +80,7 @@ const SubMenu = defineComponent({
                     data-id={submenu.identifierPath}
                     data-key={submenu.matchKey}
                   >
-                    {t(`menu.${submenu.identifierPath}`, submenu.name)}
+                    {t(getMenuI18nKey(submenu.identifierPath), submenu.name)}
                   </a>
                 </ElMenu.MenuItem>
               );
@@ -115,7 +117,10 @@ export const Sidebar = defineComponent({
       const activeIdentifierPath = bay.menu?.activeSecondaryNode?.identifierPath;
 
       return (
-        <div class={['bay-sidebar', { collapse: bay.menuCollasped }]}>
+        <div
+          class={['bay-sidebar', { collapse: bay.menuCollasped }]}
+          {...withDirectives([[ElLoadingDirective, bay.bay.isCurrentMicroAppLoading]])}
+        >
           <div id={MOUNT_POINT_SIDEBAR_TOP}></div>
           <ElMenu
             defaultActive={activeIdentifierPath}

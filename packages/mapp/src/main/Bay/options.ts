@@ -16,7 +16,7 @@ function hasContainer(container: string | HTMLElement) {
   return !!container;
 }
 
-const createLoader = (container: string | HTMLElement) => {
+const createLoader = (container: string | HTMLElement, name: string) => {
   // qiankun 会等待这里 resolve 才会开始挂载
   // 我们在这里等待路由 resolve
   let loaded = false;
@@ -29,6 +29,7 @@ const createLoader = (container: string | HTMLElement) => {
     if (!loaded) {
       // 首次加载时不需要阻塞，这里耗时比较长，通常vue-router 已经挂载了
       loaded = true;
+      window.dispatchEvent(new CustomEvent('mapp:first-load', { detail: { app: name } }));
       return undefined;
     }
 
@@ -102,7 +103,7 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
       activeRuleRaw: trimBaseUrl(baseUrl, normalizedActiveRule),
       entry: normalizedEntry,
       container,
-      loader: createLoader(container),
+      loader: createLoader(container, app.name),
       ...other,
     };
   });

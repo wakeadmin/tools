@@ -2,6 +2,7 @@
 
 .bay-layout-error {
   $desc-color: getVar(error-desc-color, --wk-color-font-placeholder);
+  $extra-color: getVar(error-extra-color, --wk-color-font-placeholder);
   $desc-top: getVar(error-desc-top, 20px);
   $font-size: getVar(error-font-size, --wk-font-size-h4);
   $image-size: getVar(error-image-size, 220px);
@@ -18,7 +19,7 @@
   justify-content: center;
   font-size: $font-size;
 
-  &__image > img {
+  &__image img {
     width: $image-size;
     object-fit: contain;
   }
@@ -30,5 +31,7 @@
 
   &__extra {
     margin-top: $extra-top;
+    color: $extra-color;
+    font-size: 0.8em;
   }
 }

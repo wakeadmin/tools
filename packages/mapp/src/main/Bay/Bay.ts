@@ -3,7 +3,15 @@ import { createRouter, createWebHistory, Router } from 'vue-router';
 import { EventEmitter, trimQueryAndHash } from '@wakeadmin/utils';
 import { registerMicroApps, start, RegistrableApp, prefetchApps, addGlobalUncaughtErrorHandler } from 'qiankun';
 
-import { BayHooks, BayOptions, IBay, Parameter, INetworkInterceptorRegister, MicroApp } from '../../types';
+import {
+  BayHooks,
+  BayOptions,
+  IBay,
+  Parameter,
+  INetworkInterceptorRegister,
+  MicroApp,
+  MicroAppStatus,
+} from '../../types';
 
 import { NoopPage } from '../components';
 import { BayProviderContext, DEFAULT_ROOT } from '../constants';
@@ -46,6 +54,35 @@ export class Bay implements IBay {
 
   get location() {
     return this.history.location;
+  }
+
+  /**
+   * 当前激活的微应用
+   */
+  get currentMicroApp(): MicroApp | undefined {
+    return this.appContext.currentApp.value;
+  }
+
+  /**
+   * 当前微应用的状态
+   */
+  get currentMicroAppStatus(): MicroAppStatus {
+    return this.appContext.currentAppStatus.value;
+  }
+
+  /**
+   * 当前微应用的状态
+   */
+  get currentMicroAppError(): Error | undefined {
+    return this.appContext.currentAppError.value;
+  }
+
+  get isCurrentMicroAppLoading(): boolean {
+    return this.appContext.isCurrentAppLoading.value;
+  }
+
+  get isCurrentMicroAppError(): boolean {
+    return this.appContext.isCurrentAppError.value;
   }
 
   private history: UniverseHistory;

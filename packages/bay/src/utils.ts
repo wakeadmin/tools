@@ -13,3 +13,7 @@ export const gotoLogin = debounce(
   1000,
   { leading: true }
 );
+
+export function getMenuI18nKey(path: string) {
+  return `menu.${path}$`;
+}

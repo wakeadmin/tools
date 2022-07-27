@@ -7,6 +7,8 @@ import { useAsset, useBayModel, useBodyClass } from '@/hooks';
 import { Header, HeaderFallback } from '../Header';
 import { Sidebar, SidebarFallback } from '../Sidebar';
 
+import { AppLoading } from './AppLoading';
+
 import './index.scss';
 
 /**
@@ -55,6 +57,16 @@ export const Main = defineComponent({
             <main class="bay-app-landing" id={DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX}>
               {/* 微应用将挂载到这里 */}
             </main>
+            {/* 加载错误 */}
+            {bay.bay.isCurrentMicroAppError ? (
+              <div class="bay-app-error">
+                <wkc-error-page description={`抱歉，应用加载失败`}>
+                  {bay.bay.currentMicroAppError?.message}
+                </wkc-error-page>
+              </div>
+            ) : bay.bay.isCurrentMicroAppLoading ? (
+              <AppLoading></AppLoading>
+            ) : null}
             <footer class="bay-footer">{FOOTER.value}</footer>
           </div>
         </div>

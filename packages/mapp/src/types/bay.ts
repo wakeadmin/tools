@@ -83,6 +83,24 @@ export interface LandingPageProps {
 }
 
 /**
+ * 微应用状态
+ * https://zh-hans.single-spa.js.org/docs/api#getappstatus
+ */
+export type MicroAppStatus =
+  | 'NOT_LOADED'
+  | 'LOADING_SOURCE_CODE'
+  | 'NOT_BOOTSTRAPPED'
+  | 'BOOTSTRAPPING'
+  | 'NOT_MOUNTED'
+  | 'MOUNTING'
+  | 'MOUNTED'
+  | 'UPDATING'
+  | 'UNMOUNTING'
+  | 'UNLOADING'
+  | 'SKIP_BECAUSE_BROKEN'
+  | 'LOAD_ERROR';
+
+/**
  * 内置界面定义
  */
 export interface BuiltinPages {
@@ -214,6 +232,7 @@ export interface BayOptions {
    */
   rootComponent?: Component;
 }
+
 /**
  * 基座实例
  */
@@ -256,6 +275,31 @@ export interface IBay {
   independentApps: MicroApp[];
 
   nonIndependentApps: MicroApp[];
+
+  /**
+   * 当前激活的微应用
+   */
+  currentMicroApp?: MicroApp;
+
+  /**
+   * 当前微应用的状态
+   */
+  currentMicroAppStatus: MicroAppStatus;
+
+  /**
+   * 当前微应用的异常信息
+   */
+  currentMicroAppError?: Error;
+
+  /**
+   * 当前微应用是否处于加载状态
+   */
+  isCurrentMicroAppLoading: boolean;
+
+  /**
+   * 当前微应用是否处于异常状态
+   */
+  isCurrentMicroAppError: boolean;
 
   /**
    * 基础路径

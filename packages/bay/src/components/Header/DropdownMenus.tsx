@@ -7,6 +7,7 @@ import { useI18n } from 'vue-i18n';
 import { getHeaderDropdowns, HeaderDropdownItemDesc, subscribeHeaderDropdownChange } from '@/services';
 import { useBayModel, useAsset } from '@/hooks';
 import { DEFAULT_LANGUAGE_SUPPORTS } from '@/constants';
+import { getMenuI18nKey } from '@/utils';
 
 import { Icon } from '../Icon';
 
@@ -120,7 +121,7 @@ export const DropdownMenus = defineComponent({
                       <ElIcon>
                         <Icon icon={button.icon ?? ClassificationSquare} />
                       </ElIcon>
-                      {t(`menu.${button.identifierPath}`, button.name)}
+                      {t(getMenuI18nKey(button.identifierPath), button.name)}
                     </ElDropdown.DropdownItem>
                   );
                 })}

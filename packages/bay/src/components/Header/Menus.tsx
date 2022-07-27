@@ -1,6 +1,8 @@
-import { BayModel } from '@/BayModel';
 import { defineComponent, PropType, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { BayModel } from '@/BayModel';
+import { getMenuI18nKey } from '@/utils';
 
 export const Menus = defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
@@ -33,7 +35,7 @@ export const Menus = defineComponent({
               onClick={handleMenuClick}
               href={item.url}
             >
-              {t(`menu.${item.identifierPath}`, item.name)}
+              {t(getMenuI18nKey(item.identifierPath), item.name)}
               {!!(!item.url && item.children.length) && (
                 <div class="bay-header__submenus">
                   {item.children.map(child => {
