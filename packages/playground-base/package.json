@@ -24,7 +24,7 @@
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.0",
-    "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.1.1",
+    "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.2.0",
     "babel-preset-wakeadmin": "workspace:^0.1.0",
     "path-browserify": "^1.0.1",
     "sass": "^1.54.0",

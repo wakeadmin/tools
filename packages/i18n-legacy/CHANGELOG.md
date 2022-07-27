@@ -1,5 +1,13 @@
 # @wakeadmin/i18n-legacy
 
+## 0.1.3
+
+### Patch Changes
+
+- 新增 missingHandler， 优化异步语言包加载闪烁问题
+- Updated dependencies
+  - @wakeadmin/i18n-shared@0.1.5
+
 ## 0.1.2
 
 ### Patch Changes

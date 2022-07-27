@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/vue-cli-plugin-mapp",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "wakeadmin 主应用配置",
   "main": "index.js",
   "types": "dist/index.d.ts",

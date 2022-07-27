@@ -1,5 +1,11 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.5
+
+### Patch Changes
+
+- 新增 missingHandler， 优化异步语言包加载闪烁问题
+
 ## 0.1.4
 
 ### Patch Changes
