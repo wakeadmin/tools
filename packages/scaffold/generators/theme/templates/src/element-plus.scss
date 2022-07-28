@@ -1,0 +1,7 @@
+// 覆盖 element-plus 样式
+@forward '../node_modules/element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'ep'
+);
+
+@use '../node_modules/element-plus/theme-chalk/src/index.scss';
+@use '../adapter/element-plus-ep';

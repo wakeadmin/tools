@@ -1,0 +1,212 @@
+/**
+ * 根据惟客云平台 UI 规范定义: https://codesign.qq.com/s/GyOl9yVmqn0dxaW/OD8r0BXKByjRXkg
+ */
+
+/**
+ * 调色盘
+ */
+:root {
+  --wk-color-primary-900: #fa7516;
+  --wk-color-primary-800: #fb931a;
+  --wk-color-primary-700: #fca31d;
+  --wk-color-primary-600: #fcb620;
+  --wk-color-primary-500: #fdc325;
+  --wk-color-primary-400: #fdcc37;
+  --wk-color-primary-300: #fdd758;
+  --wk-color-primary-200: #fee187;
+  --wk-color-primary-100: #feedb6;
+  --wk-color-primary-50: #fff8e2;
+
+  --wk-color-secondary-900: #111c4e;
+  --wk-color-secondary-800: #1c2c65;
+  --wk-color-secondary-700: #233571;
+  --wk-color-secondary-600: #2c3e7c;
+  --wk-color-secondary-500: #314584;
+  --wk-color-secondary-400: #505f94;
+  --wk-color-secondary-300: #6d7aa6;
+  --wk-color-secondary-200: #959fbf;
+  --wk-color-secondary-100: #bec4d9;
+  --wk-color-secondary-50: #e5e8ef;
+
+  --wk-color-success-900: #006a00;
+  --wk-color-success-800: #008c00;
+  --wk-color-success-700: #26a001;
+  --wk-color-success-600: #42b411;
+  --wk-color-success-500: #53c41a;
+  --wk-color-success-400: #71cd47;
+  --wk-color-success-300: #8dd66b;
+  --wk-color-success-200: #b0e297;
+  --wk-color-success-100: #d0eec0;
+  --wk-color-success-50: #ecf8e6;
+
+  --wk-color-danger-900: #c8000f;
+  --wk-color-danger-800: #d6001f;
+  --wk-color-danger-700: #e31127;
+  --wk-color-danger-600: #f5222d;
+  --wk-color-danger-500: #ff2f2c;
+  --wk-color-danger-400: #fe474a;
+  --wk-color-danger-300: #f26d70;
+  --wk-color-danger-200: #f99798;
+  --wk-color-danger-100: #ffccd2;
+  --wk-color-danger-50: #ffebee;
+
+  --wk-color-warning-900: #e35919;
+  --wk-color-warning-800: #ed721c;
+  --wk-color-warning-700: #f4811e;
+  --wk-color-warning-600: #fb9021;
+  --wk-color-warning-500: #ff9c23;
+  --wk-color-warning-400: #ffaa37;
+  --wk-color-warning-300: #ffba58;
+  --wk-color-warning-200: #ffce87;
+  --wk-color-warning-100: #ffe1b6;
+  --wk-color-warning-50: #fff3e2;
+
+  --wk-color-info-900: #1f3eaa;
+  --wk-color-info-800: #205dca;
+  --wk-color-info-700: #206fdc;
+  --wk-color-info-600: #1e81f0;
+  --wk-color-info-500: #188fff;
+  --wk-color-info-400: #3ba0ff;
+  --wk-color-info-300: #5fb1ff;
+  --wk-color-info-200: #8ec7ff;
+  --wk-color-info-100: #badcff;
+  --wk-color-info-50: #e2f1ff;
+
+  --wk-color-gray-900: #303133;
+  --wk-color-gray-800: #535456;
+  --wk-color-gray-700: #737476;
+  --wk-color-gray-600: #88898b;
+  --wk-color-gray-500: #b2b3b6;
+  --wk-color-gray-400: #cfd0d3;
+  --wk-color-gray-300: #edeef1;
+  --wk-color-gray-200: #f2f3f6;
+  --wk-color-gray-100: #f7f8fb;
+  --wk-color-gray-50: #fcfdff;
+  --wk-color-gray-0: #ffffff;
+}
+
+/**
+ * 颜色定义，从上述调色盘中取色
+ */
+:root {
+  /**
+    * 主体色一般采用企业品牌色或者品牌邻近色，根据品牌色衍生每个主题色板可以有不超过三个颜色。
+    * 由于主体色与品牌色相关，设计师可根据项目的对象、行业属性、客户品牌要求进行颜色选择；
+    * 本规范默认按照惟客品牌色衍生色作为主体色搭配。
+    */
+  --wk-color-primary: var(--wk-color-primary-900);
+  --wk-color-secondary: var(--wk-color-secondary-900);
+
+  /**
+   * 功能色代表具有信息表达或者行为特征的颜色，如：成功、失败、警告、链接...
+   * 功能色需符合用户对颜色操作的基本认知，建议整个产品体系所有的设计师及开发者固定使用同一套功能色板。
+   */
+  --wk-color-success: var(--wk-color-success-500);
+  --wk-color-danger: var(--wk-color-danger-600);
+  --wk-color-warning: var(--wk-color-warning-500);
+  --wk-color-info: var(--wk-color-info-500);
+
+  --wk-color-white: var(--wk-color-gray-0);
+  --wk-color-black: var(--wk-color-gray-900);
+
+  /**
+   * 中性色是界面的灰度颜色，主要作用于界面的字体颜色、背景色、分割线、边框…
+   * 合理地选择中性色能够令页面信息具备良好的主次关系，助力阅读体验。
+   */
+  /* 字体颜色, 数字表示色重， 越大(0-1000 大概分为 10级), 颜色越重 */
+  --wk-color-font-primary: var(--wk-color-gray-900); /* 主色 */
+  --wk-color-font-regular: #717378; /* 常规颜色, 常用于大面积的正文 */
+  --wk-color-font-secondary: #909399; /* 次要颜色，常用于描述语 */
+  --wk-color-font-placeholder: #b1b5bd; /* 占位符 */
+  --wk-color-font-disabled: #c0c4cc; /* 禁用 */
+  --wk-color-font-inverse: var(--wk-color-gray-0); /* 主色反转, 用于深色背景 */
+
+  /* 边框/分割线颜色 */
+  --wk-color-border-dark: #cfd4d9;
+  --wk-color-border: #dce1e6;
+  --wk-color-border-light: var(--wk-color-gray-300);
+  --wk-color-border-lighter: var(--wk-color-gray-200);
+  --wk-color-border-extra-light: var(--wk-color-gray-100);
+
+  /* 背景色 */
+  --wk-color-bg: #f5f7fa;
+  --wk-color-bg-dark: #f0f2f5;
+
+  /* 链接颜色 */
+  --wk-color-link: var(--wk-color-info);
+  --wk-color-link-hover: var(--wk-color-info-300);
+}
+
+/**
+ * 文字、排版
+ */
+:root {
+  /**
+   * 字体
+   */
+  /* 通常为 无衬线字体 */
+  --wk-font-family: PingFangSC, Inter var, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  /* 有衬线字体 */
+  --wk-font-family-serif: ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  /* 等宽字体，用于代码 */
+  --wk-font-family-mono: Menlo, ui-monospace, SFMono-Regular, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  /* 数字字体 */
+  --wk-font-family-number: 'Oswald';
+
+  /**
+   * 字体大小
+   */
+  --wk-font-size-h1: 20px;
+  --wk-font-line-height-h1: 32px;
+
+  --wk-font-size-h2: 18px;
+  --wk-font-line-height-h2: 28px;
+
+  --wk-font-size-h3: 16px;
+  --wk-font-line-height-h3: 26px;
+
+  --wk-font-size-h4: 14px;
+  --wk-font-line-height-h4: 22px;
+
+  --wk-font-size-h5: 13px;
+  --wk-font-line-height-h5: 21px;
+
+  --wk-font-size-h6: 12px;
+  --wk-font-line-height-h6: 20px;
+
+  /* 正文 */
+  --wk-font-size: var(--wk-font-size-h4);
+  --wk-font-line-height: var(--wk-font-line-height-h4);
+  --wk-font-weight: 500;
+}
+
+/**
+ * 其他
+ */
+:root {
+  /**
+   * 边框:大小、圆角
+   */
+  --wk-border-radius-sm: 2px;
+  --wk-border-radius-base: 4px;
+  --wk-border-radius-md: 16px;
+  --wk-border-radius-lg: 24px;
+  --wk-border-radius-full: 9999px;
+
+  /* 边距 */
+  --wk-spacing-xs: 8px;
+  --wk-spacing-sm: 16px;
+  --wk-spacing-base: 24px;
+  --wk-spacing-md: 32px;
+  --wk-spacing-lg: 48px;
+  --wk-spacing-xl: 64px;
+
+  /* 叠层顺序 z-index */
+  --wk-z-index-normal: 1; /* 常规, 高于默认优先级 */
+  --wk-z-index-dropdown: 1000; /* 下拉列表 */
+  --wk-z-index-sticky: 1020; /* 粘顶元素 */
+  --wk-z-index-fixed: 1030; /* fixed 定位元素 */
+  --wk-z-index-modal: 1040; /* 模态框、对话框、抽屉等 */
+  --wk-z-index-tooltip: 1050; /* 提示框、弹出框、消息提醒 */
+}

@@ -1,0 +1,52 @@
+@use './theme' as *;
+
+// 适配 element-ui 变量
+
+/* 颜色 */
+$--color-white: $wk-color-white;
+$--color-black: $wk-color-black;
+
+$--color-primary: $wk-color-primary;
+$--color-success: $wk-color-success;
+$--color-warning: $wk-color-warning;
+$--color-danger: $wk-color-danger;
+$--color-info: $wk-color-info;
+
+$--color-text-primary: $wk-color-font-primary;
+$--color-text-regular: $wk-color-font-regular;
+$--color-text-secondary: $wk-color-font-secondary;
+$--color-text-placeholder: $wk-color-font-placeholder;
+
+$--border-color-base: $wk-color-border;
+$--border-color-light: $wk-color-border-light;
+$--border-color-lighter: $wk-color-border-lighter;
+$--border-color-extra-light: $wk-color-border-extra-light;
+
+$--background-color-base: $wk-color-bg;
+
+$--link-color: $wk-color-link;
+$--link-hover-color: $wk-color-link-hover;
+
+/* 字体 */
+$--font-path: 'fonts';
+
+$--font-size-extra-large: $wk-font-size-h1;
+$--font-size-large: $wk-font-size-h2;
+$--font-size-medium: $wk-font-size-h3;
+$--font-size-base: $wk-font-size-h4;
+$--font-size-small: $wk-font-size-h5;
+$--font-size-extra-small: $wk-font-size-h6;
+$--font-weight-primary: $wk-font-weight;
+$--font-line-height-primary: $wk-font-line-height;
+$--font-color-disabled-base: $wk-color-font-disabled;
+
+$--size-base: $wk-font-size;
+
+$--border-radius-base: $wk-border-radius-base;
+$--border-radius-small: $wk-border-radius-sm;
+$--border-radius-circle: $wk-border-radius-full;
+
+// z-index
+$--index-normal: $wk-z-index-normal;
+$--index-top: $wk-z-index-dropdown;
+$--index-popper: $wk-z-index-modal;

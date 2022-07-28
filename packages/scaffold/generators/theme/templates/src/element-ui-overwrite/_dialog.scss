@@ -1,0 +1,44 @@
+// .ui-dialog-tips-success, .ui-dialog-tips-error, .ui-dialog-tips-default {
+.el-dialog__body {
+  text-align: center;
+  padding: 24px;
+  padding-bottom: 40px;
+  .icon {
+    width: 42px;
+    height: 42px;
+    font-size: 42px;
+  }
+
+  .title {
+    height: 26px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--wk-color-black);
+    line-height: 26px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+  }
+  .content {
+    font-weight: 400;
+    color: var(--wk-color-font-regular);
+    line-height: 22px;
+  }
+}
+
+.dialog-footer,
+.el-dialog__footer {
+  .el-button + .el-button {
+    margin-left: 34px;
+  }
+}
+
+.el-dialog__footer {
+  text-align: center;
+  padding-top: 0px;
+}
+.el-dialog__header {
+  padding-left: 24px;
+  .el-icon-close:before {
+    margin-right: 4px;
+  }
+}

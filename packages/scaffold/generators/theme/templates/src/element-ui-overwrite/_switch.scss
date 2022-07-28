@@ -1,0 +1,66 @@
+// 默认的开关
+.ui-switch-default {
+  .el-switch__core {
+    width: 30px !important;
+    height: 16px;
+  }
+
+  .el-switch__core::after {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.ui-switch-default.is-checked {
+  .el-switch__core::after {
+    margin-left: -14px;
+  }
+}
+
+// 带文字的开关
+.ui-switch-text {
+  position: relative;
+  .el-switch__label {
+    margin: 0 auto;
+
+    span {
+      font-size: 12px;
+    }
+  }
+
+  .el-switch__label--left {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 7px;
+    z-index: 1;
+  }
+  .el-switch__label--right {
+    display: none;
+  }
+  .el-switch__core {
+    width: 52px !important;
+    height: 22px;
+  }
+  .el-switch__core::after {
+    width: 16px;
+    height: 16px;
+    top: 2px;
+  }
+}
+
+.ui-switch-text.is-checked {
+  position: relative;
+  .el-switch__label--left {
+    display: none;
+  }
+  .el-switch__label--right {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 6px;
+  }
+  .el-switch__core::after {
+    margin-left: -17px;
+  }
+}

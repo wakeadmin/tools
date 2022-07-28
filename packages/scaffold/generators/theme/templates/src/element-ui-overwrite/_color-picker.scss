@@ -1,0 +1,16 @@
+// 选中的颜色展示区域
+.el-color-picker__trigger {
+  width: 70px;
+  height: 36px;
+  padding: 0px;
+  border: 4px solid #d0d5d9;
+  border-radius: 4px;
+
+  .el-color-picker__color {
+    border: 0px;
+  }
+  .el-color-picker__icon,
+  .el-color-picker__empty {
+    display: none;
+  }
+}

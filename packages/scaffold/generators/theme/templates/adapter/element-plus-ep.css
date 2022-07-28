@@ -1,0 +1,213 @@
+/* 请勿编辑，此文件自动生成 */
+/**
+ * 映射到 element-plus CSS 配置
+ * https://element-plus.org/zh-CN/guide/theming.html#%E9%80%9A%E8%BF%87-css-%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE
+ * 相关的变量定义，可以打开 element-plus 网页控制台查看
+ */
+:root {
+  /* --ep-color-white: #ffffff;
+  --ep-color-black: #000000; */
+
+  --ep-color-white: var(--wk-color-white);
+  --ep-color-black: var(--wk-color-black);
+
+  /* --ep-color-primary: #409eff;
+  --ep-color-primary-light-3: #79bbff;
+  --ep-color-primary-light-5: #a0cfff;
+  --ep-color-primary-light-7: #c6e2ff;
+  --ep-color-primary-light-8: #d9ecff;
+  --ep-color-primary-light-9: #ecf5ff;
+  --ep-color-primary-dark-2: #337ecc; */
+
+  --ep-color-primary: var(--wk-color-primary);
+  --ep-color-primary-light-3: var(--wk-color-primary-800);
+  --ep-color-primary-light-5: var(--wk-color-primary-600);
+  --ep-color-primary-light-7: var(--wk-color-primary-400);
+  --ep-color-primary-light-8: var(--wk-color-primary-200);
+  --ep-color-primary-light-9: var(--wk-color-primary-50);
+  --ep-color-primary-dark-2: var(--wk-color-primary-900);
+
+  /* --ep-color-success: #67c23a;
+  --ep-color-success-light-3: #95d475;
+  --ep-color-success-light-5: #b3e19d;
+  --ep-color-success-light-7: #d1edc4;
+  --ep-color-success-light-8: #e1f3d8;
+  --ep-color-success-light-9: #f0f9eb;
+  --ep-color-success-dark-2: #529b2e; */
+
+  --ep-color-success: var(--wk-color-success);
+  --ep-color-success-light-3: var(--wk-color-success-800);
+  --ep-color-success-light-5: var(--wk-color-success-600);
+  --ep-color-success-light-7: var(--wk-color-success-400);
+  --ep-color-success-light-8: var(--wk-color-success-200);
+  --ep-color-success-light-9: var(--wk-color-success-50);
+  --ep-color-success-dark-2: var(--wk-color-success-900);
+
+  /* --ep-color-warning: #e6a23c;
+  --ep-color-warning-light-3: #eebe77;
+  --ep-color-warning-light-5: #f3d19e;
+  --ep-color-warning-light-7: #f8e3c5;
+  --ep-color-warning-light-8: #faecd8;
+  --ep-color-warning-light-9: #fdf6ec;
+  --ep-color-warning-dark-2: #b88230; */
+
+  --ep-color-warning: var(--wk-color-warning);
+  --ep-color-warning-light-3: var(--wk-color-warning-800);
+  --ep-color-warning-light-5: var(--wk-color-warning-600);
+  --ep-color-warning-light-7: var(--wk-color-warning-400);
+  --ep-color-warning-light-8: var(--wk-color-warning-200);
+  --ep-color-warning-light-9: var(--wk-color-warning-50);
+  --ep-color-warning-dark-2: var(--wk-color-warning-900);
+
+  /* --ep-color-danger: #f56c6c;
+  --ep-color-danger-light-3: #f89898;
+  --ep-color-danger-light-5: #fab6b6;
+  --ep-color-danger-light-7: #fcd3d3;
+  --ep-color-danger-light-8: #fde2e2;
+  --ep-color-danger-light-9: #fef0f0;
+  --ep-color-danger-dark-2: #c45656; */
+
+  --ep-color-danger: var(--wk-color-danger);
+  --ep-color-danger-light-3: var(--wk-color-danger-800);
+  --ep-color-danger-light-5: var(--wk-color-danger-600);
+  --ep-color-danger-light-7: var(--wk-color-danger-400);
+  --ep-color-danger-light-8: var(--wk-color-danger-200);
+  --ep-color-danger-light-9: var(--wk-color-danger-50);
+  --ep-color-danger-dark-2: var(--wk-color-danger-900);
+
+  /*
+  --ep-color-error: #f56c6c;
+  --ep-color-error-light-3: #f89898;
+  --ep-color-error-light-5: #fab6b6;
+  --ep-color-error-light-7: #fcd3d3;
+  --ep-color-error-light-8: #fde2e2;
+  --ep-color-error-light-9: #fef0f0;
+  --ep-color-error-dark-2: #c45656; */
+
+  --ep-color-error: var(--wk-color-danger);
+  --ep-color-error-light-3: var(--wk-color-danger-800);
+  --ep-color-error-light-5: var(--wk-color-danger-600);
+  --ep-color-error-light-7: var(--wk-color-danger-400);
+  --ep-color-error-light-8: var(--wk-color-danger-200);
+  --ep-color-error-light-9: var(--wk-color-danger-50);
+  --ep-color-error-dark-2: var(--wk-color-danger-900);
+
+  /* --ep-color-info: #909399;
+  --ep-color-info-light-3: #b1b3b8;
+  --ep-color-info-light-5: #c8c9cc;
+  --ep-color-info-light-7: #dedfe0;
+  --ep-color-info-light-8: #e9e9eb;
+  --ep-color-info-light-9: #f4f4f5;
+  --ep-color-info-dark-2: #73767a; */
+
+  --ep-color-info: var(--wk-color-info);
+  --ep-color-info-light-3: var(--wk-color-info-800);
+  --ep-color-info-light-5: var(--wk-color-info-600);
+  --ep-color-info-light-7: var(--wk-color-info-400);
+  --ep-color-info-light-8: var(--wk-color-info-200);
+  --ep-color-info-light-9: var(--wk-color-info-50);
+  --ep-color-info-dark-2: var(--wk-color-info-900);
+
+  /* --ep-bg-color: #ffffff;
+  --ep-bg-color-page: #f2f3f5;
+  --ep-bg-color-overlay: #ffffff; */
+
+  --ep-bg-color-page: var(--wk-color-bg);
+
+  /* --ep-text-color-primary: #303133;
+  --ep-text-color-regular: #606266;
+  --ep-text-color-secondary: #909399;
+  --ep-text-color-placeholder: #a8abb2;
+  --ep-text-color-disabled: #c0c4cc; */
+
+  --ep-text-color-primary: var(--wk-color-font-primary);
+  --ep-text-color-regular: var(--wk-color-font-regular);
+  --ep-text-color-secondary: var(--wk-color-font-secondary);
+  --ep-text-color-placeholder: var(--wk-color-font-placeholder);
+  --ep-text-color-disabled: var(--wk-color-font-disabled);
+
+  /* --ep-border-color: #dcdfe6;
+  --ep-border-color-light: #e4e7ed;
+  --ep-border-color-lighter: #ebeef5;
+  --ep-border-color-extra-light: #f2f6fc;
+  --ep-border-color-dark: #d4d7de;
+  --ep-border-color-darker: #cdd0d6;*/
+
+  --ep-border-color: var(--wk-color-border);
+  --ep-border-color-light: var(--wk-color-border-light);
+  --ep-border-color-lighter: var(--wk-color-border-lighter);
+  --ep-border-color-extra-light: var(--wk-color-border-extra-light);
+  --ep-border-color-dark: var(--wk-color-border-dark);
+  --ep-border-color-darker: #cdd0d6;
+
+  --ep-link-text-color: var(--wk-color-link);
+  --ep-link-hover-text-color: var(--wk-color-link-hover);
+
+  /* --ep-fill-color: #f0f2f5;
+  --ep-fill-color-light: #f5f7fa;
+  --ep-fill-color-lighter: #fafafa;
+  --ep-fill-color-extra-light: #fafcff;
+  --ep-fill-color-dark: #ebedf0;
+  --ep-fill-color-darker: #e6e8eb;
+  --ep-fill-color-blank: #ffffff;
+
+  --ep-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08);
+  --ep-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --ep-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --ep-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12),
+    0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+  --ep-disabled-bg-color: var(--ep-fill-color-light);
+  --ep-disabled-text-color: var(--ep-text-color-placeholder);
+  --ep-disabled-border-color: var(--ep-border-color-light);
+  --ep-overlay-color: rgba(0, 0, 0, 0.8);
+  --ep-overlay-color-light: rgba(0, 0, 0, 0.7);
+  --ep-overlay-color-lighter: rgba(0, 0, 0, 0.5);
+  --ep-mask-color: rgba(255, 255, 255, 0.9);
+  --ep-mask-color-extra-light: rgba(255, 255, 255, 0.3);
+  --ep-border-width: 1px;
+  --ep-border-style: solid;
+  --ep-border-color-hover: var(--ep-text-color-disabled);
+  --ep-border: var(--ep-border-width) var(--ep-border-style) var(--ep-border-color);
+  --ep-svg-monochrome-grey: var(--ep-border-color); */
+
+  /* --ep-font-size-extra-large: 20px;
+  --ep-font-size-large: 18px;
+  --ep-font-size-medium: 16px;
+  --ep-font-size-base: 14px;
+  --ep-font-size-small: 13px;
+  --ep-font-size-extra-small: 12px; */
+
+  --ep-font-size-extra-large: var(--wk-font-size-h1);
+  --ep-font-size-large: var(--wk-font-size-h2);
+  --ep-font-size-medium: var(--wk-font-size-h3);
+  --ep-font-size-base: var(--wk-font-size-h4);
+  --ep-font-size-small: var(--wk-font-size-h5);
+  --ep-font-size-extra-small: var(--wk-font-size-h6);
+
+  /* --ep-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --ep-font-weight-primary: 500;
+  --ep-font-line-height-primary: 24px; */
+
+  --ep-font-family: var(--wk-font-family);
+  --ep-font-weight-primary: var(--wk-font-weight);
+  --ep-font-line-height-primary: var(--wk-font-line-height);
+
+  /* --ep-index-normal: 1;
+  --ep-index-top: 1000;
+  --ep-index-popper: 2000; */
+
+  --ep-index-normal: var(--wk-z-index-normal);
+  --ep-index-top: var(--wk-z-index-dropdown);
+  --ep-index-popper: var(--wk-z-index-modal);
+
+  /* --ep-border-radius-base: 4px;
+  --ep-border-radius-small: 2px;
+  --ep-border-radius-round: 20px;
+  --ep-border-radius-circle: 100%; */
+
+  --ep-border-radius-base: var(--wk-border-radius-base);
+  --ep-border-radius-small: var(--wk-border-radius-sm);
+  --ep-border-radius-round: var(--wk-border-radius-md);
+  --ep-border-radius-circle: var(--wk-border-radius-full);
+}
