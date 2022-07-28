@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "checkJs": true,
+    "tsBuildInfoFile": ".tsBuildInfo" /* Specify file to store incremental compilation information */
+  },
+  "include": ["generators/**/*.js"],
+  "exclude": ["templates/**/*.js"]
+}

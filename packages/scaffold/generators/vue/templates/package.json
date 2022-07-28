@@ -1,0 +1,30 @@
+{
+  "name": "<%= name %>",
+  "imageName": "wkfe/<%= name %>",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Wakeadmin 子应用",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "inspect": "vue-cli-service inspect",
+    "build": "vue-cli-service build",
+    "build:docker": "node ./scripts/build-docker.js",
+    "publish:docker": "node ./scripts/publish-docker.js"
+  },
+  "dependencies": {
+    "@wakeadmin/bay": "latest",
+    "@wakeadmin/framework": "latest",
+    "core-js": "^3.23.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-router": "~5.0.8",
+    "@vue/cli-plugin-typescript": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "@wakeadmin/vue-cli-plugin-mapp-child": "latest",
+    "@wakeadmin/vue-cli-plugin-vendor": "latest",
+    "sass": "^1.54.0",
+    "sass-loader": "^12.6.0"
+  }
+}
