@@ -5,5 +5,5 @@
     "tsBuildInfoFile": ".tsBuildInfo" /* Specify file to store incremental compilation information */
   },
   "include": ["generators/**/*.js"],
-  "exclude": ["templates/**/*.js"]
+  "exclude": ["**/templates/**/*"]
 }

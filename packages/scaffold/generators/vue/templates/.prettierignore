@@ -1,7 +1,4 @@
 dist
-build
 coverage
 node_modules
 *.min.js
-vendors/
-**/templates/
