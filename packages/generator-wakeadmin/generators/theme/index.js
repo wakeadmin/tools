@@ -1,4 +1,5 @@
 import Generator from 'yeoman-generator';
+import path from 'node:path';
 
 import { isPnpmSupported, isYarnSupported } from '../app/utils.js';
 
@@ -42,7 +43,9 @@ export default class extends Generator {
    * 安装依赖
    */
   install() {
-    this.spawnCommandSync('git', ['init']);
+    if (!this.fs.exists(this.destinationPath('.git'))) {
+      this.spawnCommandSync('git', ['init']);
+    }
 
     if (PNPM_SUPPORTED) {
       this.spawnCommand('pnpm', ['install']);
@@ -51,5 +54,19 @@ export default class extends Generator {
     } else {
       this.spawnCommand('npm', ['install', '--legacy-peer-deps']);
     }
+  }
+
+  end() {
+    const dir = path.relative(process.cwd(), this.destinationRoot());
+    const m = PNPM_SUPPORTED ? 'pnpm' : YARN_SUPPORTED ? 'yarn' : 'npm';
+
+    this.log(`主题包创建成功!
+
+cd ${dir}
+${m} run build # 构建
+${m} run serve # 本地调试
+
+详见： https://wakeadmin.wakedata.com/mapp/advanced/theme.html
+`);
   }
 }

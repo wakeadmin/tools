@@ -72,7 +72,9 @@ export default class extends Generator {
    * 安装依赖
    */
   install() {
-    this.spawnCommandSync('git', ['init']);
+    if (!this.fs.exists(this.destinationPath('.git'))) {
+      this.spawnCommandSync('git', ['init']);
+    }
 
     if (PNPM_SUPPORTED) {
       this.spawnCommand('pnpm', ['install']);
@@ -81,5 +83,20 @@ export default class extends Generator {
     } else {
       this.spawnCommand('npm', ['install']);
     }
+  }
+
+  end() {
+    const dir = path.relative(process.cwd(), this.destinationRoot());
+    const m = PNPM_SUPPORTED ? 'pnpm' : YARN_SUPPORTED ? 'yarn' : 'npm';
+
+    this.log(`子应用创建成功!
+
+cd ${dir}
+${m} run serve        # 本地开发
+${m} run build        # 生成构建
+${m} run build:docker # Docker 容器构建
+
+详见： https://wakeadmin.wakedata.com/mapp/integration.html
+`);
   }
 }
