@@ -5,6 +5,9 @@ const { defineVendors } = require('@wakeadmin/vue-cli-plugin-vendor');
 const { defineCE } = require('@wakeadmin/vue-cli-plugin-ce');
 <% }%>
 
+// 后台服务器地址
+const SERVER = process.env.SERVER || 'https://www.wakecloud.com';
+
 module.exports = defineConfig({
   parallel: false,
   transpileDependencies: [/(wakeapp|wakeadmin)/],
@@ -31,9 +34,21 @@ module.exports = defineConfig({
     // 配置代理, 通常不需要
     // proxy: ['/api', '/wd'].reduce((prev, cur) => {
     //   prev[cur] = {
-    //     target: process.env.SERVER || 'https://www.wakedata.com/',
+    //     target: SERVER,
     //     changeOrigin: true,
     //     secure: false,
+    //     // 修改 cookie
+    //     onProxyRes(proxyRes) {
+    //       const cookies = proxyRes.headers['set-cookie'];
+    //       if (cookies) {
+    //         const newCookie = cookies.map(function (cookie) {
+    //           return cookie.replace(/Domain=.*?(\.\w+\.\w+);/i, 'Domain=$1;');
+    //         });
+    //         // 修改cookie path
+    //         delete proxyRes.headers['set-cookie'];
+    //         proxyRes.headers['set-cookie'] = newCookie;
+    //       }
+    //     },
     //   };
     //   return prev;
     // }, {}),
