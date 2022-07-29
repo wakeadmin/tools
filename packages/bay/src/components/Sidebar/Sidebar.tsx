@@ -125,6 +125,7 @@ export const Sidebar = defineComponent({
           <ElMenu
             defaultActive={activeIdentifierPath}
             class="bay-sidebar__menu"
+            uniqueOpened
             collapse={bay.menuCollasped}
             style="--ep-menu-text-color: var(--wk-color-font-regular);--ep-menu-bg-color: var(--wk-color-white)"
             collapseTransition={false}
