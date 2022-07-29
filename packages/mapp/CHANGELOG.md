@@ -1,5 +1,11 @@
 # @wakeadmin/mapp
 
+## 0.1.2
+
+### Patch Changes
+
+- 暴露子应用加载状态
+
 ## 0.1.1
 
 ### Patch Changes

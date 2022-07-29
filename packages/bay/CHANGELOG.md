@@ -1,5 +1,13 @@
 # @wakeadmin/bay
 
+## 0.2.1
+
+### Patch Changes
+
+- 修复自定义组件无法识别 html attribute
+- Updated dependencies
+  - @wakeadmin/mapp@0.1.2
+
 ## 0.2.0
 
 ### Minor Changes

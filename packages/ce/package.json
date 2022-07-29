@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/ce",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vue 自定义组件创建和使用",
   "sideEffects": false,
   "main": "dist/common/index.js",
