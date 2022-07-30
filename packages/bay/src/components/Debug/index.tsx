@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, unref, ref, reactive } from 'vue';
 import { useInject } from '@wakeadmin/framework';
@@ -10,7 +11,6 @@ import {
   ElIcon,
   ElInput,
   ElLink,
-  ElMessageBox,
   FormInstance,
   FormRules,
 } from 'element-plus';
@@ -35,10 +35,18 @@ export const Debug = defineComponent({
       activeRule: [
         { required: true },
         {
-          validator(_rule, value, callback) {
+          validator(_rule, value: string, callback) {
             const baseUrl = bayModel.bay.baseUrl;
-            if (value && baseUrl !== '/' && (value as string).startsWith(baseUrl)) {
-              callback(new Error(`activeRule 不需要加上 baseUrl 前缀`));
+            if (value && baseUrl !== '/') {
+              const list = value
+                .split(',')
+                .map(i => i.trim())
+                .filter(Boolean);
+              if (list.some(i => i.startsWith(baseUrl))) {
+                callback(new Error(`activeRule 不需要加上 baseUrl 前缀`));
+              } else {
+                callback();
+              }
             } else {
               callback();
             }
@@ -66,33 +74,8 @@ export const Debug = defineComponent({
 
       if (valid) {
         const value = adding.value!;
-        let hasDuplicateName = false;
-        let hasDuplicateActiveRule = false;
-
-        for (const item of model.apps) {
-          if (item.name === value.name) {
-            hasDuplicateName = true;
-          }
-
-          if (item.activeRule === value.activeRule) {
-            hasDuplicateActiveRule = true;
-          }
-        }
-
-        try {
-          if (hasDuplicateName || hasDuplicateActiveRule) {
-            await ElMessageBox.confirm(
-              `${hasDuplicateName ? '存在重复的名称' : ''} ${
-                hasDuplicateActiveRule ? '存在重复的路由' : ''
-              }, 确认覆盖？`
-            );
-          }
-
-          model.addLocalMapp(value);
-          adding.value = undefined;
-        } catch {
-          // ignore
-        }
+        model.addLocalMapp(value);
+        adding.value = undefined;
       }
     };
 
@@ -109,13 +92,13 @@ export const Debug = defineComponent({
 
               <div>微应用</div>
               <ul>
-                {model.apps.map(i => {
+                {model.apps.map((i, idx) => {
                   const removable = model.isLocalApp(i);
                   return (
-                    <li key={`${i.name}-${i.activeRule}-${i.entry}`} class="debug-mapp">
+                    <li key={idx} class="debug-mapp">
                       {removable && <div class="debug__badge">本地</div>}
                       name=<span class="debug__field">{i.name}</span>; entry=<span class="debug__field">{i.entry}</span>
-                      ; activeRule=<span class="debug__field">{i.activeRule}</span>; independent=
+                      ; activeRule=<span class="debug__field">{JSON.stringify(i.activeRule)}</span>; independent=
                       <span class="debug__field">{String(!!i.independent)}</span>
                       <ElLink
                         href={bayModel.generateLandingUrl({ type: 'app', name: i.name })}
@@ -157,9 +140,9 @@ export const Debug = defineComponent({
                     </ElFormItem>
                     <ElFormItem label="路由(activeRule)" prop="activeRule">
                       <ElInput
-                        modelValue={adding.value.activeRule}
+                        modelValue={adding.value.activeRule as string}
                         onUpdate:modelValue={v => (adding.value!.activeRule = v)}
-                        placeholder="/my-app"
+                        placeholder="/my-app, 多个 activeRule 可以使用 ',' 分割"
                       />
                     </ElFormItem>
                     <ElFormItem label="独立模式(independent)" prop="independent">

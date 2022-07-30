@@ -181,7 +181,15 @@ export class Bay implements IBay {
   getAppByRoute(router: string): MicroApp | null {
     const normalized = normalizeUrl(trimQueryAndHash(router));
 
-    return this.apps.find(i => i.activeRule === normalized) ?? null;
+    return (
+      this.apps.find(i => {
+        if (Array.isArray(i.activeRule)) {
+          return i.activeRule.some(j => j === normalized);
+        } else {
+          return i.activeRule === normalized;
+        }
+      }) ?? null
+    );
   }
 
   getAppByAlias(alias: string): MicroApp[] {

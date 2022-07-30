@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { removeTrailingSlash } from '@wakeadmin/utils';
 import path from 'path-browserify';
 
@@ -48,12 +49,12 @@ const createLoader = (container: string | HTMLElement, name: string) => {
 
 export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormalized[] {
   // 所有 activeRule 都基于基座 base
-  const tryAddBaseToActiveRule = (activeRule: string) => {
-    if (activeRule.startsWith(baseUrl)) {
-      return normalizeUrl(activeRule);
+  const tryAddBaseToActiveRule = (route: string) => {
+    if (route.startsWith(baseUrl)) {
+      return normalizeUrl(route);
     }
 
-    return `${removeTrailingSlash(baseUrl)}${normalizeUrl(activeRule)}`;
+    return `${removeTrailingSlash(baseUrl)}${normalizeUrl(route)}`;
   };
 
   // 如果是相对路径，都相对于基座 base
@@ -72,17 +73,32 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
   // 将 base 追加到 app 上
   return apps.map(app => {
     const { activeRule, entry, ...other } = app;
-    const normalizedActiveRule = tryAddBaseToActiveRule(activeRule);
+    const normalizedActiveRule = Array.isArray(activeRule)
+      ? activeRule.map(tryAddBaseToActiveRule)
+      : tryAddBaseToActiveRule(activeRule);
     const normalizedEntry = tryAddBaseToEntry(entry);
 
-    //  检查name、activeRule、entry 是否重复
-    if (process.env.NODE_ENV !== 'production') {
+    const warn = (message: string) => {
+      if (process.env.NODE_ENV !== 'production') {
+        throw new Error(message);
+      } else {
+        console.error(message);
+      }
+    };
+
+    {
+      //  检查name、activeRule、entry 是否重复
       if (appNameSet.has(app.name)) {
-        throw new Error(`[mapp] 微应用名称重复: ${app.name}`);
+        warn(`[mapp] 微应用名称重复: ${app.name}`);
       }
 
-      if (activeRuleSet.has(normalizedActiveRule)) {
-        throw new Error(`[mapp] 微应用 activeRule 重复: ${app.name} ${normalizedActiveRule}`);
+      if (Array.isArray(normalizedActiveRule)) {
+        const found = normalizedActiveRule.find(i => activeRuleSet.has(i));
+        if (found) {
+          warn(`[mapp] 微应用 activeRule 重复: ${app.name} ${found}`);
+        }
+      } else if (activeRuleSet.has(normalizedActiveRule)) {
+        warn(`[mapp] 微应用 activeRule 重复: ${app.name} ${normalizedActiveRule}`);
       }
 
       // if (entrySet.has(normalizedEntry)) {
@@ -90,7 +106,11 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
       // }
 
       appNameSet.add(app.name);
-      activeRuleSet.add(normalizedActiveRule);
+      if (Array.isArray(normalizedActiveRule)) {
+        normalizedActiveRule.forEach(i => activeRuleSet.add(i));
+      } else {
+        activeRuleSet.add(normalizedActiveRule);
+      }
 
       // 暂时不检查 entry 重复
       // entrySet.add(normalizedEntry);
@@ -100,7 +120,9 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
 
     return {
       activeRule: normalizedActiveRule,
-      activeRuleRaw: trimBaseUrl(baseUrl, normalizedActiveRule),
+      activeRuleRaw: Array.isArray(normalizedActiveRule)
+        ? normalizedActiveRule.map(i => trimBaseUrl(baseUrl, i))
+        : trimBaseUrl(baseUrl, normalizedActiveRule),
       entry: normalizedEntry,
       container,
       loader: createLoader(container, app.name),

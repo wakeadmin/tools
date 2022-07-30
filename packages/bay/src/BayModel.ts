@@ -114,7 +114,15 @@ export class BayModel extends BaseModel implements IBayModel {
       return new Set();
     }
 
-    return new Set(apps.filter(i => entries.has(i.activeRule)));
+    return new Set(
+      apps.filter(i => {
+        if (Array.isArray(i.activeRule)) {
+          return i.activeRule.some(j => entries.has(j));
+        } else {
+          return entries.has(i.activeRule);
+        }
+      })
+    );
   }
 
   @inject('DI.bay.promiseQueue')

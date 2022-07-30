@@ -30,7 +30,7 @@ export interface MicroApp {
   /**
    * 激活的路由, 路由前缀，以 / 开始，例如 /wkb。注意不需要包含基座 base，会自动添加。
    */
-  activeRule: string;
+  activeRule: string | string[];
 
   /**
    * 挂载的 DOM 节点, 默认为 #root

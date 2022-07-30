@@ -33,7 +33,7 @@ export interface MappSingle {
   /**
    * 子应用的激活路由，默认为 /<name>
    */
-  activeRule?: string;
+  activeRule?: string | string[];
 
   /**
    * 独立模式，默认为 false

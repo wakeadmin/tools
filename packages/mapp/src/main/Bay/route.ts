@@ -94,15 +94,30 @@ export function createRoutes(
   const { independentApps, nonIndependentApps } = groupAppsByIndependent(apps);
 
   for (const app of independentApps) {
-    independentRoutes.push({
-      name: app.name,
-      path: app.activeRuleRaw,
-      component: IndependentPage,
-      meta: {
-        independent: true,
-        app,
-      },
-    });
+    if (Array.isArray(app.activeRuleRaw)) {
+      // 不支持命名路由
+      app.activeRuleRaw.forEach(p => {
+        independentRoutes.push({
+          name: `${app.name}-${p}`,
+          path: p,
+          component: IndependentPage,
+          meta: {
+            independent: true,
+            app,
+          },
+        });
+      });
+    } else {
+      independentRoutes.push({
+        name: app.name,
+        path: app.activeRuleRaw,
+        component: IndependentPage,
+        meta: {
+          independent: true,
+          app,
+        },
+      });
+    }
   }
 
   /**
@@ -120,7 +135,11 @@ export function createRoutes(
     beforeEnter: async (to, from) => {
       // 验证是否为 nonIndependentApps 的子路由
       // 如果不是，将重定向到 404 页面
-      const found = nonIndependentApps.find(a => to.path.startsWith(a.activeRuleRaw));
+      const found = nonIndependentApps.find(a => {
+        return Array.isArray(a.activeRuleRaw)
+          ? a.activeRuleRaw.some(subPath => to.path.startsWith(subPath))
+          : to.path.startsWith(a.activeRuleRaw);
+      });
       const context = {
         to,
         from,
@@ -179,7 +198,14 @@ export class Navigator {
       throw new Error(`[mapp] openApp 未找到应用：${name}`);
     }
 
-    this.openUrl({ ...route, path: app.activeRule });
+    if (Array.isArray(app.activeRule)) {
+      if (app.activeRule.length > 1) {
+        console.warn(`[mapp] openApp(${name}) 有歧义, activeRule 为数组，将选择一个项`, app);
+      }
+      this.openUrl({ ...route, path: app.activeRule[0] });
+    } else {
+      this.openUrl({ ...route, path: app.activeRule });
+    }
   };
 
   openUrl: IBay['openUrl'] = url => {
@@ -219,7 +245,7 @@ export class Navigator {
       throw new Error(`[mapp] 未配置子应用, 无法跳转`);
     }
 
-    this.navigate(firstMainApp.activeRule, redirect);
+    this.openApp({ name: firstMainApp.name, redirect });
   };
 
   private navigate(target: string, redirect: boolean = false) {

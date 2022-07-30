@@ -17,6 +17,13 @@ test('normalizeApps', () => {
     ])
   ).toThrowError('[mapp] 微应用 activeRule 重复: bar /base/');
 
+  expect(() =>
+    normalizeApps('/base', [
+      { name: 'foo', entry: '/foo', activeRule: '/' },
+      { name: 'bar', entry: '/bar', activeRule: ['/', '/foo'] },
+    ])
+  ).toThrowError('[mapp] 微应用 activeRule 重复: bar /base/');
+
   // without base
   expect(
     normalizeApps('/', [
@@ -44,8 +51,14 @@ test('normalizeApps', () => {
       },
       {
         name: '4',
-        // 已经配置了 base
+        // 会加上 base
         activeRule: '/4',
+        entry: 'app',
+      },
+      {
+        name: '5',
+        // 数组形式
+        activeRule: ['/5', '/base/6'],
         entry: 'app',
       },
     ])
@@ -84,6 +97,14 @@ test('normalizeApps', () => {
       entry: '/app',
       container: '#root',
     },
+    {
+      name: '5',
+      // 已经配置了 base
+      activeRule: ['/5', '/base/6'],
+      activeRuleRaw: ['/5', '/base/6'],
+      entry: '/app',
+      container: '#root',
+    },
   ]);
 
   expect(
@@ -114,6 +135,12 @@ test('normalizeApps', () => {
         name: '4',
         // 已经配置了 base
         activeRule: '/4',
+        entry: 'app',
+      },
+      {
+        name: '5',
+        // 数组形式
+        activeRule: ['/5', '/base/6'],
         entry: 'app',
       },
     ])
@@ -149,6 +176,14 @@ test('normalizeApps', () => {
       // 已经配置了 base
       activeRule: '/base/4',
       activeRuleRaw: '/4',
+      entry: '/base/app',
+      container: '#root',
+    },
+    {
+      name: '5',
+      // 已经配置了 base
+      activeRule: ['/base/5', '/base/6'],
+      activeRuleRaw: ['/5', '/6'],
       entry: '/base/app',
       container: '#root',
     },

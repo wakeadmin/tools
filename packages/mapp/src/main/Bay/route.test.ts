@@ -22,6 +22,12 @@ test('create routes', () => {
       activeRule: '/3',
       independent: true,
     },
+    {
+      name: '4',
+      entry: '/4',
+      activeRule: ['/4', '/base/5'],
+      independent: true,
+    },
   ]);
 
   const routes = createRoutes(base, apps);
@@ -53,6 +59,36 @@ test('create routes', () => {
           entry: '/3',
           independent: true,
           name: '3',
+        },
+        independent: true,
+      },
+    },
+    {
+      name: '4-/4',
+      path: '/4',
+      component: IndependentPage,
+      meta: {
+        app: {
+          activeRule: ['/base/4', '/base/5'],
+          container: '#root',
+          entry: '/4',
+          independent: true,
+          name: '4',
+        },
+        independent: true,
+      },
+    },
+    {
+      name: '4-/5',
+      path: '/5',
+      component: IndependentPage,
+      meta: {
+        app: {
+          activeRule: ['/base/4', '/base/5'],
+          container: '#root',
+          entry: '/4',
+          independent: true,
+          name: '4',
         },
         independent: true,
       },

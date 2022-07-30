@@ -51,7 +51,7 @@ export const getMicroApp = () => {
  * 获取当前应用的 baseUrl, 如果子应用使用 history 路由模式，可以用这个方法获取基础路径
  * 对于 hash 路由，不需要关心 baseUrl
  */
-export const getActiveRule = (): string | undefined => {
+export const getActiveRule = (): string | string[] | undefined => {
   return getMicroApp()?.activeRule;
 };
 

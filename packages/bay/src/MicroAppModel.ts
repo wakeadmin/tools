@@ -103,7 +103,7 @@ export class MicroAppModel {
       let isDup = false;
 
       for (const inList of list) {
-        if (inList.name === item.name || inList.activeRule === item.activeRule) {
+        if (inList.name === item.name || this.isActiveRuleDuplicated(inList.activeRule, item.activeRule)) {
           // 已存在
           isDup = true;
           break;
@@ -147,8 +147,40 @@ export class MicroAppModel {
 
     return {
       name: name.trim(),
-      activeRule: activeRule.trim(),
+      activeRule: this.normalizedActiveRule(activeRule),
       ...other,
     };
+  }
+
+  private normalizedActiveRule(activeRule: string | string[]) {
+    if (Array.isArray(activeRule)) {
+      return activeRule.map(i => i.trim());
+    }
+    let normalized = activeRule.trim();
+
+    if (normalized.includes(',')) {
+      // 拆分
+      const list = normalized
+        .split(',')
+        .map(i => i.trim())
+        .filter(Boolean);
+      return list.length > 1 ? list : list[0];
+    }
+    return normalized;
+  }
+
+  private isActiveRuleDuplicated(activeRuleA: string | string[], activeRuleB: string | string[]) {
+    const a = Array.isArray(activeRuleA) ? activeRuleA : [activeRuleA];
+    const b = Array.isArray(activeRuleB) ? activeRuleB : [activeRuleB];
+
+    for (const i of a) {
+      for (const j of b) {
+        if (i === j) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }

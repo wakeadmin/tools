@@ -4,7 +4,7 @@ export interface MicroAppNormalized extends MicroApp {
   /**
    * 没有携带 baseUrl 的 activeRule
    */
-  activeRuleRaw: string;
+  activeRuleRaw: string | string[];
 
   loader?: (loading: boolean) => Promise<void>;
 }
