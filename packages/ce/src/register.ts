@@ -35,6 +35,9 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
                 // FIXME: 这里依赖了 Vue 的内部实现细节
                 return this._props?.[prop];
               },
+              set(value: any) {
+                (this._props ??= {})[prop] = value;
+              },
             });
           }
         });

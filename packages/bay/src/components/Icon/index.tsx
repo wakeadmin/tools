@@ -1,6 +1,6 @@
-import { defineComponent, PropType, Component, h, CSSProperties } from 'vue';
+import { ref, defineComponent, PropType, Component, h, CSSProperties, onBeforeUnmount, unref } from 'vue';
 import * as BuiltinIcons from '@wakeadmin/icons';
-import { getAsset } from '@/services';
+import { getAsset, listenAssets } from '@/services';
 
 const NormalizeBuiltinIcons = Object.keys(BuiltinIcons).reduce<Record<string, Component>>((prev, cur) => {
   prev[cur.toLowerCase()] = (BuiltinIcons as any)[cur];
@@ -30,6 +30,17 @@ export const Icon = defineComponent({
     },
   },
   setup(props) {
+    const assetForceUpdated = ref(0);
+
+    // 监听 asset 变化，并强制更新
+    const disposer = listenAssets(() => {
+      if (typeof props.icon === 'string') {
+        assetForceUpdated.value++;
+      }
+    });
+
+    onBeforeUnmount(disposer);
+
     return () => {
       const { icon } = props;
 
@@ -40,6 +51,8 @@ export const Icon = defineComponent({
           children = h(NormalizeBuiltinIcons[icon.toLowerCase()]);
         } else {
           const asset = getAsset(icon, icon);
+          // 监听 asset 更新
+          unref(assetForceUpdated);
 
           if (asset.includes('<svg')) {
             // svg 内容
