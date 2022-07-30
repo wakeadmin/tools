@@ -13,8 +13,8 @@
     "lint": "vue-cli-service lint",
     "inspect": "vue-cli-service inspect",
     "build": "vue-cli-service build",
-    "build:docker": "node ./scripts/build-docker.js",
-    "publish:docker": "node ./scripts/publish-docker.js",
+    "build:docker": "node ./scripts/docker-build.js",
+    "publish:docker": "node ./scripts/docker-publish.js",
     "prepare": "husky install",
     "type-check": "tsc",
     "local-check": "wkstd local-check"

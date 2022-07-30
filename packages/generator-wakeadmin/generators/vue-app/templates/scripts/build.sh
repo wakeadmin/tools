@@ -19,12 +19,16 @@ node -v
 
 npm i -g pnpm
 pnpm -v
+pnpm install
 
 # 构建静态资源
 pnpm build
 
 # 构建镜像
-pnpm run build:docker
+node ./scripts/docker-build.js
 
 # 发布
-pnpm run publish:docker
+node ./scripts/docker-publish.js
+
+# 触发 Rancher 更新
+node ./scripts/rancher-update.js
