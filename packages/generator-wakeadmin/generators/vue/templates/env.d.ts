@@ -44,6 +44,11 @@ declare module '*.module.pcss' {
   export default classes;
 }
 
+// 翻译文件
+declare module '*.tr' {
+  export default object;
+}
+
 // CSS
 declare module '*.css' {
   const css: string;

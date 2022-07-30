@@ -4,6 +4,8 @@ import Bay from '@wakeadmin/bay';
 
 import App from './App.vue';
 import router from './router';
+import i18n from './i18n'
+import './locales'
 
 Vue.config.productionTip = false;
 
@@ -20,6 +22,7 @@ Bay.createMicroApp({
     console.log('mount vue2', props);
 
     instance = new Vue({
+      i18n: i18n.i18n,
       router,
       render: h => h(App),
     });
@@ -47,6 +50,8 @@ import Bay from '@wakeadmin/bay';
 
 import App from './App.vue';
 import { routes } from './router';
+import i18n from './i18n'
+import './locales'
 
 let app: TApp;
 
@@ -62,7 +67,7 @@ Bay.createMicroApp({
       routes,
     });
 
-    app = createApp(App).use(router).use(Bay);
+    app = createApp(App).use(router).use(Bay).use(i18n);
 
     app.mount(container?.querySelector('#app') ?? '#app');
   },

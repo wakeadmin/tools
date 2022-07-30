@@ -33,6 +33,7 @@
     "babel-preset-wakeadmin": "latest",
     "@wakeadmin/vue-cli-plugin-mapp-child": "latest",
     "@wakeadmin/vue-cli-plugin-vendor": "latest",
+    "@wakeadmin/vue-cli-plugin-i18n": "latest",
     "@wakeadmin/docker-build": "latest",
     "sass": "^1.54.0",
     "sass-loader": "^12.6.0",
