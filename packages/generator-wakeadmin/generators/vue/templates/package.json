@@ -1,0 +1,49 @@
+{
+  "name": "<%- name %>",
+  "imageName": "wkfe/<%- name %>",
+  "workload": "wakeadmin-<%- name %>",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Wakeadmin 应用",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": "Chrome 60",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "inspect": "vue-cli-service inspect",
+    "build": "vue-cli-service build",
+    "build:docker": "node ./scripts/docker-build.js",
+    "publish:docker": "node ./scripts/docker-publish.js",
+    "prepare": "husky install",
+    "type-check": "tsc",
+    "local-check": "wkstd local-check"
+  },
+  "dependencies": {
+    "@wakeadmin/framework": "latest",
+    "@wakeadmin/h": "latest",
+    "core-js": "^3.23.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-router": "~5.0.8",
+    "@vue/cli-plugin-typescript": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "babel-preset-wakeadmin": "latest",
+    "@wakeadmin/vue-cli-plugin-i18n": "latest",
+    "@wakeadmin/docker-build": "latest",
+    "sass": "^1.54.0",
+    "sass-loader": "^12.6.0",
+    "wkstd": "latest",
+    "typescript": "^4.7.4",
+    "prettier": "^2.7.1",
+    "husky": "^8.0.1",
+    "eslint": "~8.0.1",
+    "eslint-config-wkts": "latest",
+    "eslint-config-wkvue": "latest",
+    "cross-env": "^7.0.3",
+    "prettier-config-wk": "latest"
+  },
+  "prettier": "prettier-config-wk"
+}
