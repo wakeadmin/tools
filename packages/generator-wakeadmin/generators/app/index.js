@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import ThemeGenerator from '../theme/index.js';
-import VueGenerator from '../vue/index.js';
+import VueGenerator from '../vue-app/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -30,7 +30,7 @@ export default class extends Generator {
 
     switch (answers.type) {
       case 'vue-app':
-        this.composeWith({ Generator: VueGenerator, path: path.join(__dirname, '../vue/index.js') });
+        this.composeWith({ Generator: VueGenerator, path: path.join(__dirname, '../vue-app/index.js') });
         break;
       case 'theme':
         this.composeWith({ Generator: ThemeGenerator, path: path.join(__dirname, '../theme/index.js') });
