@@ -1,5 +1,6 @@
+import { unref, ref } from '@wakeadmin/demi';
+
 import { getAsset, registerAsset, listenAssets, useAsset } from '.';
-import { unref } from '@wakeadmin/demi';
 
 window.__MAPP_ASSETS__ = [{ global1: '1', global2: '2' }, ['global3', '3']];
 
@@ -28,7 +29,7 @@ test('assets', () => {
   expect(listener).toBeCalledTimes(1);
 });
 
-test('useAsset', () => {
+test('useAsset', async () => {
   const value = useAsset('demo', 'fallback');
 
   expect(unref(value)).toBe('fallback');
@@ -36,4 +37,12 @@ test('useAsset', () => {
   registerAsset('demo', 'demo');
 
   expect(unref(value)).toBe('demo');
+
+  // ref
+  const keyRef = ref('demo');
+  const value2 = useAsset(keyRef, 'fallback');
+  expect(unref(value2)).toBe('demo');
+  keyRef.value = 'unknown!';
+
+  expect(unref(value2)).toBe('fallback');
 });
