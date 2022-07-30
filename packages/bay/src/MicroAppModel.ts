@@ -95,11 +95,27 @@ export class MicroAppModel {
    * @returns
    */
   getMapps() {
-    // 去重, 本地优先
-    const set = new Map<string, MicroApp>();
-    this.apps.forEach(i => set.set(i.name, i));
+    // 根据name、activeRule 去重, 本地优先
+    const list: MicroApp[] = [];
 
-    return Array.from(set.values());
+    for (let i = this.apps.length - 1; i >= 0; i--) {
+      const item = this.normalizeApp(this.apps[i]);
+      let isDup = false;
+
+      for (const inList of list) {
+        if (inList.name === item.name || inList.activeRule === item.activeRule) {
+          // 已存在
+          isDup = true;
+          break;
+        }
+      }
+
+      if (!isDup) {
+        list.push(item);
+      }
+    }
+
+    return list;
   }
 
   isLocalApp(app: MicroApp) {
@@ -125,4 +141,14 @@ export class MicroAppModel {
   private debouncedSaveDebugScript = debounce((value: string) => {
     window.localStorage.setItem(DEBUG_SCRIPT_KEY, value);
   }, 500);
+
+  private normalizeApp(app: MicroApp) {
+    const { name, activeRule, ...other } = app;
+
+    return {
+      name: name.trim(),
+      activeRule: activeRule.trim(),
+      ...other,
+    };
+  }
 }

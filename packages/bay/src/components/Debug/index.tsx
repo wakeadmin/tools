@@ -32,7 +32,19 @@ export const Debug = defineComponent({
     const rulesAdd = reactive<FormRules>({
       name: [{ required: true }],
       entry: [{ required: true }],
-      activeRule: [{ required: true }],
+      activeRule: [
+        { required: true },
+        {
+          validator(_rule, value, callback) {
+            const baseUrl = bayModel.bay.baseUrl;
+            if (value && baseUrl !== '/' && (value as string).startsWith(baseUrl)) {
+              callback(new Error(`activeRule 不需要加上 baseUrl 前缀`));
+            } else {
+              callback();
+            }
+          },
+        },
+      ],
     });
 
     const handleAdd = () => {
@@ -90,6 +102,12 @@ export const Debug = defineComponent({
           <div class="debug">
             <div class="debug__hd">已注册微应用</div>
             <div class="debug__bd">
+              <div>基本信息</div>
+              <ul>
+                <li>baseUrl: {bayModel.bay.baseUrl}</li>
+              </ul>
+
+              <div>微应用</div>
               <ul>
                 {model.apps.map(i => {
                   const removable = model.isLocalApp(i);
