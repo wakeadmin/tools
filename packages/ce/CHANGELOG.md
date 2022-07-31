@@ -1,5 +1,11 @@
 # @wakeadmin/ce
 
+## 0.1.3
+
+### Patch Changes
+
+- 修复初始 props 设置警告
+
 ## 0.1.2
 
 ### Patch Changes

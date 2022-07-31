@@ -1,6 +1,6 @@
 {
   "name": "create-wakeadmin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "bin": "./index.js",
   "description": "项目创建脚手架",
   "type": "module",
@@ -15,7 +15,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "generator-wakeadmin": "workspace:^0.1.0",
-    "yeoman-environment": "^3.9.1"
+    "generator-wakeadmin": "workspace:^0.2.0",
+    "yeoman-environment": "^3.10.0"
   }
 }

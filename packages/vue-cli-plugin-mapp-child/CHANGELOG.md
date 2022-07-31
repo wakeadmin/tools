@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.3.0
+
+### Minor Changes
+
+- activeRule 支持数组形式; 支持 history 模式
+
 ## 0.2.0
 
 ### Minor Changes

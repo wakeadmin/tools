@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/mapp",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "微应用工具库",
   "files": [
     "dist"

@@ -1,5 +1,19 @@
 # @wakeadmin/bay
 
+## 0.3.0
+
+### Minor Changes
+
+- activeRule 支持数组形式; 支持 history 模式
+
+### Patch Changes
+
+- asset 动态化
+- Updated dependencies
+- Updated dependencies
+  - @wakeadmin/assets@0.1.1
+  - @wakeadmin/mapp@0.2.0
+
 ## 0.2.1
 
 ### Patch Changes
