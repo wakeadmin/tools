@@ -25,6 +25,8 @@ interface SessionData {
   selectApp: AppInfo & IndustryInfo;
 }
 
+const MOCK_ENABLED = '[%= typeof mockEnabled !== "undefined" ? mockEnabled : "" %]' as string;
+
 /**
  * 菜单获取接口
  */
@@ -35,7 +37,11 @@ export class BayRepo extends BaseRepoImplement {
    * 获取所有菜单
    * @returns
    */
-  getMenus() {
+  async getMenus() {
+    if (MOCK_ENABLED === 'true') {
+      return (await import('./tree/__fixture__/menu')).default;
+    }
+
     return this.requestor.requestByPost<TreeNodeRaw[]>(
       '/permission/web/wd/menu/show/menu',
       {
@@ -54,9 +60,10 @@ export class BayRepo extends BaseRepoImplement {
    * @returns
    */
   async getSessionInfo(): Promise<SessionInfo> {
-    const { selectApp, selectRole, roleList, ...other } = await this.requestor.requestByGet<SessionData>(
-      '/wd/employee/web/login/query'
-    );
+    const { selectApp, selectRole, roleList, ...other } =
+      MOCK_ENABLED === 'true'
+        ? (await import('./session/__fixtures__/session')).default
+        : await this.requestor.requestByGet<SessionData>('/wd/employee/web/login/query');
 
     return {
       appInfo: selectApp,

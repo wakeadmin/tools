@@ -28,7 +28,7 @@
     "@types/tapable": "^2.2.2",
     "@vue/composition-api": "^1.7.0",
     "@vue/test-utils": "next",
-    "@wakeadmin/docker-build": "^0.1.4",
+    "@wakeadmin/docker-build": "^0.1.5",
     "babel-jest": "^28.1.3",
     "babel-preset-wakeadmin-for-test": "workspace:0.1.0",
     "cross-env": "^7.0.3",

@@ -3,12 +3,10 @@
  */
 // @ts-check
 const build = require('../../../scripts/shared-docker-build');
-const clean = require('../../../scripts/shared-docker-clean');
 
 const pkg = require('../package.json');
 
-const imageName = `wkfe/bay`;
+const { IMAGE_NAME, PLAYGROUND_IMAGE_NAME } = require('./shared');
 
-// 强制清除，强制拉取最新的 wkfe/mapp 版本
-clean(`wkfe/mapp`);
-build(imageName, { VERSION: pkg.version, THEME: pkg.theme });
+build(IMAGE_NAME, { VERSION: pkg.version, THEME: pkg.theme, MOCK_ENABLED: false }, '--pull');
+build(PLAYGROUND_IMAGE_NAME, { VERSION: pkg.version, THEME: pkg.theme, MOCK_ENABLED: true });
