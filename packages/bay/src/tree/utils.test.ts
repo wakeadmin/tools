@@ -1,3 +1,4 @@
+import { __setMicroAppContextJustForTest } from './microAppContext';
 import {
   truncateIdentifierPath,
   splitIdentifierPath,
@@ -7,6 +8,8 @@ import {
   normalizeRoute,
   normalizeUrl,
   sortByLevel,
+  getQuery,
+  combineRoute,
 } from './utils';
 
 test('sortByLevel', () => {
@@ -76,6 +79,28 @@ test('trimPathSection', () => {
   expect(trimPathSection('/hello/world#/hello/world')).toBe('/hello/world#/hello');
 });
 
+test('getQuery', () => {
+  expect(getQuery('').toString()).toBe('');
+  expect(getQuery('abc').toString()).toBe('');
+  expect(getQuery('abc?a=1&b=2').toString()).toBe('a=1&b=2');
+});
+
+test('combineRoute', () => {
+  expect(combineRoute('hash', '/', '/')).toBe('/#/');
+  expect(combineRoute('hash', '/', '/foo/bar')).toBe('/#/foo/bar');
+  expect(combineRoute('hash', '/foo#boar', '/foo/bar')).toBe('/foo#/foo/bar');
+  expect(combineRoute('hash', '/foo?query#boar', '/foo/bar')).toBe('/foo?query#/foo/bar');
+
+  // history
+  expect(combineRoute('history', '/', '/')).toBe('/');
+  expect(combineRoute('history', '/', '/foo')).toBe('/foo');
+  expect(combineRoute('history', '/foo', '/bar')).toBe('/foo/bar');
+  expect(combineRoute('history', '/foo#/foo', '/bar')).toBe('/foo/bar');
+  expect(combineRoute('history', '/foo#/foo', '/bar#/bar')).toBe('/foo/bar#/bar');
+  expect(combineRoute('history', '/foo?a=1&b=2', '/bar?a=2&c=3')).toBe('/foo/bar?a=2&b=2&c=3');
+  expect(combineRoute('history', '/foo?a=1&b=2#/foo', '/bar?a=2&c=3#/bar')).toBe('/foo/bar?a=2&b=2&c=3#/bar');
+});
+
 test('normalizeUrl', () => {
   expect(normalizeUrl('')).toBe('/');
   expect(normalizeUrl('/')).toBe('/');
@@ -112,6 +137,16 @@ test('normalizeRoute', () => {
     matchable: '/hello#/hello/world',
     routeType: 'subRoute',
   });
+
+  // history 模式
+  __setMicroAppContextJustForTest({ routeMode: 'history', name: 'test', entry: 'entry', activeRule: '/' });
+  expect(normalizeRoute('/hello/world?hashQuery', '/hello?query#/trim')).toEqual({
+    raw: '/hello/world?hashQuery',
+    url: '/hello/hello/world?query=&hashQuery=',
+    matchable: '/hello/hello/world#/',
+    routeType: 'subRoute',
+  });
+  __setMicroAppContextJustForTest(null);
 
   expect(normalizeRoute('hello/world?hashQuery')).toEqual({
     raw: 'hello/world?hashQuery',

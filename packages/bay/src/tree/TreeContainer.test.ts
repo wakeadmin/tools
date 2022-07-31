@@ -3,6 +3,15 @@ import menus from './__fixture__/menu';
 import { TreeContainer } from './TreeContainer';
 import { TreeNode } from './TreeNode';
 
+jest.mock('./microAppContext', () => ({
+  getMicroAppContext() {
+    return null;
+  },
+  setMicroAppContext(route: string, runner: Function) {
+    runner();
+  },
+}));
+
 describe('TreeContainer', () => {
   let warn: jest.MockInstance<any, any> = jest.spyOn(global.console, 'warn').mockImplementation(() => null);
 

@@ -230,14 +230,6 @@ export class TreeNode {
   }
 
   /**
-   * 打开
-   */
-  open = () => {
-    // TODO: 实现
-    // TODO: 支持拦截
-  };
-
-  /**
    * 点燃，激活
    *
    * 这个方法由 TreeContainer 调用

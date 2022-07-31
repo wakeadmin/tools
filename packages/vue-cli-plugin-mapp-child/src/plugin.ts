@@ -41,6 +41,11 @@ export interface MappSingle {
   independent?: boolean;
 
   /**
+   * 路由模式，默认为 hash
+   */
+  routeMode?: 'hash' | 'history';
+
+  /**
    * 用于多业态应用，绑定到同一个身份上
    */
   alias?: string;
@@ -131,6 +136,7 @@ function createMappConfig(options: {
       activeRule: userDefineConfig.activeRule ?? addHeadingSlash(name),
       entry: isProduction ? `__apps__/${name}/` : publicPath,
       independent: userDefineConfig.independent,
+      routeMode: userDefineConfig.routeMode,
       version,
       description,
     };
@@ -149,6 +155,7 @@ function createMappConfig(options: {
       activeRule: i.activeRule ?? addHeadingSlash(name),
       entry: (isProduction ? `__apps__/${defaultName}/` : publicPath) + i.entry + '.html',
       independent: i.independent,
+      routeMode: i.routeMode,
       version,
       description,
     };

@@ -2,6 +2,7 @@
 import { computed, makeObservable, observable } from '@wakeadmin/framework';
 import { NoopArray } from '@wakeadmin/utils';
 import { WARNING_CODE_CHILD_CONFLICT, WARNING_CODE_ROOT_CONFLICT } from './constants';
+import { setMicroAppContext } from './microAppContext';
 
 import { TreeNode } from './TreeNode';
 import { TreeNodeRaw, FindResult, RouteType, MenuType } from './types';
@@ -433,12 +434,20 @@ export class TreeContainer {
    */
   private createNode(data: TreeNodeRaw, parent?: TreeNode): TreeNode {
     const node = new TreeNode(data, parent);
+    const createChildren = () => {
+      // 递归创建
+      if (data.childMenu?.length) {
+        node.children = data.childMenu.map(i => {
+          return this.createNode(i, node);
+        });
+      }
+    };
 
-    // 递归创建
-    if (data.childMenu?.length) {
-      node.children = data.childMenu.map(i => {
-        return this.createNode(i, node);
-      });
+    // 根节点
+    if (node.routeType === RouteType.Main) {
+      setMicroAppContext(node.url!, createChildren);
+    } else {
+      createChildren();
     }
 
     this.registerNode(node);

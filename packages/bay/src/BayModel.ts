@@ -444,6 +444,7 @@ export class BayModel extends BaseModel implements IBayModel {
             }
           }
 
+          console.debug(`[bay] 匹配(${exact ? '精确' : ''})到节点:`, result);
           container.lightUp(result, exact);
         }
       },

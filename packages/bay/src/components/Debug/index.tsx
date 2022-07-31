@@ -11,6 +11,7 @@ import {
   ElIcon,
   ElInput,
   ElLink,
+  ElSelect,
   FormInstance,
   FormRules,
 } from 'element-plus';
@@ -60,6 +61,7 @@ export const Debug = defineComponent({
         name: '',
         entry: '',
         activeRule: '',
+        routeMode: 'hash',
       };
     };
 
@@ -99,7 +101,8 @@ export const Debug = defineComponent({
                       {removable && <div class="debug__badge">本地</div>}
                       name=<span class="debug__field">{i.name}</span>; entry=<span class="debug__field">{i.entry}</span>
                       ; activeRule=<span class="debug__field">{JSON.stringify(i.activeRule)}</span>; independent=
-                      <span class="debug__field">{String(!!i.independent)}</span>
+                      <span class="debug__field">{String(!!i.independent)}</span>; routeMode=
+                      <span class="debug__field">{i.routeMode ?? 'hash'}</span>
                       <ElLink
                         href={bayModel.generateLandingUrl({ type: 'app', name: i.name })}
                         style="margin-left: 20px"
@@ -150,6 +153,15 @@ export const Debug = defineComponent({
                         modelValue={adding.value.independent}
                         onUpdate:modelValue={v => (adding.value!.independent = v as boolean)}
                       />
+                    </ElFormItem>
+                    <ElFormItem label="路由模式(routeMode)" prop="routeMode">
+                      <ElSelect
+                        modelValue={adding.value.routeMode}
+                        onUpdate:modelValue={v => (adding.value!.routeMode = v)}
+                      >
+                        <ElSelect.Option value="hash">hash 模式</ElSelect.Option>
+                        <ElSelect.Option value="history">history 模式</ElSelect.Option>
+                      </ElSelect>
                     </ElFormItem>
                     <ElFormItem>
                       <ElButton onClick={handleSaveAdd}>添加</ElButton>

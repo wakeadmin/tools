@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NormalizedUrl, RouteType } from './types';
 import type { TreeNode } from './TreeNode';
 import { addHeadingSlash, removeTrailingSlash, trimQuery, trimHash, trimQueryAndHash } from '@wakeadmin/utils';
+import { getMicroAppContext } from './microAppContext';
 
 const HAS_PROTOCOL = /^(http|https|file):\/\//;
 
@@ -112,6 +114,55 @@ export function normalizeUrl(url: string) {
   return `${normalize(path)}${hash ? '#' + normalize(hash) : ''}`;
 }
 
+export function getQuery(url: string) {
+  const qIdx = url.indexOf('?');
+  if (qIdx !== -1) {
+    const q = new URLSearchParams(url.slice(qIdx));
+    return q;
+  } else {
+    return new URLSearchParams();
+  }
+}
+
+/**
+ * 合并路由
+ * @param mode
+ * @param parent
+ * @param child
+ * @returns
+ */
+export function combineRoute(mode: 'hash' | 'history', parent: string, child: string) {
+  if (mode === 'hash') {
+    return trimHash(parent) + '#' + child;
+  } else {
+    // 需要合并查询字符串, hash 则以 child 的为准
+    parent = trimHash(parent);
+    const parentQuery = getQuery(parent);
+    parent = trimQuery(parent);
+
+    const hIdx = child.indexOf('#');
+    const childHashTrimed = trimHash(child);
+    const childQuery = getQuery(childHashTrimed);
+
+    // 合并 query
+    for (const key of childQuery.keys()) {
+      parentQuery.set(key, childQuery.get(key)!);
+    }
+
+    let url = removeTrailingSlash(parent) + addHeadingSlash(trimQuery(childHashTrimed));
+    const query = parentQuery.toString();
+    if (query) {
+      url = url + '?' + query;
+    }
+
+    if (hIdx !== -1) {
+      url += child.slice(hIdx);
+    }
+
+    return url;
+  }
+}
+
 /**
  * 规范化惟客云后端配置的 url 地址
  * @param url
@@ -119,6 +170,7 @@ export function normalizeUrl(url: string) {
  */
 export function normalizeRoute(url: string, root?: string): NormalizedUrl {
   url = url.trim();
+  const context = getMicroAppContext();
 
   // HTTP 外部链接
   if (HAS_PROTOCOL.test(url)) {
@@ -136,13 +188,15 @@ export function normalizeRoute(url: string, root?: string): NormalizedUrl {
     };
   }
 
-  if (url.includes('#')) {
-    throw new Error('url 不能携带 #');
-  }
-
   // 如果传入了根节点，将作为 hash 拼接起来
   if (root) {
-    const combined = normalizeUrl(trimHash(root) + '#' + url);
+    const historyMode = context?.routeMode === 'history';
+
+    if (!historyMode && url.includes('#')) {
+      throw new Error('url 不能携带 #');
+    }
+
+    const combined = normalizeUrl(combineRoute(historyMode ? 'history' : 'hash', root, url));
 
     return {
       raw: url,

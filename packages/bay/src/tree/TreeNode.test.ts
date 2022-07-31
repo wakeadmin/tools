@@ -1,5 +1,6 @@
 import { TreeNode } from './TreeNode';
 import { MenuType, TreeNodeRaw } from './types';
+import { __setMicroAppContextJustForTest } from './microAppContext';
 
 describe('基本结构测试', () => {
   const data0: TreeNodeRaw = {
@@ -227,6 +228,58 @@ describe('路由转换测试', () => {
     expect(child.routeType).toBe('outside');
 
     expect(grandchild.url).toBe('/second#/third');
+    expect(grandchild.routeType).toBe('subRoute');
+  });
+
+  test('history 路由', () => {
+    __setMicroAppContextJustForTest({
+      name: 'test',
+      entry: 'entry',
+      activeRule: '/foo',
+      routeMode: 'history',
+    });
+
+    const data0: TreeNodeRaw = {
+      id: '9',
+      parentId: '0',
+      identifier: 'root',
+      name: 'root',
+      url: '/foo',
+      level: 0,
+      isMenu: 1,
+    };
+
+    const data1: TreeNodeRaw = {
+      id: '1',
+      parentId: '9',
+      identifier: 'second',
+      name: 'second',
+      url: '/baz',
+      level: 1,
+      isMenu: 1,
+    };
+
+    const data2: TreeNodeRaw = {
+      id: '2',
+      parentId: '1',
+      identifier: 'third',
+      name: 'third',
+      url: '/bar',
+      level: 2,
+      isMenu: 1,
+    };
+
+    const root = new TreeNode(data0);
+    const child = new TreeNode(data1, root);
+    const grandchild = new TreeNode(data2, child);
+
+    root.children = [child];
+    child.children = [grandchild];
+
+    expect(child.url).toBe('/foo/baz');
+    expect(child.routeType).toBe('subRoute');
+
+    expect(grandchild.url).toBe('/foo/bar');
     expect(grandchild.routeType).toBe('subRoute');
   });
 });
