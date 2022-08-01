@@ -1,10 +1,7 @@
 import Generator from 'yeoman-generator';
 import path from 'node:path';
 
-import { isPnpmSupported, isYarnSupported } from '../app/utils.js';
-
-const PNPM_SUPPORTED = isPnpmSupported();
-const YARN_SUPPORTED = isYarnSupported();
+import { PNPM_SUPPORTED, PACKAGE_MANAGER_NAME } from '../app/utils.js';
 
 export default class extends Generator {
   async prompting() {
@@ -75,20 +72,18 @@ export default class extends Generator {
   install() {
     if (!this.fs.exists(this.destinationPath('.git'))) {
       this.spawnCommandSync('git', ['init']);
+
+      this.spawnCommandSync('git', ['add', '.']);
+      this.spawnCommandSync('git', ['commit', '-m', 'chore: initial project', '--no-verify']);
     }
 
-    if (PNPM_SUPPORTED) {
-      this.spawnCommand('pnpm', ['install']);
-    } else if (YARN_SUPPORTED) {
-      this.spawnCommand('yarn', []);
-    } else {
-      this.spawnCommand('npm', ['install']);
-    }
+    // yeoman 会自动识别包管理器
+    // this.spawnCommand(PACKAGE_MANAGER_NAME, ['install']);
   }
 
   end() {
     const dir = path.relative(process.cwd(), this.destinationRoot());
-    const m = PNPM_SUPPORTED ? 'pnpm' : YARN_SUPPORTED ? 'yarn' : 'npm';
+    const m = PACKAGE_MANAGER_NAME;
 
     this.log(`应用创建成功!
 
@@ -96,6 +91,8 @@ $ cd ${dir}
 ${m} run serve        # 本地开发
 ${m} run build        # 生成构建
 ${m} run build:docker # Docker 容器构建
+
+参考：https://wakeadmin.wakedata.com/standard/build.html 搭建 Jenkins 自动化检查、发布、部署
 `);
   }
 }

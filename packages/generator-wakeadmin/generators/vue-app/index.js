@@ -1,10 +1,7 @@
 import Generator from 'yeoman-generator';
 import path from 'node:path';
 
-import { isPnpmSupported, isYarnSupported } from '../app/utils.js';
-
-const PNPM_SUPPORTED = isPnpmSupported();
-const YARN_SUPPORTED = isYarnSupported();
+import { PNPM_SUPPORTED, PACKAGE_MANAGER_NAME } from '../app/utils.js';
 
 export default class extends Generator {
   async prompting() {
@@ -78,20 +75,15 @@ export default class extends Generator {
   install() {
     if (!this.fs.exists(this.destinationPath('.git'))) {
       this.spawnCommandSync('git', ['init']);
-    }
 
-    if (PNPM_SUPPORTED) {
-      this.spawnCommand('pnpm', ['install']);
-    } else if (YARN_SUPPORTED) {
-      this.spawnCommand('yarn', []);
-    } else {
-      this.spawnCommand('npm', ['install']);
+      this.spawnCommandSync('git', ['add', '.']);
+      this.spawnCommandSync('git', ['commit', '-m', 'chore: initial project', '--no-verify']);
     }
   }
 
   end() {
     const dir = path.relative(process.cwd(), this.destinationRoot());
-    const m = PNPM_SUPPORTED ? 'pnpm' : YARN_SUPPORTED ? 'yarn' : 'npm';
+    const m = PACKAGE_MANAGER_NAME;
 
     this.log(`子应用创建成功!
 

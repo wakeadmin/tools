@@ -17,3 +17,7 @@ export function isYarnSupported() {
     return false;
   }
 }
+
+export const PNPM_SUPPORTED = isPnpmSupported();
+export const YARN_SUPPORTED = isYarnSupported();
+export const PACKAGE_MANAGER_NAME = PNPM_SUPPORTED ? 'pnpm' : YARN_SUPPORTED ? 'yarn' : 'npm';
