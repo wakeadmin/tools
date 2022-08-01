@@ -77,7 +77,7 @@ export class AppContext {
   isCurrentAppError = computed(() => {
     const status = this.currentAppStatus.value;
 
-    return status === 'LOAD_ERROR';
+    return status === 'LOAD_ERROR' || status === 'SKIP_BECAUSE_BROKEN';
   });
 
   /**
