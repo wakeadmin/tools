@@ -1,6 +1,6 @@
 {
   "name": "generator-wakeadmin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "子应用项目脚手架",
   "type": "module",
   "exports": "./generators/app/index.js",

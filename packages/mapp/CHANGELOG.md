@@ -1,5 +1,11 @@
 # @wakeadmin/mapp
 
+## 0.2.1
+
+### Patch Changes
+
+- 修复子应用错误状态没有识别挂载错误的场景
+
 ## 0.2.0
 
 ### Minor Changes
