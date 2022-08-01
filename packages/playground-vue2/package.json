@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "inspect": "vue-cli-service inspect",
-    "build:assets": "vue-cli-service build",
+    "build:assets": "vue-cli-service --no-module build",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js"
   },
