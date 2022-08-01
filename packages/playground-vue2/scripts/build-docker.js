@@ -6,4 +6,4 @@ const build = require('../../../scripts/shared-docker-build');
 
 const imageName = `wkfe/playground-vue2`;
 
-build(imageName, {});
+build(imageName, {}, '--pull');
