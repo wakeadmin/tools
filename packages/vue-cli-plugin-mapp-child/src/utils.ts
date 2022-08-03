@@ -1,5 +1,7 @@
 import { camelCase } from '@wakeadmin/utils';
 import { createHash } from 'crypto';
+import path from 'path';
+import fs from 'fs';
 
 export type SharedDeclaration = { name: string; module: string } | string;
 export interface PackageJSONLike {
@@ -50,4 +52,20 @@ export function transformSharedToExternal(shared: SharedDeclaration[]) {
 
     return prev;
   }, {});
+}
+
+export function saveConstantsProviderModule(file: string, constants: Record<string, string>) {
+  const keys = Object.keys(constants);
+  if (!keys.length) {
+    return;
+  }
+
+  const dir = path.dirname(file);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+
+  const moduleSource = keys.map(i => `export const ${i} = ${JSON.stringify(constants[i])};`).join('\n');
+
+  fs.writeFileSync(file, moduleSource);
 }

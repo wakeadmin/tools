@@ -22,6 +22,7 @@ import {
   getNameFromPackageJson,
   getHashedPort,
   transformSharedToExternal,
+  saveConstantsProviderModule,
 } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
@@ -179,6 +180,7 @@ export const plugin: ServicePlugin = (api, options) => {
   const _shared = pluginOptions.shared || [];
   const _publicPath = pluginOptions.publicPath || 'auto';
 
+  const context = api.service.context;
   const port = options.devServer?.port || getHashedPort(_name);
   const externals = transformSharedToExternal(_shared);
 
@@ -300,6 +302,7 @@ module.exports = {
     }
 
     if (constantKeys.length) {
+      // vue cli 默认会将 NODE_ENV、BASE_URI 注入到 process.env 和 HTML 模板中，因此这里使用 constantKeys 判断是否需要注入额外的变量
       // 代码注入
       chain.plugin('mapp-constants').use(webpack.DefinePlugin, [
         constantKeys.reduce<Record<string, string>>((prev, cur) => {
@@ -330,6 +333,16 @@ module.exports = {
         }
       });
     }
+
+    // provider 注入, 这个主要用于 ejs-loader
+    const constantsProviderModulePath = path.join(context, '.temp', 'constants.js');
+    saveConstantsProviderModule(constantsProviderModulePath, constants as Record<string, string>);
+    chain.plugin('mapp-constants-provider').use(webpack.ProvidePlugin, [
+      Object.keys(constants).reduce<Record<string, [string, string]>>((prev, cur) => {
+        prev[cur] = [constantsProviderModulePath, cur];
+        return prev;
+      }, {}),
+    ]);
   });
 
   {

@@ -11,7 +11,8 @@ Vue.use(Bay);
 
 let instance: Vue;
 
-console.log(process.env.HELLO);
+// @ts-expect-error
+console.log(process.env.HELLO, HELLO);
 
 Bay.createMicroApp({
   async bootstrap() {
