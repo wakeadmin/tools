@@ -1,5 +1,11 @@
 # generator-wakeadmin
 
+## 0.2.2
+
+### Patch Changes
+
+- 禁用 module 构建、默认开启 pull
+
 ## 0.2.1
 
 ### Patch Changes

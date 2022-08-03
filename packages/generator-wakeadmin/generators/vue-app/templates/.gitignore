@@ -13,3 +13,4 @@ env.*.local.json
 .tsBuildInfo*
 *.log
 .pnpm-store/
+.temp

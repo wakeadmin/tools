@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.3.1
+
+### Patch Changes
+
+- 支持 provider 常量注入
+
 ## 0.3.0
 
 ### Minor Changes
