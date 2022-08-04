@@ -10,13 +10,23 @@ $color: var(--wk-color-font-regular);
 
 .bay-header {
   @extend %flex-center;
-  height: 56px;
+  $height: 56px;
+  height: $height;
   background-color: $bg-color;
   box-shadow: 0 1px 0 0 #dce1e6;
   padding: 0 20px;
   box-sizing: border-box;
   flex-shrink: 0;
   z-index: 2;
+
+  // 菜单隐藏
+  @at-root .bay-menu-hide & {
+    margin-top: -$height;
+  }
+
+  @at-root .bay-menu-with-animate & {
+    transition: margin-top 0.3s ease-in-out;
+  }
 
   &__before {
     width: var(--bay-sidebar-width);

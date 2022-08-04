@@ -87,10 +87,24 @@ export class BayModel extends BaseModel implements IBayModel {
   sessionInfo?: SessionInfo;
 
   /**
-   * 菜单折叠
+   * 侧边栏折叠
    */
   @observable.ref
   sidebarCollasped = false;
+
+  /**
+   * 菜单折叠
+   */
+  @observable.ref
+  menuVisible = true;
+
+  /**
+   * 菜单折叠动画效果
+   */
+  @observable.ref
+  menuVisibleWithAnimation = false;
+
+  private menuVisibleAnimationTimeout?: number;
 
   get loading() {
     return this.status !== BayStatus.READY && this.status !== BayStatus.ERROR;
@@ -221,6 +235,39 @@ export class BayModel extends BaseModel implements IBayModel {
    */
   toggleSidebar = () => {
     this.sidebarCollasped = !this.sidebarCollasped;
+  };
+
+  /**
+   * 显示菜单
+   */
+  showMenu = (animate = true) => {
+    if (this.menuVisible) {
+      return;
+    }
+
+    this.cancelMenuVisibleAnimation();
+
+    if (animate) {
+      this.startMenuVisibleAnimation();
+    }
+
+    this.menuVisible = true;
+  };
+
+  /**
+   * 隐藏菜单
+   */
+  hideMenu = (animate = true) => {
+    if (!this.menuVisible) {
+      return;
+    }
+
+    this.cancelMenuVisibleAnimation();
+
+    if (animate) {
+      this.startMenuVisibleAnimation();
+    }
+    this.menuVisible = false;
   };
 
   /**
@@ -517,5 +564,19 @@ export class BayModel extends BaseModel implements IBayModel {
     const menus = await this.repo.getMenus();
 
     return (this.menu = new TreeContainer(menus));
+  };
+
+  private startMenuVisibleAnimation = () => {
+    this.menuVisibleWithAnimation = true;
+    this.menuVisibleAnimationTimeout = window.setTimeout(() => {
+      this.menuVisibleWithAnimation = false;
+    }, 1000);
+  };
+
+  private cancelMenuVisibleAnimation = () => {
+    if (this.menuVisibleAnimationTimeout != null) {
+      window.clearTimeout(this.menuVisibleAnimationTimeout);
+      this.menuVisibleAnimationTimeout = undefined;
+    }
   };
 }
