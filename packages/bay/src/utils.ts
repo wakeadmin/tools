@@ -1,5 +1,8 @@
 import { ElMessage } from 'element-plus';
 import { debounce } from '@wakeadmin/utils';
+import { getGlobalI18n } from '@wakeadmin/i18n';
+import { Composer } from 'vue-i18n';
+
 import { getAsset } from './services';
 
 export const gotoLogin = debounce(
@@ -16,4 +19,10 @@ export const gotoLogin = debounce(
 
 export function getMenuI18nKey(path: string) {
   return `menu.${path}$`;
+}
+
+export function useT() {
+  const global = getGlobalI18n();
+  // @ts-expect-error
+  return global.__composer.t as Composer['t'];
 }

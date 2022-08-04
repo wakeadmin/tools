@@ -1,5 +1,6 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { useBayModel } from '@/hooks';
+import { useT, getMenuI18nKey } from '@/utils';
 
 import style from './Header.scss?inline';
 
@@ -20,12 +21,17 @@ export const Header = defineComponent({
   },
   setup(props) {
     const bay = useBayModel();
+    const t = useT();
     const defaultSlot = ref<HTMLSlotElement | null>(null);
     const hasDefaultSlot = ref(false);
 
     const handleSlotChange = () => {
       hasDefaultSlot.value = !!defaultSlot.value?.assignedNodes().length;
     };
+
+    onMounted(() => {
+      handleSlotChange();
+    });
 
     return () => {
       const activeNode = bay.menu?.activeNode;
@@ -45,14 +51,17 @@ export const Header = defineComponent({
                         onClick={() => bay.openTreeNode(menu)}
                         title={menu.url}
                       >
-                        {menu.name}
+                        {t(getMenuI18nKey(menu.identifierPath), menu.name)}
                       </div>
                     );
                   })}
                 </div>
               ) : (
                 <div class="bay-layout-header__title">
-                  <slot name="title">{props.title ?? activeNode?.name}</slot>
+                  <slot name="title">
+                    {props.title ??
+                      (activeNode ? t(getMenuI18nKey(activeNode.identifierPath), activeNode.name) : '未配置标题')}
+                  </slot>
                 </div>
               )}
             </div>

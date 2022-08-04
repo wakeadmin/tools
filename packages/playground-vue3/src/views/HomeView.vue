@@ -1,5 +1,6 @@
 <template>
-  <wkc-header>
+  <wkc-header></wkc-header>
+  <wkc-header style="margin-top: 10px">
     <div slot="title">title</div>
   </wkc-header>
 

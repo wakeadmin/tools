@@ -46,8 +46,3 @@ export const openError = bindApi('openError');
 export const openUrl = bindApi('openUrl');
 
 export const generateLandingUrl = bindApi('generateLandingUrl');
-
-export const registerBundles = bindApi('registerBundles');
-
-export const getLocale = bindApi('getLocale');
-export const setLocale = bindApi('setLocale');

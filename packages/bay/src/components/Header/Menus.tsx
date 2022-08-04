@@ -57,7 +57,7 @@ export const Menus = defineComponent({
                         data-key={child.matchKey}
                         title={item.url}
                       >
-                        {child.name}
+                        {t(getMenuI18nKey(child.identifierPath), child.name)}
                       </a>
                     );
                   })}

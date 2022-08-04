@@ -6,6 +6,7 @@ import { computed, defineComponent, unref } from 'vue';
 
 import { useBayModel } from '@/hooks';
 import { TreeNode } from '@/tree';
+import { getMenuI18nKey, useT } from '@/utils';
 
 import style from './Breadcrumb.scss?inline';
 
@@ -20,6 +21,7 @@ export const Breadcrumb = defineComponent({
   },
   setup(props) {
     const bay = useBayModel();
+    const t = useT();
 
     const breadcrumbs = computed(() => {
       const activeNode = bay.menu?.activeNode;
@@ -62,7 +64,7 @@ export const Breadcrumb = defineComponent({
 
               return (
                 <div class={['bay-layout-breadcrumb__item', { leaf: isLeaf }]} key={i.uid} onClick={handleClick}>
-                  <span class="bay-layout-breadcrumb__name">{i.name}</span>
+                  <span class="bay-layout-breadcrumb__name">{t(getMenuI18nKey(i.identifierPath), i.name)}</span>
                   {!isLeaf && <span class="bay-layout-breadcrumb__separator">/</span>}
                 </div>
               );

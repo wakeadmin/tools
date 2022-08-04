@@ -10,6 +10,7 @@ import { Breadcrumb } from './Breadcrumb';
 import { FloatFooter } from './FloatFooter';
 import { Allows, AllowsPage } from './Allows';
 import { ErrorPage, ErrorPageNotFound, ErrorPageForbidden } from './ErrorPage';
+import { Menuless } from './Menuless';
 
 // 注册自定义组件
 const components = registerCustomElements('wkc', {
@@ -28,6 +29,7 @@ const components = registerCustomElements('wkc', {
   ErrorPageNotFound,
   ErrorPageForbidden,
   Icon,
+  Menuless,
 });
 
 export type BayLayoutComponents = typeof components;

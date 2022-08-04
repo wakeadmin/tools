@@ -5,11 +5,13 @@
  */
 import { defineComponent, PropType, Suspense } from 'vue';
 import { ElMessageBox } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 import { useBayModel } from '@/hooks';
 import { LandingProps } from '@/types';
 
 import './index.scss';
+import { AppLoading } from '../Main/AppLoading';
 
 const LANDING_PROPS = {
   data: {
@@ -25,15 +27,16 @@ const LandingNavigator = defineComponent({
   props: LANDING_PROPS,
   async setup(props) {
     // 需要等待 bay 加载完成才能进行可靠的跳转
+    const { t } = useI18n();
     const bay = useBayModel();
 
     await bay.initialize();
 
     if (bay.error) {
-      ElMessageBox.confirm(`应用启动失败: ${bay.error.message}, 请稍后重试`, '抱歉', {
+      ElMessageBox.confirm(t('bay.bootstrapError', { message: bay.error.message }), t('bay.sorry'), {
         type: 'error',
-        confirmButtonText: '重试',
-        cancelButtonText: '返回',
+        confirmButtonText: t('bay.retry'),
+        cancelButtonText: t('bay.back'),
       })
         .then(() => {
           bay.retry();
@@ -74,16 +77,22 @@ const LandingNavigator = defineComponent({
 export const LandingPage = defineComponent({
   name: 'BayLanding',
   props: LANDING_PROPS,
-  render() {
-    return (
+  setup(props) {
+    const { t } = useI18n();
+
+    return () => (
       <Suspense
         v-slots={{
           fallback: () => {
-            return <div class="bay-landing">跳转中...</div>;
+            return (
+              <div class="bay-landing">
+                <AppLoading>{t('bay.redirecting')}</AppLoading>
+              </div>
+            );
           },
         }}
       >
-        <LandingNavigator {...this.$props} />
+        <LandingNavigator {...props} />
       </Suspense>
     );
   },

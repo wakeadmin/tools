@@ -1,8 +1,9 @@
 import { defineComponent, Suspense, watch } from 'vue';
 import { DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX } from '@wakeadmin/mapp/main';
 import { ElMessageBox } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
-import { useAsset, useBayModel, useBodyClass } from '@/hooks';
+import { useBayModel, useBodyClass } from '@/hooks';
 
 import { Header, HeaderFallback } from '../Header';
 import { Sidebar, SidebarFallback } from '../Sidebar';
@@ -19,8 +20,8 @@ export const Main = defineComponent({
   name: 'BayMain',
   setup() {
     useBodyClass('bay-ready');
-    const FOOTER = useAsset('TXT_BAY_FOOTER', 'WakeData惟客数据，数字经营专家');
     const bay = useBayModel();
+    const { t } = useI18n();
 
     // 初始化基座
     bay.initialize();
@@ -29,10 +30,10 @@ export const Main = defineComponent({
       () => bay.error,
       err => {
         if (err != null) {
-          ElMessageBox.confirm(`应用启动失败: ${err.message}, 请稍后重试`, '抱歉', {
+          ElMessageBox.confirm(t('bay.bootstrapError', { message: err.message }), t('bay.sorry'), {
             type: 'error',
-            confirmButtonText: '重试',
-            cancelButtonText: '返回',
+            confirmButtonText: t('bay.retry'),
+            cancelButtonText: t('bay.back'),
           })
             .then(() => {
               bay.retry();
@@ -62,14 +63,14 @@ export const Main = defineComponent({
             {/* 加载错误 */}
             {bay.bay.isCurrentMicroAppError ? (
               <div class="bay-app-error">
-                <wkc-error-page description={`抱歉，应用加载失败`}>
+                <wkc-error-page description={t('bay.appLoadError')}>
                   {bay.bay.currentMicroAppError?.message}
                 </wkc-error-page>
               </div>
             ) : bay.bay.isCurrentMicroAppLoading ? (
               <AppLoading></AppLoading>
             ) : null}
-            <footer class="bay-footer">{FOOTER.value}</footer>
+            <footer class="bay-footer">{t('bay.footer')}</footer>
           </div>
         </div>
       </main>

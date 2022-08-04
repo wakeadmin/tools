@@ -1,6 +1,18 @@
 {
   "bay": {
     "switch-language": "多语言",
-    "logout": "退出登录"
+    "logout": "退出登录",
+    "back": "返回",
+    "backHome": "返回首页",
+    "retry": "重试",
+    "sorry": "抱歉",
+    "footer": "WakeData 惟客数据，数字经营专家",
+    "bootstrapError": "应用启动失败: {message}, 请稍后重试",
+    "appLoadError": "抱歉，应用加载失败",
+    "notFound": "抱歉，你访问的页面丢失了",
+    "forbidden": "抱歉，暂无访问权限",
+    "serverError": "服务请求异常({code}), 请稍后重试",
+    "menuCollapse": "折叠菜单",
+    "redirecting": "跳转中..."
   }
 }

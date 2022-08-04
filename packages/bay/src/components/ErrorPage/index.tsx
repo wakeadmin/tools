@@ -3,6 +3,7 @@
  */
 import { ErrorPageProps } from '@wakeadmin/mapp/main';
 import { ElButton, ElSpace } from 'element-plus';
+import { useT } from '@/utils';
 
 import './index.scss';
 
@@ -10,6 +11,7 @@ const goHome = () => window.location.replace('/');
 const goBack = () => window.history.back();
 
 export function ErrorPage(props: ErrorPageProps) {
+  const t = useT();
   let children: JSX.Element;
 
   if (props.type === 'http') {
@@ -18,8 +20,8 @@ export function ErrorPage(props: ErrorPageProps) {
     const detail = (
       <div class="bay-error__detail">
         <ElSpace>
-          <ElButton onClick={goBack}>返回</ElButton>
-          <ElButton onClick={goHome}>回到首页</ElButton>
+          <ElButton onClick={goBack}>{t('bay.back')}</ElButton>
+          <ElButton onClick={goHome}>{t('bay.backHome')}</ElButton>
         </ElSpace>
       </div>
     );
@@ -29,7 +31,7 @@ export function ErrorPage(props: ErrorPageProps) {
     } else if (code === '403') {
       children = <wkc-error-page-forbidden>{detail}</wkc-error-page-forbidden>;
     } else {
-      children = <wkc-error-page description={`服务请求异常(${code}), 请稍后重试`} />;
+      children = <wkc-error-page description={t('bay.serverError', { code })} />;
     }
   } else {
     children = (

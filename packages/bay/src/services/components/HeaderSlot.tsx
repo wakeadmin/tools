@@ -22,19 +22,28 @@ function factory(mountPoint: string) {
           ([slotRef, targetRef]) => {
             if (slotRef.value) {
               const slot = slotRef.value;
-              const listener = () => {
+              const assign = () => {
+                const targetNode = targetRef.value;
                 const nodes = slot.assignedNodes();
 
+                if (targetNode == null) {
+                  return;
+                }
+
                 for (const node of nodes) {
-                  targetRef.value?.appendChild(node);
+                  if (!targetNode.contains(node)) {
+                    targetNode.appendChild(node);
+                  }
                 }
               };
 
-              slot.addEventListener('slotchange', listener);
+              slot.addEventListener('slotchange', assign);
 
               disposer.push(() => {
-                slot.removeEventListener('slotchange', listener);
+                slot.removeEventListener('slotchange', assign);
               });
+
+              assign();
             }
           }
         );

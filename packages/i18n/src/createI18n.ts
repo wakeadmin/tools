@@ -137,6 +137,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
     getLocale,
     getFallbackLocaleChain,
     registerBundles: bundleRegister.registerBundles,
+    __i18n: i18n,
   };
 
   __setGlobalInstance(instance);

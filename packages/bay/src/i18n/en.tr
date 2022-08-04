@@ -1,6 +1,18 @@
 {
   "bay": {
     "switch-language": "Language",
-    "logout": "Sign Out"
+    "logout": "Sign Out",
+    "back": "Back",
+    "backHome": "Back Home",
+    "retry": "Retry",
+    "sorry": "We are sorry",
+    "footer": "WakeData, Digital Business Expert",
+    "bootstrapError": "Application startup failed: {message}, please try again later",
+    "appLoadError": "Sorry, the app failed to load",
+    "notFound": "Sorry, the page you visited is missing",
+    "forbidden": "Sorry, no access right now",
+    "serverError": "Service request exception ({code}), please try again later",
+    "menuCollapse": "Collapse Menu",
+    "redirecting": "Redirecting ..."
   }
 }
