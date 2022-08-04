@@ -396,7 +396,7 @@ module.exports = {
             }
           }
 
-          return !url.startsWith('<');
+          return !url.startsWith('[%');
         },
       };
     };
