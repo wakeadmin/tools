@@ -118,7 +118,7 @@ export const Sidebar = defineComponent({
 
       return (
         <div
-          class={['bay-sidebar', { collapse: bay.menuCollasped }]}
+          class={['bay-sidebar', { collapse: bay.sidebarCollasped }]}
           {...withDirectives([[ElLoadingDirective, bay.bay.isCurrentMicroAppLoading]])}
         >
           <div id={MOUNT_POINT_SIDEBAR_TOP}></div>
@@ -126,7 +126,7 @@ export const Sidebar = defineComponent({
             defaultActive={activeIdentifierPath}
             class="bay-sidebar__menu"
             uniqueOpened
-            collapse={bay.menuCollasped}
+            collapse={bay.sidebarCollasped}
             style="--ep-menu-text-color: var(--wk-color-font-regular);--ep-menu-bg-color: var(--wk-color-white)"
             collapseTransition={false}
           >

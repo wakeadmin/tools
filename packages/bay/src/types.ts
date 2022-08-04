@@ -104,8 +104,12 @@ export interface ISession {
 }
 
 export interface IBayModel extends INavigation, ISession {
-  menuCollasped: boolean;
-  toggleMenuCollapse(): void;
+  sidebarCollasped: boolean;
+  toggleSidebar(): void;
+
+  expandSidebar(): void;
+
+  collapseSidebar(): void;
 
   registerBundles: I18nInstance['registerBundles'];
 

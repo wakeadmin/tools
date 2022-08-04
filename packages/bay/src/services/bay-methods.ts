@@ -29,7 +29,11 @@ const bindApi = <
 
 export const waitSetup = bindApi('waitSetup');
 export const logout = bindApi('logout');
-export const toggleMenuCollapse = bindApi('toggleMenuCollapse');
+export const toggleSidebar = bindApi('toggleSidebar');
+
+export const getSidebarCollapsed = bindApi('getSidebarCollapsed');
+export const expandSidebar = bindApi('expandSidebar');
+export const collapseSidebar = bindApi('collapseSidebar');
 export const openByAppName = bindApi('openByAppName');
 export const openByAppAlias = bindApi('openByAppAlias');
 export const openMain = bindApi('openMain');

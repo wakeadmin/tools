@@ -90,7 +90,7 @@ export class BayModel extends BaseModel implements IBayModel {
    * 菜单折叠
    */
   @observable.ref
-  menuCollasped = false;
+  sidebarCollasped = false;
 
   get loading() {
     return this.status !== BayStatus.READY && this.status !== BayStatus.ERROR;
@@ -204,8 +204,23 @@ export class BayModel extends BaseModel implements IBayModel {
     gotoLogin();
   };
 
-  toggleMenuCollapse = () => {
-    this.menuCollasped = !this.menuCollasped;
+  getSidebarCollapsed = () => {
+    return this.sidebarCollasped;
+  };
+
+  expandSidebar = () => {
+    this.sidebarCollasped = false;
+  };
+
+  collapseSidebar = () => {
+    this.sidebarCollasped = true;
+  };
+
+  /**
+   * 切换侧边栏折叠状态
+   */
+  toggleSidebar = () => {
+    this.sidebarCollasped = !this.sidebarCollasped;
   };
 
   /**

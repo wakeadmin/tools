@@ -63,8 +63,12 @@ function factory(mountPoint: string) {
 
             <Teleport to={target}>
               <div ref={defaultTarget} class="default-slot" style={STYLE_SHOW}></div>
-              <div ref={collapseTarget} class="collapse-slot" style={bay.menuCollasped ? STYLE_SHOW : STYLE_HIDE}></div>
-              <div ref={expandTarget} class="expand-slot" style={bay.menuCollasped ? STYLE_HIDE : STYLE_SHOW}></div>
+              <div
+                ref={collapseTarget}
+                class="collapse-slot"
+                style={bay.sidebarCollasped ? STYLE_SHOW : STYLE_HIDE}
+              ></div>
+              <div ref={expandTarget} class="expand-slot" style={bay.sidebarCollasped ? STYLE_HIDE : STYLE_SHOW}></div>
             </Teleport>
           </div>
         );

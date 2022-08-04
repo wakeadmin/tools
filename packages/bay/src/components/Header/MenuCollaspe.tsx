@@ -9,8 +9,8 @@ export const MenuCollaspe = defineComponent({
 
     return () => {
       return (
-        <div class="bay-header__collapse" onClick={bay.toggleMenuCollapse} title="折叠">
-          {bay.menuCollasped ? <MenuUnfold /> : <MenuFold />}
+        <div class="bay-header__collapse" onClick={bay.toggleSidebar} title="折叠">
+          {bay.sidebarCollasped ? <MenuUnfold /> : <MenuFold />}
         </div>
       );
     };
