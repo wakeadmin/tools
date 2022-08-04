@@ -71,6 +71,10 @@ export const Debug = defineComponent({
       model.deleteLocalMapp(app);
     };
 
+    const switchLocalMappActive = (app: MicroApp) => {
+      model.switchLocalMappActive(app);
+    };
+
     const handleSaveAdd = async () => {
       const valid = await addForm.value?.validate();
 
@@ -96,8 +100,9 @@ export const Debug = defineComponent({
               <ul>
                 {model.apps.map((i, idx) => {
                   const removable = model.isLocalApp(i);
+                  const active = model.isActiveApp(i);
                   return (
-                    <li key={idx} class="debug-mapp">
+                    <li key={idx} class={active ? 'debug-mapp' : 'debug-mapp debug-mapp--disabled'}>
                       {removable && <div class="debug__badge">本地</div>}
                       name=<span class="debug__field">{i.name}</span>; entry=<span class="debug__field">{i.entry}</span>
                       ; activeRule=<span class="debug__field">{JSON.stringify(i.activeRule)}</span>; independent=
@@ -109,6 +114,11 @@ export const Debug = defineComponent({
                       >
                         打开
                       </ElLink>
+                      {removable && (
+                        <el-button link onClick={() => switchLocalMappActive(i)}>
+                          {active ? '禁用' : '启用'}
+                        </el-button>
+                      )}
                       {removable && (
                         <ElIcon class="debug__delete">
                           <DeleteBin onClick={() => model.deleteLocalMapp(i)}></DeleteBin>

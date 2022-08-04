@@ -32,5 +32,8 @@
     align-items: center;
     line-height: 1.6;
     margin-bottom: 10px;
+    &--disabled {
+      opacity: 0.3;
+    }
   }
 }

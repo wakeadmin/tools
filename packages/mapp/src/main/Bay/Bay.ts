@@ -263,7 +263,7 @@ export class Bay implements IBay {
   /**
    * 触发钩子
    * @param name
-   * @param options
+   * @param option
    */
   private triggerHooks<Name extends keyof BayHooks, Option = Parameter<BayHooks[Name]>>(name: Name, option: Option) {
     // @ts-expect-error

@@ -60,12 +60,25 @@ export class MicroAppModel {
       throw new Error('不能在基座初始化之后注册微应用');
     }
 
-    this.apps.unshift(app);
+    if (this.isActiveApp(app)) {
+      this.apps.unshift(app);
+    }
+  }
+
+  switchLocalMappActive(app: MicroApp) {
+    const status = this.isActiveApp(app);
+    this.updateLocalMapp({
+      ...app,
+      // @ts-expect-error
+      __active__: !status,
+    });
   }
 
   addLocalMapp(mapp: MicroApp) {
     // @ts-expect-error
     mapp.__local__ = true;
+    // @ts-expect-error
+    mapp.__active__ = true;
     this.apps.push(mapp);
 
     this.saveLocalMapps();
@@ -121,6 +134,25 @@ export class MicroAppModel {
   isLocalApp(app: MicroApp) {
     // @ts-expect-error
     return app.__local__;
+  }
+
+  /**
+   * 微应用是否属于启用状态
+   * @remarks
+   * 线下注册的一律为启用状态
+   *
+   * 本地注册的通过`__active__`是否为`true`进行判断
+   *
+   * @param app
+   *
+   */
+  isActiveApp(app: MicroApp): boolean {
+    if (this.isLocalApp(app)) {
+      // @ts-expect-error
+      return app.__active__;
+    }
+
+    return true;
   }
 
   // 保存后需要重启才能生效
