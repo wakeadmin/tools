@@ -1,6 +1,6 @@
 {
   "name": "<%- name %>",
-  "imageName": "wkfe/<%- name %>",
+  "imageName": "wkfe/app-<%- name %>",
   "private": true,
   "version": "0.1.0",
   "description": "Wakeadmin 子应用",

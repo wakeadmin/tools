@@ -7,17 +7,14 @@
 </template>
 <%  } else { %>
 <template>
-  <ElConfigProvider namespace="ep">
-    <div id="app">
-      <nav><router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> |</nav>
-      <router-view />
-    </div>
-  </ElConfigProvider>
+  <div id="app">
+    <nav><router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> |</nav>
+    <router-view />
+  </div>
 </template>
 <%  } %>
 
 <script lang="ts" setup>
-  <%- type === 'vue3' ? "import { ElConfigProvider } from 'element-plus'" : '' %>
 </script>
 
 <style lang="scss">

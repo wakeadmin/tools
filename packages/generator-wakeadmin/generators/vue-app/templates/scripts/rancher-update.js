@@ -10,6 +10,6 @@ if (!PRODUCTION && PROJECT) {
     // 工作负载固定为 wakeadmin-apps, 详见规范：https://wakeadmin.wakedata.com/standard/docker.html
     workload: 'wakeadmin-apps',
     // 子应用使用 sidecar 挂载
-    container: '<%= name %>'
+    container: 'app-<%= name %>'
   });
 }
