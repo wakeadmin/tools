@@ -1,5 +1,11 @@
 # generator-wakeadmin
 
+## 0.2.3
+
+### Patch Changes
+
+- 子应用镜像名称调整
+
 ## 0.2.2
 
 ### Patch Changes

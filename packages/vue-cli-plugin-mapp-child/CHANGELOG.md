@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.3.2
+
+### Patch Changes
+
+- 修复 css url/import 模板没有识别
+
 ## 0.3.1
 
 ### Patch Changes
