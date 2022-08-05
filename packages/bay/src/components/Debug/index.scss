@@ -16,24 +16,7 @@
     line-height: 1.2;
   }
 
-  &__delete {
-    margin-left: 10px;
-    font-size: 1.3em;
-    color: var(--wk-color-danger);
-    cursor: pointer;
-  }
-
-  &__field {
-    color: var(--wk-color-info);
-  }
-
-  &-mapp {
-    display: flex;
-    align-items: center;
-    line-height: 1.6;
-    margin-bottom: 10px;
-    &--disabled {
-      opacity: 0.3;
-    }
+  &__add {
+    margin-top: 20px;
   }
 }

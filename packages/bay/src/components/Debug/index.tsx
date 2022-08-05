@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, unref, ref, reactive } from 'vue';
 import { useInject } from '@wakeadmin/framework';
@@ -8,14 +7,13 @@ import {
   ElCheckbox,
   ElForm,
   ElFormItem,
-  ElIcon,
   ElInput,
-  ElLink,
   ElSelect,
+  ElTable,
+  ElTableColumn,
   FormInstance,
   FormRules,
 } from 'element-plus';
-import { DeleteBin, EditSquare } from '@wakeadmin/icons';
 import { clone } from '@wakeadmin/utils';
 
 import { useBayModel } from '@/hooks';
@@ -97,43 +95,67 @@ export const Debug = defineComponent({
               </ul>
 
               <div>微应用</div>
-              <ul>
-                {model.apps.map((i, idx) => {
-                  const removable = model.isLocalApp(i);
-                  const active = model.isActiveApp(i);
-                  return (
-                    <li key={idx} class={active ? 'debug-mapp' : 'debug-mapp debug-mapp--disabled'}>
-                      {removable && <div class="debug__badge">本地</div>}
-                      name=<span class="debug__field">{i.name}</span>; entry=<span class="debug__field">{i.entry}</span>
-                      ; activeRule=<span class="debug__field">{JSON.stringify(i.activeRule)}</span>; independent=
-                      <span class="debug__field">{String(!!i.independent)}</span>; routeMode=
-                      <span class="debug__field">{i.routeMode ?? 'hash'}</span>
-                      <ElLink
-                        href={bayModel.generateLandingUrl({ type: 'app', name: i.name })}
-                        style="margin-left: 20px"
-                      >
-                        打开
-                      </ElLink>
-                      {removable && (
-                        <el-button link onClick={() => switchLocalMappActive(i)}>
-                          {active ? '禁用' : '启用'}
-                        </el-button>
-                      )}
-                      {removable && (
-                        <ElIcon class="debug__delete">
-                          <DeleteBin onClick={() => model.deleteLocalMapp(i)}></DeleteBin>
-                        </ElIcon>
-                      )}
-                      {removable && (
-                        <ElIcon class="debug__delete">
-                          <EditSquare onClick={() => handleEdit(i)}></EditSquare>
-                        </ElIcon>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-              {!adding.value && <ElButton onClick={handleAdd}>添加本地应用</ElButton>}
+              <ElTable data={model.apps} stripe>
+                <ElTableColumn label="本地" width="80px">
+                  {{
+                    default(scope: { row: MicroApp }) {
+                      return model.isLocalApp(scope.row) ? <div class="debug__badge">本地</div> : '';
+                    },
+                  }}
+                </ElTableColumn>
+                <ElTableColumn label="name" prop="name"></ElTableColumn>
+                <ElTableColumn label="activeRule">
+                  {{
+                    default(scope: { row: MicroApp }) {
+                      return JSON.stringify(scope.row.activeRule);
+                    },
+                  }}
+                </ElTableColumn>
+                <ElTableColumn label="independent">
+                  {{
+                    default(scope: { row: MicroApp }) {
+                      return JSON.stringify(!!scope.row.independent);
+                    },
+                  }}
+                </ElTableColumn>
+                <ElTableColumn label="routeMode" prop="routeMode"></ElTableColumn>
+                <ElTableColumn label="操作">
+                  {{
+                    default(scope: { row: MicroApp }) {
+                      const i = scope.row;
+                      const isLocalApp = model.isLocalApp(i);
+                      const isActive = model.isActiveApp(i);
+
+                      return (
+                        <>
+                          <ElButton
+                            onClick={() =>
+                              (window.location.href = bayModel.generateLandingUrl({ type: 'app', name: i.name }, true))
+                            }
+                          >
+                            打开
+                          </ElButton>
+                          {isLocalApp && (
+                            <>
+                              <ElButton type="danger" onClick={() => model.deleteLocalMapp(i)}>
+                                删除
+                              </ElButton>
+                              <ElButton onClick={() => switchLocalMappActive(i)}>{isActive ? '禁用' : '启用'}</ElButton>
+                              <ElButton onClick={() => handleEdit(i)}>编辑</ElButton>
+                            </>
+                          )}
+                        </>
+                      );
+                    },
+                  }}
+                </ElTableColumn>
+              </ElTable>
+
+              {!adding.value && (
+                <ElButton onClick={handleAdd} style="margin-top: 20px">
+                  添加本地应用
+                </ElButton>
+              )}
               {!!adding.value && (
                 <div class="debug__add">
                   <ElForm ref={addForm} labelWidth="180px" labelPosition="right" rules={rulesAdd} model={adding.value}>

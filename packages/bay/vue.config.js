@@ -2,6 +2,11 @@
 const { defineConfig } = require('@vue/cli-service');
 const { defineCE } = require('@wakeadmin/vue-cli-plugin-ce');
 
+/**
+ * 接口服务器
+ */
+const SERVER = process.env.SERVER || 'https://bizpf-test.wakedt.cn/';
+
 module.exports = defineConfig({
   parallel: false,
   transpileDependencies: [/(wakeapp|wakeadmin)/],
@@ -29,17 +34,39 @@ module.exports = defineConfig({
   },
   configureWebpack() {
     return {
+      cache: {
+        type: 'filesystem',
+        buildDependencies: {
+          // This makes all dependencies of this file - build dependencies
+          config: [__filename],
+          // By default webpack and loaders are build dependencies
+        },
+      },
       // 可以获取更好的调试体验
       devtool: 'source-map',
     };
   },
   devServer: {
-    port: 3000,
-    proxy: ['/permission', '/wd'].reduce((prev, cur) => {
+    port: 80,
+    host: '0.0.0.0',
+    allowedHosts: 'all',
+    proxy: ['/permission', '/wd', '/login.html', '/app.html'].reduce((prev, cur) => {
       prev[cur] = {
-        target: 'https://bizpf-test.wakedt.cn/',
+        target: SERVER,
         changeOrigin: true,
         secure: false,
+        // 修改 cookie
+        onProxyRes(proxyRes) {
+          const cookies = proxyRes.headers['set-cookie'];
+          if (cookies) {
+            const newCookie = cookies.map(function (cookie) {
+              return cookie.replace(/Domain=.*?(\.\w+\.\w+);/i, 'Domain=$1;');
+            });
+            // 修改cookie path
+            delete proxyRes.headers['set-cookie'];
+            proxyRes.headers['set-cookie'] = newCookie;
+          }
+        },
       };
 
       return prev;
