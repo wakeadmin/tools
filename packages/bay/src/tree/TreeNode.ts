@@ -8,6 +8,10 @@ import { noEmptyString, normalizeRoute } from './utils';
  * 菜单节点
  */
 export class TreeNode {
+  static isTreeNode(value: any): value is TreeNode {
+    return value instanceof TreeNode;
+  }
+
   /**
    * 父节点
    */

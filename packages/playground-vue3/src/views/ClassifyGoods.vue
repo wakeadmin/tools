@@ -17,7 +17,7 @@
   <wkc-sidebar-bottom-slot>hello</wkc-sidebar-bottom-slot>
   <wkc-header-dropdown-menu title="hello" @click="handleMenuClick"></wkc-header-dropdown-menu>
   <wkc-header-dropdown-menu icon="Add" title="world" @click="handleMenuClick"></wkc-header-dropdown-menu>
-  <wkc-breadcrumb />
+  <wkc-breadcrumb :list.prop="[{ title: 'custom' }]" />
   <wkc-float-footer style="background-color: red"
     ><button class="my-button">hello</button><ElButton>fukc</ElButton></wkc-float-footer
   >
