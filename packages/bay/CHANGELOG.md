@@ -1,5 +1,13 @@
 # @wakeadmin/bay
 
+## 0.4.0
+
+### Minor Changes
+
+- - 完善多语言支持
+  - 支持菜单隐藏
+  - 修复 wkc-\*-slot 失效
+
 ## 0.3.0
 
 ### Minor Changes
