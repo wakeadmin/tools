@@ -6,13 +6,19 @@ import { useBayModel } from '@/hooks';
  */
 export const Menuless = defineComponent({
   name: 'BayMenuless',
-  setup() {
+  props: {
+    animate: {
+      type: Boolean,
+      default: undefined,
+    },
+  },
+  setup(props) {
     const bay = useBayModel();
 
-    bay.hideMenu();
+    bay.hideMenu(props.animate);
 
     onBeforeUnmount(() => {
-      bay.showMenu();
+      bay.showMenu(props.animate);
     });
 
     return () => (
