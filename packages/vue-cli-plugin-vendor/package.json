@@ -23,5 +23,9 @@
   "peerDependencies": {
     "@vue/cli-service": "5.*",
     "html-webpack-plugin": "^5.5.0"
+  },
+  "dependencies": {
+    "@wakeadmin/services": "^0.2.1",
+    "@wakeadmin/utils": "workspace:^0.1.1"
   }
 }

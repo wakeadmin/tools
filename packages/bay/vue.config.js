@@ -1,6 +1,7 @@
 /* eslint-disable import/no-commonjs */
 const { defineConfig } = require('@vue/cli-service');
 const { defineCE } = require('@wakeadmin/vue-cli-plugin-ce');
+const { defineVendors } = require('@wakeadmin/vue-cli-plugin-vendor');
 
 /**
  * 接口服务器
@@ -12,6 +13,12 @@ module.exports = defineConfig({
   transpileDependencies: [/(wakeapp|wakeadmin)/],
   pluginOptions: {
     ...defineCE({ customElement: /wkc-/ }),
+    ...defineVendors({
+      modules: {
+        vue: ['Vue', 'vue@3.2/dist/vue.runtime.global.prod.js'],
+        'vue-router': ['VueRouter', 'vue-router@4.1/dist/vue-router.global.prod.js'],
+      },
+    }),
   },
   chainWebpack(chain) {
     // 支持内联 style

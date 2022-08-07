@@ -2,7 +2,6 @@ FROM <%=HOST_PREFIX%>wkfe/mapp
 
 WORKDIR /data
 COPY ./dist /data/source/__entry__
-COPY ./vendors /data/source/__vendors__
 
 # 基座版本号
 ENV MAPP_VERSION=<%=VERSION%>

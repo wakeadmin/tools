@@ -96,7 +96,7 @@ export class AppContext {
       const appName = error.appOrParcelName;
       const app = this.bay.getApp(appName)!;
 
-      console.log('[mapp] 应用加载失败: ', app, error);
+      console.error('[mapp] 应用加载失败: ', app, error);
       this.appsError[appName] = error;
     });
 

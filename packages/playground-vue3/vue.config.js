@@ -31,8 +31,8 @@ module.exports = defineConfig({
     }),
     ...defineVendors({
       modules: {
-        vue: ['Vue', 'vue@3.x'],
-        'vue-router': ['VueRouter', 'vue-router@4.x'],
+        vue: ['Vue', 'vue@3.2/dist/vue.runtime.global.prod.js?patchGlobal=Vue'],
+        'vue-router': ['VueRouter', 'vue-router@4.1/dist/vue-router.global.prod.js?patchGlobal=VueRouter'],
       },
     }),
   },
