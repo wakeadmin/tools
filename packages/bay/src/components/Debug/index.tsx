@@ -54,6 +54,8 @@ export const Debug = defineComponent({
       ],
     });
 
+    let lastEditApp: MicroApp | null;
+
     const handleAdd = () => {
       adding.value = {
         name: '',
@@ -64,8 +66,13 @@ export const Debug = defineComponent({
     };
 
     const handleEdit = (app: MicroApp) => {
-      adding.value = clone(app);
+      if (lastEditApp) {
+        model.addLocalMapp(lastEditApp);
+        lastEditApp = null;
+      }
 
+      adding.value = clone(app);
+      lastEditApp = clone(app);
       model.deleteLocalMapp(app);
     };
 
@@ -80,6 +87,7 @@ export const Debug = defineComponent({
         const value = adding.value!;
         model.addLocalMapp(value);
         adding.value = undefined;
+        lastEditApp = null;
       }
     };
 
@@ -119,6 +127,14 @@ export const Debug = defineComponent({
                   }}
                 </ElTableColumn>
                 <ElTableColumn label="routeMode" prop="routeMode"></ElTableColumn>
+                <ElTableColumn label="状态" width="80px">
+                  {{
+                    default(scope: { row: MicroApp }) {
+                      const enabled = model.isActiveApp(scope.row);
+                      return <div class="debug__badge">{enabled ? '启用' : '禁用'}</div>;
+                    },
+                  }}
+                </ElTableColumn>
                 <ElTableColumn label="操作">
                   {{
                     default(scope: { row: MicroApp }) {
