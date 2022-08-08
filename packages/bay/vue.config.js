@@ -15,8 +15,9 @@ module.exports = defineConfig({
     ...defineCE({ customElement: /wkc-/ }),
     ...defineVendors({
       modules: {
-        vue: ['Vue', 'vue@3.2/dist/vue.runtime.global.prod.js'],
-        'vue-router': ['VueRouter', 'vue-router@4.1/dist/vue-router.global.prod.js'],
+        // FIXME: 这可能会导致子应用无法正常运行，基座暂时不使用 vendor
+        // vue: ['Vue', 'vue@3.2/dist/vue.runtime.global.prod.js'],
+        // 'vue-router': ['VueRouter', 'vue-router@4.1/dist/vue-router.global.prod.js'],
       },
     }),
   },

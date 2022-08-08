@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.4.2
+
+### Patch Changes
+
+- 基座关闭 vendor
+
 ## 0.4.1
 
 ### Patch Changes
