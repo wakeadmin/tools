@@ -1,5 +1,18 @@
 # @wakeadmin/bay
 
+## 0.4.1
+
+### Patch Changes
+
+- - 网络拦截支持使用 X-Disable-Intercept 跳过
+  - 接入 vendor 插件
+  - debug 页面优化
+  - wkc-breadcrumbs 支持扩展
+  - wkc-menuless 支持动画配置
+  - 会话失效不展示弹窗
+- Updated dependencies
+  - @wakeadmin/mapp@0.2.2
+
 ## 0.4.0
 
 ### Minor Changes

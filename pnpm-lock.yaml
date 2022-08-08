@@ -138,13 +138,13 @@ importers:
       '@wakeadmin/h': workspace:^0.1.2
       '@wakeadmin/i18n': workspace:^0.1.3
       '@wakeadmin/icons': workspace:^0.1.1
-      '@wakeadmin/mapp': workspace:^0.2.0
+      '@wakeadmin/mapp': workspace:^0.2.2
       '@wakeadmin/theme': workspace:^0.1.2
       '@wakeadmin/utils': workspace:^0.1.1
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.2.0
-      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.2.0
+      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.0
       '@wakeapp/wakedata-backend': latest
       babel-preset-wakeadmin: workspace:^0.1.0
       core-js: ^3.24.1
@@ -312,9 +312,9 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.8
       '@vue/cli-plugin-vuex': ~5.0.8
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/bay': workspace:^0.4.0
+      '@wakeadmin/bay': workspace:^0.4.1
       '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.3.0
-      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.2.0
+      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.0
       core-js: ^3.24.1
       sass: ^1.54.0
       sass-loader: ^12.6.0
@@ -350,10 +350,10 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.8
       '@vue/cli-plugin-vuex': ~5.0.8
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/bay': workspace:^0.4.0
+      '@wakeadmin/bay': workspace:^0.4.1
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
       '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.3.0
-      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.2.0
+      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.0
       core-js: ^3.24.1
       element-plus: ^2.2.11
       sass: ^1.54.0

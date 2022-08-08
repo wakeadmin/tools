@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-vendor
 
+## 0.3.0
+
+### Minor Changes
+
+- 重构接入 vendor 服务
+
 ## 0.2.0
 
 ### Minor Changes

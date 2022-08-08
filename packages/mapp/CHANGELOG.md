@@ -1,5 +1,11 @@
 # @wakeadmin/mapp
 
+## 0.2.2
+
+### Patch Changes
+
+- 应用加载失败使用 console.error 提示
+
 ## 0.2.1
 
 ### Patch Changes

@@ -12,7 +12,7 @@
     "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.4.0",
+    "@wakeadmin/bay": "workspace:^0.4.1",
     "core-js": "^3.24.1",
     "vue": "^2.7.8",
     "vue-router": "^3.5.4",
@@ -26,7 +26,7 @@
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.3.0",
-    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.2.0",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.0",
     "sass": "^1.54.0",
     "sass-loader": "^12.6.0",
     "typescript": "~4.5.5",

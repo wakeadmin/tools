@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/vue-cli-plugin-vendor",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "第三方依赖 UMD 加载",
   "main": "index.js",
   "types": "dist/index.d.ts",
