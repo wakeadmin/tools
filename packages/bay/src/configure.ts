@@ -80,6 +80,11 @@ export function configureBay() {
 
         const response = await next();
 
+        if (request.headers.get('X-Disable-Intercept')) {
+          // 跳过拦截器处理
+          return;
+        }
+
         // 判断是否会话过期
         const json = await response.json();
         if (json) {
