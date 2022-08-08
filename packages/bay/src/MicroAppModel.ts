@@ -112,7 +112,13 @@ export class MicroAppModel {
     const list: MicroApp[] = [];
 
     for (let i = this.apps.length - 1; i >= 0; i--) {
-      const item = this.normalizeApp(this.apps[i]);
+      const app = this.apps[i];
+
+      if (!this.isActiveApp(app)) {
+        continue;
+      }
+
+      const item = this.normalizeApp(app);
       let isDup = false;
 
       for (const inList of list) {
