@@ -11,9 +11,9 @@ export const gotoLogin = debounce(
     window.setTimeout(() => {
       const LOGIN_URL = getAsset('URL_LOGIN', '/login.html');
       window.location.assign(`${LOGIN_URL}?url=${window.encodeURIComponent(window.location.href)}`);
-    }, 1000);
+    }, 700);
   },
-  1000,
+  3000,
   { leading: true }
 );
 

@@ -4,6 +4,7 @@ import { ElMessageBox } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 
 import { useBayModel, useBodyClass } from '@/hooks';
+import { UNAUTH } from '@/constants';
 
 import { Header, HeaderFallback } from '../Header';
 import { Sidebar, SidebarFallback } from '../Sidebar';
@@ -28,8 +29,12 @@ export const Main = defineComponent({
 
     watch(
       () => bay.error,
-      err => {
+      (err?: Error & { code?: number }) => {
         if (err != null) {
+          if (err.code && err.code === UNAUTH) {
+            return;
+          }
+
           ElMessageBox.confirm(t('bay.bootstrapError', { message: err.message }), t('bay.sorry'), {
             type: 'error',
             confirmButtonText: t('bay.retry'),
