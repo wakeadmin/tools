@@ -1,7 +1,7 @@
 /* eslint-disable vue/one-component-per-file */
 import { defineComponent, PropType } from 'vue';
 import { NoopArray } from '@wakeadmin/utils';
-import { ElMenu, ElIcon, ElLoadingDirective } from 'element-plus';
+import { ElMenu, ElIcon, ElLoadingDirective, ElScrollbar } from 'element-plus';
 import { ClassificationSquare } from '@wakeadmin/icons';
 import { useI18n } from 'vue-i18n';
 
@@ -117,7 +117,7 @@ export const Sidebar = defineComponent({
       const activeIdentifierPath = bay.menu?.activeSecondaryNode?.identifierPath;
 
       return (
-        <div
+        <ElScrollbar
           class={['bay-sidebar', { collapse: bay.sidebarCollasped }]}
           {...withDirectives([[ElLoadingDirective, bay.bay.isCurrentMicroAppLoading]])}
         >
@@ -135,7 +135,7 @@ export const Sidebar = defineComponent({
             })}
           </ElMenu>
           <div id={MOUNT_POINT_SIDEBAR_BOTTOM}></div>
-        </div>
+        </ElScrollbar>
       );
     };
   },
