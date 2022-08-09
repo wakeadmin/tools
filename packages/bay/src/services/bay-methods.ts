@@ -44,5 +44,6 @@ export const openTreeNode = bindApi('openTreeNode');
 export const openOutside = bindApi('openOutside');
 export const openError = bindApi('openError');
 export const openUrl = bindApi('openUrl');
+export const findMenuByIdentifierPath = bindApi('findMenuByIdentifierPath');
 
 export const generateLandingUrl = bindApi('generateLandingUrl');

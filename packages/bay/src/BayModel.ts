@@ -12,7 +12,7 @@ import type { IBay, MicroApp } from '@wakeadmin/mapp/main';
 import type { I18nInstance } from '@wakeadmin/i18n';
 
 import { BayRepo } from './BayRepo';
-import { TreeContainer, RouteType } from './tree';
+import { TreeContainer, RouteType, FindResult } from './tree';
 import { PromiseQueue } from './base';
 import { IBayModel } from './types';
 import type { SessionInfo } from './session';
@@ -269,6 +269,18 @@ export class BayModel extends BaseModel implements IBayModel {
     }
     this.menuVisible = false;
   };
+
+  /**
+   * @remarks
+   * 返回的对象是一个**引用对象** 因此应该避免去**编辑该对象**
+   *
+   * 如果需要编辑 请手动复制一份
+   *
+   * {@inheritDoc TreeContainer.findByIdentifierPath}
+   */
+  findMenuByIdentifierPath(path: string): FindResult | undefined {
+    return this.menu?.findByIdentifierPath(path);
+  }
 
   /**
    * 根据微应用的名称打开。
