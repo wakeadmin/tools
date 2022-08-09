@@ -1,0 +1,12 @@
+{
+  "name": "@wakeadmin/tailwind",
+  "version": "0.1.0",
+  "description": "惟客云B端 tailwind 自定义配置",
+  "main": "tailwind.config.js",
+  "keywords": [
+    "tailwind",
+    "wakeadmin"
+  ],
+  "author": "Hallz",
+  "license": "MIT"
+}
