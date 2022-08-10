@@ -8,6 +8,14 @@ module.exports = defineConfig({
   publicPath: IS_PRODUCTION ? `[%= cdnDomain ? '//' + cdnDomain : ''  %]/` : '/',
   configureWebpack() {
     return {
+     cache: {
+        type: 'filesystem',
+        buildDependencies: {
+          // This makes all dependencies of this file - build dependencies
+          config: [__filename],
+          // By default webpack and loaders are build dependencies
+        },
+      },
       // 可以获取更好的调试体验
       devtool: 'source-map',
     };
