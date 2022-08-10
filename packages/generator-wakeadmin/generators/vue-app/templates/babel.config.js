@@ -1,3 +1,3 @@
 module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', { jsx: false }], 'babel-preset-wakeadmin'],
+  presets: [['@vue/cli-plugin-babel/preset', { jsx: false, useBuiltIns: false }], 'babel-preset-wakeadmin'],
 };
