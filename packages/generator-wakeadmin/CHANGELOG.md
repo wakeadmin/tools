@@ -1,5 +1,11 @@
 # generator-wakeadmin
 
+## 0.2.4
+
+### Patch Changes
+
+- 模板优化
+
 ## 0.2.3
 
 ### Patch Changes

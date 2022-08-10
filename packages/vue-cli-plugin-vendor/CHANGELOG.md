@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-vendor
 
+## 0.3.1
+
+### Patch Changes
+
+- 始终拉取最新 services 版本
+
 ## 0.3.0
 
 ### Minor Changes

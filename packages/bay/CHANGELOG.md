@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.4.3
+
+### Patch Changes
+
+- 侧边栏滚动条优化；新增菜单搜索接口
+
 ## 0.4.2
 
 ### Patch Changes
