@@ -52,7 +52,14 @@ export const Main = defineComponent({
 
     return () => (
       <main
-        class={['bay', { 'bay-menu-hide': !bay.menuVisible, 'bay-menu-with-animate': bay.menuVisibleWithAnimation }]}
+        class={[
+          'bay',
+          {
+            'bay-menu-hide': !bay.menuVisible,
+            'bay-sidebar-hide': !bay.sidebarVisible,
+            'bay-menu-with-animate': bay.menuVisibleWithAnimation,
+          },
+        ]}
       >
         <Suspense v-slots={{ fallback: () => <HeaderFallback /> }}>
           <Header />

@@ -87,13 +87,19 @@ export class BayModel extends BaseModel implements IBayModel {
   sessionInfo?: SessionInfo;
 
   /**
-   * 侧边栏折叠
+   * 侧边栏折叠状态
    */
   @observable.ref
   sidebarCollasped = false;
 
   /**
-   * 菜单折叠
+   * 侧边栏可视状态
+   */
+  @observable.ref
+  sidebarVisible = true;
+
+  /**
+   * 菜单(侧边栏+顶部导航栏)可视状态
    */
   @observable.ref
   menuVisible = true;
@@ -237,6 +243,23 @@ export class BayModel extends BaseModel implements IBayModel {
     this.sidebarCollasped = !this.sidebarCollasped;
   };
 
+  showSidebar = (animate = true) => {
+    if (this.sidebarVisible) {
+      return;
+    }
+
+    this.setMenuVisibleAnimation(animate);
+    this.sidebarVisible = true;
+  };
+
+  hideSidebar = (animate = true) => {
+    if (!this.sidebarVisible) {
+      return;
+    }
+    this.setMenuVisibleAnimation(animate);
+    this.sidebarVisible = false;
+  };
+
   /**
    * 显示菜单
    */
@@ -245,12 +268,7 @@ export class BayModel extends BaseModel implements IBayModel {
       return;
     }
 
-    this.cancelMenuVisibleAnimation();
-
-    if (animate) {
-      this.startMenuVisibleAnimation();
-    }
-
+    this.setMenuVisibleAnimation(animate);
     this.menuVisible = true;
   };
 
@@ -262,11 +280,7 @@ export class BayModel extends BaseModel implements IBayModel {
       return;
     }
 
-    this.cancelMenuVisibleAnimation();
-
-    if (animate) {
-      this.startMenuVisibleAnimation();
-    }
+    this.setMenuVisibleAnimation(animate);
     this.menuVisible = false;
   };
 
@@ -576,6 +590,14 @@ export class BayModel extends BaseModel implements IBayModel {
     const menus = await this.repo.getMenus();
 
     return (this.menu = new TreeContainer(menus));
+  };
+
+  private setMenuVisibleAnimation = (animate: boolean) => {
+    this.cancelMenuVisibleAnimation();
+
+    if (animate) {
+      this.startMenuVisibleAnimation();
+    }
   };
 
   private startMenuVisibleAnimation = () => {
