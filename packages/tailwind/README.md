@@ -2,17 +2,15 @@
 
 ```shell
 pnpm add  -D tailwindcss postcss autoprefixer @wakeadmin/tailwind
-pnpx tailwindcss init
+pnpx tailwindcss init -p
 ```
 
 ```js
 // tailwind.config.js
 
-const wakeadminTailwindConfig = require('@wakeadmin/tailwind');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,js}'],
-  ...wakeadminTailwindConfig,
+  presets: [require('@wakeadmin/tailwind')],
 };
 ```

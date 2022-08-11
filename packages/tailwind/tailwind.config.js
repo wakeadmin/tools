@@ -3,7 +3,6 @@ const colorLevel = [900, 800, 700, 600, 500, 400, 300, 200, 100, 50, 0];
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  presets: [],
   darkMode: 'media', // or 'class'
   theme: {
     extend: {
@@ -55,12 +54,7 @@ module.exports = {
           }
         ),
       },
-      textColor: ({ theme }) => theme('colors'),
-      outlineColor: ({ theme }) => theme('colors'),
-      fill: ({ theme }) => theme('colors'),
       divideColor: ({ theme }) => theme('borderColor'),
-      boxShadowColor: ({ theme }) => theme('colors'),
-      caretColor: ({ theme }) => theme('colors'),
       borderColor: ({ theme }) => ({
         dark: 'var(--wk-color-border-dark)',
         DEFAULT: 'var(--wk-color-border)',
