@@ -22,7 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "vue": "^3.2.37",
-    "vue-i18n": "^9.1.10"
+    "vue-i18n": "9.1.10"
   },
   "peerDependencies": {
     "vue": "^3.2.37",

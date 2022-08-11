@@ -47,12 +47,12 @@
     "@wakeapp/wakedata-backend": "latest",
     "babel-preset-wakeadmin": "workspace:^0.1.0",
     "core-js": "^3.24.1",
-    "element-plus": "^2.2.11",
+    "element-plus": "^2.2.12",
     "normalize.css": "^8.0.1",
-    "sass": "^1.54.0",
+    "sass": "^1.54.4",
     "sass-loader": "^12.6.0",
     "vue": "^3.2.37",
-    "vue-i18n": "^9.1.10",
+    "vue-i18n": "9.1.10",
     "vue-router": "^4.1.3"
   }
 }
