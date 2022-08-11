@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.4.4
+
+### Patch Changes
+
+- 支持独立隐藏侧边栏
+
 ## 0.4.3
 
 ### Patch Changes
