@@ -73,6 +73,10 @@ export default class extends Generator {
    * 安装依赖
    */
   install() {
+    if (!this.fs.exists(this.destinationPath('node_modules'))) {
+      this.spawnCommandSync(PACKAGE_MANAGER_NAME, ['install']);
+    }
+
     if (!this.fs.exists(this.destinationPath('.git'))) {
       this.spawnCommandSync('git', ['init']);
 

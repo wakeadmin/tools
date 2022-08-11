@@ -70,15 +70,16 @@ export default class extends Generator {
    * 安装依赖
    */
   install() {
+    if (!this.fs.exists(this.destinationPath('node_modules'))) {
+      this.spawnCommandSync(PACKAGE_MANAGER_NAME, ['install']);
+    }
+
     if (!this.fs.exists(this.destinationPath('.git'))) {
       this.spawnCommandSync('git', ['init']);
 
       this.spawnCommandSync('git', ['add', '.']);
       this.spawnCommandSync('git', ['commit', '-m', 'chore: initial project', '--no-verify']);
     }
-
-    // yeoman 会自动识别包管理器
-    // this.spawnCommand(PACKAGE_MANAGER_NAME, ['install']);
   }
 
   end() {
