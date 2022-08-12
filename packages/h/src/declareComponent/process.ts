@@ -66,7 +66,7 @@ export function vue2Expose(exposed: Record<string, any>): void {
 
 const EVENT_NAME_FIND_CACHE = Symbol('event-name-cache');
 
-function getEventNameFindCache(target: any): Record<string, string | null> {
+export function getEventNameFindCache(target: any): Record<string, string | null> {
   if (hasProp(target, EVENT_NAME_FIND_CACHE)) {
     return target[EVENT_NAME_FIND_CACHE];
   }
