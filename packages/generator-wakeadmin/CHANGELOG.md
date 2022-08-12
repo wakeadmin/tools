@@ -1,5 +1,12 @@
 # generator-wakeadmin
 
+## 0.2.5
+
+### Patch Changes
+
+- - 修复部分 dotfile 被 npm 忽略
+  - 修复生成器没有执行 npm 安装
+
 ## 0.2.4
 
 ### Patch Changes
