@@ -35,6 +35,7 @@ describe('TreeContainer', () => {
 
     test('入口页面收集', () => {
       expect(Array.from(container.entries.values())).toEqual([
+        '/hello',
         '/console.html',
         '/dsp.html',
         '/ad.html',
@@ -225,6 +226,7 @@ describe('TreeContainer', () => {
     describe('菜单信息', () => {
       test('顶级菜单', () => {
         expect(serializeNodes(container.topMenus)).toEqual([
+          'hello',
           'company',
           'marketing',
           'ad',

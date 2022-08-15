@@ -1,5 +1,46 @@
 export default [
   {
+    disabled: 0,
+    id: 'hello',
+    identifier: 'hello',
+    isMenu: 1,
+    isShow: 1,
+    level: 0,
+    name: '你好世界',
+    parentId: '0',
+    seq: 1000,
+    status: 1,
+    url: '/hello',
+    childMenu: [
+      {
+        disabled: 0,
+        id: 'hello-view',
+        identifier: 'view',
+        isMenu: 1,
+        isShow: 1,
+        level: 3,
+        name: '查看',
+        parentId: 'hello',
+        url: '/view',
+        seq: 1000,
+        status: 1,
+      },
+      {
+        disabled: 0,
+        id: 'hello-edit',
+        identifier: 'edit',
+        isMenu: 1,
+        isShow: 1,
+        level: 3,
+        name: '编辑',
+        parentId: 'hello',
+        url: '/edit',
+        seq: 1000,
+        status: 1,
+      },
+    ],
+  },
+  {
     childMenu: [
       {
         childMenu: [
