@@ -68,11 +68,10 @@ export const Debug = defineComponent({
     const handleEdit = (app: MicroApp) => {
       if (lastEditApp) {
         model.addLocalMapp(lastEditApp);
-        lastEditApp = null;
       }
 
       adding.value = clone(app);
-      lastEditApp = clone(app);
+      lastEditApp = app;
       model.deleteLocalMapp(app);
     };
 
@@ -111,7 +110,7 @@ export const Debug = defineComponent({
                     },
                   }}
                 </ElTableColumn>
-                <ElTableColumn label="name" prop="name"></ElTableColumn>
+                <ElTableColumn label="name" prop="name" align="center" width={200}></ElTableColumn>
                 <ElTableColumn label="activeRule">
                   {{
                     default(scope: { row: MicroApp }) {
@@ -119,14 +118,14 @@ export const Debug = defineComponent({
                     },
                   }}
                 </ElTableColumn>
-                <ElTableColumn label="independent">
+                <ElTableColumn label="independent" align="center">
                   {{
                     default(scope: { row: MicroApp }) {
                       return JSON.stringify(!!scope.row.independent);
                     },
                   }}
                 </ElTableColumn>
-                <ElTableColumn label="routeMode" prop="routeMode"></ElTableColumn>
+                <ElTableColumn label="routeMode" prop="routeMode" align="center"></ElTableColumn>
                 <ElTableColumn label="状态" width="80px">
                   {{
                     default(scope: { row: MicroApp }) {
@@ -135,7 +134,7 @@ export const Debug = defineComponent({
                     },
                   }}
                 </ElTableColumn>
-                <ElTableColumn label="操作">
+                <ElTableColumn label="操作" minWidth={100}>
                   {{
                     default(scope: { row: MicroApp }) {
                       const i = scope.row;
@@ -143,8 +142,9 @@ export const Debug = defineComponent({
                       const isActive = model.isActiveApp(i);
 
                       return (
-                        <>
+                        <div class="debug__action-list">
                           <ElButton
+                            class="debug__action-item"
                             onClick={() =>
                               (window.location.href = bayModel.generateLandingUrl({ type: 'app', name: i.name }, true))
                             }
@@ -153,14 +153,22 @@ export const Debug = defineComponent({
                           </ElButton>
                           {isLocalApp && (
                             <>
-                              <ElButton type="danger" onClick={() => model.deleteLocalMapp(i)}>
+                              <ElButton class="debug__action-item" onClick={() => switchLocalMappActive(i)}>
+                                {isActive ? '禁用' : '启用'}
+                              </ElButton>
+                              <ElButton class="debug__action-item" onClick={() => handleEdit(i)}>
+                                编辑
+                              </ElButton>
+                              <ElButton
+                                class="debug__action-item"
+                                type="danger"
+                                onClick={() => model.deleteLocalMapp(i)}
+                              >
                                 删除
                               </ElButton>
-                              <ElButton onClick={() => switchLocalMappActive(i)}>{isActive ? '禁用' : '启用'}</ElButton>
-                              <ElButton onClick={() => handleEdit(i)}>编辑</ElButton>
                             </>
                           )}
-                        </>
+                        </div>
                       );
                     },
                   }}

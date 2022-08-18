@@ -19,4 +19,14 @@
   &__add {
     margin-top: 20px;
   }
+
+  &__action-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+  }
+
+  & &__action-item {
+    margin-left: 0;
+  }
 }
