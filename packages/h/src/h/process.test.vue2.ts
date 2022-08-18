@@ -132,11 +132,12 @@ test('processVue2Attr', () => {
 });
 
 test('isSlots', () => {
-  expect(isSlots({})).toBe(false);
+  expect(isSlots({})).toBe(true);
   expect(isSlots([])).toBe(false);
   expect(isSlots(wrap({}))).toBe(false);
 
   expect(isSlots({ default: () => {} })).toBe(true);
+  expect(isSlots({ default: () => {}, foo: null, bar: undefined })).toBe(true);
 });
 
 test('processProps', () => {
@@ -198,19 +199,25 @@ describe('processChildren', () => {
       const props = {};
       expect(processChildren('', props, [])).toEqual(null);
       expect(processChildren('', props, ['hello'])).toEqual(['hello']);
-      expect(processChildren('', props, [{}])).toEqual([{}]);
+      // 识别为 slots, 空对象 children 没有意义
+      expect(processChildren('', props, [{}])).toEqual(null);
     }
 
     {
       const props: any = {
-        'v-slots': {},
+        'v-slots': [],
       };
 
-      expect(() => processChildren('', props, ['hello', 'world'])).toThrowError('v-slots 必须为对象, 值为函数');
+      expect(() => processChildren('', props, ['hello', 'world'])).toThrowError('v-slots 必须为对象');
     }
   });
 
   test('识别 slots', () => {
+    {
+      // 没有设置 slots
+      const props: any = {};
+      expect(processChildren('', props, ['hello', 'world'])).toEqual(['hello', 'world']);
+    }
     {
       const props: any = {};
       expect(processChildren('', props, [{ default: () => {} }])).toEqual(null);
@@ -223,8 +230,8 @@ describe('processChildren', () => {
           foo: () => null,
         },
       };
-      expect(processChildren('', props, ['hello', 'world'])).toEqual(null);
-      expect(Object.keys(props.scopedSlots)).toEqual(['foo', 'default']);
+      expect(processChildren('', props, ['hello', 'world'])).toEqual([['hello', 'world']]);
+      expect(Object.keys(props.scopedSlots)).toEqual(['foo']);
       expect(props['v-slots']).toBeUndefined();
     }
     // slots 合并2

@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { render, createComponent } from '../__tests__/helper';
 import { h } from './h';
 
@@ -38,34 +39,59 @@ test('h props 转换', () => {
 });
 
 test('h slots 转换', () => {
-  let vnode1: any;
+  {
+    let vnode1: any;
 
-  render(
-    createComponent(() => {
-      return (vnode1 = h('my-component', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world'));
-    }),
-    {}
-  );
+    render(
+      createComponent(() => {
+        return (vnode1 = h('my-component', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world'));
+      }),
+      {}
+    );
 
-  expect(Object.keys(vnode1.data.scopedSlots)).toEqual(['foo', 'default']);
+    expect(Object.keys(vnode1.data.scopedSlots)).toEqual(['foo']);
 
-  // v-slots 不会出现在 attrs 中
-  expect(Object.keys(vnode1.data.attrs)).toEqual(['foo']);
+    // v-slots 不会出现在 attrs 中
+    expect(Object.keys(vnode1.data.attrs)).toEqual(['foo']);
+  }
 
-  // slots 放在 children
-  let vnode2: any;
-  render(
-    createComponent(() => {
-      return (vnode2 = h('my-component', { foo: 'bar' }, { foo: () => 'hello' }));
-    }),
-    {}
-  );
+  {
+    // slots 放在 children
+    let vnode2: any;
+    render(
+      createComponent(() => {
+        return (vnode2 = h('my-component', { foo: 'bar' }, { foo: () => 'hello' }));
+      }),
+      {}
+    );
 
-  expect(Object.keys(vnode2.data.scopedSlots)).toEqual(['foo']);
+    expect(Object.keys(vnode2.data.scopedSlots)).toEqual(['foo']);
+  }
 
-  // 内置组件不支持 scopedSlots
+  {
+    // 内置组件不支持 scopedSlots
 
-  expect(() => {
-    h('div', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world');
-  }).toThrowError('[h] 内置组件不支持 scopedSlots');
+    expect(() => {
+      h('div', { foo: 'bar', 'v-slots': { foo: () => 'hello' } }, 'world');
+    }).toThrowError('[h] 内置组件不支持 scopedSlots');
+  }
+
+  {
+    // 支持静态 slot
+    let vnode3: any;
+    render(
+      createComponent(() => {
+        return (vnode3 = h('my-component', { foo: 'bar', 'v-slots': { foo: () => 'hello', bar: 'baz' } }, [
+          'hello',
+          'world',
+        ]));
+      }),
+      {}
+    );
+
+    expect(Object.keys(vnode3.data.scopedSlots)).toEqual(['foo']);
+    expect(vnode3.children[0].tag).toBe('template');
+    expect(vnode3.children[0].data.slot).toBe('bar');
+    expect(vnode3.children[1].text).toBe('helloworld');
+  }
 });

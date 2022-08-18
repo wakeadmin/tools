@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue, VNodeChild } from '@wakeadmin/demi';
+import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue, VNodeChild, Slot } from '@wakeadmin/demi';
 
 export type UnionToIntersection<U> = (U extends never ? never : (arg: U) => never) extends (arg: infer I) => void
   ? I
@@ -22,8 +22,8 @@ declare module '@vue/runtime-dom' {
     slot?: string;
 
     // 避免原生组件报错
-    'v-children'?: VNodeChild;
-    'v-slots'?: Record<string, () => VNodeChild>;
+    'v-children'?: VNodeChild | Slot;
+    'v-slots'?: Record<string, ((scope: any) => VNodeChild) | VNodeChild>;
   }
 }
 

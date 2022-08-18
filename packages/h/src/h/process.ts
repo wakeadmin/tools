@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable no-magic-numbers */
-import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref } from '@wakeadmin/demi';
+import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref, h as vueh } from '@wakeadmin/demi';
 import { kebabCase, lowerFirst } from '@wakeadmin/utils';
 
 import { isBrowser, shallowMerge, isPlainObject, isVue2Dot7 } from '../utils';
@@ -237,14 +238,58 @@ export function isSlots(children: any) {
     return false;
   }
 
-  const keys = Object.keys(children);
+  return true;
+}
 
-  return !!(
-    keys.length &&
-    keys.every(k => {
-      return typeof children[k] === 'function';
-    })
-  );
+/**
+ * 规范化 Vue 3 slots, 转换为数组形式
+ * @param slots
+ */
+export function vue3NormalizeSlots(slots: Record<string, any>) {
+  for (const key in slots) {
+    const value = slots[key];
+
+    if (value !== undefined && typeof value !== 'function') {
+      slots[key] = () => value;
+    }
+  }
+
+  return slots;
+}
+
+export function vue2NormalizeSlots(slots: Record<string, any>) {
+  const scopedSlots: Record<string, any> = {};
+  const staticSlots: Record<string, any> = {};
+
+  for (const key in slots) {
+    const value = slots[key];
+    if (value === undefined) {
+      continue;
+    }
+
+    if (typeof value !== 'function') {
+      staticSlots[key] = value;
+    } else {
+      scopedSlots[key] = value;
+    }
+  }
+
+  return {
+    scopedSlots,
+    staticSlots: Object.keys(staticSlots).map(name => {
+      let children = staticSlots[name];
+
+      if (name === 'default') {
+        return children;
+      }
+
+      if (!Array.isArray(children) && children != null) {
+        children = [children];
+      }
+
+      return vueh('template', { slot: name }, children);
+    }),
+  };
 }
 
 /**
@@ -253,29 +298,29 @@ export function isSlots(children: any) {
  * @param props 这里会修改 props
  * @param children
  */
-export function processChildren(tag: any, props: any, children: any[]) {
-  const slots: Record<string, Function> | undefined = props?.['v-slots'];
+export function processChildren(tag: any, props: any, children: any[]): any {
+  const slots: Record<string, any> | undefined = props?.['v-slots'];
   const slotsFromChildren = children.length === 1 && isSlots(children[0]) ? children[0] : undefined;
   const normalizedChildren = children.length ? children : null;
 
   if (slots != null) {
     if (process.env.NODE_ENV !== 'production') {
       if (!isSlots(slots)) {
-        throw new Error('v-slots 必须为对象, 值为函数');
-      }
-
-      if (slots.default != null && children.length) {
-        throw new Error(`在 v-slots 已经定义了 default slot, 不能同时设置 children`);
+        throw new Error('v-slots 必须为对象');
       }
 
       if (slotsFromChildren != null) {
         throw new Error(`已经使用 v-slots 定义了命名 slot, 禁止使用 children 设置 slots`);
       }
+
+      if (slots.default != null && normalizedChildren) {
+        throw new Error(`在 v-slots 已经定义了 default slot, 不能同时设置 children`);
+      }
     }
 
     // 设置默认 slots
-    if (children.length) {
-      slots.default = () => children;
+    if (normalizedChildren) {
+      slots.default = normalizedChildren;
     }
 
     delete props?.['v-slots'];
@@ -284,12 +329,10 @@ export function processChildren(tag: any, props: any, children: any[]) {
   if (!isVue2) {
     // Vue3
 
-    if (slots) {
+    if (slots || slotsFromChildren) {
       // 显式定义了 v-slots
-      return slots;
-    } else if (slotsFromChildren) {
       // slots 必须以对象的形式传入
-      return slotsFromChildren;
+      return vue3NormalizeSlots(slots || slotsFromChildren);
     }
 
     // 转换为 slots 对象，避免性能警告
@@ -297,7 +340,7 @@ export function processChildren(tag: any, props: any, children: any[]) {
   }
 
   // vue2
-  const set = (_slots: any) => {
+  const setScopedSlots = (_slots: any) => {
     Object.assign((props.scopedSlots = props.scopedSlots ?? {}), _slots);
   };
 
@@ -305,12 +348,15 @@ export function processChildren(tag: any, props: any, children: any[]) {
     throw new Error(`[h] 内置组件不支持 scopedSlots`);
   }
 
-  if (slots) {
+  if (slots || slotsFromChildren) {
     // 显式定义了 slots
-    set(slots);
-  } else if (slotsFromChildren) {
     // 数组的话，只能是第一个
-    set(slotsFromChildren);
+    const { scopedSlots, staticSlots } = vue2NormalizeSlots(slots || slotsFromChildren);
+    setScopedSlots(scopedSlots);
+
+    if (staticSlots.length) {
+      return staticSlots;
+    }
   } else if (normalizedChildren) {
     return normalizedChildren;
   }

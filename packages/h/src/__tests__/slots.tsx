@@ -181,6 +181,13 @@ test('slots 测试', () => {
             <SlotTest class="demo-3" v-slots={{ header: () => 'header', footer: scope => `footer: ${scope.name}` }}>
               default
             </SlotTest>
+            {/* 静态模式  */}
+            <SlotTest
+              class="demo-4"
+              v-slots={{ header: 'header', footer: (scope: any) => `footer: ${scope.name}` } as any}
+            >
+              default
+            </SlotTest>
           </div>
         );
       },
@@ -188,7 +195,7 @@ test('slots 测试', () => {
     {}
   );
 
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 4; i++) {
     const demo = container.querySelector(`.demo-${i}`)!;
     expect(demo.outerHTML).toBe(
       `<div class="demo-${i}"><header>header</header><main>default</main><footer>footer: hello</footer></div>`
