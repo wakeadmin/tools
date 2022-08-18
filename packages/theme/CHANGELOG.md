@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 0.1.3
+
+### Patch Changes
+
+- 固定 element-ui 版本
+
 ## 0.1.2
 
 ### Patch Changes

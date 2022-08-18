@@ -1,5 +1,11 @@
 # generator-wakeadmin
 
+## 0.2.6
+
+### Patch Changes
+
+- 子应用增加缓存
+
 ## 0.2.5
 
 ### Patch Changes

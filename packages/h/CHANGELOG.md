@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.0
+
+### Minor Changes
+
+- slots 支持静态内容，修复 vue2 下 slot 无法正确传递
+
 ## 0.1.3
 
 ### Patch Changes

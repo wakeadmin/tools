@@ -1,5 +1,12 @@
 # @wakeadmin/bay
 
+## 0.4.5
+
+### Patch Changes
+
+- 优化调试体验
+  - @wakeadmin/mapp@0.2.3
+
 ## 0.4.4
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @wakeadmin/mapp
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/h@0.2.0
+
 ## 0.2.2
 
 ### Patch Changes

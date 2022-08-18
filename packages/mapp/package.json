@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/mapp",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "微应用工具库",
   "files": [
     "dist"
@@ -38,7 +38,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/h": "workspace:^0.1.2",
+    "@wakeadmin/h": "workspace:^0.2.0",
     "@wakeadmin/utils": "workspace:^0.1.1",
     "path-browserify": "^1.0.1",
     "qiankun": "^2.7.4"
