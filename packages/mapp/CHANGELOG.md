@@ -1,5 +1,16 @@
 # @wakeadmin/mapp
 
+## 0.3.0
+
+### Minor Changes
+
+- error、landing 等内置页面统一使用 \_\_ 前缀
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/h@0.2.1
+
 ## 0.2.3
 
 ### Patch Changes

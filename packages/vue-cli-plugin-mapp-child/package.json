@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/cli-table": "^0.3.0",
     "@vue/cli-service": "~5.0.8",
-    "@wakeadmin/mapp": "workspace:^0.2.2"
+    "@wakeadmin/mapp": "workspace:^0.3.0"
   },
   "peerDependencies": {
     "@vue/cli-service": "5.*",

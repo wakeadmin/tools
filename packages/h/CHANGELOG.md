@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.1
+
+### Patch Changes
+
+- declareProps 支持详细 props 定义
+
 ## 0.2.0
 
 ### Minor Changes

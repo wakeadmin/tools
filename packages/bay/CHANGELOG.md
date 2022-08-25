@@ -1,5 +1,16 @@
 # @wakeadmin/bay
 
+## 0.5.0
+
+### Minor Changes
+
+- error、landing 等内置页面统一使用 \_\_ 前缀
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/mapp@0.3.0
+
 ## 0.4.5
 
 ### Patch Changes
