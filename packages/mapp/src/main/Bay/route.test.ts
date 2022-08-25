@@ -34,7 +34,7 @@ test('create routes', () => {
   expect(routes).toMatchObject([
     {
       name: 'error',
-      path: '/error',
+      path: '/__error__',
       component: ErrorPage,
       meta: {
         builtin: true,
@@ -42,7 +42,7 @@ test('create routes', () => {
     },
     {
       name: 'landing',
-      path: '/landing',
+      path: '/__landing__',
       component: LandingPage,
       meta: {
         builtin: true,
@@ -106,9 +106,9 @@ test('create routes', () => {
 
 describe('landingPage', () => {
   test('generate landing url', () => {
-    expect(generateLandingUrl('/base', { foo: 'bar' })).toBe('/base/landing?s=eyJmb28iOiJiYXIifQ%3D%3D');
-    expect(generateLandingUrl('/', { foo: 'bar' })).toBe('/landing?s=eyJmb28iOiJiYXIifQ%3D%3D');
-    expect(generateLandingUrl('/', { foo: 'bar' }, true)).toBe('http://localhost/landing?s=eyJmb28iOiJiYXIifQ%3D%3D');
+    expect(generateLandingUrl('/base', { foo: 'bar' })).toBe('/base/__landing__?s=eyJmb28iOiJiYXIifQ%3D%3D');
+    expect(generateLandingUrl('/', { foo: 'bar' })).toBe('/__landing__?s=eyJmb28iOiJiYXIifQ%3D%3D');
+    expect(generateLandingUrl('/', { foo: 'bar' }, true)).toBe('http://localhost/__landing__?s=eyJmb28iOiJiYXIifQ%3D%3D');
   });
 
   test('parse landing page', () => {
@@ -147,7 +147,7 @@ describe('navigator', () => {
   test('openError', () => {
     nav.openError({ type: 'http', code: '404' });
 
-    expect(push).toBeCalledWith(null, '', '/error?type=http&code=404');
+    expect(push).toBeCalledWith(null, '', '/__error__?type=http&code=404');
   });
 
   test('openApp', () => {

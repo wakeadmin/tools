@@ -39,6 +39,10 @@ test('测试 defineComponent 类型推断', () => {
     t = <Test></Test>;
   });
 
+  test('props 定义', () => {
+    declareProps<{ a: number; b: number; c: boolean; d: any }>({ a: Number, c: Boolean, d: null });
+  });
+
   test('emit 定义', () => {
     const Test = declareComponent({
       // 统一使用驼峰式

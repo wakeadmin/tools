@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/array-type */
-import { defineComponent as vueDefineComponent, isVue2, VNodeChild, getCurrentInstance } from '@wakeadmin/demi';
+import {
+  defineComponent as vueDefineComponent,
+  isVue2,
+  VNodeChild,
+  getCurrentInstance,
+  ComponentObjectPropsOptions,
+} from '@wakeadmin/demi';
 import { omit } from '@wakeadmin/utils';
 
 import { DefineComponent, SimpleComponentOptions } from './types';
@@ -12,7 +18,7 @@ export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
  * @param list
  * @returns
  */
-export function declareProps<T extends {}>(list: Array<keyof T>): T {
+export function declareProps<T extends {}>(list: Array<keyof T> | ComponentObjectPropsOptions<Partial<T>>): T {
   return list as any as T;
 }
 
