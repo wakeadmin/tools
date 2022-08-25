@@ -5,12 +5,12 @@ import { IBay } from '../types';
 /**
  * 错误页面
  */
-export const ERROR_PAGE = '/error';
+export const ERROR_PAGE = '/__error__';
 
 /**
  * 跳板页
  */
-export const LANDING_PAGE = '/landing';
+export const LANDING_PAGE = '/__landing__';
 
 /**
  * 基座挂载的默认 root

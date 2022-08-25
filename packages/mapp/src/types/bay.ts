@@ -123,12 +123,12 @@ export interface BuiltinPages {
   independent: PageComponent;
 
   /**
-   * 落地页, 默认路由为 /landing
+   * 落地页, 默认路由为 /__landing__
    */
   landing: PageComponent<LandingPageProps>;
 
   /**
-   * 异常页面，默认路由为 /error?type=http&code=400, 也支持 /error?type=custom&title=xx&message=xx 这种形式
+   * 异常页面，默认路由为 /__error__?type=http&code=400, 也支持 /__error__?type=custom&title=xx&message=xx 这种形式
    */
   error: PageComponent<ErrorPageProps>;
 }
