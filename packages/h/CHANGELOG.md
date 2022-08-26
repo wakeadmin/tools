@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.2
+
+### Patch Changes
+
+- 修复 declareComponent vue 2 emit 异常
+
 ## 0.2.1
 
 ### Patch Changes
