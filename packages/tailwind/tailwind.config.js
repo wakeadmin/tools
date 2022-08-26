@@ -9,18 +9,6 @@ module.exports = {
       colors: {
         white: 'var(--wk-color-gray-0)',
         black: 'var(--wk-color-gray-900)',
-
-        /* 链接颜色 */
-        link: 'var(--wk-color-link)',
-        'link-hover': 'var(--wk-color-link-hover)',
-
-        'font-primary': 'var(--wk-color-font-primary)',
-        'font-regular': 'var(--wk-color-font-regular)',
-        'font-secondary': 'var(--wk-color-font-secondary)',
-        'font-placeholder': 'var(--wk-color-font-placeholder)',
-        'font-disabled': 'var(--wk-color-font-disabled)',
-        'font-inverse': 'var(--wk-color-font-inverse)',
-
         ...colorType.reduce(
           (obj, type) => {
             obj[type] = {
@@ -54,7 +42,18 @@ module.exports = {
           }
         ),
       },
-      divideColor: ({ theme }) => theme('borderColor'),
+      textColor: ({ theme }) => ({
+        ...theme('color'),
+        /* 链接颜色 */
+        'text-link': 'var(--wk-color-link)',
+        'text-link-hover': 'var(--wk-color-link-hover)',
+        'text-primary': 'var(--wk-color-font-primary)',
+        'text-regular': 'var(--wk-color-font-regular)',
+        'text-secondary': 'var(--wk-color-font-secondary)',
+        'text-placeholder': 'var(--wk-color-font-placeholder)',
+        'text-disabled': 'var(--wk-color-font-disabled)',
+        'text-inverse': 'var(--wk-color-font-inverse)',
+      }),
       borderColor: ({ theme }) => ({
         dark: 'var(--wk-color-border-dark)',
         DEFAULT: 'var(--wk-color-border)',
@@ -71,29 +70,25 @@ module.exports = {
         base: 'var(--wk-border-radius-base)',
         md: 'var(--wk-border-radius-md)',
         lg: 'var(--wk-border-radius-lg)',
-        xl: '0.75rem',
-        '2xl': '1rem',
-        '3xl': '1.5rem',
         full: 'var(--wk-border-radius-full)',
       },
 
       backgroundColor: ({ theme }) => ({
-        bg: 'var(--wk-color-bg)',
+        DEFAULT: 'var(--wk-color-bg)',
         dark: 'var(--wk-color-bg-dark)',
         ...theme('colors'),
       }),
-
       spacing: {
         xs: 'var(--wk-spacing-xs, 8px)',
         sm: 'var(--wk-spacing-sm, 16px)',
         base: 'var(--wk-spacing-base, 24px)',
         md: 'var(--wk-spacing-md, 32px)',
-        lg: 'var(--wk-spacing-lg, 348x)',
+        lg: 'var(--wk-spacing-lg, 48x)',
         xl: 'var(--wk-spacing-xl, 64px)',
       },
       zIndex: {
         normal: 'var(--wk-z-index-normal,1)',
-        dropdown: 'var(--wk-z-index-dropdown,100)',
+        dropdown: 'var(--wk-z-index-dropdown,1000)',
         sticky: 'var(--wk-z-index-sticky,1020)',
         fixed: 'var(--wk-z-index-fixed, 1030)',
         modal: 'var(--wk-z-index-modal,1040)',
