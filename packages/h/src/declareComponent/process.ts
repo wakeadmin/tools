@@ -65,8 +65,21 @@ export function vue2Expose(exposed: Record<string, any>): void {
 }
 
 const EVENT_NAME_FIND_CACHE = Symbol('event-name-cache');
+const EVENT_CACHE_MAP = new WeakMap<any, Record<string, any | null>>();
 
 export function getEventNameFindCache(target: any): Record<string, string | null> {
+  if (!Object.isExtensible(target)) {
+    // 不支持扩展，使用 WeakMap 缓存
+    let cache: Record<string, string> | undefined = EVENT_CACHE_MAP.get(target);
+    if (cache != null) {
+      return cache;
+    }
+    cache = {};
+    EVENT_CACHE_MAP.set(target, cache);
+
+    return cache;
+  }
+
   if (hasProp(target, EVENT_NAME_FIND_CACHE)) {
     return target[EVENT_NAME_FIND_CACHE];
   }

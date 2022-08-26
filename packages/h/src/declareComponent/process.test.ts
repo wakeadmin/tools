@@ -1,4 +1,10 @@
-import { findEventHandler } from './process';
+import { findEventHandler, getEventNameFindCache } from './process';
+
+test('getEventNameFindCache', () => {
+  expect(getEventNameFindCache({})).toEqual({});
+  expect(getEventNameFindCache(Object.preventExtensions({}))).toEqual({});
+  expect(getEventNameFindCache(Object.freeze({}))).toEqual({});
+});
 
 test('findEventHandler', () => {
   const target = {
