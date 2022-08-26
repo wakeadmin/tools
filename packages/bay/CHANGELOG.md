@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.5.1
+
+### Patch Changes
+
+- 基座重复加载提示
+
 ## 0.5.0
 
 ### Minor Changes
