@@ -150,6 +150,10 @@ export function injectDebugScripts() {
 }
 
 export function createApp() {
+  if (window.__MAPP_SERVICES__ != null) {
+    throw new Error(`[bay] 基座重复加载，请检查子应用 entry 配置是否正确`);
+  }
+
   // 暴露给下级子应用的服务
   window.__MAPP_SERVICES__ = services;
 
