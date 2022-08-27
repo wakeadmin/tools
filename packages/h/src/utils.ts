@@ -70,7 +70,7 @@ export function shallowMerge<T extends {}, S extends {}>(target: T, source: S): 
 
     const targetValue = (target as any)[key];
     if (isObject(sourceValue) && isObject(targetValue)) {
-      Object.assign(targetValue, sourceValue);
+      (target as any)[key] = Object.assign({}, targetValue, sourceValue);
     } else {
       (target as any)[key] = sourceValue;
     }
