@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.3
+
+### Patch Changes
+
+- 修复 vue 2 下， props 合并报错
+
 ## 0.2.2
 
 ### Patch Changes
