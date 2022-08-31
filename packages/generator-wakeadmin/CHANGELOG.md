@@ -1,5 +1,11 @@
 # generator-wakeadmin
 
+## 0.2.7
+
+### Patch Changes
+
+- 修复 Dockerfile.tpl 编译失败
+
 ## 0.2.6
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.4.0
+
+### Minor Changes
+
+- 支持 ?raw 加载原始静态资源内容
+
 ## 0.3.2
 
 ### Patch Changes
