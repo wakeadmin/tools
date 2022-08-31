@@ -280,6 +280,14 @@ module.exports = {
   }
 
   api.chainWebpack(chain => {
+    // 添加导入svg文件原始数据的rule
+    chain.module
+      .rule('svgRaw')
+      .resourceQuery(/raw/)
+      // @ts-expect-error
+      .type('asset/source')
+      .end();
+
     if (terminalMode) {
       // 添加 hash 查询字符串，方便失效统一缓存失效
       const hashQuery = '?[%= hash %]';
