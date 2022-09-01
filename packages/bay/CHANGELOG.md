@@ -1,5 +1,15 @@
 # @wakeadmin/bay
 
+## 0.5.2
+
+### Patch Changes
+
+- - 菜单节点排序
+  - 未选择应用重定向到 app.html 页面
+  - 修复 / 重定向加载子应用失败
+- Updated dependencies
+  - @wakeadmin/mapp@0.3.1
+
 ## 0.5.1
 
 ### Patch Changes

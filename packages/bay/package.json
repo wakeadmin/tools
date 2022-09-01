@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/bay",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "惟客云基座",
   "main": "index.js",
   "module": "index.mjs",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@wakeadmin/assets": "workspace:^0.1.1",
-    "@wakeadmin/mapp": "workspace:^0.3.0"
+    "@wakeadmin/mapp": "workspace:^0.3.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.8",

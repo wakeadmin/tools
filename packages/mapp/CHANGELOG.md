@@ -1,5 +1,11 @@
 # @wakeadmin/mapp
 
+## 0.3.1
+
+### Patch Changes
+
+- 支持 beforeEnterMain 返回重定向路由
+
 ## 0.3.0
 
 ### Minor Changes
