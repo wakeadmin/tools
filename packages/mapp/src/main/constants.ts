@@ -27,3 +27,5 @@ export const DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX = DEFAULT_ROOT_FOR_CHILD.slic
  * 获取 bay 实例
  */
 export const BayProviderContext: InjectionKey<IBay> = Symbol('bay-provider');
+
+export const MAX_WAIT_TIMES = 5;

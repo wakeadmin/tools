@@ -60,7 +60,16 @@ export function configureBay() {
           bayModel.initialize();
           await bayModel.waitSetup();
 
-          bayModel.openMain();
+          console.log(`[bay] 重定向到菜单第一个节点`);
+          const mainApp = bayModel.getMainApp();
+
+          if (mainApp) {
+            // 内部链接
+            return mainApp.matchedNode.url;
+          } else {
+            // 外部链接，直接重定向
+            bayModel.openMain();
+          }
 
           return false;
         }

@@ -12,11 +12,11 @@ import type { IBay, MicroApp } from '@wakeadmin/mapp/main';
 import type { I18nInstance } from '@wakeadmin/i18n';
 
 import { BayRepo } from './BayRepo';
-import { TreeContainer, RouteType, FindResult } from './tree';
+import { TreeContainer, RouteType, FindResult, TreeNode } from './tree';
 import { PromiseQueue } from './base';
 import { IBayModel } from './types';
 import type { SessionInfo } from './session';
-import { gotoChooseApp, gotoLogin } from './utils';
+import { gotoChooseApp, gotoLogin, throwErrorIfNeedAfterSettled } from './utils';
 import { AUTO_INDEX } from './constants';
 
 declare global {
@@ -381,6 +381,46 @@ export class BayModel extends BaseModel implements IBayModel {
   };
 
   /**
+   * 获取主入口 app
+   * @returns
+   */
+  getMainApp = (): { app: MicroApp; matchedNode: TreeNode } | undefined => {
+    if (!this.assertOpen()) {
+      return;
+    }
+
+    const first = this.menu?.topMenus?.[0];
+    if (first == null) {
+      console.warn(`[bay] getMainApp 菜单未配置`);
+      return;
+    }
+
+    const node = !first.url ? first.children[0] : first;
+
+    if (node == null) {
+      console.warn(`[bay] getMainApp 菜单未配置`);
+      return;
+    }
+
+    if (!node.url) {
+      console.warn(`[bay] getMain url 未配置`);
+      return;
+    }
+
+    if (node.routeType !== RouteType.Href && node.routeType !== RouteType.None) {
+      const app = this.bay.getAppByRoute(node.url);
+
+      if (app) {
+        // eslint-disable-next-line consistent-return
+        return {
+          app,
+          matchedNode: node,
+        };
+      }
+    }
+  };
+
+  /**
    * 根据权限标识符路径打开
    */
   openByIdentifierPath: IBayModel['openByIdentifierPath'] = (path, options) => {
@@ -548,25 +588,15 @@ export class BayModel extends BaseModel implements IBayModel {
       this.status = BayStatus.PENDING;
       this.error = undefined;
 
-      const [userInfo, menu] = await Promise.all([
-        this.getSessionInfo(),
-        this.createMenus().catch(err => ({ __error__: err })),
-      ]);
+      const [userInfo, menu] = await Promise.allSettled([this.getSessionInfo(), this.createMenus()]);
 
-      if (!userInfo.appInfo) {
+      // 未选择应用
+      if (userInfo.status === 'fulfilled' && !userInfo.value.appInfo) {
         return gotoChooseApp();
       }
 
-      /**
-       * 如果不是因为没有选择应用导致的无法获取菜单
-       *
-       * 那么抛出这个异常
-       */
-      // @ts-expect-error
-      if (menu.__error__) {
-        // @ts-expect-error
-        throw new Error(menu.__error__);
-      }
+      throwErrorIfNeedAfterSettled(userInfo, menu);
+
       this.status = BayStatus.READY;
 
       this.emit('Event.bay.setup', this);

@@ -1,3 +1,9 @@
 import { createApp } from './configure';
 
-createApp().mount();
+const app = createApp();
+
+app.mount();
+
+Promise.resolve().then(() => {
+  app.start();
+});

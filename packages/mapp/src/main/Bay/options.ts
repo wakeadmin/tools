@@ -4,7 +4,7 @@ import path from 'path-browserify';
 
 import { BayOptions, MicroApp } from '../../types';
 
-import { DEFAULT_ROOT_FOR_CHILD } from '../constants';
+import { DEFAULT_ROOT_FOR_CHILD, MAX_WAIT_TIMES } from '../constants';
 import { pushMountQueue } from './mount-delay';
 import { MicroAppNormalized } from './types';
 import { normalizeUrl, trimBaseUrl } from './utils';
@@ -21,6 +21,27 @@ const createLoader = (container: string | HTMLElement, name: string) => {
   // qiankun 会等待这里 resolve 才会开始挂载
   // 我们在这里等待路由 resolve
   let loaded = false;
+  let retryTime = 0;
+
+  async function waitMounterSetup() {
+    // 放入等待队列
+    await new Promise<void>(resolve => {
+      pushMountQueue(resolve);
+    });
+
+    if (!hasContainer(container)) {
+      if (retryTime >= MAX_WAIT_TIMES) {
+        throw new Error(`[mapp] 加载子应用(${name})：等待挂载点超时`);
+      }
+
+      retryTime++;
+      // 继续等待
+      await waitMounterSetup();
+    } else {
+      // 等待完成
+      retryTime = 0;
+    }
+  }
 
   return async (loading: boolean): Promise<void> => {
     if (!loading) {
@@ -31,16 +52,11 @@ const createLoader = (container: string | HTMLElement, name: string) => {
       // 首次加载时不需要阻塞，这里耗时比较长，通常vue-router 已经挂载了
       loaded = true;
       window.dispatchEvent(new CustomEvent('mapp:first-load', { detail: { app: name } }));
-      return undefined;
     }
 
     if (!hasContainer(container)) {
       // 等待路由就绪
-      return await new Promise<void>(resolve => {
-        pushMountQueue(() => {
-          resolve();
-        });
-      });
+      return await waitMounterSetup();
     }
 
     return undefined;

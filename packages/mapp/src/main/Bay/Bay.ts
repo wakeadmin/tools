@@ -34,6 +34,8 @@ export class Bay implements IBay {
 
   options: BayOptions;
 
+  mounted: boolean = false;
+
   started: boolean = false;
 
   /**
@@ -132,12 +134,27 @@ export class Bay implements IBay {
     });
   }
 
+  /**
+   * 挂载基座
+   * @param root
+   */
   mount(root?: string | HTMLElement): void {
-    if (this.started && process.env.NODE_ENV !== 'production') {
+    if (this.mounted) {
       throw new Error(`[mapp] 不能重复挂载`);
     }
 
     this.app.mount(root ?? DEFAULT_ROOT);
+
+    this.mounted = true;
+  }
+
+  /**
+   * 启动微前端子应用
+   */
+  start() {
+    if (this.started) {
+      throw new Error(`[mapp] 不能重复启动`);
+    }
 
     // 启动 qiankun
     start({

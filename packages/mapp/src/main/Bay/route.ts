@@ -150,8 +150,8 @@ export function createRoutes(
 
       const rtn = await onBeforeEnterMain?.(context);
 
-      // 应用未找到, 默认行为是跳转到 404， 应用可以返回 false 取消默认行为
-      if (!found && rtn !== false) {
+      // 应用未找到, 默认行为是跳转到 404， 应用可以返回 false 或者 location 取消默认行为
+      if (!found && rtn === undefined) {
         console.warn(`[mapp] ${to.path} 未匹配到任何子应用，将重定向到 404 页面`);
         return getErrorRoute({
           type: 'http',

@@ -38,36 +38,35 @@ export class BayRepo extends BaseRepoImplement {
    * @returns
    */
   async getMenus() {
-    console.warn(MOCK_ENABLED);
     if (MOCK_ENABLED === 'true') {
       return (await import('./tree/__fixture__/menu')).default;
     }
 
-    return this.requestor
-      .requestByPost<TreeNodeRaw[]>(
-        '/permission/web/wd/menu/show/menu',
-        {
-          // 根节点为 0
-          menuIdList: [0],
-          allChildren: true,
-        },
-        {
-          headers: { 'content-Type': 'application/x-www-form-urlencoded' },
+    const menus = await this.requestor.requestByPost<TreeNodeRaw[]>(
+      '/permission/web/wd/menu/show/menu',
+      {
+        // 根节点为 0
+        menuIdList: [0],
+        allChildren: true,
+      },
+      {
+        headers: { 'content-Type': 'application/x-www-form-urlencoded' },
+      }
+    );
+
+    const sorter = (a: TreeNodeRaw, b: TreeNodeRaw) => (a.seq ?? 1000) - (b.seq ?? 1000);
+
+    // 原地排序
+    const sort = (list: TreeNodeRaw[]) => {
+      list.sort(sorter);
+      list.forEach(item => {
+        if (item.childMenu?.length) {
+          sort(item.childMenu);
         }
-      )
-      .then(menu => {
-        const sortMenu: (list: TreeNodeRaw[]) => TreeNodeRaw[] = list => {
-          return list
-            .sort((a, b) => a.seq! - b.seq!)
-            .map(item => {
-              if (item.childMenu) {
-                item.childMenu = sortMenu(item.childMenu);
-              }
-              return item;
-            });
-        };
-        return sortMenu(menu);
       });
+    };
+
+    return menus;
   }
 
   /**

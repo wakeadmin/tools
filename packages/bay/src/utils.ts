@@ -19,10 +19,8 @@ export const gotoLogin = debounce(
 
 export const gotoChooseApp = debounce(
   () => {
-    window.setTimeout(() => {
-      const LOGIN_URL = getAsset('URL_CHOOSE_APP', '/app.html');
-      window.location.assign(`${LOGIN_URL}`);
-    }, 300);
+    const CHOOSE_APP_URL = getAsset('URL_CHOOSE_APP', '/app.html');
+    window.location.assign(CHOOSE_APP_URL);
   },
   3000,
   { leading: true }
@@ -36,4 +34,12 @@ export function useT() {
   const global = getGlobalI18n();
   // @ts-expect-error
   return global.__composer.t as Composer['t'];
+}
+
+export function throwErrorIfNeedAfterSettled(...list: PromiseSettledResult<any>[]) {
+  for (const item of list) {
+    if (item.status === 'rejected') {
+      throw item.reason;
+    }
+  }
 }

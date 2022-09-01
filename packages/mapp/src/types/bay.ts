@@ -1,5 +1,5 @@
 import type { DefineComponent, App, Component, FunctionalComponent } from 'vue';
-import type { RouteRecordRaw, RouteLocationNormalized, Router } from 'vue-router';
+import type { RouteRecordRaw, RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
 
 import { UniverseLocation, RouteLocationOptions, RouteLocationAsPathAndHash } from './route';
@@ -157,7 +157,7 @@ export interface BayHooks {
     from: RouteLocationNormalized;
     apps: MicroApp[];
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-  }): Promise<void | false>;
+  }): Promise<void | false | RouteLocationRaw>;
 
   /**
    * 在应用创建之前调用。可以在这里修改即将注册的微应用配置
@@ -311,11 +311,20 @@ export interface IBay {
    */
   baseUrl: string;
 
+  mounted: boolean;
+
+  started: boolean;
+
   /**
-   * 挂载和启动应用
+   * 挂载应用
    * @param target 可选，默认是 #app
    */
   mount(target?: string | HTMLElement): void;
+
+  /**
+   * 启动应用。建议在基座挂载到 DOM 节点之后调用
+   */
+  start(): void;
 
   /**
    * 注册网络拦截器
