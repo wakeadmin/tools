@@ -16,7 +16,7 @@ import { TreeContainer, RouteType, FindResult } from './tree';
 import { PromiseQueue } from './base';
 import { IBayModel } from './types';
 import type { SessionInfo } from './session';
-import { gotoLogin } from './utils';
+import { gotoChooseApp, gotoLogin } from './utils';
 import { AUTO_INDEX } from './constants';
 
 declare global {
@@ -548,7 +548,25 @@ export class BayModel extends BaseModel implements IBayModel {
       this.status = BayStatus.PENDING;
       this.error = undefined;
 
-      await Promise.all([this.getSessionInfo(), this.createMenus()]);
+      const [userInfo, menu] = await Promise.all([
+        this.getSessionInfo(),
+        this.createMenus().catch(err => ({ __error__: err })),
+      ]);
+
+      if (!userInfo.appInfo) {
+        return gotoChooseApp();
+      }
+
+      /**
+       * 如果不是因为没有选择应用导致的无法获取菜单
+       *
+       * 那么抛出这个异常
+       */
+      // @ts-expect-error
+      if (menu.__error__) {
+        // @ts-expect-error
+        throw new Error(menu.__error__);
+      }
       this.status = BayStatus.READY;
 
       this.emit('Event.bay.setup', this);

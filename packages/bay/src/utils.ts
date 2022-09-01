@@ -17,6 +17,17 @@ export const gotoLogin = debounce(
   { leading: true }
 );
 
+export const gotoChooseApp = debounce(
+  () => {
+    window.setTimeout(() => {
+      const LOGIN_URL = getAsset('URL_CHOOSE_APP', '/app.html');
+      window.location.assign(`${LOGIN_URL}`);
+    }, 300);
+  },
+  3000,
+  { leading: true }
+);
+
 export function getMenuI18nKey(path: string) {
   return `menu.${path}$`;
 }
