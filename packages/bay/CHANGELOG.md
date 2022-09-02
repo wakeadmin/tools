@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.5.3
+
+### Patch Changes
+
+- 修复菜单没有排序
+
 ## 0.5.2
 
 ### Patch Changes
