@@ -66,6 +66,8 @@ export class BayRepo extends BaseRepoImplement {
       });
     };
 
+    sort(menus);
+
     return menus;
   }
 
