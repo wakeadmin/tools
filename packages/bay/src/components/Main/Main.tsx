@@ -55,6 +55,7 @@ export const Main = defineComponent({
         class={[
           'bay',
           {
+            'bay-standalone': bay.standalone,
             'bay-menu-hide': !bay.menuVisible,
             'bay-sidebar-hide': !bay.sidebarVisible,
             'bay-menu-with-animate': bay.menuVisibleWithAnimation,

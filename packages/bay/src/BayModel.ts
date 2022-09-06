@@ -123,6 +123,14 @@ export class BayModel extends BaseModel implements IBayModel {
   }
 
   /**
+   * 独立模式
+   */
+  @computed
+  get standalone() {
+    return 'bay-standalone' in this.bay.location.query || 'bay-standalone' in this.bay.location.hashQuery;
+  }
+
+  /**
    * 在后台菜单配置中定义了路由的微应用
    */
   @computed

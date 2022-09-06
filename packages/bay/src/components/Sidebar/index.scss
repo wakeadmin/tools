@@ -13,6 +13,12 @@
     }
   }
 
+  @at-root {
+    .bay-standalone & {
+      display: none;
+    }
+  }
+
   @at-root .bay-menu-with-animate & {
     transition: max-width 0.3s ease-in-out;
   }

@@ -77,4 +77,8 @@
     color: var(--wk-color-font-secondary);
     text-align: center;
   }
+
+  @at-root .bay-standalone &-footer {
+    display: none;
+  }
 }

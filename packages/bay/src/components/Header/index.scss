@@ -21,11 +21,16 @@ $color: var(--wk-color-font-regular);
 
   // 菜单隐藏
   @at-root .bay-menu-hide & {
-    margin-top: -$height;
+    height: 0;
+    overflow: hidden;
+  }
+
+  @at-root .bay-standalone & {
+    display: none;
   }
 
   @at-root .bay-menu-with-animate & {
-    transition: margin-top 0.3s ease-in-out;
+    transition: height 0.3s ease-in-out;
   }
 
   &__before {
