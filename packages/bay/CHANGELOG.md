@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.5.5
+
+### Patch Changes
+
+- 修复 standalone 模式，bay-content 包含边距
+
 ## 0.5.4
 
 ### Patch Changes
