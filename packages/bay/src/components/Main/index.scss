@@ -78,6 +78,10 @@
     text-align: center;
   }
 
+  @at-root .bay-standalone &-content {
+    padding: 0;
+  }
+
   @at-root .bay-standalone &-footer {
     display: none;
   }
