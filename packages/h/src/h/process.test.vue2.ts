@@ -12,6 +12,7 @@ import {
   vue2GetElementInstance,
   vue2MustUseProps,
   processRef,
+  mergeProps,
 } from './process';
 import { isVue2Dot7 } from '../utils';
 import { render } from '../__tests__/helper';
@@ -21,6 +22,17 @@ test('wrap', () => {
   expect(isWrapped(a)).toBe(false);
   wrap(a);
   expect(isWrapped(a)).toBe(true);
+});
+
+test('mergeProps', () => {
+  expect(mergeProps({}, {})).toEqual({});
+  expect(mergeProps({ foo: { bar: 1 } }, { foo: { baz: 2 } })).toEqual({ foo: { bar: 1, baz: 2 } });
+
+  const h1 = () => {};
+  const h2 = () => {};
+  expect(mergeProps({ on: { foo: h1, bar: h1 } }, { on: { foo: h2, baz: h2 } })).toEqual({
+    on: { foo: [h1, h2], bar: h1, baz: h2 },
+  });
 });
 
 test('processVue2Event', () => {

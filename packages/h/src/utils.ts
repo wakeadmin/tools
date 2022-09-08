@@ -8,7 +8,7 @@ export const isVue2Dot7 = version.startsWith('2.7.');
 
 export const isBrowser = typeof window !== 'undefined';
 
-export function isObject(obj: any): obj is object {
+export function isObject<T = object>(obj: any): obj is T {
   return obj != null && typeof obj === 'object';
 }
 
@@ -54,30 +54,6 @@ export const ownKeys: (target: any) => PropertyKey[] =
     : hasGetOwnPropertySymbols
     ? obj => Object.getOwnPropertyNames(obj).concat(Object.getOwnPropertySymbols(obj) as any)
     : /* istanbul ignore next */ Object.getOwnPropertyNames;
-
-export function shallowMerge<T extends {}, S extends {}>(target: T, source: S): T & S {
-  for (const key in source) {
-    if (!Object.prototype.hasOwnProperty.call(source, key)) {
-      continue;
-    }
-
-    const sourceValue = source[key];
-
-    // 跳过空对象
-    if (!ownKeys(sourceValue).length) {
-      continue;
-    }
-
-    const targetValue = (target as any)[key];
-    if (isObject(sourceValue) && isObject(targetValue)) {
-      (target as any)[key] = Object.assign({}, targetValue, sourceValue);
-    } else {
-      (target as any)[key] = sourceValue;
-    }
-  }
-
-  return target as T & S;
-}
 
 export function isCamelCase(str: string): boolean {
   return typeof str === 'string' && !str.includes('-');

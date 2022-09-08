@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable no-magic-numbers */
 import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref, h as vueh } from '@wakeadmin/demi';
 import { kebabCase, lowerFirst } from '@wakeadmin/utils';
 
-import { isBrowser, shallowMerge, isPlainObject, isVue2Dot7 } from '../utils';
+import { isBrowser, isObject, ownKeys, isPlainObject, isVue2Dot7 } from '../utils';
 
 const WRAP_SYMBOL = Symbol('__vnode__');
 const EVENT_KEY = /^on[A-Z][a-zA-Z0-9:]*/;
@@ -174,6 +173,45 @@ export function processVue2Attr(el: { tag: string; type?: string }, key: string,
   return { domProps: false, name: key, value };
 }
 
+type Data = Record<string, unknown>;
+
+export function mergeProps<T extends {}, S extends {}>(target: T, source: S): T & S {
+  for (const key in source) {
+    if (!Object.prototype.hasOwnProperty.call(source, key)) {
+      continue;
+    }
+
+    const sourceValue = source[key];
+
+    // 跳过空对象
+    if (!ownKeys(sourceValue).length) {
+      continue;
+    }
+
+    const targetValue = (target as any)[key];
+
+    if (isObject<Data>(sourceValue) && isObject<Data>(targetValue)) {
+      if (key === 'nativeOn' || key === 'on') {
+        // 合并监听器
+        for (const eventName in sourceValue) {
+          const incoming = sourceValue[eventName];
+          const existing = targetValue[eventName];
+
+          if (incoming && existing !== incoming && !(Array.isArray(existing) && existing.includes(incoming))) {
+            targetValue[eventName] = existing ? [].concat(existing as any, incoming as any) : incoming;
+          }
+        }
+      } else {
+        (target as any)[key] = Object.assign({}, targetValue, sourceValue);
+      }
+    } else {
+      (target as any)[key] = sourceValue;
+    }
+  }
+
+  return target as T & S;
+}
+
 export function processProps(tag: any, props: any) {
   if (props == null || typeof props !== 'object') {
     return props;
@@ -223,7 +261,7 @@ export function processProps(tag: any, props: any) {
     }
   }
 
-  shallowMerge(finalProps, { attrs, domProps, nativeOn, on });
+  mergeProps(finalProps, { attrs, domProps, nativeOn, on });
 
   return finalProps;
 }

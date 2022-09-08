@@ -1,5 +1,9 @@
 /* eslint-disable no-lone-blocks */
+import { screen, fireEvent } from '@testing-library/vue';
+import { nextTick } from '@wakeadmin/demi';
+
 import { render, createComponent } from '../__tests__/helper';
+
 import { h } from './h';
 
 test('h props 转换', () => {
@@ -36,6 +40,22 @@ test('h props 转换', () => {
     },
   });
   expect(Object.keys(vnode.data.on)).toEqual(['foo', '!foo']);
+});
+
+test('h listener 合并', async () => {
+  const fn = jest.fn();
+  const fn2 = () => fn();
+  render(
+    createComponent(() => {
+      return h('div', { title: 'target', onClick: fn, on: { click: fn2 } });
+    }),
+    {}
+  );
+  const target = screen.getByTitle('target');
+  fireEvent(target, new MouseEvent('click'));
+  await nextTick();
+
+  expect(fn).toBeCalledTimes(2);
 });
 
 test('h slots 转换', () => {
