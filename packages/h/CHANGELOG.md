@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.4
+
+### Patch Changes
+
+- 修复事件处理器合并问题
+
 ## 0.2.3
 
 ### Patch Changes
