@@ -144,3 +144,19 @@ export function findEventHandler(
 
   return found;
 }
+
+export function safeCallHandler(handler: Function | Function[] | undefined, context: any, args: any[]) {
+  if (typeof handler === 'function') {
+    return handler.apply(context, args);
+  } else if (Array.isArray(handler) && handler.length) {
+    return handler.map(h => {
+      if (typeof h === 'function') {
+        return h.apply(context, args);
+      }
+
+      return undefined;
+    })[handler.length - 1];
+  }
+
+  return undefined;
+}

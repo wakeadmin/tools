@@ -9,7 +9,7 @@ import {
 import { omit } from '@wakeadmin/utils';
 
 import { DefineComponent, SimpleComponentOptions } from './types';
-import { vue2Expose, findEventHandler, vue3EventNameCapitalized } from './process';
+import { vue2Expose, findEventHandler, vue3EventNameCapitalized, safeCallHandler } from './process';
 
 export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
 
@@ -91,7 +91,7 @@ export function declareComponent<
           const emit = (name: string, ...args: any[]) => {
             const found = findEventHandler(name, instance.proxy.$listeners);
             if (found) {
-              instance.proxy.$listeners[found]?.(...args);
+              safeCallHandler(instance.proxy.$listeners[found], instance.proxy.$listeners, args);
             } else {
               context.emit(name, ...args);
             }
@@ -105,7 +105,7 @@ export function declareComponent<
             // 先尝试从 attrs 中调用
             const found = findEventHandler(name, context.attrs, vue3EventNameCapitalized);
             if (found) {
-              context.attrs[found]?.(...args);
+              safeCallHandler(context.attrs[found], context.attrs, args);
             } else {
               context.emit(name, ...args);
             }
