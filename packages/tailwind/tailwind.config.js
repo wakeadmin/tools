@@ -45,14 +45,14 @@ module.exports = {
       textColor: ({ theme }) => ({
         ...theme('color'),
         /* 链接颜色 */
-        'text-link': 'var(--wk-color-link)',
-        'text-link-hover': 'var(--wk-color-link-hover)',
-        'text-primary': 'var(--wk-color-font-primary)',
-        'text-regular': 'var(--wk-color-font-regular)',
-        'text-secondary': 'var(--wk-color-font-secondary)',
-        'text-placeholder': 'var(--wk-color-font-placeholder)',
-        'text-disabled': 'var(--wk-color-font-disabled)',
-        'text-inverse': 'var(--wk-color-font-inverse)',
+        link: 'var(--wk-color-link)',
+        'link-hover': 'var(--wk-color-link-hover)',
+        primary: 'var(--wk-color-font-primary)',
+        regular: 'var(--wk-color-font-regular)',
+        secondary: 'var(--wk-color-font-secondary)',
+        placeholder: 'var(--wk-color-font-placeholder)',
+        disabled: 'var(--wk-color-font-disabled)',
+        inverse: 'var(--wk-color-font-inverse)',
       }),
       borderColor: ({ theme }) => ({
         dark: 'var(--wk-color-border-dark)',
