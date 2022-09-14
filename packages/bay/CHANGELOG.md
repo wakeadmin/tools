@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.5.6
+
+### Patch Changes
+
+- 外挂页面添加 bay-outside-mode 类名
+
 ## 0.5.5
 
 ### Patch Changes
