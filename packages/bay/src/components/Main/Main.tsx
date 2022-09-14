@@ -55,6 +55,8 @@ export const Main = defineComponent({
         class={[
           'bay',
           {
+            // 页面外挂模式
+            'bay-outside-mode': bay.menu?.outsideMode,
             'bay-standalone': bay.standalone,
             'bay-menu-hide': !bay.menuVisible,
             'bay-sidebar-hide': !bay.sidebarVisible,

@@ -44,6 +44,14 @@ export class TreeContainer {
   entries: Set<string> = new Set<string>();
 
   /**
+   * 页面外挂模式
+   */
+  @computed
+  get outsideMode() {
+    return this.activeNode?.routeType === RouteType.Outside;
+  }
+
+  /**
    * 当前激活菜单树
    */
   @computed

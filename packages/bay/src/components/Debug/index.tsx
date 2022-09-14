@@ -118,6 +118,7 @@ export const Debug = defineComponent({
                     },
                   }}
                 </ElTableColumn>
+                <ElTableColumn label="entry" prop="entry"></ElTableColumn>
                 <ElTableColumn label="independent" align="center">
                   {{
                     default(scope: { row: MicroApp }) {
