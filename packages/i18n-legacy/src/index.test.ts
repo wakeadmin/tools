@@ -61,6 +61,21 @@ const suite = async (options: I18nOptions) => {
   });
 
   describe('注册语言包', () => {
+    test('初始化语言包', async () => {
+      const en = jest.fn(() => Promise.resolve({ hello: { a: '2', c: '3' } }));
+
+      const defer = registerBundles({ en });
+      const instance = createI18n({ ...options, messages: { en: { hello: { a: '1', b: '2' } } } });
+
+      await defer;
+
+      expect(instance.i18n.messages).toEqual({
+        en: {
+          hello: { a: '2', b: '2', c: '3' },
+        },
+      });
+    });
+
     test('基础', async () => {
       const en = jest.fn(() => Promise.resolve({ hello: 'hello' }));
       const zh = jest.fn(() => Promise.resolve({ hello: '你好' }));
@@ -147,7 +162,7 @@ const suite = async (options: I18nOptions) => {
     expect(document.body.outerHTML).toBe('<body><p>world[  ]</p></body>');
 
     await defer;
-    expect(document.body.outerHTML).toBe('<body><p>hello[不见了]</p></body>');
+    expect(document.body.outerHTML).toBe('<body><p>world[不见了]</p></body>');
   });
 };
 

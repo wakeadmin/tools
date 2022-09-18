@@ -18,6 +18,7 @@ import {
   __setGlobalInstance,
   __flushReadyWaitQueue,
 } from '@wakeadmin/i18n-shared';
+import { merge } from '@wakeadmin/utils';
 import { fallbackWithLocaleChain } from './fallback';
 import { I18nInstance, I18nOptions } from './types';
 
@@ -37,7 +38,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   // 接受新的等待
   __resetReadyState();
 
-  let { detect, mapper, fallbackLocale, datetimeFormats, numberFormats, locale, ...other } = options ?? {};
+  let { detect, mapper, fallbackLocale, datetimeFormats, numberFormats, locale, messages, ...other } = options ?? {};
   let ready = false;
   let bundleRegister: BundleRegister;
 
@@ -64,6 +65,7 @@ export function createI18n(options?: I18nOptions): I18nInstance {
     datetimeFormats,
     numberFormats,
     missing: missingHandler,
+    messages,
     ...other,
   });
 
@@ -104,7 +106,15 @@ export function createI18n(options?: I18nOptions): I18nInstance {
 
   bundleRegister = new BundleRegister(
     (loc, bundle) => {
-      vueI18nInstance.setLocaleMessage(loc, bundle);
+      const initialMessages = messages?.[loc];
+      let cloneBundle = bundle;
+
+      // 拷贝
+      if (initialMessages) {
+        cloneBundle = merge({}, initialMessages, cloneBundle);
+      }
+
+      vueI18nInstance.setLocaleMessage(loc, cloneBundle);
     },
     getFallbackLocaleChain,
     () => {
