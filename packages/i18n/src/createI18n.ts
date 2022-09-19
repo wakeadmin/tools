@@ -17,6 +17,8 @@ import {
   __resetReadyState,
   __setGlobalInstance,
   __flushReadyWaitQueue,
+  Cache,
+  I18nBundle,
 } from '@wakeadmin/i18n-shared';
 import { merge } from '@wakeadmin/utils';
 import { fallbackWithLocaleChain } from './fallback';
@@ -38,7 +40,8 @@ export function createI18n(options?: I18nOptions): I18nInstance {
   // 接受新的等待
   __resetReadyState();
 
-  let { detect, mapper, fallbackLocale, datetimeFormats, numberFormats, locale, messages, ...other } = options ?? {};
+  let { detect, mapper, fallbackLocale, datetimeFormats, numberFormats, locale, messages, localCache, ...other } =
+    options ?? {};
   let ready = false;
   let bundleRegister: BundleRegister;
 
@@ -104,6 +107,13 @@ export function createI18n(options?: I18nOptions): I18nInstance {
     return fallbackWithLocaleChain(vueI18nInstance, fallback, loc);
   };
 
+  // 本地缓存
+  let cache: Cache | undefined;
+
+  if (localCache) {
+    cache = new Cache(typeof localCache === 'string' ? localCache : undefined);
+  }
+
   bundleRegister = new BundleRegister(
     (loc, bundle) => {
       const initialMessages = messages?.[loc];
@@ -115,12 +125,26 @@ export function createI18n(options?: I18nOptions): I18nInstance {
       }
 
       vueI18nInstance.setLocaleMessage(loc, cloneBundle);
+
+      // 缓存设置
+      cache?.set(loc, cloneBundle);
     },
     getFallbackLocaleChain,
     () => {
       eventBus.emit(EVENT_MESSAGE_CHANGE);
     }
   );
+
+  if (cache) {
+    // 缓存获取
+    bundleRegister.registerBundles(
+      cache.keys.reduce<Record<string, I18nBundle>>((prev, cur) => {
+        prev[cur] = () => Promise.resolve(cache?.get(cur));
+
+        return prev;
+      }, {})
+    );
+  }
 
   // 监听语言变动
   watch(

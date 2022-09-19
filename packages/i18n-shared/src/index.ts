@@ -6,3 +6,4 @@ export * from './types';
 export * from './locale-mapper';
 export * from './register';
 export * from './types';
+export * from './cache';

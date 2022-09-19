@@ -2,7 +2,6 @@ import { asyncModuleLoader, httpLoader } from './loader';
 
 test('async loader', async () => {
   const res: Record<string, string> = {};
-  // @ts-expect-error
   expect(await asyncModuleLoader(async () => res)).toBe(res);
   expect(await asyncModuleLoader(async () => ({ __esModule: true, default: res }))).toBe(res);
   expect(

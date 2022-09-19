@@ -13,7 +13,7 @@ export interface LocaleDetector {
  */
 export type LocaleMapper = Record<string, string> | ((source: string) => string);
 
-export type I18nAsyncBundle = () => Promise<{ default: Record<string, any> }>;
+export type I18nAsyncBundle = () => Promise<{ default?: Record<string, any>; [key: string]: any }>;
 
 /**
  * 语言包类型
@@ -34,6 +34,12 @@ export interface ExtendedI18nOptions {
    * locale 标识符映射
    */
   mapper?: LocaleMapper;
+
+  /**
+   * 是否本地缓存。默认关闭
+   * 如果传入 string，将会作为本地缓存的 key
+   */
+  localCache?: boolean | string;
 }
 
 declare global {

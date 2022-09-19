@@ -131,6 +131,30 @@ const suite = async (options: I18nOptions) => {
     });
   });
 
+  describe('缓存', () => {
+    afterEach(() => {
+      window.localStorage.clear();
+    });
+
+    test('缓存恢复', async () => {
+      window.localStorage.setItem('i18n_keys', JSON.stringify(['en']));
+      window.localStorage.setItem('i18n_en', JSON.stringify({ hello: 'helo' }));
+      const en = jest.fn(() => Promise.resolve({ world: 'World' }));
+      const instance = createI18n({ ...options, localCache: true });
+      const defer = registerBundles({ en });
+
+      await defer;
+      expect(unref(instance.i18n.messages).en).toEqual({
+        hello: 'helo',
+        world: 'World',
+      });
+
+      // 设置缓存
+      expect(window.localStorage.getItem('i18n_keys')).toBe('["en"]');
+      expect(window.localStorage.getItem('i18n_en')).toBe('{"hello":"helo","world":"World"}');
+    });
+  });
+
   beforeEach(() => {
     document.body.innerHTML = '';
   });
