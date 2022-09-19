@@ -4,7 +4,7 @@
  *
  * 通常用于主题配置场景，比如默认头像、logo. 可以通过这个方法获取外部注入的静态资源链接
  */
-import { NamedRegistry } from '@wakeadmin/utils';
+import { NamedRegistry, debounce } from '@wakeadmin/utils';
 
 type MappAssetPayload = [string, string] | Record<string, string>;
 
@@ -53,6 +53,13 @@ function mountGlobalIfNeed() {
     globalThis.__MAPP_ASSETS__.forEach(register);
   }
 
+  // 缓存恢复
+  const cache = window.localStorage.getItem('@wakeadmin/assets');
+  if (cache) {
+    const assets = JSON.parse(cache);
+    register(assets);
+  }
+
   const mount: any[] = (globalThis.__MAPP_ASSETS__ = []);
   const _push = mount.push;
 
@@ -62,6 +69,20 @@ function mountGlobalIfNeed() {
     return _push.apply(mount, items);
   };
 }
+
+/**
+ * 本地缓存
+ */
+const saveLocalCache = debounce(() => {
+  const values = registry.registered().entries();
+  const json: Record<string, string> = {};
+
+  for (const [key, value] of values) {
+    json[key] = value;
+  }
+
+  window.localStorage.setItem('@wakeadmin/assets', JSON.stringify(json));
+}, 3000);
 
 /**
  * 获取静态资源
@@ -85,8 +106,14 @@ export function registerAsset(key: string, value: string): void;
 export function registerAsset(key: string, value: string): void {
   mountGlobalIfNeed();
 
-  registry.unregister(key);
-  registry.register(key, value);
+  const oldValue = registry.registered(key);
+
+  if (oldValue !== value) {
+    registry.unregister(key);
+    registry.register(key, value);
+
+    saveLocalCache();
+  }
 }
 
 /**
