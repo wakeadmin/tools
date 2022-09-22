@@ -71,7 +71,7 @@ export const Main = defineComponent({
           <Suspense v-slots={{ fallback: () => <SidebarFallback /> }}>
             <Sidebar />
           </Suspense>
-          <div class="bay-content">
+          <div class="bay-content" id="bay-content">
             <main class="bay-app-landing" id={DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX}>
               {/* 微应用将挂载到这里 */}
             </main>

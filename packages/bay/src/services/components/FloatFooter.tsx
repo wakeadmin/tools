@@ -13,9 +13,10 @@ export const FloatFooter = defineComponent({
     const disposer = useDisposer();
     const left = ref<string | number>(0);
     const elRef = ref<HTMLDivElement>();
+    const bayContentEle = document.querySelector('#bay-content');
 
     onMounted(() => {
-      const el = elRef.value;
+      const el = bayContentEle || elRef.value;
       if (!el) {
         return;
       }
