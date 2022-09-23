@@ -185,7 +185,7 @@ export const plugin: ServicePlugin = (api, options) => {
   const externals = transformSharedToExternal(_shared);
 
   // 开发环境将资源放到 子目录下，集成到基座时方便区分来源于哪个微应用
-  const assetsDir = options.assetsDir || isProduction ? '' : _name;
+  const assetsDir = options.assetsDir || (isProduction ? '' : _name);
 
   // 生产环境输出到 dist/NAME/ 目录下, 方便直接拷贝部署
   const outputDir = isProduction
