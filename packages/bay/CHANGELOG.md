@@ -1,5 +1,12 @@
 # @wakeadmin/bay
 
+## 0.5.8
+
+### Patch Changes
+
+- - i18n 支持本地缓存
+  - floatFooter 优先使用 bay-content 作为基准定位
+
 ## 0.5.7
 
 ### Patch Changes

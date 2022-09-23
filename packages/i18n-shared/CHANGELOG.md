@@ -1,5 +1,11 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.6
+
+### Patch Changes
+
+- 支持本地缓存
+
 ## 0.1.5
 
 ### Patch Changes

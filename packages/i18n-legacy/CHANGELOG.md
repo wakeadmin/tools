@@ -1,5 +1,13 @@
 # @wakeadmin/i18n-legacy
 
+## 0.1.4
+
+### Patch Changes
+
+- 支持本地缓存
+- Updated dependencies
+  - @wakeadmin/i18n-shared@0.1.6
+
 ## 0.1.3
 
 ### Patch Changes
