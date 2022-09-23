@@ -38,7 +38,7 @@ export function configureBay() {
     registerSingletonClass('DI.bay.MicroAppModel', MicroAppModel);
   });
 
-  const i18nInstance = createI18n();
+  const i18nInstance = createI18n({ localCache: 'bay' });
 
   const apps = getInject('DI.bay.MicroAppModel').getMapps();
 
