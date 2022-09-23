@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.5.7
+
+### Patch Changes
+
+- 增加同步判断是否有权限方法
+
 ## 0.5.6
 
 ### Patch Changes
