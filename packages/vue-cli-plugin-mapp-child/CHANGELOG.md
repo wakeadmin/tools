@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.4.1
+
+### Patch Changes
+
+- 修复 assetsDir 无法配置问题
+
 ## 0.4.0
 
 ### Minor Changes
