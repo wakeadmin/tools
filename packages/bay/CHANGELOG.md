@@ -1,5 +1,12 @@
 # @wakeadmin/bay
 
+## 0.5.9
+
+### Patch Changes
+
+- - 修复 float-footer z-index 问题
+  - allows\* 方法支持直接传入字符串
+
 ## 0.5.8
 
 ### Patch Changes
