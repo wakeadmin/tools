@@ -1,8 +1,6 @@
-import omit from 'lodash/omit';
-import pick from 'lodash/pick';
 import merge from 'lodash/merge';
 
-export { omit, pick, merge };
+export { merge };
 
 /**
  * 查看属性是否定义
