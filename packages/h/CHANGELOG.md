@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.5
+
+### Patch Changes
+
+- - mergeProps 时避免篡改原有的 on/nativeOn 属性
+
 ## 0.2.4
 
 ### Patch Changes
