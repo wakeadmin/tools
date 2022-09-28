@@ -55,7 +55,8 @@ test('h listener 合并', async () => {
   fireEvent(target, new MouseEvent('click'));
   await nextTick();
 
-  expect(fn).toBeCalledTimes(2);
+  // 外部 onClick 会取代 on内部的
+  expect(fn).toBeCalledTimes(1);
 });
 
 test('h slots 转换', () => {

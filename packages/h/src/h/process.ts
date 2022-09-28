@@ -191,24 +191,7 @@ export function mergeProps<T extends {}, S extends {}>(target: T, source: S): T 
     const targetValue = (target as any)[key];
 
     if (isObject<Data>(sourceValue) && isObject<Data>(targetValue)) {
-      if (key === 'nativeOn' || key === 'on') {
-        // 合并监听器
-        const merged: Record<string, any> = {};
-
-        for (const eventName in sourceValue) {
-          const incoming = sourceValue[eventName];
-          const existing = targetValue[eventName];
-
-          if (incoming && existing !== incoming && !(Array.isArray(existing) && existing.includes(incoming))) {
-            merged[eventName] = existing ? [].concat(existing as any, incoming as any) : incoming;
-          }
-        }
-        if (Object.keys(merged).length) {
-          (target as any)[key] = Object.assign({}, targetValue, merged);
-        }
-      } else {
-        (target as any)[key] = Object.assign({}, targetValue, sourceValue);
-      }
+      (target as any)[key] = Object.assign({}, targetValue, sourceValue);
     } else {
       (target as any)[key] = sourceValue;
     }

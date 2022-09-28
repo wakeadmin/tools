@@ -30,8 +30,9 @@ test('mergeProps', () => {
 
   const h1 = () => {};
   const h2 = () => {};
+
   expect(mergeProps({ on: { foo: h1, bar: h1 } }, { on: { foo: h2, baz: h2 } })).toEqual({
-    on: { foo: [h1, h2], bar: h1, baz: h2 },
+    on: { foo: h2, bar: h1, baz: h2 },
   });
 });
 
