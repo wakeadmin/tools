@@ -1,10 +1,10 @@
 # @wakeadmin/h
 
-## 0.2.5
+## 0.2.6
 
 ### Patch Changes
 
-- - mergeProps 时避免篡改原有的 on/nativeOn 属性
+- refactor(h): 不针对 nativeOn、on 进行特殊的合并，和 vue 3 行为保持一致
 
 ## 0.2.4
 
