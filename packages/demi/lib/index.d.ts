@@ -1,3 +1,5 @@
+/* eslint-disable import/export */
+// eslint-disable-next-line vue/prefer-import-from-vue
 import * as Vue from '@vue/runtime-dom';
 
 declare const isVue2: boolean;
@@ -13,5 +15,78 @@ declare const V: typeof Vue;
 export function set<T>(target: any, key: any, val: T): T;
 export function del(target: any, key: any): void;
 
+// @vue/runtime-dom 导出的类型更加丰富一点，我们需要依赖这里的一些类型
+// eslint-disable-next-line vue/prefer-import-from-vue
 export * from '@vue/runtime-dom';
+
+// 以下是 vue 2/3 通用的类型
+export {
+  EffectScope,
+  computed,
+  customRef,
+  effectScope,
+  getCurrentInstance,
+  getCurrentScope,
+  inject,
+  isProxy,
+  isReactive,
+  isReadonly,
+  isRef,
+  isShallow,
+  markRaw,
+  nextTick,
+  onActivated,
+  onBeforeMount,
+  onBeforeUnmount,
+  onBeforeUpdate,
+  onDeactivated,
+  onErrorCaptured,
+  onMounted,
+  onRenderTracked,
+  onRenderTriggered,
+  onScopeDispose,
+  onServerPrefetch,
+  onUnmounted,
+  onUpdated,
+  provide,
+  proxyRefs,
+  reactive,
+  readonly,
+  ref,
+  shallowReactive,
+  shallowReadonly,
+  shallowRef,
+  toRaw,
+  toRef,
+  toRefs,
+  triggerRef,
+  unref,
+  useAttrs,
+  useCssModule,
+  useCssVars,
+  useListeners,
+  useSlots,
+  warn,
+  watch,
+  watchEffect,
+  watchPostEffect,
+  watchSyncEffect,
+} from 'vue-demi';
+
+// 纯类型
+export {
+  Ref,
+  UnwrapRef,
+  UnwrapNestedRefs,
+  ComputedRef,
+  WritableComputedRef,
+  ShallowUnwrapRef,
+  ShallowReactive,
+  ShallowRef,
+  ToRef,
+  ToRefs,
+  PropType,
+  InjectionKey,
+} from 'vue-demi';
+
 export { V as Vue, Vue2, isVue2, isVue3, install };
