@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.1.3
+
+### Patch Changes
+
+- 回退类型声明
+
 ## 0.1.2
 
 ### Patch Changes
