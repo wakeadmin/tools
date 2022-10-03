@@ -2,7 +2,6 @@
 import {
   defineComponent as vueDefineComponent,
   isVue2,
-  VNodeChild,
   getCurrentInstance,
   ComponentObjectPropsOptions,
 } from '@wakeadmin/demi';
@@ -19,6 +18,7 @@ export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
  * @returns
  */
 export function declareProps<T extends {}>(list: Array<keyof T> | ComponentObjectPropsOptions<Partial<T>>): T {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   return list as any as T;
 }
 
@@ -35,7 +35,7 @@ export function declareExpose<T extends {}>(): T {
  * @returns
  */
 export function declareSlots<T extends { [key: string]: {} }>(): {
-  [K in keyof T]: T[K] extends never ? () => VNodeChild : (scope: T[K]) => VNodeChild;
+  [K in keyof T]: T[K] extends never ? () => any : (scope: T[K]) => any;
 } {
   return undefined as any;
 }

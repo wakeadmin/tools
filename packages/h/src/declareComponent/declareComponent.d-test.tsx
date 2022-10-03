@@ -112,6 +112,7 @@ test('测试 defineComponent 类型推断', () => {
           default: () => {
             return '';
           },
+          // @ts-expect-error
           named: scope => {
             expectType<string>(scope);
             return '';

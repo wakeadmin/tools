@@ -173,6 +173,7 @@ test('slots 测试', () => {
             <SlotTest class="demo-2">
               {{
                 header: () => 'header',
+                // @ts-expect-error
                 footer: scope => `footer: ${scope.name}`,
                 default: () => 'default',
               }}

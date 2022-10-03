@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue, VNodeChild, Slot } from '@wakeadmin/demi';
+import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue } from '@wakeadmin/demi';
 
 export type UnionToIntersection<U> = (U extends never ? never : (arg: U) => never) extends (arg: infer I) => void
   ? I
@@ -22,8 +22,10 @@ declare module '@vue/runtime-dom' {
     slot?: string;
 
     // 避免原生组件报错
-    'v-children'?: VNodeChild | Slot;
-    'v-slots'?: Record<string, ((scope: any) => VNodeChild) | VNodeChild>;
+    'v-children'?: any;
+
+    // 原生组件没有 v-slots
+    'v-slots'?: never;
   }
 }
 
@@ -85,7 +87,7 @@ export interface ReservedAttrs {
  */
 export type WithRef<T extends {}> = { [K in keyof T]: T[K] | Ref<T[K]> };
 
-export interface SetupContext<Emit, Slot, Expose, Attrs> {
+export interface SetupContext<Emit, Slot, Expose extends {}, Attrs> {
   attrs: Attrs;
   slots: Readonly<Partial<Slot>>;
   emit: EmitFn<Emit>;
@@ -103,7 +105,7 @@ export type MergeDefaultProps<DefaultProps extends {}, Props extends DefaultProp
   Required<Pick<Props, keyof DefaultProps>>;
 
 export interface DefaultSlots {
-  default?: () => VNodeChild;
+  default?: () => any;
 }
 
 export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> = {
@@ -123,7 +125,7 @@ export type SimpleComponentOptions<Props extends {}, Emit extends {}, Expose ext
 } & ThisType<void>;
 
 export type VSlotType<Slots extends {}> = DefaultSlots & Slots;
-export type VChildrenType<Slots extends {}> = VNodeChild | VSlotType<Slots>;
+export type VChildrenType<Slots extends {}> = any | VSlotType<Slots>;
 
 export type RefType<Expose extends {}> = Ref<Expose | undefined> | string; // string 用于兼容 template 引用
 
