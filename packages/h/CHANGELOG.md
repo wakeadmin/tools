@@ -1,5 +1,13 @@
 # @wakeadmin/h
 
+## 0.2.7
+
+### Patch Changes
+
+- 让 Vnode 类型更宽松
+- Updated dependencies
+  - @wakeadmin/demi@0.1.4
+
 ## 0.2.6
 
 ### Patch Changes
