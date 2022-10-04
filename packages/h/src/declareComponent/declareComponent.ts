@@ -34,7 +34,7 @@ export function declareExpose<T extends {}>(): T {
  * 声明插槽
  * @returns
  */
-export function declareSlots<T extends { [key: string]: {} }>(): {
+export function declareSlots<T extends { [key: string]: unknown }>(): {
   [K in keyof T]: T[K] extends never ? () => any : (scope: T[K]) => any;
 } {
   return undefined as any;
