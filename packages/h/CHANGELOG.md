@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.8
+
+### Patch Changes
+
+- 优化 declareSlots 类型，不强约束为 {}
+
 ## 0.2.7
 
 ### Patch Changes
