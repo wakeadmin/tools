@@ -1,6 +1,7 @@
 import { defineComponent, Suspense, watch } from 'vue';
 import { DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX } from '@wakeadmin/mapp/main';
-import { ElMessageBox } from 'element-plus';
+import { withDirectives } from '@wakeadmin/h';
+import { ElMessageBox, ElLoadingDirective } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 
 import { useBayModel, useBodyClass } from '@/hooks';
@@ -71,7 +72,7 @@ export const Main = defineComponent({
           <Suspense v-slots={{ fallback: () => <SidebarFallback /> }}>
             <Sidebar />
           </Suspense>
-          <div class="bay-content" id="bay-content">
+          <div class="bay-content" id="bay-content" {...withDirectives([[ElLoadingDirective, bay.mainLoading]])}>
             <main class="bay-app-landing" id={DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX}>
               {/* 微应用将挂载到这里 */}
             </main>

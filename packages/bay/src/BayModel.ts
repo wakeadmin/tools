@@ -110,6 +110,12 @@ export class BayModel extends BaseModel implements IBayModel {
   @observable.ref
   menuVisibleWithAnimation = false;
 
+  /**
+   * 微应用内容区的加载状态
+   */
+  @observable.ref
+  mainLoading = false;
+
   private menuVisibleAnimationTimeout?: number;
 
   get loading() {
@@ -291,6 +297,20 @@ export class BayModel extends BaseModel implements IBayModel {
     this.setMenuVisibleAnimation(animate);
     this.menuVisible = false;
   };
+
+  /**
+   * 显示内容区的加载动画
+   */
+  showMainLoading() {
+    this.mainLoading = true;
+  }
+
+  /**
+   * 隐藏内容区的加载动画
+   */
+  hideMainLoading() {
+    this.mainLoading = false;
+  }
 
   /**
    * @remarks
