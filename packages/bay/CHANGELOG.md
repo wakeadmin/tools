@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.6.0
+
+### Minor Changes
+
+- 增加内容区动画
+
 ## 0.5.9
 
 ### Patch Changes

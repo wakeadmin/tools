@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/bay",
-  "version": "0.5.9",
+  "version": "0.6.0",
   "description": "惟客云基座",
   "main": "index.js",
   "module": "index.mjs",
