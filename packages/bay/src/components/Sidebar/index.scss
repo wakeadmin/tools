@@ -4,7 +4,7 @@
   max-width: var(--bay-sidebar-width);
   background-color: var(--wk-color-white);
   box-shadow: 1px 0 0 0 #dce1e6;
-  z-index: 2;
+  z-index: 4;
 
   @at-root {
     .bay-menu-hide &,
