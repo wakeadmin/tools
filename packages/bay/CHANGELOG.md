@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.6.1
+
+### Patch Changes
+
+- 修复 modal 会被挡住的问题
+
 ## 0.6.0
 
 ### Minor Changes
