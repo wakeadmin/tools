@@ -1,17 +1,18 @@
-/* eslint-disable no-magic-numbers */
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 /* eslint-disable @typescript-eslint/array-type */
 import {
   Directive as Vue3Directive,
   DirectiveArguments as Vue3DirectiveArguments,
-  resolveComponent as vueResolveComponent,
-  resolveDirective as vueResolveDirective,
+  resolveDirective,
   withDirectives as vueWithDirectives,
-  isVNode as vueIsVNode,
+  DirectiveModifiers,
   VNode,
   isVue2,
   vShow,
 } from '@wakeadmin/demi';
 import { isWrapped } from './process';
+
+export { resolveComponent, resolveDirective } from '@wakeadmin/demi';
 
 export declare type Directive<T = any, V = any> = Vue3Directive<T, V> | string;
 
@@ -19,27 +20,6 @@ export declare type Directive<T = any, V = any> = Vue3Directive<T, V> | string;
 export declare type DirectiveArguments = Array<
   [Directive] | [Directive, any] | [Directive, any, string] | [Directive, any, string, DirectiveModifiers]
 >;
-
-export const resolveComponent: typeof vueResolveComponent = function (name) {
-  if (isVue2) {
-    return name;
-  }
-
-  return vueResolveComponent.apply(null, arguments as any);
-};
-
-/**
- * 查找指令
- * @param name
- * @returns
- */
-export function resolveDirective(name: string): Directive | undefined {
-  if (isVue2) {
-    return name;
-  }
-
-  return vueResolveDirective.apply(null, arguments as any);
-}
 
 export interface DirectiveProperty {
   name: string | Directive;
@@ -52,18 +32,6 @@ export interface DirectiveProperty {
 export interface DirectiveBinding {
   directives: DirectiveProperty[];
 }
-
-export function isVNode(node: any): node is VNode {
-  if (vueIsVNode) {
-    return vueIsVNode(node);
-  } else if (isVue2) {
-    return isWrapped(node);
-  }
-
-  return false;
-}
-
-declare type DirectiveModifiers = Record<string, boolean>;
 
 const DIRECTIVE_BINDING = Symbol('directive-binding');
 
@@ -109,9 +77,10 @@ export function withDirectives<T extends VNode>(
   arg1: T | DirectiveArguments,
   arg2?: DirectiveArguments
 ): T | DirectiveBinding {
-  if (isVNode(arg1)) {
+  if (isWrapped(arg1)) {
     // 注入模式
     if (!isVue2) {
+      // @ts-ignore
       return vueWithDirectives(
         arg1,
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -128,7 +97,7 @@ export function withDirectives<T extends VNode>(
         })
       );
     } else {
-      // @ts-expect-error
+      // @ts-ignore
       if (arg1.data) {
         // @ts-expect-error
         arg1.data.directives = [...(arg1.data?.directives ?? []), ...directiveArgumentsToBinding(arg2).directives];

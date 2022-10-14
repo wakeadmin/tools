@@ -12,7 +12,7 @@ test('Teleport、Suspense 不支持', () => {
   [Teleport, Suspense].forEach(Comp => {
     render(
       createComponent(() => (
-        <div title="container">
+        <div title="container" onClick={evt => console.log(evt)}>
           {/* @ts-expect-error */}
           <Comp />
         </div>
