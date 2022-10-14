@@ -3,6 +3,9 @@ import { INetworkInterceptor, INetworkInterceptorRegister, InterceptRequest, Int
 export class BaseInterceptor implements INetworkInterceptor {
   private interceptors: INetworkInterceptorRegister[] = [];
 
+  /**
+   * 存在拦截器
+   */
   protected get isIntercepted() {
     return this.interceptors.length > 0;
   }
