@@ -57,9 +57,7 @@ export type VNodeChild = VNodeChildren;
 export type VNodeArrayChildren = VNodeChildrenArrayContents;
 export type VNodeProps = VNodeData;
 
-export type DirectiveArguments = Array<
-  [Directive] | [Directive, any] | [Directive, any, string] | [Directive, any, string, DirectiveModifiers]
->;
+export type DirectiveArguments = ([Directive] | [Directive, any] | [Directive, any, string] | [Directive, any, string, DirectiveModifiers])[];
 
 export type RenderFunction = () => VNodeChild;
 

@@ -14,6 +14,7 @@ importers:
       '@types/tapable': ^2.2.2
       '@vue/composition-api': ^1.7.0
       '@vue/test-utils': next
+      '@wakeadmin/demi': workspace:^0.1.5
       '@wakeadmin/docker-build': ^0.1.8
       babel-jest: ^28.1.3
       babel-preset-wakeadmin-for-test: workspace:0.1.0
@@ -56,6 +57,7 @@ importers:
       '@types/tapable': 172.26.59.72+4873/@types/tapable/2.2.2
       '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.7.0
       '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0-rc.18
+      '@wakeadmin/demi': link:packages/demi
       '@wakeadmin/docker-build': 172.26.59.72+4873/@wakeadmin/docker-build/0.1.8
       babel-jest: 172.26.59.72+4873/babel-jest/28.1.3_@babel+core@7.18.10
       babel-preset-wakeadmin-for-test: link:packages/babel-preset-wakeadmin-for-test
