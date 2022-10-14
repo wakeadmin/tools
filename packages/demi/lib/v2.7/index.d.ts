@@ -116,7 +116,7 @@ export type TransitionGroupProps = Omit<TransitionProps, 'mode'> & {
 };
 
 export interface KeepAliveProps {
-  max?: number;
+  max?: number | string;
   include?: string | RegExp | (string | RegExp)[];
   exclude?: string | RegExp | (string | RegExp)[];
 }
