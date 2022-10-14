@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import { set, isVue2, isReactive, h, getCurrentInstance } from '@wakeadmin/demi';
 
 import { processProps } from '../h/process';
@@ -79,6 +80,7 @@ export function fallthrough(component: any, context: SetupContextLike, props: an
       instance?.proxy?.$slots?.default
     );
   } else {
+    // @ts-ignore vue 2 会报错，忽略
     return h(component, { ...context.attrs, ...props }, context.slots);
   }
 }

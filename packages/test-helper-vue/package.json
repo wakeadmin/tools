@@ -13,9 +13,8 @@
     "build": "npm run build:es && npm run build:common",
     "type-check": "tsc",
     "test:vue2": "vue-demi-switch 2.7 vue2 && jest --verbose",
-    "test:vue26": "vue-demi-switch 2 vue26 && jest --verbose",
     "test:vue3": "vue-demi-switch 3 && jest --verbose",
-    "test": "npm run test:vue26 -- --silent && npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
+    "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
   "keywords": [],
   "author": "",

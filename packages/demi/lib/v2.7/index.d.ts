@@ -10,6 +10,7 @@ import type {
   VNodeData,
 } from 'vue';
 import { ScopedSlotReturnValue, ScopedSlotReturnArray } from 'vue/types/vnode';
+import { EmitFn, ObjectEmitsOptions, EmitsOptions } from 'vue/types/v3-setup-context';
 
 declare const isVue2: boolean;
 declare const isVue3: boolean;
@@ -50,7 +51,6 @@ export * from 'vue/types/jsx';
 export { ComponentObjectPropsOptions } from 'vue/types/v3-component-props';
 export { DefineComponent } from 'vue/types/v3-define-component';
 export { Directive } from 'vue/types/v3-directive';
-export { EmitFn, ObjectEmitsOptions, EmitsOptions } from 'vue/types/v3-setup-context';
 
 export type VNodeChild = ScopedSlotReturnValue;
 export type VNodeArrayChildren = ScopedSlotReturnArray;
@@ -145,3 +145,48 @@ export type SuspenseProps = unknown;
 export type FunctionalComponent<P, E> = unknown;
 export type ConcreteComponent<P> = unknown;
 export type ComponentOptions<P> = unknown;
+
+// 支持 h 库的一些特殊需求
+declare module 'vue/types/jsx' {
+  interface HTMLAttributes {
+    // FIXME: vue 没有设置这个属性
+    textContent?: string;
+
+    // 支持 shadow dom
+    part?: string;
+    slot?: string;
+
+    // 避免原生组件报错
+    'v-children'?: any;
+
+    // 原生组件没有 v-slots
+    'v-slots'?: never;
+  }
+}
+
+type EmitsToProps<T extends EmitsOptions> = T extends string[]
+  ? {
+      [K in string & `on${Capitalize<T[number]>}`]?: (...args: any[]) => any;
+    }
+  : T extends ObjectEmitsOptions
+  ? {
+      [K in string & `on${Capitalize<string & keyof T>}`]?: K extends `on${infer C}`
+        ? T[Uncapitalize<C>] extends null
+          ? (...args: any[]) => any
+          : // eslint-disable-next-line @typescript-eslint/no-shadow
+            (...args: T[Uncapitalize<C>] extends (...args: infer P) => any ? P : never) => any
+        : never;
+    }
+  : {};
+
+export { EmitFn, ObjectEmitsOptions, EmitsOptions, EmitsToProps };
+
+declare module 'vue/types/v3-component-public-instance' {
+  interface Vue3Instance<D, P, PublicProps, E, Defaults, MakeDefaultsOptional, Options> {
+    // 覆盖 props 类型，以支持 h JSX 的事件调用
+    $props: Readonly<
+      MakeDefaultsOptional extends true ? Partial<Defaults> & Omit<P & PublicProps, keyof Defaults> : P & PublicProps
+    > &
+      EmitsToProps<E>;
+  }
+}

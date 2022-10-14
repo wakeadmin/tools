@@ -18,7 +18,6 @@ export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
  * @returns
  */
 export function declareProps<T extends {}>(list: Array<keyof T> | ComponentObjectPropsOptions<Partial<T>>): T {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   return list as any as T;
 }
 

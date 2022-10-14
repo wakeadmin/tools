@@ -12,7 +12,6 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/node': ^17.0.45
       '@types/tapable': ^2.2.2
-      '@vue/composition-api': ^1.7.0
       '@vue/test-utils': next
       '@wakeadmin/demi': workspace:^0.1.5
       '@wakeadmin/docker-build': ^0.1.8
@@ -39,11 +38,9 @@ importers:
       vue: ^3.2.37
       vue-router: ^4.1.3
       vue-router-3: npm:vue-router@^3.5.4
-      vue-template-compiler: ^2.7.8
-      vue-template-compiler26: npm:vue-template-compiler@2.6.14
+      vue-template-compiler: ^2.7.13
       vue-test-utils-2: npm:@vue/test-utils@^1.3.0
-      vue2: npm:vue@^2.7.8
-      vue26: npm:vue@2.6.14
+      vue2: npm:vue@^2.7.13
       whatwg-fetch: ^3.6.2
       wkstd: ^0.2.1
     devDependencies:
@@ -55,7 +52,6 @@ importers:
       '@types/lodash': 172.26.59.72+4873/@types/lodash/4.14.182
       '@types/node': 172.26.59.72+4873/@types/node/17.0.45
       '@types/tapable': 172.26.59.72+4873/@types/tapable/2.2.2
-      '@vue/composition-api': 172.26.59.72+4873/@vue/composition-api/1.7.0
       '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.0-rc.18
       '@wakeadmin/demi': link:packages/demi
       '@wakeadmin/docker-build': 172.26.59.72+4873/@wakeadmin/docker-build/0.1.8
@@ -81,12 +77,10 @@ importers:
       typescript: 172.26.59.72+4873/typescript/4.7.4
       vue: 172.26.59.72+4873/vue/3.2.37
       vue-router: 172.26.59.72+4873/vue-router/4.1.3
-      vue-router-3: 172.26.59.72+4873/vue-router/3.5.4
-      vue-template-compiler: 172.26.59.72+4873/vue-template-compiler/2.7.8
-      vue-template-compiler26: 172.26.59.72+4873/vue-template-compiler/2.6.14
+      vue-router-3: 172.26.59.72+4873/vue-router/3.6.5
+      vue-template-compiler: 172.26.59.72+4873/vue-template-compiler/2.7.13
       vue-test-utils-2: 172.26.59.72+4873/@vue/test-utils/1.3.0
-      vue2: 172.26.59.72+4873/vue/2.7.8
-      vue26: 172.26.59.72+4873/vue/2.6.14
+      vue2: 172.26.59.72+4873/vue/2.7.13
       whatwg-fetch: 172.26.59.72+4873/whatwg-fetch/3.6.2
       wkstd: 172.26.59.72+4873/wkstd/0.2.1_eslint@8.0.1
 
@@ -836,11 +830,25 @@ packages:
     version: 7.18.10
     engines: {node: '>=6.9.0'}
 
+  172.26.59.72+4873/@babel/helper-string-parser/7.19.4:
+    resolution: {integrity: sha512-nHtDoQcuqFmwYNYPz3Rah5ph2p8PFeFCsZk9A/48dPc/rGocJ5J3hAAZ7pb76VWX3fZKu+uEr/FhH5jLx7umrw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fhelper-string-parser/-/helper-string-parser-7.19.4.tgz}
+    name: '@babel/helper-string-parser'
+    version: 7.19.4
+    engines: {node: '>=6.9.0'}
+    dev: true
+
   172.26.59.72+4873/@babel/helper-validator-identifier/7.18.6:
     resolution: {integrity: sha512-MmetCkz9ej86nJQV+sFCxoGGrUbU3q02kgLciwkrt9QqEB7cP39oKEY0PakknEO0Gu20SskMRi+AYZ3b1TpN9g==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fhelper-validator-identifier/-/helper-validator-identifier-7.18.6.tgz}
     name: '@babel/helper-validator-identifier'
     version: 7.18.6
     engines: {node: '>=6.9.0'}
+
+  172.26.59.72+4873/@babel/helper-validator-identifier/7.19.1:
+    resolution: {integrity: sha512-awrNfaMtnHUr653GgGEs++LlAvW6w+DcPrOliSMXWCKo597CwL5Acf/wWdNkf/tfEQE3mjkeD1YOVZOUV/od1w==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fhelper-validator-identifier/-/helper-validator-identifier-7.19.1.tgz}
+    name: '@babel/helper-validator-identifier'
+    version: 7.19.1
+    engines: {node: '>=6.9.0'}
+    dev: true
 
   172.26.59.72+4873/@babel/helper-validator-option/7.18.6:
     resolution: {integrity: sha512-XO7gESt5ouv/LRJdrVjkShckw6STTaB7l9BrpBaAHDeF5YZT+01PCwmR0SJHnkW6i8OwW/EVWRShfi4j2x+KQw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fhelper-validator-option/-/helper-validator-option-7.18.6.tgz}
@@ -891,6 +899,16 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 172.26.59.72+4873/@babel/types/7.18.10
+
+  172.26.59.72+4873/@babel/parser/7.19.4:
+    resolution: {integrity: sha512-qpVT7gtuOLjWeDTKLkJ6sryqLliBaFpAtGeqw5cs5giLldvh+Ch0plqnUMKoVAUS6ZEueQQiZV+p5pxtPitEsA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fparser/-/parser-7.19.4.tgz}
+    name: '@babel/parser'
+    version: 7.19.4
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+    dependencies:
+      '@babel/types': 172.26.59.72+4873/@babel/types/7.19.4
+    dev: true
 
   172.26.59.72+4873/@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression/7.18.6_@babel+core@7.18.10:
     resolution: {integrity: sha512-Dgxsyg54Fx1d4Nge8UnvTrED63vrwOdPmyvPzlNN/boaliRP54pm3pGzZD1SJUwrBA+Cs/xdG8kXX6Mn/RfISQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fplugin-bugfix-safari-id-destructuring-collision-in-function-expression/-/plugin-bugfix-safari-id-destructuring-collision-in-function-expression-7.18.6.tgz}
@@ -2105,14 +2123,14 @@ packages:
       - supports-color
     dev: false
 
-  172.26.59.72+4873/@babel/runtime-corejs3/7.18.9:
-    resolution: {integrity: sha512-qZEWeccZCrHA2Au4/X05QW5CMdm4VjUDCrGq5gf1ZDcM4hRqreKrtwAn7yci9zfgAS9apvnsFXiGBHBAxZdK9A==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fruntime-corejs3/-/runtime-corejs3-7.18.9.tgz}
+  172.26.59.72+4873/@babel/runtime-corejs3/7.19.4:
+    resolution: {integrity: sha512-HzjQ8+dzdx7dmZy4DQ8KV8aHi/74AjEbBGTFutBmg/pd3dY5/q1sfuOGPTFGEytlQhWoeVXqcK5BwMgIkRkNDQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fruntime-corejs3/-/runtime-corejs3-7.19.4.tgz}
     name: '@babel/runtime-corejs3'
-    version: 7.18.9
+    version: 7.19.4
     engines: {node: '>=6.9.0'}
     dependencies:
-      core-js-pure: 172.26.59.72+4873/core-js-pure/3.24.1
-      regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.13.9
+      core-js-pure: 172.26.59.72+4873/core-js-pure/3.25.5
+      regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.13.10
     dev: true
 
   172.26.59.72+4873/@babel/runtime/7.18.9:
@@ -2122,6 +2140,15 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.13.9
+
+  172.26.59.72+4873/@babel/runtime/7.19.4:
+    resolution: {integrity: sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2fruntime/-/runtime-7.19.4.tgz}
+    name: '@babel/runtime'
+    version: 7.19.4
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.13.10
+    dev: true
 
   172.26.59.72+4873/@babel/template/7.18.10:
     resolution: {integrity: sha512-TI+rCtooWHr3QJ27kJxfjutghu44DLnasDMwpDqCXVTal9RLp3RSYNh4NdBrRP2cQAoG9A8juOQl6P6oZG4JxA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2ftemplate/-/template-7.18.10.tgz}
@@ -2161,6 +2188,17 @@ packages:
       '@babel/helper-string-parser': 172.26.59.72+4873/@babel/helper-string-parser/7.18.10
       '@babel/helper-validator-identifier': 172.26.59.72+4873/@babel/helper-validator-identifier/7.18.6
       to-fast-properties: 172.26.59.72+4873/to-fast-properties/2.0.0
+
+  172.26.59.72+4873/@babel/types/7.19.4:
+    resolution: {integrity: sha512-M5LK7nAeS6+9j7hAq+b3fQs+pNfUtTGq+yFFfHnauFA8zQtLRfmuipmsKDKKLuyG+wC8ABW43A153YNawNTEtw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@babel%2ftypes/-/types-7.19.4.tgz}
+    name: '@babel/types'
+    version: 7.19.4
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/helper-string-parser': 172.26.59.72+4873/@babel/helper-string-parser/7.19.4
+      '@babel/helper-validator-identifier': 172.26.59.72+4873/@babel/helper-validator-identifier/7.19.1
+      to-fast-properties: 172.26.59.72+4873/to-fast-properties/2.0.0
+    dev: true
 
   172.26.59.72+4873/@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha1-daLotRy3WKdVPWgEpZMteqznXDk=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@bcoe%2fv8-coverage/-/v8-coverage-0.2.3.tgz}
@@ -3356,7 +3394,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       '@babel/code-frame': 172.26.59.72+4873/@babel/code-frame/7.18.6
-      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.9
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.19.4
       '@types/aria-query': 172.26.59.72+4873/@types/aria-query/4.2.2
       aria-query: 172.26.59.72+4873/aria-query/4.2.2
       chalk: 172.26.59.72+4873/chalk/4.1.2
@@ -3404,7 +3442,7 @@ packages:
     version: 5.8.3
     engines: {node: '>10.18'}
     dependencies:
-      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.9
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.19.4
       '@testing-library/dom': 172.26.59.72+4873/@testing-library/dom/7.31.2
       '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/1.3.0
     dev: true
@@ -3417,7 +3455,7 @@ packages:
     dependencies:
       '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.9
       '@testing-library/dom': 172.26.59.72+4873/@testing-library/dom/8.17.1
-      '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.0.2
+      '@vue/test-utils': 172.26.59.72+4873/@vue/test-utils/2.1.0
     dev: true
 
   172.26.59.72+4873/@tootallnate/once/1.1.2:
@@ -5105,6 +5143,16 @@ packages:
       '@vue/compiler-core': 172.26.59.72+4873/@vue/compiler-core/3.2.37
       '@vue/shared': 172.26.59.72+4873/@vue/shared/3.2.37
 
+  172.26.59.72+4873/@vue/compiler-sfc/2.7.13:
+    resolution: {integrity: sha512-zzu2rLRZlgIU+OT3Atbr7Y6PG+LW4wVQpPfNRrGDH3dM9PsrcVfa+1pKb8bW467bGM3aDOvAnsYLWVpYIv3GRg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2fcompiler-sfc/-/compiler-sfc-2.7.13.tgz}
+    name: '@vue/compiler-sfc'
+    version: 2.7.13
+    dependencies:
+      '@babel/parser': 172.26.59.72+4873/@babel/parser/7.19.4
+      postcss: 172.26.59.72+4873/postcss/8.4.18
+      source-map: 172.26.59.72+4873/source-map/0.6.1
+    dev: true
+
   172.26.59.72+4873/@vue/compiler-sfc/2.7.8:
     resolution: {integrity: sha512-2DK4YWKfgLnW9VDR9gnju1gcYRk3flKj8UNsms7fsRmFcg35slVTZEkqwBtX+wJBXaamFfn6NxSsZh3h12Ix/Q==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2fcompiler-sfc/-/compiler-sfc-2.7.8.tgz}
     name: '@vue/compiler-sfc'
@@ -5209,12 +5257,6 @@ packages:
       - whiskers
     dev: true
 
-  172.26.59.72+4873/@vue/composition-api/1.7.0:
-    resolution: {integrity: sha512-hxOgLYR+wjuPX9bkP2pAPlqUs98XxBoa9DSLyp1z6+YR92wC42PZcZKs4d+VRtcv4udOv041Kss+F6ap5nj8YA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2fcomposition-api/-/composition-api-1.7.0.tgz}
-    name: '@vue/composition-api'
-    version: 1.7.0
-    dev: true
-
   172.26.59.72+4873/@vue/devtools-api/6.2.1:
     resolution: {integrity: sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2fdevtools-api/-/devtools-api-6.2.1.tgz}
     name: '@vue/devtools-api'
@@ -5284,10 +5326,10 @@ packages:
     version: 2.0.0-rc.18
     dev: true
 
-  172.26.59.72+4873/@vue/test-utils/2.0.2:
-    resolution: {integrity: sha512-E2P4oXSaWDqTZNbmKZFVLrNN/siVN78YkEqs7pHryWerrlZR9bBFLWdJwRoguX45Ru6HxIflzKl4vQvwRMwm5g==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2ftest-utils/-/test-utils-2.0.2.tgz}
+  172.26.59.72+4873/@vue/test-utils/2.1.0:
+    resolution: {integrity: sha512-U4AxAD/tKJ3ajxYew1gkfEotpr96DE/gLXpbl+nPbsNRqGBfQZZA7YhwGoQNDPgon56v+IGZDrYq7pe3GDl9aw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/@vue%2ftest-utils/-/test-utils-2.1.0.tgz}
     name: '@vue/test-utils'
-    version: 2.0.2
+    version: 2.1.0
     dev: true
 
   172.26.59.72+4873/@vue/web-component-wrapper/1.3.0:
@@ -5905,8 +5947,8 @@ packages:
     version: 4.2.2
     engines: {node: '>=6.0'}
     dependencies:
-      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.18.9
-      '@babel/runtime-corejs3': 172.26.59.72+4873/@babel/runtime-corejs3/7.18.9
+      '@babel/runtime': 172.26.59.72+4873/@babel/runtime/7.19.4
+      '@babel/runtime-corejs3': 172.26.59.72+4873/@babel/runtime-corejs3/7.19.4
     dev: true
 
   172.26.59.72+4873/aria-query/5.0.0:
@@ -7250,10 +7292,10 @@ packages:
       browserslist: 172.26.59.72+4873/browserslist/4.21.3
       semver: 172.26.59.72+4873/semver/7.0.0
 
-  172.26.59.72+4873/core-js-pure/3.24.1:
-    resolution: {integrity: sha512-r1nJk41QLLPyozHUUPmILCEMtMw24NG4oWK6RbsDdjzQgg9ZvrUsPBj1MnG0wXXp1DCDU6j+wUvEmBSrtRbLXg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/core-js-pure/-/core-js-pure-3.24.1.tgz}
+  172.26.59.72+4873/core-js-pure/3.25.5:
+    resolution: {integrity: sha512-oml3M22pHM+igfWHDfdLVq2ShWmjM2V4L+dQEBs0DWVIqEm9WHCwGAlZ6BmyBQGy5sFrJmcx+856D9lVKyGWYg==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/core-js-pure/-/core-js-pure-3.25.5.tgz}
     name: core-js-pure
-    version: 3.24.1
+    version: 3.25.5
     requiresBuild: true
     dev: true
 
@@ -7575,6 +7617,12 @@ packages:
     resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/csstype/-/csstype-3.1.0.tgz}
     name: csstype
     version: 3.1.0
+
+  172.26.59.72+4873/csstype/3.1.1:
+    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/csstype/-/csstype-3.1.1.tgz}
+    name: csstype
+    version: 3.1.1
+    dev: true
 
   172.26.59.72+4873/csv-generate/3.4.3:
     resolution: {integrity: sha512-w/T+rqR0vwvHqWs/1ZyMDWtHHSJaN06klRqJXBEpDJaM/+dZkso0OKh1VcuuYvK3XM53KysVNq8Ko/epCK8wOw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/csv-generate/-/csv-generate-3.4.3.tgz}
@@ -11379,10 +11427,10 @@ packages:
       '@sideway/pinpoint': 172.26.59.72+4873/@sideway/pinpoint/2.0.0
     dev: true
 
-  172.26.59.72+4873/js-beautify/1.14.5:
-    resolution: {integrity: sha512-P2BfZBhXchh10uZ87qMKpM2tfcDXLA+jDiWU/OV864yWdTGzLUGNAdp9Y1ID5ubpNVGls3cZ1UMcO8myUB+UyA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/js-beautify/-/js-beautify-1.14.5.tgz}
+  172.26.59.72+4873/js-beautify/1.14.6:
+    resolution: {integrity: sha512-GfofQY5zDp+cuHc+gsEXKPpNw2KbPddreEo35O6jT6i0RVK6LhsoYBhq5TvK4/n74wnA0QbK8gGd+jUZwTMKJw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/js-beautify/-/js-beautify-1.14.6.tgz}
     name: js-beautify
-    version: 1.14.5
+    version: 1.14.6
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -13783,6 +13831,17 @@ packages:
       picocolors: 172.26.59.72+4873/picocolors/1.0.0
       source-map-js: 172.26.59.72+4873/source-map-js/1.0.2
 
+  172.26.59.72+4873/postcss/8.4.18:
+    resolution: {integrity: sha512-Wi8mWhncLJm11GATDaQKobXSNEYGUHeQLiQqDFG1qQ5UTDPTEvKw0Xt5NsTpktGTwLps3ByrWsBrG0rB8YQ9oA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/postcss/-/postcss-8.4.18.tgz}
+    name: postcss
+    version: 8.4.18
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 172.26.59.72+4873/nanoid/3.3.4
+      picocolors: 172.26.59.72+4873/picocolors/1.0.0
+      source-map-js: 172.26.59.72+4873/source-map-js/1.0.2
+    dev: true
+
   172.26.59.72+4873/preferred-pm/3.0.3:
     resolution: {integrity: sha1-G2M4AANx4+285S7y5PZesuc1htY=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/preferred-pm/-/preferred-pm-3.0.3.tgz}
     name: preferred-pm
@@ -13890,7 +13949,7 @@ packages:
     dependencies:
       condense-newlines: 172.26.59.72+4873/condense-newlines/0.2.1
       extend-shallow: 172.26.59.72+4873/extend-shallow/2.0.1
-      js-beautify: 172.26.59.72+4873/js-beautify/1.14.5
+      js-beautify: 172.26.59.72+4873/js-beautify/1.14.6
     dev: true
 
   172.26.59.72+4873/proc-log/1.0.0:
@@ -14239,6 +14298,12 @@ packages:
     resolution: {integrity: sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz}
     name: regenerator-runtime
     version: 0.11.1
+    dev: true
+
+  172.26.59.72+4873/regenerator-runtime/0.13.10:
+    resolution: {integrity: sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz}
+    name: regenerator-runtime
+    version: 0.13.10
     dev: true
 
   172.26.59.72+4873/regenerator-runtime/0.13.9:
@@ -16272,6 +16337,13 @@ packages:
     resolution: {integrity: sha512-x+/DLAJZv2mcQ7glH2oV9ze8uPwcI+H+GgTgTmb5I55bCgY3+vXWIsqbYUzbBSZnwFHEJku4eoaH/x98veyymQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-router/-/vue-router-3.5.4.tgz}
     name: vue-router
     version: 3.5.4
+    dev: false
+
+  172.26.59.72+4873/vue-router/3.6.5:
+    resolution: {integrity: sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-router/-/vue-router-3.6.5.tgz}
+    name: vue-router
+    version: 3.6.5
+    dev: true
 
   172.26.59.72+4873/vue-router/4.1.3:
     resolution: {integrity: sha512-XvK81bcYglKiayT7/vYAg/f36ExPC4t90R/HIpzrZ5x+17BOWptXLCrEPufGgZeuq68ww4ekSIMBZY1qdUdfjA==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-router/-/vue-router-4.1.3.tgz}
@@ -16289,10 +16361,10 @@ packages:
       loader-utils: 172.26.59.72+4873/loader-utils/1.4.0
     dev: true
 
-  172.26.59.72+4873/vue-template-compiler/2.6.14:
-    resolution: {integrity: sha1-ovDn2YVnDULJye4NBE/tdpD092M=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-template-compiler/-/vue-template-compiler-2.6.14.tgz}
+  172.26.59.72+4873/vue-template-compiler/2.7.13:
+    resolution: {integrity: sha512-jYM6TClwDS9YqP48gYrtAtaOhRKkbYmbzE+Q51gX5YDr777n7tNI/IZk4QV4l/PjQPNh/FVa/E92sh/RqKMrog==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue-template-compiler/-/vue-template-compiler-2.7.13.tgz}
     name: vue-template-compiler
-    version: 2.6.14
+    version: 2.7.13
     dependencies:
       de-indent: 172.26.59.72+4873/de-indent/1.0.2
       he: 172.26.59.72+4873/he/1.2.0
@@ -16326,10 +16398,13 @@ packages:
       typescript: 172.26.59.72+4873/typescript/4.7.4
     dev: true
 
-  172.26.59.72+4873/vue/2.6.14:
-    resolution: {integrity: sha1-5RqlJQJQ1Wmj+606ilpofWA24jU=, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue/-/vue-2.6.14.tgz}
+  172.26.59.72+4873/vue/2.7.13:
+    resolution: {integrity: sha512-QnM6ULTNnPmn71eUO+4hdjfBIA3H0GLsBnchnI/kS678tjI45GOUZhXd0oP/gX9isikXz1PAzSnkPspp9EUNfQ==, registry: http://npm.wakedata-inc.com/, tarball: http://172.26.59.72:4873/vue/-/vue-2.7.13.tgz}
     name: vue
-    version: 2.6.14
+    version: 2.7.13
+    dependencies:
+      '@vue/compiler-sfc': 172.26.59.72+4873/@vue/compiler-sfc/2.7.13
+      csstype: 172.26.59.72+4873/csstype/3.1.1
     dev: true
 
   172.26.59.72+4873/vue/2.7.8:
