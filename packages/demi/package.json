@@ -1,21 +1,32 @@
 {
   "name": "@wakeadmin/demi",
   "version": "0.1.5",
-  "description": "重新导出 vue-demi, 统一使用 @vue/runtime-dom 作为类型",
+  "description": "提供跨版本 Vue Api 支持",
+  "engines": {
+    "node": ">=12"
+  },
   "main": "lib/index.cjs",
   "module": "lib/index.mjs",
   "types": "lib/index.d.ts",
-  "scripts": {},
-  "keywords": [],
+  "bin": {
+    "vue-demi-fix": "bin/vue-demi-fix.js",
+    "vue-demi-switch": "bin/vue-demi-switch.js"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "vue",
+    "vue-demi"
+  ],
   "files": [
-    "lib"
+    "lib",
+    "bin",
+    "scripts"
   ],
   "author": "ivan-lee",
   "license": "MIT",
-  "dependencies": {
-    "vue-demi": "latest"
-  },
   "peerDependencies": {
-    "@vue/runtime-dom": ">=3.0.0"
+    "vue": ">=2.7.0"
   }
 }
