@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "build": "pnpm run -r --filter=!playground-* build",
     "test": "pnpm run -r --filter=!playground-* --workspace-concurrency=1 test --passWithNoTests --silent",
-    "type-check": "pnpm run -r type-check"
+    "type-check": "pnpm run -r type-check",
+    "type-check:vue2": "pnpm run -r --filter=!@wakeadmin/bay type-check"
   },
   "author": "ivan-lee",
   "license": "MIT",

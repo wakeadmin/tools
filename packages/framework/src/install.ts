@@ -1,4 +1,5 @@
-import { App, isVue2, nextTick } from '@wakeadmin/demi';
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+import { App, Plugin, isVue2, nextTick } from '@wakeadmin/demi';
 import { setCurrentPageInstanceGetter, clearPageScope, mergePageScope } from '@wakeapp/framework-core';
 import { addHiddenProp, hasProp } from './utils';
 
@@ -60,6 +61,7 @@ export function getInstanceFromMatcheds(matcheds: MaybeMatched[]) {
 }
 
 export function getMatchedFromVue3Router(app: App) {
+  // @ts-ignore vue 2 下会报错
   const matcheds = app.config.globalProperties.$route?.matched;
 
   const instance = getInstanceFromMatcheds(matcheds) ?? global;
@@ -120,7 +122,7 @@ export function install(app: App) {
 
     // add mixin
     app.mixin({
-      beforeCreate() {
+      beforeCreate(this: any) {
         const ctor = this.$.type;
         // 需要合并临时实例
         if (hasProp(ctor, TEMP_INSTANCE)) {
@@ -130,7 +132,7 @@ export function install(app: App) {
           mergePageScope(this, instance);
         }
       },
-      mounted() {
+      mounted(this: any) {
         // 但是组件可能在 mounted 中进行 getInject, 因此这里最好延后处理
         const ctor = this.$.type;
         if (hasProp(ctor, TEMP_INSTANCE)) {
@@ -141,6 +143,7 @@ export function install(app: App) {
           });
         }
       },
+      // @ts-ignore vue 2 会报错，可以忽略
       beforeUnmount() {
         // 已经标记为页面实例，可以销毁
         if (isMark(this)) {
@@ -151,4 +154,4 @@ export function install(app: App) {
   }
 }
 
-export const plugin = { install };
+export const plugin = { install } as unknown as Plugin;

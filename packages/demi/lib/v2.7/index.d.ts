@@ -14,7 +14,7 @@ import { EmitFn, ObjectEmitsOptions, EmitsOptions } from 'vue/types/v3-setup-con
 
 declare const isVue2: boolean;
 declare const isVue3: boolean;
-declare const Vue2: typeof Vue | undefined;
+declare const Vue2: typeof Vue;
 declare const version: string;
 declare const install: (vue?: typeof Vue) => void;
 export declare function warn(msg: string, vm?: Component | null): void;

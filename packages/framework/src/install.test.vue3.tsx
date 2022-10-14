@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 /* eslint-disable vue/one-component-per-file */
 // vue3 页面作用域测试
 import { cleanup } from '@testing-library/vue';
@@ -7,6 +8,7 @@ import { plugin } from './install';
 import { testSuite, NoopComponent } from './install.test.share';
 
 const Wrapper = defineComponent({
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Wrapper',
   render() {
     return (
@@ -50,6 +52,7 @@ function initialApp(): [App, Router] {
     history: createWebHistory(),
   });
 
+  // @ts-ignore vue 2 下会报错，忽略
   app.use(router);
   app.use(plugin);
 
