@@ -15,10 +15,10 @@ importers:
       '@types/node': ^17.0.45
       '@types/tapable': ^2.2.2
       '@vue/test-utils': next
-      '@wakeadmin/demi': workspace:^0.1.5
+      '@wakeadmin/demi': workspace:^0.2.0
       '@wakeadmin/docker-build': ^0.1.8
       babel-jest: ^28.1.3
-      babel-preset-wakeadmin-for-test: workspace:0.1.0
+      babel-preset-wakeadmin-for-test: workspace:0.1.1
       cross-env: ^7.0.3
       eslint: ~8.0.1
       eslint-config-wkts: ^0.2.2
@@ -28,7 +28,7 @@ importers:
       husky: ^8.0.1
       jest: ^28.1.3
       jest-environment-jsdom: ^28.1.3
-      jest-preset-universe-vue: workspace:^0.1.0
+      jest-preset-universe-vue: workspace:^0.1.1
       lodash: ^4.17.21
       lodash-es: ^4.17.21
       prettier: ^2.7.1
@@ -88,8 +88,8 @@ importers:
 
   packages/assets:
     specifiers:
-      '@wakeadmin/demi': workspace:^0.1.5
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/demi': workspace:^0.2.0
+      '@wakeadmin/utils': workspace:^0.1.3
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/utils': link:../utils
@@ -131,21 +131,21 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.8
       '@vue/cli-service': ~5.0.8
       '@vueuse/core': ^8.9.4
-      '@wakeadmin/assets': workspace:^0.1.1
-      '@wakeadmin/ce': workspace:^0.1.3
-      '@wakeadmin/framework': workspace:^0.1.3
-      '@wakeadmin/h': workspace:^0.2.8
-      '@wakeadmin/i18n': workspace:^0.1.4
-      '@wakeadmin/icons': workspace:^0.1.2
-      '@wakeadmin/mapp': workspace:^0.3.1
-      '@wakeadmin/theme': workspace:^0.1.5
-      '@wakeadmin/utils': workspace:^0.1.2
-      '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
-      '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.0
-      '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.2.0
-      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.1
+      '@wakeadmin/assets': workspace:^0.1.2
+      '@wakeadmin/ce': workspace:^0.1.4
+      '@wakeadmin/framework': workspace:^0.1.4
+      '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/i18n': workspace:^0.1.5
+      '@wakeadmin/icons': workspace:^0.1.3
+      '@wakeadmin/mapp': workspace:^0.3.2
+      '@wakeadmin/theme': workspace:^0.1.6
+      '@wakeadmin/utils': workspace:^0.1.3
+      '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.1
+      '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.1
+      '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.2.1
+      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.2
       '@wakeapp/wakedata-backend': latest
-      babel-preset-wakeadmin: workspace:^0.1.0
+      babel-preset-wakeadmin: workspace:^0.1.1
       core-js: ^3.25.5
       element-plus: ^2.2.18
       normalize.css: ^8.0.1
@@ -187,19 +187,16 @@ importers:
 
   packages/ce:
     specifiers:
-      '@wakeadmin/h': workspace:^0.2.8
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/utils': workspace:^0.1.3
     dependencies:
       '@wakeadmin/utils': link:../utils
     devDependencies:
       '@wakeadmin/h': link:../h
 
-  packages/components:
-    specifiers: {}
-
   packages/create-wakeadmin:
     specifiers:
-      generator-wakeadmin: workspace:^0.2.7
+      generator-wakeadmin: workspace:^0.2.8
       yeoman-environment: ^3.12.1
     dependencies:
       generator-wakeadmin: link:../generator-wakeadmin
@@ -210,11 +207,11 @@ importers:
 
   packages/framework:
     specifiers:
-      '@wakeadmin/demi': workspace:^0.1.5
-      '@wakeadmin/h': workspace:^0.2.8
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/demi': workspace:^0.2.0
+      '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/utils': workspace:^0.1.3
       '@wakeapp/framework-core': latest
-      test-helper-vue: workspace:^0.1.3
+      test-helper-vue: workspace:^0.1.4
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
@@ -234,16 +231,16 @@ importers:
 
   packages/h:
     specifiers:
-      '@wakeadmin/demi': workspace:^0.1.5
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/demi': workspace:^0.2.0
+      '@wakeadmin/utils': workspace:^0.1.3
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/utils': link:../utils
 
   packages/i18n:
     specifiers:
-      '@wakeadmin/i18n-shared': workspace:^0.1.6
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/i18n-shared': workspace:^0.1.7
+      '@wakeadmin/utils': workspace:^0.1.3
       vue: ^3.2.41
       vue-i18n: 9.1.10
     dependencies:
@@ -255,8 +252,8 @@ importers:
 
   packages/i18n-legacy:
     specifiers:
-      '@wakeadmin/i18n-shared': workspace:^0.1.6
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/i18n-shared': workspace:^0.1.7
+      '@wakeadmin/utils': workspace:^0.1.3
       vue: ~2.7.13
       vue-i18n: ~8.27.2
     dependencies:
@@ -268,16 +265,16 @@ importers:
 
   packages/i18n-shared:
     specifiers:
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/utils': workspace:^0.1.3
     dependencies:
       '@wakeadmin/utils': link:../utils
 
   packages/icons:
     specifiers:
-      '@wakeadmin/demi': workspace:^0.1.5
-      '@wakeadmin/h': workspace:^0.2.8
+      '@wakeadmin/demi': workspace:^0.2.0
+      '@wakeadmin/h': workspace:^0.2.9
       svgo: ^2.8.0
-      test-helper-vue: workspace:^0.1.3
+      test-helper-vue: workspace:^0.1.4
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
@@ -290,8 +287,8 @@ importers:
 
   packages/mapp:
     specifiers:
-      '@wakeadmin/h': workspace:^0.2.8
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/utils': workspace:^0.1.3
       path-browserify: ^1.0.1
       qiankun: ^2.8.3
     dependencies:
@@ -308,11 +305,11 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.8
       '@vue/cli-plugin-vuex': ~5.0.8
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/bay': workspace:^0.6.1
-      '@wakeadmin/h': workspace:^0.2.8
-      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.4.1
-      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.1
-      babel-preset-wakeadmin: workspace:^0.1.0
+      '@wakeadmin/bay': workspace:^0.6.2
+      '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.4.2
+      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.2
+      babel-preset-wakeadmin: workspace:^0.1.1
       core-js: ^3.25.5
       sass: ^1.55.0
       sass-loader: ^12.6.0
@@ -350,12 +347,12 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.8
       '@vue/cli-plugin-vuex': ~5.0.8
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/bay': workspace:^0.6.1
-      '@wakeadmin/h': workspace:^0.2.8
-      '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.0
-      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.4.1
-      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.1
-      babel-preset-wakeadmin: workspace:^0.1.0
+      '@wakeadmin/bay': workspace:^0.6.2
+      '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.1
+      '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.4.2
+      '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.2
+      babel-preset-wakeadmin: workspace:^0.1.1
       core-js: ^3.25.5
       element-plus: ^2.2.18
       sass: ^1.55.0
@@ -387,7 +384,7 @@ importers:
   packages/playground-vue3-vite:
     specifiers:
       '@vitejs/plugin-vue': ^2.3.4
-      '@wakeadmin/bay': workspace:^0.6.1
+      '@wakeadmin/bay': workspace:^0.6.2
       typescript: ^4.8.4
       vite: ^2.9.15
       vue: ^3.2.41
@@ -406,8 +403,8 @@ importers:
 
   packages/test-helper-vue:
     specifiers:
-      '@wakeadmin/demi': workspace:^0.1.5
-      '@wakeadmin/h': workspace:^0.2.8
+      '@wakeadmin/demi': workspace:^0.2.0
+      '@wakeadmin/h': workspace:^0.2.9
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
@@ -457,7 +454,7 @@ importers:
     specifiers:
       '@types/cli-table': ^0.3.1
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/utils': workspace:^0.1.3
       cli-table: ^0.3.11
     dependencies:
       '@wakeadmin/utils': link:../utils
@@ -470,8 +467,8 @@ importers:
     specifiers:
       '@types/cli-table': ^0.3.1
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/mapp': workspace:^0.3.1
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/mapp': workspace:^0.3.2
+      '@wakeadmin/utils': workspace:^0.1.3
       cli-table: ^0.3.11
     dependencies:
       '@wakeadmin/utils': link:../utils
@@ -485,7 +482,7 @@ importers:
     specifiers:
       '@vue/cli-service': ~5.0.8
       '@wakeadmin/services': latest
-      '@wakeadmin/utils': workspace:^0.1.2
+      '@wakeadmin/utils': workspace:^0.1.3
     dependencies:
       '@wakeadmin/services': 172.26.59.72+4873/@wakeadmin/services/0.3.2
       '@wakeadmin/utils': link:../utils
@@ -6851,7 +6848,6 @@ packages:
       }
     name: '@types/node'
     version: 15.14.9
-    dev: false
 
   172.26.59.72+4873/@types/node/17.0.45:
     resolution:
@@ -6873,6 +6869,7 @@ packages:
       }
     name: '@types/node'
     version: 18.11.0
+    dev: true
 
   172.26.59.72+4873/@types/normalize-package-data/2.4.1:
     resolution:
@@ -7084,7 +7081,7 @@ packages:
     version: 2.0.6
     dependencies:
       '@types/expect': 172.26.59.72+4873/@types/expect/1.20.4
-      '@types/node': 172.26.59.72+4873/@types/node/18.11.0
+      '@types/node': 172.26.59.72+4873/@types/node/15.14.9
 
   172.26.59.72+4873/@types/web-bluetooth/0.0.14:
     resolution:
@@ -10553,7 +10550,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 172.26.59.72+4873/caniuse-lite/1.0.30001419
-      electron-to-chromium: 172.26.59.72+4873/electron-to-chromium/1.4.282
+      electron-to-chromium: 172.26.59.72+4873/electron-to-chromium/1.4.283
       node-releases: 172.26.59.72+4873/node-releases/2.0.6
       update-browserslist-db: 172.26.59.72+4873/update-browserslist-db/1.0.10_browserslist@4.21.4
 
@@ -13047,15 +13044,15 @@ packages:
       jake: 172.26.59.72+4873/jake/10.8.5
     dev: false
 
-  172.26.59.72+4873/electron-to-chromium/1.4.282:
+  172.26.59.72+4873/electron-to-chromium/1.4.283:
     resolution:
       {
-        integrity: sha512-Dki0WhHNh/br/Xi1vAkueU5mtIc9XLHcMKB6tNfQKk+kPG0TEUjRh5QEMAUbRp30/rYNMFD1zKKvbVzwq/4wmg==,
+        integrity: sha512-g6RQ9zCOV+U5QVHW9OpFR7rdk/V7xfopNXnyAamdpFgCHgZ1sjI8VuR1+zG2YG/TZk+tQ8mpNkug4P8FU0fuOA==,
         registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/electron-to-chromium/-/electron-to-chromium-1.4.282.tgz,
+        tarball: http://172.26.59.72:4873/electron-to-chromium/-/electron-to-chromium-1.4.283.tgz,
       }
     name: electron-to-chromium
-    version: 1.4.282
+    version: 1.4.283
 
   172.26.59.72+4873/element-plus/2.2.18:
     resolution:

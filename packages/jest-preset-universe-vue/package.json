@@ -1,6 +1,6 @@
 {
   "name": "jest-preset-universe-vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "vue 跨版本测试配置",
   "private": true,
   "scripts": {},

@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/icons",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "惟客云图标库",
   "main": "./dist/common/index.js",
   "module": "./dist/index.js",
@@ -29,12 +29,12 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.1.5",
-    "@wakeadmin/h": "workspace:^0.2.8"
+    "@wakeadmin/demi": "workspace:^0.2.0",
+    "@wakeadmin/h": "workspace:^0.2.9"
   },
   "devDependencies": {
     "svgo": "^2.8.0",
-    "test-helper-vue": "workspace:^0.1.3"
+    "test-helper-vue": "workspace:^0.1.4"
   },
   "peerDependencies": {
     "vue": ">=2.7.0"

@@ -1,5 +1,13 @@
 # @wakeadmin/vue-cli-plugin-mapp-child
 
+## 0.4.2
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/utils@0.1.3
+
 ## 0.4.1
 
 ### Patch Changes

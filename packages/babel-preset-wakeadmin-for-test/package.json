@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-wakeadmin-for-test",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "用于 jest 单元测试的 babel 配置",
   "main": "index.js",
   "scripts": {},

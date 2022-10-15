@@ -1,5 +1,14 @@
 # @wakeadmin/h
 
+## 0.2.9
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/demi@0.2.0
+  - @wakeadmin/utils@0.1.3
+
 ## 0.2.8
 
 ### Patch Changes

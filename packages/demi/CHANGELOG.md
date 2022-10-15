@@ -1,5 +1,12 @@
 # @wakeadmin/demi
 
+## 0.2.0
+
+### Minor Changes
+
+- 重构, fork vue-demi
+- 更新依赖
+
 ## 0.1.4
 
 ### Patch Changes

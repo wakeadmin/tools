@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/vue-cli-plugin-i18n",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "vue i18n 插件",
   "main": "index.js",
   "types": "dist/index.d.ts",

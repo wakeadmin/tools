@@ -1,6 +1,6 @@
 {
   "name": "playground-vue3",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "vue3 子应用游乐场",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.6.1",
+    "@wakeadmin/bay": "workspace:^0.6.2",
     "core-js": "^3.25.5",
     "element-plus": "^2.2.18",
     "vue": "^3.2.41",
@@ -23,11 +23,11 @@
     "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
-    "@wakeadmin/h": "workspace:^0.2.8",
-    "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.0",
-    "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.4.1",
-    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.1",
-    "babel-preset-wakeadmin": "workspace:^0.1.0",
+    "@wakeadmin/h": "workspace:^0.2.9",
+    "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.1",
+    "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.4.2",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.2",
+    "babel-preset-wakeadmin": "workspace:^0.1.1",
     "sass": "^1.55.0",
     "sass-loader": "^12.6.0"
   }
