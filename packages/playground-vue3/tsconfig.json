@@ -4,6 +4,7 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    "jsxImportSource": "@wakeadmin/h",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,

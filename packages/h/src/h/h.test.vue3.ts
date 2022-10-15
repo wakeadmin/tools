@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 /* eslint-disable no-lone-blocks */
 import { h } from './h';
 
@@ -7,6 +8,7 @@ test('h props 转换', () => {
 
   const vnode = h('div', { foo: value, onFoo: handler }, 'hello', 'world');
 
+  // @ts-ignore vue 2 下会报错，这个可以忽略
   expect(vnode.props).toEqual({
     foo: value,
     onFoo: handler,

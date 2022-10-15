@@ -4,7 +4,6 @@ import {
   directiveArgumentsToBinding,
   resolveComponent,
   resolveDirective,
-  isVNode,
   assertNotFragment,
 } from './helper';
 import { wrap } from './process';
@@ -15,11 +14,6 @@ test('resolveComponent', () => {
 
 test('resolveDirective', () => {
   expect(resolveDirective('h')).toBe('h');
-});
-
-test('isVNode', () => {
-  expect(isVNode({})).toBeFalsy();
-  expect(isVNode(wrap({}))).toBeTruthy();
 });
 
 test('directiveArgumentsToBinding', () => {

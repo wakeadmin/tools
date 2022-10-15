@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 // vue2 页面作用域测试
 import { Vue2, defineComponent } from '@wakeadmin/demi';
 import VueRouter, { RouteConfig } from 'vue-router-3';
@@ -5,6 +6,7 @@ import { plugin } from './install';
 import { NoopComponent, testSuite } from './install.test.share';
 
 const Wrapper = defineComponent({
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Wrapper',
   render() {
     return (
@@ -41,6 +43,7 @@ Vue2.use(VueRouter);
 Vue2.use(plugin);
 
 const app = new Vue2({
+  // @ts-ignore vue 2 下会报错, 可以忽略
   router,
   name: 'App',
   render() {

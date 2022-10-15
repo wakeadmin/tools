@@ -1,5 +1,11 @@
 # generator-wakeadmin
 
+## 0.2.8
+
+### Patch Changes
+
+- 更新依赖
+
 ## 0.2.7
 
 ### Patch Changes

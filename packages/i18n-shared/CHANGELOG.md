@@ -1,5 +1,13 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.7
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/utils@0.1.3
+
 ## 0.1.6
 
 ### Patch Changes

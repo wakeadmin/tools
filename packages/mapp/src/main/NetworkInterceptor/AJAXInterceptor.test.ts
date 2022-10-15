@@ -1,7 +1,7 @@
 import { EventEmitter } from '@wakeadmin/utils';
 import { InterceptRequest, InterceptResponse } from '../../types';
 
-import { parseHeaders, spyHeaders, AJAXInterceptor, AJAXState } from './AJAXInterceptor';
+import { parseHeaders, AJAXInterceptor, AJAXState } from './AJAXInterceptor';
 import { stringifyHeaders } from './helper.test.share';
 
 test('parseHeaders', () => {
@@ -13,23 +13,6 @@ test('parseHeaders', () => {
       )
     )
   ).toBe('[["date","Fri, 08 Dec 2017 21:04:30 GMT"],["content-encoding","gzip"],["x-content-type-options","nosniff"]]');
-});
-
-test('spyHeaders', () => {
-  const fn = jest.fn();
-  const headers = new Headers();
-
-  spyHeaders(headers, fn);
-
-  headers.set('Foo', 'bar');
-  expect(fn).toBeCalledWith('Foo', 'bar');
-
-  headers.append('Foo', 'baz');
-  expect(fn).toBeCalledWith('Foo', 'bar, baz');
-  expect(headers.get('Foo')).toBe('bar, baz');
-
-  headers.delete('Foo');
-  expect(fn).toBeCalledWith('Foo', null);
 });
 
 describe('AJAXInterceptor', () => {
@@ -82,6 +65,7 @@ describe('AJAXInterceptor', () => {
   const interceptor = new AJAXInterceptor();
   const register = jest.fn((req: InterceptRequest, next) => {
     req.headers.set('X-Add-By-Interceptor', 'yes');
+    req.headers.set('bar', 'override bar');
     return Promise.resolve(next());
   });
 
@@ -103,6 +87,9 @@ describe('AJAXInterceptor', () => {
     xhr.setRequestHeader('Foo', 'foo');
     xhr.setRequestHeader('Bar', 'bar');
 
+    // 设置了两次，这里应该是 append
+    xhr.setRequestHeader('Foo', 'baz');
+
     xhr.send('body');
 
     const req = getRequest();
@@ -115,7 +102,12 @@ describe('AJAXInterceptor', () => {
         xhr,
       },
     });
-    expect(stringifyHeaders(req.headers)).toBe('[["foo","foo"],["bar","bar"],["x-add-by-interceptor","yes"]]');
+    expect(stringifyHeaders(req.headers)).toBe(
+      // foo 设置了两次，采用 append 形式
+      // bar 在拦截器中被重置
+      // x-add-by-interceptor 为拦截器添加
+      '[["foo","foo, baz"],["bar","override bar"],["x-add-by-interceptor","yes"]]'
+    );
   });
 
   test('正确数据响应', async () => {

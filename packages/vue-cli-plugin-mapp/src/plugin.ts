@@ -106,7 +106,7 @@ module.exports = {
 
   table.push(
     ['mode', '主应用'],
-    ['terminalMode', terminalMode],
+    ['terminalMode', JSON.stringify(terminalMode)],
     ['publicPath', publicPath],
     ['baseUrl', `${_baseUrl}, 应用内可以通过 process.env.MAPP_BASE_URL 获取`],
     ['assetsDir', assetsDir],

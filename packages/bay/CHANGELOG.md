@@ -1,5 +1,14 @@
 # @wakeadmin/bay
 
+## 0.6.2
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/assets@0.1.2
+  - @wakeadmin/mapp@0.3.2
+
 ## 0.6.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 0.1.6
+
+### Patch Changes
+
+- 更新依赖
+
 ## 0.1.4
 
 ### Patch Changes

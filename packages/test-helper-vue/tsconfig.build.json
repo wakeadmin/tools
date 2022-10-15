@@ -3,6 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "ES2017",
+    "incremental": false,
+    "tsBuildInfoFile": null,
     "noEmit": false
   },
   "exclude": ["dist", "**/*.test.*"]

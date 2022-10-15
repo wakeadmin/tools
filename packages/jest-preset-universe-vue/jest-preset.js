@@ -2,7 +2,7 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-const { isVue2, Vue2 } = require('vue-demi');
+const { isVue2, Vue2 } = require('@wakeadmin/demi');
 const path = require('path');
 
 const isVue27 = isVue2 && Vue2.version.startsWith('2.7');
