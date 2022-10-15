@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build:es": "tsc -b tsconfig.build.json",
     "build": "npm run build:es && npm run build:common",
@@ -37,13 +37,12 @@
   "author": "ivan",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.1.4",
-    "@wakeadmin/utils": "workspace:^0.1.1"
+    "@wakeadmin/demi": "workspace:^0.1.5",
+    "@wakeadmin/utils": "workspace:^0.1.2"
   },
   "jest": {
     "preset": "jest-preset-universe-vue"
   },
-  "devDependencies": {},
   "peerDependencies": {
     "vue": ">=2.7.0"
   }

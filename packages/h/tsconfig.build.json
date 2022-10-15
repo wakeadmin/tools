@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "target": "ES2017"
+    "target": "ES2017",
+    "incremental": false,
+    "tsBuildInfoFile": null
   },
   "exclude": ["dist", "**/__tests__/*", "**/*.test.*", "**/*.d-test.*", "**/*.vue", "**/*.d.ts"]
 }

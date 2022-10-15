@@ -15,7 +15,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "generator-wakeadmin": "workspace:^0.2.4",
-    "yeoman-environment": "^3.10.0"
+    "generator-wakeadmin": "workspace:^0.2.7",
+    "yeoman-environment": "^3.12.1"
   }
 }

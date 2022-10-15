@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build:es": "tsc -b tsconfig.build.json",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build": "npm run build:es && npm run build:common",
@@ -38,10 +38,10 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/h": "workspace:^0.2.1",
-    "@wakeadmin/utils": "workspace:^0.1.1",
+    "@wakeadmin/h": "workspace:^0.2.8",
+    "@wakeadmin/utils": "workspace:^0.1.2",
     "path-browserify": "^1.0.1",
-    "qiankun": "^2.7.4"
+    "qiankun": "^2.8.3"
   },
   "peerDependencies": {
     "vue": "^3.2.37",

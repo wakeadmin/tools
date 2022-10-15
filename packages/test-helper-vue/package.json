@@ -7,7 +7,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build:es": "tsc -b tsconfig.build.json",
     "build": "npm run build:es && npm run build:common",
@@ -20,8 +20,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.1.1",
-    "@wakeadmin/h": "workspace:^0.2.0"
+    "@wakeadmin/demi": "workspace:^0.1.5",
+    "@wakeadmin/h": "workspace:^0.2.8"
   },
   "jest": {
     "preset": "jest-preset-universe-vue"

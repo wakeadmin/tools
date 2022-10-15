@@ -243,12 +243,12 @@ module.exports = {
 
   table.push(
     ['mode', '子应用'],
-    ['terminalMode', terminalMode],
+    ['terminalMode', JSON.stringify(terminalMode)],
     ['name', _name],
     ['publicPath', publicPath],
     ['port', port],
     ['assetsDir', assetsDir],
-    ['outputDir', outputDir],
+    ['outputDir', outputDir ?? ''],
     ['shared', JSON.stringify(_shared, null, 2)],
     ['mapp', JSON.stringify(mapp, null, 2)]
   );

@@ -15,7 +15,7 @@ module.exports = defineConfig({
       },
     }),
     ...defineVendors({
-      enableInDev: true,
+      enableInDev: false,
       modules: {
         vue: ['Vue', 'vue@2.7.7/dist/vue.runtime.js'],
         'vue-router': ['VueRouter', 'vue-router@3.5.4/dist/vue-router.js'],

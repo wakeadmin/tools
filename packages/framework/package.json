@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build:es": "tsc -b tsconfig.build.json",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build": "npm run build:es && npm run build:common",
@@ -29,9 +29,9 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.1.1",
-    "@wakeadmin/h": "workspace:^0.2.0",
-    "@wakeadmin/utils": "workspace:^0.1.1",
+    "@wakeadmin/demi": "workspace:^0.1.5",
+    "@wakeadmin/h": "workspace:^0.2.8",
+    "@wakeadmin/utils": "workspace:^0.1.2",
     "@wakeapp/framework-core": "latest"
   },
   "devDependencies": {

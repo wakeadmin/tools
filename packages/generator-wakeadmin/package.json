@@ -26,6 +26,6 @@
     "node": ">= 16.0.0"
   },
   "devDependencies": {
-    "@types/yeoman-generator": "^5.2.10"
+    "@types/yeoman-generator": "^5.2.11"
   }
 }

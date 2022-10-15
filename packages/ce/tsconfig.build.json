@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "ES2017",
-    "noEmit": false
+    "noEmit": false,
+    "incremental": false,
+    "tsBuildInfoFile": null
   },
   "exclude": ["dist", "**/*.test.*", "**/*.test-d.*"]
 }
