@@ -22,6 +22,6 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "@wakeapp/utils": "latest"
+    "@wakeapp/utils": "^0.4.0"
   }
 }

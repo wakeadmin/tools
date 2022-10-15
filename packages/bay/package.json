@@ -44,7 +44,7 @@
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.1",
     "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.2.1",
     "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.2",
-    "@wakeapp/wakedata-backend": "latest",
+    "@wakeapp/wakedata-backend": "^0.4.0",
     "babel-preset-wakeadmin": "workspace:^0.1.1",
     "core-js": "^3.25.5",
     "element-plus": "^2.2.18",

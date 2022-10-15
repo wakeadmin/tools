@@ -144,7 +144,7 @@ importers:
       '@wakeadmin/vue-cli-plugin-i18n': workspace:^0.1.1
       '@wakeadmin/vue-cli-plugin-mapp': workspace:^0.2.1
       '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.2
-      '@wakeapp/wakedata-backend': latest
+      '@wakeapp/wakedata-backend': ^0.4.0
       babel-preset-wakeadmin: workspace:^0.1.1
       core-js: ^3.25.5
       element-plus: ^2.2.18
@@ -174,7 +174,7 @@ importers:
       '@wakeadmin/vue-cli-plugin-i18n': link:../vue-cli-plugin-i18n
       '@wakeadmin/vue-cli-plugin-mapp': link:../vue-cli-plugin-mapp
       '@wakeadmin/vue-cli-plugin-vendor': link:../vue-cli-plugin-vendor
-      '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20221010168
+      '@wakeapp/wakedata-backend': 172.26.59.72+4873/@wakeapp/wakedata-backend/0.4.0
       babel-preset-wakeadmin: link:../babel-preset-wakeadmin
       core-js: 172.26.59.72+4873/core-js/3.25.5
       element-plus: 172.26.59.72+4873/element-plus/2.2.18
@@ -210,13 +210,13 @@ importers:
       '@wakeadmin/demi': workspace:^0.2.0
       '@wakeadmin/h': workspace:^0.2.9
       '@wakeadmin/utils': workspace:^0.1.3
-      '@wakeapp/framework-core': latest
+      '@wakeapp/framework-core': ^0.4.0
       test-helper-vue: workspace:^0.1.4
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/h': link:../h
       '@wakeadmin/utils': link:../utils
-      '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20221010168
+      '@wakeapp/framework-core': 172.26.59.72+4873/@wakeapp/framework-core/0.4.0
     devDependencies:
       test-helper-vue: link:../test-helper-vue
 
@@ -429,9 +429,9 @@ importers:
 
   packages/utils:
     specifiers:
-      '@wakeapp/utils': latest
+      '@wakeapp/utils': ^0.4.0
     dependencies:
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20221010168
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.4.0
 
   packages/vue-cli-plugin-ce:
     specifiers:
@@ -8918,18 +8918,28 @@ packages:
       - supports-color
     dev: false
 
-  172.26.59.72+4873/@wakeapp/framework-core/0.1.0-daily20221010168:
+  172.26.59.72+4873/@wakeapp/events/0.4.0:
     resolution:
       {
-        integrity: sha512-tYOFWt4J/LLps6wADLXPKsn5tfkajI2TUf8hjhaOsS+fj9IUH4TRcmY7Tmz/9i9KTHh0vuxZeb0H015qqkyA/Q==,
+        integrity: sha512-+UH8RNDdRJZQh//S6iY6MzcePgsyLIzIZT9RBwn9vNp2T/3CzmOWpUJaG3ajW28QHCm6hO4UQQsBOb4IXSD2Zg==,
         registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@wakeapp%2fframework-core/-/framework-core-0.1.0-daily20221010168.tgz,
+        tarball: http://172.26.59.72:4873/@wakeapp%2fevents/-/events-0.4.0.tgz,
+      }
+    name: '@wakeapp/events'
+    version: 0.4.0
+
+  172.26.59.72+4873/@wakeapp/framework-core/0.4.0:
+    resolution:
+      {
+        integrity: sha512-jNegEIje7r2G5pG2dheI1ZvA1P4X4AQNnatMlu/axBUALLPfkOkUPt5iKfswmbVxnVe+raTwzpvDVY0TtClb4w==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@wakeapp%2fframework-core/-/framework-core-0.4.0.tgz,
       }
     name: '@wakeapp/framework-core'
-    version: 0.1.0-daily20221010168
+    version: 0.4.0
     dependencies:
       '@wakeapp/inversify': 172.26.59.72+4873/@wakeapp/inversify/6.1.0_tslib@2.4.0
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20221010168
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.4.0
       reflect-metadata: 172.26.59.72+4873/reflect-metadata/0.1.13
       tslib: 172.26.59.72+4873/tslib/2.4.0
     transitivePeerDependencies:
@@ -8952,37 +8962,37 @@ packages:
       tslib: 172.26.59.72+4873/tslib/2.4.0
     dev: false
 
-  172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20221010168:
+  172.26.59.72+4873/@wakeapp/utils/0.4.0:
     resolution:
       {
-        integrity: sha512-9YK5wwMFjv273w+GFeSJ7McUGhz3TwoA/VYkLuROyDWx6+sMFKcV7tElWqaXcZXjfss0AAg9iAXx4wQve4/ujQ==,
+        integrity: sha512-QpT5A9DmZ5cF6lOYtMX7NUFQ3Rm2jOYdYF7XhWZNGEd+ZIT+1VzbwbS5ylKTzi+VouBbtxYJuWc+o/lCokCMcw==,
         registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@wakeapp%2futils/-/utils-0.1.0-daily20221010168.tgz,
+        tarball: http://172.26.59.72:4873/@wakeapp%2futils/-/utils-0.4.0.tgz,
       }
     name: '@wakeapp/utils'
-    version: 0.1.0-daily20221010168
+    version: 0.4.0
     peerDependencies:
       lodash: 4.*
     dependencies:
       '@types/big.js': 172.26.59.72+4873/@types/big.js/6.1.6
+      '@wakeapp/events': 172.26.59.72+4873/@wakeapp/events/0.4.0
       big.js: 172.26.59.72+4873/big.js/6.2.1
       dayjs: 172.26.59.72+4873/dayjs/1.11.5
-      events: 172.26.59.72+4873/events/3.3.0
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
       polished: 172.26.59.72+4873/polished/4.2.2
       query-string: 172.26.59.72+4873/query-string/7.1.1
 
-  172.26.59.72+4873/@wakeapp/wakedata-backend/0.1.0-daily20221010168:
+  172.26.59.72+4873/@wakeapp/wakedata-backend/0.4.0:
     resolution:
       {
-        integrity: sha512-nCeD8DyVpUKQO2LB5MDJAzCrLOkuMMg2AqXxLC78e7KeFWjVm1sLFXRrOwy/4sjKCKEYH2q0yCPxvKjz0z9vTA==,
+        integrity: sha512-LTzn6fKV/DgUAdUPSYb2G587VqRybqYxJCpCwc96oMcfuqurCIbmbASj6ELgmH4sneSFwH/BrIb1C5bpGQ0hbw==,
         registry: http://npm.wakedata-inc.com/,
-        tarball: http://172.26.59.72:4873/@wakeapp%2fwakedata-backend/-/wakedata-backend-0.1.0-daily20221010168.tgz,
+        tarball: http://172.26.59.72:4873/@wakeapp%2fwakedata-backend/-/wakedata-backend-0.4.0.tgz,
       }
     name: '@wakeapp/wakedata-backend'
-    version: 0.1.0-daily20221010168
+    version: 0.4.0
     dependencies:
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.1.0-daily20221010168
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.4.0
     transitivePeerDependencies:
       - lodash
     dev: true
@@ -14470,6 +14480,7 @@ packages:
     name: events
     version: 3.3.0
     engines: { node: '>=0.8.x' }
+    dev: true
 
   172.26.59.72+4873/execa/0.8.0:
     resolution:

@@ -8,7 +8,7 @@ export class InjectScriptPlugin {
 
   apply(compiler: Compiler) {
     compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation: Compilation) => {
-      HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tap(PLUGIN_NAME, groups => {
+      HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tap(PLUGIN_NAME, (groups: any) => {
         groups.headTags.unshift(
           ...this.scripts.map(i => ({
             voidTag: false,
