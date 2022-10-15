@@ -8,7 +8,7 @@ import {
   watch,
   BaseModel,
 } from '@wakeadmin/framework';
-import type { IBay, MicroApp } from '@wakeadmin/mapp/main';
+import type { IBay, MicroApp } from '@wakeadmin/mapp';
 import type { I18nInstance } from '@wakeadmin/i18n';
 
 import { BayRepo } from './BayRepo';

@@ -1,7 +1,7 @@
 /**
  * 基座错误页面
  */
-import { ErrorPageProps } from '@wakeadmin/mapp/main';
+import { ErrorPageProps } from '@wakeadmin/mapp';
 import { ElButton, ElSpace } from 'element-plus';
 import { useT } from '@/utils';
 

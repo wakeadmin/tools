@@ -138,6 +138,7 @@ importers:
       '@wakeadmin/i18n': workspace:^0.1.5
       '@wakeadmin/icons': workspace:^0.1.3
       '@wakeadmin/mapp': workspace:^0.3.2
+      '@wakeadmin/mapp-child': workspace:^0.1.0
       '@wakeadmin/theme': workspace:^0.1.6
       '@wakeadmin/utils': workspace:^0.1.3
       '@wakeadmin/vue-cli-plugin-ce': workspace:^0.1.1
@@ -155,19 +156,20 @@ importers:
       vue-i18n: 9.1.10
       vue-router: ^4.1.5
     dependencies:
-      '@wakeadmin/assets': link:../assets
-      '@wakeadmin/mapp': link:../mapp
+      '@wakeadmin/mapp-child': link:../mapp-child
     devDependencies:
       '@vue/cli-plugin-babel': 172.26.59.72+4873/@vue/cli-plugin-babel/5.0.8_vue@3.2.41
       '@vue/cli-plugin-router': 172.26.59.72+4873/@vue/cli-plugin-router/5.0.8
       '@vue/cli-plugin-typescript': 172.26.59.72+4873/@vue/cli-plugin-typescript/5.0.8
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.8_sass-loader@12.6.0
       '@vueuse/core': 172.26.59.72+4873/@vueuse/core/8.9.4_vue@3.2.41
+      '@wakeadmin/assets': link:../assets
       '@wakeadmin/ce': link:../ce
       '@wakeadmin/framework': link:../framework
       '@wakeadmin/h': link:../h
       '@wakeadmin/i18n': link:../i18n
       '@wakeadmin/icons': link:../icons
+      '@wakeadmin/mapp': link:../mapp
       '@wakeadmin/theme': link:../theme
       '@wakeadmin/utils': link:../utils
       '@wakeadmin/vue-cli-plugin-ce': link:../vue-cli-plugin-ce
@@ -288,14 +290,30 @@ importers:
   packages/mapp:
     specifiers:
       '@wakeadmin/h': workspace:^0.2.9
+      '@wakeadmin/mapp-shared': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.3
       path-browserify: ^1.0.1
       qiankun: ^2.8.3
     dependencies:
       '@wakeadmin/h': link:../h
+      '@wakeadmin/mapp-shared': link:../mapp-shared
       '@wakeadmin/utils': link:../utils
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
       qiankun: 172.26.59.72+4873/qiankun/2.8.3
+
+  packages/mapp-child:
+    specifiers:
+      '@wakeadmin/mapp': workspace:^0.3.2
+      '@wakeadmin/mapp-shared': workspace:^0.1.0
+      '@wakeadmin/utils': workspace:^0.1.3
+    dependencies:
+      '@wakeadmin/mapp-shared': link:../mapp-shared
+      '@wakeadmin/utils': link:../utils
+    devDependencies:
+      '@wakeadmin/mapp': link:../mapp
+
+  packages/mapp-shared:
+    specifiers: {}
 
   packages/playground-vue2:
     specifiers:
@@ -467,16 +485,16 @@ importers:
     specifiers:
       '@types/cli-table': ^0.3.1
       '@vue/cli-service': ~5.0.8
-      '@wakeadmin/mapp': workspace:^0.3.2
+      '@wakeadmin/mapp-shared': workspace:^0.1.0
       '@wakeadmin/utils': workspace:^0.1.3
       cli-table: ^0.3.11
     dependencies:
+      '@wakeadmin/mapp-shared': link:../mapp-shared
       '@wakeadmin/utils': link:../utils
       cli-table: 172.26.59.72+4873/cli-table/0.3.11
     devDependencies:
       '@types/cli-table': 172.26.59.72+4873/@types/cli-table/0.3.1
       '@vue/cli-service': 172.26.59.72+4873/@vue/cli-service/5.0.8
-      '@wakeadmin/mapp': link:../mapp
 
   packages/vue-cli-plugin-vendor:
     specifiers:
@@ -5337,7 +5355,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 172.26.59.72+4873/@types/istanbul-lib-coverage/2.0.4
       '@types/istanbul-reports': 172.26.59.72+4873/@types/istanbul-reports/3.0.1
-      '@types/node': 172.26.59.72+4873/@types/node/17.0.45
+      '@types/node': 172.26.59.72+4873/@types/node/18.11.0
       '@types/yargs': 172.26.59.72+4873/@types/yargs/15.0.14
       chalk: 172.26.59.72+4873/chalk/4.1.2
     dev: true

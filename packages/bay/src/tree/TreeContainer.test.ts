@@ -13,7 +13,7 @@ jest.mock('./microAppContext', () => ({
 }));
 
 describe('TreeContainer', () => {
-  let warn: jest.MockInstance<any, any> = jest.spyOn(global.console, 'warn').mockImplementation(() => null);
+  let warn: jest.MockInstance<any, any> = jest.spyOn(globalThis.console, 'warn').mockImplementation(() => null);
 
   const container = new TreeContainer(menus);
   const getWarnings = () => warn.mock.calls.map(c => c[0]);

@@ -1,6 +1,23 @@
-import { IBay } from '../types';
+import type { IBay } from '@wakeadmin/mapp';
+import type { MicroApp } from '@wakeadmin/mapp-shared';
 
-export * from '../types';
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    __POWERED_BY_QIANKUN__?: boolean;
+
+    /**
+     * Bay 实例
+     */
+    __MAPP_BAY__?: IBay;
+
+    /**
+     * 当前应用
+     * 子应用可见
+     */
+    __MAPP_CURRENT_APP__?: MicroApp;
+  }
+}
 
 /**
  * 获取基座实例

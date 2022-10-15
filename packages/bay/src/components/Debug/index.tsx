@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, unref, ref, reactive } from 'vue';
 import { useInject } from '@wakeadmin/framework';
-import { MicroApp } from '@wakeadmin/mapp/main';
+import { MicroApp } from '@wakeadmin/mapp';
 import {
   ElButton,
   ElCheckbox,

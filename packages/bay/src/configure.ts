@@ -1,6 +1,6 @@
 import Framework, { configureDI, getInject } from '@wakeadmin/framework';
 import { initial } from '@wakeapp/wakedata-backend';
-import { createBay, IBay } from '@wakeadmin/mapp/main';
+import { createBay, IBay } from '@wakeadmin/mapp';
 import { createI18n, I18nInstance } from '@wakeadmin/i18n';
 
 import App from './App';

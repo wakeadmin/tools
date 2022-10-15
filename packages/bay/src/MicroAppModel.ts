@@ -1,4 +1,4 @@
-import { MicroApp, getBay } from '@wakeadmin/mapp/main';
+import { MicroApp, getBay } from '@wakeadmin/mapp';
 import { injectable, makeObservable, observable, singleton } from '@wakeadmin/framework';
 import { debounce } from '@wakeadmin/utils';
 

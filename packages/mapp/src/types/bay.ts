@@ -1,91 +1,16 @@
 import type { DefineComponent, App, Component, FunctionalComponent } from 'vue';
 import type { RouteRecordRaw, RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
+import type { MicroApp, ErrorPageProps, LandingPageProps, IBayBase } from '@wakeadmin/mapp-shared';
 
-import { UniverseLocation, RouteLocationOptions, RouteLocationAsPathAndHash } from './route';
+import { UniverseLocation } from './route';
 import { INetworkInterceptorRegister } from './network-interceptor';
 
-/**
- * 微应用描述
- */
-export interface MicroApp {
-  /**
-   * 应用名称, 必须唯一
-   * 如果集成的是 @wakeadmin/vue-cli-plugin-mapp-child
-   * 在控制台可以看到生成的应用名称
-   */
-  name: string;
-
-  /**
-   * 用于多业态应用，绑定到同一个身份上
-   */
-  alias?: string;
-
-  /**
-   * HTML 入口
-   * 例如 /__apps__/vue3, 指向微应用的静态资源的目录即可。本地开发时可以指向本地路径，例如  //localhost:17355
-   */
-  entry: string;
-
-  /**
-   * 激活的路由, 路由前缀，以 / 开始，例如 /wkb。注意不需要包含基座 base，会自动添加。
-   */
-  activeRule: string | string[];
-
-  /**
-   * 挂载的 DOM 节点, 默认为 #root
-   */
-  container?: string | HTMLElement;
-
-  /**
-   * 传递给子应用的参数
-   */
-  props?: Record<string, any>;
-
-  /**
-   * 微应用版本号
-   */
-  version?: string;
-
-  /**
-   * 应用描述
-   */
-  description?: string;
-
-  /**
-   * 可选，默认为 false。一般情况下微应用都是挂载在由基座的提供的页面框架内，某些特殊场景，微应用要完全接管一个页面，比如登录。这时候就开启
-   */
-  independent?: boolean;
-
-  /**
-   * 路由模式，默认为 hash
-   */
-  routeMode?: 'hash' | 'history';
-}
+export { MicroApp, ErrorPageProps, LandingPageProps };
 
 export type PageComponent<T = any> =
   | DefineComponent<T, any, any, any, any, any, any, any, any>
   | FunctionalComponent<T>;
-
-export type ErrorPageProps =
-  | {
-      // HTTP 错误
-      type: 'http';
-      /**
-       * HTTP 错误代码
-       */
-      code?: string;
-    }
-  | {
-      // 自定义错误
-      type: 'custom';
-      title?: string;
-      detail?: string;
-    };
-
-export interface LandingPageProps {
-  data: any;
-}
 
 /**
  * 微应用状态
@@ -241,7 +166,7 @@ export interface BayOptions {
 /**
  * 基座实例
  */
-export interface IBay {
+export interface IBay extends IBayBase {
   /**
    * 配置
    */
@@ -330,64 +255,6 @@ export interface IBay {
    * 注册网络拦截器
    */
   registerNetworkInterceptor(...interceptors: INetworkInterceptorRegister[]): void;
-
-  // ---------------- 路由导航相关方法 ---------------------
-
-  /**
-   * 打开错误页面
-   */
-  openError(data: ErrorPageProps & RouteLocationOptions): void;
-
-  /**
-   * 打开子应用
-   * @param name 子应用名称
-   * @param route 子应用路由
-   */
-  openApp(options: Omit<RouteLocationAsPathAndHash, 'path'> & RouteLocationOptions & { name: string }): void;
-
-  /**
-   * 直接打开路径
-   * @param url
-   */
-  openUrl(url: string | (RouteLocationAsPathAndHash & RouteLocationOptions)): void;
-
-  /**
-   * 打开主页面。将打开非 independent 的第一个子应用
-   * @param options
-   */
-  openMain(options?: RouteLocationOptions): void;
-
-  // ---------------------------- 应用相关方法 ------------------------------------
-
-  /**
-   * 获取应用
-   * @param name
-   */
-  getApp(name: string): MicroApp | null;
-
-  /**
-   * 根据路由获取应用，即匹配 activeRule
-   * activeRule 和给定的 route 的 pathname 部分必须精确匹配
-   */
-  getAppByRoute(route: string): MicroApp | null;
-
-  /**
-   * 根据别名获取应用
-   * @param alias
-   */
-  getAppByAlias(alias: string): MicroApp[];
-
-  /**
-   * 生成 landing 地址
-   * @param data
-   * @param addHost 是否追加域名信息
-   */
-  generateLandingUrl(data: Record<string, any>, addHost?: boolean): string;
-
-  /**
-   * 预加载微应用
-   */
-  prefetch(apps: MicroApp[]): void;
 
   /**
    * TODO: 其他方法

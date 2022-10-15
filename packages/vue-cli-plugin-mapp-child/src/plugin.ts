@@ -14,7 +14,7 @@ import {
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { ServicePlugin } from '@vue/cli-service';
 import Table from 'cli-table';
-import type { MicroApp } from '@wakeadmin/mapp/main';
+import type { MicroApp } from '@wakeadmin/mapp-shared';
 
 import {
   SharedDeclaration,
