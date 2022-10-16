@@ -10,7 +10,7 @@
     "index.js",
     "index.mjs",
     "index.d.ts",
-    "expose"
+    "types"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -18,27 +18,27 @@
     "build:assets": "vue-cli-service build",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js",
-    "prebuild": "rimraf expose",
-    "build": "tsc -b ./tsconfig.expose.json",
     "type-check": "tsc --noEmit",
     "test": "jest"
   },
   "dependencies": {
-    "@wakeadmin/mapp-child": "workspace:^0.1.0"
+    "@wakeadmin/assets": "workspace:^0.1.2",
+    "@wakeadmin/i18n-shared": "workspace:^0.1.7",
+    "@wakeadmin/mapp-child": "workspace:^0.1.0",
+    "@wakeadmin/mapp-shared": "workspace:^0.1.0"
   },
   "devDependencies": {
-    "@wakeadmin/assets": "workspace:^0.1.2",
     "@vue/cli-plugin-babel": "~5.0.8",
     "@vue/cli-plugin-router": "~5.0.8",
     "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
-    "@wakeadmin/mapp": "workspace:^0.3.2",
     "@vueuse/core": "^8.9.4",
     "@wakeadmin/ce": "workspace:^0.1.4",
     "@wakeadmin/framework": "workspace:^0.1.4",
     "@wakeadmin/h": "workspace:^0.2.9",
     "@wakeadmin/i18n": "workspace:^0.1.5",
     "@wakeadmin/icons": "workspace:^0.1.3",
+    "@wakeadmin/mapp": "workspace:^0.3.2",
     "@wakeadmin/theme": "workspace:^0.1.6",
     "@wakeadmin/utils": "workspace:^0.1.3",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.1",
