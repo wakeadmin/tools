@@ -1,4 +1,4 @@
-import { MicroApp, IBayBase } from '@wakeadmin/mapp-shared';
+import { MicroApp, IBayBase, CreateMicroAppOptions } from '@wakeadmin/mapp-shared';
 import { EventEmitter } from '@wakeadmin/utils';
 
 export const isMicroApp: boolean;

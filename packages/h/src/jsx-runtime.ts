@@ -1,4 +1,5 @@
 import { h, Fragment } from './h';
+import { VNode } from '@wakeadmin/demi';
 
 /**
  * 支持 自动 JSX, used by Babel's {runtime:"automatic"} JSX transform
@@ -14,7 +15,7 @@ export function jsx(
   key?: string | number | symbol,
   __self?: string,
   __source?: string
-) {
+): VNode {
   const { children, ...finalProps } = props;
 
   if (key != null) {

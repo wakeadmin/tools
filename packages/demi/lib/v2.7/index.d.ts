@@ -29,7 +29,7 @@ declare const V: typeof Vue;
 export declare type Plugin = PluginObject<any> | PluginFunction<any>;
 export type { VNode } from 'vue';
 export * from 'vue';
-export { V as Vue, Vue2, isVue2, isVue3, version, install };
+export { V as Vue, Vue2, isVue2, isVue3, version, install, DirectiveModifiers };
 
 // #region createApp polyfill
 export interface App<T = any> {

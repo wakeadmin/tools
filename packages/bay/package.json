@@ -13,13 +13,13 @@
     "types"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-demi-switch 3 && vue-cli-service serve",
     "prebuild:assets": "rimraf dist",
-    "build:assets": "vue-cli-service build",
+    "build:assets": "vue-demi-switch 3 && vue-cli-service build",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js",
-    "type-check": "tsc --noEmit",
-    "test": "jest"
+    "type-check": "vue-demi-switch 3 && tsc --noEmit",
+    "test": "vue-demi-switch 3 && jest"
   },
   "dependencies": {
     "@wakeadmin/assets": "workspace:^0.1.2",
