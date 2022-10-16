@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/i18n-shared",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "惟客云规范的，i18n 封装, 共享部分",
   "module": "dist/index.js",
   "main": "dist/common/index.js",
@@ -21,6 +21,6 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/utils": "workspace:^0.1.3"
+    "@wakeadmin/utils": "workspace:^0.1.4"
   }
 }

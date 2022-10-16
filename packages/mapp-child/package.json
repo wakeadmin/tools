@@ -22,9 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "@wakeadmin/mapp-shared": "workspace:^0.1.0",
-    "@wakeadmin/utils": "workspace:^0.1.3"
+    "@wakeadmin/utils": "workspace:^0.1.4"
   },
   "devDependencies": {
-    "@wakeadmin/mapp": "workspace:^0.3.2"
+    "@wakeadmin/mapp": "workspace:^0.4.0"
   }
 }

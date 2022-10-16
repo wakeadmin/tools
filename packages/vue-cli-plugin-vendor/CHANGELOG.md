@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-vendor
 
+## 0.3.3
+
+### Patch Changes
+
+- 更新依赖
+
 ## 0.3.2
 
 ### Patch Changes

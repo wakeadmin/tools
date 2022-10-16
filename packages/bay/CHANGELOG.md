@@ -1,5 +1,15 @@
 # @wakeadmin/bay
 
+## 0.7.0
+
+### Minor Changes
+
+- expose 构建和导出方式调整, 不再耦合 vue 和基座类型
+
+### Patch Changes
+
+- @wakeadmin/mapp-child@0.1.0
+
 ## 0.6.2
 
 ### Patch Changes

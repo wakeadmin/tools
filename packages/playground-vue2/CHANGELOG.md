@@ -1,5 +1,12 @@
 # playground-vue2
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/bay@0.7.0
+
 ## 0.1.6
 
 ### Patch Changes

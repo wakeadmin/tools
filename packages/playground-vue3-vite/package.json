@@ -1,14 +1,14 @@
 {
   "name": "playground-vue3-vite",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "serve": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.6.2",
+    "@wakeadmin/bay": "workspace:^0.7.0",
     "vue": "^3.2.41"
   },
   "devDependencies": {
