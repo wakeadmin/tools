@@ -1,44 +1,116 @@
-// .ui-dialog-tips-success, .ui-dialog-tips-error, .ui-dialog-tips-default {
-.el-dialog__body {
-  text-align: center;
-  padding: 24px;
-  padding-bottom: 40px;
-  .icon {
-    width: 42px;
-    height: 42px;
-    font-size: 42px;
+.el-message-box,
+.el-dialog {
+  padding: 20px;
+  box-shadow: 0 2px 8px 0 rgba(200, 201, 204, 0.5);
+  border-radius: 4px;
+  &__header {
+    padding: 0;
+    padding-bottom: 10px;
   }
 
-  .title {
-    height: 26px;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--wk-color-black);
-    line-height: 26px;
-    padding-top: 3px;
-    padding-bottom: 5px;
+  &__footer {
+    padding-bottom: 0;
   }
-  .content {
-    font-weight: 400;
-    color: var(--wk-color-font-regular);
-    line-height: 22px;
+
+  &__title {
+    line-height: 26px;
+  }
+  &__headerbtn {
+    .el-icon-close {
+      color: #717378;
+    }
+  }
+
+  &__content,
+  &__body {
+    padding: 32px 0 12px;
+  }
+
+  &__btns {
+    padding: 0;
+    padding-top: 30px;
+  }
+  &__btns:lang(zh) {
+    letter-spacing: 1ch;
+  }
+}
+
+.el-message-box {
+  &__status {
+    font-size: 16px !important;
+    top: unset;
+    transform: none;
+  }
+  &__headerbtn {
+    top: 5px;
+  }
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.el-message-box,
+.el-dialog {
+  padding: 20px;
+  &__header {
+    padding: 0;
+    padding-bottom: 10px;
+  }
+  &__title {
+    line-height: 26px;
+  }
+  &__headerbtn {
+    .el-icon-close {
+      color: #717378;
+    }
+  }
+
+  &__content {
+    padding: 32px 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__btns {
+    padding: 0;
+    padding-top: 30px;
+  }
+  &__btns:lang(zh) {
+    letter-spacing: 1ch;
+  }
+}
+
+.el-message-box {
+  &__status {
+    font-size: 16px !important;
+    top: unset;
+    transform: none;
+  }
+  &__headerbtn {
+    top: 5px;
   }
 }
 
 .dialog-footer,
-.el-dialog__footer {
+.el-dialog__footer,
+.el-message-box__btns {
   .el-button + .el-button {
-    margin-left: 34px;
+    margin-left: 20px;
   }
 }
 
-.el-dialog__footer {
-  text-align: center;
-  padding-top: 0px;
-}
-.el-dialog__header {
-  padding-left: 24px;
-  .el-icon-close:before {
-    margin-right: 4px;
+.el-drawer {
+  &__header {
+    color: var(--wk-color-font-primary);
+    font-size: 16px;
+    line-height: 22px;
+    text-align: left;
+    font-weight: 600;
+    padding: 16px 0 10px;
+    margin: 0 16px;
+    border-bottom: 1px solid var(--wk-color-border-extra-light);
   }
 }

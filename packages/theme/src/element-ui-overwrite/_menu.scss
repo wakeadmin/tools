@@ -1,0 +1,13 @@
+.el-menu {
+  .el-submenu.is-active .el-submenu__title {
+    color: var(--wk-color-primary);
+  }
+}
+.el-dropdown {
+  &-menu__item {
+    &:focus,
+    &:not(.is-disabled):hover {
+      background-color: transparent;
+    }
+  }
+}

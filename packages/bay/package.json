@@ -39,7 +39,7 @@
     "@wakeadmin/i18n": "workspace:^0.1.6",
     "@wakeadmin/icons": "workspace:^0.1.4",
     "@wakeadmin/mapp": "workspace:^0.4.0",
-    "@wakeadmin/theme": "workspace:^0.1.6",
+    "@wakeadmin/theme": "workspace:^0.2.0",
     "@wakeadmin/utils": "workspace:^0.1.4",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.1",
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.1",

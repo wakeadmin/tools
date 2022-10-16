@@ -1,0 +1,12 @@
+.el-form {
+  &--inline &-item {
+    margin-right: var(--wk-spacing-base);
+  }
+  &-item__tip {
+    font-size: 12px;
+    display: block;
+    color: var(--wk-color-font-secondary);
+    line-height: 20px;
+    margin-top: 4px;
+  }
+}

@@ -1,0 +1,15 @@
+.el-button {
+  padding: 8px 12px;
+  &.is-round {
+    padding: 8px 15px;
+  }
+  &.is-circle {
+    padding: 8px;
+  }
+  &.el-button--default:not(&--primary, &--success, &--info, &--warning, &--danger) {
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+}

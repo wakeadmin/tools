@@ -1,4 +1,6 @@
 .el-table {
+  margin-top: 0;
+
   th,
   td {
     padding: 14px 0;
@@ -10,17 +12,26 @@
       padding-left: 24px;
     }
   }
+
+  th.el-table__cell > .cell,
   .cell {
     padding-left: 24px;
     padding-right: 24px;
   }
+
   td {
     padding: 19px 0;
     border-bottom: 1px solid #ebeef5;
   }
-  thead {
-    th {
-      background: #fff;
-    }
+  thead th,
+  th.el-table__cell {
+    background-color: var(--wk-color-bg);
+  }
+}
+
+.el-pager {
+  li.active,
+  li:hover {
+    color: var(--wk-color-info);
   }
 }

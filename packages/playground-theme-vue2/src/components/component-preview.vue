@@ -47,7 +47,7 @@
     <el-row class="demo-line">
       <el-radio-group v-model="radio1">
         <el-radio-button label="New York"></el-radio-button>
-        <el-radio-button label="Washington"></el-radio-button>
+        <el-radio-button label="Washington" disabled></el-radio-button>
         <el-radio-button label="Los Angeles"></el-radio-button>
         <el-radio-button label="Chicago"></el-radio-button>
       </el-radio-group>
@@ -58,13 +58,15 @@
     </el-row>
     <h4>Checkbox</h4>
     <el-row class="demo-line">
-      <el-checkbox v-model="checked">Option</el-checkbox>
+      <el-checkbox v-model="checked_1">Option1</el-checkbox>
+      <el-checkbox v-model="checked_2">Option2</el-checkbox>
     </el-row>
     <el-row class="demo-line">
       <el-checkbox-group v-model="checked1">
         <el-checkbox-button
           v-for="city in ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen']"
           :key="city"
+          disabled
           :label="city"
           >{{ city }}</el-checkbox-button
         >
@@ -86,10 +88,32 @@
       <el-select v-model="selectValue" placeholder="Select">
         <el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
+      <el-select v-model="selectValue1" placeholder="多选" multiple>
+        <el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+      <el-select v-model="selectValue2" placeholder="自定义模板">
+        <el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value">
+          <span style="float: left">{{ item.label }}</span>
+          <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+        </el-option>
+      </el-select>
     </el-row>
     <h4>Cascader</h4>
     <el-row>
       <el-cascader v-model="cascaderValue" :options="cascadeOptions"></el-cascader>
+      <el-cascader
+        v-model="cascaderValue1"
+        :options="cascadeOptions"
+        :props="{ multiple: true }"
+        placeholder="多选"
+      ></el-cascader>
+      <el-cascader
+        v-model="cascaderValue2"
+        :options="cascadeOptions"
+        :props="{ checkStrictly: true }"
+        multiple
+        placeholder="任意一级"
+      ></el-cascader>
     </el-row>
     <h4>Switch</h4>
     <el-row>
@@ -104,6 +128,7 @@
     <h4>DatePicker</h4>
     <el-row>
       <el-date-picker v-model="datePicker" type="date"></el-date-picker>
+      <el-date-picker v-model="datePicker1" type="daterange"></el-date-picker>
     </el-row>
     <h4>Rate</h4>
     <el-row>
@@ -262,6 +287,17 @@
         </div>
       </div>
     </el-row>
+    <h4>Drawer</h4>
+    <el-row>
+      <el-button @click="drawerVisible = true">开启</el-button>
+      <el-drawer :visible="drawerVisible" title="Drawer" size="50%" @close="drawerVisible = false">
+        <el-table :data="tableData">
+          <el-table-column prop="date" label="Date" width="180"></el-table-column>
+          <el-table-column prop="name" label="Name" width="180"></el-table-column>
+          <el-table-column prop="address" label="Address"></el-table-column>
+        </el-table>
+      </el-drawer>
+    </el-row>
     <h4>Menu</h4>
     <el-row>
       <el-menu :default-active="menu" class="el-menu-demo" mode="horizontal">
@@ -330,6 +366,19 @@
         <el-tab-pane label="Task">Task</el-tab-pane>
       </el-tabs>
     </el-row>
+    <h4>dropdown</h4>
+    <el-row>
+      <el-dropdown>
+        <el-button type="primary"> 更多菜单<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>黄金糕</el-dropdown-item>
+          <el-dropdown-item>狮子头</el-dropdown-item>
+          <el-dropdown-item>螺蛳粉</el-dropdown-item>
+          <el-dropdown-item>双皮奶</el-dropdown-item>
+          <el-dropdown-item>蚵仔煎</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </el-row>
     <h4>Dialog</h4>
     <el-row>
       <div role="dialog" aria-modal="true" aria-label="Tips" class="el-dialog" style="margin: 0">
@@ -384,6 +433,34 @@
         this is content, this is content, this is content
         <div x-arrow="" class="popper__arrow"></div>
       </div>
+      <el-tooltip effect="dark" :value="true" manual style="margin-right: 300px; margin-top: 130px" placement="top">
+        <div slot="content">
+          <p>啊，怎么说呢，</p>
+          <p>这曾是我的梦想啊</p>
+          <p>像这样和喜欢的人在一起……一面迎来早晨一面喝着咖啡，曾是我的梦想啊。</p>
+          <p>你看不是有着那种曲子么。那首曲子，我从以前就很喜欢了呢</p>
+        </div>
+        <el-button>tooltip</el-button>
+      </el-tooltip>
+      <el-tooltip effect="light" :value="true" manual style="margin-right: 200px; margin-top: 130px" placement="top">
+        <div slot="content">
+          <p>交替轮回的春夏秋冬</p>
+          <p>即将结束的1095日</p>
+          <p>那或许会如梦似幻一般流逝而过吧</p>
+          <p>或许会如Ghost一般消逝而去吧</p>
+          <p>然而,又像樱花那样</p>
+          <p>留给人一种面向未来,再度绽放的预感</p>
+        </div>
+        <el-button>tooltip</el-button>
+      </el-tooltip>
+      <el-popover v-model="popoverVisible" placement="top" width="160">
+        <p>这是一段内容这是一段内容确定删除吗？</p>
+        <div style="text-align: right; margin: 0">
+          <el-button size="mini" type="text" @click="popoverVisible = false">取消</el-button>
+          <el-button type="primary" size="mini" @click="popoverVisible = false">确定</el-button>
+        </div>
+        <el-button slot="reference">删除</el-button>
+      </el-popover>
     </el-row>
     <h4>Card</h4>
     <el-row>
@@ -433,11 +510,14 @@
   export default {
     data() {
       return {
+        drawerVisible: false,
+        popoverVisible: false,
         radio: '1',
         radio1: 'Washington',
         radio2: '1',
-        checked: true,
-        checked1: ['Shanghai'],
+        checked_1: true,
+        checked_2: false,
+        checked1: ['Shanghai', 'Guangzhou'],
         checked2: true,
         input: 'Element',
         inputNumber: 1,
@@ -464,6 +544,8 @@
           },
         ],
         selectValue: '',
+        selectValue1: [],
+        selectValue2: '',
         cascadeOptions: [
           {
             value: 'guide',
@@ -505,9 +587,12 @@
           },
         ],
         cascaderValue: [],
+        cascaderValue1: [],
+        cascaderValue2: [],
         switchValue: true,
         slider: 28,
         datePicker: '',
+        datePicker1: [],
         rate: null,
         transferData: (() => {
           const data = [];
