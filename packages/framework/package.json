@@ -29,7 +29,7 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.2.1",
+    "@wakeadmin/demi": "workspace:^0.2.2",
     "@wakeadmin/h": "workspace:^0.2.10",
     "@wakeadmin/utils": "workspace:^0.1.4",
     "@wakeapp/framework-core": "^0.4.0"

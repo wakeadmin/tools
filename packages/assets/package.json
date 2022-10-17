@@ -21,7 +21,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.2.1",
+    "@wakeadmin/demi": "workspace:^0.2.2",
     "@wakeadmin/utils": "workspace:^0.1.4"
   }
 }

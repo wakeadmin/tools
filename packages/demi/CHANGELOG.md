@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.2.2
+
+### Patch Changes
+
+- 修复受 @types/node 影响后, HTML 元素事件处理器类型错误
+
 ## 0.2.1
 
 ### Patch Changes

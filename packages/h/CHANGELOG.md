@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.11
+
+### Patch Changes
+
+- 更新依赖
+
 ## 0.2.10
 
 ### Patch Changes

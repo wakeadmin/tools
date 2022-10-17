@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.2.1",
+    "@wakeadmin/demi": "workspace:^0.2.2",
     "@wakeadmin/h": "workspace:^0.2.10"
   },
   "jest": {
