@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.2.3
+
+### Patch Changes
+
+- 修复命令, 避免和 vue-demi 冲突
+
 ## 0.2.2
 
 ### Patch Changes
