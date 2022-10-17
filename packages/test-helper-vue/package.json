@@ -12,8 +12,8 @@
     "build:es": "tsc -b tsconfig.build.json",
     "build": "npm run build:es && npm run build:common",
     "type-check": "tsc",
-    "test:vue2": "vue-demi-switch 2.7 vue2 && jest --verbose",
-    "test:vue3": "vue-demi-switch 3 && jest --verbose",
+    "test:vue2": "wk-demi-switch 2.7 vue2 && jest --verbose",
+    "test:vue3": "wk-demi-switch 3 && jest --verbose",
     "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
   "keywords": [],

@@ -9,8 +9,8 @@
   "module": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "bin": {
-    "vue-demi-fix": "bin/vue-demi-fix.js",
-    "vue-demi-switch": "bin/vue-demi-switch.js"
+    "wk-demi-fix": "bin/vue-demi-fix.js",
+    "wk-demi-switch": "bin/vue-demi-switch.js"
   },
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js"

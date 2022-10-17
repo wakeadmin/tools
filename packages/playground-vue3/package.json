@@ -4,8 +4,8 @@
   "description": "vue3 子应用游乐场",
   "private": true,
   "scripts": {
-    "serve": "vue-demi-switch 3 && vue-cli-service serve",
-    "build:assets": "vue-demi-switch 3 && vue-cli-service --no-module build",
+    "serve": "wk-demi-switch 3 && vue-cli-service serve",
+    "build:assets": "wk-demi-switch 3 && vue-cli-service --no-module build",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js"
   },
