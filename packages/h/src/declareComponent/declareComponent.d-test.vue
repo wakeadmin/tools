@@ -1,5 +1,5 @@
 <template>
-  <!-- 报错 -->
+  <!-- 报错, 需要传 a -->
   <Foo />
 
   <!-- 报错 -->
@@ -13,7 +13,7 @@
     <template #foo="scope">{{ exactType(scope, scopeType) }} </template>
   </Foo>
 
-  <Foo :a="1" ref="fooRef" />
+  <Foo ref="fooRef" :a="1" />
 </template>
 
 <script lang="ts" setup>
@@ -46,5 +46,5 @@
   });
 
   const count = ref(0);
-  const fooRef = ref<ExtraRef<typeof Foo>>(null);
+  const fooRef = ref<ExtraRef<typeof Foo>>();
 </script>

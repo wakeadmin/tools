@@ -1,5 +1,5 @@
 import { getInject } from '@wakeadmin/framework';
-import { MicroApp } from '@wakeadmin/mapp/main';
+import { MicroApp } from '@wakeadmin/mapp';
 
 let app: MicroApp | null;
 

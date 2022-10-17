@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/bay",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "惟客云基座",
   "main": "index.js",
   "module": "index.mjs",
@@ -10,22 +10,22 @@
     "index.js",
     "index.mjs",
     "index.d.ts",
-    "expose"
+    "types"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-demi-switch 3 && vue-cli-service serve",
     "prebuild:assets": "rimraf dist",
-    "build:assets": "vue-cli-service build",
+    "build:assets": "vue-demi-switch 3 && vue-cli-service build",
     "build:docker": "node ./scripts/build-docker.js",
     "publish:docker": "node ./scripts/publish-docker.js",
-    "prebuild": "rimraf expose .tsBuildInfo",
-    "build": "tsc -b ./tsconfig.expose.json",
-    "type-check": "tsc --noEmit",
-    "test": "jest"
+    "type-check": "vue-demi-switch 3 && tsc --noEmit",
+    "test": "vue-demi-switch 3 && jest"
   },
   "dependencies": {
-    "@wakeadmin/assets": "workspace:^0.1.1",
-    "@wakeadmin/mapp": "workspace:^0.3.1"
+    "@wakeadmin/assets": "workspace:^0.1.3",
+    "@wakeadmin/i18n-shared": "workspace:^0.1.8",
+    "@wakeadmin/mapp-child": "workspace:^0.1.0",
+    "@wakeadmin/mapp-shared": "workspace:^0.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.8",
@@ -33,26 +33,27 @@
     "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "@vueuse/core": "^8.9.4",
-    "@wakeadmin/ce": "workspace:^0.1.3",
-    "@wakeadmin/framework": "workspace:^0.1.3",
-    "@wakeadmin/h": "workspace:^0.2.1",
-    "@wakeadmin/i18n": "workspace:^0.1.4",
-    "@wakeadmin/icons": "workspace:^0.1.2",
-    "@wakeadmin/theme": "workspace:^0.1.3",
-    "@wakeadmin/utils": "workspace:^0.1.1",
-    "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.0",
-    "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.0",
-    "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.2.0",
-    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.1",
-    "@wakeapp/wakedata-backend": "latest",
-    "babel-preset-wakeadmin": "workspace:^0.1.0",
-    "core-js": "^3.24.1",
-    "element-plus": "^2.2.12",
+    "@wakeadmin/ce": "workspace:^0.1.5",
+    "@wakeadmin/framework": "workspace:^0.1.5",
+    "@wakeadmin/h": "workspace:^0.2.10",
+    "@wakeadmin/i18n": "workspace:^0.1.6",
+    "@wakeadmin/icons": "workspace:^0.1.4",
+    "@wakeadmin/mapp": "workspace:^0.4.0",
+    "@wakeadmin/theme": "workspace:^0.1.6",
+    "@wakeadmin/utils": "workspace:^0.1.4",
+    "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.1",
+    "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.1",
+    "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.2.2",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.3",
+    "@wakeapp/wakedata-backend": "^0.4.0",
+    "babel-preset-wakeadmin": "workspace:^0.1.1",
+    "core-js": "^3.25.5",
+    "element-plus": "^2.2.18",
     "normalize.css": "^8.0.1",
-    "sass": "^1.54.4",
+    "sass": "^1.55.0",
     "sass-loader": "^12.6.0",
-    "vue": "^3.2.37",
+    "vue": "^3.2.41",
     "vue-i18n": "9.1.10",
-    "vue-router": "^4.1.3"
+    "vue-router": "^4.1.5"
   }
 }

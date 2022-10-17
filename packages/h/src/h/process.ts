@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref, h as vueh } from '@wakeadmin/demi';
+import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref, h as vueh, VNode } from '@wakeadmin/demi';
 import { kebabCase, lowerFirst } from '@wakeadmin/utils';
 
 import { isBrowser, isObject, ownKeys, isPlainObject, isVue2Dot7 } from '../utils';
@@ -46,8 +47,9 @@ export interface IAttr {
   value: any;
 }
 
-export function isWrapped(vnode: any): boolean {
+export function isWrapped(vnode: any): vnode is VNode {
   if (!isVue2) {
+    // @ts-ignore vue 2 下不支持
     return isVNode(vnode);
   }
 
@@ -130,6 +132,7 @@ export function vue2MustUseProps(tag: any, type: string | undefined, key: string
     return false;
   }
 
+  // @ts-ignore 类型未公开
   if (Vue2?.config?.mustUseProp(tag, type, key)) {
     return true;
   }
@@ -148,6 +151,7 @@ export function vue2MustUseProps(tag: any, type: string | undefined, key: string
 }
 
 export function vue2IsReservedElement(tag: any): boolean {
+  // @ts-ignore 类型未公开
   return typeof tag === 'string' && Vue2?.config?.isReservedTag(tag);
 }
 

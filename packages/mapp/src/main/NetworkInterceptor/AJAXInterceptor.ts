@@ -35,29 +35,6 @@ export function parseHeaders(headersInString: string) {
   return headers;
 }
 
-/**
- * 监听 header 的读写，进行某些副作用
- * @param headers
- * @param setter
- */
-export function spyHeaders(headers: Headers, setter: (key: string, value: any) => void) {
-  const spy = (method: 'set' | 'delete' | 'append') => {
-    const origin = headers[method];
-
-    headers[method] = function (name: string) {
-      const result = origin.apply(headers, arguments as any);
-
-      setter(name, headers.get(name));
-
-      return result;
-    };
-  };
-
-  spy('append');
-  spy('set');
-  spy('delete');
-}
-
 export class AJAXInterceptor extends BaseInterceptor {
   attach() {
     const XHR = window.XMLHttpRequest;
@@ -80,10 +57,11 @@ export class AJAXInterceptor extends BaseInterceptor {
       if (that.isIntercepted) {
         // @ts-expect-error 记录参数
         const headers: Headers = (this.__intercept_headers ??= new Headers());
-        headers.set(name, value);
+        // setRequestHeader 等价于 append
+        headers.append(name, value);
+      } else {
+        originSetRequestHeader.apply(this, arguments as any);
       }
-
-      return originSetRequestHeader.apply(this, arguments as any);
     };
 
     XHR.prototype.send = function (body) {
@@ -103,8 +81,8 @@ export class AJAXInterceptor extends BaseInterceptor {
           _url.password = password!;
         }
 
-        // @ts-expect-error
-        const headers = new Headers(xhr.__intercept_headers); // 拷贝一份，避免循环
+        // @ts-expect-error __intercept_headers 为扩展对象
+        const headers: Headers = xhr.__intercept_headers ?? new Headers(); // 拷贝一份，避免循环
 
         const request: InterceptRequest = {
           url: _url.href,
@@ -120,11 +98,6 @@ export class AJAXInterceptor extends BaseInterceptor {
         if (process.env.NODE_ENV !== 'production') {
           Object.freeze(request);
         }
-
-        // 监听 headers 的变化
-        spyHeaders(headers, (key, value) => {
-          xhr.setRequestHeader(key, value ?? '');
-        });
 
         let completed = false;
 
@@ -208,6 +181,11 @@ export class AJAXInterceptor extends BaseInterceptor {
             xhr.addEventListener('timeout', () => {
               _reject(new Error('XMLHttpRequest timeout'));
             });
+
+            // 发起请求之前设置 headers
+            for (const [key, value] of headers.entries()) {
+              originSetRequestHeader.call(xhr, key, value);
+            }
 
             // 发起请求
             originSend.apply(xhr, args);

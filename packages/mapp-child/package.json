@@ -1,0 +1,30 @@
+{
+  "name": "@wakeadmin/mapp-child",
+  "version": "0.1.0",
+  "description": "微前端子应用调用库",
+  "main": "dist/common/index.js",
+  "module": "dist/index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "start": "tsc -b tsconfig.build.json --watch",
+    "prebuild": "rimraf dist",
+    "build:es": "tsc -b tsconfig.build.json",
+    "build:common": "tsc -b tsconfig.build.common.json",
+    "build": "npm run build:es && npm run build:common",
+    "type-check": "tsc"
+  },
+  "keywords": [],
+  "author": "ivan-lee",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@wakeadmin/mapp-shared": "workspace:^0.1.0",
+    "@wakeadmin/utils": "workspace:^0.1.4"
+  },
+  "devDependencies": {
+    "@wakeadmin/mapp": "workspace:^0.4.0"
+  }
+}

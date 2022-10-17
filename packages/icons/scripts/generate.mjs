@@ -82,22 +82,27 @@ await Promise.all(
     const svg = i.optimized.replace('<svg ', `<svg {...fallthroughProps} `);
 
     let content = `// 此文件自动生成，请勿编辑
-import { defineComponent, SVGAttributes, isVue2 } from '@wakeadmin/demi';
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+import { SVGAttributes, isVue2, getCurrentInstance } from '@wakeadmin/demi';
+import { declareComponent } from '@wakeadmin/h';
 
 // eslint-disable-next-line spaced-comment
-export const ${componentName} = /*#__PURE__*/ defineComponent<SVGAttributes>({
+export const ${componentName} = /*#__PURE__*/ declareComponent<SVGAttributes>({
   name: 'WKSvg${componentName}',
   inheritAttrs: true,
-  render() {
-    let fallthroughProps: any;
+  setup() {
+    const vm = getCurrentInstance()?.proxy;
+    return () => {
+      let fallthroughProps: any;
 
-    if (isVue2) {
-      fallthroughProps = {
-        // @ts-expect-error
-        on: this.$listeners,
-      };
-    }
-    return (${svg});
+      if (isVue2) {
+        fallthroughProps = {
+          // @ts-ignore
+          on: vm?.$listeners,
+        };
+      }
+      return (${svg});
+    };
   },
 });
 `;

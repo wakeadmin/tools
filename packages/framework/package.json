@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/framework",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "wakeadmin 依赖注入框架",
   "module": "./dist/index.js",
   "main": "./dist/commonjs/index.js",
@@ -10,15 +10,14 @@
   ],
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build:es": "tsc -b tsconfig.build.json",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build": "npm run build:es && npm run build:common",
     "type-check": "tsc",
     "test:vue2": "vue-demi-switch 2.7 vue2 && jest --verbose",
-    "test:vue26": "vue-demi-switch 2 vue26 && jest --verbose",
     "test:vue3": "vue-demi-switch 3 && jest --verbose",
-    "test": "npm run test:vue26 -- --silent && npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
+    "test": "npm run test:vue2 -- --silent && npm run test:vue3 -- --silent "
   },
   "keywords": [],
   "author": "ivan-lee",
@@ -30,21 +29,15 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.1.1",
-    "@wakeadmin/h": "workspace:^0.2.0",
-    "@wakeadmin/utils": "workspace:^0.1.1",
-    "@wakeapp/framework-core": "latest"
+    "@wakeadmin/demi": "workspace:^0.2.2",
+    "@wakeadmin/h": "workspace:^0.2.10",
+    "@wakeadmin/utils": "workspace:^0.1.4",
+    "@wakeapp/framework-core": "^0.4.0"
   },
   "devDependencies": {
-    "test-helper-vue": "workspace:^0.1.3"
+    "test-helper-vue": "workspace:^0.1.4"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.7.0",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "vue": ">=2.7.0"
   }
 }

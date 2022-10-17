@@ -1,38 +1,15 @@
-import { LifeCycles } from 'single-spa';
+/* eslint-disable @typescript-eslint/return-await */
+import type { LifeCycles } from 'single-spa';
+import type { CreateMicroAppOptions } from '@wakeadmin/mapp-shared';
 import { isMicroApp, getMicroApp } from './bay';
 
-export interface MicroAppOptions<Props = {}> {
-  /**
-   * 应用启动逻辑
-   */
-  bootstrap?: (props: Props) => Promise<void>;
-
-  /**
-   * 应用挂载
-   */
-  mount: (container: HTMLElement | undefined, props: Props) => Promise<void>;
-
-  /**
-   * 应用更新
-   */
-  update?: (props: Props) => Promise<void>;
-
-  /**
-   * 应用卸载
-   */
-  unmount: (props: Props) => Promise<void>;
-
-  /**
-   * 应用对外暴露的共享 API
-   */
-  expose?: () => Promise<Record<string, any>>;
-}
+export { CreateMicroAppOptions };
 
 /**
  * 集成子应用
  * @param options
  */
-export function createMicroApp<Props = {}>(options: MicroAppOptions<Props>) {
+export function createMicroApp<Props = {}>(options: CreateMicroAppOptions<Props>) {
   if (!isMicroApp) {
     const NoopProps = {};
     options.bootstrap?.(NoopProps as any);
@@ -46,7 +23,7 @@ export function createMicroApp<Props = {}>(options: MicroAppOptions<Props>) {
     throw new Error(`[mapp/child] 子应用 name 不能为空，且必须全局唯一`);
   }
 
-  const exposes: LifeCycles<{ container: HTMLElement }> & { expose: MicroAppOptions['expose'] } = {
+  const exposes: LifeCycles<{ container: HTMLElement }> & { expose: CreateMicroAppOptions['expose'] } = {
     bootstrap: async props => {
       return await options.bootstrap?.(props as unknown as Props);
     },

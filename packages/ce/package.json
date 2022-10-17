@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/ce",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Vue 自定义组件创建和使用",
   "sideEffects": false,
   "main": "dist/common/index.js",
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "tsc -b tsconfig.build.json --watch",
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build:es": "tsc -b tsconfig.build.json",
     "build:common": "tsc -b tsconfig.build.common.json",
     "build": "npm run build:es && npm run build:common",
@@ -25,9 +25,9 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "@wakeadmin/utils": "workspace:^0.1.1"
+    "@wakeadmin/utils": "workspace:^0.1.4"
   },
   "devDependencies": {
-    "@wakeadmin/h": "workspace:^0.2.0"
+    "@wakeadmin/h": "workspace:^0.2.10"
   }
 }

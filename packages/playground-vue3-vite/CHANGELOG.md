@@ -1,5 +1,20 @@
 # playground-vue3-vite
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/bay@0.7.0
+
+## 0.0.6
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/bay@0.6.2
+
 ## 0.0.5
 
 ### Patch Changes

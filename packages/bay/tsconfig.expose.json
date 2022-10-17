@@ -3,6 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "./expose",
+    "incremental": false,
+    "tsBuildInfoFile": null,
     "emitDeclarationOnly": true
   },
   "include": ["src/**/*"]

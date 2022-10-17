@@ -1,5 +1,5 @@
 import { defineComponent, Suspense, watch } from 'vue';
-import { DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX } from '@wakeadmin/mapp/main';
+import { DEFAULT_ROOT_FOR_CHILD_WITHOUT_PREFIX } from '@wakeadmin/mapp';
 import { withDirectives } from '@wakeadmin/h';
 import { ElMessageBox, ElLoadingDirective } from 'element-plus';
 import { useI18n } from 'vue-i18n';

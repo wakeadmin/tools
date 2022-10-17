@@ -1,5 +1,19 @@
 # @wakeadmin/ce
 
+## 0.1.5
+
+### Patch Changes
+
+- 更新依赖
+
+## 0.1.4
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/utils@0.1.3
+
 ## 0.1.3
 
 ### Patch Changes

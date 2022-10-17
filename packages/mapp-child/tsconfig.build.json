@@ -2,8 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "ES2017",
-    "noEmit": false,
-    "jsx": "react-jsx"
+    "incremental": false,
+    "tsBuildInfoFile": null,
+    "noEmit": false
   },
   "exclude": ["dist", "**/*.test.*"]
 }

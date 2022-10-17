@@ -38,6 +38,6 @@ pnpm publish -r --no-git-checks --registry=$NPM_REGISTRY --access public
 
 # 构建基座容器
 echo '开始构建基座'
-pnpm run -r build:assets
-pnpm run -r build:docker
-pnpm run -r publish:docker
+pnpm run --workspace-concurrency=1 -r build:assets
+pnpm run --workspace-concurrency=1 -r build:docker
+pnpm run --workspace-concurrency=1 -r publish:docker

@@ -1,7 +1,8 @@
 /** @jsxImportSource .. */
-import { VNodeChild, ref, StyleValue } from '@wakeadmin/demi';
+import { VNodeChild, ref, StyleValue, defineComponent } from '@wakeadmin/demi';
 import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './declareComponent';
 import { withDefaults } from './helper';
+import SPA from './declareComponent.d-test.vue';
 
 import { expectType } from '../__tests__/helper';
 
@@ -209,4 +210,18 @@ test('测试 defineComponent 类型推断', () => {
     let a = <A />;
     a = <A b={1}>{{ default: () => 1 }}</A>;
   });
+});
+
+test('不同方式定义的组件 ref 不应该报错', () => {
+  const DefineComponent = defineComponent({});
+  const DeclareComponent = declareComponent({
+    setup() {
+      return () => <div></div>;
+    },
+  });
+
+  const instanceRef = ref<any>();
+  <SPA ref={instanceRef} />;
+  <DefineComponent ref={instanceRef} />;
+  <DeclareComponent ref={instanceRef} />;
 });

@@ -10,7 +10,7 @@ import { omit } from '@wakeadmin/utils';
 import { DefineComponent, SimpleComponentOptions } from './types';
 import { vue2Expose, findEventHandler, vue3EventNameCapitalized, safeCallHandler } from './process';
 
-export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
+export { ExtraRef, ExtraArrayRef, ExtraProps, DefineComponent } from './types';
 
 /**
  * 声明属性
@@ -18,8 +18,7 @@ export { ExtraRef, ExtraArrayRef, ExtraProps } from './types';
  * @returns
  */
 export function declareProps<T extends {}>(list: Array<keyof T> | ComponentObjectPropsOptions<Partial<T>>): T {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  return list as any as T;
+  return list as T;
 }
 
 /**

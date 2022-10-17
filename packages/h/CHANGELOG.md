@@ -1,5 +1,30 @@
 # @wakeadmin/h
 
+## 0.2.11
+
+### Patch Changes
+
+- 更新依赖
+
+## 0.2.10
+
+### Patch Changes
+
+- Bug 修复: 导入 DefineComponent 类型, 修复 jsx-runtime 编译结果隐式依赖 vue
+
+- Updated dependencies
+  - @wakeadmin/utils@0.1.4
+  - @wakeadmin/demi@0.2.1
+
+## 0.2.9
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/demi@0.2.0
+  - @wakeadmin/utils@0.1.3
+
 ## 0.2.8
 
 ### Patch Changes

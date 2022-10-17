@@ -84,6 +84,7 @@ test('元素自定义组件兼容', () => {
 
     t = <Native foo="foo" bar={1} baz={{ foo: 'foo' }}></Native>;
 
+    // 事件调用
     t = <Native foo="foo" onFoo={evt => expectType<number>(evt)} onBar={evt => expectType<string>(evt)}></Native>;
 
     // v-slots 语法支持

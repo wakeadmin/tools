@@ -1,5 +1,5 @@
 import { Compiler, Compilation, sources } from 'webpack';
-import type { MicroApp } from '@wakeadmin/mapp/main';
+import type { MicroApp } from '@wakeadmin/mapp-shared';
 
 const PLUGIN_NAME = 'WebpackMAPPJsonPlugin';
 

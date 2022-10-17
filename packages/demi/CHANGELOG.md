@@ -1,5 +1,24 @@
 # @wakeadmin/demi
 
+## 0.2.2
+
+### Patch Changes
+
+- 修复受 @types/node 影响后, HTML 元素事件处理器类型错误
+
+## 0.2.1
+
+### Patch Changes
+
+- 暴露 DirectiveModifiers
+
+## 0.2.0
+
+### Minor Changes
+
+- 重构, fork vue-demi
+- 更新依赖
+
 ## 0.1.4
 
 ### Patch Changes

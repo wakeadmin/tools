@@ -1,42 +1,6 @@
-import {
-  isVue2,
-  Transition as VueTransition,
-  TransitionGroup as VueTransitionGroup,
-  KeepAlive as VueKeepAlive,
-  Teleport as VueTeleport,
-  Suspense as VueSuspense,
-  Fragment as VueFragment,
-} from '@wakeadmin/demi';
+import { Teleport as VueTeleport, Suspense as VueSuspense, Fragment as VueFragment } from '@wakeadmin/demi';
 
-/**
- * Vue3 Transition 变动
- *
- * props:
- * leave-class -> leave-from-class
- * enter-class -> enter-from-class
- *
- * class
- * .v-enter -> .v-enter-from
- * .v-leave -> .v-leave-from
- *
- * https://v3-migration.vuejs.org/breaking-changes/transition.html#_3-x-update
- */
-export const Transition: typeof VueTransition = isVue2
-  ? ({
-      functional: true,
-      render(h: Function, context: any) {
-        const { props, children, listeners } = context;
-        const leaveClass = props.leaveClass ?? props.leaveFromClass;
-        const enterClass = props.enterClass ?? props.enterFromClass;
-
-        return h('transition', { props: { ...props, leaveClass, enterClass }, on: listeners }, children);
-      },
-    } as any)
-  : VueTransition;
-
-export const TransitionGroup: typeof VueTransitionGroup = isVue2 ? ('transition-group' as any) : VueTransitionGroup;
-
-export const KeepAlive: typeof VueKeepAlive = isVue2 ? ('keep-alive' as any) : VueKeepAlive;
+export { Transition, TransitionGroup, KeepAlive } from '@wakeadmin/demi';
 
 const notSupportedInVue2 = (message: string) => ({
   functional: true,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/array-type */
 /* eslint-disable @typescript-eslint/prefer-function-type */
@@ -128,4 +129,5 @@ export function h(type: any, props: any, ...children: any[]): VNode {
 /**
  * 支持从 h.Fragment 中访问 Fragment
  */
+// @ts-ignore
 h.Fragment = Fragment;

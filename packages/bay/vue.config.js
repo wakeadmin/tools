@@ -6,7 +6,7 @@ const { defineVendors } = require('@wakeadmin/vue-cli-plugin-vendor');
 /**
  * 接口服务器
  */
-const SERVER = process.env.SERVER || 'https://bizpf-test.wakedt.cn/';
+const SERVER = process.env.SERVER || 'https://www.wakedt.cn/';
 
 module.exports = defineConfig({
   parallel: false,

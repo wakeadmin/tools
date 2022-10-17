@@ -1,5 +1,24 @@
 # @wakeadmin/mapp
 
+## 0.4.0
+
+### Minor Changes
+
+- 剥离代码到 mapp-child, mapp-shared, 当前该库只处理基座相关内容
+
+- Updated dependencies
+  - @wakeadmin/utils@0.1.4
+  - @wakeadmin/h@0.2.10
+
+## 0.3.2
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/h@0.2.9
+  - @wakeadmin/utils@0.1.3
+
 ## 0.3.1
 
 ### Patch Changes

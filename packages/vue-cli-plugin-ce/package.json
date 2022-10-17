@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/vue-cli-plugin-ce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "vue 自定义元素增强插件",
   "main": "index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "rimraf dist .tsBuildInfo",
+    "prebuild": "rimraf dist",
     "build": "tsc -b tsconfig.build.json",
     "type-check": "tsc",
     "test": "jest"

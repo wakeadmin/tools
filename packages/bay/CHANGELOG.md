@@ -1,5 +1,30 @@
 # @wakeadmin/bay
 
+## 0.7.0
+
+### Minor Changes
+
+- expose 构建和导出方式调整, 不再耦合 vue 和基座类型
+
+### Patch Changes
+
+- @wakeadmin/mapp-child@0.1.0
+
+## 0.6.2
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @wakeadmin/assets@0.1.2
+  - @wakeadmin/mapp@0.3.2
+
+## 0.6.1
+
+### Patch Changes
+
+- 修复 modal 会被挡住的问题
+
 ## 0.6.0
 
 ### Minor Changes
