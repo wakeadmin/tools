@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "jsxImportSource": "@wakeadmin/h",
     "noUnusedLocals": true,
     "moduleResolution": "node",

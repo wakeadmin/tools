@@ -15,7 +15,7 @@ module.exports = () => ({
     ],
   ],
   plugins: [
-    'babel-plugin-transform-typescript-metadata',
+    // 'babel-plugin-transform-typescript-metadata',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     // 必须放在 plugin-proposal-decorators 之后
     ['@babel/plugin-proposal-class-properties'],

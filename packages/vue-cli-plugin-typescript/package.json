@@ -1,0 +1,19 @@
+{
+  "name": "@wakeadmin/vue-cli-plugin-typescript",
+  "version": "0.1.0",
+  "description": "vue cli typescript 插件",
+  "main": "index.js",
+  "keywords": [],
+  "author": "ivan-lee",
+  "license": "MIT",
+  "devDependencies": {
+    "@vue/cli-service": "~5.0.8"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": "5.*"
+  },
+  "dependencies": {
+    "esbuild-loader": "^2.20.0",
+    "json5": "^2.2.1"
+  }
+}

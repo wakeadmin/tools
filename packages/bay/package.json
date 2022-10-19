@@ -30,7 +30,6 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.8",
     "@vue/cli-plugin-router": "~5.0.8",
-    "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "@vueuse/core": "^8.9.4",
     "@wakeadmin/ce": "workspace:^0.1.5",
@@ -44,6 +43,7 @@
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.1",
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.1",
     "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.2.2",
+    "@wakeadmin/vue-cli-plugin-typescript": "workspace:^0.1.0",
     "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.3",
     "@wakeapp/wakedata-backend": "^0.4.0",
     "babel-preset-wakeadmin": "workspace:^0.1.1",
