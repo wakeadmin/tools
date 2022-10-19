@@ -1,5 +1,12 @@
 # @wakeadmin/bay
 
+## 0.7.1
+
+### Patch Changes
+
+- 主题包本地缓存
+- 升级 mapp 镜像
+
 ## 0.7.0
 
 ### Minor Changes
