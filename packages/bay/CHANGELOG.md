@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.7.2
+
+### Patch Changes
+
+- 优化模板, 修复安全警告
+
 ## 0.7.1
 
 ### Patch Changes

@@ -12,6 +12,9 @@ ENV MAPP_VERSION=<%=VERSION%>
 # 默认主题包, 如果你想远程来取主题包，需要配置这一行
 ENV MAPP_NPM_THEME=<%=THEME%>
 
+# 开放 iframe 白名单
+ENV MAPP_ALLOW_FRAMES=www.24haowan.com
+
 <% if (MOCK_ENABLED) { %>
 ENV MAPP_MOCK_ENABLED=true
 <% }%>
