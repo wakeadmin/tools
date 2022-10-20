@@ -19,19 +19,16 @@
     <!--! [%- theme.scripts.map(i => `<script async="true" src="${i + '?' + hash}"></script>`).join('\n') %] -->
 
     <!--! [% if (microApps.length) { %] -->
+    <!-- 微应用注入 -->
     <!--! [%-
-      `<script>
-        // 微应用注入
-        (window.__MAPPS__ = (window.__MAPPS__ || [])).push(${microApps.map(i => JSON.stringify(i)).join(', ')});
-      </script>`
+      `<script nonce="${hash}">(window.__MAPPS__ = (window.__MAPPS__ || [])).push(${microApps.map(i => JSON.stringify(i)).join(', ')});</script>`
     %] -->
     <!--! [% } %]-->
 
-    <!--! [%- `<script>
-      // 静态资源注入
+    <!-- 静态资源/语言包注入 -->
+    <!--! [%- `<script nonce="${hash}">
       (window.__MAPP_ASSETS__ = (window.__MAPP_ASSETS__ || [])).push(${JSON.stringify(assets)});
 
-      // 全局共享的语言包
       window.__I18N_BUNDLES__ = ${JSON.stringify(i18n)};
     </script>` %]
     -->
