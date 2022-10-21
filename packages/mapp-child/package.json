@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/mapp-child",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "微前端子应用调用库",
   "main": "dist/common/index.js",
   "module": "dist/index.js",
@@ -21,10 +21,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@wakeadmin/mapp-shared": "workspace:^0.1.0",
+    "@wakeadmin/mapp-shared": "workspace:^0.1.1",
     "@wakeadmin/utils": "workspace:^0.1.4"
   },
   "devDependencies": {
-    "@wakeadmin/mapp": "workspace:^0.4.0"
+    "@wakeadmin/mapp": "workspace:^0.5.0"
   }
 }

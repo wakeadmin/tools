@@ -1,5 +1,18 @@
 # @wakeadmin/bay
 
+## 0.8.0
+
+### Minor Changes
+
+- 支持链接过滤, 绕开 qiankun 沙箱. 需要配合全局变量进行使用
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @wakeadmin/mapp-child@0.1.1
+  - @wakeadmin/mapp-shared@0.1.1
+
 ## 0.7.2
 
 ### Patch Changes

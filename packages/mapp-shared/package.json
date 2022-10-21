@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/mapp-shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "mapp 共享内容",
   "main": "index.js",
   "types": "index.d.ts",

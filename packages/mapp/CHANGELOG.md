@@ -1,5 +1,16 @@
 # @wakeadmin/mapp
 
+## 0.5.0
+
+### Minor Changes
+
+- 支持链接过滤, 绕开 qiankun 处理, 通常需要配合全局变量进行使用
+
+### Patch Changes
+
+- Updated dependencies
+  - @wakeadmin/mapp-shared@0.1.1
+
 ## 0.4.0
 
 ### Minor Changes

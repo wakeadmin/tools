@@ -1,6 +1,6 @@
 {
   "name": "playground-vue2",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "vue2 子应用游乐场",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.7.0",
+    "@wakeadmin/bay": "workspace:^0.8.0",
     "core-js": "^3.25.5",
     "vue": "^2.7.13",
     "vue-router": "^3.6.5",
