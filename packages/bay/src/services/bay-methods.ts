@@ -51,3 +51,4 @@ export const findMenuByIdentifierPath = bindApi('findMenuByIdentifierPath');
 export const generateLandingUrl = bindApi('generateLandingUrl');
 export const showMainLoading = bindApi('showMainLoading');
 export const hideMainLoading = bindApi('hideMainLoading');
+export const addExcludeAssetFilter = bindApi('addExcludeAssetFilter');

@@ -95,3 +95,28 @@ export const openUrl: IBay['openUrl'] = (...args) => {
 export const openMain: IBay['openMain'] = (...args) => {
   getBay()?.openMain(...args);
 };
+
+/**
+ * 添加变量到真实的 window 对象上
+ * 注意：只能在必要的场景使用，后果自负
+ */
+export function addGlobalVariable(name: string, value: any) {
+  // eslint-disable-next-line no-eval
+  const global = (0, eval)('window');
+
+  global[name] = value;
+}
+
+/**
+ * 移除真实 window 对象上的变量
+ *
+ * 注意：只能在必要的场景使用，后果自负
+ * @param name
+ */
+export function deleteGlobalVariable(name: string) {
+  // eslint-disable-next-line no-eval
+  const global = (0, eval)('window');
+
+  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+  delete global[name];
+}

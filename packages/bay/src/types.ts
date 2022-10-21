@@ -116,6 +116,8 @@ export interface IBayModel extends INavigation, ISession {
   getLocale: I18nInstance['getLocale'];
 
   setLocale: I18nInstance['setLocale'];
+
+  addExcludeAssetFilter: IBay['addExcludeAssetFilter'];
 }
 
 /**

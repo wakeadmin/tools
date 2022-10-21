@@ -1,1 +1,9 @@
-export { getBayBaseUrl, isMicroApp, getMicroApp, getActiveRule, createMicroApp } from '@wakeadmin/mapp-child';
+export {
+  getBayBaseUrl,
+  isMicroApp,
+  getMicroApp,
+  getActiveRule,
+  createMicroApp,
+  addGlobalVariable,
+  deleteGlobalVariable,
+} from '@wakeadmin/mapp-child';

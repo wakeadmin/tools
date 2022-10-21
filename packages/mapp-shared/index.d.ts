@@ -168,6 +168,8 @@ export interface IBayNavigation {
   openMain(options?: RouteLocationOptions): void;
 }
 
+export type ExcludeAssetFilter = string | RegExp | ((url: string) => boolean) | ExcludeAssetFilter[];
+
 export interface IBayBase extends IBayNavigation {
   // ---------------------------- 应用相关方法 ------------------------------------
 
@@ -200,6 +202,14 @@ export interface IBayBase extends IBayNavigation {
    * 预加载微应用
    */
   prefetch(apps: MicroApp[]): void;
+
+  // ----------------- 安全相关方法 --------------------
+
+  /**
+   * 添加部分特殊的动态加载的微应用资源（css/js) 不被 qiankun 劫持处理。
+   * @param filter
+   */
+  addExcludeAssetFilter(filter: ExcludeAssetFilter): void;
 }
 
 export interface CreateMicroAppOptions<Props = {}> {

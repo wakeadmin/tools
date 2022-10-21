@@ -50,6 +50,19 @@ export function configureBay() {
       error: ErrorPage,
       landing: LandingPage,
     },
+    // 这里可以添加常用的第三方链接, 避免被微前端框架拦截，导致跨域问题
+    excludeAssetFilter: [
+      // 腾讯地图
+      'map.qq.com',
+      'mapapi.qq.com',
+
+      // 百度地图
+      'map.baidu.com',
+      'bdimg.com',
+
+      // 高德地图
+      'amap.com',
+    ],
     hooks: {
       async beforeRouterEnterMain(info) {
         if (!info.matched && info.to.path === '/' && AUTO_INDEX) {

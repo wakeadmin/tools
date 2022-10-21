@@ -3,6 +3,7 @@ import {
   RouteLocationAsPathAndHash,
   ErrorPageProps,
   LocationQueryRaw,
+  ExcludeAssetFilter,
 } from '@wakeadmin/mapp-shared';
 
 export interface TreeNode {
@@ -105,3 +106,4 @@ export const generateLandingUrl: (props: LandingProps, addHost?: boolean | undef
 
 export const showMainLoading: () => Promise<void>;
 export const hideMainLoading: () => Promise<void>;
+export const addExcludeAssetFilter: (filters: ExcludeAssetFilter) => Promise<void>;

@@ -1,7 +1,7 @@
 import type { DefineComponent, App, Component, FunctionalComponent } from 'vue';
 import type { RouteRecordRaw, RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
 import type { EventEmitter } from '@wakeadmin/utils';
-import type { MicroApp, ErrorPageProps, LandingPageProps, IBayBase } from '@wakeadmin/mapp-shared';
+import type { MicroApp, ErrorPageProps, LandingPageProps, IBayBase, ExcludeAssetFilter } from '@wakeadmin/mapp-shared';
 
 import { UniverseLocation } from './route';
 import { INetworkInterceptorRegister } from './network-interceptor';
@@ -155,6 +155,11 @@ export interface BayOptions {
    * 你也可以通过 registerNetworkInterceptor 方法来注册
    */
   networkInterceptors?: INetworkInterceptorRegister[];
+
+  /**
+   * 指定部分特殊的动态加载的微应用资源（css/js) 不被 qiankun 劫持处理
+   */
+  excludeAssetFilter?: ExcludeAssetFilter;
 
   /**
    * 根组件。将传递给 createApp

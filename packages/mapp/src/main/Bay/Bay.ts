@@ -24,6 +24,7 @@ import { AppContext } from './AppContext';
 import { normalizeUrl } from './utils';
 import { MicroAppNormalized } from './types';
 import { flushMountQueue } from './mount-delay';
+import { AssetFilter } from './exclude-asset';
 
 export class Bay implements IBay {
   app: App;
@@ -97,6 +98,8 @@ export class Bay implements IBay {
 
   private appContext: AppContext;
 
+  private assetFilter = new AssetFilter();
+
   constructor(options: BayOptions) {
     /**
      * 参数初始化
@@ -115,6 +118,10 @@ export class Bay implements IBay {
     }
     this.navigator = new Navigator(this);
     this.appContext = new AppContext(this);
+
+    if (options.excludeAssetFilter) {
+      this.assetFilter.addFiler(options.excludeAssetFilter);
+    }
 
     /**
      * 应用初始化
@@ -160,10 +167,21 @@ export class Bay implements IBay {
     start({
       // 关闭自动fetch，由开发者手动指定
       prefetch: false,
+      excludeAssetFilter: src => {
+        return this.assetFilter.filter(src);
+      },
     });
 
     this.started = true;
   }
+
+  /**
+   * 添加资源过滤器, 指定部分特殊的动态加载的微应用资源（css/js) 不被 qiankun 劫持处理。
+   * @param filter
+   */
+  addExcludeAssetFilter: IBay['addExcludeAssetFilter'] = filter => {
+    this.assetFilter.addFiler(filter);
+  };
 
   prefetch(apps: MicroApp[]): void {
     prefetchApps(apps);

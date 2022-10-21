@@ -557,6 +557,14 @@ export class BayModel extends BaseModel implements IBayModel {
     return this.i18n.getLocale();
   };
 
+  /**
+   * 添加过滤器
+   * @param filters
+   */
+  addExcludeAssetFilter: IBayModel['addExcludeAssetFilter'] = filters => {
+    this.bay.addExcludeAssetFilter(filters);
+  };
+
   private assertOpen(): boolean {
     if (this.menu == null) {
       console.warn(`[bay] openByIdentifierPath 需要等待基座启动后才能调用`);
