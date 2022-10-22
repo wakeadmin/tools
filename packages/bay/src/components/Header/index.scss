@@ -2,6 +2,7 @@ $bg-color: var(--wk-color-white);
 $active-color: var(--wk-color-primary);
 $menu-padding: 0 20px;
 $color: var(--wk-color-font-regular);
+$borderColor: var(--wk-color-gray-300);
 
 %flex-center {
   display: flex;
@@ -13,11 +14,11 @@ $color: var(--wk-color-font-regular);
   $height: 56px;
   height: $height;
   background-color: $bg-color;
-  box-shadow: 0 1px 0 0 #dce1e6;
+  box-shadow: 0 1px 0 0 $borderColor;
   padding: 0 20px;
   box-sizing: border-box;
   flex-shrink: 0;
-  z-index: 3;
+  z-index: 5;
 
   // 菜单隐藏
   @at-root .bay-menu-hide & {

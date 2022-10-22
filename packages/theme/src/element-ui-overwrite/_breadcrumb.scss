@@ -1,6 +1,6 @@
 .el-breadcrumb {
   // 不做上边距
-  padding-bottom: 10px;
+  padding-bottom: var(--wk-spacing-sm, 16px);
   line-height: 22px;
   &__inner.is-link {
     color: var(--wk-color-font-regular);

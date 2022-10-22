@@ -28,6 +28,9 @@
 // 单独配置
 
 .el-input {
+  & &__count {
+    color: var(--wk-color-font-placeholder);
+  }
   &__inner:focus {
     border-color: var(--wk-color-info);
   }
@@ -35,12 +38,17 @@
   // 数字输入框
   &-number__decrease,
   &-number__increase {
-    &:hover,
     &:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
       border-color: var(--wk-color-info);
     }
     &:hover {
       color: var(--wk-color-info);
+    }
+  }
+  &-number.is-controls-right .el-input-number {
+    &__increase,
+    &__decrease {
+      line-height: 15px;
     }
   }
 
@@ -51,6 +59,11 @@
 }
 
 .el-radio {
+  &__inner:hover{
+    border-color: var(--wk-color-info);
+  }
+
+
   &__input.is-checked {
     .el-radio__inner {
       background-color: var(--wk-color-info);
@@ -103,7 +116,7 @@
     color: var(--wk-color-info);
   }
 
-  &_input.is-indeterminate {
+  &__input.is-indeterminate {
     .el-checkbox__inner {
       border-color: var(--wk-color-info);
       background-color: var(--wk-color-info);
@@ -178,10 +191,16 @@
   }
 
   .el-tag.el-tag--info {
-    // TODO 背景色使用变量
     background: #f4f4f5;
     border-color: var(--wk-color-gray-400);
     color: var(--wk-color-font-secondary);
+    .el-tag__close {
+      color: var(--wk-color-gray-700);
+      &:hover {
+        color: #fff;
+        background-color: var(--wk-color-gray-700);
+      }
+    }
   }
 }
 
@@ -238,17 +257,18 @@
   }
 
   .el-date-table {
+    td.today span,
+    td.available:hover {
+      color: var(--wk-color-info);
+    }
+
     td.end-date,
     td.start-date,
     td.current:not(.disabled) {
       span {
         background-color: var(--wk-color-info);
+        color: #fff;
       }
-    }
-
-    td.today span,
-    td.available:hover {
-      color: var(--wk-color-info);
     }
   }
   .el-month-table,
@@ -269,6 +289,12 @@
     .el-button--text {
       color: inherit;
     }
+  }
+}
+
+.el-time-panel {
+  &__btn.confirm {
+    color: var(--wk-color-info);
   }
 }
 

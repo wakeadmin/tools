@@ -1,6 +1,14 @@
 const colorType = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'gray'];
 const colorLevel = [900, 800, 700, 600, 500, 400, 300, 200, 100, 50, 0];
 
+const formItemWidths = {
+  'form-item-xs': 'var(--wk-width-form-item-xs , 96px)',
+  'form-item-sm': 'var(--wk-width-form-item-sm , 200px)',
+  'form-item-md': 'var(--wk-width-form-item-md , 304px)',
+  'form-item-lg': 'var(--wk-width-form-item-lg , 404px)',
+  'form-item-xl': 'var(--wk-width-form-item-xl , 512px)',
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'media', // or 'class'
@@ -49,8 +57,8 @@ module.exports = {
         'link-hover': 'var(--wk-color-link-hover)',
         'link-disabled': 'var(--wk-color-link-disbaled)',
         'link-active': 'var(--wk-color-link-active)',
-        primary: 'var(--wk-color-font-primary)',
-        regular: 'var(--wk-color-font-regular)',
+        'font-primary': 'var(--wk-color-font-primary)',
+        'font-regular': 'var(--wk-color-font-regular)',
         secondary: 'var(--wk-color-font-secondary)',
         placeholder: 'var(--wk-color-font-placeholder)',
         disabled: 'var(--wk-color-font-disabled)',
@@ -138,13 +146,9 @@ module.exports = {
           },
         ],
       },
-      width: {
-        'form-item-xs': 'var(--wk-width-form-item-xs , 96px)',
-        'form-item-sm': 'var(--wk-width-form-item-sm , 200px)',
-        'form-item-md': 'var(--wk-width-form-item-md , 304px)',
-        'form-item-lg': 'var(--wk-width-form-item-lg , 404px)',
-        'form-item-xl': 'var(--wk-width-form-item-xl , 512px)',
-      },
+      width: formItemWidths,
+      maxWidth: formItemWidths,
+      minWidth: formItemWidths,
     },
   },
   plugins: [],

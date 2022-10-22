@@ -12,4 +12,17 @@
       background-color: transparent;
     }
   }
+
+  &--text.el-button {
+    color: var(--wk-color-link);
+    &.is-disabled {
+      color: var(--wk-color-link-disabled);
+    }
+    &:hover {
+      color: var(--wk-color-link-hover);
+    }
+    &:active {
+      color: var(--wk-color-link-active);
+    }
+  }
 }

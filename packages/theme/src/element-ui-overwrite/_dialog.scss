@@ -16,8 +16,14 @@
     line-height: 26px;
   }
   &__headerbtn {
+    &:hover {
+      .el-icon-close {
+        color: var(--wk-color-gray-800);
+      }
+    }
+
     .el-icon-close {
-      color: #717378;
+      color: var(--wk-color-gray-600);
     }
   }
 
@@ -41,8 +47,13 @@
     top: unset;
     transform: none;
   }
+
+  &__status + &__message {
+    padding-left: var(--wk-spacing-base);
+  }
   &__headerbtn {
     top: 5px;
+    right: 0;
   }
   &__container {
     display: flex;
@@ -86,7 +97,7 @@
 .el-message-box {
   &__status {
     font-size: 16px !important;
-    top: unset;
+    top: 4px;
     transform: none;
   }
   &__headerbtn {
@@ -111,6 +122,6 @@
     font-weight: 600;
     padding: 16px 0 10px;
     margin: 0 16px;
-    border-bottom: 1px solid var(--wk-color-border-extra-light);
+    border-bottom: none;
   }
 }

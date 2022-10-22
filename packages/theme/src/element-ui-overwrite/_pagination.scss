@@ -1,0 +1,17 @@
+.el-pagination {
+  font-weight: 500;
+
+  button:hover {
+    color: var(--wk-color-info);
+  }
+  &__sizes .el-input .el-input__inner:hover {
+    border-color: var(--wk-color-info);
+  }
+}
+
+.el-pager {
+  li.active,
+  li:hover {
+    color: var(--wk-color-info);
+  }
+}

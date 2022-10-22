@@ -1,8 +1,17 @@
 $disabledColor: #8dccff;
 .fat-actions {
-  --fat-table-actions-gap: var(--wk-spacing-base);
+  --fat-table-actions-gap: var(--wk-spacing-sm);
 
-  &__dropdown-menu {
+  // FIX  修复组件库显示
+  align-items: center;
+
+  &__more > svg {
+    display: block;
+  }
+
+  // FIX end
+
+  &__menu &__menu-item {
     color: var(--wk-color-info);
     &.is-disabled {
       color: $disabledColor;
@@ -39,6 +48,11 @@ $disabledColor: #8dccff;
     }
   }
 
+  .fat-container__query {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
   &__query {
     .el-form > .el-form-item:last-child {
       margin-right: 0;
@@ -49,7 +63,8 @@ $disabledColor: #8dccff;
       padding-left: 24px;
       padding-right: 0;
     }
-    & + th {
+    & + th,
+    & + .el-table__cell {
       .cell {
         padding-left: 8px;
       }

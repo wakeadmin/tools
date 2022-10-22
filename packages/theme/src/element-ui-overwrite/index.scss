@@ -4,6 +4,7 @@
 @use './dialog';
 @use './input';
 // @use './switch';
+@use './tab';
 @use './table';
 @use './upload';
 @use './menu';
@@ -11,3 +12,4 @@
 @use './popover';
 @use './form';
 @use './breadcrumb';
+@use './pagination';

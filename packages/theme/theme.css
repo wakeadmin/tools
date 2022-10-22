@@ -121,7 +121,7 @@
   --wk-color-font-regular: var(--wk-color-gray-800); /* 常规颜色, 常用于大面积的正文 */
   --wk-color-font-secondary: var(--wk-color-gray-700); /* 次要颜色，常用于描述语 */
   --wk-color-font-placeholder: var(--wk-color-gray-600); /* 占位符 */
-  --wk-color-font-disabled: var(--wk-color-gray-100); /* 禁用 */
+  --wk-color-font-disabled: var(--wk-color-gray-600); /* 禁用 */
   --wk-color-font-inverse: var(--wk-color-gray-0); /* 主色反转, 用于深色背景 */
 
   /* 分割线颜色 */

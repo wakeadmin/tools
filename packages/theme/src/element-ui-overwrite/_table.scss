@@ -26,12 +26,19 @@
   thead th,
   th.el-table__cell {
     background-color: var(--wk-color-bg);
+    color: var(--wk-color-font-primary);
+  }
+
+  &__body tr.hover-row {
+    &.current-row > td.el-table__cell,
+    &.el-table__row--striped.current-row > td.el-table__cell,
+    &.el-table__row--striped > td.el-table__cell,
+    & > td.el-table__cell {
+      background-color: var(--wk-color-info-50);
+    }
   }
 }
 
-.el-pager {
-  li.active,
-  li:hover {
-    color: var(--wk-color-info);
-  }
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+  background-color: var(--wk-color-info-50);
 }

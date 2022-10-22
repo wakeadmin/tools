@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/theme",
-  "version": "0.2.1",
+  "version": "0.2.2-next-8",
   "description": "Wakedata 默认主题包",
   "main": "index.js",
   "types": "index.d.ts",

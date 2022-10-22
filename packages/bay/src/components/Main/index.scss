@@ -3,6 +3,8 @@
   overflow-x: auto;
 }
 
+$spacing-sm: var(--wk-spacing-sm, 16px);
+
 .bay {
   // 参考了 jd.com
   min-width: 990px;
@@ -28,7 +30,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 20px 20px 0;
+    padding: $spacing-sm $spacing-sm 0;
     @media screen and (max-width: 990px) {
       padding: 20px 10px 0;
     }

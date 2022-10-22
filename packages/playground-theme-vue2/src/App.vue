@@ -6,7 +6,10 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import '@wakeadmin/theme/dist/share.css';
+  import '@wakeadmin/theme/dist/element-ui.css';
+</script>
 
 <style lang="scss">
   #app {

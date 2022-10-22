@@ -58,26 +58,46 @@ module.exports = defineConfig({
     port: 80,
     host: '0.0.0.0',
     allowedHosts: 'all',
-    proxy: ['/permission', '/wd', '/login.html', '/app.html'].reduce((prev, cur) => {
-      prev[cur] = {
-        target: SERVER,
-        changeOrigin: true,
-        secure: false,
-        // 修改 cookie
-        onProxyRes(proxyRes) {
-          const cookies = proxyRes.headers['set-cookie'];
-          if (cookies) {
-            const newCookie = cookies.map(function (cookie) {
-              return cookie.replace(/Domain=.*?(\.\w+\.\w+);/i, 'Domain=$1;');
-            });
-            // 修改cookie path
-            delete proxyRes.headers['set-cookie'];
-            proxyRes.headers['set-cookie'] = newCookie;
-          }
-        },
-      };
+    proxy: ['/permission', '/wd', '/login.html', '/app.html',
+      '/sale',
+      '/scrmm',
+      '/plt',
+      '/dw',
+      '/wp',
+      '/p',
+      '/dwifi',
+      '/image',
+      '/dsp',
+      '/athena',
+      '/dmp2',
+      '/am',
+      '/mc',
+      '/org',
+      '/sms',
+      '/wd',
+      '/mtool',
+      '/wd-wechat-goods',
+      '/ma',
+      '/coupon'].reduce((prev, cur) => {
+        prev[cur] = {
+          target: SERVER,
+          changeOrigin: true,
+          secure: false,
+          // 修改 cookie
+          onProxyRes(proxyRes) {
+            const cookies = proxyRes.headers['set-cookie'];
+            if (cookies) {
+              const newCookie = cookies.map(function (cookie) {
+                return cookie.replace(/Domain=.*?(\.\w+\.\w+);/i, 'Domain=$1;');
+              });
+              // 修改cookie path
+              delete proxyRes.headers['set-cookie'];
+              proxyRes.headers['set-cookie'] = newCookie;
+            }
+          },
+        };
 
-      return prev;
-    }, {}),
+        return prev;
+      }, {}),
   },
 });
