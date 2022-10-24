@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.8.1
+
+### Patch Changes
+
+- 多语言切换按钮从菜单中获取
+
 ## 0.8.0
 
 ### Minor Changes
