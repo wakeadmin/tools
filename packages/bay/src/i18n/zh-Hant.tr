@@ -1,6 +1,6 @@
 {
   "bay": {
-    "switch-language": "多語言",
+    "i18n": "多語言",
     "logout": "退出登錄",
     "back": "返回",
     "backHome": "返回首頁",

@@ -1,4 +1,4 @@
-import { defineComponent, onBeforeUnmount, ref } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, ref } from 'vue';
 import { ElDropdown, ElIcon } from 'element-plus';
 import { ArrowDown, Signout, Translate, ClassificationSquare } from '@wakeadmin/icons';
 import { useInject } from '@wakeadmin/framework';
@@ -6,7 +6,7 @@ import { useI18n } from 'vue-i18n';
 
 import { getHeaderDropdowns, HeaderDropdownItemDesc, subscribeHeaderDropdownChange } from '@/services';
 import { useBayModel, useAsset } from '@/hooks';
-import { DEFAULT_LANGUAGE_SUPPORTS } from '@/constants';
+import { DEFAULT_LANGUAGE_IDENTIFIER } from '@/constants';
 import { getMenuI18nKey } from '@/utils';
 
 import { Icon } from '../Icon';
@@ -64,10 +64,17 @@ export const DropdownMenus = defineComponent({
       }
     };
 
+    const languageMenu = computed(() => {
+      return bay.menu!.roots.find(item => item.identifier === DEFAULT_LANGUAGE_IDENTIFIER);
+    });
+
     return () => {
       const name = bay.sessionInfo?.userInfo.userName;
       const avatar = defaultAvatar.value;
-      const buttons = bay.menu?.topButtons;
+      // 多语言菜单单独进行渲染
+      const buttons = bay.menu?.topButtons?.filter(item => item.identifier !== DEFAULT_LANGUAGE_IDENTIFIER);
+
+      const i18nMenu = languageMenu.value;
 
       return (
         <ElDropdown
@@ -92,27 +99,29 @@ export const DropdownMenus = defineComponent({
                   );
                 })}
 
-                <ElDropdown.DropdownItem command={BuiltinCommands.SWITCH_LANGUAGE} icon={Translate}>
-                  <ElDropdown
-                    onCommand={handleLanguageSwitchCommand}
-                    placement="left-start"
-                    v-slots={{
-                      dropdown: () => (
-                        <ElDropdown.DropdownMenu>
-                          {DEFAULT_LANGUAGE_SUPPORTS.map(i => {
-                            return (
-                              <ElDropdown.DropdownItem key={i.key} command={i.key}>
-                                {i.name}
-                              </ElDropdown.DropdownItem>
-                            );
-                          })}
-                        </ElDropdown.DropdownMenu>
-                      ),
-                    }}
-                  >
-                    {t('bay.switch-language')}
-                  </ElDropdown>
-                </ElDropdown.DropdownItem>
+                {i18nMenu && (
+                  <ElDropdown.DropdownItem command={BuiltinCommands.SWITCH_LANGUAGE} icon={i18nMenu.icon || Translate}>
+                    <ElDropdown
+                      onCommand={handleLanguageSwitchCommand}
+                      placement="left-start"
+                      v-slots={{
+                        dropdown: () => (
+                          <ElDropdown.DropdownMenu>
+                            {i18nMenu.children.map(i => {
+                              return (
+                                <ElDropdown.DropdownItem key={i.identifier} command={i.identifier}>
+                                  {i.name}
+                                </ElDropdown.DropdownItem>
+                              );
+                            })}
+                          </ElDropdown.DropdownMenu>
+                        ),
+                      }}
+                    >
+                      {t('bay.i18n')}
+                    </ElDropdown>
+                  </ElDropdown.DropdownItem>
+                )}
 
                 {/* 扩展 */}
                 {buttons?.map(button => {

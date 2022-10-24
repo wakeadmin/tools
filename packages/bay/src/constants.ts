@@ -11,11 +11,6 @@ export const AUTO_INDEX = true;
 export const UNAUTH = 401;
 
 /**
- * 当前支持的语言
+ * 多语言菜单的标识值
  */
-export const DEFAULT_LANGUAGE_SUPPORTS = [
-  { key: 'zh', name: '中文/简体' },
-  { key: 'zh-Hant', name: '中文/繁體' },
-  { key: 'en', name: 'English' },
-  { key: 'th', name: 'ภาษาไทย' },
-];
+export const DEFAULT_LANGUAGE_IDENTIFIER = 'i18n';

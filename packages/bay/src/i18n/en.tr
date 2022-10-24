@@ -1,6 +1,6 @@
 {
   "bay": {
-    "switch-language": "Language",
+    "i18n": "Language",
     "logout": "Sign Out",
     "back": "Back",
     "backHome": "Back Home",
