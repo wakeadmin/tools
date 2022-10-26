@@ -29,8 +29,8 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.2.2",
-    "@wakeadmin/h": "workspace:^0.2.10"
+    "@wakeadmin/demi": "workspace:^0.2.3",
+    "@wakeadmin/h": "workspace:^0.2.12"
   },
   "devDependencies": {
     "svgo": "^2.8.0",

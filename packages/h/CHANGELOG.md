@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.12
+
+### Patch Changes
+
+- Vue 2 支持转换 on\*Native props
+
 ## 0.2.11
 
 ### Patch Changes

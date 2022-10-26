@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "cssnano": "^5.1.13",
-    "element-plus": "^2.2.18",
+    "element-plus": "^2.2.19",
     "element-ui": "2.14.1",
     "fs-extra": "^10.1.0",
     "http-serve": "^1.0.1",

@@ -34,7 +34,7 @@
     "@vueuse/core": "^8.9.4",
     "@wakeadmin/ce": "workspace:^0.1.5",
     "@wakeadmin/framework": "workspace:^0.1.5",
-    "@wakeadmin/h": "workspace:^0.2.10",
+    "@wakeadmin/h": "workspace:^0.2.12",
     "@wakeadmin/i18n": "workspace:^0.1.6",
     "@wakeadmin/icons": "workspace:^0.1.4",
     "@wakeadmin/mapp": "workspace:^0.5.0",
@@ -47,13 +47,13 @@
     "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.3",
     "@wakeapp/wakedata-backend": "^0.4.0",
     "babel-preset-wakeadmin": "workspace:^0.1.1",
-    "core-js": "^3.25.5",
-    "element-plus": "^2.2.18",
+    "core-js": "^3.26.0",
+    "element-plus": "^2.2.19",
     "normalize.css": "^8.0.1",
     "sass": "^1.55.0",
     "sass-loader": "^12.6.0",
     "vue": "^3.2.41",
     "vue-i18n": "9.1.10",
-    "vue-router": "^4.1.5"
+    "vue-router": "^4.1.6"
   }
 }
