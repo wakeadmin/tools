@@ -204,13 +204,35 @@ export function mergeProps<T extends {}, S extends {}>(target: T, source: S): T 
   return target as T & S;
 }
 
+/**
+ * Vue 3 下 props 转换
+ * @param tag
+ * @param props
+ */
+function processVue3Props(props: any) {
+  // 转换 onEventNative 这种写法
+  let finalProps: Record<string, any> | undefined;
+
+  for (const key in props) {
+    if (key.startsWith('on') && key.endsWith('Native') && typeof props[key] === 'function') {
+      (finalProps ??= {})[key.slice(0, -6)] = props[key];
+    }
+  }
+
+  if (finalProps != null) {
+    return Object.assign(finalProps, props);
+  }
+
+  return props;
+}
+
 export function processProps(tag: any, props: any) {
   if (props == null || typeof props !== 'object') {
     return props;
   }
 
   if (!isVue2) {
-    return props;
+    return processVue3Props(props);
   }
 
   const keys = Object.keys(props);

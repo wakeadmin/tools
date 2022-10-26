@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from '@wakeadmin/demi';
-import { wrap, isWrapped, processChildren } from './process';
+import { wrap, isWrapped, processChildren, processProps } from './process';
 
 test('wrap', () => {
   const a = {};
@@ -11,6 +11,23 @@ test('wrap', () => {
   expect(isWrapped(a)).toBe(false);
 
   expect(isWrapped(h('div'))).toBe(true);
+});
+
+test('processProps', () => {
+  const props = {
+    a: 1,
+  };
+
+  expect(processProps('h', props)).toBe(props);
+
+  const fn = jest.fn();
+  const props2 = {
+    a: 1,
+    onClick: fn,
+    onMouseDownNative: fn,
+  };
+
+  expect(processProps('h', props2)).toEqual({ ...props2, onMouseDown: fn });
 });
 
 test('processChildren', () => {
