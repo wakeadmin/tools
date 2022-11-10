@@ -18,7 +18,7 @@ export interface PluginOptions {
   enableInDev?: boolean;
 
   /**
-   * 基础路径, base 必须以 / 结束, 本地开发环境默认为 /__vendor__/ 生产环境默认为  `[%= cdnDomain ? '//' + cdnDomain : '' %][%= base %]__vendor__/`
+   * 基础路径, base 必须以 / , 本地开发环境默认为 /__vendor__/ 生产环境默认为  `[%= cdnDomain ? '//' + cdnDomain : '' %][%= base %]/__vendor__/`
    */
   base?: `${string}/`;
 
@@ -47,7 +47,9 @@ export const plugin: ServicePlugin = (api, options) => {
 
   const base =
     ownOptions.base ??
-    (isProduction ? `[%= cdnDomain ? '//' + cdnDomain : '' %][%= base %]__vendor__/` : '/__vendor__/');
+    (isProduction
+      ? `[%= cdnDomain ? '//' + cdnDomain : '' %][%= base === '/' ? '' : base %]/__vendor__/`
+      : '/__vendor__/');
 
   const modules = Object.keys(ownOptions.modules ?? {}).reduce<{ [module: string]: { name: string; url: string } }>(
     (prev, cur) => {
