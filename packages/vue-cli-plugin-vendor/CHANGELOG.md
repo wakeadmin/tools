@@ -1,5 +1,11 @@
 # @wakeadmin/vue-cli-plugin-vendor
 
+## 0.3.4
+
+### Patch Changes
+
+- 修复 publicPath 模板没有带上 / 后缀
+
 ## 0.3.3
 
 ### Patch Changes
