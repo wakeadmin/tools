@@ -13,7 +13,7 @@
     <meta name="update-time" content="[%= `${year}-${month}-${date}` %]" />
     <title>[%= title %]</title>
     <!-- polyfill -->
-    <!--! [%- `<script src="${base}__polyfill__"></script>` %] -->
+    <!--! [%- `<script src="${pathJoin(base, '__polyfill__')}"></script>` %] -->
     <!-- 注入主题包 -->
     <!--! [%- theme.stylesheets.map(i => `<link rel="stylesheet" href="${i + '?' + hash }" />`).join('\n') %] -->
     <!--! [%- theme.scripts.map(i => `<script async="true" src="${i + '?' + hash}"></script>`).join('\n') %] -->
