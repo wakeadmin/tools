@@ -32,7 +32,7 @@
     "@wakeadmin/demi": "workspace:^0.2.3",
     "@wakeadmin/h": "workspace:^0.2.12",
     "@wakeadmin/utils": "workspace:^0.1.4",
-    "@wakeapp/framework-core": "^0.4.0"
+    "@wakeapp/framework-core": "^0.4.5"
   },
   "devDependencies": {
     "test-helper-vue": "workspace:^0.1.4"

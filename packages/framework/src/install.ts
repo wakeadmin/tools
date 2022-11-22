@@ -64,7 +64,7 @@ export function getMatchedFromVue3Router(app: App) {
   // @ts-ignore vue 2 下会报错
   const matcheds = app.config.globalProperties.$route?.matched;
 
-  const instance = getInstanceFromMatcheds(matcheds) ?? global;
+  const instance = getInstanceFromMatcheds(matcheds as MaybeMatched[]) ?? global;
   if (process.env.NODE_ENV !== 'production' && instance === global) {
     console.warn(WARNING);
   }

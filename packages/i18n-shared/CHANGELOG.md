@@ -1,5 +1,11 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.9
+
+### Patch Changes
+
+- 修改标识符映射规则
+
 ## 0.1.8
 
 ### Patch Changes

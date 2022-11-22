@@ -25,7 +25,7 @@
     "@wakeadmin/mapp-shared": "workspace:^0.1.1",
     "@wakeadmin/utils": "workspace:^0.1.4",
     "path-browserify": "^1.0.1",
-    "qiankun": "^2.8.3"
+    "qiankun": "^2.8.4"
   },
   "peerDependencies": {
     "vue": "^3.2.37",

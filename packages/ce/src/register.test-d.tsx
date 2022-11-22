@@ -1,10 +1,10 @@
 /* eslint-disable vue/one-component-per-file */
-import { expectType } from 'tsd';
 import { defineComponent, PropType, ref, Ref } from 'vue';
 
 import { registerCustomElements } from './register';
 import { InferProps, InferEmits, InferRawBindings, CustomElementProps, CustomElementEmit } from './type-utils';
 
+declare const expectType: <T>(value: T) => void;
 declare const v: any;
 
 const Foo = defineComponent({

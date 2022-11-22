@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.8.2
+
+### Patch Changes
+
+- 修复 polyfill 模板路径错误
+
 ## 0.8.1
 
 ### Patch Changes

@@ -21,7 +21,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "devDependencies": {
-    "vue": "~2.7.13",
+    "vue": "~2.7.14",
     "vue-i18n": "~8.27.2"
   },
   "peerDependencies": {
@@ -29,7 +29,7 @@
     "vue-i18n": "8.*"
   },
   "dependencies": {
-    "@wakeadmin/i18n-shared": "workspace:^0.1.8",
+    "@wakeadmin/i18n-shared": "workspace:^0.1.9",
     "@wakeadmin/utils": "workspace:^0.1.4"
   }
 }

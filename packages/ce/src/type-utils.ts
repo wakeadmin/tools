@@ -9,8 +9,8 @@ import type {
   ExtractDefaultPropTypes,
   HTMLAttributes,
   Ref,
+  VNodeRef,
 } from 'vue';
-import { VNodeRef } from '@vue/runtime-core';
 
 interface ReservedProps {
   key?: string | number | symbol;

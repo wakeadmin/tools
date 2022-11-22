@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/bay",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "惟客云基座",
   "main": "index.js",
   "module": "index.mjs",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@wakeadmin/assets": "workspace:^0.1.3",
-    "@wakeadmin/i18n-shared": "workspace:^0.1.8",
+    "@wakeadmin/i18n-shared": "workspace:^0.1.9",
     "@wakeadmin/mapp-child": "workspace:^0.1.1",
     "@wakeadmin/mapp-shared": "workspace:^0.1.1"
   },
@@ -44,15 +44,15 @@
     "@wakeadmin/vue-cli-plugin-i18n": "workspace:^0.1.1",
     "@wakeadmin/vue-cli-plugin-mapp": "workspace:^0.2.2",
     "@wakeadmin/vue-cli-plugin-typescript": "workspace:^0.1.0",
-    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.3",
-    "@wakeapp/wakedata-backend": "^0.4.0",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.4",
+    "@wakeapp/wakedata-backend": "^0.4.5",
     "babel-preset-wakeadmin": "workspace:^0.1.1",
-    "core-js": "^3.26.0",
-    "element-plus": "^2.2.19",
+    "core-js": "^3.26.1",
+    "element-plus": "^2.2.22",
     "normalize.css": "^8.0.1",
-    "sass": "^1.55.0",
+    "sass": "^1.56.1",
     "sass-loader": "^12.6.0",
-    "vue": "^3.2.41",
+    "vue": "^3.2.45",
     "vue-i18n": "9.1.10",
     "vue-router": "^4.1.6"
   }

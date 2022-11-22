@@ -10,10 +10,10 @@
     "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.8.1",
-    "core-js": "^3.26.0",
-    "element-plus": "^2.2.19",
-    "vue": "^3.2.41",
+    "@wakeadmin/bay": "workspace:^0.8.2",
+    "core-js": "^3.26.1",
+    "element-plus": "^2.2.22",
+    "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
   },
@@ -26,9 +26,9 @@
     "@wakeadmin/h": "workspace:^0.2.12",
     "@wakeadmin/vue-cli-plugin-ce": "workspace:^0.1.1",
     "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.4.3",
-    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.3",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.4",
     "babel-preset-wakeadmin": "workspace:^0.1.1",
-    "sass": "^1.55.0",
+    "sass": "^1.56.1",
     "sass-loader": "^12.6.0"
   }
 }
