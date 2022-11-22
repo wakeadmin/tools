@@ -24,7 +24,6 @@ export const DEFAULT_LOCALE = 'zh';
  * 默认语言映射
  */
 export const DEFAULT_MAPPER: LocaleMapper = {
-  'zh-CN': 'zh',
   'zh-TW': 'zh-Hant',
   'zh-HK': 'zh-Hant',
   'zh-MO': 'zh-Hant',

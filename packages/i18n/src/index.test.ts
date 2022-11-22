@@ -59,9 +59,12 @@ const suite = async (options: I18nOptions) => {
     setLocale('zh-cn');
 
     // 标识符映射
-    expect(getLocale()).toBe('zh');
+    expect(getLocale()).toBe('zh-cn');
+
+    setLocale('zh-HK');
+    expect(getLocale()).toBe('zh-Hant');
     // 持久化
-    expect(window.localStorage.getItem(DEFAULT_LOCALE_PERSIST_KEY)).toBe('zh');
+    expect(window.localStorage.getItem(DEFAULT_LOCALE_PERSIST_KEY)).toBe('zh-Hant');
   });
 
   describe('注册语言包', () => {
