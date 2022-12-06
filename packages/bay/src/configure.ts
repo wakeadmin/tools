@@ -63,6 +63,10 @@ export function configureBay() {
       // 高德地图
       'amap.com',
     ],
+    async bayReady() {
+      const bayModel = getInject('DI.bay.BayModel');
+      await bayModel.waitSetup();
+    },
     hooks: {
       async beforeRouterEnterMain(info) {
         if (!info.matched && info.to.path === '/' && AUTO_INDEX) {

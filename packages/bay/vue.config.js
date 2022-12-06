@@ -58,7 +58,7 @@ module.exports = defineConfig({
     port: 80,
     host: '0.0.0.0',
     allowedHosts: 'all',
-    proxy: ['/permission', '/wd', '/login.html', '/app.html'].reduce((prev, cur) => {
+    proxy: ['/permission', '/wd', '/dw', '/login.html', '/app.html'].reduce((prev, cur) => {
       prev[cur] = {
         target: SERVER,
         changeOrigin: true,
@@ -74,6 +74,12 @@ module.exports = defineConfig({
             delete proxyRes.headers['set-cookie'];
             proxyRes.headers['set-cookie'] = newCookie;
           }
+
+          // 绕过安全认证
+          proxyRes.headers['access-control-allow-origin'] = '*';
+
+          delete proxyRes.headers['content-security-policy'];
+          delete proxyRes.headers['content-security-policy-report-only'];
         },
       };
 

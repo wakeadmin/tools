@@ -17,7 +17,7 @@ function hasContainer(container: string | HTMLElement) {
   return !!container;
 }
 
-const createLoader = (container: string | HTMLElement, name: string) => {
+const createLoader = (container: string | HTMLElement, name: string, waitReady?: () => Promise<void>) => {
   // qiankun 会等待这里 resolve 才会开始挂载
   // 我们在这里等待路由 resolve
   let loaded = false;
@@ -43,6 +43,10 @@ const createLoader = (container: string | HTMLElement, name: string) => {
     }
   }
 
+  // 这个方法会被调用三次
+  // 第一次：应用激活时，这时候应用静态资源还没有加载
+  // 第二次: 应用挂载之前，这时候应用静态资源已经加载完毕，准备开始挂载
+  // 第三次：应该挂载完成
   return async (loading: boolean): Promise<void> => {
     if (!loading) {
       return undefined;
@@ -59,11 +63,20 @@ const createLoader = (container: string | HTMLElement, name: string) => {
       return await waitMounterSetup();
     }
 
+    // 外部定义的就绪器等待
+    if (typeof waitReady === 'function') {
+      return await waitReady();
+    }
+
     return undefined;
   };
 };
 
-export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormalized[] {
+export function normalizeApps(
+  baseUrl: string,
+  apps: MicroApp[],
+  waitReady?: () => Promise<void>
+): MicroAppNormalized[] {
   // 所有 activeRule 都基于基座 base
   const tryAddBaseToActiveRule = (route: string) => {
     if (route.startsWith(baseUrl)) {
@@ -141,7 +154,7 @@ export function normalizeApps(baseUrl: string, apps: MicroApp[]): MicroAppNormal
         : trimBaseUrl(baseUrl, normalizedActiveRule),
       entry: normalizedEntry,
       container,
-      loader: createLoader(container, app.name),
+      loader: createLoader(container, app.name, waitReady),
       ...other,
     };
   });
@@ -168,13 +181,13 @@ export function groupAppsByIndependent(apps: MicroAppNormalized[]) {
  * @returns
  */
 export function normalizeOptions(options: BayOptions): BayOptions {
-  let { baseUrl = process.env.MAPP_BASE_URL ?? '/', apps, ...others } = options;
+  let { baseUrl = process.env.MAPP_BASE_URL ?? '/', apps, bayReady, ...others } = options;
 
   baseUrl = normalizeUrl(baseUrl);
 
   return {
     baseUrl,
-    apps: normalizeApps(baseUrl, apps),
+    apps: normalizeApps(baseUrl, apps, bayReady),
     ...others,
   };
 }

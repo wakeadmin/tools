@@ -151,6 +151,12 @@ export interface BayOptions {
   hooks?: Partial<BayHooks>;
 
   /**
+   * 基座就绪断言
+   * 返回一个 promise, 表示基座已经就绪，基座就绪后子应用才会开始挂载
+   */
+  bayReady?: () => Promise<void>;
+
+  /**
    * 网络拦截器，可以用于检测 AJAX/fetch 的请求和响应
    * 你也可以通过 registerNetworkInterceptor 方法来注册
    */
