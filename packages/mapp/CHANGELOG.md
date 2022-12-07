@@ -1,5 +1,11 @@
 # @wakeadmin/mapp
 
+## 0.5.1
+
+### Patch Changes
+
+- 等待基座就绪后才挂载子应用
+
 ## 0.5.0
 
 ### Minor Changes

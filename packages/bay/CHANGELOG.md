@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.8.3
+
+### Patch Changes
+
+- 等待基座就绪后才挂载子应用
+
 ## 0.8.2
 
 ### Patch Changes
