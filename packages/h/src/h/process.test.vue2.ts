@@ -13,6 +13,7 @@ import {
   vue2MustUseProps,
   processRef,
   mergeProps,
+  mergeEvents,
 } from './process';
 import { isVue2Dot7 } from '../utils';
 import { render } from '../__tests__/helper';
@@ -33,6 +34,53 @@ test('mergeProps', () => {
 
   expect(mergeProps({ on: { foo: h1, bar: h1 } }, { on: { foo: h2, baz: h2 } })).toEqual({
     on: { foo: h2, bar: h1, baz: h2 },
+  });
+});
+
+test('mergeEvents', () => {
+  const handler = () => {};
+  const overwriteHandle = () => {};
+
+  const eventMap = {
+    cl: {
+      isNative: false,
+      value: handler,
+      name: 'cl',
+    },
+    's-q-w-q': {
+      isNative: false,
+      value: handler,
+      name: 's-q-w-q',
+    },
+    'select-all': {
+      isNative: true,
+      value: handler,
+      name: 'select-all',
+    },
+  };
+
+  expect(
+    mergeEvents({
+      ...eventMap,
+      selectAll: {
+        isNative: true,
+        value: overwriteHandle,
+        name: 'selectAll',
+      },
+      sQWQ: {
+        isNative: false,
+        value: overwriteHandle,
+        name: 'sQWQ',
+      },
+    })
+  ).toEqual({
+    nativeOn: {
+      selectAll: overwriteHandle,
+    },
+    on: {
+      sQWQ: overwriteHandle,
+      cl: handler,
+    },
   });
 });
 

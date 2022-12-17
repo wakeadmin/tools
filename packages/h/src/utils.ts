@@ -3,6 +3,7 @@ import { version } from '@wakeadmin/demi';
 const objectPrototype = Object.prototype;
 const plainObjectString = Object.toString();
 const hasGetOwnPropertySymbols = typeof Object.getOwnPropertySymbols !== 'undefined';
+const CAMELIZE_REGEXP = /(-|_|\.|\s)+(.)?/g;
 
 export const isVue2Dot7 = version.startsWith('2.7.');
 
@@ -60,3 +61,25 @@ export function isCamelCase(str: string): boolean {
 }
 
 export const identity = <T = any>(i: T) => i;
+
+/**
+ * 转换成小写驼峰格式
+ *
+ * @example
+ * ```javascript
+ * camelize('innerHTML');          // 'innerHTML'
+ * camelize('action_name');        // 'actionName'
+ * camelize('css-class-name');     // 'cssClassName'
+ * camelize('update:modalValue');  // 'update:modalValue'
+ * camelize('update:modal-value');  // 'update:modalValue'
+ * camelize('Q w Q');  // 'QWQ'
+ * ```
+ * @param str
+ */
+export function camelize(str: string): string {
+  return str
+    .replace(CAMELIZE_REGEXP, (_: string, sep: string, chr: string) => {
+      return chr ? chr.toUpperCase() : '';
+    })
+    .replace(/^([A-Z])/, (chr: string) => chr.toLowerCase());
+}

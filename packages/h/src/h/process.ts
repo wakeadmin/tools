@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import { Vue2, isVue2, isVNode, isRef, getCurrentInstance, Ref, h as vueh, VNode } from '@wakeadmin/demi';
+import { getCurrentInstance, h as vueh, isRef, isVNode, isVue2, Ref, VNode, Vue2 } from '@wakeadmin/demi';
 import { kebabCase, lowerFirst } from '@wakeadmin/utils';
 
-import { isBrowser, isObject, ownKeys, isPlainObject, isVue2Dot7 } from '../utils';
+import { camelize, isBrowser, isObject, isPlainObject, isVue2Dot7, ownKeys } from '../utils';
 
 const WRAP_SYMBOL = Symbol('__vnode__');
 const EVENT_KEY = /^on[A-Z][a-zA-Z0-9:]*/;
@@ -26,6 +26,7 @@ const RESERVED_KEYS = new Set([
   // vue3
   'ref_for',
 ]);
+
 const EVENT_MODIFIER_PREFIX: Record<string, string> = {
   capture: '!',
   once: '~',
@@ -72,6 +73,34 @@ export function wrap<T = any>(vnode: T): T {
   return vnode;
 }
 
+export function mergeEvents(events: Record<string, IEventHandler>): {
+  nativeOn: Record<string, Function>;
+  on: Record<string, Function>;
+} {
+  const attachedEvents: Record<string, string> = {};
+  const nativeOn: Record<string, Function> = {};
+  const on: Record<string, Function> = {};
+  for (const event of Object.values(events)) {
+    const eventName = camelize(event.name);
+    // 两者不相等 意味着传入的eventName 不是 camelCase 格式
+    // 并且已经对应的事件处理了 那么不做处理
+    if (eventName !== event.name && attachedEvents[eventName]) {
+      continue;
+    }
+    attachedEvents[eventName] = event.name;
+    if (event.isNative) {
+      nativeOn[eventName] = event.value;
+    } else {
+      on[eventName] = event.value;
+    }
+  }
+
+  return {
+    on,
+    nativeOn,
+  };
+}
+
 export function processVue2Event(key: string, value: any): IEventHandler | null {
   if (EVENT_KEY.test(key) && typeof value === 'function') {
     const splitted = kebabCase(key)
@@ -96,7 +125,7 @@ export function processVue2Event(key: string, value: any): IEventHandler | null 
     }
 
     const modifiersLength = detectedModifier.join('').length;
-    let eventName =
+    const eventName =
       detectedModifier.map(m => EVENT_MODIFIER_PREFIX[m]).join('') +
       lowerFirst(key.slice(2, -modifiersLength || key.length));
 
@@ -239,8 +268,7 @@ export function processProps(tag: any, props: any) {
   const finalProps: Record<string, any> = {};
   const attrs: Record<string, any> = {};
   const domProps: Record<string, any> = {};
-  const nativeOn: Record<string, Function> = {};
-  const on: Record<string, Function> = {};
+  const eventMap: Record<string, IEventHandler> = {};
 
   for (const key of keys) {
     const value = props[key];
@@ -253,11 +281,7 @@ export function processProps(tag: any, props: any) {
     // 事件处理
     const maybeEvent = processVue2Event(key, value);
     if (maybeEvent) {
-      if (maybeEvent.isNative) {
-        nativeOn[maybeEvent.name] = maybeEvent.value;
-      } else {
-        on[maybeEvent.name] = maybeEvent.value;
-      }
+      eventMap[maybeEvent.name] = maybeEvent;
       continue;
     }
 
@@ -275,7 +299,7 @@ export function processProps(tag: any, props: any) {
     }
   }
 
-  mergeProps(finalProps, { attrs, domProps, nativeOn, on });
+  mergeProps(finalProps, { attrs, domProps, ...mergeEvents(eventMap) });
 
   return finalProps;
 }
@@ -436,7 +460,7 @@ export function processRef(tag: any, props: any) {
     return;
   }
 
-  const ref = props?.ref as string | undefined | Ref<any>;
+  const ref = props?.ref;
 
   if (ref == null || typeof ref === 'string') {
     return;
