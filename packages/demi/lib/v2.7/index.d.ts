@@ -55,8 +55,8 @@ export { Directive } from 'vue/types/v3-directive';
 
 export interface AppContext<T = any> extends App {}
 
-export type render = (vnode: VNode | null, container: HostElement, isSVG?: boolean) => void;
-export type createVNode = (
+export const render: (vnode: VNode | null, container: HostElement, isSVG?: boolean) => void;
+export const createVNode: (
   type: VNodeTypes | ClassComponent | typeof NULL_DYNAMIC_COMPONENT,
   props?: (Data & VNodeProps) | null,
   children?: unknown,
