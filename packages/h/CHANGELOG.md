@@ -1,5 +1,13 @@
 # @wakeadmin/h
 
+## 0.2.13
+
+### Patch Changes
+
+- vue2 下 eventName 统一为 camelCase
+- Updated dependencies
+  - @wakeadmin/demi@0.2.4
+
 ## 0.2.12
 
 ### Patch Changes

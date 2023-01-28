@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.2.4
+
+### Patch Changes
+
+- 兼容 vue3 的 render 、createVNode 声明
+
 ## 0.2.3
 
 ### Patch Changes
