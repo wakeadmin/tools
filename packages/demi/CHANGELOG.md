@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.2.5
+
+### Patch Changes
+
+- 修复导出错误
+
 ## 0.2.4
 
 ### Patch Changes
