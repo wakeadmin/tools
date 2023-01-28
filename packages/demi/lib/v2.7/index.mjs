@@ -25,11 +25,11 @@ export const Transition = {
 };
 
 export const resolveComponent = function (name) {
-  return name
+  return name;
 };
 
 export const resolveDirective = function (name) {
-  return name
+  return name;
 };
 
 export const vShow = 'show';
@@ -42,6 +42,8 @@ export const Comment = undefined;
 export const isVNode = undefined;
 export const withDirectives = undefined;
 
+export const render = undefined;
+export const createVNode = undefined;
 
 function install() {}
 

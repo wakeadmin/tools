@@ -43,6 +43,7 @@ export interface App<T = any> {
   mount: Vue['$mount'];
   unmount: Vue['$destroy'];
 }
+
 export declare function createApp(rootComponent: any, rootProps?: any): App;
 // #endregion
 
@@ -52,6 +53,17 @@ export { ComponentObjectPropsOptions } from 'vue/types/v3-component-props';
 export { DefineComponent } from 'vue/types/v3-define-component';
 export { Directive } from 'vue/types/v3-directive';
 
+export interface AppContext<T = any> extends App {}
+
+export type render = (vnode: VNode | null, container: HostElement, isSVG?: boolean) => void;
+export type createVNode = (
+  type: VNodeTypes | ClassComponent | typeof NULL_DYNAMIC_COMPONENT,
+  props?: (Data & VNodeProps) | null,
+  children?: unknown,
+  patchFlag?: number,
+  dynamicProps?: string[] | null,
+  isBlockNode?: boolean
+) => VNode;
 export type VNodeChild = ScopedSlotReturnValue;
 export type VNodeArrayChildren = ScopedSlotReturnArray;
 export type VNodeProps = VNodeData;

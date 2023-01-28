@@ -30,10 +30,10 @@ exports.Transition = {
   },
 };
 exports.resolveComponent = function (name) {
-  return name
+  return name;
 };
 exports.resolveDirective = function (name) {
-  return name
+  return name;
 };
 exports.vShow = 'show';
 
@@ -44,6 +44,9 @@ exports.Text = undefined;
 exports.Comment = undefined;
 exports.isVNode = undefined;
 exports.withDirectives = undefined;
+
+exports.render = undefined;
+exports.createVNode = undefined;
 
 // createApp polyfill
 exports.createApp = function (rootComponent, rootProps) {
