@@ -204,6 +204,15 @@
         <el-table-column prop="address" label="Address"></el-table-column>
       </el-table>
     </el-row>
+    <h4>Step</h4>
+    <div>
+      <el-steps :active="2">
+        <el-step title="挫其锐"></el-step>
+        <el-step title="解其纷"></el-step>
+        <el-step title="和其光"></el-step>
+        <el-step title="同其尘"></el-step>
+      </el-steps>
+    </div>
     <h4>Message</h4>
     <el-row>
       <div
@@ -433,26 +442,30 @@
         this is content, this is content, this is content
         <div x-arrow="" class="popper__arrow"></div>
       </div>
-      <el-tooltip effect="dark" :value="true" manual style="margin-right: 300px; margin-top: 130px" placement="top">
-        <div slot="content">
-          <p>啊，怎么说呢，</p>
-          <p>这曾是我的梦想啊</p>
-          <p>像这样和喜欢的人在一起……一面迎来早晨一面喝着咖啡，曾是我的梦想啊。</p>
-          <p>你看不是有着那种曲子么。那首曲子，我从以前就很喜欢了呢</p>
-        </div>
-        <el-button>tooltip</el-button>
-      </el-tooltip>
-      <el-tooltip effect="light" :value="true" manual style="margin-right: 200px; margin-top: 130px" placement="top">
-        <div slot="content">
-          <p>交替轮回的春夏秋冬</p>
-          <p>即将结束的1095日</p>
-          <p>那或许会如梦似幻一般流逝而过吧</p>
-          <p>或许会如Ghost一般消逝而去吧</p>
-          <p>然而,又像樱花那样</p>
-          <p>留给人一种面向未来,再度绽放的预感</p>
-        </div>
-        <el-button>tooltip</el-button>
-      </el-tooltip>
+      <div style="height: 300px">
+        <el-tooltip effect="dark" :value="true" manual style="margin-right: 300px; margin-top: 130px" placement="top">
+          <div slot="content">
+            <p>啊，怎么说呢，</p>
+            <p>这曾是我的梦想啊</p>
+            <p>像这样和喜欢的人在一起……一面迎来早晨一面喝着咖啡，曾是我的梦想啊。</p>
+            <p>你看不是有着那种曲子么。那首曲子，我从以前就很喜欢了呢</p>
+          </div>
+          <el-button>tooltip</el-button>
+        </el-tooltip>
+      </div>
+      <div style="height: 300px">
+        <el-tooltip effect="light" :value="true" manual style="margin-right: 200px; margin-top: 130px" placement="top">
+          <div slot="content">
+            <p>交替轮回的春夏秋冬</p>
+            <p>即将结束的1095日</p>
+            <p>那或许会如梦似幻一般流逝而过吧</p>
+            <p>或许会如Ghost一般消逝而去吧</p>
+            <p>然而,又像樱花那样</p>
+            <p>留给人一种面向未来,再度绽放的预感</p>
+          </div>
+          <el-button>tooltip</el-button>
+        </el-tooltip>
+      </div>
       <el-popover v-model="popoverVisible" placement="top" width="160">
         <p>这是一段内容这是一段内容确定删除吗？</p>
         <div style="text-align: right; margin: 0">

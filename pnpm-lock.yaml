@@ -332,6 +332,7 @@ importers:
       '@wakeadmin/vue-cli-plugin-mapp-child': workspace:^0.4.0
       '@wakeadmin/vue-cli-plugin-vendor': workspace:^0.3.1
       core-js: ^3.24.1
+      element-ui: 2.15.10
       sass: ^1.54.4
       sass-loader: ^12.6.0
       typescript: ~4.5.5
@@ -343,6 +344,7 @@ importers:
       '@wakeadmin/bay': link:../bay
       '@wakeadmin/theme': link:../theme
       core-js: 172.26.59.72+4873/core-js/3.25.5
+      element-ui: 172.26.59.72+4873/element-ui/2.15.10
       vue: 172.26.59.72+4873/vue/2.7.13
       vue-router: 172.26.59.72+4873/vue-router/3.6.5
       vuex: 172.26.59.72+4873/vuex/3.6.2
@@ -9945,7 +9947,6 @@ packages:
     version: 1.8.5
     dependencies:
       babel-runtime: 172.26.59.72+4873/babel-runtime/6.26.0
-    dev: true
 
   172.26.59.72+4873/async-validator/4.2.5:
     resolution:
@@ -10048,7 +10049,6 @@ packages:
       }
     name: babel-helper-vue-jsx-merge-props
     version: 2.0.3
-    dev: true
 
   172.26.59.72+4873/babel-jest/28.1.3_@babel+core@7.18.13:
     resolution:
@@ -10340,7 +10340,6 @@ packages:
     dependencies:
       core-js: 172.26.59.72+4873/core-js/2.6.12
       regenerator-runtime: 172.26.59.72+4873/regenerator-runtime/0.11.1
-    dev: true
 
   172.26.59.72+4873/balanced-match/1.0.2:
     resolution:
@@ -11913,7 +11912,6 @@ packages:
     version: 2.6.12
     deprecated: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
     requiresBuild: true
-    dev: true
 
   172.26.59.72+4873/core-js/3.25.5:
     resolution:
@@ -12648,7 +12646,6 @@ packages:
     name: deepmerge
     version: 1.5.2
     engines: { node: '>=0.10.0' }
-    dev: true
 
   172.26.59.72+4873/deepmerge/4.2.2:
     resolution:
@@ -13197,7 +13194,6 @@ packages:
       normalize-wheel: 172.26.59.72+4873/normalize-wheel/1.0.1
       resize-observer-polyfill: 172.26.59.72+4873/resize-observer-polyfill/1.5.1
       throttle-debounce: 172.26.59.72+4873/throttle-debounce/1.1.0
-    dev: true
 
   172.26.59.72+4873/emittery/0.10.2:
     resolution:
@@ -20019,7 +20015,6 @@ packages:
       }
     name: normalize-wheel
     version: 1.0.1
-    dev: true
 
   172.26.59.72+4873/normalize.css/8.0.1:
     resolution:
@@ -22497,7 +22492,6 @@ packages:
       }
     name: regenerator-runtime
     version: 0.11.1
-    dev: true
 
   172.26.59.72+4873/regenerator-runtime/0.13.10:
     resolution:
@@ -22697,7 +22691,6 @@ packages:
       }
     name: resize-observer-polyfill
     version: 1.5.1
-    dev: true
 
   172.26.59.72+4873/resolve-cwd/3.0.0:
     resolution:
@@ -24525,7 +24518,6 @@ packages:
     name: throttle-debounce
     version: 1.1.0
     engines: { node: '>=4' }
-    dev: true
 
   172.26.59.72+4873/through/2.3.8:
     resolution:
