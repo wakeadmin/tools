@@ -476,7 +476,7 @@ export class BayModel extends BaseModel implements IBayModel {
     switch (node.routeType) {
       case RouteType.Href: {
         // 外部链接, 直接打开
-        this.openOutside(node.url, options);
+        window.open(node.url, node.identifier);
         break;
       }
       case RouteType.None:
