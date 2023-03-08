@@ -1,5 +1,11 @@
 # @wakeadmin/bay
 
+## 0.8.4
+
+### Patch Changes
+
+- feat: 现在外部链接菜单将会在新的页面进行打开
+
 ## 0.8.3
 
 ### Patch Changes
