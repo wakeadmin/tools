@@ -28,6 +28,20 @@ test('processProps', () => {
   };
 
   expect(processProps('h', props2)).toEqual({ ...props2, onMouseDown: fn });
+
+  expect(
+    processProps('div', {
+      staticClass: 'w-83',
+      attrs: {
+        foo: 'foo',
+      },
+    })
+  ).toEqual({
+    staticClass: 'w-83',
+    attrs: {
+      foo: 'foo',
+    },
+  });
 });
 
 test('processChildren', () => {

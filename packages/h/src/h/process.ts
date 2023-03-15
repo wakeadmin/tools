@@ -23,6 +23,7 @@ const RESERVED_KEYS = new Set([
   'class',
   'style',
   'domProps',
+  "staticClass",
   // vue3
   'ref_for',
 ]);

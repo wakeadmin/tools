@@ -252,6 +252,24 @@ test('processProps', () => {
     },
     refInFor: true,
   });
+
+  expect(
+    processProps('div', {
+      staticClass: 'w-83',
+      onClick1: h,
+      attrs: {
+        foo: 'foo',
+      },
+    })
+  ).toEqual({
+    staticClass: 'w-83',
+    on: {
+      click1: h,
+    },
+    attrs: {
+      foo: 'foo',
+    },
+  });
 });
 
 describe('processChildren', () => {
