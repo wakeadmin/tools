@@ -27,6 +27,6 @@
   "author": "ivan-lee",
   "license": "MIT",
   "peerDependencies": {
-    "vue": ">=2.7.0"
+    "vue": ">=2.7.14"
   }
 }
