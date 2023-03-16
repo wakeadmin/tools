@@ -1,5 +1,13 @@
 # @wakeadmin/h
 
+## 0.2.14
+
+### Patch Changes
+
+- 修复 h 在 vue2 下错误的传递 staticClass 的问题
+- Updated dependencies
+  - @wakeadmin/demi@0.2.6
+
 ## 0.2.13
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.2.6
+
+### Patch Changes
+
+- 现在 demi 在 vue2 下不再扩展对应的事件类型
+
 ## 0.2.5
 
 ### Patch Changes
