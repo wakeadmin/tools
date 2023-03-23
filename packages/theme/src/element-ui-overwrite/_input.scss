@@ -4,6 +4,12 @@
   padding: 5px 10px;
 }
 
+.el-textarea {
+  & > .el-input__count {
+    color: var(--wk-color-font-secondary);
+  }
+}
+
 .el-form-item__content,
 .el-form-item__label,
 .el-input__icon,
@@ -59,10 +65,9 @@
 }
 
 .el-radio {
-  &__inner:hover{
+  &__inner:hover {
     border-color: var(--wk-color-info);
   }
-
 
   &__input.is-checked {
     .el-radio__inner {
