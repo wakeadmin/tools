@@ -1,5 +1,6 @@
 // 从 wkb-common-ui 移植，仅保留结构性（如宽高、间距）覆盖信息
 
+@use './avatar';
 @use './color-picker';
 @use './dialog';
 @use './input';
