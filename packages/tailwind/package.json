@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/tailwind",
-  "version": "0.2.0-next2",
+  "version": "1.0.0",
   "description": "惟客云B端 tailwind 自定义配置",
   "main": "tailwind.config.js",
   "keywords": [

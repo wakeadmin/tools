@@ -1,5 +1,11 @@
 # @wakeadmin/tailwind
 
+## 1.0.0
+
+### Major Changes
+
+- 适配惟客 ui 规范
+
 ## 0.1.3
 
 ### Patch Changes
