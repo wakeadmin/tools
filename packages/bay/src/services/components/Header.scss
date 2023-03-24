@@ -2,7 +2,7 @@
 
 .bay-layout-header {
   $radius: var(--wk-border-radius-sm);
-  $height: getVar(header-height, 58px);
+  $height: getVar(header-height, 46px);
   $body-padding: getVar(header-body-padding, 20px 16px);
 
   background-color: var(--wk-color-white);
@@ -10,14 +10,14 @@
   width: 100%;
 
   &__top {
-    padding: 0 24px 0 8px;
+    padding: 0 var(--wk-spacing-sm, 16px);
     height: $height;
     display: flex;
     align-items: center;
     font-size: var(--wk-font-size-h3);
 
     &:not(.lonely) {
-      border-bottom: 1px solid var(--wk-color-border);
+      border-bottom: 1px solid var(--wk-color-divider);
     }
   }
 
@@ -41,13 +41,25 @@
     display: inline-block;
     height: $height;
     line-height: $height;
-    padding: 0 16px;
     position: relative;
     user-select: none;
   }
 
+  &__title {
+    color: var(--wk-color-font-primary, #303133);
+    font-size: 16px;
+  }
+
   &__tab {
     cursor: pointer;
+    padding: 0 12px;
+
+    &:first-child {
+      padding-left: 0;
+      &.active::after {
+        left: 0;
+      }
+    }
 
     &.active {
       color: var(--wk-color-primary);

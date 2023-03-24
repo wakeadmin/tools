@@ -1,4 +1,6 @@
 .el-table {
+  margin-top: 0;
+
   th,
   td {
     padding: 14px 0;
@@ -10,17 +12,33 @@
       padding-left: 24px;
     }
   }
+
+  th.el-table__cell > .cell,
   .cell {
     padding-left: 24px;
     padding-right: 24px;
   }
+
   td {
     padding: 19px 0;
     border-bottom: 1px solid #ebeef5;
   }
-  thead {
-    th {
-      background: #fff;
+  thead th,
+  th.el-table__cell {
+    background-color: var(--wk-color-bg);
+    color: var(--wk-color-font-primary);
+  }
+
+  &__body tr.hover-row {
+    &.current-row > td.el-table__cell,
+    &.el-table__row--striped.current-row > td.el-table__cell,
+    &.el-table__row--striped > td.el-table__cell,
+    & > td.el-table__cell {
+      background-color: var(--wk-color-info-50);
     }
   }
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+  background-color: var(--wk-color-info-50);
 }

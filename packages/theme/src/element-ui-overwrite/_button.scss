@@ -1,0 +1,28 @@
+.el-button {
+  padding: 8px 12px;
+  &.is-round {
+    padding: 8px 15px;
+  }
+  &.is-circle {
+    padding: 8px;
+  }
+  &.el-button--default:not(&--primary, &--success, &--info, &--warning, &--danger) {
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  &--text.el-button {
+    color: var(--wk-color-link);
+    &.is-disabled {
+      color: var(--wk-color-link-disabled);
+    }
+    &:hover {
+      color: var(--wk-color-link-hover);
+    }
+    &:active {
+      color: var(--wk-color-link-active);
+    }
+  }
+}

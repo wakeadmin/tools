@@ -1,0 +1,73 @@
+$disabledColor: #8dccff;
+.fat-actions {
+  --fat-table-actions-gap: var(--wk-spacing-sm);
+
+  // FIX  修复组件库显示
+  align-items: center;
+
+  &__more > svg {
+    display: block;
+  }
+
+  // FIX end
+
+  &__menu &__menu-item {
+    color: var(--wk-color-info);
+    &.is-disabled {
+      color: $disabledColor;
+    }
+  }
+
+  .el-button {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    &.is-disabled {
+      color: $disabledColor;
+    }
+
+    &.is-loading {
+      .el-icon-loading {
+        position: absolute;
+        left: -16px;
+      }
+    }
+
+    [class*='el-icon-'] + span {
+      margin-left: 0;
+    }
+  }
+}
+
+.fat-table {
+  &__pagination {
+    .el-pagination {
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .fat-container__query {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  &__query {
+    .el-form > .el-form-item:last-child {
+      margin-right: 0;
+    }
+  }
+  & .el-table &__selection-cell {
+    .cell {
+      padding-left: 24px;
+      padding-right: 0;
+    }
+    & + th,
+    & + .el-table__cell {
+      .cell {
+        padding-left: 8px;
+      }
+    }
+  }
+}

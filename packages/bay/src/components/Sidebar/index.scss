@@ -3,7 +3,7 @@
   flex-direction: column;
   max-width: var(--bay-sidebar-width);
   background-color: var(--wk-color-white);
-  box-shadow: 1px 0 0 0 #dce1e6;
+  box-shadow: 1px 0 0 0 var(--wk-color-gray-300, '#ebeef5');
   z-index: 4;
 
   @at-root {

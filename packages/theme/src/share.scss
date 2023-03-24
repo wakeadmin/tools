@@ -8,3 +8,31 @@
   font-style: normal;
   font-weight: normal;
 }
+
+body {
+  font-size: 14px;
+  font-family: var(--wk-font-family);
+}
+
+.wk {
+  &-link {
+    color: var(--wk-color-link);
+
+    &:visited {
+      color: var(--wk-color-link);
+    }
+
+    &:active {
+      color: var(--wk-color-link-active);
+    }
+
+    &:hover {
+      color: var(--wk-color-link-hover);
+    }
+
+    &:disabled,
+    &[disabled] {
+      color: var(--wk-color-link-disabled);
+    }
+  }
+}

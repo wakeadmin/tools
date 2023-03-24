@@ -1,0 +1,16 @@
+.el-breadcrumb {
+  // 不做上边距
+  padding-bottom: var(--wk-spacing-sm, 16px);
+  line-height: 22px;
+  &__inner.is-link {
+    color: var(--wk-color-font-regular);
+    font-weight: 400;
+    &:hover {
+      color: var(--wk-color-info);
+    }
+  }
+
+  &__item:last-child {
+    color: var(--wk-color-font-primary);
+  }
+}
