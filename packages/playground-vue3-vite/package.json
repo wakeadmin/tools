@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.8.2",
+    "@wakeadmin/bay": "latest",
     "vue": "^3.2.45"
   },
   "devDependencies": {

@@ -10,7 +10,7 @@
     "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
-    "@wakeadmin/bay": "workspace:^0.8.2",
+    "@wakeadmin/bay": "latest",
     "core-js": "^3.26.1",
     "element-plus": "^2.2.22",
     "vue": "^3.2.45",
