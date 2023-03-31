@@ -33,8 +33,4 @@ npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 echo '开始发布 npm 模块'
 pnpm publish -r --no-git-checks --registry=$NPM_REGISTRY --access public
 
-# 构建基座容器
-echo '开始构建基座'
-pnpm run --workspace-concurrency=1 -r build:assets
-pnpm run --workspace-concurrency=1 -r build:docker
-pnpm run --workspace-concurrency=1 -r publish:docker
+
