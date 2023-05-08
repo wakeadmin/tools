@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.2.15
+
+### Patch Changes
+
+- 指定 jsx-dev-runtime 导出规则
+
 ## 0.2.14
 
 ### Patch Changes
