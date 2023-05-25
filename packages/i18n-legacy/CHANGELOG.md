@@ -1,5 +1,13 @@
 # @wakeadmin/i18n-legacy
 
+## 0.1.7
+
+### Patch Changes
+
+- 修复 registerBundles 不支持 layer
+- Updated dependencies
+  - @wakeadmin/i18n-shared@0.1.10
+
 ## 0.1.6
 
 ### Patch Changes
