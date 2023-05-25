@@ -111,7 +111,7 @@ export interface I18nInstance {
    * 注册语言包
    * @param bundles
    */
-  registerBundles(bundles: { [locale: string]: I18nBundle }): Promise<void>;
+  registerBundles(bundles: { [locale: string]: I18nBundle }, layer?: number): Promise<void>;
 }
 
 /* ------------- 以下类型从 vue-i18n 中拷贝 ----------------- */

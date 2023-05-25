@@ -96,7 +96,7 @@ export function setLocale(locale: string) {
  * 注册语言包
  * @param bundles
  */
-export async function registerBundles(bundles: { [locale: string]: I18nBundle }): Promise<void> {
+export async function registerBundles(bundles: { [locale: string]: I18nBundle }, layer?: number): Promise<void> {
   await __waitReady();
-  return await getGlobalInstance().registerBundles(bundles);
+  return await getGlobalInstance().registerBundles(bundles, layer);
 }
