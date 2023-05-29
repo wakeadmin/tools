@@ -21,4 +21,8 @@
       color: var(--wk-color-link-active);
     }
   }
+
+  &.is-plain {
+    --#{$prefix}-button-bg-color: transparent;
+  }
 }
