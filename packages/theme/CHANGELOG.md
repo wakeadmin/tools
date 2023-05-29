@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 1.1.0
+
+### Minor Changes
+
+- element-plus 主题覆盖
+
 ## 1.0.0
 
 ### Major Changes
