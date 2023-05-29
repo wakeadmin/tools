@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 1.1.1
+
+### Patch Changes
+
+- 修复 element-plus 按钮, 消息弹窗样式
+
 ## 1.1.0
 
 ### Minor Changes
