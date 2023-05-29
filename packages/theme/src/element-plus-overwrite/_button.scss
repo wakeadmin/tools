@@ -1,0 +1,24 @@
+@use './setting' as *;
+
+.#{$prefix}-button {
+  padding: 8px 12px;
+  &.is-round {
+    padding: 8px 15px;
+  }
+  &.is-circle {
+    padding: 8px;
+  }
+
+  &.is-link {
+    color: var(--wk-color-link);
+    &.is-disabled {
+      color: var(--wk-color-link-disabled);
+    }
+    &:hover {
+      color: var(--wk-color-link-hover);
+    }
+    &:active {
+      color: var(--wk-color-link-active);
+    }
+  }
+}

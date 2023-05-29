@@ -1,0 +1,18 @@
+@use './setting' as *;
+
+// 选中的颜色展示区域
+.#{$prefix}-color-picker__trigger {
+  width: 70px;
+  height: 36px;
+  padding: 0px;
+  border: 4px solid #d0d5d9;
+  border-radius: 4px;
+
+  .#{$prefix}-color-picker__color {
+    border: 0px;
+  }
+  .#{$prefix}-color-picker__icon,
+  .#{$prefix}-color-picker__empty {
+    display: none;
+  }
+}

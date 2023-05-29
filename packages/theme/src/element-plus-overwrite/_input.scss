@@ -1,0 +1,310 @@
+@use './setting' as *;
+
+.#{$prefix}-textarea {
+  & > .#{$prefix}-input__count {
+    color: var(--wk-color-font-secondary);
+  }
+}
+
+.#{$prefix}-form-item__content,
+.#{$prefix}-form-item__label,
+.#{$prefix}-input__icon,
+.#{$prefix}-input-number,
+.#{$prefix}-form-item__content {
+  line-height: 32px;
+}
+
+.#{$prefix}-input-number__increase,
+.#{$prefix}-input-number__decrease {
+  line-height: 30px;
+}
+.#{$prefix}-input__inner {
+  height: 32px;
+  line-height: 32px;
+}
+.#{$prefix}-date-editor .#{$prefix}-range__icon,
+.#{$prefix}-date-editor .#{$prefix}-range-separator {
+  line-height: 26px;
+}
+
+// 单独配置
+
+.#{$prefix}-input {
+  & &__count {
+    color: var(--wk-color-font-placeholder);
+  }
+  &__inner:focus {
+    border-color: var(--wk-color-info);
+  }
+
+  // 数字输入框
+  &-number__decrease,
+  &-number__increase {
+    &:hover:not(.is-disabled) ~ .#{$prefix}-input .#{$prefix}-input__inner:not(.is-disabled) {
+      border-color: var(--wk-color-info);
+    }
+    &:hover {
+      color: var(--wk-color-info);
+    }
+  }
+  &-number.is-controls-right .#{$prefix}-input-number {
+    &__increase,
+    &__decrease {
+      line-height: 15px;
+    }
+  }
+
+  &-group__append,
+  &-group__prepend {
+    color: inherit;
+  }
+}
+
+.#{$prefix}-radio {
+  &__inner:hover {
+    border-color: var(--wk-color-info);
+  }
+
+  &__input.is-checked {
+    .#{$prefix}-radio__inner {
+      background-color: var(--wk-color-info);
+      border-color: var(--wk-color-info);
+    }
+
+    & + .#{$prefix}-radio__label {
+      color: inherit;
+    }
+  }
+
+  &-button__inner:hover {
+    color: var(--wk-color-info);
+  }
+
+  &-button:focus:not(.is-focus):not(:active):not(.is-disabled),
+  &:focus:not(.is-focus):not(:active):not(.is-disabled) &__inner {
+    box-shadow: 0 0 2px 2px var(--wk-color-info);
+  }
+
+  &.is-bordered.is-checked {
+    border-color: var(--wk-color-info);
+  }
+
+  &-button__orig-radio {
+    &:checked + .#{$prefix}-radio-button__inner {
+      background-color: var(--wk-color-info);
+      border-color: var(--wk-color-info);
+      box-shadow: -1px 0 0 0 var(--wk-color-info);
+    }
+
+    &:disabled + .#{$prefix}-radio-button__inner {
+      border-color: var(--wk-color-border);
+    }
+
+    &:disabled:checked + .#{$prefix}-radio-button__inner {
+      border-color: var(--wk-color-border);
+      box-shadow: none;
+    }
+  }
+}
+
+.#{$prefix}-checkbox {
+  &__inner:hover {
+    border-color: var(--wk-color-info);
+  }
+
+  &-button__inner:hover {
+    border-color: var(--wk-color-info);
+    color: var(--wk-color-info);
+  }
+
+  &__input.is-indeterminate {
+    .#{$prefix}-checkbox__inner {
+      border-color: var(--wk-color-info);
+      background-color: var(--wk-color-info);
+    }
+  }
+
+  &__input.is-focus {
+    .#{$prefix}-checkbox__inner {
+      border-color: var(--wk-color-info);
+    }
+  }
+
+  &__input.is-checked {
+    & + .#{$prefix}-checkbox__label {
+      color: inherit;
+    }
+
+    & .#{$prefix}-checkbox__inner {
+      background-color: var(--wk-color-info);
+      border-color: var(--wk-color-info);
+    }
+  }
+
+  &-button {
+    &.is-focus {
+      .#{$prefix}-checkbox-button__inner {
+        border-color: var(--wk-color-info);
+      }
+    }
+
+    &.is-checked {
+      &:first-child .#{$prefix}-checkbox-button__inner {
+        border-left-color: var(--wk-color-info);
+      }
+
+      .#{$prefix}-checkbox-button__inner {
+        background-color: var(--wk-color-info);
+        border-color: var(--wk-color-info);
+        box-shadow: -1px 0 0 0 var(--wk-color-info-50);
+      }
+    }
+
+    &.is-disabled {
+      .#{$prefix}-checkbox-button__inner {
+        border-color: var(--wk-color-border);
+      }
+    }
+
+    &.is-disabled.is-checked {
+      .#{$prefix}-checkbox-button__inner {
+        border-color: var(--wk-color-border);
+        background-color: var(--wk-color-font-disabled);
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.is-bordered.is-checked {
+    border-color: var(--wk-color-info);
+  }
+}
+
+.#{$prefix}-select {
+  &-dropdown.is-multiple &-dropdown__item.selected,
+  &-dropdown__item.selected {
+    color: var(--wk-color-info);
+  }
+
+  .#{$prefix}-input__inner:focus,
+  .#{$prefix}-input.is-focus .#{$prefix}-input__inner {
+    border-color: var(--wk-color-info);
+  }
+
+  .#{$prefix}-tag.#{$prefix}-tag--info {
+    background: #f4f4f5;
+    border-color: var(--wk-color-gray-400);
+    color: var(--wk-color-font-secondary);
+    .#{$prefix}-tag__close {
+      color: var(--wk-color-gray-700);
+      &:hover {
+        color: #fff;
+        background-color: var(--wk-color-gray-700);
+      }
+    }
+  }
+}
+
+.#{$prefix}-cascader {
+  .tag {
+    color: var(--wk-color-gray-700);
+  }
+  & .#{$prefix}-input.is-focus .#{$prefix}-input__inner,
+  & .#{$prefix}-input .#{$prefix}-input__inner:focus {
+    border-color: var(--wk-color-info);
+  }
+  &-node {
+    &.in-active-path,
+    &.is-active,
+    &.is-selectable.in-checked-path {
+      color: var(--wk-color-info);
+    }
+  }
+}
+
+.#{$prefix}-slider {
+  &__bar {
+    background-color: var(--wk-color-info);
+  }
+
+  &__button {
+    border-color: var(--wk-color-info);
+  }
+}
+
+// 时间选择器
+.#{$prefix}-date-editor {
+  &--datetimerange.#{$prefix}-input,
+  &--datetimerange.#{$prefix}-input__inner {
+    // width: 100%;
+    justify-content: space-between;
+  }
+
+  &.is-active,
+  &.is-active:hover {
+    border-color: var(--wk-color-info);
+  }
+  .#{$prefix}-range__close-icon {
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.#{$prefix}-picker-panel {
+  &__icon-btn:hover {
+    color: var(--wk-color-info);
+  }
+
+  .#{$prefix}-date-table {
+    td.today span,
+    td.available:hover {
+      color: var(--wk-color-info);
+    }
+
+    td.end-date,
+    td.start-date,
+    td.current:not(.disabled) {
+      span {
+        background-color: var(--wk-color-info);
+        color: #fff;
+      }
+    }
+  }
+  .#{$prefix}-month-table,
+  .#{$prefix}-year-table {
+    td .cell:hover,
+    td.current:not(.disabled) .cell,
+    td.today .cell {
+      color: var(--wk-color-info);
+    }
+  }
+  .#{$prefix}-date-picker__header-label {
+    &.active,
+    &:hover {
+      color: var(--wk-color-info);
+    }
+  }
+  &__footer {
+    .#{$prefix}-button--text {
+      color: inherit;
+    }
+  }
+}
+
+.#{$prefix}-time-panel {
+  &__btn.confirm {
+    color: var(--wk-color-info);
+  }
+}
+
+.#{$prefix}-switch {
+  &__lab#{$prefix}.is-active {
+    color: var(--wk-color-success);
+  }
+  &.is-checked &__core {
+    border-color: var(--wk-color-success);
+    background-color: var(--wk-color-success);
+  }
+}

@@ -1,0 +1,131 @@
+@use './setting' as *;
+
+.#{$prefix}-message-box,
+.#{$prefix}-dialog {
+  padding: 20px;
+  box-shadow: 0 2px 8px 0 rgba(200, 201, 204, 0.5);
+  border-radius: 4px;
+
+  &__header {
+    padding: 0;
+    padding-bottom: 10px;
+  }
+
+  &__footer {
+    padding-bottom: 0;
+  }
+
+  &__title {
+    line-height: 26px;
+  }
+  &__headerbtn {
+    &:hover {
+      .#{$prefix}-icon-close {
+        color: var(--wk-color-gray-800);
+      }
+    }
+
+    .#{$prefix}-icon-close {
+      color: var(--wk-color-gray-600);
+    }
+  }
+
+  &__content,
+  &__body {
+    padding: 32px 0 12px;
+  }
+
+  &__btns {
+    padding: 0;
+    padding-top: 30px;
+  }
+  &__btns:lang(zh) {
+    letter-spacing: 1ch;
+  }
+}
+
+.#{$prefix}-message-box {
+  &__status {
+    font-size: 16px !important;
+    top: unset;
+    transform: none;
+  }
+
+  &__status + &__message {
+    padding-left: var(--wk-spacing-base);
+  }
+  &__headerbtn {
+    top: 5px;
+    right: 0;
+  }
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: r#{$prefix}ative;
+  }
+}
+
+.#{$prefix}-message-box,
+.#{$prefix}-dialog {
+  padding: 20px;
+  &__header {
+    padding: 0;
+    padding-bottom: 10px;
+  }
+  &__title {
+    line-height: 26px;
+  }
+  &__headerbtn {
+    .#{$prefix}-icon-close {
+      color: #717378;
+    }
+  }
+
+  &__content {
+    padding: 32px 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__btns {
+    padding: 0;
+    padding-top: 30px;
+  }
+  &__btns:lang(zh) {
+    letter-spacing: 1ch;
+  }
+}
+
+.#{$prefix}-message-box {
+  &__status {
+    font-size: 16px !important;
+    top: 4px;
+    transform: none;
+  }
+  &__headerbtn {
+    top: 5px;
+  }
+}
+
+.dialog-footer,
+.#{$prefix}-dialog__footer,
+.#{$prefix}-message-box__btns {
+  .#{$prefix}-button + .#{$prefix}-button {
+    margin-left: 20px;
+  }
+}
+
+.#{$prefix}-drawer {
+  &__header {
+    color: var(--wk-color-font-primary);
+    font-size: 16px;
+    line-height: 22px;
+    text-align: left;
+    font-weight: 600;
+    padding: 16px 0 10px;
+    margin: 0 16px;
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,8 @@
+@use './setting' as *;
+
+.#{$prefix}-cascader {
+  display: inline-block;
+  position: relative;
+  font-size: 14px;
+  line-height: 32px;
+}

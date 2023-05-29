@@ -1,0 +1,15 @@
+@use './setting' as *;
+
+.#{$prefix}-menu {
+  .#{$prefix}-submenu.is-active .#{$prefix}-submenu__title {
+    color: var(--wk-color-primary);
+  }
+}
+.#{$prefix}-dropdown {
+  &-menu__item {
+    &:focus,
+    &:not(.is-disabled):hover {
+      background-color: transparent;
+    }
+  }
+}

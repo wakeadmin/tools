@@ -1,0 +1,5 @@
+@use './setting' as *;
+
+.#{$prefix}-avatar > img {
+  width: 100%;
+}

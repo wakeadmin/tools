@@ -1,0 +1,19 @@
+@use './setting' as *;
+
+.#{$prefix}-pagination {
+  font-weight: 500;
+
+  button:hover {
+    color: var(--wk-color-info);
+  }
+  &__sizes .#{$prefix}-input .#{$prefix}-input__inner:hover {
+    border-color: var(--wk-color-info);
+  }
+}
+
+.#{$prefix}-pager {
+  li.active,
+  li:hover {
+    color: var(--wk-color-info);
+  }
+}

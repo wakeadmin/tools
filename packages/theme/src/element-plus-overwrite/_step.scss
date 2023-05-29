@@ -1,0 +1,15 @@
+@use './setting' as *;
+
+.#{$prefix}-step {
+  &__head {
+    &.is-finish {
+      border-color: var(--wk-color-info);
+      color: var(--wk-color-info);
+    }
+  }
+  &__title {
+    &.is-finish {
+      color: var(--wk-color-info);
+    }
+  }
+}

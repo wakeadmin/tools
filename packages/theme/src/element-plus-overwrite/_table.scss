@@ -1,0 +1,46 @@
+@use './setting' as *;
+
+.#{$prefix}-table {
+  margin-top: 0;
+
+  th,
+  td {
+    padding: 14px 0;
+    > .cell {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    &:first-child .cell {
+      padding-left: 24px;
+    }
+  }
+
+  th.#{$prefix}-table__cell > .cell,
+  .cell {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  td {
+    padding: 19px 0;
+    border-bottom: 1px solid #ebeef5;
+  }
+  thead th,
+  th.#{$prefix}-table__cell {
+    background-color: var(--wk-color-bg);
+    color: var(--wk-color-font-primary);
+  }
+
+  &__body tr.hover-row {
+    &.current-row > td.#{$prefix}-table__cell,
+    &.#{$prefix}table__row--striped.current-row > td.#{$prefix}table__cell,
+    &.#{$prefix}table__row--striped > td.#{$prefix}table__cell,
+    & > td.#{$prefix}table__cell {
+      background-color: var(--wk-color-info-50);
+    }
+  }
+}
+
+.#{$prefix}table--enable-row-hover .#{$prefix}table__body tr:hover > td.#{$prefix}table__cell {
+  background-color: var(--wk-color-info-50);
+}

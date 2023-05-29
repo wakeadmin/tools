@@ -1,0 +1,9 @@
+@use './setting' as *;
+
+.#{$prefix}-popover__reference-wrapper > .#{$prefix}-button--default {
+  color: var(--wk-color-info-900);
+  border-color: currentColor;
+}
+.#{$prefix}-tooltip__popper {
+  padding: 6px 12px;
+}
