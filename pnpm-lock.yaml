@@ -170,9 +170,13 @@ importers:
     specifiers:
       '@wakeadmin/demi': workspace:^0.2.6
       '@wakeadmin/utils': workspace:^0.1.4
+      lodash: ^4.17.21
+      tslib: ^2.5.3
     dependencies:
       '@wakeadmin/demi': link:../demi
       '@wakeadmin/utils': link:../utils
+      lodash: 172.26.59.72+4873/lodash/4.17.21
+      tslib: 172.26.59.72+4873/tslib/2.5.3
 
   packages/i18n:
     specifiers:
@@ -428,8 +432,12 @@ importers:
   packages/utils:
     specifiers:
       '@wakeapp/utils': ^0.4.5
+      lodash: ^4.17.21
+      tslib: ^2.5.3
     dependencies:
-      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.4.5
+      '@wakeapp/utils': 172.26.59.72+4873/@wakeapp/utils/0.4.5_lodash@4.17.21
+      lodash: 172.26.59.72+4873/lodash/4.17.21
+      tslib: 172.26.59.72+4873/tslib/2.5.3
 
   packages/vue-cli-plugin-ce:
     specifiers:
@@ -9106,6 +9114,29 @@ packages:
       '@wakeapp/events': 172.26.59.72+4873/@wakeapp/events/0.4.5
       big.js: 172.26.59.72+4873/big.js/6.2.1
       dayjs: 172.26.59.72+4873/dayjs/1.11.6
+      path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
+      polished: 172.26.59.72+4873/polished/4.2.2
+      query-string: 172.26.59.72+4873/query-string/7.1.1
+    dev: false
+
+  172.26.59.72+4873/@wakeapp/utils/0.4.5_lodash@4.17.21:
+    resolution:
+      {
+        integrity: sha512-a7u5CyCdNdXw4c5YgUnLyjMCsSuUubkWDCvhokzCbiHv8C6B9YmpeyrH55N7TzX2m+88dQyQe3k239rds1uB0g==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/@wakeapp%2futils/-/utils-0.4.5.tgz,
+      }
+    id: 172.26.59.72+4873/@wakeapp/utils/0.4.5
+    name: '@wakeapp/utils'
+    version: 0.4.5
+    peerDependencies:
+      lodash: 4.*
+    dependencies:
+      '@types/big.js': 172.26.59.72+4873/@types/big.js/6.1.6
+      '@wakeapp/events': 172.26.59.72+4873/@wakeapp/events/0.4.5
+      big.js: 172.26.59.72+4873/big.js/6.2.1
+      dayjs: 172.26.59.72+4873/dayjs/1.11.6
+      lodash: 172.26.59.72+4873/lodash/4.17.21
       path-browserify: 172.26.59.72+4873/path-browserify/1.0.1
       polished: 172.26.59.72+4873/polished/4.2.2
       query-string: 172.26.59.72+4873/query-string/7.1.1
@@ -25384,6 +25415,17 @@ packages:
       }
     name: tslib
     version: 2.4.1
+
+  172.26.59.72+4873/tslib/2.5.3:
+    resolution:
+      {
+        integrity: sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==,
+        registry: http://npm.wakedata-inc.com/,
+        tarball: http://172.26.59.72:4873/tslib/-/tslib-2.5.3.tgz,
+      }
+    name: tslib
+    version: 2.5.3
+    dev: false
 
   172.26.59.72+4873/tsutils/3.21.0_typescript@4.8.4:
     resolution:
