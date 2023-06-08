@@ -12,12 +12,12 @@
     "publish:docker": "node ./scripts/publish-docker.js"
   },
   "dependencies": {
-    "@wakeadmin/bay": "latest",
-    "@wakeadmin/theme": "workspace:^*",
-    "core-js": "^3.24.1",
+    "@wakeadmin/bay": "^0.8.4",
+    "@wakeadmin/theme": "workspace:^1.1.1",
+    "core-js": "^3.30.2",
     "element-ui": "2.15.10",
     "vue": "^2.7.14",
-    "vue-router": "^3.5.4",
+    "vue-router": "^3.6.5",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
@@ -27,12 +27,12 @@
     "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
-    "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.4.0",
-    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.1",
-    "sass": "^1.54.4",
+    "@wakeadmin/vue-cli-plugin-mapp-child": "workspace:^0.4.3",
+    "@wakeadmin/vue-cli-plugin-vendor": "workspace:^0.3.4",
+    "sass": "^1.63.2",
     "sass-loader": "^12.6.0",
     "typescript": "~4.5.5",
-    "vue-template-compiler": "^2.7.8"
+    "vue-template-compiler": "^2.7.14"
   },
   "pnpm": {
     "overrides": {

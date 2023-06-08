@@ -1,5 +1,14 @@
 # @wakeadmin/assets
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @wakeadmin/utils@0.1.5
+  - @wakeadmin/demi@0.3.0
+
 ## 0.1.3
 
 ### Patch Changes

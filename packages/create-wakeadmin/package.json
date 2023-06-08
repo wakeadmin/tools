@@ -16,6 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "generator-wakeadmin": "workspace:^0.2.8",
-    "yeoman-environment": "^3.12.1"
+    "yeoman-environment": "^3.19.3"
   }
 }

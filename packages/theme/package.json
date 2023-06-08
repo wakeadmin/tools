@@ -17,14 +17,14 @@
     "serve": "http-serve -p 5500 --cors ."
   },
   "devDependencies": {
-    "cssnano": "^5.1.13",
-    "element-plus": "^2.2.18",
+    "cssnano": "^5.1.15",
+    "element-plus": "^2.3.6",
     "element-ui": "2.15.10",
     "fs-extra": "^10.1.0",
     "http-serve": "^1.0.1",
-    "postcss": "^8.4.18",
-    "sass": "^1.55.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.22",
+    "postcss": "^8.4.24",
+    "sass": "^1.63.2"
   },
   "keywords": [
     "wakedata",

@@ -1,6 +1,6 @@
 {
   "name": "test-helper-vue",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "跨版本 vue 测试辅助",
   "private": true,
   "main": "dist/commonjs/index.js",
@@ -20,8 +20,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.2.3",
-    "@wakeadmin/h": "workspace:^0.2.12"
+    "@wakeadmin/demi": "workspace:^0.3.0",
+    "@wakeadmin/h": "workspace:^0.3.0"
   },
   "jest": {
     "preset": "jest-preset-universe-vue"

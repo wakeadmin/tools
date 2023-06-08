@@ -1,5 +1,19 @@
 # @wakeadmin/h
 
+## 0.3.0
+
+### Minor Changes
+
+- - 修复: 修复 vite 下依赖缺失, 导致构建失败
+  - 优化: 支持最新 vue 版本
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @wakeadmin/utils@0.1.5
+  - @wakeadmin/demi@0.3.0
+
 ## 0.2.15
 
 ### Patch Changes

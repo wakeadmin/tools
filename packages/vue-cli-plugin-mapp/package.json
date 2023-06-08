@@ -32,7 +32,7 @@
     "@vue/cli-service": "5.*"
   },
   "dependencies": {
-    "@wakeadmin/utils": "workspace:^0.1.4",
+    "@wakeadmin/utils": "workspace:^0.1.5",
     "cli-table": "^0.3.11"
   }
 }

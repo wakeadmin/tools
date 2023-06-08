@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/framework",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "wakeadmin 依赖注入框架",
   "module": "./dist/index.js",
   "main": "./dist/commonjs/index.js",
@@ -29,13 +29,13 @@
     "preset": "jest-preset-universe-vue"
   },
   "dependencies": {
-    "@wakeadmin/demi": "workspace:^0.2.3",
-    "@wakeadmin/h": "workspace:^0.2.12",
-    "@wakeadmin/utils": "workspace:^0.1.4",
-    "@wakeapp/framework-core": "^0.4.5"
+    "@wakeadmin/demi": "workspace:^0.3.0",
+    "@wakeadmin/h": "workspace:^0.3.0",
+    "@wakeadmin/utils": "workspace:^0.1.5",
+    "@wakeapp/framework-core": "^1.0.11"
   },
   "devDependencies": {
-    "test-helper-vue": "workspace:^0.1.4"
+    "test-helper-vue": "workspace:^0.1.5"
   },
   "peerDependencies": {
     "vue": ">=2.7.0"

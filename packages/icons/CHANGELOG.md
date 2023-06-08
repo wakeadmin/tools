@@ -1,5 +1,14 @@
 # @wakeadmin/icons
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @wakeadmin/h@0.3.0
+  - @wakeadmin/demi@0.3.0
+
 ## 0.1.4
 
 ### Patch Changes

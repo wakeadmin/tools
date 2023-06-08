@@ -30,6 +30,6 @@
   },
   "dependencies": {
     "@wakeadmin/i18n-shared": "workspace:^0.1.10",
-    "@wakeadmin/utils": "workspace:^0.1.4"
+    "@wakeadmin/utils": "workspace:^0.1.5"
   }
 }

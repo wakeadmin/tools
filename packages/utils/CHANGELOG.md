@@ -1,5 +1,11 @@
 # @wakeadmin/utils
 
+## 0.1.5
+
+### Patch Changes
+
+- 修复 vite 构建失败问题
+
 ## 0.1.4
 
 ### Patch Changes

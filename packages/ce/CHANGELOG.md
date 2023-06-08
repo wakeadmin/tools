@@ -1,5 +1,13 @@
 # @wakeadmin/ce
 
+## 0.1.6
+
+### Patch Changes
+
+- 优化最新 Vue 版本下类型推导
+- Updated dependencies
+  - @wakeadmin/utils@0.1.5
+
 ## 0.1.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @wakeadmin/demi
 
+## 0.3.0
+
+### Minor Changes
+
+- 兼容最新的 vue 3.3
+
 ## 0.2.6
 
 ### Patch Changes

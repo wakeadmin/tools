@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/demi",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "提供跨版本 Vue Api 支持",
   "engines": {
     "node": ">=12"

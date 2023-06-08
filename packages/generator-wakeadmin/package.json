@@ -17,7 +17,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
-    "yeoman-generator": "^5.7.0"
+    "yeoman-generator": "^5.9.0"
   },
   "peerDependencies": {
     "yo": ">=4.0.0"
