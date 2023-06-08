@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@wakeadmin/bay": "latest",
-    "vue": "^3.2.45"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.4",

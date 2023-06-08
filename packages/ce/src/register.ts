@@ -1,4 +1,4 @@
-import { defineCustomElement, DefineComponent } from 'vue';
+import { defineCustomElement, VueElementConstructor } from 'vue';
 import { kebabCase } from '@wakeadmin/utils';
 
 import { IGNORE_PROPS } from './constants';
@@ -127,7 +127,7 @@ export function registerCustomElement(prefix: string, name: string, comp: any) {
  */
 export function registerCustomElements<
   PREFIX extends string,
-  COMPONENTS extends { [key: string]: DefineComponent<any, any, any, any, any, any, any, any, any> }
+  COMPONENTS extends { [key: string]: VueElementConstructor<any> }
 >(prefix: PREFIX, components: COMPONENTS): CustomElements<PREFIX, COMPONENTS> {
   const results: any = {};
   Object.keys(components).forEach(key => {

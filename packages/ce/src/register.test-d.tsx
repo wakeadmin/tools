@@ -1,8 +1,8 @@
 /* eslint-disable vue/one-component-per-file */
-import { defineComponent, PropType, ref, Ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 
 import { registerCustomElements } from './register';
-import { InferProps, InferEmits, InferRawBindings, CustomElementProps, CustomElementEmit } from './type-utils';
+import { InferProps, InferEmits, InferRawBindings, CustomElementEmit, CustomElementBindings } from './type-utils';
 
 declare const expectType: <T>(value: T) => void;
 declare const v: any;
@@ -26,6 +26,9 @@ const Foo = defineComponent({
     hello(value: string) {
       return true;
     },
+    world(value: number) {
+      return true;
+    },
   },
   setup() {
     const a = ref(1);
@@ -47,35 +50,34 @@ const BarBar = defineComponent({
   },
 });
 
+type FooProps = InferProps<typeof Foo>;
+
 expectType<{
-  foo: {
-    type: NumberConstructor;
-    required: true;
+  baz?: string | undefined;
+  readonly foo: number;
+  readonly bar: {
+    foo: number;
+    bar: number;
   };
-  bar: {
-    type: PropType<{
-      foo: number;
-      bar: number;
-    }>;
-    required: true;
-  };
-  baz: {
-    type: StringConstructor;
-    default: string;
-  };
-}>(v as InferProps<typeof Foo>);
+}>(v as Pick<FooProps, 'foo' | 'bar' | 'baz'>);
 
-expectType<{ hello(value: string): true }>(v as InferEmits<typeof Foo>);
+type FooEmits = InferEmits<typeof Foo>;
+expectType<{
+  onHello?: ((value: string) => any) | undefined;
+  onWorld?: ((value: number) => any) | undefined;
+}>(v as FooEmits);
 
-expectType<{ a: Ref<number>; b: string }>(v as InferRawBindings<typeof Foo>);
+type FooRawBindings = InferRawBindings<typeof Foo>;
 
-expectType<{ foo: number; bar: { foo: number; bar: number }; baz?: string }>(
-  v as CustomElementProps<InferProps<typeof Foo>>
-);
+expectType<{ a: number; b: string }>(v as Pick<FooRawBindings, 'a' | 'b'>);
+type FooRawBindingsRef = CustomElementBindings<Pick<FooRawBindings, 'a' | 'b'>>;
+expectType<number | undefined>((v as FooRawBindingsRef).ref?.value?.a);
 
-expectType<{ onHello?: (evt: CustomEvent<[value: string]>) => void }>(
-  v as CustomElementEmit<{ hello(value: string): true }>
-);
+type CustomElementEmits = CustomElementEmit<Required<FooEmits>>;
+expectType<{
+  onHello?: (evt: CustomEvent<[value: string]>) => void;
+  onWorld?: (evt: CustomEvent<[value: number]>) => void;
+}>(v as CustomElementEmits);
 
 const c = registerCustomElements('foo-', { Foo, BarBar });
 
@@ -104,4 +106,11 @@ declare global {
   }
 }
 
-expectType<JSX.Element>(<foo-foo foo={1} bar={{ foo: 1, bar: 2 }} baz="3" />);
+expectType<JSX.Element>(
+  <foo-foo
+    foo={1}
+    bar={{ foo: 1, bar: 2 }}
+    // @ts-expect-error
+    baz={3}
+  />
+);

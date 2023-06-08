@@ -24,6 +24,6 @@ test('transition', () => {
   expect(container.outerHTML).toBe(
     isVue2
       ? '<div title="container"><transition-stub appear="true" enterclass="enter-from" leaveclass="leave-from"><div>hello</div></transition-stub></div>'
-      : '<div title="container"><transition-stub><div>hello</div></transition-stub></div>'
+      : '<div title="container"><transition-stub enterfromclass="enter-from" leavefromclass="leave-from" appear="true" persisted="false" css="true"><div>hello</div></transition-stub></div>'
   );
 });

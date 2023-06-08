@@ -1,5 +1,7 @@
+// vue 3.3+
 import * as Vue from 'vue';
-import type { StyleValue } from '@vue/runtime-dom';
+import type { VNode, IntrinsicElementAttributes, ReservedProps, NativeElements, StyleValue } from '@vue/runtime-dom';
+
 declare const isVue2: boolean;
 declare const isVue3: boolean;
 declare const Vue2: any;
@@ -39,12 +41,23 @@ declare module '@vue/runtime-dom' {
   }
 }
 
-/**
- * 扩展 JSX 定义
- * for vue 2 or vue under 3.3
- */
+// vue 3.3+ 之后 JSX 不会暴露到全局，这回导致 h 库无法正式使用, 这里将 JSX 暴露到全局
+// global JSX namespace registration
+// somehow we have to copy=pase the jsx-runtime types here to make TypeScript happy
 declare global {
   namespace JSX {
+    export interface Element extends VNode {}
+    export interface ElementClass {
+      $props: {};
+    }
+    export interface ElementAttributesProperty {
+      $props: {};
+    }
+    export interface IntrinsicElements extends NativeElements {
+      // allow arbitrary elements
+      // @ts-ignore suppress ts:2374 = Duplicate string index signature.
+      [name: string]: any;
+    }
     interface ElementChildrenAttribute {
       // JSX 从 v-slots 推断子元素
       // 和 vue 的 jsx 插件语法保持一致
@@ -52,9 +65,7 @@ declare global {
       // 为什么不直接用 v-slots, 因为 children 的类型应该更加宽松，v-slots 则必须为对象
       'v-children': {};
     }
-
-    // fix: 自定义组件在未声明情况下， 也能使用 class/style
-    interface IntrinsicAttributes {
+    export interface IntrinsicAttributes extends ReservedProps {
       class?: any;
       style?: StyleValue;
     }

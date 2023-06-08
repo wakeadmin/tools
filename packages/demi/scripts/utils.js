@@ -5,6 +5,7 @@ const dir = path.resolve(__dirname, '..', 'lib');
 
 function loadModule(name) {
   try {
+    // eslint-disable-next-line import/no-dynamic-require
     return require(name);
   } catch (e) {
     return undefined;
@@ -55,7 +56,9 @@ function switchVersion(version, vue) {
   copy('index.mjs', version, vue);
   copy('index.d.ts', version, vue);
 
-  if (version === 2) {updateVue2API();}
+  if (version === 2) {
+    updateVue2API();
+  }
 }
 
 module.exports.loadModule = loadModule;

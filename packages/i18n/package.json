@@ -21,7 +21,7 @@
   "author": "ivan-lee",
   "license": "MIT",
   "devDependencies": {
-    "vue": "^3.2.45",
+    "vue": "^3.3.4",
     "vue-i18n": "9.1.10"
   },
   "peerDependencies": {

@@ -13,7 +13,7 @@
     "@wakeadmin/bay": "latest",
     "core-js": "^3.26.1",
     "element-plus": "^2.2.22",
-    "vue": "^3.2.45",
+    "vue": "^3.3.4",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
   },

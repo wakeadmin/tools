@@ -12,24 +12,6 @@ export type UnionToTuple<T> = UnionToIntersection<T extends never ? never : (t: 
 
 export type NotUndefined<T> = T extends undefined ? never : T;
 
-declare global {
-  namespace JSX {
-    interface ElementChildrenAttribute {
-      // JSX 从 v-slots 推断子元素
-      // 和 vue 的 jsx 插件语法保持一致
-      // 'v-slots': {};
-      // 为什么不直接用 v-slots, 因为 children 的类型应该更加宽松，v-slots 则必须为对象
-      'v-children': {};
-    }
-
-    // fix: 自定义组件在未声明情况下， 也能使用 class/style
-    interface IntrinsicAttributes {
-      class?: any;
-      style?: StyleValue;
-    }
-  }
-}
-
 export type EmitsToProps<T extends EmitsOptions> = T extends string[]
   ? {
       [K in string & `on${Capitalize<T[number]>}`]?: (...args: any[]) => any;

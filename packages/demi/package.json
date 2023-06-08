@@ -28,5 +28,8 @@
   "license": "MIT",
   "peerDependencies": {
     "vue": ">=2.7.14"
+  },
+  "dependencies": {
+    "semver": "^7.5.1"
   }
 }
