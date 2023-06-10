@@ -1,5 +1,11 @@
 # @wakeadmin/h
 
+## 0.3.1
+
+### Patch Changes
+
+- declareComponent 支持泛型
+
 ## 0.3.0
 
 ### Minor Changes
