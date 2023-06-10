@@ -3,6 +3,7 @@ import { VNodeChild, ref, StyleValue, defineComponent } from '@wakeadmin/demi';
 import { declareComponent, declareProps, declareExpose, declareSlots, declareEmits } from './declareComponent';
 import { withDefaults } from './helper';
 import SPA from './declareComponent.d-test.vue';
+import { ComponentInstance, DefineComponentContext } from './types';
 
 import { expectType } from '../__tests__/helper';
 
@@ -224,4 +225,113 @@ test('不同方式定义的组件 ref 不应该报错', () => {
   <SPA ref={instanceRef} />;
   <DefineComponent ref={instanceRef} />;
   <DeclareComponent ref={instanceRef} />;
+});
+
+test('泛型', () => {
+  function OurGeneric<T>(
+    props: { list: T[]; filter: (item: T) => boolean },
+    ctx: DefineComponentContext<
+      { change: (list: T[]) => void; add: (item: T) => void },
+      {
+        open: (item: T) => void;
+        list: T[];
+      },
+      {
+        foo: (list: T[]) => any;
+      }
+    >
+  ) {
+    ctx.emit('change', []);
+    ctx.expose({
+      open: item => {
+        // ignore
+      },
+      list: props.list,
+    });
+    return {} as any;
+  }
+
+  // My.options = {
+  //   props: ['list', 'shit'],
+  // };
+
+  const GenericBar = declareComponent(OurGeneric);
+
+  <GenericBar
+    list={[1, 2]}
+    filter={i => {
+      expectType<number>(i);
+      return true;
+    }}
+    onAdd={i => {
+      expectType<number>(i);
+    }}
+    onChange={i => {
+      expectType<number[]>(i);
+    }}
+    v-slots={{
+      foo(i) {
+        expectType<number[]>(i);
+      },
+    }}
+  ></GenericBar>;
+});
+
+test('泛型 2', () => {
+  interface Props<T> {
+    list: T[];
+    filter: (item: T) => boolean;
+  }
+
+  type Emit<T> = {
+    add: (item: T) => void;
+    change: (list: T[]) => void;
+  };
+
+  type Expose<T> = {
+    open: (item: T) => void;
+    list: T[];
+  };
+
+  type Slots<T> = {
+    foo: (list: T[]) => any;
+  };
+
+  const GenericBar = declareComponent({
+    props: declareProps<Props<any>>([]),
+    emits: declareEmits<Emit<any>>(),
+    expose: declareExpose<Expose<any>>(),
+    slots: declareSlots<Slots<any>>(),
+    setup(props, ctx) {
+      expectType<any[]>(props.list);
+      ctx.emit('change', []);
+      ctx.slots.foo?.([]);
+      ctx.expose({
+        list: [],
+        open() {
+          // ignore
+        },
+      });
+      return {} as any;
+    },
+  }) as new <T>(...args: any[]) => ComponentInstance<Props<T>, Emit<T>, Expose<T>, Slots<T>>;
+
+  <GenericBar
+    list={[1, 2]}
+    filter={i => {
+      expectType<number>(i);
+      return true;
+    }}
+    onAdd={i => {
+      expectType<number>(i);
+    }}
+    onChange={i => {
+      expectType<number[]>(i);
+    }}
+    v-slots={{
+      foo(i) {
+        expectType<number[]>(i);
+      },
+    }}
+  ></GenericBar>;
 });

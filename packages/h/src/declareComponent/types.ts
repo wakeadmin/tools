@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
 import { Ref, EmitsOptions, ObjectEmitsOptions, RenderFunction, StyleValue } from '@wakeadmin/demi';
 
@@ -21,8 +20,7 @@ export type EmitsToProps<T extends EmitsOptions> = T extends string[]
       [K in string & `on${Capitalize<string & keyof T>}`]?: K extends `on${infer C}`
         ? T[Uncapitalize<C>] extends null
           ? (...args: any[]) => any
-          : // eslint-disable-next-line @typescript-eslint/no-shadow
-            (...args: T[Uncapitalize<C>] extends (...args: infer P) => any ? P : never) => any
+          : (...args: T[Uncapitalize<C>] extends (...args: infer P) => any ? P : never) => any
         : never;
     }
   : {};
@@ -41,6 +39,8 @@ export type EmitFn<
           : (event: key, ...args: any[]) => void;
       }[Event]
     >;
+
+export type ExposeFn<Expose extends {}> = (exposed: WithRef<Expose>) => void;
 
 export interface ReservedAttrs {
   class?: any;
@@ -109,16 +109,32 @@ export type ExtraArrayRef<T extends DefineComponent<any, any, any, any>, Expose 
  */
 export type ExtraProps<T extends DefineComponent<any, any, any, any>, Props = T['__props']> = Props;
 
-export interface DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> {
-  new (...args: any[]): {
-    $props: Props &
-      EmitsToProps<Emit> & { 'v-slots'?: Partial<VSlotType<Slots>> } & { 'v-children'?: VChildrenType<Slots> } & {
-        ref?: RefType<Expose | Expose[]>;
-      };
-    // 支持 volar 推断
-    $slots: VSlotType<Slots>;
-    $emit: EmitFn<Emit>;
+export type PropsType<Props extends {}, Emit extends {}, Slots extends {}, Expose extends {}> = Props &
+  EmitsToProps<Emit> & { 'v-slots'?: Partial<VSlotType<Slots>> } & { 'v-children'?: VChildrenType<Slots> } & {
+    ref?: RefType<Expose | Expose[]>;
   };
+
+export interface DefineComponentContext<
+  Emit extends ObjectEmitsOptions = {},
+  Expose extends {} = {},
+  Slots extends { [key: string]: Function } = {},
+  Attrs extends {} = {}
+> {
+  attrs: Attrs;
+  slots: Slots;
+  emit: EmitFn<Emit>;
+  expose: ExposeFn<Expose>;
+}
+
+export interface ComponentInstance<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> {
+  $props: PropsType<Props, Emit, Slots, Expose>;
+  // 支持 volar 推断
+  $slots: VSlotType<Slots>;
+  $emit: EmitFn<Emit>;
+}
+
+export interface DefineComponent<Props extends {}, Emit extends {}, Expose extends {}, Slots extends {}> {
+  new (...args: any[]): ComponentInstance<Props, Emit, Expose, Slots>;
 
   // 方便外部提取
   __ref: Expose;
