@@ -6,14 +6,20 @@
   button:hover {
     color: var(--wk-color-info);
   }
+
   &__sizes .#{$prefix}-input .#{$prefix}-input__inner:hover {
     border-color: var(--wk-color-info);
   }
-}
 
-.#{$prefix}-pager {
-  li.active,
-  li:hover {
-    color: var(--wk-color-info);
+  .#{$prefix}-input__inner {
+    height: unset;
+    line-height: unset;
+  }
+
+  .#{$prefix}-pager {
+    li.is-active,
+    li:hover {
+      color: var(--wk-color-info);
+    }
   }
 }

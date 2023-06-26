@@ -1,6 +1,8 @@
 @use './setting' as *;
 
 .#{$prefix}-textarea {
+  --#{$prefix}-input-focus-border-color: var(--wk-color-info);
+
   & > .#{$prefix}-input__count {
     color: var(--wk-color-font-secondary);
   }
@@ -14,32 +16,11 @@
   line-height: 32px;
 }
 
-.#{$prefix}-input-number__increase,
-.#{$prefix}-input-number__decrease {
-  line-height: 30px;
-}
-.#{$prefix}-input__inner {
-  height: 32px;
-  line-height: 32px;
-}
-.#{$prefix}-date-editor .#{$prefix}-range__icon,
-.#{$prefix}-date-editor .#{$prefix}-range-separator {
-  line-height: 26px;
-}
+.#{$prefix}-input-number {
+  & &__increase,
+  & &__decrease {
+    line-height: 30px;
 
-// 单独配置
-
-.#{$prefix}-input {
-  & &__count {
-    color: var(--wk-color-font-placeholder);
-  }
-  &__inner:focus {
-    border-color: var(--wk-color-info);
-  }
-
-  // 数字输入框
-  &-number__decrease,
-  &-number__increase {
     &:hover:not(.is-disabled) ~ .#{$prefix}-input .#{$prefix}-input__inner:not(.is-disabled) {
       border-color: var(--wk-color-info);
     }
@@ -47,11 +28,35 @@
       color: var(--wk-color-info);
     }
   }
-  &-number.is-controls-right .#{$prefix}-input-number {
-    &__increase,
-    &__decrease {
+
+  &.is-controls-right {
+    .#{$prefix}-input-number__increase,
+    .#{$prefix}-input-number__decrease {
       line-height: 15px;
     }
+
+    .#{$prefix}-input__wrapper {
+      padding-left: 10px;
+    }
+  }
+
+  .#{$prefix}-input__inner {
+    text-align: left;
+  }
+}
+
+.#{$prefix}-input__inner {
+  height: 32px;
+  line-height: 32px;
+}
+
+// 单独配置
+
+.#{$prefix}-input {
+  --#{$prefix}-input-focus-border-color: var(--wk-color-info);
+
+  & &__count {
+    color: var(--wk-color-font-placeholder);
   }
 
   &-group__append,
@@ -181,14 +186,10 @@
 }
 
 .#{$prefix}-select {
+  --#{$prefix}-select-input-focus-border-color: var(--wk-color-info);
   &-dropdown.is-multiple &-dropdown__item.selected,
   &-dropdown__item.selected {
     color: var(--wk-color-info);
-  }
-
-  .#{$prefix}-input__inner:focus,
-  .#{$prefix}-input.is-focus .#{$prefix}-input__inner {
-    border-color: var(--wk-color-info);
   }
 
   .#{$prefix}-tag.#{$prefix}-tag--info {
@@ -234,21 +235,25 @@
 
 // 时间选择器
 .#{$prefix}-date-editor {
+  --#{$prefix}-input-focus-border-color: var(--wk-color-info);
+  box-sizing: border-box;
+
   &--datetimerange.#{$prefix}-input,
   &--datetimerange.#{$prefix}-input__inner {
     // width: 100%;
     justify-content: space-between;
   }
 
-  &.is-active,
-  &.is-active:hover {
-    border-color: var(--wk-color-info);
-  }
   .#{$prefix}-range__close-icon {
     line-height: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .#{$prefix}-range__icon,
+  .#{$prefix}-range-separator {
+    line-height: 26px;
   }
 }
 

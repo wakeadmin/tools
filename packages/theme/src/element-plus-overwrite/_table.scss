@@ -21,14 +21,27 @@
     padding-right: 24px;
   }
 
-  td {
+  & &__cell {
     padding: 19px 0;
     border-bottom: 1px solid #ebeef5;
   }
+
+  // 表头
   thead th,
   th.#{$prefix}-table__cell {
     background-color: var(--wk-color-bg);
     color: var(--wk-color-font-primary);
+  }
+
+  // 浮动表头
+  &.is-scrolling-none,
+  &.is-scrolling-right,
+  &.is-scrolling-left,
+  &__header-wrapper {
+    th.#{$prefix}-table-fixed-column--left,
+    th.#{$prefix}-table-fixed-column--right {
+      background-color: var(--wk-color-bg);
+    }
   }
 
   &__body tr.hover-row {

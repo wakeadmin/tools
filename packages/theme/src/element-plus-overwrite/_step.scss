@@ -2,13 +2,19 @@
 
 .#{$prefix}-step {
   &__head {
-    &.is-finish {
+    &.is-finish,
+    &.is-process {
       border-color: var(--wk-color-info);
       color: var(--wk-color-info);
     }
+
+    &.is-finish .#{$prefix}-step__line {
+      background-color: var(--wk-color-info);
+    }
   }
   &__title {
-    &.is-finish {
+    &.is-finish,
+    &.is-process {
       color: var(--wk-color-info);
     }
   }

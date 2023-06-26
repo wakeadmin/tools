@@ -188,7 +188,7 @@
   /* 正文 */
   --wk-font-size: var(--wk-font-size-h4);
   --wk-font-line-height: var(--wk-font-line-height-h4);
-  --wk-font-weight: 500;
+  --wk-font-weight: 400;
 }
 
 /**
