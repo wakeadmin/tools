@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 1.1.2
+
+### Patch Changes
+
+- element-plus 主题包适配惟客云标准
+
 ## 1.1.1
 
 ### Patch Changes
