@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 1.1.4
+
+### Patch Changes
+
+- 修复 element-plus 表格头颜色错误
+
 ## 1.1.3
 
 ### Patch Changes
