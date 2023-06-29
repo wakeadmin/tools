@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 1.1.3
+
+### Patch Changes
+
+- 优化 element-plus 主题包定制
+
 ## 1.1.2
 
 ### Patch Changes
