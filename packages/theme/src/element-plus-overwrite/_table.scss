@@ -3,6 +3,7 @@
 .#{$prefix}-table {
   margin-top: 0;
   --ep-table-row-hover-bg-color: #f6fbff;
+  --ep-table-header-text-color: var(--wk-color-font-primary);
   --ep-table-header-bg-color: var(--wk-color-bg);
 
   th,
