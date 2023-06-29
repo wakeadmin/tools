@@ -118,8 +118,8 @@
     line-height: 22px;
     text-align: left;
     font-weight: 600;
-    padding: 16px 0 10px;
-    margin: 0 16px;
-    border-bottom: none;
+    padding: 16px 16px 10px 16px;
+    margin: 0;
+    border-bottom: 1px solid var(--wk-color-gray-200);
   }
 }

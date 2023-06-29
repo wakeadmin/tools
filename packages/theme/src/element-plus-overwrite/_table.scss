@@ -2,6 +2,8 @@
 
 .#{$prefix}-table {
   margin-top: 0;
+  --ep-table-row-hover-bg-color: #f6fbff;
+  --ep-table-header-bg-color: var(--wk-color-bg);
 
   th,
   td {
@@ -25,35 +27,4 @@
     padding: 19px 0;
     border-bottom: 1px solid #ebeef5;
   }
-
-  // 表头
-  thead th,
-  th.#{$prefix}-table__cell {
-    background-color: var(--wk-color-bg);
-    color: var(--wk-color-font-primary);
-  }
-
-  // 浮动表头
-  &.is-scrolling-none,
-  &.is-scrolling-right,
-  &.is-scrolling-left,
-  &__header-wrapper {
-    th.#{$prefix}-table-fixed-column--left,
-    th.#{$prefix}-table-fixed-column--right {
-      background-color: var(--wk-color-bg);
-    }
-  }
-
-  &__body tr.hover-row {
-    &.current-row > td.#{$prefix}-table__cell,
-    &.#{$prefix}table__row--striped.current-row > td.#{$prefix}table__cell,
-    &.#{$prefix}table__row--striped > td.#{$prefix}table__cell,
-    & > td.#{$prefix}table__cell {
-      background-color: var(--wk-color-info-50);
-    }
-  }
-}
-
-.#{$prefix}table--enable-row-hover .#{$prefix}table__body tr:hover > td.#{$prefix}table__cell {
-  background-color: var(--wk-color-info-50);
 }

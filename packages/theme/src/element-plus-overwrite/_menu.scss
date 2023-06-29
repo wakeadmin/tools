@@ -6,10 +6,11 @@
   }
 }
 .#{$prefix}-dropdown {
-  &-menu__item {
+  &-menu__item:not(.is-disabled) {
     &:focus,
-    &:not(.is-disabled):hover {
-      background-color: transparent;
+    &:hover {
+      background-color: #f5f7fa;
+      color: var(--wk-color-info);
     }
   }
 }

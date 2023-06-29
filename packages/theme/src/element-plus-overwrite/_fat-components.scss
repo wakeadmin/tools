@@ -1,0 +1,29 @@
+@use './setting' as *;
+
+.fat-form-drawer__footer,
+.fat-float-footer {
+  .#{$prefix}-button {
+    min-width: 80px;
+  }
+}
+
+// override
+.fat-tooltip-title {
+  padding: 0;
+
+  .fat-tooltip-content {
+    padding: 5px 11px;
+    max-width: 400px;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+}
+
+// 可编辑表格 将 actions 对齐表单
+.fat-form-table {
+  .fat-actions.in-table-actions {
+    min-height: 32px;
+  }
+}
