@@ -1,5 +1,13 @@
 # @wakeadmin/i18n-legacy
 
+## 0.1.8
+
+### Patch Changes
+
+- 跟随 share 升级
+- Updated dependencies
+  - @wakeadmin/i18n-shared@0.1.11
+
 ## 0.1.7
 
 ### Patch Changes

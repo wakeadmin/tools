@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/i18n",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "惟客云规范的，i18n 封装, 适用于 vue3",
   "main": "dist/common/index.js",
   "module": "dist/index.js",
@@ -29,7 +29,7 @@
     "vue-i18n": ">=9"
   },
   "dependencies": {
-    "@wakeadmin/i18n-shared": "workspace:^0.1.10",
+    "@wakeadmin/i18n-shared": "workspace:^0.1.11",
     "@wakeadmin/utils": "workspace:^0.1.5"
   }
 }

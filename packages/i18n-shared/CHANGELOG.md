@@ -1,5 +1,11 @@
 # @wakeadmin/i18n-shared
 
+## 0.1.11
+
+### Patch Changes
+
+- 简化 layer 的实现, 抛弃原型模式的实现,这种模式比较低效,而且在 merge 下有合并问题
+
 ## 0.1.10
 
 ### Patch Changes

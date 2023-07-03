@@ -183,7 +183,7 @@ importers:
 
   packages/i18n:
     specifiers:
-      '@wakeadmin/i18n-shared': workspace:^0.1.10
+      '@wakeadmin/i18n-shared': workspace:^0.1.11
       '@wakeadmin/utils': workspace:^0.1.5
       vue: ^3.3.4
       vue-i18n: 9.1.10
@@ -196,7 +196,7 @@ importers:
 
   packages/i18n-legacy:
     specifiers:
-      '@wakeadmin/i18n-shared': workspace:^0.1.10
+      '@wakeadmin/i18n-shared': workspace:^0.1.11
       '@wakeadmin/utils': workspace:^0.1.5
       vue: ~2.7.14
       vue-i18n: ~8.27.2
