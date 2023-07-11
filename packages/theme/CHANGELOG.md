@@ -1,5 +1,11 @@
 # @wakeadmin/theme
 
+## 1.1.5
+
+### Patch Changes
+
+- 优化 element-plus 按钮样式
+
 ## 1.1.4
 
 ### Patch Changes
