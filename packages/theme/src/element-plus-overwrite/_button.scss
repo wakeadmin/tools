@@ -25,4 +25,12 @@
   &.is-plain {
     --#{$prefix}-button-bg-color: transparent;
   }
+
+  &--primary {
+    &.is-link,
+    &.is-plain,
+    &.is-text {
+      --ep-button-border-color: var(--wk-color-primary);
+    }
+  }
 }
