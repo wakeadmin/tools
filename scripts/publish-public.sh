@@ -19,7 +19,7 @@ node -v
 
 echo "开始每周发布"
 
-npm i -g pnpm@7
+npm i -g pnpm@7 --registry=https://registry.npmmirror.com/
 pnpm install
 
 # 构建

@@ -22,7 +22,7 @@ node -v
 
 echo "开始每日发布"
 
-npm i -g pnpm@7 npm-cli-login
+npm i -g pnpm@7 npm-cli-login --registry=https://registry.npmmirror.com/
 pnpm install
 
 # 构建
