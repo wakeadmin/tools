@@ -120,7 +120,7 @@ importers:
       '@babel/preset-env': 7.22.4_@babel+core@7.18.13
       '@babel/preset-react': 7.22.3_@babel+core@7.18.13
       '@babel/preset-typescript': 7.21.5_@babel+core@7.18.13
-      babel-plugin-transform-typescript-metadata: 0.3.2
+      babel-plugin-transform-typescript-metadata: 0.3.2_@babel+core@7.18.13
 
   packages/ce:
     specifiers:
@@ -232,7 +232,7 @@ importers:
   packages/mapp:
     specifiers:
       '@wakeadmin/h': workspace:^0.3.0
-      '@wakeadmin/mapp-shared': workspace:^0.1.1
+      '@wakeadmin/mapp-shared': workspace:^0.1.2
       '@wakeadmin/utils': workspace:^0.1.5
       path-browserify: ^1.0.1
       qiankun: ^2.10.8
@@ -245,8 +245,8 @@ importers:
 
   packages/mapp-child:
     specifiers:
-      '@wakeadmin/mapp': workspace:^0.5.2
-      '@wakeadmin/mapp-shared': workspace:^0.1.1
+      '@wakeadmin/mapp': workspace:^0.5.3
+      '@wakeadmin/mapp-shared': workspace:^0.1.2
       '@wakeadmin/utils': workspace:^0.1.5
     dependencies:
       '@wakeadmin/mapp-shared': link:../mapp-shared
@@ -7375,7 +7375,27 @@ packages:
   /babel-plugin-transform-typescript-metadata/0.3.2:
     resolution:
       { integrity: sha512-mWEvCQTgXQf48yDqgN7CH50waTyYBeP2Lpqx4nNWab9sxEpdXVeKgfj1qYI2/TgUPQtNFZ85i3PemRtnXVYYJg== }
+    peerDependencies:
+      '@babel/core': ^7
+      '@babel/traverse': ^7
+    peerDependenciesMeta:
+      '@babel/traverse':
+        optional: true
     dependencies:
+      '@babel/helper-plugin-utils': 7.21.5
+    dev: false
+
+  /babel-plugin-transform-typescript-metadata/0.3.2_@babel+core@7.18.13:
+    resolution:
+      { integrity: sha512-mWEvCQTgXQf48yDqgN7CH50waTyYBeP2Lpqx4nNWab9sxEpdXVeKgfj1qYI2/TgUPQtNFZ85i3PemRtnXVYYJg== }
+    peerDependencies:
+      '@babel/core': ^7
+      '@babel/traverse': ^7
+    peerDependenciesMeta:
+      '@babel/traverse':
+        optional: true
+    dependencies:
+      '@babel/core': 7.18.13
       '@babel/helper-plugin-utils': 7.21.5
     dev: false
 

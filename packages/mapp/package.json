@@ -1,6 +1,6 @@
 {
   "name": "@wakeadmin/mapp",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "微应用工具库",
   "main": "./dist/common/main/index.js",
   "module": "./dist/main/index.js",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@wakeadmin/h": "workspace:^0.3.0",
-    "@wakeadmin/mapp-shared": "workspace:^0.1.1",
+    "@wakeadmin/mapp-shared": "workspace:^0.1.2",
     "@wakeadmin/utils": "workspace:^0.1.5",
     "path-browserify": "^1.0.1",
     "qiankun": "^2.10.8"
