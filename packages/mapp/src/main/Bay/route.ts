@@ -156,6 +156,7 @@ export function createRoutes(
         return getErrorRoute({
           type: 'http',
           code: '404',
+          extra: to.path,
         });
       }
 

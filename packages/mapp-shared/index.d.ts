@@ -64,6 +64,11 @@ export type ErrorPageProps =
        * HTTP 错误代码
        */
       code?: string;
+
+      /**
+       * 额外参数
+       */
+      extra?: string;
     }
   | {
       // 自定义错误
