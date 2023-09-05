@@ -125,6 +125,8 @@ export class AppContext {
 
   afterMount: LifeCycleFn<any> = async (app, global) => {
     this.triggerHooks('afterAppMount', this.getApp(app));
+    this.currentMountingApp.value = undefined;
+    this.currentLoadingApp.value = undefined;
   };
 
   beforeUnmount: LifeCycleFn<any> = async (app, global) => {
@@ -133,6 +135,7 @@ export class AppContext {
 
   afterUnmount: LifeCycleFn<any> = async (app, global) => {
     this.triggerHooks('afterAppUnmount', this.getApp(app));
+    this.currentApp.value = undefined;
   };
 
   private getApp(app: LoadableApp<any>) {
@@ -142,4 +145,6 @@ export class AppContext {
   private triggerHooks<Name extends keyof BayHooks, Option = Parameter<BayHooks[Name]>>(name: Name, option: Option) {
     (this.bay as any).triggerHooks(name, option);
   }
+
+
 }
