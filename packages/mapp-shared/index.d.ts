@@ -51,6 +51,17 @@ export interface MicroApp {
   independent?: boolean;
 
   /**
+   * 可选，默认为 false。
+   *
+   * 开启时将认为该应用为一个支持现代浏览器的应用
+   *
+   * 因此将允许使用 module script 这些功能
+   *
+   * 该功能只工作在开发模式下 并且不支持沙盒隔离
+   */
+  modern?: boolean;
+
+  /**
    * 路由模式，默认为 hash
    */
   routeMode?: 'hash' | 'history';

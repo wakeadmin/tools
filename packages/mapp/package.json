@@ -21,11 +21,13 @@
   "author": "ivan-lee",
   "license": "MIT",
   "dependencies": {
+    "@qiankunjs/loader": "0.0.1-alpha.4",
     "@wakeadmin/h": "workspace:^0.3.0",
     "@wakeadmin/mapp-shared": "workspace:^0.1.1",
     "@wakeadmin/utils": "workspace:^0.1.5",
     "path-browserify": "^1.0.1",
-    "qiankun": "^2.10.8"
+    "qiankun": "^2.10.13",
+    "single-spa": "^5.9.5"
   },
   "peerDependencies": {
     "vue": "^3.2.37",
@@ -33,5 +35,11 @@
   },
   "jest": {
     "preset": "jest-preset-universe-vue"
+  },
+  "resolutions": {
+    "single-spa": "^5.9.5"
+  },
+  "devDependencies": {
+    "@types/semver": "^7.5.1"
   }
 }

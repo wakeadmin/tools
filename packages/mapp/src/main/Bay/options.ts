@@ -1,13 +1,15 @@
 /* eslint-disable no-lone-blocks */
 import { removeTrailingSlash } from '@wakeadmin/utils';
 import path from 'path-browserify';
+import { pathToActiveWhen } from 'single-spa';
 
 import { BayOptions, MicroApp } from '../../types';
 
 import { DEFAULT_ROOT_FOR_CHILD, MAX_WAIT_TIMES } from '../constants';
 import { pushMountQueue } from './mount-delay';
-import { MicroAppNormalized } from './types';
-import { normalizeUrl, trimBaseUrl } from './utils';
+import { parcelUnmountDeferred, qiankunUnmountDeferred } from './shared';
+import { MicroAppNormalized, ModernMicroAppNormalized } from './types';
+import { normalizeUrl, runPromiseChain, toArray, trimBaseUrl } from './utils';
 
 function hasContainer(container: string | HTMLElement) {
   if (typeof container === 'string') {
@@ -181,13 +183,39 @@ export function groupAppsByIndependent(apps: MicroAppNormalized[]) {
  * @returns
  */
 export function normalizeOptions(options: BayOptions): BayOptions {
-  let { baseUrl = process.env.MAPP_BASE_URL ?? '/', apps, bayReady, ...others } = options;
+  let { baseUrl = process.env.MAPP_BASE_URL ?? '/', hooks = {}, apps, bayReady, ...others } = options;
 
   baseUrl = normalizeUrl(baseUrl);
 
   return {
     baseUrl,
-    apps: normalizeApps(baseUrl, apps, bayReady),
+    apps: normalizeApps(
+      baseUrl,
+      apps,
+      runPromiseChain([bayReady || (() => Promise.resolve()), () => parcelUnmountDeferred.promise])
+    ),
+    hooks: {
+      ...hooks,
+      beforeAppMount: app => {
+        if (hooks.beforeAppMount) {
+          hooks.beforeAppMount(app);
+        }
+        // 不做任何操作 暂时先直接重置掉
+        qiankunUnmountDeferred.reset();
+      },
+      afterAppUnmount(app) {
+        if (hooks.afterAppUnmount) {
+          hooks.afterAppUnmount(app);
+        }
+        qiankunUnmountDeferred.resolve();
+      },
+    },
     ...others,
   };
+}
+
+export function normalizeModernApps(app: MicroAppNormalized): ModernMicroAppNormalized {
+  return Object.assign(app, {
+    activeRuleWhen: toArray(app.activeRule).map(rule => pathToActiveWhen(rule, true)),
+  });
 }
