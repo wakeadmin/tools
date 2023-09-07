@@ -12,10 +12,108 @@ const isDev = process.env.NODE_ENV === 'development';
 const LOG_PREFIX = '[Single SPA Parcel] ';
 
 const PARCEL_INSTANCE_APP_NAME = '__$$app_name__';
+
+const QIANKUN_CONTEXT_KEYS = ['__POWERED_BY_QIANKUN__'];
+
+/**
+ * document.head的快照
+ * 用于处理添加到document.head里的元素
+ *
+ * **只处理新增节点**
+ */
+class DocumentHeadSnapshot {
+  private snapshotRecordMap: Map<string, Node[][]> = new Map();
+  private currentAppName?: string;
+  private observer: MutationObserver;
+
+  constructor() {
+    this.observer = new MutationObserver(records => {
+      if (!this.currentAppName) {
+        return;
+      }
+      const nodeRecord = this.snapshotRecordMap.get(this.currentAppName)![0];
+
+      if (!nodeRecord) {
+        return;
+      }
+
+      for (const record of records) {
+        if (record.type === 'childList' && record.addedNodes) {
+          for (const node of record.addedNodes) {
+            if (node.nodeName.toLocaleLowerCase() === 'style') {
+              nodeRecord.push(node);
+            }
+          }
+        }
+      }
+    });
+
+    this.observer.observe(document.head, { childList: true });
+  }
+
+  /**
+   * 创建一个子应用快照列表
+   *
+   * 如果存在 不做任何操作
+   * @param name
+   */
+  create(name: string) {
+    this.currentAppName = name;
+    if (this.snapshotRecordMap.has(name)) {
+      return;
+    }
+    this.snapshotRecordMap.set(name, []);
+  }
+  /**
+   * 创建一个快照点
+   */
+  store() {
+    if (this.currentAppName) {
+      this.snapshotRecordMap.get(this.currentAppName)!.unshift([]);
+    }
+  }
+
+  /**
+   * 恢复到上一个快照
+   * @returns
+   */
+  restore() {
+    if (!this.currentAppName) {
+      return;
+    }
+    const snapshot = this.snapshotRecordMap.get(this.currentAppName)![0] || [];
+
+    this.removeNodes(snapshot);
+  }
+
+  /**
+   * 使用最新的快照进行还原
+   */
+  use() {
+    if (!this.currentAppName) {
+      return;
+    }
+    const list = this.snapshotRecordMap.get(this.currentAppName)![0] || [];
+    this.appendNodes(list);
+  }
+
+  private appendNodes(nodeList: Node[]) {
+    const parentElement = document.head;
+    nodeList.filter(node => node.parentElement === parentElement).forEach(node => parentElement.appendChild(node));
+  }
+  private removeNodes(nodeList: Node[]) {
+    const parentElement = document.head;
+    nodeList.filter(node => node.parentElement === parentElement).forEach(node => (node as any as Element).remove());
+  }
+}
+
 export class ParcelContext {
   private parcelInstance?: Parcel & {
     [PARCEL_INSTANCE_APP_NAME]: string;
   };
+
+  private global = window;
+  private documentHeadSnapshot = new DocumentHeadSnapshot();
 
   private currentApp?: MicroAppNormalized;
 
@@ -97,8 +195,8 @@ export class ParcelContext {
 
     this.isLoading = true;
 
-    // FIXME: 缓存对应的返回值 但是这样会导致vue应用没法正常显示
-    // 暂时先不用缓存 没什么太大影响
+    this.simulateQiankunContext();
+
     const { config, container } = await this.load(app, target);
 
     const instance = mountRootParcel(config, { domElement: container });
@@ -121,6 +219,10 @@ export class ParcelContext {
 
     isDev && console.debug(`${LOG_PREFIX}开始加载子应用 -> ${app.name}`);
 
+    this.documentHeadSnapshot.create(app.name);
+    this.documentHeadSnapshot.use();
+    this.documentHeadSnapshot.store();
+
     await app.loader!(true);
 
     const container =
@@ -133,7 +235,7 @@ export class ParcelContext {
       },
     });
 
-    this.appContext.beforeLoad(loadedApp, window);
+    this.appContext.beforeLoad(loadedApp, this.global);
 
     await loadEntry(app.entry, container, {
       fetch: window.fetch,
@@ -162,7 +264,7 @@ export class ParcelContext {
         () => {
           isDev && console.debug(`${LOG_PREFIX}开始挂载子应用 -> ${app.name};  挂载点: `, container);
           parcelUnmountDeferred.reset();
-          return this.appContext.beforeMount(loadedApp, window);
+          return this.appContext.beforeMount(loadedApp, this.global);
         },
         (props: Record<string, unknown>) =>
           mount({ ...props, container }).catch((err: unknown) =>
@@ -171,7 +273,7 @@ export class ParcelContext {
         () => {
           isDev && console.debug(`${LOG_PREFIX}挂载子应用完成 -> ${app.name}`);
           this.isLoading = false;
-          return this.appContext.afterMount(loadedApp, window);
+          return this.appContext.afterMount(loadedApp, this.global);
         },
         () => {
           this.mountDeferredWeakMap.get(this.parcelInstance!)?.resolve();
@@ -182,7 +284,7 @@ export class ParcelContext {
       unmount: [
         () => {
           isDev && console.debug(`${LOG_PREFIX}开始卸载子应用 -> ${app.name}`);
-          return this.appContext.beforeUnmount(loadedApp, window);
+          return this.appContext.beforeUnmount(loadedApp, this.global);
         },
         (props: Record<string, unknown>) =>
           unmount({ ...props, container }).catch((err: unknown) =>
@@ -192,7 +294,13 @@ export class ParcelContext {
           isDev && console.debug(`${LOG_PREFIX}卸载子应用完成 -> ${app.name}`);
           parcelUnmountDeferred.resolve();
           this.currentApp = undefined;
-          return this.appContext.afterUnmount(loadedApp, window);
+          return this.appContext.afterUnmount(loadedApp, this.global);
+        },
+        () => {
+          container.innerHTML = '';
+          this.documentHeadSnapshot.restore();
+          this.cancelSimulateQiankunContext();
+          return Promise.resolve();
         },
       ],
 
@@ -207,7 +315,7 @@ export class ParcelContext {
 
   private getAppLifeCycles(appName: string) {
     // @ts-expect-error
-    const obj = window[appName];
+    const obj = this.global[appName];
 
     if (!obj) {
       throw new Error(`${LOG_PREFIX}无法获取到子应用 (${appName}) 的生命周期函数`);
@@ -222,5 +330,19 @@ export class ParcelContext {
     throw new Error(
       `${LOG_PREFIX}子应用 (${appName}) 的生命周期函数异常，请确保 bootstrap, mount, unmount 三个字段为函数`
     );
+  }
+
+  private simulateQiankunContext() {
+    for (const key of QIANKUN_CONTEXT_KEYS) {
+      // @ts-expect-error
+      this.global[key] = true;
+    }
+  }
+
+  private cancelSimulateQiankunContext() {
+    for (const key of QIANKUN_CONTEXT_KEYS) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete (this.global as any)[key];
+    }
   }
 }
