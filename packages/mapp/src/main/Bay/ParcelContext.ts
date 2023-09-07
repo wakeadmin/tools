@@ -1,19 +1,21 @@
-import { mountRootParcel, type Parcel } from 'single-spa';
+import { mountRootParcel, type ParcelConfig, type Parcel } from 'single-spa';
 import { AppContext } from './AppContext';
 import { MicroAppNormalized, ModernMicroAppNormalized } from './types';
 
 import { loadEntry } from '@qiankunjs/loader';
 import { Noop } from '@wakeadmin/utils';
 import isFunction from 'lodash/isFunction';
-import { parcelUnmountDeferred, qiankunUnmountDeferred } from './shared';
-import { Deferred } from './utils';
+import { parcelUnmountDeferred, qiankunUnmountDeferred, Deferred } from './deferred';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const LOG_PREFIX = '[Single SPA Parcel] ';
 
+const PARCEL_INSTANCE_APP_NAME = '__$$app_name__';
 export class ParcelContext {
-  private parcelInstance?: Parcel;
+  private parcelInstance?: Parcel & {
+    [PARCEL_INSTANCE_APP_NAME]: string;
+  };
 
   private currentApp?: MicroAppNormalized;
 
@@ -40,7 +42,6 @@ export class ParcelContext {
 
     if (this.parcelInstance) {
       await this.unmountApp();
-      this.parcelInstance = undefined;
     }
 
     if (
@@ -75,9 +76,11 @@ export class ParcelContext {
       isDev && console.debug(`${LOG_PREFIX}卸载子应用 -> ${this.currentApp?.name}`);
 
       return this.parcelInstance.unmount().then(() => {
-        const deferred = this.mountDeferredWeakMap.get(this.parcelInstance!);
-        if (deferred) {
-          deferred.reject('unmount');
+        if (isDev) {
+          const deferred = this.mountDeferredWeakMap.get(this.parcelInstance!);
+          deferred?.reject(
+            `${LOG_PREFIX}子应用(${this.parcelInstance![PARCEL_INSTANCE_APP_NAME]})挂载失败 -> 当前子应用已被卸载`
+          );
         }
         this.parcelInstance = undefined;
       });
@@ -86,14 +89,35 @@ export class ParcelContext {
     return Promise.resolve();
   }
 
-  // 并发可能还是有点问题
   private async loadApp(app: ModernMicroAppNormalized, target?: HTMLElement): Promise<void> {
-    if (this.isLoading && this.currentApp?.name === app.name) {
-      return await this.mountDeferredWeakMap.get(this.parcelInstance!)!.promise;
+    if (this.isLoading && this.parcelInstance?.[PARCEL_INSTANCE_APP_NAME] === app.name) {
+      // eslint-disable-next-line @typescript-eslint/return-await
+      return this.mountDeferredWeakMap.get(this.parcelInstance)!.promise;
     }
 
-    this.currentApp = app;
     this.isLoading = true;
+
+    // FIXME: 缓存对应的返回值 但是这样会导致vue应用没法正常显示
+    // 暂时先不用缓存 没什么太大影响
+    const { config, container } = await this.load(app, target);
+
+    const instance = mountRootParcel(config, { domElement: container });
+
+    // @ts-expect-error
+    instance[PARCEL_INSTANCE_APP_NAME] = app.name;
+
+    this.mountDeferredWeakMap.set(instance, new Deferred());
+    this.parcelInstance = instance as any;
+  }
+
+  private async load(
+    app: ModernMicroAppNormalized,
+    target: HTMLElement | undefined
+  ): Promise<{
+    container: HTMLElement;
+    config: ParcelConfig;
+  }> {
+    this.currentApp = app;
 
     isDev && console.debug(`${LOG_PREFIX}开始加载子应用 -> ${app.name}`);
 
@@ -118,16 +142,18 @@ export class ParcelContext {
     isDev && console.debug(`${LOG_PREFIX}加载子应用完成 -> ${app.name}`);
 
     // 这里重新判断下当前正在加载的子应用是否是最新的
-    // --mountA-----------loadedA----
-    // ----mountB----loadedB---------
+    // --loadAppA-----------loadEntryA----
+    // ----loadAppB----loadEntryB---------
     // 假设有两个并发如上 可以发现A会在B后面运行下面的代码 从而导致子应用不正确
     if (this.currentApp.name !== app.name) {
-      throw new Error('unmont');
+      throw new Error(
+        `${LOG_PREFIX}子应用挂载失败: 当前子应用为 ${app.name}, 需要挂载的子应用为 ${this.currentApp.name}`
+      );
     }
 
     const { bootstrap, mount, unmount, update } = this.getAppLifeCycles(app.name);
 
-    const parcelConfig = {
+    const config = {
       name: app.name,
 
       bootstrap,
@@ -135,7 +161,6 @@ export class ParcelContext {
       mount: [
         () => {
           isDev && console.debug(`${LOG_PREFIX}开始挂载子应用 -> ${app.name};  挂载点: `, container);
-          parcelUnmountDeferred.resolve();
           parcelUnmountDeferred.reset();
           return this.appContext.beforeMount(loadedApp, window);
         },
@@ -147,6 +172,10 @@ export class ParcelContext {
           isDev && console.debug(`${LOG_PREFIX}挂载子应用完成 -> ${app.name}`);
           this.isLoading = false;
           return this.appContext.afterMount(loadedApp, window);
+        },
+        () => {
+          this.mountDeferredWeakMap.get(this.parcelInstance!)?.resolve();
+          return Promise.resolve();
         },
       ],
 
@@ -171,10 +200,9 @@ export class ParcelContext {
     };
 
     if (update) {
-      parcelConfig.update = update;
+      config.update = update;
     }
-
-    this.parcelInstance = mountRootParcel(parcelConfig, { domElement: container });
+    return { config, container };
   }
 
   private getAppLifeCycles(appName: string) {

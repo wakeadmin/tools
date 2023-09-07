@@ -28,22 +28,3 @@ export function runPromiseChain(this: any, chain: any[]): () => Promise<void> {
   const that = this;
   return (...args) => chain.reduce((pre, cur) => pre.then(() => cur.apply(that, args)), Promise.resolve());
 }
-
-export class Deferred<T> {
-  promise!: Promise<T>;
-
-  resolve!: (value: T | PromiseLike<T>) => void;
-
-  reject!: (reason?: unknown) => void;
-
-  constructor() {
-    this.reset();
-  }
-
-  reset() {
-    this.promise = new Promise((resolve, reject) => {
-      this.resolve = resolve;
-      this.reject = reject;
-    });
-  }
-}

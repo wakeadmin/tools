@@ -6,8 +6,8 @@ import { pathToActiveWhen } from 'single-spa';
 import { BayOptions, MicroApp } from '../../types';
 
 import { DEFAULT_ROOT_FOR_CHILD, MAX_WAIT_TIMES } from '../constants';
+import { parcelUnmountDeferred, qiankunUnmountDeferred } from './deferred';
 import { pushMountQueue } from './mount-delay';
-import { parcelUnmountDeferred, qiankunUnmountDeferred } from './shared';
 import { MicroAppNormalized, ModernMicroAppNormalized } from './types';
 import { normalizeUrl, runPromiseChain, toArray, trimBaseUrl } from './utils';
 
@@ -200,7 +200,6 @@ export function normalizeOptions(options: BayOptions): BayOptions {
         if (hooks.beforeAppMount) {
           hooks.beforeAppMount(app);
         }
-        // 不做任何操作 暂时先直接重置掉
         qiankunUnmountDeferred.reset();
       },
       afterAppUnmount(app) {
