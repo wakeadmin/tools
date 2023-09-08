@@ -82,7 +82,6 @@ class DocumentHeadSnapshot {
       return;
     }
     const snapshot = this.snapshotRecordMap.get(this.currentAppName)![0] || [];
-
     this.removeNodes(snapshot);
   }
 
@@ -99,8 +98,9 @@ class DocumentHeadSnapshot {
 
   private appendNodes(nodeList: Node[]) {
     const parentElement = document.head;
-    nodeList.filter(node => node.parentElement === parentElement).forEach(node => parentElement.appendChild(node));
+    nodeList.filter(node => node.parentElement !== parentElement).forEach(node => parentElement.appendChild(node));
   }
+
   private removeNodes(nodeList: Node[]) {
     const parentElement = document.head;
     nodeList.filter(node => node.parentElement === parentElement).forEach(node => (node as any as Element).remove());
@@ -120,6 +120,14 @@ export class ParcelContext {
   private isLoading: boolean = false;
 
   private mountDeferredWeakMap: WeakMap<Parcel, Deferred<void>> = new WeakMap();
+
+  private parcelConfigCache: Map<
+    string,
+    {
+      config: ParcelConfig;
+      container: HTMLElement;
+    }
+  > = new Map();
 
   constructor(private apps: ModernMicroAppNormalized[], private appContext: AppContext) {}
 
@@ -150,6 +158,7 @@ export class ParcelContext {
       isDev && console.log(`${LOG_PREFIX}等待qiankun卸载子应用 -> `, this.appContext.currentApp.value?.name);
 
       await qiankunUnmountDeferred.promise;
+
       isDev && console.log(`${LOG_PREFIX}qiankun卸载子应用完成 -> `, this.appContext.currentApp.value?.name);
     }
 
@@ -217,11 +226,24 @@ export class ParcelContext {
   }> {
     this.currentApp = app;
 
-    isDev && console.debug(`${LOG_PREFIX}开始加载子应用 -> ${app.name}`);
-
     this.documentHeadSnapshot.create(app.name);
     this.documentHeadSnapshot.use();
     this.documentHeadSnapshot.store();
+
+    if (this.parcelConfigCache.has(app.name)) {
+      const cache = this.parcelConfigCache.get(app.name)!;
+
+      // 这里重新执行下 用于添加html entry的html内容到挂载点上
+      await loadEntry(app.entry, cache.container, {
+        fetch: window.fetch,
+      });
+
+      // 重置下bootstrap 防止多次调用
+      (cache.config as any).bootstrap = () => Promise.resolve();
+      return cache;
+    }
+
+    isDev && console.debug(`${LOG_PREFIX}开始加载子应用 -> ${app.name}`);
 
     await app.loader!(true);
 
@@ -307,9 +329,14 @@ export class ParcelContext {
       update: Noop,
     };
 
-    if (update) {
+    if (isFunction(update)) {
       config.update = update;
     }
+
+    this.parcelConfigCache.set(app.name, {
+      config,
+      container,
+    });
     return { config, container };
   }
 
