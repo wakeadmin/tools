@@ -217,8 +217,6 @@ export interface IBay extends IBayBase {
 
   nonIndependentApps: MicroApp[];
 
-  modernApps: MicroApp[];
-
   /**
    * 当前激活的微应用
    */

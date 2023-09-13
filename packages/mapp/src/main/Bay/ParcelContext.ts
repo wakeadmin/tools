@@ -67,7 +67,7 @@ class DocumentHeadSnapshot {
   /**
    * 创建一个快照点
    */
-  store() {
+  capture() {
     if (this.currentAppName) {
       this.snapshotRecordMap.get(this.currentAppName)!.unshift([]);
     }
@@ -92,8 +92,12 @@ class DocumentHeadSnapshot {
     if (!this.currentAppName) {
       return;
     }
-    const list = this.snapshotRecordMap.get(this.currentAppName)![0] || [];
-    this.appendNodes(list);
+    const snapshot = this.snapshotRecordMap.get(this.currentAppName)![0] || [];
+    this.appendNodes(snapshot);
+  }
+
+  destroy() {
+    this.observer.disconnect();
   }
 
   private appendNodes(nodeList: Node[]) {
@@ -159,7 +163,7 @@ export class ParcelContext {
 
       await qiankunUnmountDeferred.promise;
 
-      isDev && console.log(`${LOG_PREFIX}qiankun卸载子应用完成 -> `, this.appContext.currentApp.value?.name);
+      isDev && console.log(`${LOG_PREFIX}qiankun卸载子应用完成`);
     }
 
     this.loadApp(app, container);
@@ -228,12 +232,12 @@ export class ParcelContext {
 
     this.documentHeadSnapshot.create(app.name);
     this.documentHeadSnapshot.use();
-    this.documentHeadSnapshot.store();
+    this.documentHeadSnapshot.capture();
 
     if (this.parcelConfigCache.has(app.name)) {
       const cache = this.parcelConfigCache.get(app.name)!;
 
-      // 这里重新执行下 用于添加html entry的html内容到挂载点上
+      // 这里重新执行下 用于添加 entry 的 html 内容到挂载点上
       await loadEntry(app.entry, cache.container, {
         fetch: window.fetch,
       });
@@ -284,7 +288,7 @@ export class ParcelContext {
 
       mount: [
         () => {
-          isDev && console.debug(`${LOG_PREFIX}开始挂载子应用 -> ${app.name};  挂载点: `, container);
+          isDev && console.debug(`${LOG_PREFIX}开始挂载子应用 -> ${app.name}`);
           parcelUnmountDeferred.reset();
           return this.appContext.beforeMount(loadedApp, this.global);
         },

@@ -56,8 +56,6 @@ export class Bay implements IBay {
 
   nonIndependentApps: MicroAppNormalized[];
 
-  modernApps: MicroAppNormalized[] = [];
-
   private parcelContext: ParcelContext;
 
   get location() {
