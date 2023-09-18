@@ -1,30 +1,31 @@
-import { createApp, App } from 'vue';
-import { createRouter, createWebHistory, Router } from 'vue-router';
 import { EventEmitter, trimQueryAndHash } from '@wakeadmin/utils';
-import { registerMicroApps, start, RegistrableApp, prefetchApps, addGlobalUncaughtErrorHandler } from 'qiankun';
+import { RegistrableApp, addGlobalUncaughtErrorHandler, prefetchApps, registerMicroApps, start } from 'qiankun';
+import { App, createApp } from 'vue';
+import { Router, createRouter, createWebHistory } from 'vue-router';
 
 import {
   BayHooks,
   BayOptions,
   IBay,
-  Parameter,
   INetworkInterceptorRegister,
   MicroApp,
   MicroAppStatus,
+  Parameter,
 } from '../../types';
 
+import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
+import { UniverseHistory } from '../UniverseHistory';
 import { NoopPage } from '../components';
 import { BayProviderContext, DEFAULT_ROOT } from '../constants';
-import { UniverseHistory } from '../UniverseHistory';
-import { AJAXInterceptor, FetchInterceptor } from '../NetworkInterceptor';
 
-import { groupAppsByIndependent, normalizeOptions } from './options';
-import { createRoutes, generateLandingUrl, Navigator } from './route';
 import { AppContext } from './AppContext';
-import { normalizeUrl } from './utils';
-import { MicroAppNormalized } from './types';
-import { flushMountQueue } from './mount-delay';
+import { ParcelContext } from './ParcelContext';
 import { AssetFilter } from './exclude-asset';
+import { flushMountQueue } from './mount-delay';
+import { groupAppsByIndependent, normalizeModernApps, normalizeOptions } from './options';
+import { Navigator, createRoutes, generateLandingUrl } from './route';
+import { MicroAppNormalized } from './types';
+import { normalizeUrl } from './utils';
 
 export class Bay implements IBay {
   app: App;
@@ -54,6 +55,8 @@ export class Bay implements IBay {
   independentApps: MicroAppNormalized[];
 
   nonIndependentApps: MicroAppNormalized[];
+
+  private parcelContext: ParcelContext;
 
   get location() {
     return this.history.location;
@@ -113,11 +116,15 @@ export class Bay implements IBay {
     this.independentApps = independentApps;
     this.nonIndependentApps = nonIndependentApps;
 
+    const modernApps = this.apps.filter(app => app.modern).map(app => normalizeModernApps(app));
+
     if (this.options.networkInterceptors?.length) {
       this.registerNetworkInterceptor(...this.options.networkInterceptors);
     }
+
     this.navigator = new Navigator(this);
     this.appContext = new AppContext(this);
+    this.parcelContext = new ParcelContext(modernApps, this.appContext);
 
     if (options.excludeAssetFilter) {
       this.assetFilter.addFiler(options.excludeAssetFilter);
@@ -130,6 +137,7 @@ export class Bay implements IBay {
     this.router = this.createRouter();
     this.history = new UniverseHistory(l => {
       this.triggerHooks('locationChange', l);
+      this.parcelContext.mountOrUnmountAppIfNeed();
     });
 
     this.app.use(this.router);
@@ -171,6 +179,8 @@ export class Bay implements IBay {
         return this.assetFilter.filter(src);
       },
     });
+
+    this.parcelContext.mountOrUnmountAppIfNeed();
 
     this.started = true;
   }
@@ -288,7 +298,7 @@ export class Bay implements IBay {
   }
 
   private registerApps() {
-    const apps = this.apps;
+    const apps = this.apps.filter(app => !app.modern);
 
     this.triggerHooks('beforeAppsRegister', apps);
 

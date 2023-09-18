@@ -17,3 +17,14 @@ export function normalizeUrl(url: string) {
 export function trimBaseUrl(baseUrl: string, path: string) {
   return normalizeUrl(normalizeUrl(path).replace(normalizeUrl(baseUrl), ''));
 }
+
+export function toArray<T>(input: T): T extends any[] ? T : T[] {
+  // @ts-expect-error
+  return Array.isArray(input) ? input : [input];
+}
+
+export function runPromiseChain(this: any, chain: any[]): () => Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const that = this;
+  return (...args) => chain.reduce((pre, cur) => pre.then(() => cur.apply(that, args)), Promise.resolve());
+}
